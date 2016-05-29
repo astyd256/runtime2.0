@@ -6,6 +6,7 @@ import file_access
 import managers
 
 from utils.properties import roproperty
+from utils.verificators import uuid
 from logs import log
 
 from ..generic import MemoryBase
@@ -39,10 +40,14 @@ class MemoryTypes(MemoryBase, Mapping):
             return item
 
     def _discover(self):
-        uuids = managers.file_manager.list(file_access.TYPE)
+        listing = managers.file_manager.list(file_access.TYPE)
         with self._owner._lock:
-            for uuid in uuids:
-                self._items.setdefault(uuid, NOT_LOADED)
+            for filename in listing:
+                try:
+                    uuid(filename)
+                except ValueError:
+                    continue
+                self._items.setdefault(filename, NOT_LOADED)
             self._lazy = False
 
     def search(self, uuid_or_name):
