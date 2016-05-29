@@ -1,9 +1,1 @@
 *.pyc
-applications/
-cache/
-data/databases/
-data/storage/
-local/certificates/
-local/certificates/libraries/
-!local/certificates/libraries/__init__.py
-temp/
