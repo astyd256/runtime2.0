@@ -42,6 +42,10 @@ def cleanup_directory(path, ignore_errors=False, onerror=None, remove=False):
 
     # remove files and directories
     for name in names:
+        # TODO: hack to avoid deleting settings
+        #       need to think how to do it right
+        if name == ".gitignore":
+            continue
         fullname = os.path.join(path, name)
         if os.path.isfile(fullname):
             try:
