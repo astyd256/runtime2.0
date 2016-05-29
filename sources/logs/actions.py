@@ -1,0 +1,7 @@
+
+NOP = 0
+ASSUME = 1
+REVOKE = 2
+WRITE = 3
+UPDATE = 4
+READ = 5

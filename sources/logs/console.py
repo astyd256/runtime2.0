@@ -1,0 +1,49 @@
+
+import sys
+from threading import Lock
+from . import levels
+from .formatters import PrefixingLogFormatter
+
+
+LOGGING = None
+NAME = "console"
+
+
+class Console(object):
+
+    stdout = sys.stdout
+    stderr = sys.stderr
+
+    def __init__(self):
+        self._lock = Lock()
+        self._formatter = PrefixingLogFormatter(NAME)
+
+    def write(self, message=None, warning=None, error=None, debug=None, module=None, level=None):
+        if level is None:
+            level, message = \
+                (levels.MESSAGE, message) if message is not None else \
+                (levels.WARNING, warning) if warning is not None else \
+                (levels.ERROR, error) if error is not None else \
+                (levels.DEBUG, debug) if debug is not None else \
+                (levels.MESSAGE, "")
+
+        if not isinstance(message, basestring):
+            message = str(message)
+
+        message = self._formatter.format(module, level, message)
+
+        with self._lock:
+            (self.stderr if level is levels.ERROR else self.stdout).write(message)
+
+    def flush(self):
+        self.stdout.flush()
+        self.stderr.flush()
+
+    def debug(self, message, module=None):
+        self.write(message, module=module, level=levels.DEBUG)
+
+    def warning(self, message, module=None):
+        self.write(message, module=module, level=levels.WARNING)
+
+    def error(self, message, module=None):
+        self.write(message, module=module, level=levels.ERROR)
