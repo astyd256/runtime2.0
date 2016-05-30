@@ -3,7 +3,7 @@ from contextlib import closing
 import managers
 import file_access
 from logs import console
-from utils.parsing import Parser
+from utils.parsing import native, Parser
 
 
 TYPE = "type"
@@ -17,14 +17,15 @@ def run(filename):
     """
 
     def builder(parser):
-        def document_handler(name, attributes):
+        @native
+        def entity(name, attributes):
             if name == u"Type":
                 parser.complete(TYPE)
             if name == u"Application":
                 parser.complete(APPLICATION)
             else:
                 parser.abort()
-        return document_handler
+        return entity
 
     try:
         file = managers.file_manager.open(file_access.FILE, file_access.NO_OWNER, filename, mode="rb")

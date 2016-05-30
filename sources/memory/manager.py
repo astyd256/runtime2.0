@@ -127,6 +127,8 @@ class Memory(object):
                     log.warning("    %s at line %s" % (message, lineno))
             type.save()
             return type
+        except IOError as error:
+            raise Exception("Unable to read from \"%s\": %s" % (os.path.basename(filename), error.strerror))
         except ParsingException as error:
             cleanup(context.uuid)
             raise Exception("Unable to parse %s, line %s: %s" % (os.path.basename(filename), error.lineno, error))
@@ -137,6 +139,7 @@ class Memory(object):
     def install_application(self, filename):
 
         def cleanup(uuid):
+            # TODO: check this later
             return
             if uuid:
                 self.cleanup_application(uuid)
@@ -157,10 +160,14 @@ class Memory(object):
             # TODO: Check this two lines later
 
         log.write("Install application from %s" % filename)
+        try:
+            file = managers.file_manager.open(file_access.FILE, file_access.NO_OWNER, filename, mode="rb")
+        except IOError as error:
+            log.error("Unable to open file: %s" % error)
         parser = Parser(builder=application_builder, notify=True, options=on_information)
         context = Structure(uuid=None)
         try:
-            application = parser.parse(filename=filename)
+            application = parser.parse(file=file)
             if parser.report:
                 log.warning("Install application notifications")
                 for lineno, message in parser.report:
@@ -168,9 +175,11 @@ class Memory(object):
             application.unimport_libraries()
             application.save()
             return application
+        except IOError as error:
+            raise Exception("Unable to read from \"%s\": %s" % (os.path.basename(filename), error.strerror))
         except ParsingException as error:
             cleanup(context.uuid)
-            raise Exception("Unable to parse %s, line %s: %s" % (os.path.basename(filename), error.lineno, error))
+            raise Exception("Unable to parse \"%s\", line %s: %s" % (os.path.basename(filename), error.lineno, error))
         except:
             cleanup(context.uuid)
             raise
@@ -189,23 +198,25 @@ class Memory(object):
                 for lineno, message in parser.report:
                     log.warning("    %s at line %s" % (message, lineno))
             return type
+        except IOError as error:
+            raise Exception("Unable to read from \"%s\": %s" % (os.path.basename(location), error.strerror))
         except ParsingException as error:
-            raise Exception("Unable to parse %s, line %s: %s" % (os.path.basename(location), error.lineno, error))
+            raise Exception("Unable to parse \"%s\", line %s: %s" % (os.path.basename(location), error.lineno, error))
 
     def load_application(self, uuid, silently=False):
         location = managers.file_manager.locate(file_access.APPLICATION, uuid, settings.APPLICATION_FILENAME)
         parser = Parser(builder=application_builder, notify=True)
         try:
             application = parser.parse(filename=location)
-            if not silently:
-                log.write("Load %s as %s" % (application, application.name))
-            if parser.report:
-                log.warning("Load %s notifications" % application)
+            if not silently or parser.report:
+                log.write("Load %s" % application)
                 for lineno, message in parser.report:
                     log.warning("    %s at line %s" % (message, lineno))
             return application
+        except IOError as error:
+            raise Exception("Unable to read from \"%s\": %s" % (os.path.basename(location), error.strerror))
         except ParsingException as error:
-            raise Exception("Unable to parse %s, line %s: %s" % (os.path.basename(location), error.lineno, error))
+            raise Exception("Unable to parse \"%s\", line %s: %s" % (os.path.basename(location), error.lineno, error))
 
     # auxiliary
 

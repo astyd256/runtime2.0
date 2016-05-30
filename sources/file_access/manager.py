@@ -118,7 +118,7 @@ class FileManager(object):
         except:
             print "List storage %s directory error: %s" % (location, error)
 
-    def exists(self, category, owner, name=None):
+    def exists(self, category, owner=None, name=None):
         return os.path.exists(self.locate(category, owner, name))
 
     def open(self, category, owner, name, mode="r", buffering=-1, encoding=None, errors=None, newline=""):
