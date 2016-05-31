@@ -6,7 +6,7 @@ import settings
 import managers
 import file_access
 
-from utils.verificators import uuid
+from utils import verificators
 from logs import log
 
 from ..generic import MemoryBase
@@ -52,7 +52,7 @@ class MemoryApplications(MemoryBase, Mapping):
         with self._owner._lock:
             for filename in listing:
                 try:
-                    uuid(filename)
+                    verificators.uuid(filename)
                 except ValueError:
                     continue
                 self._items.setdefault(filename, NOT_LOADED)

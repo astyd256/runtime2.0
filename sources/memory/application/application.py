@@ -292,7 +292,7 @@ class MemoryApplication(MemoryApplicationSketch):
         if not self._save_queue:
             log.write("Autosave %s" % self)
             self._save_queue = True
-            managers.memory.schedule(save=self)
+            managers.memory.schedule(self)
 
     def save(self, async=False):
         if settings.ALLOW_TO_CHANGE is not None:
@@ -303,7 +303,7 @@ class MemoryApplication(MemoryApplicationSketch):
         if async:
             if not self._save_queue:
                 self._save_queue = True
-                managers.memory.schedule(save=self)
+                managers.memory.schedule(self)
         else:
             with self.lock:
                 self._save_queue = False
@@ -321,10 +321,15 @@ class MemoryApplication(MemoryApplicationSketch):
 
     # unsafe
     def uninstall(self, remove_zero_resources=True, remove_databases=True, remove_storage=True):
-        managers.memory.applications.unload(self._id)
-
         # if not managers.acl_manager.session_user_has_access2(application_id, application_id, security.delete_application):
         #     raise VDOM_exception_sec(_("Deleting application is not allowed"))
+
+        # remove from save queue
+        if self._save_queue:
+            managers.memory.unschedule(self)
+
+        # unload application
+        managers.memory.applications.unload(self._id)
 
         # NOTE: currently not supported
         # on_uninstall = application.global_actions[APPLICATION_SECTION][APPLICATION_SECTION + ON_UNINSTALL]
@@ -340,24 +345,13 @@ class MemoryApplication(MemoryApplicationSketch):
         # if handler:
         #     managers.engine.execute(handler, namespace={})
 
-        # delete objects
-        # TODO: check this later...
-        from scripting import application
-        try:
-            previous = application.id
-        except:
-            previous = None
-        application.set_app_id(self)
-        try:
-            # TODO: possible here we can just invalidate object's resources
-            #       we not calling on_create (only on_parse) when install
-            #       but call on_delete on uninstall
-            self._objects.clear()
-        finally:
-            application.set_app_id(previous)
+        # delete objects's resources
+        for object in self._objects.catalog.itervalues():
+            managers.resource_manager.invalidate_resources(object.id)
 
         # delete resources
         # NOTE: managers.resource_manager.invalidate_resources(self._id)
+        # TODO: check this later...
         uuids = managers.resource_manager.list_resources(self._id)
         for uuid in uuids:
             resource = managers.resource_manager.get_resource(self._id, uuid)

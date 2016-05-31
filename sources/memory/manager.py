@@ -78,11 +78,15 @@ class Memory(object):
 
     # scheduling
 
-    def schedule(self, save=None):
+    def schedule(self, application):
         with self._lock:
-            self._queue.add(save)
+            self._queue.add(application)
             if self._daemon is None:
                 self.start_daemon()
+
+    def unschedule(self, application):
+        with self._lock:
+            self._queue.discard(application)
 
     # cleanupping
 
