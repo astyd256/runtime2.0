@@ -121,7 +121,7 @@ class Memory(object):
                 managers.file_manager.prepare_directory(category, type.id, cleanup=True)
 
         log.write("Install type from %s" % filename)
-        parser = Parser(builder=type_builder, notify=True, callback=on_information)
+        parser = Parser(builder=type_builder, notify=True, options=on_information)
         context = Structure(uuid=None)
         try:
             type = parser.parse(filename=filename)
