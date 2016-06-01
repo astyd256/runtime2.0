@@ -38,6 +38,8 @@ class Engine(object):
             instance = object.factory(RENDER_CONTEXT)(parent)
             instance.execute(managers.request_manager.get_request().session().context)
             return instance.render()
+        except RenderTermination:
+            return ""
         finally:
             self.select(previous)
 
@@ -60,6 +62,8 @@ class Engine(object):
                 instance = action.owner.factory(context or action.id)(parent)
                 instance.execute(managers.request_manager.get_request().session().context)
                 return instance.separate_render() if render else None
+        except RenderTermination:
+            return "" if render else None
         finally:
             self.select(previous)
 
