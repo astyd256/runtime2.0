@@ -1,8 +1,9 @@
 
 from contextlib import contextmanager
+from textwrap import wrap
 from logs import console
 from utils.structure import Structure
-from utils.auxiliary import fit, align
+from utils.auxiliary import align
 
 
 MISSING = "MISSING"
@@ -62,7 +63,12 @@ def show(name=None, value=MISSING, indent=None, longer=False):
 
         name_width = LONG_NAME_WIDTH if longer else NAME_WIDTH
         filler = "." if name else " "
+        caption = align(name, name_width, filler=filler, indent=indent)
 
-        console.write("%s%s" % (
-            align(name, name_width, filler=filler, indent=indent),
-            fit(value, VALUE_WIDTH)))
+        message = wrap(value,
+            initial_indent=caption,
+            subsequent_indent=" " * len(caption),
+            width=NAME_WIDTH + VALUE_WIDTH,
+            break_long_words=False)
+
+        console.write("\n".join(message))

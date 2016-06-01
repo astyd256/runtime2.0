@@ -3,7 +3,6 @@ import re
 from itertools import izip_longest
 import managers
 from logs import console
-from utils.auxiliary import align
 from .auxiliary import section, show
 
 
@@ -100,14 +99,14 @@ def interface(subject, attribute):
 
 
 def describe(subject, attribute):
-    # return fit(unlang(subject, attribute.description).replace("\n", " "), DESCRIPTION_WIDTH)
-    return align(unlang(subject, attribute.description).replace("\n", " "), DESCRIPTION_WIDTH)
+    return unlang(subject, attribute.description).replace("\n", " ")
 
 
-def run(uuid_or_name):
+def run(uuid_or_name, description=False):
     """
     show application or type
     :param uuid_or_name uuid_or_name: application or type uuid or name
+    :param switch description: show attributes description
     """
 
     subject = managers.memory.types.search(uuid_or_name)
@@ -149,7 +148,11 @@ def run(uuid_or_name):
         if entity is TYPE:
             with section("attributes"):
                 for attribute in subject.attributes.itervalues():
-                    show(attribute.name.replace("_", " "), interface(subject, attribute))
+                    name = attribute.name.replace("_", " ")
+                    if description:
+                        show(name, describe(subject, attribute))
+                    else:
+                        show(name, interface(subject, attribute))
 
     except Exception as error:
         console.error("unable to show %s: %s" % (entity, error))
