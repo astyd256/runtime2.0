@@ -3,7 +3,7 @@ import re
 from itertools import izip_longest
 import managers
 from logs import console
-from .auxiliary import section, show
+from .auxiliary import escape, section, show
 
 
 TYPE = "type"
@@ -49,10 +49,6 @@ def unlang(subject, value):
         return subject.sentences["en_US"][int(match.group(1))]
     except:
         return value
-
-
-def escape(value):
-    return "\"%s\"" % value.replace("\"", "\\\"")
 
 
 def explain(name, value):

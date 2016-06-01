@@ -18,6 +18,10 @@ global_indent = ""
 global_section = None
 
 
+def escape(value):
+    return "\"%s\"" % value.replace("\"", "\\\"")
+
+
 @contextmanager
 def section(name=None, value=MISSING):
     global global_indent, global_section
