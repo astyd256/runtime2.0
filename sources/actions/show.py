@@ -33,7 +33,7 @@ NAME_WIDTH = 36
 DESCRIPTION_WIDTH = 79
 
 
-name_regex = re.compile(r"^([0-9A-Z]+)\((.+)\)", re.IGNORECASE)
+name_regex = re.compile(r"^([0-9A-Z]+)\((.*)\)", re.IGNORECASE)
 dropdown_regex = re.compile(r"\|([^(|)]+)?\)")
 lang_regex = re.compile(r"^#lang\((\d+)\)$", re.IGNORECASE)
 
@@ -49,6 +49,10 @@ def unlang(subject, value):
         return subject.sentences["en_US"][int(match.group(1))]
     except:
         return value
+
+
+def escape(value):
+    return "\"%s\"" % value.replace("\"", "\\\"")
 
 
 def explain(name, value):
@@ -75,16 +79,27 @@ def explain(name, value):
 def interface(subject, attribute):
 
     def dropdown(value):
-        def pair(description, value):
+
+        def compose(description, value):
+            value = value.lower()
+            description = unlang(subject, description).lower()
             if description:
-                return "%s: %s" % (value, unlang(subject, description))
+                try:
+                    value = int(value)
+                    return "%s=%s" % (value, description)
+                except ValueError:
+                    if value == description:
+                        return description
+                return "%s=%s" % (escape(value), description)
             else:
                 return value
+
         try:
-            pairs = (pair(left[1:], right[:-1]) for left, right in grouper(value.split("|"), 2))
-            return "dropdown (%s)" % "; ".join(pairs)
+            pairs = [(left[1:], right[:-1]) for left, right in grouper(value.split("|"), 2)]
+            return "dropdown: %s" % ", ".join((compose(*pair) for pair in sorted(pairs, key=lambda pair: pair[-1])))
         except:
-            return "dropdown (...)"
+            raise
+            return "dropdown"
 
     value = attribute.code_interface
     match = name_regex.search(value)
@@ -99,14 +114,35 @@ def interface(subject, attribute):
 
 
 def describe(subject, attribute):
-    return unlang(subject, attribute.description).replace("\n", " ")
+    return unlang(subject, attribute.description) # .replace("\n", " ")
 
 
-def run(uuid_or_name, description=False):
+def group_color(subject, attribute):
+    try:
+        return COLORS[int(attribute.color_group)]
+    except (ValueError, KeyError):
+        return "unknown (%s)" % attribute.color_group
+
+
+def visible(subject, attribute):
+    return "yes" if attribute.visible else "no"
+
+
+def default_value(subject, attribute):
+    return escape(attribute.default_value) if attribute.default_value else "<empty>"
+
+
+def validation_pattern(subject, attribute):
+    return "<anything>" if attribute.validation_pattern in (".*", "^.*$") \
+        else escape(attribute.validation_pattern)
+
+
+def run(uuid_or_name, description=False, details=False):
     """
     show application or type
     :param uuid_or_name uuid_or_name: application or type uuid or name
     :param switch description: show attributes description
+    :param switch details: show attribute details
     """
 
     subject = managers.memory.types.search(uuid_or_name)
@@ -149,10 +185,20 @@ def run(uuid_or_name, description=False):
             with section("attributes"):
                 for attribute in subject.attributes.itervalues():
                     name = attribute.name.replace("_", " ")
-                    if description:
-                        show(name, describe(subject, attribute))
+                    if details:
+                        with section(name):
+                            show("interface", interface(subject, attribute))
+                            show("visible", visible(subject, attribute))
+                            show("group color", group_color(subject, attribute))
+                            show("default value", default_value(subject, attribute))
+                            show("validation pattern", validation_pattern(subject, attribute))
+                            if description:
+                                show("description", describe(subject, attribute))
                     else:
-                        show(name, interface(subject, attribute))
+                        if description:
+                            show(name, describe(subject, attribute))
+                        else:
+                            show(name, interface(subject, attribute))
 
     except Exception as error:
         console.error("unable to show %s: %s" % (entity, error))
