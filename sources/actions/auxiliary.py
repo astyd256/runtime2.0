@@ -60,7 +60,8 @@ def show(name=None, value=MISSING, indent=None, longer=False):
         indent = global_indent
 
     if value is MISSING:
-        console.write(indent + name)
+        value = name
+        caption = indent
     else:
         if not isinstance(value, basestring):
             value = str(value)
@@ -69,10 +70,11 @@ def show(name=None, value=MISSING, indent=None, longer=False):
         filler = "." if name else " "
         caption = align(name, name_width, filler=filler, indent=indent)
 
-        message = wrap(value,
+    message = "\n".join(("\n".join(
+        wrap(part,
             initial_indent=caption,
             subsequent_indent=" " * len(caption),
             width=NAME_WIDTH + VALUE_WIDTH,
-            break_long_words=False)
-
-        console.write("\n".join(message))
+            replace_whitespace=False,
+            break_long_words=False)) for part in value.splitlines()))
+    console.write(message)

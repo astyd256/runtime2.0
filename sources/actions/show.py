@@ -145,9 +145,9 @@ def run(uuid_or_name, description=False, details=False):
     if subject:
         entity = TYPE
         names = ("id", "module_name", "name", "class_name",
-            "category", "interface_type", "dynamic", "moveable", "resizable",
-            "optimization_priority", "container", "containers", "render_type",
-            "http_content_type", "remote_methods", "handlers", "languages", "version")
+        "category", "interface_type", "dynamic", "moveable", "resizable",
+        "optimization_priority", "container", "containers", "render_type",
+        "http_content_type", "remote_methods", "handlers", "languages", "version")
     else:
         subject = managers.memory.applications.search(uuid_or_name)
         if subject:
@@ -158,12 +158,16 @@ def run(uuid_or_name, description=False, details=False):
             console.error("unable to find application or type with such uuid or name")
             return
 
+    if description:
+        names = "id", "name"
+
     try:
         with section("summary"):
             show("entity", entity)
             for name in names:
                 value = getattr(subject, name)
                 explanation = explain(name, value)
+
                 if explanation:
                     value = explanation
                 elif isinstance(value, basestring):
@@ -175,7 +179,12 @@ def run(uuid_or_name, description=False, details=False):
                         value = "<empty>"
                 else:
                     value = repr(value)
+
                 show(name.replace("_", " "), value)
+
+        if description:
+            with section("description"):
+                show(unlang(subject, subject.description or "<no description>"))
 
         if entity is TYPE:
             with section("attributes"):
