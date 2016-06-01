@@ -52,10 +52,10 @@ class VDOM_vdomclass(VDOM_object):
 
     def wysiwyg(self, contents=""):
         if len(contents) == 0:
-            import utils.wysiwyg
+            from scripting.utils.wysiwyg import get_empty_wysiwyg_value
 
             image_id = "51267b9d-7246-639e-ab19-16f8321bb2dd"
-            result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
+            result = get_empty_wysiwyg_value(self, image_id)
 
             return VDOM_object.wysiwyg(self, contents=result)
 

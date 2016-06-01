@@ -67,8 +67,7 @@ class VDOM_copy(VDOM_object):
         return VDOM_object.render(self, contents=result)
 
     def empty_copy(self):
-        import utils.wysiwyg
-
+        from scripting.utils.wysiwyg import get_centered_image_metrics
         top = self.top if self.top else 10
         left = self.left if self.left else 10
         width = 100
@@ -78,7 +77,7 @@ class VDOM_copy(VDOM_object):
         image_x = image_y = 0
         image_width = image_height = 50
 
-        image_x, image_y, image_width, image_height = utils.wysiwyg.get_centered_image_metrics(image_width, image_height, width, height)
+        image_x, image_y, image_width, image_height = get_centered_image_metrics(image_width, image_height, width, height)
 
         designcolorvalue = u"#" + self.designcolor if self.designcolor != "" else "none"
 

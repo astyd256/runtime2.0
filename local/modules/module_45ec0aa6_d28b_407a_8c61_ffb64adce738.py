@@ -11,7 +11,6 @@ from collections import OrderedDict
 from uuid import uuid4
 
 import managers
-import scripting.utils.wysiwyg as utils_wysiwyg
 from memory import vdomxml
 
 
@@ -373,6 +372,7 @@ $(document).ready(function(){{
             return VDOM_object.render(self, contents=contents)
 
     def wysiwyg(self, contents=""):
+        from scripting.utils.wysiwyg import get_empty_wysiwyg_value
         image_id = "76bfc7be-dbe3-46e3-8d11-cc78a576b63a"
-        result = utils_wysiwyg.get_empty_wysiwyg_value(self, image_id)
+        result = get_empty_wysiwyg_value(self, image_id)
         return VDOM_object.wysiwyg(self, contents=result)

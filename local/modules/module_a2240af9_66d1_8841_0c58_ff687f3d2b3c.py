@@ -429,7 +429,7 @@ $j('#%(id)s tr').draggable({
 
 
 	def wysiwyg(self, contents=""):
-		import utils.wysiwyg
+		from scripting.utils.wysiwyg import get_empty_wysiwyg_value
 
 		# parse data
 		try:
@@ -449,7 +449,7 @@ $j('#%(id)s tr').draggable({
 		if len(src_data) == 0 and len(header) == 0:
 			image_id = "f7e008b4-3eef-3269-b004-089c613a538b"
 
-			result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
+			result = get_empty_wysiwyg_value(self, image_id)
 
 			return VDOM_object.wysiwyg(self, contents=result)
 

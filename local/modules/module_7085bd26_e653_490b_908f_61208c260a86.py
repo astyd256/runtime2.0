@@ -45,12 +45,12 @@ class VDOM_hypertext(VDOM_object):
 
 
     def wysiwyg(self, contents=""):
-        import utils.wysiwyg
+        from scripting.utils.wysiwyg import get_empty_wysiwyg_value
 
         if not self.htmlcode:
             image_id = "f74a4262-469b-f3cf-8e10-08a127dfbdbf"
 
-            result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
+            result = get_empty_wysiwyg_value(self, image_id)
 
             return VDOM_object.wysiwyg(self, contents=result)
 

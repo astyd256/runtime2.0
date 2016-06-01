@@ -5,7 +5,6 @@ from scripting import server, application, log, session, request, response, VDOM
 
 import managers
 from scripting import e2vdom
-import scripting.utils.wysiwyg as utils_wysiwyg
 from memory import vdomxml, vdomjson
 
 
@@ -63,5 +62,6 @@ class VDOM_DynamicObject(VDOM_object):
         return super(VDOM_DynamicObject, self).render(contents=contents)
 
     def wysiwyg(self, contents=""):
-        contents += utils_wysiwyg.get_empty_wysiwyg_value(self, WYSIWYG_IMAGE_UUID)
+        from scripting.utils.wysiwyg import get_empty_wysiwyg_value
+        contents += get_empty_wysiwyg_value(self, WYSIWYG_IMAGE_UUID)
         return super(VDOM_DynamicObject, self).wysiwyg(contents=contents)

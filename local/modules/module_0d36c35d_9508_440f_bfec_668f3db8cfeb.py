@@ -64,7 +64,7 @@ class VDOM_image(VDOM_object):
         return False
 
     def wysiwyg(self, contents=""):
-        import utils.wysiwyg
+        from scripting.utils.wysiwyg import get_empty_wysiwyg_value
 
         if self.value:      # show image from resources
             editable = u' editable="value" '
@@ -116,7 +116,7 @@ class VDOM_image(VDOM_object):
 
         else:
             image_id = "e8115c4a-903a-a4c6-c0bc-08a336586d51"
-            result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
+            result = get_empty_wysiwyg_value(self, image_id)
 
         return VDOM_object.wysiwyg(self, contents=result)
 

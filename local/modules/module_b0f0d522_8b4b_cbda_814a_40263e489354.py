@@ -384,6 +384,6 @@ class VDOM_objectview(VDOM_object):
             return VDOM_object.render(self, contents=result)
 
     def wysiwyg(self, contents=""):
-        from scripting.utils import wysiwyg
-        result = wysiwyg.get_empty_wysiwyg_value(self, "cc72f740-5527-4dab-3c59-16b7fccb0032")
+        from scripting.utils.wysiwyg import get_empty_wysiwyg_value
+        result = get_empty_wysiwyg_value(self, "cc72f740-5527-4dab-3c59-16b7fccb0032")
         return VDOM_object.wysiwyg(self, contents=result)

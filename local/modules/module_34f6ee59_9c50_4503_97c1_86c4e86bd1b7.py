@@ -117,10 +117,10 @@ $j(function(){
 
 	def wysiwyg(self, contents=""):
 		if len(contents) == 0:
-			import utils.wysiwyg
+			from scripting.utils.wysiwyg import get_empty_wysiwyg_value
 			
 			image_id = "54e7f8ab-64f1-b113-029e-1703a76c6fa4"
-			result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
+			result = get_empty_wysiwyg_value(self, image_id)
 			
 			return VDOM_object.wysiwyg(self, contents=result)
 		

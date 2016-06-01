@@ -77,7 +77,7 @@ class VDOM_container(VDOM_object):
 
 
     def wysiwyg(self, contents=""):
-        import utils.wysiwyg
+        from scripting.utils.wysiwyg import get_centered_image_metrics
 
         colorNumber = self.backgroundcolor if self.backgroundcolor != "" else self.designcolor
         colorValue = "#" + colorNumber if colorNumber != "" else "none"
@@ -94,7 +94,7 @@ class VDOM_container(VDOM_object):
             image_id = "8c8c753c-f1e4-07bb-e5bf-08771d63f502"
             image_width = image_height = 50
 
-            image_x, image_y, image_width, image_height = utils.wysiwyg.get_centered_image_metrics( image_width, image_height, int(self.width), int(self.height) )
+            image_x, image_y, image_width, image_height = get_centered_image_metrics( image_width, image_height, int(self.width), int(self.height) )
 
             empty_container_image = u"""<image href="#Res({image_id})" x="{image_x}" y="{image_y}"
                                                         width="{image_width}" height="{image_height}" />
