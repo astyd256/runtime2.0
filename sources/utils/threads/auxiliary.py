@@ -42,7 +42,7 @@ def intercept(handler=None, ctrlc=None):
         signal.signal(signal.SIGTERM, sigterm_handler)
     if ctrlc:
         def sigint_handler(signum=None, frame=None):
-            sys.stdout.write("Interrupt from keyboard")
+            # sys.stdout.write("Interrupt from keyboard")
             ctrlc()
         signal.signal(signal.SIGINT, sigint_handler)
 

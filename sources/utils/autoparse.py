@@ -132,13 +132,14 @@ def autoparse(alias, routine, subparsers, letters=None):
 class AutoArgumentParser(ArgumentParser):
 
     def __init__(self, *arguments, **keywords):
+        self._default = keywords.pop("default", None)
         package = keywords.pop("package", None)
         module = keywords.pop("module", None)
         alias = keywords.pop("alias", None)
         super(AutoArgumentParser, self).__init__(*arguments, **keywords)
         if module:
             self._package = package or module.__package__ + "."
-            self._name = ":%s:" % (alias or module.__name__)
+            self._name = "#%s" % (alias or module.__name__)
             self._parsers = {}
             self._repository = {}
 
@@ -173,11 +174,23 @@ class AutoArgumentParser(ArgumentParser):
                 name = getattr(arguments, parser._name)
                 subparser = parser._parsers.get(name)
 
-            routine, names, remainder = parser._repository.get(name)
-            arguments.action = Structure(
-                name=name,
-                run=routine,
-                arguments=chain((getattr(arguments, name) for name in names),
-                    getattr(arguments, remainder) if remainder else ()))
+            entry = parser._repository.get(name)
+            if entry:
+                routine, names, remainder = parser._repository.get(name)
+                arguments.action = Structure(
+                    name=name,
+                    run=routine,
+                    arguments=chain((getattr(arguments, name) for name in names),
+                        getattr(arguments, remainder) if remainder else ()))
+            else:
+                arguments.action = Structure(
+                    name=name,
+                    run=self._default,
+                    arguments=())
 
         return arguments
+
+    def error(self, message):
+        if self._default and message.endswith("too few arguments"):
+            return
+        super(AutoArgumentParser, self).error(message)
