@@ -241,7 +241,7 @@ class MemoryApplication(MemoryApplicationSketch):
                 acl = managers.acl_manager.acl[object_id]
             except KeyError:
                 continue
-            for name, value in acl:
+            for name, value in acl.iteritems():
                 item = (object_id, u",".join(map(str, value.keys())))
                 group = managers.user_manager.get_group_by_name(name)
                 if group and not group.system:

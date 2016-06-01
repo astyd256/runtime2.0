@@ -721,7 +721,7 @@ def application_builder(parser, callback=None):
                                             # </Description>
                                         elif name == u"Rights":
                                             # <Rights>
-                                            def rights_handler(value):
+                                            def rights_handler(name, attributes):
                                                 if name == u"Right":
                                                     # <Right>
                                                     try:
@@ -729,7 +729,7 @@ def application_builder(parser, callback=None):
                                                     except KeyError:
                                                         raise MissingAttributeError(u"Target")
                                                     try:
-                                                        access = map(int, map(string.stripe, attributes.pop(u"Access").split(u",")))
+                                                        access = map(int, map(string.strip, attributes.pop(u"Access").split(u",")))
                                                     except KeyError:
                                                         raise MissingAttributeError(u"Access")
                                                     except ValueError:
@@ -812,7 +812,7 @@ def application_builder(parser, callback=None):
                                             # </MemberOf>
                                         elif name == u"Rights":
                                             # <Rights>
-                                            def rights_handler(value):
+                                            def rights_handler(name, attributes):
                                                 if name == u"Right":
                                                     # <Right>
                                                     try:
@@ -820,7 +820,7 @@ def application_builder(parser, callback=None):
                                                     except KeyError:
                                                         raise MissingAttributeError(u"Target")
                                                     try:
-                                                        access = map(int, map(string.stripe, attributes.pop(u"Access").split(u",")))
+                                                        access = map(int, map(string.strip, attributes.pop(u"Access").split(u",")))
                                                     except KeyError:
                                                         raise MissingAttributeError(u"Access")
                                                     except ValueError:
