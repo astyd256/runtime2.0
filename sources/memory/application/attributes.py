@@ -101,6 +101,7 @@ class MemoryAttributes(MemoryAttributesSketch, MutableMapping):
             if updates:
                 managers.dispatcher.dispatch_handler(self._owner, "on_update", updates)
 
+            if updates:
                 for name, value in updates.iteritems():
                     if not isinstance(value, basestring):
                         value = str(value)
