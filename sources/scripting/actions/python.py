@@ -18,7 +18,7 @@ class VDOM_python_action(VDOM_generic_action):
         server_log.debug(
             "- - - - - - - - - - - - - - - - - - - -\n%s\n- - - - - - - - - - - - - - - - - - - -" % self._action.source_code,
             module=False)
-        return compile(self._action.source_code, "Action %s %s" % (self._action.id, self._action.name), u"exec")
+        return compile(self._action.source_code, "<action %s:%s>" % (self._action.id, self._action.name), u"exec")
 
     def _invoke(self, code, object, namespace):
         __import__(self._package)

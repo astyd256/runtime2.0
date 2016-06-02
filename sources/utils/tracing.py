@@ -135,8 +135,8 @@ def format_trace(stack, limit=sys.maxint,
         location = fullname + ending
         if statements:
             lines.append("%s%s%s" % (indent,
-                align(location, width - len(indent), " ", filler),
-                align(statement or UNKNOWN_STATEMENT, STATEMENT_WIDTH, " ", " ")))
+                align(location, width - len(indent), " ", filler=filler),
+                align(statement or UNKNOWN_STATEMENT, STATEMENT_WIDTH, " ", filler=" ")))
         else:
             lines.append("%s%s" % (indent, location))
 
@@ -198,7 +198,7 @@ def format_exception_locals(information=None, ignore_builtins=True, indent="", f
     frame = inspect.getinnerframes(extraceback)[-1][0]
 
     for name, value in frame.f_locals.iteritems():
-        caption = align(name, NAME_WIDTH - len(indent), " ", filler)
+        caption = align(name, NAME_WIDTH - len(indent), " ", filler=filler)
         if ignore_builtins and name == "__builtins__":
             lines.append("%s%s%s" % (indent, caption, "{...}"))
         else:

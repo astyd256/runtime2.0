@@ -5,10 +5,12 @@ import sys
 
 # settings
 
-from .importing import VDOM_settings_importer
+from .importers.settings import SettingsFinder
 
-sys.meta_path.append(VDOM_settings_importer())
+finder = SettingsFinder()
+sys.meta_path.append(finder)
 settings = __import__("settings")
+sys.meta_path.remove(finder)
 
 
 # initialize
@@ -19,15 +21,17 @@ import utils.threads
 import logs
 
 
-# include modules to search
+# include modules and libraries to search
 
 sys.path.append(settings.MODULES_LOCATION)
+sys.path.append(settings.LIBRARIES_LOCATION)
 
 
-# register metaimporter
+# register libraries finder
 
-from .metaimporter import VDOM_metaimporter
-sys.meta_path.append(VDOM_metaimporter())
+from .importers.libraries import LibraryFinder
+
+sys.meta_path.append(LibraryFinder())
 
 
 # start log server

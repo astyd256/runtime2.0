@@ -1,5 +1,4 @@
 
-import sys
 import imp
 import pkgutil
 import os.path
@@ -9,9 +8,6 @@ import managers
 
 
 class VDOM_metaimporter(object):
-
-    def __init__(self):
-        sys.path.append(settings.LIBRARIES_LOCATION)
 
     def find_module(self, fullname, path=None):
         engine = getattr(managers, "engine", None)

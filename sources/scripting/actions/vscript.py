@@ -15,7 +15,7 @@ class VDOM_vscript_action(VDOM_generic_action):
     def _compile(self, package):
         code, self._vscript_source = vcompile(
             self._action.source_code,
-            filename="Action %s %s" % (self._action.id, self._action.name),
+            filename="<action %s:%s>" % (self._action.id, self._action.name),
             package=package)
         return code
 
