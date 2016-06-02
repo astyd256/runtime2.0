@@ -4,7 +4,7 @@ import re
 
 UUID_REGEX = re.compile(r"^[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12}$", re.IGNORECASE)
 NAME_REGEX = re.compile(r"^[A-Z][A-Z\d_]*$", re.IGNORECASE)
-UUID_OR_NAME_REGEX = re.compile(r"^(?:[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})|(?:[A-Z][A-Z\d]*)$", re.IGNORECASE)
+UUID_OR_NAME_REGEX = re.compile(r"^(?:[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})|(?:[A-Z][A-Z\d_]*)$", re.IGNORECASE)
 UUID_OR_NONE_REGEX = re.compile(r"^(?:[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})|(?:none)$", re.IGNORECASE)
 SIZE_REGEX = re.compile(r"^(?P<size>[0-9]+)(?P<measure>[KM])?$", re.IGNORECASE)
 

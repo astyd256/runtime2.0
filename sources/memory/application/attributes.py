@@ -87,6 +87,9 @@ class MemoryAttributes(MemoryAttributesSketch, MutableMapping):
                     except KeyError:
                         raise Exception("The object has no \"%s\" attribute " % name)
 
+                if not isinstance(value, basestring):
+                    value = str(value)
+
                 value = DEREFERENCE_REGEX.sub(lambda match: match.group(1), value)
 
                 if current_value != value:
@@ -97,10 +100,15 @@ class MemoryAttributes(MemoryAttributesSketch, MutableMapping):
 
             if updates:
                 managers.dispatcher.dispatch_handler(self._owner, "on_update", updates)
+
                 for name, value in updates.iteritems():
+                    if not isinstance(value, basestring):
+                        value = str(value)
+
                     if name not in self._cdata and \
                             len(value) > FORCE_CDATA_LENGTH or FORCE_CDATA_REGEX.search(value):
                         self._cdata.add(name)
+
                     log.write("Update %s attrbiute \"%s\" to \"%s\"" % (self._owner, name, value.replace('"', '\"')))
                     self._items[name] = value
 
