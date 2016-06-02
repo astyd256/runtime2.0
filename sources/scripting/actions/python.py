@@ -14,7 +14,7 @@ class VDOM_python_action(VDOM_generic_action):
         self._package = None
 
     def _compile(self, package):
-        self._package = package
+        self._package = str(package)
         server_log.debug(
             "- - - - - - - - - - - - - - - - - - - -\n%s\n- - - - - - - - - - - - - - - - - - - -" % self._action.source_code,
             module=False)

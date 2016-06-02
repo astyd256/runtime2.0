@@ -14,7 +14,12 @@ def get_calling_module():
             package = namespace.get("__package__")
             if not package:
                 return
-            name = getattr(sys.modules[package], "LOGGING", None)
+
+            try:
+                name = getattr(sys.modules[package], "LOGGING", None)
+            except KeyError:
+                name = None
+
             if name:
                 return name
             else:

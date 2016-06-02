@@ -5,7 +5,8 @@ from scripting import server, application, log, session, request, response, VDOM
 
 from scripting import utils
 import StringIO
-    
+
+
 class VDOM_button(VDOM_object):
 
     def compute(self):
