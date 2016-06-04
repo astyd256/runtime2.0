@@ -337,12 +337,7 @@ def type_builder(parser, callback=None):
                     if u"Information" not in sections:
                         raise SectionMustPrecedeError(u"Information")
                     def handle_sourcecode(value):
-                        sourcecode =\
-                            u"from scripting import server, application, log, session, request, response, VDOM_object, obsolete_request\n"\
-                            u"\n%s\n" % value
-                        # managers.source_cache.store_type(type.id, sourcecode)
-                        managers.file_manager.write(file_access.type_source, type.id,
-                            "%s.py" % type.module_name, "# coding=utf8\n\n%s" % sourcecode, encoding="utf8")
+                        managers.file_manager.write(file_access.MODULE, type.id, value, encoding="utf8")
                     parser.handle_value(name, attributes, handle_sourcecode)
                     # </SourceCode>
                 elif name == u"Libraries":

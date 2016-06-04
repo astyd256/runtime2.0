@@ -1,5 +1,4 @@
 
-from __future__ import absolute_import
 from utils.exception import VDOM_exception
 from .python import VDOM_python_action
 from .vscript import VDOM_vscript_action

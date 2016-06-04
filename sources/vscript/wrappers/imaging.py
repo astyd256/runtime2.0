@@ -1,11 +1,11 @@
 
-from __future__ import absolute_import
-
-import re
+from importlib import import_module
 import managers
-from scripting.utils.imaging import VDOM_imaging
 from .. import errors
 from ..subtypes import integer, generic, string, v_mismatch
+
+
+VDOM_imaging = import_module("scripting.utils.imaging").VDOM_imaging
 
 
 def as_integer(value):
@@ -62,11 +62,11 @@ class v_vdomimaging(generic):
 			("ident", as_integer), ("textdecoration", as_string))
 		self._imaging.write_text(**adapt(arguments, adaptors, require=1, name="writetext"))
 		return v_mismatch
-	
+
 	def v_crop(self, x, y, w, h):
 		self._imaging.crop(x.as_integer, y.as_integer, w.as_integer, h.as_integer)
 		return v_mismatch
-		
+
 	def v_thumbnail(self, size):
 		self._imaging.thumbnail(size.as_integer)
 		return v_mismatch

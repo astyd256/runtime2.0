@@ -5,9 +5,9 @@ import sys
 
 # settings
 
-from .importers.settings import SettingsFinder
+from .importers.settings import SettingsImporter
 
-finder = SettingsFinder()
+finder = SettingsImporter()
 sys.meta_path.append(finder)
 settings = __import__("settings")
 sys.meta_path.remove(finder)
@@ -21,17 +21,11 @@ import utils.threads
 import logs
 
 
-# include modules and libraries to search
-
-sys.path.append(settings.MODULES_LOCATION)
-sys.path.append(settings.LIBRARIES_LOCATION)
-
-
 # register libraries finder
 
-from .importers.libraries import LibraryFinder
+from .importers.scripting import ScriptingFinder
 
-sys.meta_path.append(LibraryFinder())
+sys.meta_path.append(ScriptingFinder())
 
 
 # start log server

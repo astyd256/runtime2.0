@@ -3,41 +3,53 @@ import sys
 import imp
 import os
 import os.path
-from .generic import BaseLoader, BaseFinder
+import io
 
 
-class SettingsLoader(BaseLoader):
+class SettingsImporter(object):
 
-    def setup_module(self, module):
-        namespace = module.__dict__
+    def find_module(self, fullname, path=None):
+        return self if fullname == "settings" and path is None else None
+
+    def load_module(self, fullname):
+        if fullname != "settings":
+            raise ImportError("Settings loader cannot handle module \"%s\"" % fullname)
+
+        module = sys.modules.get(fullname)
+        if not module:
+            module = imp.new_module(fullname)
+
+        filename = fullname + ".pyc"
+        if os.path.isfile(filename):
+            with io.open(filename, "rb") as file:
+                code = file.read()
+        else:
+            filename = fullname + ".py"
+            if os.path.isfile(filename):
+                with io.open(filename, "rU", encoding="utf8") as file:
+                    source = file.read()
+                code = compile(source, filename, "exec")
+            else:
+                raise ImportError("Unable to load \"%s\"" % fullname)
+
+        module.__file__ = filename
+        module.__loader__ = self
+        module.__package__ = None
 
         platform = sys.platform
         filename = os.path.splitext(os.path.basename(sys.argv[0]))[0].lower()
         environment = os.environ.get("ENVIRONMENT", "development").lower()
 
-        namespace["WINDOWS"] = platform.startswith("win")
-        namespace["LINUX"] = platform.startswith("linux")
-        namespace["FREEBSD"] = platform.startswith("frebsd")
-        namespace["SERVER"] = filename == "server"
-        namespace["MANAGE"] = filename == "manage"
-        namespace["PRODUCTION"] = environment == "production"
-        namespace["DEVELOPMENT"] = environment != "production"
+        module.__dict__.update(
+            WINDOWS=platform.startswith("win"),
+            LINUX=platform.startswith("linux"),
+            FREEBSD=platform.startswith("frebsd"),
+            SERVER=filename == "server",
+            MANAGE=filename == "manage",
+            PRODUCTION=environment == "production",
+            DEVELOPMENT=environment != "production")
 
-    def __str__(self):
-        return "settings loader"
+        sys.modules[fullname] = module
+        exec(code, module.__dict__)
 
-
-class SettingsFinder(BaseFinder):
-
-    def find_module(self, fullname, path=None):
-        if fullname == "settings" and path is None:
-            try:
-                file, pathname, suffixes = imp.find_module(fullname)
-            except ImportError:
-                return None
-            return SettingsLoader(fullname, file, pathname, suffixes)
-        else:
-            return None
-
-    def __str__(self):
-        return "settings finder"
+        return module

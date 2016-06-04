@@ -1,5 +1,4 @@
 
-import re
 import binascii
 
 from threading import RLock
@@ -22,7 +21,6 @@ from .actions import MemoryTypeActions
 
 
 NOT_LOADED = "NOT LOADED"
-ENCODING_REGEX = re.compile(r"^\n*# coding=utf-?8\n*")
 
 
 class MemoryTypeSketch(MemoryBase):
@@ -253,8 +251,7 @@ class MemoryType(MemoryTypeSketch):
                 file.write(u"\t</Resources>\n")
 
         if not shorter:
-            source_code = managers.file_manager.read(file_access.type_source, self._id, "%s.py" % self._module_name, encoding="utf8")
-            source_code = ENCODING_REGEX.sub("", source_code.strip())
+            source_code = managers.file_manager.read(file_access.MODULE, self._id, encoding="utf8")
             file.write(u"\t<SourceCode>\n")
             file.write(u"%s\n" % source_code.encode("cdata"))
             file.write(u"\t</SourceCode>\n")

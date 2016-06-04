@@ -1,5 +1,4 @@
 
-from __future__ import absolute_import
 from logs import server_log
 from ..wrappers import server, application, session, log, request, response, obsolete_request
 from .generic import VDOM_generic_action

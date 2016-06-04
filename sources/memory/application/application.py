@@ -166,13 +166,19 @@ class MemoryApplication(MemoryApplicationSketch):
             container.structure.compose(ident=u"\t\t", file=file)
         file.write(u"\t</Structure>\n")
 
-        if self._libraries:
-            file.write(u"\t<Libraries>\n")
-            for name, value in self._libraries.iteritems():
-                file.write(u"\t\t<Library Name=\"%s\">\n" % name)
-                file.write(u"%s\n" % value.encode("cdata"))
-                file.write(u"\t\t</Library>\n")
-            file.write(u"\t</Libraries>\n")
+        if not shorter:
+            filenames = managers.file_manager.list(file_access.LIBRARY, self._id)
+            names = {name[:-3] for name in filenames if name.endswith(".py")}
+            if names:
+                file.write(u"\t<Libraries>\n")
+                for name in names:
+                    file.write(u"\t\t<Library Name=\"%s\">\n" % name)
+                    with managers.file_manager.open(file_access.LIBRARY, self._id, name,
+                            mode="rU", encoding="utf8") as library_file:
+                        value = library_file.read()
+                    file.write(u"%s\n" % value.encode("cdata"))
+                    file.write(u"\t\t</Library>\n")
+                file.write(u"\t</Libraries>\n")
 
         if self._sentences:
             file.write(u"\t<Languages>\n")

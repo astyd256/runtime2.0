@@ -403,14 +403,14 @@ def application_builder(parser, callback=None):
                                 raise MissingAttributeError(u"Name")
                             # if not is_valid_identifier(name): raise VDOM_incorrect_value_error, u"Name"
                             def library_handler(value):
-                                application.libraries[library_name] = value
-                                if application.scripting_language == u"vscript":
-                                    # TODO: Check this thread using
-                                    threading.currentThread().application = application.id
-                                    try:
-                                        value, source = vcompile(value, bytecode=0)
-                                    finally:
-                                        threading.currentThread().application = None
+                                # application.libraries[library_name] = value
+                                # if application.scripting_language == u"vscript":
+                                #     # TODO: Check this thread using
+                                #     threading.currentThread().application = application.id
+                                #     try:
+                                #         value, source = vcompile(value, bytecode=0)
+                                #     finally:
+                                #         threading.currentThread().application = None
                                 managers.file_manager.write_library(application.id, library_name, value)
                             parser.handle_value(name, attributes, library_handler)
                             # </Library>

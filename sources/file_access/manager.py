@@ -19,13 +19,13 @@ from .auxiliary import cleanup_directory
 from .daemon import FileWriter
 
 
-application_path = "applications"
+# application_path = "applications"
 # global_types_path = "types"
 # type_source_path = "objects"
 # py_files_cache = "cache"
-resources_path = "resources"
-application_file_name = "application.xml"
-databases_path = "databases"
+# resources_path = "resources"
+# application_file_name = "application.xml"
+# databases_path = "databases"
 
 
 class FileManager(object):
@@ -56,16 +56,16 @@ class FileManager(object):
 
     # locations
 
-    def locate(self, category=None, owner=None, name=None):
+    def locate(self, category=None, owner=None, name=None, *arguments):
         if category is None:
             assert owner is None
             segments = name,
         elif category == file_access.APPLICATION:
             # VDOM_CONFIG["FILE-ACCESS-DIRECTORY"] / application_path="applications" / application_id / application_file_name="app.xml"
-            segments = settings.APPLICATIONS_LOCATION, owner, name
+            segments = (settings.APPLICATIONS_LOCATION, owner, name) + arguments
         elif category == file_access.TYPE:
             # VDOM_CONFIG["FILE-ACCESS-DIRECTORY"] / global_types_path="types" / object_name
-            segments = settings.TYPES_LOCATION, owner, name
+            segments = (settings.TYPES_LOCATION, owner, name) + arguments
         elif category == file_access.RESOURCE:
             # VDOM_CONFIG["FILE-ACCESS-DIRECTORY"] / resources_path="resources" / owner_id / object_name
             # VDOM_CONFIG["FILE-ACCESS-DIRECTORY"] / resources_path="resources"
@@ -75,10 +75,16 @@ class FileManager(object):
             # VDOM_CONFIG["FILE-ACCESS-DIRECTORY"] / databases_path="databases"
             segments = settings.DATABASES_LOCATION, owner, name
         elif category == file_access.MODULE:
+            assert owner is not None
+            assert name is None
             # VDOM_CONFIG["FILE-ACCESS-DIRECTORY"] / type_source_path="objects" / object_name
-            segments = settings.MODULES_LOCATION, name
+            # segments = settings.MODULES_LOCATION, name
+            segments = settings.TYPES_LOCATION, owner, settings.TYPE_MODULE_NAME + ".py"
         elif category == file_access.LIBRARY:
-            segments = settings.LIBRARIES_LOCATION, owner, name
+            assert owner is not None
+            assert not arguments
+            # segments = settings.LIBRARIES_LOCATION, owner, name
+            segments = settings.APPLICATIONS_LOCATION, owner, settings.APPLICATION_LIBRARIES_DIRECTORY, ((name + ".py") if name else None)
         elif category == file_access.STORAGE:
             # VDOM_CONFIG["FILE-STORAGE-DIRECTORY"] / application_id / file_name
             # VDOM_CONFIG["FILE-STORAGE-DIRECTORY"] / application_id
@@ -214,8 +220,8 @@ class FileManager(object):
                     cleanup_directory(location, ignore_errors=True)
             else:
                 os.makedirs(location)
-            if category == file_access.LIBRARY:
-                self.write(category, owner, "__init__.py", "")
+            # if category == file_access.LIBRARY:
+            #     self.write(category, owner, "__init__.py", "")
         except Exception as error:
             print "Prepare %s directory error: %s" % (location, error)
 
@@ -256,7 +262,7 @@ class FileManager(object):
 
     def write_library(self, owner, name, data):
         # fname = os.path.join(VDOM_CONFIG["LIB-DIRECTORY"], appid, libname + ".py")
-        self.write(file_access.LIBRARY, owner, name + ".py", "# coding=utf-8\n\n" + data, encoding="utf-8")
+        self.write(file_access.LIBRARY, owner, name, data, encoding="utf-8")
 
     def delete_library(self, owner, name):
         # fname = os.path.join(VDOM_CONFIG["LIB-DIRECTORY"], appid, libname + ".py")
