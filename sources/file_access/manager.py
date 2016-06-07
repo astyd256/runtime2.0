@@ -76,15 +76,14 @@ class FileManager(object):
             segments = settings.DATABASES_LOCATION, owner, name
         elif category == file_access.MODULE:
             assert owner is not None
-            assert name is None
             # VDOM_CONFIG["FILE-ACCESS-DIRECTORY"] / type_source_path="objects" / object_name
             # segments = settings.MODULES_LOCATION, name
-            segments = settings.TYPES_LOCATION, owner, settings.TYPE_MODULE_NAME + ".py"
+            segments = settings.TYPES_LOCATION, owner, name
         elif category == file_access.LIBRARY:
             assert owner is not None
             assert not arguments
             # segments = settings.LIBRARIES_LOCATION, owner, name
-            segments = settings.APPLICATIONS_LOCATION, owner, settings.APPLICATION_LIBRARIES_DIRECTORY, ((name + ".py") if name else None)
+            segments = settings.APPLICATIONS_LOCATION, owner, settings.APPLICATION_LIBRARIES_DIRECTORY, name
         elif category == file_access.STORAGE:
             # VDOM_CONFIG["FILE-STORAGE-DIRECTORY"] / application_id / file_name
             # VDOM_CONFIG["FILE-STORAGE-DIRECTORY"] / application_id
@@ -125,10 +124,11 @@ class FileManager(object):
             print "List storage %s directory error: %s" % (location, error)
 
     def exists(self, category, owner=None, name=None):
-        return os.path.exists(self.locate(category, owner, name))
+        location = owner if category is None else self.locate(category, owner, name)
+        return os.path.exists(location)
 
-    def open(self, category, owner, name, mode="r", buffering=-1, encoding=None, errors=None, newline=""):
-        location = self.locate(category, owner, name)
+    def open(self, category, owner, name=None, mode="r", buffering=-1, encoding=None, errors=None, newline=""):
+        location = owner if category is None else self.locate(category, owner, name)
         # self.ensure(category, owner, mode)
         return io.open(location, mode, buffering, encoding, errors, None if "b" in mode else newline)
 
@@ -220,8 +220,6 @@ class FileManager(object):
                     cleanup_directory(location, ignore_errors=True)
             else:
                 os.makedirs(location)
-            # if category == file_access.LIBRARY:
-            #     self.write(category, owner, "__init__.py", "")
         except Exception as error:
             print "Prepare %s directory error: %s" % (location, error)
 

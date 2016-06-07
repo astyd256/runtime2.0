@@ -3,5 +3,9 @@ def register(name, manager_class):
     globals()[name] = manager_class()
 
 
-def has(name):
-    return name in globals()[name]
+def has(*names):
+    namespace = globals()
+    for name in names:
+        if name not in namespace:
+            return False
+    return True

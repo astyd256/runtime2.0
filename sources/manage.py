@@ -11,6 +11,7 @@ from database import VDOM_database_manager
 from security import VDOM_acl_manager, VDOM_user_manager
 from scripting import VDOM_compiler, VDOM_dispatcher
 from memory import VDOM_memory
+from engine import VDOM_engine
 
 from startup.manage import arguments
 
@@ -26,5 +27,6 @@ managers.register("user_manager", VDOM_user_manager)
 managers.register("dispatcher", VDOM_dispatcher)
 managers.register("compiler", VDOM_compiler)
 managers.register("memory", VDOM_memory)
+managers.register("engine", VDOM_engine)
 
 arguments.action.run(*arguments.action.arguments)

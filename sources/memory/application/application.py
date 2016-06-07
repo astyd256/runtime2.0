@@ -15,7 +15,8 @@ from logs import log
 from database.dbobject import VDOM_sql_query
 from utils.properties import constant, roproperty, rwproperty
 
-from .. import APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT
+from .. import PYTHON_LANGUAGE, VSCRIPT_LANGUAGE, PYTHON_EXTENSION, VSCRIPT_EXTENSION, \
+    APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT
 from ..generic import MemoryBase
 from .objects import MemoryObjects
 from .events import MemoryEvents
@@ -32,6 +33,19 @@ class MemoryApplicationSketch(MemoryBase):
     is_object = constant(False)
 
     generic = APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT
+
+    def get_library_executable(self, name):
+        from scripting.executable import select_library_class
+        return select_library_class(self._scripting_language)(self, name)
+
+    @property
+    def scripting_extension(self):
+        if self._scripting_language == PYTHON_LANGUAGE:
+            return PYTHON_EXTENSION
+        elif self._scripting_language == VSCRIPT_LANGUAGE:
+            return VSCRIPT_EXTENSION
+        else:
+            return ""
 
     def __init__(self, callback):
         self._callback = callback
@@ -167,16 +181,17 @@ class MemoryApplication(MemoryApplicationSketch):
         file.write(u"\t</Structure>\n")
 
         if not shorter:
+            extension = self.scripting_extension
             filenames = managers.file_manager.list(file_access.LIBRARY, self._id)
-            names = {name[:-3] for name in filenames if name.endswith(".py")}
+            names = {name[:-3] for name in filenames if name.endswith(extension)}
             if names:
                 file.write(u"\t<Libraries>\n")
                 for name in names:
                     file.write(u"\t\t<Library Name=\"%s\">\n" % name)
-                    with managers.file_manager.open(file_access.LIBRARY, self._id, name,
+                    with managers.file_manager.open(file_access.LIBRARY, self._id, name + extension,
                             mode="rU", encoding="utf8") as library_file:
-                        value = library_file.read()
-                    file.write(u"%s\n" % value.encode("cdata"))
+                        library_source_code = library_file.read()
+                    file.write(u"%s\n" % library_source_code.encode("cdata"))
                     file.write(u"\t\t</Library>\n")
                 file.write(u"\t</Libraries>\n")
 

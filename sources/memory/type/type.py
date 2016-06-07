@@ -13,7 +13,7 @@ import managers
 from utils.id import guid2mod
 from utils.properties import lazy, roproperty, rwproperty
 
-from ..constants import NON_CONTAINER
+from ..constants import PYTHON_LANGUAGE, PYTHON_EXTENSION, NON_CONTAINER
 from ..generic import MemoryBase
 from .attributes import MemoryTypeAttributes
 from .events import MemoryTypeUserInterfaceEvents, MemoryTypeObjectEvents
@@ -24,6 +24,11 @@ NOT_LOADED = "NOT LOADED"
 
 
 class MemoryTypeSketch(MemoryBase):
+
+    @lazy
+    def _executable(self):
+        from scripting.executable import select_module_class
+        return select_module_class(PYTHON_LANGUAGE)(self)
 
     @lazy
     def _module_name(self):
@@ -114,6 +119,7 @@ class MemoryTypeSketch(MemoryBase):
     object_events = roproperty("_object_events")
     actions = roproperty("_actions")
 
+    executable = roproperty("_executable")
     module_name = roproperty("_module_name")
     module = roproperty("_module")
     klass = roproperty("_klass")
@@ -251,7 +257,8 @@ class MemoryType(MemoryTypeSketch):
                 file.write(u"\t</Resources>\n")
 
         if not shorter:
-            source_code = managers.file_manager.read(file_access.MODULE, self._id, encoding="utf8")
+            source_code = managers.file_manager.read(file_access.MODULE, self._id,
+                settings.TYPE_MODULE_NAME + PYTHON_EXTENSION, encoding="utf8")
             file.write(u"\t<SourceCode>\n")
             file.write(u"%s\n" % source_code.encode("cdata"))
             file.write(u"\t</SourceCode>\n")

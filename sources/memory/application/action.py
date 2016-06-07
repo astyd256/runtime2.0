@@ -1,6 +1,5 @@
 
 from uuid import uuid4
-import scripting
 from utils.properties import lazy, constant, roproperty, rwproperty
 from ..generic import MemoryBase
 
@@ -11,8 +10,9 @@ class MemoryActionSketch(MemoryBase):
     is_binding = constant(False)
 
     @lazy
-    def _code(self):
-        return scripting.actions.select(self._owner.application.scripting_language)(self)
+    def _executable(self):
+        from scripting.executable import select_action_class
+        return select_action_class(self._owner.application.scripting_language)(self, self._name)
 
     def __init__(self, callback, owner):
         self._callback = callback
@@ -81,8 +81,8 @@ class MemoryAction(MemoryActionSketch):
     def _set_source_code(self, value):
         with self._owner.lock:
             self._source_code = value
-            if "_code" in self.__dict__:
-                del self._code
+            if "_executable" in self.__dict__:
+                del self._executable
             self._owner.invalidate(contexts=(self._id, self._name), downward=True, upward=True)
             self._owner.autosave()
 
@@ -107,7 +107,7 @@ class MemoryAction(MemoryActionSketch):
     # unsafe
     def execute(self, object, namespace):
         if self._source_code:
-            self._code.execute(object, namespace)
+            self._executable.execute(namespace, context=object, sandbox=True)
 
     def __invert__(self):
         raise NotImplementedError

@@ -3,12 +3,15 @@ import string
 import base64
 
 import file_access
+import settings
 import managers
 
 from utils.parsing import \
     SectionMustPrecedeError, MissingSectionError, \
     UnexpectedElementValueError, UnexpectedAttributeValueError, \
     MissingElementError, MissingAttributeError
+
+from ..constants import PYTHON_EXTENSION
 
 
 def type_builder(parser, callback=None):
@@ -337,7 +340,8 @@ def type_builder(parser, callback=None):
                     if u"Information" not in sections:
                         raise SectionMustPrecedeError(u"Information")
                     def handle_sourcecode(value):
-                        managers.file_manager.write(file_access.MODULE, type.id, value, encoding="utf8")
+                        managers.file_manager.write(file_access.MODULE, type.id,
+                            settings.TYPE_MODULE_NAME + PYTHON_EXTENSION, value, encoding="utf8")
                     parser.handle_value(name, attributes, handle_sourcecode)
                     # </SourceCode>
                 elif name == u"Libraries":

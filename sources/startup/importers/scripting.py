@@ -1,8 +1,6 @@
 
 import sys
 import imp
-import os
-import os.path
 import io
 import re
 import managers
@@ -16,16 +14,18 @@ SCRIPTING_MODULES = ("server", "application", "log", "session", "request", "resp
 
 settings = None
 file_access = None
+memory = None
 
 
 class ScriptingFinder(object):
 
     def find_module(self, fullname, path=None):
-        global settings, file_access, ScriptingFinder
-        if getattr(managers, "file_manager", None) and getattr(managers, "engine", None):
+        global settings, file_access, memory
+        if managers.has("file_manager", "engine"):
             settings = __import__("settings")
             file_access = __import__("file_access")
-            self.__class__ = ScriptingFinder = ActualScriptingFinder
+            memory = __import__("memory")
+            self.__class__ = ActualScriptingFinder
             return self.find_module(fullname, path)
         else:
             return None
@@ -35,45 +35,35 @@ class ActualScriptingFinder(object):
 
     def find_module(self, fullname, path=None):
 
-        def select_loader(fullname, location, loader_class, package=None):
-            if location.endswith(".py"):
-                location = location[:-3]
-            filename = location + ".pyc"
-            if os.path.isfile(filename):
-                return loader_class(fullname, package=package, filename=filename)
-            else:
-                filename = location + ".py"
-                if os.path.isfile(filename):
-                    return loader_class(fullname, package=package, filename=filename)
-                else:
-                    return None
-
         match = FULLNAME_REGEX.match(fullname)
         if match:
             module = match.group(1)
             if module:
-                location = managers.file_manager.locate(file_access.MODULE, module.replace("_", "-"))
-                return select_loader(fullname, location, ScriptingLoader)
+                uuid = module.replace("_", "-")
+                try:
+                    loader = ScriptingLoader(fullname, managers.memory.types[uuid].executable)
+                    return loader
+                except KeyError:
+                    raise ImportError("Unable to load module %s" % uuid)
             else:
                 package = match.group(2)
                 library = match.group(3)
                 if library:
                     application = managers.engine.application
                     if application is None:
-                        return None
+                        raise ImportError("Unable to load \"%s\" library: no active application" % library)
                     if package != application.id:
                         raise ImportError("Unable to load \"%s\" library from \"%s\" context" %
                             (package, application.id))
-                    location = managers.file_manager.locate(file_access.LIBRARY, package, library)
-                    return select_loader(fullname, location, ScriptingLoader, package=package)
+                    return ScriptingLoader(fullname, application.get_library_executable(library))
                 else:
                     location = managers.file_manager.locate(file_access.LIBRARY, package)
-                    return ScriptingLoader(fullname, package=fullname, path=[location])
+                    return FakeModuleLoader(fullname, package=fullname, path=[location])
 
         return None
 
 
-class ScriptingLoader(object):
+class FakeModuleLoader(object):
 
     def __init__(self, fullname, package=None, path=None, filename=None):
         self._fullname = fullname
@@ -112,5 +102,29 @@ class ScriptingLoader(object):
         sys.modules[self._fullname] = module
         if code:
             exec(code, module.__dict__)
+
+        return module
+
+
+class ScriptingLoader(object):
+
+    def __init__(self, fullname, executable):
+        self._fullname = fullname
+        self._executable = executable
+
+    def load_module(self, fullname):
+        if fullname != self._fullname:
+            raise ImportError("Loader for module \"%s\" cannot handle module \"%s\"" % (self._fullname, fullname))
+
+        module = sys.modules.get(self._fullname)
+        if not module:
+            module = imp.new_module(self._fullname)
+
+        module.__file__ = self._executable._signature
+        module.__loader__ = self
+        module.__package__ = self._executable._package
+
+        sys.modules[self._fullname] = module
+        self._executable.execute(module.__dict__)
 
         return module

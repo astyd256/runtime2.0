@@ -1,5 +1,6 @@
 
-from threading import local
+from contextlib import contextmanager
+from threading import local, current_thread
 import managers
 from logs import log
 from memory import COMPUTE_CONTEXT, RENDER_CONTEXT, WYSIWYG_CONTEXT
@@ -20,7 +21,19 @@ class Engine(object):
         if application is not previous:
             log.write("Select %s" % (application or "no application"))
             self._storage.application = application
+            # TODO: check this thread using
+            current_thread().application = application.id if application else None
         return previous
+
+    @contextmanager
+    def context(self, application=None):
+        if application:
+            previous = self.select(application)
+        try:
+            yield
+        finally:
+            if application:
+                self.select(previous)
 
     def compute(self, object, parent=None):
         log.write("Compute %s" % object)

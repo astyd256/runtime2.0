@@ -13,7 +13,7 @@ from utils.parsing import ParsingException, \
     SectionMustPrecedeError, MissingSectionError, \
     UnexpectedElementValueError, UnexpectedAttributeValueError, \
     MissingElementError, MissingAttributeError
-from vscript.engine import vcompile
+# from vscript.engine import vcompile
 
 from ..constants import SCRIPT_CONTEXT
 
@@ -411,7 +411,15 @@ def application_builder(parser, callback=None):
                                 #         value, source = vcompile(value, bytecode=0)
                                 #     finally:
                                 #         threading.currentThread().application = None
-                                managers.file_manager.write_library(application.id, library_name, value)
+                                managers.file_manager.write_library(application.id,
+                                    library_name + application.scripting_extension, value)
+                                # previous = managers.engine.select(application.id)
+                                # try:
+                                #     code, source = vcompile(value, bytecode=0)
+                                # finally:
+                                #     managers.engine.select(previous)
+
+                                # managers.file_manager.write_library(application.id, library_name + ".py", value)
                             parser.handle_value(name, attributes, library_handler)
                             # </Library>
                         else:
