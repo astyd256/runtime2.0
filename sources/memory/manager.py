@@ -165,7 +165,7 @@ class Memory(object):
 
         log.write("Install application from %s" % filename)
         try:
-            file = managers.file_manager.open(file_access.FILE, file_access.NO_OWNER, filename, mode="rb")
+            file = managers.file_manager.open(file_access.FILE, filename, mode="rb")
         except IOError as error:
             log.error("Unable to open file: %s" % error)
         parser = Parser(builder=application_builder, notify=True, options=on_information)

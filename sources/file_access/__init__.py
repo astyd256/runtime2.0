@@ -3,8 +3,6 @@ from .manager import FileManager, VDOM_file_manager
 from .share import VDOM_share
 from .daemon import FileWriter, VDOM_file_manager_writer
 
-NO_OWNER = None
-
 FILE = None
 APPLICATION = application_xml = 0 # XML
 TYPE = global_type = 1 # XML files of types: app/types

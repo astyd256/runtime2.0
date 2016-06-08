@@ -58,8 +58,7 @@ class FileManager(object):
 
     def locate(self, category=None, owner=None, name=None, *arguments):
         if category is None:
-            assert owner is None
-            segments = name,
+            segments = (owner, name) + arguments
         elif category == file_access.APPLICATION:
             # VDOM_CONFIG["FILE-ACCESS-DIRECTORY"] / application_path="applications" / application_id / application_file_name="app.xml"
             segments = (settings.APPLICATIONS_LOCATION, owner, name) + arguments
@@ -124,11 +123,11 @@ class FileManager(object):
             print "List storage %s directory error: %s" % (location, error)
 
     def exists(self, category, owner=None, name=None):
-        location = owner if category is None else self.locate(category, owner, name)
+        location = self.locate(category, owner, name)
         return os.path.exists(location)
 
     def open(self, category, owner, name=None, mode="r", buffering=-1, encoding=None, errors=None, newline=""):
-        location = owner if category is None else self.locate(category, owner, name)
+        location = self.locate(category, owner, name)
         # self.ensure(category, owner, mode)
         return io.open(location, mode, buffering, encoding, errors, None if "b" in mode else newline)
 

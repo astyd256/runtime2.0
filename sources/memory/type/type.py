@@ -293,7 +293,7 @@ class MemoryType(MemoryTypeSketch):
                 self.compose(file=file, shorter=True)
 
     def export(self, filename):
-        with managers.file_manager.open(file_access.FILE, file_access.NO_OWNER, filename,
+        with managers.file_manager.open(file_access.FILE, filename,
                 mode="w", encoding="utf8") as file:
             self.compose(file=file)
 

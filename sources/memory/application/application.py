@@ -336,7 +336,7 @@ class MemoryApplication(MemoryApplicationSketch):
 
     def export(self, filename):
         with self.lock:
-            with managers.file_manager.open(file_access.FILE, file_access.NO_OWNER, filename,
+            with managers.file_manager.open(file_access.FILE, filename,
                     mode="w", encoding="utf8") as file:
                 self.compose(file=file)
 
