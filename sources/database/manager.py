@@ -228,17 +228,20 @@ class VDOM_database_manager(object):
         """Remove one or all databases of given owner"""
         remove_list = []
         database = None
-        for key in self.__index:
-            database = self.__index[key]
-            if database.owner_id == owner_id and (db_id is None or db_id == database.id):
-                self.__database_by_name.pop((database.owner_id, database.name), None)
-                remove_list.append(key)
+        is_dirty_index = True
+        if self.__index:
+            for key in self.__index:
+                database = self.__index[key]
+                if database.owner_id == owner_id and (db_id is None or db_id == database.id):
+                    self.__database_by_name.pop((database.owner_id, database.name), None)
+                    remove_list.append(key)
 
-        is_dirty_index = False
-        for key in remove_list:
-            self.__index.pop(key)
-            is_dirty_index = True
-
+            is_dirty_index = False
+            for key in remove_list:
+                self.__index.pop(key)
+                is_dirty_index = True
+        else:
+            self.__index = {}
         if is_dirty_index:
             managers.storage.write_object_async(VDOM_CONFIG["DATABASE-MANAGER-INDEX-STORAGE-RECORD"], self.__index)
         if db_id and database:
