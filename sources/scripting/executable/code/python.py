@@ -3,6 +3,7 @@ import re
 
 from utils.properties import lazy
 from memory import PYTHON_LANGUAGE
+from logs import server_log
 
 from ...wrappers import server, application, session, log, request, response, obsolete_request
 from ...object import VDOM_object
@@ -23,11 +24,12 @@ class PythonCode(Code):
         try:
             return compile(self._source_code, self._signature, "exec")
         except SyntaxError as error:
-            if str(error).startswith(ERROR_MESSAGE):
+            if error.msg == ERROR_MESSAGE:
                 self._source_code = REMOVE_ENCODING_REGEX.sub("", self._source_code)
                 return self._compile(store=store)
             else:
-                raise
+                server_log.warning("Unable to compile %s, line %s: %s" % (self, error.lineno, error.msg))
+                return None
 
     def _invoke(self, namespace, context=None):
         if self._package:
@@ -45,4 +47,7 @@ class PythonCode(Code):
             obsolete_request=obsolete_request,
             VDOM_object=VDOM_object)
 
-        exec self._code in namespace
+        if self._code is None:
+            raise Exception("No code to execute")
+        else:
+            exec self._code in namespace

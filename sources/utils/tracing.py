@@ -21,7 +21,7 @@ DEFAULT_FILLER = "."
 
 DESIRED_WIDTH = 139
 CAPTION_WIDTH = 36
-LOCATION_WIDTH = 79 if width == sys.maxint else min(width * 2 // 3, 79)
+LOCATION_WIDTH = 99 if width == sys.maxint else min(width * 2 // 3, 99)
 STATEMENT_WIDTH = DESIRED_WIDTH - LOCATION_WIDTH
 NAME_WIDTH = 32
 VALUE_WIDTH = DESIRED_WIDTH - NAME_WIDTH
