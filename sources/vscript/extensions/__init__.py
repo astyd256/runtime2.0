@@ -11,3 +11,4 @@ from .xmls import v_xmlnode, v_xmlattribute, v_xmlelement, v_xmldocument, \
 	v_xmlnamespaceerror, v_xmlnotfounderror, v_xmlnotsupportederror, \
 	v_xmlnodataallowederror, v_xmlnodataallowederror, v_xmlsyntaxerror, \
 	v_xmlwrongdocumenterror
+from .constraint import v_problem

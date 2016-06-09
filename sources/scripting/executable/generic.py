@@ -1,7 +1,5 @@
 
-import managers
-import file_access
-from utils.properties import lazy
+from utils.properties import lazy, roproperty
 
 
 class Executable(object):
@@ -11,11 +9,11 @@ class Executable(object):
         return None
 
     @lazy
-    def _location(self):
+    def _name(self):
         raise NotImplementedError
 
     @lazy
-    def _name(self):
+    def _source_extension(self):
         raise NotImplementedError
 
     @lazy
@@ -24,11 +22,15 @@ class Executable(object):
 
     @lazy
     def _source_code(self):
-        with managers.file_manager.open(file_access.FILE, self._location + self._extension, mode="rU", encoding="utf8") as file:
-            return file.read()
+        return self._read(self._source_extension)
+
+    package = roproperty("package")
+    name = roproperty("name")
+    source_extension = roproperty("_source_extension")
+    source_code = roproperty("_source_code")
 
     def exists(self):
-        return managers.file_manager.exists(file_access.FILE, self._location + self._extension)
+        return self._exists(self._source_extension)
 
     def __str__(self):
         raise NotImplementedError

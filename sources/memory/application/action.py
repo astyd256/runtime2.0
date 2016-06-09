@@ -13,6 +13,8 @@ class MemoryActionSketch(MemoryBase):
     def _executable(self):
         from scripting.executable import select_action_class
         return select_action_class(self._owner.application.scripting_language)(self, self._name)
+        # import scripting
+        # return scripting.actions.select(self._owner.application.scripting_language)(self)
 
     def __init__(self, callback, owner):
         self._callback = callback
@@ -107,6 +109,7 @@ class MemoryAction(MemoryActionSketch):
     # unsafe
     def execute(self, object, namespace):
         if self._source_code:
+            # self._executable.execute(object, namespace)
             self._executable.execute(namespace, context=object, sandbox=True)
 
     def __invert__(self):

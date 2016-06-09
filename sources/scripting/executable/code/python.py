@@ -13,8 +13,8 @@ class PythonCode(Code):
     def _scripting_language(self):
         return PYTHON_LANGUAGE
 
-    def _compile(self):
-        return compile(self._source_code, self._signature, u"exec"), None
+    def _compile(self, store=False):
+        return compile(self._source_code, self._signature, "exec")
 
     def _invoke(self, namespace, context=None):
         if self._package:

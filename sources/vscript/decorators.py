@@ -36,21 +36,25 @@ unwrappers={
 
 
 def get_function_wrapper(arguments, result, function):
-	if not isinstance(function, types.FunctionType):
+	if not isinstance(function, (types.FunctionType, types.MethodType)):
 		raise errors.python("Require function to decorate")
 	maximal=function.__code__.co_argcount
 	varnames=function.__code__.co_varnames
-	leading=1 if varnames and varnames[0]=="self" else 0
+	leading=1 if isinstance(function, types.MethodType) else 0
 	if len(arguments)+leading-maximal:
 		raise errors.python("Incorrect number of arguments")
-	defaults=function.__defaults__
-	minimal=maximal-(len(defaults) if defaults else 0)
 	try:
 		handlers=tuple(unwrappers[argument] for argument in arguments)
 		controller=wrappers[result] if result else None
 	except KeyError:
 		raise errors.python("Incorrect argument value")
-	if leading: handlers=(lambda self: self,)+handlers
+	if leading:
+		if function.im_self is None:
+			handlers=(lambda self: self,)+handlers
+		else:
+			maximal-=1
+	defaults=function.__defaults__
+	minimal=maximal-(len(defaults) if defaults else 0)
 	def wrapper(*arguments, **keywords):
 		if keywords: raise errors.type_mismatch
 		if not minimal<=len(arguments)<=maximal:

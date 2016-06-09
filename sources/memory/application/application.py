@@ -36,7 +36,11 @@ class MemoryApplicationSketch(MemoryBase):
 
     def get_library_executable(self, name):
         from scripting.executable import select_library_class
-        return select_library_class(self._scripting_language)(self, name)
+        executable = select_library_class(self._scripting_language)(self, name)
+        if executable.exists():
+            return executable
+        else:
+            return None
 
     @property
     def scripting_extension(self):

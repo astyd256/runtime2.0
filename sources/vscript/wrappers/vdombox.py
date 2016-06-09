@@ -26,7 +26,7 @@ class v_vdombox(generic):
 
 
 	def v_open(self, address, username, password):
-		raise errors.internal_error("NOT IMPLEMENTET - WAS REQUIRE SOAP")
+		raise errors.internal_error("NOT IMPLEMENTET - REQUIRE SOAP")
 		if self._server is not None: raise errors.invalid_procedure_call("open")
 		self._server=SOAPpy.WSDL.Proxy("http://%s/vdom.wsdl"%address)
 		self._address=address.as_string

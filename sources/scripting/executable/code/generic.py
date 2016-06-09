@@ -21,22 +21,21 @@ class Code(object):
 
     @lazy
     def _symbols(self):
-        self.compile()
-        return self._symbols
+        return None
 
     scripting_language = roproperty("_scripting_language")
     signature = roproperty("_signature")
     code = roproperty("_code")
     symbols = roproperty("_symbols")
 
-    def _compile(self):
+    def _compile(self, store=False):
         raise NotImplementedError
 
     def _invoke(self, namespace, context=None):
         raise NotImplementedError
 
-    def compile(self):
-        self._code, self._symbols = self._compile()
+    def compile(self, store=False):
+        self._code = self._compile(store=store)
 
     def execute(self, namespace, context=None, sandbox=False):
         if sandbox:

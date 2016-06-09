@@ -117,7 +117,7 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
 		if bytecode:
 			code=compile(code, filename or vscript_source_string, u"exec") # CHECK: code=compile(code, vscript_source_string, u"exec")
 		if use:
-			use_code, use_source=vcompile(use, package=package, environment=environment, safely=True)
+			use_code, use_source=vcompile(use, package=package, environment=environment, safe=True)
 			weakuses[code]=use_code, use_source
 		return code, source
 	except errors.generic as error:

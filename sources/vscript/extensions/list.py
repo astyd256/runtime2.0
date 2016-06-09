@@ -9,8 +9,11 @@ class v_list(generic):
 	def __init__(self):
 		generic.__init__(self)
 		self._items=[]
-		
-	
+
+
+	items=property(lambda self: self._items)
+
+
 	def erase(self, *arguments):
 		if arguments:
 			if len(arguments)>1: raise errors.wrong_number_of_arguments

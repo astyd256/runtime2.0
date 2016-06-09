@@ -201,7 +201,7 @@ class FileManager(object):
                 if safely:
                     shutil.move(location, proper_location)
 
-    def delete(self, category, owner, name):
+    def delete(self, category, owner, name=None):
         location = self.locate(category, owner, name)
         with VDOM_named_mutex(location):
             try:

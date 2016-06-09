@@ -30,6 +30,7 @@ def application_builder(parser, callback=None):
             bindings = {}
             actions = {}
             events = set()
+            libraries = set()
             sections = {}
             def application_handler(name, attributes):
                 sections[name] = True
@@ -411,8 +412,11 @@ def application_builder(parser, callback=None):
                                 #         value, source = vcompile(value, bytecode=0)
                                 #     finally:
                                 #         threading.currentThread().application = None
+
                                 managers.file_manager.write_library(application.id,
                                     library_name + application.scripting_extension, value)
+                                libraries.add(library_name)
+
                                 # previous = managers.engine.select(application.id)
                                 # try:
                                 #     code, source = vcompile(value, bytecode=0)
@@ -879,6 +883,12 @@ def application_builder(parser, callback=None):
             def close_application_handler(name):
                 if not sections.get("Information", False):
                     raise MissingSectionError("Information")
+
+                from scripting.executable import select_library_class
+                for library in libraries:
+                    executable = select_library_class(application.scripting_language)(application, library)
+                    executable.compile(store=True)
+
                 for binding in bindings.itervalues():
                     ~binding
                 for action in actions.itervalues():
@@ -888,6 +898,7 @@ def application_builder(parser, callback=None):
                 for object in objects.itervalues():
                     ~object
                 ~application
+
                 # def handle_on_create(container):
                 #     for object in container.objects.itervalues():
                 #         handle_on_create(object)

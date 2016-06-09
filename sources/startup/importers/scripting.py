@@ -34,17 +34,13 @@ class ScriptingFinder(object):
 class ActualScriptingFinder(object):
 
     def find_module(self, fullname, path=None):
-
         match = FULLNAME_REGEX.match(fullname)
         if match:
             module = match.group(1)
             if module:
                 uuid = module.replace("_", "-")
-                try:
-                    loader = ScriptingLoader(fullname, managers.memory.types[uuid].executable)
-                    return loader
-                except KeyError:
-                    raise ImportError("Unable to load module %s" % uuid)
+                loader = ScriptingLoader(fullname, managers.memory.types[uuid].executable)
+                return loader
             else:
                 package = match.group(2)
                 library = match.group(3)
@@ -55,11 +51,14 @@ class ActualScriptingFinder(object):
                     if package != application.id:
                         raise ImportError("Unable to load \"%s\" library from \"%s\" context" %
                             (package, application.id))
-                    return ScriptingLoader(fullname, application.get_library_executable(library))
+                    executable = application.get_library_executable(library)
+                    if executable:
+                        return ScriptingLoader(fullname, executable)
+                    else:
+                        return None
                 else:
                     location = managers.file_manager.locate(file_access.LIBRARY, package)
                     return FakeModuleLoader(fullname, package=fullname, path=[location])
-
         return None
 
 
