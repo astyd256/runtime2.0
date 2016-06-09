@@ -1,7 +1,6 @@
 
 import string
 import base64
-import threading
 
 from collections import defaultdict, OrderedDict
 from uuid import uuid4
@@ -15,7 +14,7 @@ from utils.parsing import ParsingException, \
     MissingElementError, MissingAttributeError
 # from vscript.engine import vcompile
 
-from ..constants import SCRIPT_CONTEXT
+from ..constants import VSCRIPT_LANGUAGE, SCRIPT_CONTEXT
 
 
 def application_builder(parser, callback=None):

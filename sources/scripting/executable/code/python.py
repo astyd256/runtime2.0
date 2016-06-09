@@ -1,10 +1,16 @@
 
+import re
+
 from utils.properties import lazy
 from memory import PYTHON_LANGUAGE
 
 from ...wrappers import server, application, session, log, request, response, obsolete_request
 from ...object import VDOM_object
 from .generic import Code
+
+
+REMOVE_ENCODING_REGEX = re.compile(r"^[ \t\v]*#.*?coding[:=][ \t]*([-_.a-zA-Z0-9]+).*$", re.MULTILINE)
+ERROR_MESSAGE = "encoding declaration in Unicode string"
 
 
 class PythonCode(Code):
@@ -14,7 +20,14 @@ class PythonCode(Code):
         return PYTHON_LANGUAGE
 
     def _compile(self, store=False):
-        return compile(self._source_code, self._signature, "exec")
+        try:
+            return compile(self._source_code, self._signature, "exec")
+        except SyntaxError as error:
+            if str(error).startswith(ERROR_MESSAGE):
+                self._source_code = REMOVE_ENCODING_REGEX.sub("", self._source_code)
+                return self._compile(store=store)
+            else:
+                raise
 
     def _invoke(self, namespace, context=None):
         if self._package:

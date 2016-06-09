@@ -1,14 +1,5 @@
 
-from utils.properties import lazy, roproperty
-
-
 class CodeStorage(object):
-
-    @lazy
-    def _location(self):
-        raise NotImplementedError
-
-    location = roproperty("_location")
 
     def _exists(self, extension):
         raise NotImplementedError
