@@ -4,12 +4,12 @@
 # import uuid
 import managers
 import file_access
-from utils.exception import VDOM_exception
+# from utils.exception import VDOM_exception
 from dbobject import VDOM_database_object, VDOM_database_table
 from xml.dom.minidom import parseString
 from xml.dom import Node
 # import time
-# import sqlite3
+import sqlite3
 
 
 class VDOM_database_manager(object):
@@ -255,21 +255,21 @@ class VDOM_database_manager(object):
         """Saving changes in database index to Storage"""
         managers.storage.write_object_async(VDOM_CONFIG["DATABASE-MANAGER-INDEX-STORAGE-RECORD"], self.__index)
 
-    # def backup_database(self, owner_id, db_id):
-    #     if db_id not in self.__index:
-    #         return None
-    #     orig_db = self.get_database(owner_id, db_id)
-    #     id = orig_db.id
-    #     tempdb_name = orig_db.name
-    #     temppath = managers.file_manager.create_tmp_dir("db_")
-    #     tgt_connection = sqlite3.connect("%s\copydb" % temppath)
-    #     newdb = orig_db.backup_data(tgt_connection)
-    #     tgt_connection.execute("VACUUM")
-    #     tgt_connection.commit()
-    #     tgt_connection.close()
-    #     data = managers.file_manager.read_file("%s\copydb" % temppath)
-    #     managers.file_manager.delete_tmp_dir(temppath)
-    #     return data
+    def backup_database(self, owner_id, db_id):
+        if db_id not in self.__index:
+            return None
+        orig_db = self.get_database(owner_id, db_id)
+        temppath = managers.file_manager.create_temporary_directory("db_")
+        try:
+            tgt_connection = sqlite3.connect("%s\copydb" % temppath)
+            orig_db.backup_data(tgt_connection)
+            tgt_connection.execute("VACUUM")
+            tgt_connection.commit()
+            tgt_connection.close()
+            data = managers.file_manager.read(file_access.FILE, None, "%s\copydb" % temppath)
+        finally:
+            managers.file_manager.delete_temporary_directory(temppath)
+        return data
 
 
 def un_quote(param):

@@ -5,7 +5,7 @@ import shutil
 
 from collections import deque
 from threading import RLock
-from tempfile import NamedTemporaryFile # _TemporaryFileWrapper
+from tempfile import mkdtemp, NamedTemporaryFile # _TemporaryFileWrapper
 
 import settings
 import file_access
@@ -18,6 +18,8 @@ from utils.tracing import format_exception_trace
 from .auxiliary import cleanup_directory
 from .daemon import FileWriter
 
+
+TEMPORARY_DIRECTORY_SUFFIX = "-temporary"
 
 # application_path = "applications"
 # global_types_path = "types"
@@ -58,7 +60,8 @@ class FileManager(object):
 
     def locate(self, category=None, owner=None, name=None, *arguments):
         if category is None:
-            segments = (owner, name) + arguments
+            assert owner is None
+            segments = (name,) + arguments
         elif category == file_access.APPLICATION:
             # VDOM_CONFIG["FILE-ACCESS-DIRECTORY"] / application_path="applications" / application_id / application_file_name="app.xml"
             segments = (settings.APPLICATIONS_LOCATION, owner, name) + arguments
@@ -126,7 +129,7 @@ class FileManager(object):
         location = self.locate(category, owner, name)
         return os.path.exists(location)
 
-    def open(self, category, owner, name=None, mode="r", buffering=-1, encoding=None, errors=None, newline=""):
+    def open(self, category, owner, name, mode="r", buffering=-1, encoding=None, errors=None, newline=""):
         location = self.locate(category, owner, name)
         # self.ensure(category, owner, mode)
         return io.open(location, mode, buffering, encoding, errors, None if "b" in mode else newline)
@@ -180,10 +183,10 @@ class FileManager(object):
     #         os.rename(content.name, location)
     #     return
 
-    def write(self, category, owner, name, content, encoding=None, async=False, safely=False):
+    def write(self, category, owner, name, data=None, encoding=None, async=False, safely=False):
         if async:
             with self._lock:
-                self._queue.append((category, owner, name, content, encoding, False, safely))
+                self._queue.append((category, owner, name, data, encoding, False, safely))
                 if self._daemon is None:
                     self.start_daemon()
         else:
@@ -194,14 +197,14 @@ class FileManager(object):
                 if safely:
                     proper_location, location = location, location + ".temporary"
                 with io.open(location, mode, encoding=encoding, newline=None if "b" in mode else "") as file:
-                    if hasattr(content, "read"):
-                        shutil.copyfileobj(content, file)
+                    if hasattr(data, "read"):
+                        shutil.copyfileobj(data, file)
                     else:
-                        file.write(content)
+                        file.write(data)
                 if safely:
                     shutil.move(location, proper_location)
 
-    def delete(self, category, owner, name=None):
+    def delete(self, category, owner, name):
         location = self.locate(category, owner, name)
         with VDOM_named_mutex(location):
             try:
@@ -231,6 +234,15 @@ class FileManager(object):
                 raise Exception("Unable to cleanup non-directory: %s" % location)
         except Exception as error:
             print "Cleanup %s directory error: %s" % (location, error)
+
+    def create_temporary_directory(self, prefix=""):
+        return mkdtemp(TEMPORARY_DIRECTORY_SUFFIX, prefix, dir=settings.TEMPORARY_LOCATION)
+
+    def delete_temporary_directory(self, name):
+        relative = os.path.relpath(os.path.normpath(name), os.path.abspath(settings.TEMPORARY_LOCATION))
+        if relative.find('/') >= 0 or relative.find('\\') >= 0:
+            raise VDOM_exception_file_access("Provided file name is invalid")
+        shutil.rmtree(name)
 
     # storage
 

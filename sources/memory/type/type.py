@@ -1,6 +1,4 @@
 
-import binascii
-
 from threading import RLock
 from collections import defaultdict
 from io import StringIO
@@ -15,6 +13,7 @@ from utils.properties import lazy, roproperty, rwproperty
 
 from ..constants import PYTHON_LANGUAGE, PYTHON_EXTENSION, NON_CONTAINER
 from ..generic import MemoryBase
+from ..auxiliary import copy_as_base64
 from .attributes import MemoryTypeAttributes
 from .events import MemoryTypeUserInterfaceEvents, MemoryTypeObjectEvents
 from .actions import MemoryTypeActions
@@ -237,22 +236,13 @@ class MemoryType(MemoryTypeSketch):
                 file.write(u"\t<Resources>\n")
                 for id in ids:
                     resource = managers.resource_manager.get_resource(self._id, id)
-                    # TODO: Investigate this condition
                     if resource.label == "":
                         try:
                             resource_file = resource.get_fd()
-                        except Exception as error:
-                            print "Unable to load %s resource: %s" % (id, error)
+                        except:
                             continue
-                        chunksize = (settings.RESOURCE_LINE_LENGTH // 4) * 3
                         file.write(u"\t\t<Resource ID=\"%s\" Type=\"%s\" Name=\"%s\">\n" % (id, resource.res_format, resource.name))
-                        with resource_file:
-                            while True:
-                                chunk = resource_file.read(chunksize)
-                                if chunk:
-                                    file.write(u"\t\t\t%s" % binascii.b2a_base64(chunk))
-                                else:
-                                    break
+                        copy_as_base64(file, resource_file, indent=u"\t\t\t")
                         file.write(u"\t\t</Resource>\n")
                 file.write(u"\t</Resources>\n")
 
@@ -293,7 +283,7 @@ class MemoryType(MemoryTypeSketch):
                 self.compose(file=file, shorter=True)
 
     def export(self, filename):
-        with managers.file_manager.open(file_access.FILE, filename,
+        with managers.file_manager.open(file_access.FILE, None, filename,
                 mode="w", encoding="utf8") as file:
             self.compose(file=file)
 

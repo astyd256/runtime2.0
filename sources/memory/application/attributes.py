@@ -1,6 +1,7 @@
 
 import re
 from collections import Mapping, MutableMapping
+import settings
 import managers
 from utils.properties import lazy
 from logs import log
@@ -22,6 +23,10 @@ class MemoryAttributesSketch(MemoryBase):
     def _cdata(self):
         return set()
 
+    @lazy
+    def _query(self):
+        return set()
+
     def __init__(self, owner, attributes=None):
         self._owner = owner
         if attributes:
@@ -33,10 +38,8 @@ class MemoryAttributesSketch(MemoryBase):
         return self._items[name]
 
     def __setitem__(self, name, value):
-        if name not in self._cdata and \
-                len(value) > FORCE_CDATA_LENGTH or FORCE_CDATA_REGEX.search(value):
-            self._cdata.add(name)
         value = DEREFERENCE_REGEX.sub(lambda match: match.group(1), value)
+        self._query.add(name)
         self._items[name] = value
 
     def __invert__(self):
@@ -55,9 +58,22 @@ class MemoryAttributes(MemoryAttributesSketch, MutableMapping):
     # unsafe
     def compose(self, ident=u"", file=None, shorter=False):
         if self._items:
+            for name in self._query:
+                value = self._items[name]
+                cdata = len(value) > FORCE_CDATA_LENGTH or FORCE_CDATA_REGEX.search(value)
+                if name in self._cdata:
+                    if not cdata:
+                        self._cdata.remove(name)
+                else:
+                    if cdata:
+                        self._cdata.add(name)
+
+            self._query.clear()
+
             file.write(u"%s<Attributes>\n" % ident)
             for name, value in self._items.iteritems():
-                if value == self._owner.type.attributes[name].default_value:
+                if not settings.STORE_DEFAULT_VALUES and \
+                        value == self._owner.type.attributes[name].default_value:
                     continue
                 complexity = self._owner.type.attributes[name].complexity or name in self._cdata
                 file.write(u"%s\t<Attribute Name=\"%s\">%s</Attribute>\n" %
@@ -106,9 +122,7 @@ class MemoryAttributes(MemoryAttributesSketch, MutableMapping):
                     if not isinstance(value, basestring):
                         value = str(value)
 
-                    if name not in self._cdata and \
-                            len(value) > FORCE_CDATA_LENGTH or FORCE_CDATA_REGEX.search(value):
-                        self._cdata.add(name)
+                    self._query.add(name)
 
                     log.write("Update %s attrbiute \"%s\" to \"%s\"" % (self._owner, name, value.replace('"', '\"')))
                     self._items[name] = value

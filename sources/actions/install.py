@@ -28,7 +28,7 @@ def run(filename):
         return entity
 
     try:
-        file = managers.file_manager.open(file_access.FILE, filename, mode="rb")
+        file = managers.file_manager.open(file_access.FILE, None, filename, mode="rb")
     except Exception as error:
         console.error("unable to open file: %s" % error)
     else:

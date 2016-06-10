@@ -18,6 +18,7 @@ from utils.properties import constant, roproperty, rwproperty
 from .. import PYTHON_LANGUAGE, VSCRIPT_LANGUAGE, PYTHON_EXTENSION, VSCRIPT_EXTENSION, \
     APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT
 from ..generic import MemoryBase
+from ..auxiliary import write_as_base64, copy_as_base64
 from .objects import MemoryObjects
 from .events import MemoryEvents
 from .actions import MemoryActions
@@ -217,15 +218,14 @@ class MemoryApplication(MemoryApplicationSketch):
                 file.write(u"\t<Resources>\n")
                 for id in ids:
                     resource = managers.resource_manager.get_resource(self._id, id)
-                    # TODO: Investigate this condition
                     if resource.label == "":
                         try:
-                            data = resource.get_data()
+                            resource_file = resource.get_fd()
                         except:
                             continue
-                        data = base64.b64encode(data)
-                        file.write(u"\t\t<Resource ID=\"%s\" Type=\"%s\" Name=\"%s\">%s</Resource>\n" % (
-                            id, resource.res_format, resource.name, data))
+                        file.write(u"\t\t<Resource ID=\"%s\" Type=\"%s\" Name=\"%s\">\n" % (id, resource.res_format, resource.name))
+                        copy_as_base64(file, resource_file, indent=u"\t\t\t")
+                        file.write(u"\t\t</Resource>\n")
                 file.write(u"\t</Resources>\n")
 
             ids = managers.database_manager.list_databases(self._id)
@@ -241,11 +241,12 @@ class MemoryApplication(MemoryApplicationSketch):
                     query.close()
 
                     database = managers.database_manager.get_database(self._id, id)
-                    data = managers.database_manager.backup_database(self._id, id)
-                    if database.name != "" and data:
-                        data = base64.b64encode(data)
-                        file.write(u"\t\t<Database ID=\"%s\" Name=\"%s\" Type=\"sqlite\">%s</Database>\n" % (
-                            database.id, database.name, data))
+                    if database.name != "":
+                        data = managers.database_manager.backup_database(self._id, id)
+                        if data:
+                            file.write(u"\t\t<Database ID=\"%s\" Name=\"%s\" Type=\"sqlite\">\n" % (database.id, database.name))
+                            write_as_base64(file, data, indent=u"\t\t\t")
+                            file.write(u"\t\t</Database>\n")
                 file.write(u"\t</Databases>\n")
 
         if self._bindings or self._events.catalog:
@@ -340,7 +341,7 @@ class MemoryApplication(MemoryApplicationSketch):
 
     def export(self, filename):
         with self.lock:
-            with managers.file_manager.open(file_access.FILE, filename,
+            with managers.file_manager.open(file_access.FILE, None, filename,
                     mode="w", encoding="utf8") as file:
                 self.compose(file=file)
 

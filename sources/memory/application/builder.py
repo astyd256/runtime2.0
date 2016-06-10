@@ -14,7 +14,8 @@ from utils.parsing import ParsingException, \
     MissingElementError, MissingAttributeError
 # from vscript.engine import vcompile
 
-from ..constants import VSCRIPT_LANGUAGE, SCRIPT_CONTEXT
+from ..constants import SCRIPT_CONTEXT
+from ..auxiliary import clean_attribute_value, clean_source_code
 
 
 def application_builder(parser, callback=None):
@@ -153,6 +154,7 @@ def application_builder(parser, callback=None):
                                             except KeyError:
                                                 raise MissingAttributeError(u"Name")
                                             def attribute_handler(value):
+                                                value = clean_attribute_value(value)
                                                 if attribute_name in object.type.attributes:
                                                     object.attributes[attribute_name] = value
                                                 else:
@@ -181,7 +183,7 @@ def application_builder(parser, callback=None):
                                             action.id = str(uuid4())
                                             action.name = SCRIPT_CONTEXT
                                             def script_handler(value):
-                                                action.source_code = value
+                                                action.source_code = clean_source_code(value)
                                                 actions[action.id] = action
                                                 # ~action
                                             parser.handle_value(name, attributes, script_handler)
@@ -231,7 +233,7 @@ def application_builder(parser, callback=None):
                                             except KeyError:
                                                 pass
                                             def action_handler(value):
-                                                action.source_code = value
+                                                action.source_code = clean_source_code(value)
                                                 actions[action.id] = action
                                                 # ~action
                                             parser.handle_value(name, attributes, action_handler)
