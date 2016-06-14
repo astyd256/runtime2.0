@@ -63,7 +63,7 @@ def get_console_size():
     elif platform.startswith("freebsd") or platform.startswith("linux"):
         return _get_linux_console_size()
     else:
-        return sys.maxint
+        return sys.maxint, sys.maxint
 
 
 def get_ansii_color():

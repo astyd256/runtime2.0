@@ -1,7 +1,6 @@
 
 
 import sys
-import base64
 
 from threading import RLock
 from collections import defaultdict

@@ -5,6 +5,8 @@ import io
 import re
 import managers
 
+# from logs import console
+
 
 MODULE_NAME_PATTERN = r"(?:module_)([A-F\d]{8}_[A-F\d]{4}_[A-F\d]{4}_[A-F\d]{4}_[A-F\d]{12})"
 LIBRARY_NAME_PATTERN = r"([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})(?:\.(.+))?"
@@ -34,10 +36,12 @@ class ScriptingFinder(object):
 class ActualScriptingFinder(object):
 
     def find_module(self, fullname, path=None):
+        # console.stdout.write("IMPORT >>> %s, %s\n" % (fullname, path))
         match = FULLNAME_REGEX.match(fullname)
         if match:
             module = match.group(1)
             if module:
+                # console.stdout.write("IMPORT >>> MODULE %s\n" % module)
                 uuid = module.replace("_", "-")
                 loader = ScriptingLoader(fullname, managers.memory.types[uuid].executable)
                 return loader
@@ -45,6 +49,7 @@ class ActualScriptingFinder(object):
                 package = match.group(2)
                 library = match.group(3)
                 if library:
+                    # console.stdout.write("IMPORT >>> LIBRARY %s - %s\n" % (package, library))
                     application = managers.engine.application
                     if application is None:
                         raise ImportError("Unable to load \"%s\" library: no active application" % library)
@@ -57,6 +62,7 @@ class ActualScriptingFinder(object):
                     else:
                         return None
                 else:
+                    # console.stdout.write("IMPORT >>> PACKAGE %s\n" % package)
                     location = managers.file_manager.locate(file_access.LIBRARY, package)
                     return FakeModuleLoader(fullname, package=fullname, path=[location])
         return None
