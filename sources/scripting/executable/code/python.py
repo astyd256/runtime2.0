@@ -10,6 +10,7 @@ from ...object import VDOM_object
 from .generic import Code
 
 
+MISSING = "MISSING"
 REMOVE_ENCODING_REGEX = re.compile(r"^[ \t\v]*#.*?coding[:=][ \t]*([-_.a-zA-Z0-9]+).*$", re.MULTILINE)
 ERROR_MESSAGE = "encoding declaration in Unicode string"
 
@@ -32,12 +33,14 @@ class PythonCode(Code):
                 return None
 
     def _invoke(self, namespace, context=None):
+        if self._code is None:
+            raise Exception("No code to execute")
+
         if self._package:
             __import__(self._package)
             namespace["__package__"] = self._package
 
         namespace.update(
-            self=context,
             server=server,
             request=request,
             response=response,
@@ -47,7 +50,9 @@ class PythonCode(Code):
             obsolete_request=obsolete_request,
             VDOM_object=VDOM_object)
 
-        if self._code is None:
-            raise Exception("No code to execute")
-        else:
+        if context:
+            namespace["self"] = context
+        try:
             exec self._code in namespace
+        finally:
+            namespace.pop("self", None)

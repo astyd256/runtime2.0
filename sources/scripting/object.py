@@ -1,6 +1,6 @@
 
 from copy import copy
-from collections import MutableMapping
+from collections import Mapping, MutableMapping
 import managers
 from logs import log
 from .wrappers import obsolete_request
@@ -56,6 +56,24 @@ class VDOMObjectAttributes(MutableMapping):
         return len(self._owner._attributes)
 
 
+class VDOMObjectObjects(Mapping):
+
+    def __init__(self, owner):
+        self._owner = owner
+
+    def __getitem__(self, name):
+        try:
+            return getattr(self._owner, make_object_name(name))
+        except AttributeError:
+            return self._owner._instantiate(name)
+
+    def __iter__(self):
+        return iter(self._owner._objects)
+
+    def __len__(self):
+        return len(self._owner._objects)
+
+
 class VDOMObject(object):
 
     # internal attributes
@@ -91,6 +109,7 @@ class VDOMObject(object):
         self._compute_state = STATE_REQUIRE_RECOMPUTE
         self._update_state = STATE_UNMODIFIED
         self._attributes_collection = None
+        self._objects_collection = None
 
     def _get_state(self):
         request = managers.request_manager.current
@@ -102,7 +121,9 @@ class VDOMObject(object):
         return self._attributes_collection
 
     def _get_objects(self):
-        return {name: getattr(self, make_object_name(name)) for name in self._objects}
+        if self._objects_collection is None:
+            self._objects_collection = VDOMObjectObjects(self)
+        return self._objects_collection
 
     parent = property(lambda self: self._parent)
     state = property(_get_state)

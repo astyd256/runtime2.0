@@ -47,7 +47,7 @@ def calls_builder(parser):
 							except KeyError:
 								try: parameter_name=attributes.pop(u"name")
 								except KeyError: raise MissingAttributeError, u"Name"
-							def parameter_handler(value): event_parameters[parameter_name]=value.encode("utf8")
+							def parameter_handler(value): event_parameters[parameter_name]=[value.encode("utf8")]
 							parser.handle_value(name, attributes, parameter_handler)
 							# </Parameter>
 						else:
@@ -121,6 +121,7 @@ def run(request):
 			r = {}
 			err = None
 			try:
+				# print "E2VDOM >>>", ev.events
 				for ob, nm in ev.events:
 					obj=app.objects.catalog.get(ob)
 					if obj is None:
@@ -130,7 +131,11 @@ def run(request):
 					if h is None:
 						debug("Event: No such event")
 						continue
+					# for callee in h.callees:
+					# 	print "CALLEE >>>", callee
 					for callee in h.callees:
+						if not callee.is_action:
+							continue
 						params = ev.events[ob, nm]
 						params["sender"] = [ob]
 						request.arguments().arguments(params)

@@ -63,7 +63,8 @@ class Compiler(object):
 
             # attributes and objects
             "_attributes": tuple(name for name in origin.attributes),
-            "_objects": tuple(entry.origin.name for entry in profile.entries)
+            "_objects": tuple(entry.origin.name for entry in profile.entries),
+            "_ghosts": tuple(entry.origin.name for entry in profile.entries if not entry.dynamic)
         }
 
         # TODO: avoid double descriptor assigments for not hidden in namespace attributes
