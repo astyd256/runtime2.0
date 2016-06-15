@@ -3,7 +3,7 @@ from copy import copy
 from collections import Mapping, MutableMapping
 import managers
 from logs import log
-from .wrappers import obsolete_request
+# from .wrappers import obsolete_request
 from .compiler import STATE_UNMODIFIED, STATE_MODIFIED, \
     STATE_UP_TO_DATE, STATE_REQUIRE_RECOMPUTE, STATE_RECOMPUTE, STATE_AVOID_RECOMPUTE
 from .compiler.descriptors import make_attribute_name, make_object_name, make_descriptor_name
@@ -236,7 +236,8 @@ class VDOMObject(object):
     def write(self, data):
         log.write("Write data to client %s" % data)
         self._compute_state = STATE_AVOID_RECOMPUTE
-        obsolete_request.add_client_action(self._id, data)
+        # obsolete_request.add_client_action(self._id, data)
+        managers.request_manager.current.add_client_action(self._id, data)
 
     def action(self, action_name, param=[], source_id=None):
         """Client action call from server action"""

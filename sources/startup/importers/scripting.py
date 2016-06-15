@@ -49,7 +49,6 @@ class ActualScriptingFinder(object):
                 package = match.group(2)
                 library = match.group(3)
                 if library:
-                    # console.stdout.write("IMPORT >>> LIBRARY %s - %s\n" % (package, library))
                     application = managers.engine.application
                     if application is None:
                         raise ImportError("Unable to load \"%s\" library: no active application" % library)
@@ -58,6 +57,7 @@ class ActualScriptingFinder(object):
                             (package, application.id))
                     executable = application.get_library_executable(library)
                     if executable:
+                        # console.stdout.write("IMPORT >>> LIBRARY %s - %s\n" % (package, library))
                         return ScriptingLoader(fullname, executable)
                     else:
                         return None

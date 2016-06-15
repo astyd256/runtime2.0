@@ -11,6 +11,8 @@ from utils.auxiliary import fit, align, lfill
 from utils.console import width
 
 
+LOGGING = None
+
 PYTHON_ALIAS = "<python>"
 SERVER_ALIAS = "<server>"
 

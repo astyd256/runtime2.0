@@ -31,6 +31,14 @@ def make_descriptor_class_name(name):
     return "ScriptingObject%sDescriptor" % "".join(part.capitalize() for part in name.split("_"))
 
 
+# exceptions
+
+class AvoidRecomputeError(AttributeError):
+
+    def __init__(self, name):
+        super(AttributeError, self).__init__("Avoid recompute when update %r" % name)
+
+
 # scripting type creator
 
 def create_type_object(type):
@@ -64,6 +72,7 @@ object={class_name}()""".format(
 
 def create_attribute_descriptor(name):
     namespace = {
+        "AvoidRecomputeError": AvoidRecomputeError,
         "STATE_UNMODIFIED": STATE_UNMODIFIED,
         "STATE_MODIFIED": STATE_MODIFIED,
         "STATE_UP_TO_DATE": STATE_UP_TO_DATE,
@@ -86,7 +95,7 @@ def create_attribute_descriptor(name):
         if instance._compute_state is STATE_UP_TO_DATE:
             instance._compute_state=STATE_REQUIRE_RECOMPUTE
         elif instance._compute_state is STATE_AVOID_RECOMPUTE:
-            raise AttributeError
+            raise AvoidRecomputeError("{name}")
         if instance._update_state is STATE_UNMODIFIED:
             instance._update_state=STATE_MODIFIED
         instance.{attribute_name}=value
@@ -96,12 +105,13 @@ descriptor={class_name}()""".format(
         class_name=class_name,
         attribute_name=attribute_name)
 
-    exec(source, namespace)
+    exec(compile(source, "<attribute descriptor \"%s\">" % name, "exec"), namespace)
     return namespace["descriptor"]
 
 
 def create_stateful_attribute_descriptor(name):
     namespace = {
+    "AvoidRecomputeError": AvoidRecomputeError,
         "STATE_UNMODIFIED": STATE_UNMODIFIED,
         "STATE_MODIFIED": STATE_MODIFIED,
         "STATE_UP_TO_DATE": STATE_UP_TO_DATE,
@@ -123,7 +133,7 @@ def create_stateful_attribute_descriptor(name):
         if instance._compute_state is STATE_UP_TO_DATE:
             instance._compute_state=STATE_REQUIRE_RECOMPUTE
         elif instance._compute_state is STATE_AVOID_RECOMPUTE:
-            raise AttributeError
+            raise AvoidRecomputeError("{name}")
         if instance._update_state is STATE_UNMODIFIED:
             instance._update_state=STATE_MODIFIED
             instance._switch()
@@ -133,7 +143,7 @@ descriptor={class_name}()""".format(
         name=name,
         class_name=class_name)
 
-    exec(source, namespace)
+    exec(compile(source, "<stateful attribute descriptor \"%s\">" % name, "exec"), namespace)
     return namespace["descriptor"]
 
 
@@ -153,7 +163,7 @@ descriptor={class_name}()""".format(
         class_name=class_name,
         attribute_name=attribute_name)
 
-    exec(source, namespace)
+    exec(compile(source, "<object descriptor \"%s\">" % name, "exec"), namespace)
     return namespace["descriptor"]
 
 
@@ -177,5 +187,5 @@ descriptor={class_name}()""".format(
         class_name=class_name,
         attribute_name=attribute_name)
 
-    exec(source, namespace)
+    exec(compile(source, "<ghost object descriptor \"%s\">" % name, "exec"), namespace)
     return namespace["descriptor"]
