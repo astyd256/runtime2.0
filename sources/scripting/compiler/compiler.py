@@ -194,13 +194,13 @@ class Compiler(object):
 
         # compile methods
         if source:
+            log.write("Compose %s in %s context" % (origin, context))
             clean_source = "\n".join(fit(line, MAXIMAL_LINE_LENGTH) for line in "".join(source).splitlines())
-            log.debug(u"- - - - - - - - - - - - - - - - - - - -\n"
-                u"%s\n"
+            log.debug(
                 u"- - - - - - - - - - - - - - - - - - - -\n"
                 u"%s\n"
                 u"- - - - - - - - - - - - - - - - - - - -" %
-                (origin, clean_source), module=False)
+                clean_source.replace("\t", "    "), module=False)
 
             # compile and execute
             code = compile(u"".join(source), u"<class %s>" % origin.id, u"exec")

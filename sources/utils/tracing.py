@@ -1,6 +1,7 @@
 
 import sys
 import types
+import linecache
 import traceback
 import inspect
 import pprint
@@ -12,6 +13,7 @@ from utils.console import width
 
 
 LOGGING = None
+TRACING = None
 
 PYTHON_ALIAS = "<python>"
 SERVER_ALIAS = "<server>"
@@ -64,6 +66,53 @@ def restore_source_path(path):
         return PYTHON_PATH + path[len(PYTHON_PATH):]
     else:
         return path
+
+
+def extract_stack(frame=None, skip_tracing=True, skip=None, until=None):
+    if frame is None:
+        try:
+            raise ZeroDivisionError
+        except ZeroDivisionError:
+            frame = sys.exc_info()[2].tb_frame.f_back
+
+    lines = []
+    while frame is not None:
+        namespace = frame.f_globals
+        lineno = frame.f_lineno
+        code = frame.f_code
+        filename = code.co_filename
+        name = code.co_name
+
+        if skip_tracing:
+            if namespace.get("TRACING", KeyError) is None:
+                frame = frame.f_back
+                continue
+            else:
+                skip_tracing = False
+
+        if until:
+            module_name = namespace.get("__name__")
+            if module_name and module_name.startswith(until):
+                break
+
+        if skip and name in skip:
+            frame = frame.f_back
+            continue
+        else:
+            skip = None
+
+        linecache.checkcache(filename)
+        line = linecache.getline(filename, lineno, frame.f_globals)
+        if line:
+            line = line.strip()
+        else:
+            line = None
+
+        lines.append((filename, lineno, name, line))
+        frame = frame.f_back
+
+    lines.reverse()
+    return lines
 
 
 # detectors
@@ -149,12 +198,12 @@ def format_trace(stack, limit=sys.maxint,
 
 def format_thread_trace(thread=None, limit=sys.maxint,
         statements=True, caption=False, compact=COMPACT_DEFAULT_MODE,
-        indent="", filler=DEFAULT_FILLER, into=None):
+        indent="", filler=DEFAULT_FILLER, skip=None, until=None, into=None):
     if thread is None:
-        stack = traceback.extract_stack()
+        stack = extract_stack(skip=skip, until=until)
     else:
         frame = sys._current_frames()[thread.ident]
-        stack = traceback.extract_stack(frame)
+        stack = extract_stack(frame, skip=skip, until=until)
 
     if caption:
         if thread is None:
@@ -187,6 +236,8 @@ def format_threads_trace(limit=sys.maxint,
             compact=compact,
             indent=indent,
             filler=filler,
+            skip=None,
+            until=None,
             into=lines)
 
     if into is None:
@@ -292,9 +343,9 @@ def show_trace(stack, limit=sys.maxint,
 
 def show_thread_trace(thread=None, limit=sys.maxint,
         statements=True, caption=False, compact=COMPACT_DEFAULT_MODE,
-        indent="", filler=DEFAULT_FILLER, output=None):
+        indent="", filler=DEFAULT_FILLER, skip=None, until=None, output=None):
     (output or sys.stdout).write(format_thread_trace(
-        thread, limit, statements, caption, compact, indent, filler))
+        thread, limit, statements, caption, compact, indent, filler, skip, until))
 
 
 def show_threads_trace(limit=sys.maxint,

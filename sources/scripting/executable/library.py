@@ -38,7 +38,7 @@ class Library(Executable, LibraryCodeStorage):
     owner = application = roproperty("_application")
 
     def __str__(self):
-        return "library %s:%s" % (self._application.id, self._name)
+        return "library %s" % self._name.lower()
 
 
 class PythonLibrary(Library, PythonCode):

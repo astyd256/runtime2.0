@@ -81,9 +81,9 @@ class Engine(object):
             self.select(previous)
 
     def terminate(self):
-        from utils.tracing import format_thread_trace
-        trace = format_thread_trace(indent="    ")
-        log.write("Terminate render:\n%s" % trace)
+        log.write("Terminate render")
+        from utils.tracing import show_thread_trace
+        show_thread_trace(indent="    ", statements=False, skip=("terminate", "redirect"), until="scripting.executable")
         raise RenderTermination
 
 

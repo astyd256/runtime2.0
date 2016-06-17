@@ -1,7 +1,12 @@
 
+import types
+import json
+
 from copy import copy
 from collections import Mapping, MutableMapping
+
 import managers
+
 from logs import log
 # from .wrappers import obsolete_request
 from .compiler import STATE_UNMODIFIED, STATE_MODIFIED, \
@@ -234,39 +239,57 @@ class VDOMObject(object):
         return chunks
 
     def write(self, data):
-        log.write("Write data to client %s" % data)
+        log.write(u"Write data to client")
+
+        from importlib import import_module
+        show_thread_trace = import_module("utils.tracing").show_thread_trace
+        show_thread_trace(indent="    ", statements=False, skip=("write", "action"), until="scripting.executable")
+
+        render_type = managers.request_manager.current.render_type
+        if render_type != "e2vdom":
+            log.error("Perform write when render type is \"%s\"" % render_type)
+
+        log.debug(
+            u"- - - - - - - - - - - - - - - - - - - -\n"
+            u"%s\n"
+            u"- - - - - - - - - - - - - - - - - - - -\n" %
+            data, module=False)
+
         self._compute_state = STATE_AVOID_RECOMPUTE
+
         # obsolete_request.add_client_action(self._id, data)
         managers.request_manager.current.add_client_action(self._id, data)
 
-    def action(self, action_name, param=[], source_id=None):
-        """Client action call from server action"""
+    def action(self, action_name, arguments=[], source_id=None):
+        render_type = managers.request_manager.current.render_type
+        if render_type != "e2vdom":
+            log.error("Invoke client action when render type is \"%s\"" % render_type)
 
         if source_id:
-            src_id = "SRC_ID=\"o_%s\" " % source_id.replace('-', '_')
+            information = "SRC_ID=\"o_%s\" " % source_id.replace('-', '_')
         else:
-            src_id = ""
+            information = ""
+        information += "DST_ID=\"%s\" ACT_NAME=\"%s\"" % (self._id.replace('-', '_'), action_name)
 
-        if type(param) != list:
-            param = [param]
+        if not isinstance(arguments, (tuple, list)):
+            arguments = (arguments,)
 
-        params = ""
-        import types
-        import json
-        for val in param:
-            if isinstance(val, types.StringTypes):
-                xtype = 'str'
-                xval = unicode(val)  # NO str() !!! unicode() ONLY
-            else:
-                xtype = 'obj'
-                xval = unicode(json.dumps(val))
-            params += "<PARAM type=\"%s\"><![CDATA[%s]]></PARAM>" % (
-                xtype, xval)
+        data = (("str", unicode(argument)) if isinstance(argument, basestring) else
+            ("obj", unicode(json.dumps(argument))) for argument in arguments)
 
-        self.write("<EXECUTE %sDST_ID=\"%s\" ACT_NAME=\"%s\">%s</EXECUTE>" %
-            (src_id, self._id.replace('-', '_'), action_name, params))
-        # self.write("<EXECUTE %sDST_ID=\"%s\" ACT_NAME=\"%s\"><PARAM><![CDATA[%s]]></PARAM></EXECUTE>\n" %
-        #     (src_id, self._id.replace('-', '_'), action_name, param))
+        # params = ""
+        # for argument in arguments:
+        #     if isinstance(argument, basestring):
+        #         xtype, xvalue = "str", unicode(argument)  # unicode only
+        #     else:
+        #         xtype, xvalue = "obj", unicode(json.dumps(argument))
+        #     params += "<PARAM type=\"%s\"><![CDATA[%s]]></PARAM>" % (xtype, xvalue)
+
+        if arguments:
+            self.write("<EXECUTE %s>\n%s\n</EXECUTE>" % (information,
+                "\n".join("  <PARAM type=\"%s\"><![CDATA[%s]]></PARAM>" % pair for pair in data)))
+        else:
+            self.write("<EXECUTE %s/>")
 
     def _fetch(self):
         log.write("Fetch %s attributes" % self)

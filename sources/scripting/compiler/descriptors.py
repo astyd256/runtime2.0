@@ -35,8 +35,8 @@ def make_descriptor_class_name(name):
 
 class AvoidRecomputeError(AttributeError):
 
-    def __init__(self, name):
-        super(AttributeError, self).__init__("Avoid recompute when update %r" % name)
+    def __init__(self, owner, name):
+        super(AttributeError, self).__init__("%r avoid recompute when update %r" % (owner, name))
 
 
 # scripting type creator
@@ -64,7 +64,7 @@ object={class_name}()""".format(
         name=type.class_name,
         class_name=class_name)
 
-    exec(source, namespace)
+    exec(compile(source, "<scripting type %s>" % type, "exec"), namespace)
     return namespace["object"]
 
 
@@ -93,25 +93,25 @@ def create_attribute_descriptor(name):
 
     def __set__(self, instance, value):
         if instance._compute_state is STATE_UP_TO_DATE:
-            instance._compute_state=STATE_REQUIRE_RECOMPUTE
+            instance._compute_state = STATE_REQUIRE_RECOMPUTE
         elif instance._compute_state is STATE_AVOID_RECOMPUTE:
-            raise AvoidRecomputeError("{name}")
+            raise AvoidRecomputeError(instance, "{name}")
         if instance._update_state is STATE_UNMODIFIED:
-            instance._update_state=STATE_MODIFIED
-        instance.{attribute_name}=value
+            instance._update_state = STATE_MODIFIED
+        instance.{attribute_name} = value
 
 descriptor={class_name}()""".format(
         name=name,
         class_name=class_name,
         attribute_name=attribute_name)
 
-    exec(compile(source, "<attribute descriptor \"%s\">" % name, "exec"), namespace)
+    exec(compile(source, "<scripting attribute descriptor %s>" % name, "exec"), namespace)
     return namespace["descriptor"]
 
 
 def create_stateful_attribute_descriptor(name):
     namespace = {
-    "AvoidRecomputeError": AvoidRecomputeError,
+        "AvoidRecomputeError": AvoidRecomputeError,
         "STATE_UNMODIFIED": STATE_UNMODIFIED,
         "STATE_MODIFIED": STATE_MODIFIED,
         "STATE_UP_TO_DATE": STATE_UP_TO_DATE,
@@ -131,19 +131,19 @@ def create_stateful_attribute_descriptor(name):
 
     def __set__(self, instance, value):
         if instance._compute_state is STATE_UP_TO_DATE:
-            instance._compute_state=STATE_REQUIRE_RECOMPUTE
+            instance._compute_state = STATE_REQUIRE_RECOMPUTE
         elif instance._compute_state is STATE_AVOID_RECOMPUTE:
-            raise AvoidRecomputeError("{name}")
+            raise AvoidRecomputeError(instance, "{name}")
         if instance._update_state is STATE_UNMODIFIED:
-            instance._update_state=STATE_MODIFIED
+            instance._update_state = STATE_MODIFIED
             instance._switch()
-        instance._attributes["{name}"]=value
+        instance._attributes["{name}"] = value
 
 descriptor={class_name}()""".format(
         name=name,
         class_name=class_name)
 
-    exec(compile(source, "<stateful attribute descriptor \"%s\">" % name, "exec"), namespace)
+    exec(compile(source, "<scripting stateful attribute descriptor %s>" % name, "exec"), namespace)
     return namespace["descriptor"]
 
 
@@ -163,7 +163,7 @@ descriptor={class_name}()""".format(
         class_name=class_name,
         attribute_name=attribute_name)
 
-    exec(compile(source, "<object descriptor \"%s\">" % name, "exec"), namespace)
+    exec(compile(source, "<scripting object descriptor %s>" % name, "exec"), namespace)
     return namespace["descriptor"]
 
 
@@ -187,5 +187,5 @@ descriptor={class_name}()""".format(
         class_name=class_name,
         attribute_name=attribute_name)
 
-    exec(compile(source, "<ghost object descriptor \"%s\">" % name, "exec"), namespace)
+    exec(compile(source, "<scripting ghost object descriptor %s>" % name, "exec"), namespace)
     return namespace["descriptor"]
