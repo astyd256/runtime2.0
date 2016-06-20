@@ -159,6 +159,8 @@ class VDOM_module_manager(object):
             #             os.remove(request_object.files[key][0].name)
 
             if request_object.fh:
+                from logs import log
+                log.debug("REQUEST FILE HANDLER: %r" % request_object.fh)
                 shutil.copyfileobj(request_object.fh, request_object.wfile)
                 return (None, "")
 

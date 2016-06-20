@@ -242,8 +242,8 @@ class VDOMObject(object):
         log.write(u"Write data to client")
 
         from importlib import import_module
-        show_thread_trace = import_module("utils.tracing").show_thread_trace
-        show_thread_trace(indent="    ", statements=False, skip=("write", "action"), until="scripting.executable")
+        format_thread_trace = import_module("utils.tracing").format_thread_trace
+        log.debug(format_thread_trace(statements=False, skip=("write", "action"), until="scripting.executable"))
 
         render_type = managers.request_manager.current.render_type
         if render_type != "e2vdom":
