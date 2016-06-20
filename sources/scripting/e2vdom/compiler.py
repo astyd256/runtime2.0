@@ -33,7 +33,6 @@ DEFINE_CLASS = \
     "function {class_name}(id, eventEngine){{\n" \
         "this.Base=VDOM_Object;\n" \
         "this.Base(id, eventEngine);\n" \
-        "console.log(this.__proto__);\n" \
         "{extra}" \
     "}};" \
     "{class_name}.prototype=new VDOM_Object;"

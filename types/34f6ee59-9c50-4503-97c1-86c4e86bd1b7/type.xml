@@ -650,7 +650,7 @@
 				</Action>
 				<Action Name="submit" DisplayName="#Lang(606)" Description="#Lang(506)">
 					<SourceCode>
-<![CDATA[console.log("SUBMIT");$q(this.domCont).submit();]]>
+<![CDATA[$q(this.domCont).submit();]]>
 					</SourceCode>
 				</Action>
 			</Container>

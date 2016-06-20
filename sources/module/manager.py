@@ -75,7 +75,6 @@ class VDOM_module_manager(object):
             if app.index: # CHECK: if app.index_page:
                 # _o = app.search_object(app.index) # CHECK: _o = app.search_object(app.index_page)
                 _o = app.objects.catalog.get(app.index)
-                print "_o", _o
                 if _o:
                     request_object.redirect("/%s.vdom" % _o.name)
                 else:
