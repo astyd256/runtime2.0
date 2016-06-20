@@ -22,7 +22,7 @@ class VDOM_tabview(VDOM_object):
 		children = self.objects
 		for key in children:
 			child = children[key]
-			children_array.append([str(child.id), str(child.name), str(child.hierarchy), "o_" + (child.id).replace('-', '_')])
+			children_array.append([str(child.id), str(child.name), str(child.hierarchy), "o_" + str(child.id).replace('-', '_')])
 			tag_array[child.hierarchy] = u"""<li><a href='#{id}'>{tabname}</a></li>\n""".format(id = "o_" + (child.id).replace('-', '_'), tabname = child.title) 
 			
 			if self.currenttab == child.hierarchy:
