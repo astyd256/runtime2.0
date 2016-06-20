@@ -10,7 +10,7 @@ class MemoryBindingParameters(MemoryBase, Mapping):
         if items is None:
             self._items = OrderedDict()
         elif isinstance(items, OrderedDict):
-            self._items = OrderedDict()
+            self._items = OrderedDict(items)
         else:
             self._items = OrderedDict(("parameter%d" % index, value) for index, value in enumerate(items, 1))
 

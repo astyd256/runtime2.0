@@ -34,9 +34,9 @@ $q(function(){
 </script>""" % {
 			"debug_info": debug_info,
 			"id": id, "style": style, "contents": contents,
-			"classname": classname, "opened" : self.opened}
+			"classname": classname, "opened": self.opened}
 
-		return VDOM_object.render(self,  contents=result)
+		return VDOM_object.render(self, contents=result)
 
 	def wysiwyg(self, contents=""):
 		if len(contents) == 0:
