@@ -35,7 +35,7 @@ class MemoryBindingSketch(MemoryBase):
     def __str__(self):
         return " ".join(filter(None, (
             "binding",
-            repr(self._name) if self._name else None,
+            "\"%s\"" % self._name if self._name else None,
             "sketch of %s" % self._target_object)))
 
 
@@ -70,5 +70,5 @@ class MemoryBinding(MemoryBindingSketch):
     def __str__(self):
         return " ".join(filter(None, (
             "binding",
-            repr(self._name) if self._name else None,
+            "\"%s\"" % self._name if self._name else None,
             "of %s" % self._target_object)))

@@ -41,7 +41,7 @@ class MemoryStructureLevelSketch(MemoryBase, MutableSet):
     def __str__(self):
         return " ".join(filter(None, (
             "structure level",
-            repr(self._name) if self._name else None,
+            "\"%s\"" % self._name if self._name else None,
             "sketch of %s" % self._owner)))
 
 
@@ -74,5 +74,5 @@ class MemoryStructureLevel(MemoryStructureLevelSketch):
     def __str__(self):
         return " ".join(filter(None, (
             "structure level",
-            repr(self._name) if self._name else None,
+            "\"%s\"" % self._name if self._name else None,
             "of %s" % self._owner)))

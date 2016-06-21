@@ -49,7 +49,7 @@ class MemoryActionSketch(MemoryBase):
     def __str__(self):
         return " ".join(filter(None, (
             "action",
-            repr(self._name) if self._name else None,
+            "\"%s\"" % self._name if self._name else None,
             "sketch of %s" % self._owner)))
 
 
@@ -118,5 +118,5 @@ class MemoryAction(MemoryActionSketch):
     def __str__(self):
         return " ".join(filter(None, (
             "action",
-            repr(self._name) if self._name else None,
+            "%s:%s" % (self._id, self._name) if self._name else None,
             "of %s" % self._owner)))

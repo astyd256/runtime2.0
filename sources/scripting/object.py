@@ -244,17 +244,17 @@ class VDOMObject(object):
         # from importlib import import_module
         # format_thread_trace = import_module("utils.tracing").format_thread_trace
         # log.debug(format_thread_trace(statements=False, skip=("write", "action"), until="scripting.executable"))
-        # log.debug(
-        #     u"- - - - - - - - - - - - - - - - - - - -\n"
-        #     u"%s\n"
-        #     u"- - - - - - - - - - - - - - - - - - - -\n" %
-        #     data, module=False)
+        log.debug(
+            u"- - - - - - - - - - - - - - - - - - - -\n"
+            u"%s\n"
+            u"- - - - - - - - - - - - - - - - - - - -\n" %
+            data, module=False)
 
         render_type = managers.request_manager.current.render_type
         if render_type != "e2vdom":
             log.error("Perform write when render type is \"%s\"" % render_type)
 
-        self._compute_state = STATE_AVOID_RECOMPUTE
+        # self._compute_state = STATE_AVOID_RECOMPUTE
 
         # obsolete_request.add_client_action(self._id, data)
         managers.request_manager.current.add_client_action(self._id, data)
@@ -274,19 +274,11 @@ class VDOMObject(object):
             arguments = (arguments,)
 
         data = (("str", unicode(argument)) if isinstance(argument, basestring) else
-            ("obj", unicode(json.dumps(argument))) for argument in arguments)
-
-        # params = ""
-        # for argument in arguments:
-        #     if isinstance(argument, basestring):
-        #         xtype, xvalue = "str", unicode(argument)  # unicode only
-        #     else:
-        #         xtype, xvalue = "obj", unicode(json.dumps(argument))
-        #     params += "<PARAM type=\"%s\"><![CDATA[%s]]></PARAM>" % (xtype, xvalue)
+            ("obj", unicode(json.dumps(argument)).encode("xml")) for argument in arguments)
 
         if arguments:
             self.write("<EXECUTE %s>\n%s\n</EXECUTE>" % (information,
-                "\n".join("  <PARAM type=\"%s\"><![CDATA[%s]]></PARAM>" % pair for pair in data)))
+                "\n".join("  <PARAM type=\"%s\">%s</PARAM>" % pair for pair in data)))
         else:
             self.write("<EXECUTE %s/>" % information)
 

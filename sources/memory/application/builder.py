@@ -135,7 +135,7 @@ def application_builder(parser, callback=None):
                                 raise ParsingException(u"Type %s not found" % object_type_id)
                             object = context.container.new_sketch(object_type)
                             try:
-                                object.id = attributes.pop(u"ID")
+                                object.id = str(attributes.pop(u"ID"))
                             except KeyError:
                                 raise MissingAttributeError(u"ID")
                             try:
