@@ -14,7 +14,6 @@ def query(options):
         yield "<types>"
         for type in types:
             yield "<type id=\"%08X\" name=\"%s\"/>" % (id(type), type.encode("xml"))
-            break
         yield "</types>"
         yield "</reply>"
 

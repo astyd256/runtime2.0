@@ -1,4 +1,5 @@
 
+import os.path
 from logs import console
 from utils.structure import Structure
 from utils.parsing import VALUE, Parser, ParsingException
@@ -23,18 +24,26 @@ def builder(parser):
     return reply
 
 
-def run(object, filename=None, address=None, port=None, timeout=None):
+def generate_filename(object):
+    return "%s.dot" % "-".join((part.lower() for part in object.split(".")))
+
+
+def run(object, location=None, address=None, port=None, timeout=None):
     """
     query object graph
     :param object: specifies origin object by its type name or identifier to make graph
-    :param filename: specifies filename to store graph
+    :param location: specifies location to store graph
     :param address: specifies server address
     :param int port: specifies server port
     :param float timeout: specifies timeout to wait for reply
     """
     try:
-        if filename is None:
-            filename = "%s.dot" % "-".join((part.lower() for part in object.split(".")))
+        if location is None:
+            location = generate_filename(object)
+        elif os.path.isdir(location):
+            location = os.path.join(location, generate_filename(object))
+        elif not location.endswith(".dot"):
+            location += ".dot"
 
         message = query("query object graph", address, port, REQUEST % object, timeout=timeout)
         parser = Parser(builder=builder, notify=True, supress=True)
@@ -49,8 +58,8 @@ def run(object, filename=None, address=None, port=None, timeout=None):
         console.write()
 
         with section("summary"):
-            show("filename", filename)
+            show("location", location)
             show("size", len(result.graph))
 
-        with open(filename, "wb") as file:
+        with open(location, "wb") as file:
             file.write(result.graph)
