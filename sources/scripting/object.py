@@ -1,5 +1,5 @@
 
-import types
+# import types
 import json
 
 from copy import copy
@@ -240,18 +240,21 @@ class VDOMObject(object):
     def write(self, data):
         log.write(u"Write data to client")
 
-        # from importlib import import_module
-        # format_thread_trace = import_module("utils.tracing").format_thread_trace
-        # log.debug(format_thread_trace(statements=False, skip=("write", "action"), until="scripting.executable"))
+        render_type = managers.request_manager.current.render_type
+        if render_type != "e2vdom":
+            log.warning("Perform write when render type is \"%s\"" % render_type)
+            from importlib import import_module
+            format_thread_trace = import_module("utils.tracing").format_thread_trace
+            log.debug(format_thread_trace(statements=False, skip=("write", "action"), until="scripting.executable"))
+        # else:
+        #     from importlib import import_module
+        #     format_thread_trace = import_module("utils.tracing").format_thread_trace
+        #     log.debug(format_thread_trace(statements=False, skip=("write", "action"), until="scripting.executable"))
         log.debug(
             u"- - - - - - - - - - - - - - - - - - - -\n"
             u"%s\n"
             u"- - - - - - - - - - - - - - - - - - - -\n" %
             data, module=False)
-
-        render_type = managers.request_manager.current.render_type
-        if render_type != "e2vdom":
-            log.error("Perform write when render type is \"%s\"" % render_type)
 
         # self._compute_state = STATE_AVOID_RECOMPUTE
 
@@ -261,7 +264,7 @@ class VDOMObject(object):
     def action(self, action_name, arguments=[], source_id=None):
         render_type = managers.request_manager.current.render_type
         if render_type != "e2vdom":
-            log.error("Invoke client action when render type is \"%s\"" % render_type)
+            log.warning("Invoke client action when render type is \"%s\"" % render_type)
 
         if source_id:
             information = "SRC_ID=\"o_%s\" " % source_id.replace('-', '_')
