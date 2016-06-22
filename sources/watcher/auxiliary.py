@@ -55,7 +55,7 @@ def select_threads(string):
 def search_object(string):
     if not string:
         return None
-    elif string[0] in "0123456789":
+    elif string[0].upper() in "0123456789ABCDEF":
         number = int(string, 16)
         for object in gc.get_objects():
             if id(object) == number:

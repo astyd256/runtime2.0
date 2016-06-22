@@ -49,7 +49,9 @@ def state(options):
                 try:
                     value = getattr(object, name)
                     yield "<attribute name=\"%s\">" % name
-                    if isinstance(value, (basestring, numbers.Number, bool, types.NoneType)):
+                    if value is None:
+                        yield "<object id=\"%08X\" type=\"%s\"/>" % (id(value), get_type_name(value))
+                    elif isinstance(value, (basestring, numbers.Number, bool)):
                         yield "<object id=\"%08X\" type=\"%s\">%r</object>" % (id(value), get_type_name(value), value)
                     else:
                         yield "<object id=\"%08X\" type=\"%s\"/>" % (id(value), get_type_name(value))

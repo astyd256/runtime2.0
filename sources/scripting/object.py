@@ -10,7 +10,7 @@ import managers
 from logs import log
 # from .wrappers import obsolete_request
 from .compiler import STATE_UNMODIFIED, STATE_MODIFIED, \
-    STATE_UP_TO_DATE, STATE_REQUIRE_RECOMPUTE, STATE_RECOMPUTE, STATE_AVOID_RECOMPUTE
+    STATE_UP_TO_DATE, STATE_REQUIRE_RECOMPUTE, STATE_RECOMPUTE  # STATE_AVOID_RECOMPUTE
 from .compiler.descriptors import make_attribute_name, make_object_name, make_descriptor_name
 
 

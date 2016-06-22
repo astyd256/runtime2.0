@@ -52,7 +52,7 @@ def builder(parser):
     return reply
 
 
-def run(address=None, port=None, timeout=None, all=False, sort=None, order=None):
+def run(address=None, port=None, timeout=None, all=False, sort=None, order=None, limit=None):
     """
     analyze server garbage
     :param address: specifies server address
@@ -61,6 +61,7 @@ def run(address=None, port=None, timeout=None, all=False, sort=None, order=None)
     :param switch all: disable objects filtering
     :param sort: sort entries by "name" or by "counter"
     :param order: sort entries "asc"ending or "desc"ending
+    :param int limit: limit output
     """
     try:
         sort = SORT_VALUES.get((sort or "").lower(), SORT_BY_NAME)
@@ -84,7 +85,11 @@ def run(address=None, port=None, timeout=None, all=False, sort=None, order=None)
             if result.counters:
                 key = sort_by_counter if sort is SORT_BY_COUNTER else sort_by_name
                 reverse = order is ORDER_BY_DESCENDING
-                for name, counter in sorted(result.counters, key=key, reverse=reverse):
+                reverse = order is ORDER_BY_DESCENDING
+                entries = sorted(result.counters, key=key, reverse=reverse)
+                if limit is not None:
+                    entries = entries[:limit]
+                for name, counter in entries:
                     show(name, counter, longer=True)
             else:
                 show("no objects")

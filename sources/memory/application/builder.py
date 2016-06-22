@@ -26,11 +26,11 @@ def application_builder(parser, callback=None):
             # <Application>
             application = managers.memory.applications.new_sketch()
             containers = {}
-            objects = {}
-            bindings = {}
-            actions = {}
-            events = set()
-            libraries = set()
+            objects = OrderedDict()
+            bindings = OrderedDict()
+            actions = OrderedDict()
+            events = []
+            libraries = []
             sections = {}
             def application_handler(name, attributes):
                 sections[name] = True
@@ -121,7 +121,7 @@ def application_builder(parser, callback=None):
                     # <Objects>
                     if u"Information" not in sections:
                         raise SectionMustPrecedeError(u"Information")
-                    context = VDOM_structure(level=0, container=application.objects) # pages
+                    context = VDOM_structure(level=0, container=application.objects)
                     def objects_handler(name, attributes):
                         if name == u"Object":
                             # <Object>
@@ -185,7 +185,6 @@ def application_builder(parser, callback=None):
                                             def script_handler(value):
                                                 action.source_code = clean_source_code(value)
                                                 actions[action.id] = action
-                                                # ~action
                                             parser.handle_value(name, attributes, script_handler)
                                             # </Script>
                                         else:
@@ -235,7 +234,6 @@ def application_builder(parser, callback=None):
                                             def action_handler(value):
                                                 action.source_code = clean_source_code(value)
                                                 actions[action.id] = action
-                                                # ~action
                                             parser.handle_value(name, attributes, action_handler)
                                             # </Action>
                                         else:
@@ -262,7 +260,7 @@ def application_builder(parser, callback=None):
                     def actions_handler(name, attributes):
                         if name == u"Action":
                             # <Action>
-                            action = application.actions.new_sketch() # global
+                            action = application.actions.new_sketch()
                             try:
                                 action.id = attributes.pop(u"ID")
                             except KeyError:
@@ -298,7 +296,6 @@ def application_builder(parser, callback=None):
                                 pass
                             def action_handler(value):
                                 action.source_code = value
-                                # ~action
                                 actions[action.id] = action
                             parser.handle_value(name, attributes, action_handler)
                             # </Action>
@@ -317,7 +314,6 @@ def application_builder(parser, callback=None):
                                 parent_id = attributes.pop(u"ID")
                             except KeyError:
                                 raise MissingAttributeError(u"ID")
-                            # parent = application.objects.get(parent_id) # pages
                             parent = containers[parent_id]
                             if not parent:
                                 parser.handle_elements(name, attributes)
@@ -416,7 +412,7 @@ def application_builder(parser, callback=None):
 
                                 managers.file_manager.write_library(application.id,
                                     library_name + application.scripting_extension, value)
-                                libraries.add(library_name)
+                                libraries.append(library_name)
 
                                 # previous = managers.engine.select(application.id)
                                 # try:
@@ -542,7 +538,7 @@ def application_builder(parser, callback=None):
                             # <Events>
                             def events_handler(name, attributes):
                                 if name == u"Event":
-                                    # <Event>  ObjSrcName??? ObjSrcName??? TypeID???
+                                    # <Event>
                                     unknown_bindings = []
                                     try:
                                         event_container_id = attributes.pop(u"ContainerID")
@@ -614,7 +610,7 @@ def application_builder(parser, callback=None):
                                             unknown_events[event] = unknown_bindings
                                         else:
                                             # ~event
-                                            events.add(event)
+                                            events.append(event)
                                     parser.handle_elements(name, attributes, event_handler, close_event_handler)
                                     # </Event>
                                 else:
@@ -688,7 +684,6 @@ def application_builder(parser, callback=None):
                                         binding.left = binding_left
                                         binding.state = binding_state
                                         bindings[binding.id] = binding
-                                        # ~binding
                                     parser.handle_elements(name, attributes, action_handler, close_action_handler)
                                     # </Action>
                                 else:
@@ -707,7 +702,7 @@ def application_builder(parser, callback=None):
                                 else:
                                     parser.notify("Unable to find %s target for %s event" % (binding_id, event.name))
                             # ~event
-                            events.add(event)
+                            events.append(event)
                     parser.handle_elements(name, attributes, e2vdom_handler, close_e2vdom_handler)
                     # </E2VDOM>
                 elif name == u"Security":
@@ -890,14 +885,14 @@ def application_builder(parser, callback=None):
                     executable = select_library_class(application.scripting_language)(application, library)
                     executable.compile(store=True)
 
+                for object in objects.itervalues():
+                    ~object
                 for binding in bindings.itervalues():
                     ~binding
                 for action in actions.itervalues():
                     ~action
                 for event in events:
                     ~event
-                for object in objects.itervalues():
-                    ~object
                 ~application
 
                 # def handle_on_create(container):

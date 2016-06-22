@@ -96,7 +96,7 @@ class FakeModuleLoader(object):
             code = None
 
         module.__file__ = self._filename
-        module.__loader__ = self
+        module.__loader__ = None  # self
         module.__package__ = self._package
         if self._path:
             module.__path__ = self._path
@@ -126,7 +126,7 @@ class ScriptingLoader(object):
             module = imp.new_module(self._fullname)
 
         module.__file__ = self._executable._signature
-        module.__loader__ = self
+        module.__loader__ = None  # self
         module.__package__ = self._executable._package
 
         sys.modules[self._fullname] = module

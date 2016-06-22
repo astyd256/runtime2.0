@@ -14,7 +14,6 @@ def query(options):
         yield "<types>"
         for type in types:
             yield "<type id=\"%08X\" name=\"%s\"/>" % (id(type), type.encode("xml"))
-            break
         yield "</types>"
         yield "</reply>"
 
@@ -66,6 +65,6 @@ def query(options):
         objects = select_objects(options["graph"], server=False)
         yield "<reply>"
         yield "<graph>"
-        yield "".join(generate_graph(objects)).encode("xml")
+        yield "".join(generate_graph(objects, depth=10)).encode("xml")
         yield "</graph>"
         yield "</reply>"

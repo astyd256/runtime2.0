@@ -197,7 +197,9 @@ def run(address=None, port=None, timeout=None, thread=None, object=None):
                     show("type", type)
                 with section("attributes"):
                     for name, id, type, value in attributes:
-                        if value:
+                        if type == "NoneType":
+                            show(name, "None")
+                        elif value:
                             show(name, "%s (%s) = %s" % (type, id, value))
                         else:
                             show(name, "%s (%s)" % (type, id))
