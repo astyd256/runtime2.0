@@ -67,8 +67,6 @@ class Engine(object):
 
     def execute(self, action, parent=None, context=None, render=None):
         log.write("Execute%s %s" % (" and render" if render else "", action))
-        from utils.tracing import show_thread_trace
-        show_thread_trace(indent="    ")
         previous = self.select(action.owner.application)
         try:
             if action.owner.is_application:

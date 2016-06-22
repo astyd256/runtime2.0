@@ -52,7 +52,7 @@ def value(self, selector, iterator):
 
         if iterator:
             try:
-                iterator.send(u"".join(chunks))
+                iterator.send(u"".join(chunks).strip())
             except StopIteration:
                 pass
 
