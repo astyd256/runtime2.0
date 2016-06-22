@@ -48,7 +48,7 @@ def calls_builder(parser):
 							except KeyError:
 								try: parameter_name=attributes.pop(u"name")
 								except KeyError: raise MissingAttributeError, u"Name"
-							def parameter_handler(value): event_parameters[parameter_name]=[value.encode("utf8")]
+							def parameter_handler(value): event_parameters[parameter_name]=[value.replace('&quot;', '"').replace('&gt;', '>').replace('&lt;', '<').replace('&amp;', '&').encode("utf8")]
 							parser.handle_value(name, attributes, parameter_handler)
 							# </Parameter>
 						else:
@@ -94,6 +94,11 @@ def run(request):
 	if datafield:
 		datafield = datafield[0]
 	if sid and datafield:
+		# debug(
+		# 	u"- - - - - - - - - - - - - - - - - - - -\n"
+		# 	u"%s\n"
+		# 	u"- - - - - - - - - - - - - - - - - - - -\n" %
+		# 	datafield)
 		request.request_type = "action"
 		try:
 			ev=Parser(builder=calls_builder).parse(datafield)
