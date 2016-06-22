@@ -47,7 +47,6 @@ class VDOMObjectAttributes(MutableMapping):
 
     def __setitem__(self, name, value):
         # setattr(self._owner, make_attribute_name(name), value)
-        print "SET", name, "OF", self._owner, "TO", repr(value)
         setattr(self._owner, make_descriptor_name(name), value)
 
     def __delitem__(self, name):

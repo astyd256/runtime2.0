@@ -64,10 +64,10 @@ class VDOM_file_storage(object):
     def __init__(self):
         pass
 
-    def open(self, filename):
+    def open(self, filename, mode="rb"):
         from scripting.wrappers import application
         # return managers.file_manager.get_fd(app_storage, application.id, None, self.__norm_filename(filename))
-        return managers.file_manager.open(app_storage, application.id, self.__norm_filename(filename), mode="rb")
+        return managers.file_manager.open(app_storage, application.id, self.__norm_filename(filename), mode=mode)
 
     # def opentmp(self, mode="w+b", prefix="app_data"):
     #     return managers.file_manager.open_tmp_file(mode, prefix)
@@ -117,9 +117,10 @@ class VDOM_file_storage(object):
         # managers.file_manager.delete_app_storage_user_directory(application.id, self.__norm_filename(foldername))
         managers.file_manager.delete_storage_directory(application.id, self.__norm_filename(foldername))
 
-    # def listdir(self, foldername):
-    #     from scripting.wrappers import application
-    #     return managers.file_manager.list_app_storage_directory(application.id, self.__norm_filename(foldername))
+    def listdir(self, foldername):
+        from scripting.wrappers import application
+        # return managers.file_manager.list_app_storage_directory(application.id, self.__norm_filename(foldername))
+        return managers.file_manager.list_storage_directory(application.id, self.__norm_filename(foldername))
 
     # def isfile(self, path):
     #     from scripting.wrappers import application
