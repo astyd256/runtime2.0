@@ -14,12 +14,12 @@ Check you system to meet all requirements:
 * python-ldap (pip install python-ldap)
 * soappy (pip install soappy)
 
-Download latest runtime - there are two executable files in the sources directory:
+Download latest runtime. Under Linux-like system may be needed to update settings.py then create required directories and move resources and other files according this settings.
+
+There are two executable files in the sources directory:
 
 * server.py - server executable
 * manage.py - auxiliary management utility
-
-Under Linux-like system may be needed to correct settings.py and move resources and other files according this settings.
 
 To install and select application you must execute command:
 
