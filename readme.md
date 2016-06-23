@@ -92,8 +92,7 @@ Action:
 
 ### View log
 
+Display actual server log and update it in realtime.
 Action:
 
     log
-
-Display actual server log and update it in realtime.
