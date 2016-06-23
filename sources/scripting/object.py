@@ -108,7 +108,7 @@ class VDOMObject(object):
     #   _values                 original attributes values
 
     def __init__(self, parent):
-        log.write("Initialize %s" % self)
+        # log.write("Initialize %s" % self)
         self._parent = parent
         self._compute_state = STATE_REQUIRE_RECOMPUTE
         self._update_state = STATE_UNMODIFIED
@@ -154,14 +154,15 @@ class VDOMObject(object):
             action.execute(self, namespace)
 
     def compute(self):
-        log.write("Compute %s" % self)
+        # log.write("Compute %s" % self)
+        pass
 
     def render(self, contents=""):
-        log.write("Render %s" % self)
+        # log.write("Render %s" % self)
         return contents
 
     def wysiwyg(self, contents=""):
-        log.write("Wysiwyg %s" % self)
+        # log.write("Wysiwyg %s" % self)
         return contents
 
     def _instantiate(self, name):
@@ -280,7 +281,7 @@ class VDOMObject(object):
 
         if arguments:
             self.write("<EXECUTE %s>\n%s\n</EXECUTE>" % (information,
-                "\n".join("  <PARAM type=\"%s\">%s</PARAM>" % pair for pair in data)))
+                "\n".join("  <PARAM type=\"%s\">%s</PARAM>" % (kind, value.encode("xml")) for kind, value in data)))
         else:
             self.write("<EXECUTE %s/>" % information)
 

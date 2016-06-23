@@ -194,7 +194,7 @@ class Compiler(object):
 
         # compile methods
         if source:
-            log.write("Compose %s in %s context" % (origin, context))
+            # log.write("Compose %s in %s context" % (origin, context))
 
             # clean_source = "\n".join(fit(line, MAXIMAL_LINE_LENGTH) for line in "".join(source).splitlines())
             # log.debug(
@@ -212,7 +212,7 @@ class Compiler(object):
             for name in ("__init__", "execute", "render", "wysiwyg"):
                 method = module_namespace.get(name)
                 if method:
-                    log.write("Override \"%s\" for %s" % (name, origin))
+                    # log.write("Override \"%s\" for %s" % (name, origin))
                     setattr(klass, name, method)
 
         return klass
