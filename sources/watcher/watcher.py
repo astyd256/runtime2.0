@@ -41,6 +41,9 @@ class Watcher(SmartThread):
         self._socket = None
 
     def main(self):
+        if not self.running:
+            return
+
         parser = Parser(builder=builder, result=[])
         parser.cache = True
         log.write("Listen on %s:%d" % (self._address or "*", self._port))
