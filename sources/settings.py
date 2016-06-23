@@ -42,9 +42,9 @@ LOGGER_PIDFILE_LOCATION = TEMPORARY_LOCATION + "/logger.pid"
 
 # obsolete locations
 
-LOCAL_LOCATION = "../local"
-MODULES_LOCATION = LOCAL_LOCATION + "/modules"
-LIBRARIES_LOCATION = LOCAL_LOCATION + "/libraries"
+# LOCAL_LOCATION = "../local"
+# MODULES_LOCATION = LOCAL_LOCATION + "/modules"
+# LIBRARIES_LOCATION = LOCAL_LOCATION + "/libraries"
 
 FONTS_LOCATION = "../fonts"
 
@@ -129,10 +129,10 @@ VDOM_CONFIG = {
     # "HTTP-ERROR-PAGES-DIRECTORY": "../errors",
 
     # managers directories
-    "FILE-ACCESS-DIRECTORY": LOCAL_LOCATION, # "../app"
+    # "FILE-ACCESS-DIRECTORY": LOCAL_LOCATION, # "../app"
     # "XML-MANAGER-DIRECTORY": "../app"
     # "APPLICATION-XML-TEMPLATE": "../app/app_template.xml"
-    "SOURCE-MODULES-DIRECTORY": MODULES_LOCATION, # "../app/objects"
+    # "SOURCE-MODULES-DIRECTORY": MODULES_LOCATION, # "../app/objects"
 
     # server stuff
     "SERVER-ADDRESS": SERVER_ADDRESS, # ""
@@ -171,13 +171,13 @@ VDOM_CONFIG = {
 
     # "APP-SAVE-TIMEOUT": MEMORY_WRITER_QUANTUM, # 30.1
 
-    "STORAGE-DIRECTORY": LOCAL_LOCATION, # "../app"
+    "STORAGE-DIRECTORY": DATA_LOCATION, # "../app"
     "TEMP-DIRECTORY": TEMPORARY_LOCATION, # "../app/temp"
     "FONT-DIRECTORY": FONTS_LOCATION, # "../fonts"
     # "BACKUP-DIRECTORY": "../app/backup",
     # "SHARE-DIRECTORY": "../app/share",
     "FILE-STORAGE-DIRECTORY": STORAGE_LOCATION, # "../app/storage"
-    "LIB-DIRECTORY": LIBRARIES_LOCATION, # "../app/lib"
+    # "LIB-DIRECTORY": LIBRARIES_LOCATION, # "../app/lib"
     "LOG-DIRECTORY": LOGS_LOCATION, # "../app/log"
 
     # storage keys

@@ -6,7 +6,7 @@ from memory import PYTHON_LANGUAGE
 from logs import server_log
 
 from ...wrappers import server, application, session, log, request, response, obsolete_request
-from ...object import VDOM_object
+from ...object import VDOMObject
 from .generic import Code
 
 
@@ -44,10 +44,11 @@ class PythonCode(Code):
             application=application,
             log=log,
             obsolete_request=obsolete_request,
-            VDOM_object=VDOM_object)
+            VDOM_object=VDOMObject,
+            VDOMObject=VDOMObject)
 
-        # save instance and package
-        previous_package = namespace.get("__package__", MISSING)
+        # store package and instance
+        previous_package = namespace.get("__package__")
         previous_instance = namespace.get("self", MISSING)
 
         # update package
@@ -55,7 +56,7 @@ class PythonCode(Code):
             __import__(self._package)
             namespace["__package__"] = self._package
         else:
-            namespace.pop("__package__", None)
+            namespace["__package__"] = None
 
         # update instance
         if context:
@@ -66,13 +67,8 @@ class PythonCode(Code):
         try:
             exec self._code in namespace
         finally:
-            # restore package
-            if previous_package is MISSING:
-                namespace.pop("__package__", None)
-            else:
-                namespace["__package__"] = previous_package
-
-            # restore instance
+            # restore package and instance
+            namespace["__package__"] = previous_package
             if previous_instance is MISSING:
                 namespace.pop("self", None)
             else:

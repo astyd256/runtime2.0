@@ -41,7 +41,7 @@ for name in dir(wrappers):
 	if name.startswith("v_"):
 		vscript_default_environment.setdefault(name, vscript_wrappers_name)
 
-	
+
 def check_exception(source, error, error_type=errors.generic.runtime, quiet=None):
 	exclass, exexception, extraceback=sys.exc_info()
 	history=traceback.extract_tb(extraceback)

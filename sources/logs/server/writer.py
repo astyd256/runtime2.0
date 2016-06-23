@@ -37,4 +37,4 @@ class LogWriter(object):
                 self._files.pop().drop()
                 for log_file in reversed(self._files):
                     log_file.shift()
-                self._files.appendleft(LogFile(self._name, 0))
+                self._files.appendleft(LogFile(self._name, 0, self._formatter))
