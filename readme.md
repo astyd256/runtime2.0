@@ -28,7 +28,7 @@ To install and select application you must user manage.py utility:
 
 For more detailed information see below.
 
-## Starging runtime server
+## Starting runtime server
 
 To start server just type:
 
@@ -82,3 +82,11 @@ Action:
 Action:
 
     list
+
+### View log
+
+Action:
+
+    log
+
+Display actual server log and update it in realtime.
