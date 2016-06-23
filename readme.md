@@ -2,7 +2,7 @@
 
 ## Installation
 
-Check you system to meet all requirements:
+First check you system to meet all requirements:
 
 * ply (pip install ply)
 * pillow (pip install pillow)
@@ -14,64 +14,67 @@ Check you system to meet all requirements:
 * python-ldap (pip install python-ldap)
 * soappy (pip install soappy)
 
-Download latest runtime. Under Linux-like system may be needed to update settings.py then create required directories and move resources and other files according this settings.
+Download latest runtime. Under Linux-like systems may be needed to update settings.py then create required directories and move resources and other files according these settings. Under Windows all files already laid in proper places and you can just install application and start server.
 
 There are two executable files in the sources directory:
 
-* server.py - server executable
+* server.py - main server executable
 * manage.py - auxiliary management utility
 
-To install and select application you must execute command:
+To install and select application you must user manage.py utility:
 
-    python manage.py install <location>
-    python manage.py select <uuid>
+    python manage.py install <application XML file location>
+    python manage.py select <application uuid or name>
 
-More detailed information for actions see below.
+For more detailed information see below.
 
-## Server
+## Starging runtime server
 
 To start server just type:
 
     python server.py
 
-Configuration are taken from settings.py file, also server supports several command line arguments:
+Configuration can be found in the settings.py file, also server supports several command line arguments:
+
 * -l, --listen - specify address to listen
 * -p, --port - specify port
 * -a, --applicaiton - specify application to serve
 
-## Manage
+## Using manage utility
 
 This utility can be used to perform several maintenance tasks, for example:
-* install/uninstall application
+
+* install or uninstall application
 * select default application
-* show installed applications and types
+* list available applications and types
+
 Utility can be used from command line as follow:
 
-    python manage.py <action> <arguments>...
+    python manage.py *action* *arguments*...
 
 Also can work in interactive mode - just lunch manage.py without arguments.
-    
+
 ### Install application
 
 Action:
 
-    install <location>
+    install *location*
     install x:\data\promail.xml
 
-Where "location" is the location of the application XML file.
+Where *location* is the location of the application XML file.
 
 ### Uninstall application
 
 Action:
 
-    uninstall <application name or uuid>
+    uninstall *application name or uuid*
     uninstall promail
 
 ### Select default application
 
 Action:
 
-    select <application name or uuid>
+    select *application name or uuid*
     select promail
 
 ### List available applications and types

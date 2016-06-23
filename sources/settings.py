@@ -13,26 +13,25 @@ SERVER_PORT = 80
 
 # locations
 
-if WINDOWS:
+REPOSITORY_LOCATION = "../data/repository"
+TYPES_LOCATION = "../types"
+APPLICATIONS_LOCATION = "../applications"
+RESOURCES_LOCATION = "../resources"
+CACHE_LOCATION = "../cache"
+DATA_LOCATION = "../data"
+TEMPORARY_LOCATION = "../temp"
 
-    REPOSITORY_LOCATION = "../data/repository"
-    TYPES_LOCATION = "../types"
-    APPLICATIONS_LOCATION = "../applications"
-    RESOURCES_LOCATION = "../resources"
-    CACHE_LOCATION = "../cache"
-    DATA_LOCATION = "../data"
-    TEMPORARY_LOCATION = "../temp"
+# possible layout for deploying
 
-else:
+# REPOSITORY_LOCATION = "/var/vdom/repository"
+# TYPES_LOCATION = "/var/vdom/types"
+# APPLICATIONS_LOCATION = "/var/vdom/applications"
+# RESOURCES_LOCATION = "/var/vdom/resources"
+# CACHE_LOCATION = "/var/vdom/cache"
+# DATA_LOCATION = "/var/vdom/data"
+# TEMPORARY_LOCATION = "/tmp"
 
-    REPOSITORY_LOCATION = "/var/vdom/repository"
-    TYPES_LOCATION = "/var/vdom/types"
-    APPLICATIONS_LOCATION = "/var/vdom/applications"
-    RESOURCES_LOCATION = "/var/vdom/resources"
-    CACHE_LOCATION = "/var/vdom/cache"
-    DATA_LOCATION = "/var/vdom/data"
-    TEMPORARY_LOCATION = "/tmp"
-
+# other locations
 
 DATABASES_LOCATION = DATA_LOCATION + "/databases"
 STORAGE_LOCATION = DATA_LOCATION + "/storage"
