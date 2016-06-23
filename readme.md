@@ -92,8 +92,20 @@ Action:
 
 ### View log
 
-Display actual server log and update it in realtime.
+Display actual server log and update it in the realtime.
 
 Action:
 
     log
+
+### Show application or type details
+
+Show some information about available application or type like id, name, attributes and so on.
+
+Action:
+
+    show <application or type name or uuid>
+
+Example:
+
+    show form
