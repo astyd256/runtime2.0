@@ -74,8 +74,8 @@ Action:
     select <application name or uuid>
     select promail
 
-### Show available applications and types
+### List available applications and types
 
 Action:
 
-    show
+    list
