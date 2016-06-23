@@ -50,7 +50,7 @@ This utility can be used to perform several maintenance tasks, for example:
 
 Utility can be used from command line as follow:
 
-    python manage.py *action* *arguments*...
+    python manage.py <action> <arguments>...
 
 Also can work in interactive mode - just lunch manage.py without arguments.
 
@@ -58,7 +58,7 @@ Also can work in interactive mode - just lunch manage.py without arguments.
 
 Action:
 
-    install *location*
+    install <location>
     install x:\data\promail.xml
 
 Where *location* is the location of the application XML file.
@@ -67,14 +67,14 @@ Where *location* is the location of the application XML file.
 
 Action:
 
-    uninstall *application name or uuid*
+    uninstall <application name or uuid>
     uninstall promail
 
 ### Select default application
 
 Action:
 
-    select *application name or uuid*
+    select <application name or uuid>
     select promail
 
 ### List available applications and types
