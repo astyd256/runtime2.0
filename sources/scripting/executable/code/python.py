@@ -50,14 +50,16 @@ class PythonCode(Code):
             obsolete_request=obsolete_request,
             VDOM_object=VDOM_object)
 
+        previous = namespace.get("self", MISSING)
         if context:
-            previous = namespace.get("self", MISSING)
             namespace["self"] = context
+        else:
+            namespace.pop("self", None)
+
         try:
             exec self._code in namespace
         finally:
-            if context:
-                if previous is MISSING:
-                    namespace.pop("self", None)
-                else:
-                    namespace["self"] = previous
+            if previous is MISSING:
+                namespace.pop("self", None)
+            else:
+                namespace["self"] = previous
