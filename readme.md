@@ -16,7 +16,7 @@ First check you system to meet all requirements:
 
 Download latest runtime. Under Linux-like systems may be needed to update settings.py then create required directories and move resources and other files according these settings. Under Windows all files already laid in proper places and you can just install application and start server.
 
-Warning: To avoid loose resources of the preinstalled types in the data directory file "vdom.storage.db.sql.original" must be copied to the "vdom.storage.db.sql".
+**Warning:** To avoid loose resources of the preinstalled types in the data directory file "vdom.storage.db.sql.original" must be copied to the "vdom.storage.db.sql".
 
 There are two executable files in the sources directory:
 
