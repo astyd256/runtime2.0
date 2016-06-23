@@ -36,10 +36,6 @@ class PythonCode(Code):
         if self._code is None:
             raise Exception("No code to execute")
 
-        if self._package:
-            __import__(self._package)
-            namespace["__package__"] = self._package
-
         namespace.update(
             server=server,
             request=request,
@@ -50,7 +46,18 @@ class PythonCode(Code):
             obsolete_request=obsolete_request,
             VDOM_object=VDOM_object)
 
-        previous = namespace.get("self", MISSING)
+        # save instance and package
+        previous_package = namespace.get("__package__", MISSING)
+        previous_instance = namespace.get("self", MISSING)
+
+        # update package
+        if self._package:
+            __import__(self._package)
+            namespace["__package__"] = self._package
+        else:
+            namespace.pop("__package__", None)
+
+        # update instance
         if context:
             namespace["self"] = context
         else:
@@ -59,7 +66,14 @@ class PythonCode(Code):
         try:
             exec self._code in namespace
         finally:
-            if previous is MISSING:
+            # restore package
+            if previous_package is MISSING:
+                namespace.pop("__package__", None)
+            else:
+                namespace["__package__"] = previous_package
+
+            # restore instance
+            if previous_instance is MISSING:
                 namespace.pop("self", None)
             else:
-                namespace["self"] = previous
+                namespace["self"] = previous_instance
