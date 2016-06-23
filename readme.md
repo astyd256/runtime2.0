@@ -21,7 +21,7 @@ There are two executable files in the sources directory:
 * server.py - main server executable
 * manage.py - auxiliary management utility
 
-To install and select application you must user manage.py utility:
+To install and select application you can use manage.py utility:
 
     python manage.py install <application XML file location>
     python manage.py select <application uuid or name>
@@ -48,17 +48,18 @@ This utility can be used to perform several maintenance tasks, for example:
 * select default application
 * list available applications and types
 
-Utility can be used from command line as follow:
+To perform action utility can be called from the command line as follow:
 
     python manage.py <action> <arguments>...
 
-Also can work in interactive mode - just lunch manage.py without arguments.
+Or can work in interactive mode - just lunch manage.py without arguments.
 
 ### Install application
 
 Action:
 
     install <location>
+
     install x:\data\promail.xml
 
 Where *location* is the location of the application XML file.
@@ -68,6 +69,7 @@ Where *location* is the location of the application XML file.
 Action:
 
     uninstall <application name or uuid>
+
     uninstall promail
 
 ### Select default application
@@ -75,6 +77,7 @@ Action:
 Action:
 
     select <application name or uuid>
+
     select promail
 
 ### List available applications and types
