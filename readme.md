@@ -70,6 +70,8 @@ Action:
 
     uninstall <application name or uuid>
 
+Example:
+
     uninstall promail
 
 ### Select default application
@@ -77,6 +79,8 @@ Action:
 Action:
 
     select <application name or uuid>
+
+Example:
 
     select promail
 
