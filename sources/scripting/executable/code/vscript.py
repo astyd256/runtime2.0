@@ -20,7 +20,8 @@ class VScriptCode(Code):
             python_source_code = self._read(PYTHON_EXTENSION)
             self._symbols = loads(self._read(SYMBOLS_EXTENSION))
         else:
-            python_source_code, self._symbols = vengine.vcompile(self._source_code, filename=self._signature, package=self._package, bytecode=0)
+            python_source_code, self._symbols = vengine.vcompile(self._source_code,
+                filename=self._signature, package=self._package, bytecode=0, listing=False)
             if store:
                 self._write(PYTHON_EXTENSION, python_source_code)
                 self._write(SYMBOLS_EXTENSION, unicode(dumps(self._symbols)))

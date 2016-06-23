@@ -81,7 +81,8 @@ def check_exception(source, error, error_type=errors.generic.runtime, quiet=None
 	#managers.log_manager.error_bug(error, "vscript")
 
 
-def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package=None, lines=None, environment=None, use=None, anyway=1, quiet=None, safe=None):
+def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package=None,
+		lines=None, environment=None, use=None, anyway=1, quiet=None, listing=False, safe=None):
 	if script is None:
 		if let is not None:
 			script="result=%s"%let
@@ -93,7 +94,7 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
 		mutex=auto_mutex("vscript_engine_compile_mutex")
 	try:
 		source=None
-		if not quiet:
+		if not quiet and listing:
 			debug("- - - - - - - - - - - - - - - - - - - -")
 			for line, statement in enumerate(script.split("\n")):
 				debug( (u"  %s      %s"%(unicode(line+1).ljust(4), statement.expandtabs(4))).encode("utf-8"))
@@ -106,7 +107,7 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
 			parser.package=None
 			parser.environment=None
 		if lines: source[0:0]=((None, 0, line) for line in lines)
-		if not quiet:
+		if not quiet and listing:
 			debug( "- - - - - - - - - - - - - - - - - - - -")
 			for line, data in enumerate(source):
 				debug( (u"  %s %s %s%s"%(unicode(line+1).ljust(4),
