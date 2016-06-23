@@ -2,6 +2,18 @@
 
 ## Installation
 
+Check you system to meet all requirements:
+* ply (pip install ply)
+* pillow (pip install pillow)
+* pycrypto (pip install pycrypto)
+* sqlite (pip install pysqlite; copy dll for windows)
+* sqlitebck (copy dll for windows)
+* xapian (copy module for windows)
+* xappy (copy module for windows)
+* python-ldap (pip install python-ldap)
+* soappy (pip install soappy)
+
+[17:46:14 | Edited 17:47:07] Nikolay Grishkov: плюс pillow, SOAPpy, WsgiDAV, python-ldap и ply через pip
 Download latest runtime
 There are two executable files in the sources directory:
 * server.py - server executable
@@ -17,7 +29,9 @@ More detailed information for actions see below.
 ## Server
 
 To start server just type:
+
     python server.py
+
 Configuration are taken from settings.py file, also server supports several command line arguments:
 * -l, --listen - specify address to listen
 * -p, --port - specify port
