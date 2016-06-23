@@ -51,8 +51,13 @@ class PythonCode(Code):
             VDOM_object=VDOM_object)
 
         if context:
+            previous = namespace.get("self", MISSING)
             namespace["self"] = context
         try:
             exec self._code in namespace
         finally:
-            namespace.pop("self", None)
+            if context:
+                if previous is MISSING:
+                    namespace.pop("self", None)
+                else:
+                    namespace["self"] = previous
