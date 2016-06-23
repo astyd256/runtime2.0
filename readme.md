@@ -6,6 +6,13 @@ Download latest runtime
 There are two executable files in the sources directory:
 * server.py - server executable
 * manage.py - auxiliary management utility
+To install and select application you must execute command:
+
+    python manage.py install <location>
+    python manage.py select <uuid>
+
+More detailed information for actions see below.
+    
 
 ## Server
 
