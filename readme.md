@@ -3,6 +3,7 @@
 ## Installation
 
 Check you system to meet all requirements:
+
 * ply (pip install ply)
 * pillow (pip install pillow)
 * pycrypto (pip install pycrypto)
@@ -13,18 +14,18 @@ Check you system to meet all requirements:
 * python-ldap (pip install python-ldap)
 * soappy (pip install soappy)
 
-[17:46:14 | Edited 17:47:07] Nikolay Grishkov: плюс pillow, SOAPpy, WsgiDAV, python-ldap и ply через pip
 Download latest runtime
 There are two executable files in the sources directory:
+
 * server.py - server executable
 * manage.py - auxiliary management utility
+
 To install and select application you must execute command:
 
     python manage.py install <location>
     python manage.py select <uuid>
 
 More detailed information for actions see below.
-    
 
 ## Server
 
@@ -62,8 +63,8 @@ Where <location> is the location of the application XML file.
 
 Action:
 
-	uninstall <application name or uuid>
-	uninstall promail
+    uninstall <application name or uuid>
+    uninstall promail
 
 ### Select default application
 
