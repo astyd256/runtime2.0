@@ -122,7 +122,7 @@ class FileManager(object):
         location = self.locate(category, owner, name)
         try:
             return os.listdir(location)
-        except:
+        except Exception as error:
             print "List storage %s directory error: %s" % (location, error)
 
     def exists(self, category, owner=None, name=None):
@@ -257,14 +257,14 @@ class FileManager(object):
         location = self.locate(file_access.STORAGE, owner, folder_name)
         try:
             return os.listdir(location)
-        except:
+        except Exception as error:
             print "List storage %s directory error: %s" % (location, error)
 
     def delete_storage_directory(self, owner, folder_name):
         location = self.locate(file_access.STORAGE, owner, folder_name)
         try:
             shutil.rmtree(location)
-        except:
+        except Exception as error:
             print "Delete storage %s directory error: %s" % (location, error)
 
     # libraries
