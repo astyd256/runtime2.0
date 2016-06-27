@@ -28,13 +28,25 @@ fill = lfill
 just = ljust
 
 
-def fit(value, width):
+def rfit(value, width):
     if width < 0:
         return value
     elif value:
         return value[:width - 3] + "..." if len(value) > width else value
     else:
         return ""
+
+
+def lfit(value, width, start=0):
+    if width < 0:
+        return value
+    elif value:
+        return value[:start] + "..." + value[width - start - 3:] if len(value) > width else value
+    else:
+        return ""
+
+
+fit = rfit
 
 
 def fitrepr(value, width):

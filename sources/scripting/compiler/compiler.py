@@ -11,7 +11,7 @@ from .descriptors import make_attribute_name, make_object_name, make_descriptor_
 
 MAXIMAL_LINE_LENGTH = 99
 UUID_REGEX = re.compile(r"^([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})$", re.IGNORECASE)
-RENDER_TYPE = "html"
+# RENDER_TYPE = "html"
 
 
 class Compiler(object):
