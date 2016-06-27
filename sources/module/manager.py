@@ -159,7 +159,7 @@ class VDOM_module_manager(object):
 
             if request_object.fh:
                 from logs import log
-                log.debug("REQUEST FILE HANDLER: %r" % request_object.fh)
+                # log.debug("REQUEST FILE HANDLER: %r" % request_object.fh)
                 shutil.copyfileobj(request_object.fh, request_object.wfile)
                 return (None, "")
 

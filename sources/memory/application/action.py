@@ -109,8 +109,7 @@ class MemoryAction(MemoryActionSketch):
     # unsafe
     def execute(self, object, namespace):
         if self._source_code:
-            # self._executable.execute(object, namespace)
-            self._executable.execute(namespace, context=object, sandbox=True)
+            self._executable.execute(namespace, context=object)
 
     def __invert__(self):
         raise NotImplementedError
