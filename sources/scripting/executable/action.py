@@ -43,7 +43,11 @@ class Action(Executable, ActionCodeStorage):
 
 
 class PythonAction(Action, PythonCode):
-    pass
+
+    def _invoke(self, namespace, context=None):
+        # HACK: here we provide empty namespace to keep "self" private
+        #       in multithreaded environment and simulate legacy behavior
+        return super(PythonAction, self)._invoke({}, context=context)
 
 
 class VScriptAction(Action, VScriptCode):
