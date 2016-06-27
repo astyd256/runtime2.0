@@ -39,7 +39,7 @@ def application_builder(parser, callback=None):
                     def information_handler(name, attributes):
                         if name == u"ID" or name == u"ExtRef":
                             # <ID>
-                            def id_handler(value): application.id = value.lower()
+                            def id_handler(value): application.id = str(value.lower())
                             parser.handle_value(name, attributes, id_handler)
                             # </ID>
                         elif name == u"Name":
@@ -78,12 +78,12 @@ def application_builder(parser, callback=None):
                             # </Active>
                         elif name == u"Index":
                             # <Index>
-                            def index_handler(value): application.index = value
+                            def index_handler(value): application.index = str(value.lower())
                             parser.handle_value(name, attributes, index_handler)
                             # </Index>
                         elif name == u"Icon":
                             # <Icon>
-                            def icon_handler(value): application.icon = value
+                            def icon_handler(value): application.icon = str(value.lower())
                             parser.handle_value(name, attributes, icon_handler)
                             # </Icon>
                         elif name == u"ServerVersion" or name == u"Serverversion":
@@ -126,7 +126,7 @@ def application_builder(parser, callback=None):
                         if name == u"Object":
                             # <Object>
                             try:
-                                object_type_id = attributes.pop(u"Type")
+                                object_type_id = str(attributes.pop(u"Type").lower())
                             except KeyError:
                                 raise MissingAttributeError(u"Type")
                             try:
@@ -135,7 +135,7 @@ def application_builder(parser, callback=None):
                                 raise ParsingException(u"Type %s not found" % object_type_id)
                             object = context.container.new_sketch(object_type)
                             try:
-                                object.id = str(attributes.pop(u"ID"))
+                                object.id = str(attributes.pop(u"ID").lower())
                             except KeyError:
                                 raise MissingAttributeError(u"ID")
                             try:
@@ -198,10 +198,10 @@ def application_builder(parser, callback=None):
                                             # <Action>
                                             action = object.actions.new_sketch()
                                             try:
-                                                action.id = attributes.pop(u"ID")
+                                                action.id = str(attributes.pop(u"ID").lower())
                                             except KeyError:
                                                 try:
-                                                    action.id = attributes.pop(u"id")
+                                                    action.id = str(attributes.pop(u"id").lower())
                                                 except KeyError:
                                                     raise MissingAttributeError(u"ID")
                                             try:
@@ -262,10 +262,10 @@ def application_builder(parser, callback=None):
                             # <Action>
                             action = application.actions.new_sketch()
                             try:
-                                action.id = attributes.pop(u"ID")
+                                action.id = str(attributes.pop(u"ID").lower())
                             except KeyError:
                                 raise MissingAttributeError(u"ID")
-                            if action.id.lower() in (u"session", u"application"):
+                            if action.id.lower() in (u"session", u"application"): # ?
                                 action.id = str(uuid4())
                             try:
                                 action.name = attributes.pop(u"Name")
@@ -311,7 +311,7 @@ def application_builder(parser, callback=None):
                         if name == u"Object":
                             # <Object>
                             try:
-                                parent_id = attributes.pop(u"ID")
+                                parent_id = str(attributes.pop(u"ID").lower())
                             except KeyError:
                                 raise MissingAttributeError(u"ID")
                             parent = containers[parent_id]
@@ -333,10 +333,9 @@ def application_builder(parser, callback=None):
                             except KeyError:
                                 pass
                             try:
-                                # Here "or 0" is the hack to handle ResourceID="" elements
-                                structure.resource = attributes.pop(u"ResourceID") or None
+                                structure.resource = str(attributes.pop(u"ResourceID").lower())
                             except KeyError:
-                                pass
+                                structure.resource = None
                             if structure.resource != obsolete_resource:
                                 if structure.resource and \
                                         managers.resource_manager.check_resource(application.id, {"id": structure.resource}):
@@ -359,7 +358,7 @@ def application_builder(parser, callback=None):
                                         if name == u"Object":
                                             # <Object>
                                             try:
-                                                child_id = attributes.pop(u"ID")
+                                                child_id = str(attributes.pop(u"ID").lower())
                                             except KeyError:
                                                 raise MissingAttributeError(u"ID")
                                             child = application.cotainers.get(child_id)
@@ -466,7 +465,7 @@ def application_builder(parser, callback=None):
                         if name == u"Resource":
                             # <Resource>
                             try:
-                                resource_id = attributes.pop(u"ID")
+                                resource_id = str(attributes.pop(u"ID").lower())
                             except KeyError:
                                 raise MissingAttributeError(u"ID")
                             try:
@@ -496,7 +495,7 @@ def application_builder(parser, callback=None):
                         if name == u"Database":
                             # <Database>
                             try:
-                                database_id = attributes.pop(u"ID")
+                                database_id = str(attributes.pop(u"ID").lower())
                             except KeyError:
                                 raise MissingAttributeError(u"ID")
                             try:
@@ -541,7 +540,7 @@ def application_builder(parser, callback=None):
                                     # <Event>
                                     unknown_bindings = []
                                     try:
-                                        event_container_id = attributes.pop(u"ContainerID")
+                                        event_container_id = str(attributes.pop(u"ContainerID").lower())
                                     except KeyError:
                                         raise MissingAttributeError(u"ContainerID")
                                     try:
@@ -550,7 +549,7 @@ def application_builder(parser, callback=None):
                                     except KeyError:
                                         raise ParsingException(u"Container %s not found" % event_container_id)
                                     try:
-                                        event_source_object_id = attributes.pop(u"ObjSrcID")
+                                        event_source_object_id = str(attributes.pop(u"ObjSrcID").lower())
                                     except KeyError:
                                         raise MissingAttributeError(u"ObjSrcID")
                                     try:
@@ -589,16 +588,16 @@ def application_builder(parser, callback=None):
                                         if name == u"Action":
                                             # <Action>
                                             try:
-                                                callee_id = attributes.pop(u"ID")
+                                                callee_id = str(attributes.pop(u"ID").lower())
                                             except KeyError:
                                                 raise MissingAttributeError(u"ID")
                                             try:
-                                                # event.callees.append(application.bindings[callee_id])
-                                                event.callees.add(bindings[callee_id])
+                                                # application.bindings[callee_id]
+                                                event.callees.append(bindings[callee_id])
                                             except KeyError:
                                                 try:
-                                                    # event.callees.append(application.actions.catalog[callee_id])
-                                                    event.callees.add(actions[callee_id])
+                                                    # application.actions.catalog[callee_id]
+                                                    event.callees.append(actions[callee_id])
                                                 except KeyError:
                                                     unknown_bindings.append(callee_id)
                                             parser.handle_elements(name, attributes)
@@ -623,7 +622,7 @@ def application_builder(parser, callback=None):
                                 if name == u"Action":
                                     # <Action>
                                     try:
-                                        target_object_id = attributes.pop(u"ObjTgtID")
+                                        target_object_id = str(attributes.pop(u"ObjTgtID").lower())
                                     except KeyError:
                                         raise MissingAttributeError(u"ObjTgtID")
                                     try:
@@ -639,7 +638,7 @@ def application_builder(parser, callback=None):
                                         except KeyError:
                                             raise MissingAttributeError(u"Name")
                                     try:
-                                        binding_id = attributes.pop(u"ID")  # interface_name
+                                        binding_id = str(attributes.pop(u"ID").lower())  # interface_name
                                     except KeyError:
                                         raise MissingAttributeError(u"ID")
                                     try:
@@ -698,7 +697,7 @@ def application_builder(parser, callback=None):
                                 # binding = application.bindings.get(binding_id, None)
                                 binding = bindings.get(binding_id, None)
                                 if binding:
-                                    event.callees.add(binding)
+                                    event.callees.append(binding)
                                 else:
                                     parser.notify("Unable to find %s target for %s event" % (binding_id, event.name))
                             # ~event

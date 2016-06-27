@@ -153,7 +153,10 @@ class MemoryObjects(MemoryBase, MutableMapping):
             bindings = (binding for binding in self._owner.application.bindings.itervalues()
                 if binding.target_object == item)
             for event in self._owner.application.events.catalog.itervalues():
-                event.callees -= bindings
+                # event.callees -= bindings
+                for binding in bindings:
+                    while binding in event.callees:
+                        event.callees.remove(binding)
             for binding in bindings:
                 del self._owner.application.bindings[binding.id]
 
