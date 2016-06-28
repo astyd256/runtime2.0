@@ -21,10 +21,10 @@ finally:
 
 parser = ArgumentParser(prog="server")
 
-parser.add_argument("-l", "--listen", type=port, help="Override server listening address")
-parser.add_argument("-p", "--port", type=port, help="Override server listening port")
-parser.add_argument("-a", "--application", help="Application to start")
-parser.add_argument("-c", "--configure", help="Load configuration from the file")
+parser.add_argument("-l", "--listen", type=port, metavar="address", help="Override server listening address")
+parser.add_argument("-p", "--port", type=port, metavar="port", help="Override server listening port")
+parser.add_argument("-a", "--application", metavar="identifier", help="Application to start")
+parser.add_argument("-c", "--configure", metavar="filename", help="Load configuration from the file")
 
 arguments = parser.parse_args()
 

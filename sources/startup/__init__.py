@@ -2,6 +2,8 @@
 import __builtin__
 import sys
 
+from argparse import ArgumentParser
+
 
 # settings
 
@@ -11,6 +13,18 @@ finder = SettingsImporter()
 sys.meta_path.append(finder)
 settings = __import__("settings")
 sys.meta_path.remove(finder)
+
+
+# override
+
+from .override import override
+
+parser = ArgumentParser(add_help=False)
+parser.add_argument("-c", "--configure", dest="filename", default=None)
+
+arguments, other = parser.parse_known_args()
+if arguments.filename:
+    override(arguments.filename)
 
 
 # initialize
@@ -38,10 +52,11 @@ if settings.START_LOG_SERVER:
 
 # obsolete
 
+from . import legacy
 from .debug import debug, DebugFile
 
-__builtin__.VDOM_CONFIG = settings.VDOM_CONFIG
-__builtin__.VDOM_CONFIG_1 = settings.VDOM_CONFIG_1
+__builtin__.VDOM_CONFIG = legacy.VDOM_CONFIG
+__builtin__.VDOM_CONFIG_1 = legacy.VDOM_CONFIG_1
 __builtin__.system_options = {"server_license_type": "0", "firmware": "N/A", "card_state": "0", "object_amount": "0"}
 __builtin__.debug = debug
 __builtin__.debugfile = DebugFile()

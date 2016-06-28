@@ -45,6 +45,18 @@ Configuration can be found in the settings.py file, also server supports several
 * -l, --listen - specify address to listen
 * -p, --port - specify port
 * -a, --applicaiton - specify application to serve
+* -c, --configure - specify filename to load settings
+
+### Override settings
+
+Command line:
+
+    python server.py -c settings.ini
+
+File contents:
+
+    SERVER-ADDRESS = "gerg"
+    SERVER-PORT = 4234
 
 ## Using manage utility
 
