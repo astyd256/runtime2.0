@@ -17,10 +17,10 @@ The first is needed to check that system meets all requirements:
 Then download latest runtime. After that must be performed deploy action:
 
     python manage.py deploy
-    
+
 This action creates required directories and install all types from repository directory.
 
-## Introduction
+## Quick start
 
 There are two executable files in the sources directory:
 
@@ -60,21 +60,23 @@ To perform action utility can be called from the command line as follow:
 
 Or can work in interactive mode - just lunch manage.py without arguments.
 
-### Install application
+### Install application or type
 
 Action:
 
     install <location>
 
+Example:
+
     install x:\data\promail.xml
 
 Where *location* is the location of the application XML file.
 
-### Uninstall application
+### Uninstall application or type
 
 Action:
 
-    uninstall <application name or uuid>
+    uninstall <application or type name or uuid>
 
 Example:
 
