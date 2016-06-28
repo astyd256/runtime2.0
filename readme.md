@@ -2,7 +2,7 @@
 
 ## Installation
 
-First check you system to meet all requirements:
+The first is needed to check that system meets all requirements:
 
 * ply (pip install ply)
 * pillow (pip install pillow)
@@ -14,13 +14,17 @@ First check you system to meet all requirements:
 * python-ldap (pip install python-ldap)
 * soappy (pip install soappy)
 
-Download latest runtime. Under Linux-like systems may be needed to update settings.py then create required directories and move resources and other files according these settings. Under Windows all files already laid in proper places and you can just install application and start server.
+Then download latest runtime. After that must be performed deploy action:
 
-**Warning:** To avoid loose resources of the preinstalled types in the data directory file "vdom.storage.db.sql.original" must be copied to the "vdom.storage.db.sql".
+    python manage.py deploy
+    
+This action creates required directories and install all types from repository directory.
+
+## Introduction
 
 There are two executable files in the sources directory:
 
-* server.py - main server executable
+* server.py - main runtime server executable
 * manage.py - auxiliary management utility
 
 To install and select application you can use manage.py utility:

@@ -1,1 +1,7 @@
 *.pyc
+applications
+cache
+data
+resources
+temp
+types
