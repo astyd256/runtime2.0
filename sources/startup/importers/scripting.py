@@ -41,31 +41,39 @@ class ActualScriptingFinder(object):
         if match:
             module = match.group(1)
             if module:
-                # console.stdout.write("IMPORT >>> MODULE %s\n" % module)
+                # console.stdout.write("IMPORT MODULE >>> %s\n" % module)
                 uuid = module.replace("_", "-")
                 loader = ScriptingLoader(fullname, managers.memory.types[uuid].executable)
                 return loader
             else:
                 package = match.group(2)
                 library = match.group(3)
+                # console.stdout.write("IMPORT MATCH PACKAGE & LIBRARY >>> %r, %r\n" % (package, library))
                 if library:
                     application = managers.engine.application
+                    # console.stdout.write("IMPORT APPLICATION >>> %r\n" % application)
                     if application is None:
-                        raise ImportError("Unable to load \"%s\" library: no active application" % library)
-                    if package != application.id:
+                        # raise ImportError("Unable to load \"%s\" library: no active application" % library)
+                        application = managers.memory.applications[package]
+                        if application is None:
+                            raise ImportError("Unable to load \"%s\" library: ubable to find application" % library)
+                        managers.engine.select(application=application)
+                    elif package != application.id:
                         raise ImportError("Unable to load \"%s\" library from \"%s\" context" %
                             (package, application.id))
                     executable = application.get_library_executable(library)
                     if executable:
-                        # console.stdout.write("IMPORT >>> LIBRARY %s - %s\n" % (package, library))
+                        # console.stdout.write("IMPORT LIBRARY >>> %s . %s\n" % (package, library))
                         return ScriptingLoader(fullname, executable)
                     else:
+                        # console.stdout.write("IMPORT LIBRARY >>> NO EXECUTABLE FOR %s . %s\n" % (package, library))
                         return None
                 else:
-                    # console.stdout.write("IMPORT >>> PACKAGE %s\n" % package)
+                    # console.stdout.write("IMPORT PACKAGE >>> %s\n" % package)
                     location = managers.file_manager.locate(file_access.LIBRARY, package)
                     return FakeModuleLoader(fullname, package=fullname, path=[location])
-        return None
+        else:
+            return None
 
 
 class FakeModuleLoader(object):
