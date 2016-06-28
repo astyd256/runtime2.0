@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>070b91d0-7e2d-4290-ba5e-1693a4d7181f</ID>
+		<Name>formtextarea</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_formtextarea</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.21.6200</Version>
+		<Category>Form</Category>
+		<InterfaceType>1</InterfaceType>
+		<Icon>#Res(db01c67d-691d-bdff-bda0-1720935c0d06)</Icon>
+		<EditorIcon>#Res(0b4d5ee9-cdaa-b17a-919a-1720b87cc816)</EditorIcon>
+		<StructureIcon>#Res(25af6e1a-2862-86ea-bb38-1720e7e9534e)</StructureIcon>
+		<Dynamic>1</Dynamic>
+		<Moveable>1</Moveable>
+		<Resizable>3</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>1</Container>
+		<Containers>form, password, container</Containers>
+		<Languages>en_US, ru_RU, fr_FR</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>zindex</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>top</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>left</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>width</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue>130</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>height</Name>
+			<DisplayName>#Lang(107)</DisplayName>
+			<Description>#Lang(207)</Description>
+			<DefaultValue>100</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>value</Name>
+			<DisplayName>#Lang(108)</DisplayName>
+			<Description>#Lang(208)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(100)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>tabindex</Name>
+			<DisplayName>#Lang(109)</DisplayName>
+			<Description>#Lang(209)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">Form text area</Sentence>
+			<Sentence ID="002">The Form text type produces an object used for adding a multi-line text input field. It can be contained only in the Form, Password, and Container objects.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Top</Sentence>
+			<Sentence ID="105">Left</Sentence>
+			<Sentence ID="106">Width</Sentence>
+			<Sentence ID="107">Height</Sentence>
+			<Sentence ID="108">Value</Sentence>
+			<Sentence ID="109">TabIndex</Sentence>
+			<Sentence ID="201">Order of rendering the object on the page</Sentence>
+			<Sentence ID="202">Visibility of the object</Sentence>
+			<Sentence ID="203">Position in visual hierarchy of objects</Sentence>
+			<Sentence ID="204">Spacing between the top edge of the container and the object in pixels</Sentence>
+			<Sentence ID="205">Spacing between the left edge of the container and the object in pixels</Sentence>
+			<Sentence ID="206">Width of the object in pixels</Sentence>
+			<Sentence ID="207">Height of the object in pixels</Sentence>
+			<Sentence ID="208">Text to display</Sentence>
+			<Sentence ID="209">Index number of switching the elements on pressing the tab key</Sentence>
+			<Sentence ID="301">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="302">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="303">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="304">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="305">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="306">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="307">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="308">Incorrect value</Sentence>
+			<Sentence ID="309">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="501">Hide the object</Sentence>
+			<Sentence ID="502">Move the object to a new position</Sentence>
+			<Sentence ID="503">Set focus on the object</Sentence>
+			<Sentence ID="504">Set new CSS style of the object</Sentence>
+			<Sentence ID="505">Set new text value</Sentence>
+			<Sentence ID="506">Show the object</Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="601">Hide</Sentence>
+			<Sentence ID="602">moveTo</Sentence>
+			<Sentence ID="603">setFocus</Sentence>
+			<Sentence ID="604">setStyle</Sentence>
+			<Sentence ID="605">setValue</Sentence>
+			<Sentence ID="606">Show</Sentence>
+			<Sentence ID="701">Fade</Sentence>
+			<Sentence ID="702">newX</Sentence>
+			<Sentence ID="703">newY</Sentence>
+			<Sentence ID="704">Effect</Sentence>
+			<Sentence ID="705">cssStyleValue</Sentence>
+			<Sentence ID="706">Value</Sentence>
+			<Sentence ID="707">Fade</Sentence>
+			<Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="802">X-coordinate of the new position relative to the left upper corner of the container</Sentence>
+			<Sentence ID="803">Y-coordinate of the new position relative to the left upper corner of the container</Sentence>
+			<Sentence ID="804">Visual effect of moving, time is indicated in milliseconds</Sentence>
+			<Sentence ID="805">CSS Style value</Sentence>
+			<Sentence ID="806">New text value</Sentence>
+			<Sentence ID="807">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="901">Current X-value</Sentence>
+			<Sentence ID="902">Current Y-value</Sentence>
+			<Sentence ID="903">Current X-value</Sentence>
+			<Sentence ID="904">Current Y-value</Sentence>
+			<Sentence ID="905">Current X-value</Sentence>
+			<Sentence ID="906">Current Y-value</Sentence>
+			<Sentence ID="907">Current X-value</Sentence>
+			<Sentence ID="908">Current Y-value</Sentence>
+			<Sentence ID="909">Current X-value</Sentence>
+			<Sentence ID="911">Current Y-value</Sentence>
+			<Sentence ID="912">Current X-value</Sentence>
+			<Sentence ID="913">Current Y-value</Sentence>
+			<Sentence ID="914">Current X-value</Sentence>
+			<Sentence ID="915">Current Y-value</Sentence>
+			<Sentence ID="916">Current X-value</Sentence>
+			<Sentence ID="917">Current Y-value</Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">Zone de Texte de Formulaire</Sentence>
+			<Sentence ID="002">Zone de Texte de Formulaire</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hiérarchie</Sentence>
+			<Sentence ID="102">Visibilité</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Haut</Sentence>
+			<Sentence ID="105">Gauche</Sentence>
+			<Sentence ID="106">Largeur</Sentence>
+			<Sentence ID="107">Hauteur</Sentence>
+			<Sentence ID="108">Valeur</Sentence>
+			<Sentence ID="109">TabIndex</Sentence>
+			<Sentence ID="201">Hiérarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="202">Afficher ou cacher l&apos;objet</Sentence>
+			<Sentence ID="203">Niveau de superposition de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="204">Distance depuis le bord haut de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="205">Distance depuis le bord gauche de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="206">Largeur de l&apos;objet en pixels</Sentence>
+			<Sentence ID="207">Hauteur de l&apos;objet en pixels</Sentence>
+			<Sentence ID="208">Texte dans le champs</Sentence>
+			<Sentence ID="209">Tab index</Sentence>
+			<Sentence ID="301">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="302">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="303">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="304">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="305">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="306">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="307">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="308">Valeur Incorrecte</Sentence>
+			<Sentence ID="309">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="501">Hide the object</Sentence>
+			<Sentence ID="502">Move object to selected point</Sentence>
+			<Sentence ID="503">Set focus to the object</Sentence>
+			<Sentence ID="504">Set new CSS style</Sentence>
+			<Sentence ID="505">Set new text</Sentence>
+			<Sentence ID="506">Show the object</Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="601">Hide</Sentence>
+			<Sentence ID="602">moveTo</Sentence>
+			<Sentence ID="603">setFocus</Sentence>
+			<Sentence ID="604">setStyle</Sentence>
+			<Sentence ID="605">setValue</Sentence>
+			<Sentence ID="606">Show</Sentence>
+			<Sentence ID="701">Fade</Sentence>
+			<Sentence ID="702">newX</Sentence>
+			<Sentence ID="703">newY</Sentence>
+			<Sentence ID="704">Effect</Sentence>
+			<Sentence ID="705">cssStyleValue</Sentence>
+			<Sentence ID="706">Value</Sentence>
+			<Sentence ID="707">Fade</Sentence>
+			<Sentence ID="801">Fade time</Sentence>
+			<Sentence ID="802">X-coordinate of new point</Sentence>
+			<Sentence ID="803">Y-coordinate of new point</Sentence>
+			<Sentence ID="804">Visual effect by moving</Sentence>
+			<Sentence ID="805">New CSS style value</Sentence>
+			<Sentence ID="806">New text</Sentence>
+			<Sentence ID="807">Time of appearance</Sentence>
+			<Sentence ID="901">Current X-value</Sentence>
+			<Sentence ID="902">Current Y-value</Sentence>
+			<Sentence ID="903">Current X-value</Sentence>
+			<Sentence ID="904">Current Y-value</Sentence>
+			<Sentence ID="905">Current X-value</Sentence>
+			<Sentence ID="906">Current Y-value</Sentence>
+			<Sentence ID="907">Current X-value</Sentence>
+			<Sentence ID="908">Current Y-value</Sentence>
+			<Sentence ID="909">Current X-value</Sentence>
+			<Sentence ID="911">Current Y-value</Sentence>
+			<Sentence ID="912">Current X-value</Sentence>
+			<Sentence ID="913">Current Y-value</Sentence>
+			<Sentence ID="914">Current X-value</Sentence>
+			<Sentence ID="915">Current Y-value</Sentence>
+			<Sentence ID="916">Current X-value</Sentence>
+			<Sentence ID="917">Current Y-value</Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">Поле текста</Sentence>
+			<Sentence ID="002">Используется для добавления текста</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Иерархия</Sentence>
+			<Sentence ID="102">Отображение</Sentence>
+			<Sentence ID="103">Позиция</Sentence>
+			<Sentence ID="104">Сверху</Sentence>
+			<Sentence ID="105">Слева</Sentence>
+			<Sentence ID="106">Ширина</Sentence>
+			<Sentence ID="107">Высота</Sentence>
+			<Sentence ID="108">Значение</Sentence>
+			<Sentence ID="109">Tab индекс</Sentence>
+			<Sentence ID="201">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
+			<Sentence ID="202">Режим отображения объекта</Sentence>
+			<Sentence ID="203">Положение в визуальной иерархии объектов</Sentence>
+			<Sentence ID="204">Расстояние от верхней границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="205">Расстояние от левой границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="206">Ширина объекта в пикселях</Sentence>
+			<Sentence ID="207">Высота объекта в пикселях</Sentence>
+			<Sentence ID="208">Отображаемый текст</Sentence>
+			<Sentence ID="209">Tab индекс объекта на странице</Sentence>
+			<Sentence ID="301">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="302">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="303">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="304">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="305">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="306">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="307">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="308">Неправильное значение</Sentence>
+			<Sentence ID="309">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="401">Не отображать</Sentence>
+			<Sentence ID="402">Отображать</Sentence>
+			<Sentence ID="501">Скрыть объект</Sentence>
+			<Sentence ID="502">Сдвинуть объект в заданную точку</Sentence>
+			<Sentence ID="503">Установить фокус на объекте</Sentence>
+			<Sentence ID="504">Установить новый стиль CSS</Sentence>
+			<Sentence ID="505">Установить новый текст</Sentence>
+			<Sentence ID="506">Показать объект</Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="601">Скрыть</Sentence>
+			<Sentence ID="602">Сдвинуть</Sentence>
+			<Sentence ID="603">Установить фокус</Sentence>
+			<Sentence ID="604">Установить стиль</Sentence>
+			<Sentence ID="605">Установить текст</Sentence>
+			<Sentence ID="606">Показать</Sentence>
+			<Sentence ID="701">Исчезновение</Sentence>
+			<Sentence ID="702">Координата по оси X</Sentence>
+			<Sentence ID="703">Координата по оси Y</Sentence>
+			<Sentence ID="704">Эффект</Sentence>
+			<Sentence ID="705">Стиль</Sentence>
+			<Sentence ID="706">Текст</Sentence>
+			<Sentence ID="707">Появление</Sentence>
+			<Sentence ID="801">Время исчезновения в миллисекундах</Sentence>
+			<Sentence ID="802">Координата новой точки по оси X</Sentence>
+			<Sentence ID="803">Координата новой точки по оси Y</Sentence>
+			<Sentence ID="804">Визуальный эффект при перетаскивании</Sentence>
+			<Sentence ID="805">Новое значение стиля</Sentence>
+			<Sentence ID="806">Новый текст</Sentence>
+			<Sentence ID="807">Время появление в миллисекундах</Sentence>
+			<Sentence ID="901">Текущее значение X</Sentence>
+			<Sentence ID="902">Текущее значение Y</Sentence>
+			<Sentence ID="903">Текущее значение X</Sentence>
+			<Sentence ID="904">Текущее значение Y</Sentence>
+			<Sentence ID="905">Текущее значение X</Sentence>
+			<Sentence ID="906">Текущее значение Y</Sentence>
+			<Sentence ID="907">Текущее значение X</Sentence>
+			<Sentence ID="908">Текущее значение Y</Sentence>
+			<Sentence ID="909">Текущее значение X</Sentence>
+			<Sentence ID="911">Текущее значение Y</Sentence>
+			<Sentence ID="912">Текущее значение X</Sentence>
+			<Sentence ID="913">Текущее значение Y</Sentence>
+			<Sentence ID="914">Текущее значение X</Sentence>
+			<Sentence ID="915">Текущее значение Y</Sentence>
+			<Sentence ID="916">Текущее значение X</Sentence>
+			<Sentence ID="917">Текущее значение Y</Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="25af6e1a-2862-86ea-bb38-1720e7e9534e" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjM2N0IxQTIxMUZFNDExRTFBMDUyRkZCQkQzRjJCN0M3IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjM2N0IxQTIyMUZFNDExRTFBMDUyRkZCQkQzRjJCN0M3Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MzY3QjFBMUYxRkU0MTFFMUEwNTJG
+			RkJCRDNGMkI3QzciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MzY3QjFBMjAxRkU0MTFFMUEw
+			NTJGRkJCRDNGMkI3QzciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz7jqi9DAAAAmUlEQVR42mL8//9/PAMFgAVK7yZTvysTA4WA
+			BV1g2pX/1/4zMPBjU8zNytCWoM44FVkMwwVszAybs3UYpX/8YfA8+ZKB4eIbhi0g/pMvDOnnXxPh
+			ghRNxnIQrS7IwPAX6JQ7HyHi7RaMW7C5iuIwGDUAhwELbv7PfviZYTuI/eMvg0/xsf/bcRnACM0L
+			A5eUqZYXXMk1ACDAAB8YLLeCZiJSAAAAAElFTkSuQmCC
+		</Resource>
+		<Resource ID="db01c67d-691d-bdff-bda0-1720935c0d06" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjY0MTUwNTVFMUZERjExRTE4MDI3RjQzRUMxQzU2MTAzIiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjY0MTUwNTVGMUZERjExRTE4MDI3RjQzRUMxQzU2MTAzIj4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NjQxNTA1NUMxRkRGMTFFMTgwMjdG
+			NDNFQzFDNTYxMDMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NjQxNTA1NUQxRkRGMTFFMTgw
+			MjdGNDNFQzFDNTYxMDMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz4kTYCCAAAMMklEQVR42sRabXBU1Rk+59yPTUKAkIAWENFi
+			olIDEhQsJYFsEgKI44yd6diZjv1RGTutnf7rdPqr/el02v7oz9bW6kxVpsX6gRCye3c3i1YBEz4i
+			ASIBJGJEYjAku3vvPR99z9m7y+5mv2OHO3Nzsrvn6z3nfd73ec69SAiB5nUzgXO/Cxzum/Pdf958
+			B8NNuCvkjV0oE3ALKnThCo25HHMqMIf+mNcny/i/1K0qhUKhYxghTSAEXyKCMBL+zs4NqPSFvVLk
+			+zEYCAxDh7rAWDNgzg5itKenZy3icoR022RrLd2LkAUmUEI9WWb2GbZCR9Vv0J/AiBCov237ts26
+			mg0hWCOkLVXZpe6JUha88+5BNSj0iTFMCsO0CMxmx+7e9MAawUgzfA+kP8fZ2f43DkB1aQRWE4Y1
+			h+noWevB1VJqaPcTvXMWCEZDmqZtTn3mlH8oy6QhXNqWURtWwgoFhzmX0+PYZ/rWtre3o8OB4CiB
+			HzmMtGf3rmaoSfoPB8YwfAcGEf+O3rtld5FAcEwkO7Vlu9Rl9QW4XmueB2fhmiselPOihm8UjIGR
+			dMRder9sb5raaQ6mBIMW7+ryr4tGo4i6dAiM4MqFMg3zPnuuFR7Uda0tNWjQsk51+f3rCu3GwYN9
+			iMHkpXvIndeSTiY0bCh36d7ZozqP9IPhNWZzqt9AIDDS3d39oPp//wGs1hAMJkSDEguCuVxOnoD1
+			27Nnd153DVnh47qhPZLqMxwOHdu+vfNR3dsAzFz3hGVZcnNNUcKtdu3qTeFDZGAF52JF0zAA274Q
+			DYYwhQWrk0N5V/dTjwvkilsww55v4RKghM2nLhsMh8NcfUo1ONB3CB/sO6h2JmgFT8wjguGK2yQY
+			FrbXzoFS3m55/YAXHc/8rO/a0SttSsULDVV/iYpb+MitNga0pzAVvbx+IKRl1SM4YwIq9N7uSxpD
+			SzlY0nOzDMn8YJrmd26rEbqHkTJ2Rdf1toKG3PZLmoGra5plSCJhj95WQ2S+J+VhJOG6Q9mbWQVe
+			OYfU5QgdbkQBZUCRwGGFyuTwAWHhzcqnMhUiAqu4iwHb3MMoZ1xF37iDkD0LkTjOkAt1mUPdDQ8t
+			NksCJCdQ5xpSMmpJLnL12tfid389iX7x9DqUiLtieGR8+MS5y0emvpxOgGmi+Z4Vq5Yva1q99bHW
+			TbMxFw1duIE+nYijlpXUeeEPLz37SPvDa5Y0LFkMCVC//647di5ZunTNjVmMX3prFO1+rFHbsvn7
+			mwyz/sz01OmZIgmFFDSkpqb226XDnkCXP/sSzyYoP3nuc7b3x3/+wp7qh+VhECjwdVhzt6nl6aWt
+			G5tXbG5bi647Nhq9NI0mpuPoytUZ/fzR/p9dGOy7qpsG1TQdx5E4c+fdT5K9z+2+99qUjU+P3oA8
+			4nue0vifYLihQvMwDN+6eYO9bkEt7nnsW+Knv3yV2l9ZDUCdpFNeAM89DhntvclzL7/16NoVkw3g
+			IZrQJQkEVxLIYZhAiq8FwjRMXBEEB41im/73i5H977/+5oeJPd9biUzDBAfj6yBPNFUW8DIBFItf
+			hOLekrvCKfi0jWNjr03DFM8ITF80NbPfqF92Y0FdPVuyvBXv6mjZCrx2PaNQH/BwbcpBSxfCv5hf
+			WaBr/6hftOASYA3XAtWavTm7ajTwx6Fnf7T/99Txge/rADCbFZuD4yZOQbGuAEZ4eeYDYI+duRpH
+			ujYBU/t3Y9PKfabPR8fHLIXkV/5l4RXLF9lEGU0gvyE0HXPQohoZARiQS5K4MhZJDcZaWlouXp3w
+			vRK7OfnbhoYFYC6XisUoHuBwEbATUparnTo3ceCN1yKNIBs+hd6iCdvlN76ewS/vC3kcDgYR3HbA
+			nShzVSxkoFyk2AOSazosOyufP39e3L1m6+Txjz5+wSGLfg3TmhFJnVfYK1gR1wKwry7HkMf9T/wG
+			VmQvePw4Jto45B/hzJxEf3/9PZkJwIw4MCFQTFLNCEmhINQC8ZeWcCiAEc/p89MLR3hNXfM/gXs2
+			QA9NoKBixeZg1vha5wV2JQWRPgF/3gZdcGhx47IpMEKJPQ076mbCSHJScJ64C9izQYy5EBBkDiEu
+			Y5TW5w0i9Ys+A0HxDljch3XjStVgj8Xjl6C4p1T4bVq+5avYzExU00w29fXN9G/P/KBTucNL+wJS
+			eHHwK0SlYmAMWIOLbsiNEA4RKH+6qqtfDBvHP7DdGbNp2R2zRcGeSJyEYn1eQ0gOgDLEkuf593rG
+			XARfb3ZZPc4SVH97LYCT/AAiD4PMD5nedhKwK2AT2CUxI2RSFjgvo/KChe3dxS/DmAv2/r4ghF2m
+			S7853Nc/Ljgjvbt2rsjgLMIzIK0GhRjN/E0ZAy6lOtdwAhgIw6DkUNwWaBbKmAvcXClCaUi8ajoW
+			tAIjgE8KuhiFguETkjB1dvnbdG8rGAA9nT/seGy8zCOfrFXZ+8Ntqs5fXg1hSDWC6gx2wUGuQ1VN
+			qn6lEAQ4r9YQUPbcMI3WlCKhLh9M74iWI1Jy+JjIowRxscTjHWxoDDAyG+OIAVA4IJ8mqSNDQq9e
+			PmCel+YSb+R0x8nTiUILJjxMCO9/jvNrA1dAaJJYl+BWuUSiXsQlM6YF21UqqL2TFHEL7FgGgcQn
+			YCzuP3zILBRV5m4QEflOTyRWBCGCAS6kQRx8St6uci4MY1JzPoY4jnsKhIGwgpY8baRpQ/w93c3q
+			rCnY/0lP185VxTw0uROy5N7u4PwZmEpHgskDz6KQhol0CXUU5hrywCUnKpZ9+bu7lRwHI076u/wP
+			502IvOwdT1VMudhcjEBiFxLjDogvSZxkYgfTIO4a0r9q568mRWGpW1vju6/ErubsgMD5OSWsOxXc
+			BbdywRABYVeTEYaqE6jMwxpRrR2GYa4vohDLO3r3sOEFhfyuBcYwAZCwAeiUquSCXJnlsQaRJZ3M
+			8HyMKXz44NhjZcQMjOYYlNupgxIudxjgQyiuKBT7VW2JOmCw5ztx17GHChqCcVmrU7LO2YuTiCcg
+			swNft4EoMp58ICJcLmFuZixA1bvBchIKyVZ+gn8T2/z8MzsQpO+EK2MjlYYk4wOW1BmIPAbuX4gd
+			lGIPGUekoqAhNb6a5m/mnE1ojU1LnotB2EqorC7U2hNdPrxaKB+OOYXdtTwPAG3/SNVgL+e6cOV6
+			oy2M8FfxeP3Va7MoPgMgwZp0K1TXWIvWP/WrjXriM8nrTp4ZmwJ2HMMbHlg5b8BnGRKP259AcV/F
+			k798DZyl5sXpuLPJ4UbzxBQ1z16KoXOfx9B0InkirRkEaWYdvuuulQseWvXQvv2h0TOLa9H7dTX4
+			51WBnblHodiUX49UyYDWrL5DrFi95Sc3b07Xc0FXAXXbwKn2JDgA0GGtAcsnf8TAkwCXEcIm+5AT
+			hO/eBhbzMQzZCIswPXX9Q7fSY+KCOyJyqWVxAGa5w+zNuI8xZw1M/EGs4Y3Q852YiGlI7xRL18Iu
+			lScSgHfQ4mQ5iLiNQlDILmiEM0eeObvljuXReVHk8MFsqfahTt3CRe5sjF0BPZ5AGhnXNBFB1KnV
+			TCyDIWQRmeINAoZwTSMuSJJJ8McvuXCvm3ULacWZXSeb/y9g//xyRJL2Se8++40+bCiDBWSFX8dx
+			hitmK5V9r+WMi8vMJXO8AKT0e4WPgwhmFeADlzmBzEmwIqpzHhLLe84etsJDQLalrsLyQSKWD/+7
+			ulrL5Gq80LaHByIggAAWBBgDdE+A+G7d0tGWsQi8UuIYCUeOQDBRYpqoly4Q6uho36onTeNCN4wN
+			tw6InRPldBq0gt7LG8leujq7cs9nOYT0h5NaTEXFwYzVFAORIO7Y1iUqiVZCrjLC7RilRXc0DXZM
+			cpcZ81DAGpKEVXCGTF/NBqmP+4PWsHyFQy6EzzBbu/xdIhgMjiRlilocqd5EKBwe1Ih8QEVYe8et
+			VzgGIlEeHYgelwy/Y9v2R02fiSPR8KCcHZbnwjpqk5wMKM0HkvjJN2o6Ojq+K1/hgJB3RNbRciZL
+			Ut6qHr4HrY8GBgbSD98tKzhYzUsDh/sPkayH+lY4q99wOHIst43clUrGiAxEjmT2ORCJHFFyzTvP
+			FZDyj4XDlhILCFcMPuUGPd29KqFaIQv5O/3JM3khjg8MhOXjBeiaz3Gb9g5/RQLLizJR2FnuaTqW
+			Bvt8lPM8NEVm9BPzVYv/E2AAjb+phQgFwgsAAAAASUVORK5CYII=
+		</Resource>
+		<Resource ID="0b4d5ee9-cdaa-b17a-919a-1720b87cc816" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+			jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVh
+			ZHlxyWU8AAADIGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78i
+			IGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9i
+			ZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAy
+			MDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93
+			d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJk
+			ZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5z
+			OnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0
+			cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JU
+			b29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5p
+			aWQ6NjQxNTA1NUUxRkRGMTFFMTgwMjdGNDNFQzFDNTYxMDMiIHhtcE1NOkRvY3VtZW50SUQ9Inht
+			cC5kaWQ6NjQxNTA1NUYxRkRGMTFFMTgwMjdGNDNFQzFDNTYxMDMiPiA8eG1wTU06RGVyaXZlZEZy
+			b20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NDE1MDU1QzFGREYxMUUxODAyN0Y0M0VDMUM1
+			NjEwMyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NDE1MDU1RDFGREYxMUUxODAyN0Y0M0VD
+			MUM1NjEwMyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94
+			cGFja2V0IGVuZD0iciI/PiRNgIIAAAPfSURBVEhLrVZNbGJVFP7eg7ZAR1ooVKA/KE3sKDVOTFxq
+			4qSL2Zj4s3SjZoxxoTtXmokrE/cuXNiVK40xcePO6GKsznQ0tQU6UErL9AGlLT8pnb7/dz33kjJD
+			mEfjxJMAj3vu/c79zj3fPU/qdDqs0WjAOzKCmUQCw6xcLoPZDqKxaYwHxl2nHtRqME0L4akw5Faz
+			hWQyCV3XUNwpQtM0KJUKFKUCVdWwlc0IoN1iEbIEPJV6Gtn1TahnZzioHWBvb4/ATOTzeTiOg/19
+			hTB0zM3PodloQqpUqkzXVJyqKp5Pp4cy2Pj7L1wKTmJ83I8n4+5sc9ktBGjO2NgYwMiKxSL/+V+t
+			VCoJPIl/8bT4fL6hu/+vTl3XBQOZL+SH/NjGHr2y0WwKh2CgKApmZ2f7Zt7J1dFoM5TyG4CtA94p
+			XFt+CT/drCEyosCyNWgG0LbncHxcx433nkUwNNXDqNWqiNM5CQaRqcjANhKxIN69fgM/fLsCn3QC
+			y2zBljxYzTTx9crP8FlteI0j/LO2iszWPfzy680+jHA43P3PGWQzmwMH/OdGhV299j6NOz1frmSw
+			5Y9vs9fe/rI31my12ZsfrrDvv/uxDyN/d0v8FwyeSy8NMGD3D/HRB2/xLAqfYRjQLRsqs2HRM+CI
+			8dDkBF65LCEx05/iZxYvP2BQKGz3RSfBDDCiSmO/Z07Zi+/8xl5+/VMiZg4t6/MylXd39+Ahid6+
+			davHQpK6u37Y+EjnzEBTM2Eb5jmxgXl8YH19HbLHQ6reh8xI3qmFBUyEJh85uTfIJJycaiI9Ij5z
+			qU9yTQSfQHJ+np8v5Fg8hj9WV4deXiKIxGBaBlWsBU1X6dKzXTfk9wdwZ20NkWgUciAQwAtXrgzo
+			YDBFDk7OuqCmLZEOLNcAsXgc6aUlBPz+rg5OOp3h6SGvQynSVR0WZcaBB7LsGbqG2oDwiwA63UUX
+			GS+E+4YDx6YIpgGPVyx1Nd0g9Z8HSCRmXCfygzIpM9uHDpSWRMB+BFKvonUB6Xgs3sXkxZzL5obW
+			9Pauwj757Cs2GllmuHSVBefeYJ9/8Q3bV2qu6wrFrrbEZWdTG/R43Ckf1o+QvbuNdrsDL9U3Z8UV
+			vLi4gOnpBxfcw2ng3U2WCZMHKN8rD2XwOE6lonQZVKllqtQyVWqZ6Qta5mYmgyCJiJdfNDrtem75
+			QgF+amCjo9RwTMtEKpUC18POzo6oqEq1iip9eKfjzZxbubxHaZkkhSZBfVxs6Oj4iJ4rsCwLdPeI
+			pl+lPsDB50nJFglTOuWvLU3+2jKKBAlkmHEwDhKJROAnFm52UK/DpqChUAj/Ao7pSLvHckUwAAAA
+			AElFTkSuQmCC
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[
+class VDOM_formtextarea(VDOM_object):
+
+	def render(self, contents=""):
+		display = u"display:none;" if self.visible == "0" else u""
+		id = u"o_" + (self.id).replace('-', '_')			
+
+		style = u"""z-index: {zind}; position: {pos}; top: {top}px; left: {left}px;
+					width: {width}px; height: {height}px; padding: 2px 5px 2px 5px; {display} font: 14px tahoma
+				""".format(zind = self.zindex, pos = self.position, top = self.top, left = self.left, 
+						width = self.width, height = self.height, display = display)
+
+		result = u"""<textarea id="{id}" name="{name}" tabindex="{tabind}" style="{style}">{value}</textarea>"""\
+				.format(id = id, name = self.name, tabind = self.tabindex, style = style, value = self.value)
+
+		return VDOM_object.render(self, contents=result)
+
+	def wysiwyg(self, contents=""):
+		
+		result = \
+			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
+						top="{top}" left="{left}" width="{width}" height="{height}" >
+					<htmltext top="0" left="0" width="{width}" height="{height}" overflow="hidden" blendMode="normal">
+						<textarea style="width: {width}px; height: {height}px; background-color:#ffffff; font: 14px tahoma; padding: 2px 5px;">
+							{value}
+						</textarea>
+					</htmltext>
+				</container>
+			""".format(
+					id = self.id, vis = self.visible, zind = self.zindex, 
+					hierarchy = self.hierarchy, order = self.order, 
+					top = self.top, left = self.left, 
+					width = self.width, height = self.height,
+					value = self.value)
+		
+		return VDOM_object.wysiwyg(self, contents=result)
+		
+]]>
+	</SourceCode>
+	<E2VDOM>
+		<Events>
+			<UserInterfaceEvents>
+				<Event Name="mouseup" Description="#Lang(515)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(916)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(917)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mousemove" Description="#Lang(512)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(909)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(911)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mousedown" Description="#Lang(511)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(907)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(908)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mouseout" Description="#Lang(513)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(912)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(913)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="ctrlclick" Description="#Lang(508)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(903)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(904)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mouseover" Description="#Lang(514)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(914)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(915)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="click" Description="#Lang(507)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(901)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(902)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="dblclick" Description="#Lang(509)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(905)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(906)" Order="0"/>
+					</Parameters>
+				</Event>
+			</UserInterfaceEvents>
+		</Events>
+		<Actions>
+			<Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
+				<Action Name="hide" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_hide(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="show" DisplayName="#Lang(606)" Description="#Lang(506)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(707)" Description="#Lang(807)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_show(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="removeClass" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).removeClass(className);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="addClass" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).addClass(className);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setFocus" DisplayName="#Lang(603)" Description="#Lang(503)">
+					<SourceCode>
+<![CDATA[jQuery(this.domCont).focus();]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setValue" DisplayName="#Lang(605)" Description="#Lang(505)">
+					<Parameters>
+						<Parameter Name="value" DisplayName="#Lang(706)" Description="#Lang(806)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[jQuery(this.domCont).val(value);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="moveTo" DisplayName="#Lang(602)" Description="#Lang(502)">
+					<Parameters>
+						<Parameter Name="newX" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="newY" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="Effect" DisplayName="#Lang(704)" Description="#Lang(804)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_moveTo(this.domCont, newX, newY, Effect);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setStyle" DisplayName="#Lang(604)" Description="#Lang(504)">
+					<Parameters>
+						<Parameter Name="cssStyleValue" DisplayName="#Lang(705)" Description="#Lang(805)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[jQuery(this).attr('style', cssStyleValue);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setClass" DisplayName="#Lang(607)" Description="#Lang(507)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(709)" Description="#Lang(809)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).attr('class',className);]]>
+					</SourceCode>
+				</Action>
+			</Container>
+		</Actions>
+	</E2VDOM>
+</Type>

@@ -7,7 +7,6 @@ def run():
     """
     show installed applications and types
     """
-
     types = sorted(managers.memory.types.itervalues(), key=lambda item: item.name)
     with section("types"):
         for type in types:

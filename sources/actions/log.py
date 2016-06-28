@@ -10,7 +10,6 @@ def run(name="server", uuid=None):
     :param name: log name
     :param uuid uuid: application uuid
     """
-
     if name in ("server", "network", "security"):
         log = getattr(managers.log_manager.logs, name)
     elif name == "application":

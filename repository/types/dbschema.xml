@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>753ea72c-475d-4a29-96be-71c522ca2097</ID>
+		<Name>dbschema</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_dbschema</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.5.8519</Version>
+		<Category>Database</Category>
+		<InterfaceType>1</InterfaceType>
+		<Icon>#Res(102e782e-aa0b-4564-b5fd-e121cd6f7bf7)</Icon>
+		<EditorIcon>#Res(ba7f587e-3a4e-4b9f-a141-48ac5e1567ea)</EditorIcon>
+		<StructureIcon>#Res(026e4744-4507-4f24-bbf9-65d83556eb72)</StructureIcon>
+		<Dynamic>1</Dynamic>
+		<Moveable>1</Moveable>
+		<Resizable>1</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>3</Container>
+		<RemoteMethods>execute_query_xml</RemoteMethods>
+		<Handlers>on_rename, on_delete, execute_query</Handlers>
+		<Languages>en_US, ru_RU, fr_FR</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>title</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(10)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>description</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(20)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">DBSchema</Sentence>
+			<Sentence ID="002">A container upon which a database in VDOM server is created. It can contain only DB HTML view, Database table and MySQL connector types.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Title</Sentence>
+			<Sentence ID="104">Description</Sentence>
+			<Sentence ID="201">The order of rendering the object on the page. The objects with identical values of the Hierarchy attribute are rendered in the order they are written in the XML-file of the VDOM application.</Sentence>
+			<Sentence ID="202">The visibility of the object. In any case the object will exist on the web page, this attribute only makes it invisible.</Sentence>
+			<Sentence ID="203">The title of the object to display, may be in HTML format. In some objects the title is not displayed if the Title appearance attribute is set to &apos;Title off&apos;.</Sentence>
+			<Sentence ID="204">The description of the object.</Sentence>
+			<Sentence ID="301">Incorrect value, must be even integer from 0 to 99.</Sentence>
+			<Sentence ID="302">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="303">Incorrect value.</Sentence>
+			<Sentence ID="304">Incorrect value, must be string.</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">BDD Schema</Sentence>
+			<Sentence ID="002">Conteneur, qui représente la base de données</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hiérarchie</Sentence>
+			<Sentence ID="102">Visibilité</Sentence>
+			<Sentence ID="103">Titre</Sentence>
+			<Sentence ID="104">Description</Sentence>
+			<Sentence ID="201">Hiérarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="202">Afficher ou cacher l&apos;objet</Sentence>
+			<Sentence ID="203">Titre</Sentence>
+			<Sentence ID="204">Description du conteneur</Sentence>
+			<Sentence ID="301">Valeur Incorrecte</Sentence>
+			<Sentence ID="302">Valeur Incorrecte</Sentence>
+			<Sentence ID="303">Valeur Incorrecte</Sentence>
+			<Sentence ID="304">Valeur Incorrecte, doit être une chaîne</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">Схема БД</Sentence>
+			<Sentence ID="002">Контейнер, представляющий схему базы данных</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Иерархия</Sentence>
+			<Sentence ID="102">Отображение</Sentence>
+			<Sentence ID="103">Заголовок</Sentence>
+			<Sentence ID="104">Описание</Sentence>
+			<Sentence ID="201">Приоритет в потоке гипертекста</Sentence>
+			<Sentence ID="202">Режим отображения объекта</Sentence>
+			<Sentence ID="203">Заголовок объекта</Sentence>
+			<Sentence ID="204">Описание объекта</Sentence>
+			<Sentence ID="301">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="302">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="303">Неправильное значение, должна быть строка</Sentence>
+			<Sentence ID="304">Неправильное значение, должна быть строка</Sentence>
+			<Sentence ID="401">Не отображать</Sentence>
+			<Sentence ID="402">Отображать</Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="102e782e-aa0b-4564-b5fd-e121cd6f7bf7" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjI5RUMxMDRCMUZENzExRTFBNzlEOTlCQjUyMDA3QTYwIiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjI5RUMxMDRDMUZENzExRTFBNzlEOTlCQjUyMDA3QTYwIj4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MjlFQzEwNDkxRkQ3MTFFMUE3OUQ5
+			OUJCNTIwMDdBNjAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MjlFQzEwNEExRkQ3MTFFMUE3
+			OUQ5OUJCNTIwMDdBNjAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			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
+			PP5DgAEAQadGbqASXoQAAAAASUVORK5CYII=
+		</Resource>
+		<Resource ID="ba7f587e-3a4e-4b9f-a141-48ac5e1567ea" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+			jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVh
+			ZHlxyWU8AAADIGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78i
+			IGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9i
+			ZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAy
+			MDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93
+			d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJk
+			ZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5z
+			OnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0
+			cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JU
+			b29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5p
+			aWQ6MjlFQzEwNEIxRkQ3MTFFMUE3OUQ5OUJCNTIwMDdBNjAiIHhtcE1NOkRvY3VtZW50SUQ9Inht
+			cC5kaWQ6MjlFQzEwNEMxRkQ3MTFFMUE3OUQ5OUJCNTIwMDdBNjAiPiA8eG1wTU06RGVyaXZlZEZy
+			b20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoyOUVDMTA0OTFGRDcxMUUxQTc5RDk5QkI1MjAw
+			N0E2MCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoyOUVDMTA0QTFGRDcxMUUxQTc5RDk5QkI1
+			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
+		</Resource>
+		<Resource ID="026e4744-4507-4f24-bbf9-65d83556eb72" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjYzQThFMDk4MUZENzExRTFBQTk1OUM5RDNDNDQ0Q0U3IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjYzQThFMDk5MUZENzExRTFBQTk1OUM5RDNDNDQ0Q0U3Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NjNBOEUwOTYxRkQ3MTFFMUFBOTU5
+			QzlEM0M0NDRDRTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NjNBOEUwOTcxRkQ3MTFFMUFB
+			OTU5QzlEM0M0NDRDRTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz4sXtYVAAAC60lEQVR42mSTa0hUQRTH/zP37l29u7qaqai1
+			tlhUampYCn6IPoREBBEYQVGJX8roU4VJ6KeeWAlBT+pTTyp7KWQJBT3UCD9ICD3YjF0LzWXd691d
+			dV8zzd3a2toDd+bMuef85pyZM4Rzjt9CjMGnabZAMLhTDwS26brfrum6qk/rn7WA/ioYnOnc07jr
+			h5qeHksEUfwVHpoLlYr5q0CdBUet0AuE2cYJXwVODkSi4bHOC5cakmLiAPJbtwjtlZizkh2I8ZuD
+			MDAxSpQxdrPt+MnKZECihnrhOi/uLSyEkjj6V4k8TiKSYeNSts22NyUDzlhRfKacCQs3IJIIEBwW
+			ExgKBolQsZZR4rAvTslgxOm2MiOWE0opiQnvqNicccEQS4MHgy12x0L7svkph9j3iS5zu10QIVHD
+			VaaIgcjEKB1MuBET7AVF2LJxPXrefMpLxMkJJaLazVd6H6OhxiMvL1vKJCXLlGaSYVUVLHI4kJ+V
+			jTm/jjv3e+GcLlFSAPPpRGiieB2uvXmK4v4+usheAjXNKs7BDK9Xg8fjw7Bbw8fpQrQ2LTGlANze
+			sHxw9Tfcsm7A5de1sDwfhHnOBTqrwT2lws8yUVZdhdtH6nD1wRDfvKYwAeCEHAC/11jkvNDdg611
+			HjTtL8Vj51q4xkPQPDp25EpYZc9Aoaqjq6sbY5GFk0kZGAcs2i7DOT6wYB06ep6gUn6G5RVLUZ5j
+			g5Kj4Lvbg+EX33FxdBb9nnzcOLx4NAnACD9D+aP774f2VXHcMdWzu++qqe31e6jhcdCYH5MzJkzN
+			WpBfsATXD1XAN/ahDyscvzqV85i4I8pIEyPnV557WFNTsSl3QTlefo7ANRWCTw/CIUqoLEpHnuJH
+			/8Dbr+FopLK5udmfBBBlcEaOHjtBEQ11WiyW3fZih5KRqcJMFXinNUx4JjHxw9uryNL2tvZ235+3
+			IgDkn7cjvpaWVguLhjeKpnSInswgEhshVB7sOHX6C/6TnwIMAGarMf/aqyMBAAAAAElFTkSuQmCC
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[
+class VDOM_dbschema(VDOM_object):
+	
+	def render(self, parent, contents=""):
+		pass
+		
+	def wysiwyg(self, parent, contents=""):
+		result="<container id=\"%s\" visible=\"%s\" hierarchy=\"%s\" >%s</container>"%(self.id, self.visible, self.hierarchy, contents)
+		return VDOM_object.wysiwyg(self, parent, contents=result)
+
+# def set_name(application_id, object_id, param):
+def on_rename(object, name):
+	database_manager = obsolete_request.database_manager
+	# if not database_manager.check_database(application.id, object_id):
+	if not database_manager.check_database(application.id, object.id):
+		# database_manager.create_database(application_id, object_id, param["name"])
+		database_manager.create_database(object.application.id, object.id, name)
+	else:
+		# database_manager.rename_database(application_id, object_id, param["name"])
+		database_manager.rename_database(object.application.id, object.id, name)
+	
+# def on_delete(application_id, object_id, param):
+def on_delete(object):
+	# obsolete_request.database_manager.delete_database(application_id, object_id)
+	obsolete_request.database_manager.delete_database(object.application.id, object.id)
+	return ""
+
+# def execute_query(application_id, object_id, param):
+def execute_query(object, param):
+	if param:
+		from database.dbobject import VDOM_sql_query
+		q = VDOM_sql_query(object.application.id, object.id, param)
+		q.commit()
+		query =q.fetchall()
+		return (query)
+	else:
+		# return "Error, query filed: %s"%str(e)
+		return "NO PARAM"
+
+# TODO: need update remote methods
+def execute_query_xml(application_id, object_id, xml_param):
+	if xml_param:
+		from xml.dom.minidom import parseString
+		dom_param = parseString(xml_param.encode("UTF-8"))
+		query = dom_param.getElementsByTagName("query_sql")
+		if query:
+			from database.dbobject import VDOM_sql_query
+			q = VDOM_sql_query(application_id, object_id, query[0].firstChild.nodeValue)
+			q.commit()
+			query_xml = q.fetchall_xml()
+			return (query_xml) 
+	else:
+		# return "<Error>Query failed: %s</Error>"%str(e)
+		return "NO XML PARAM"
+		
+		
+]]>
+	</SourceCode>
+</Type>

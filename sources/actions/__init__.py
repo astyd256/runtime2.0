@@ -1,4 +1,5 @@
 
+import deploy
 import analyze
 import list
 import install

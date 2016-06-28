@@ -5,7 +5,7 @@ import io
 import re
 import managers
 
-# from logs import console
+from logs import console
 
 
 MODULE_NAME_PATTERN = r"(?:module_)([A-F\d]{8}_[A-F\d]{4}_[A-F\d]{4}_[A-F\d]{4}_[A-F\d]{12})"

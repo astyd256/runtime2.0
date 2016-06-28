@@ -78,3 +78,10 @@ def show(name=None, value=MISSING, indent=None, longer=False):
             replace_whitespace=False,
             break_long_words=False)) for part in value.splitlines()))
     console.write(message)
+
+
+def confirm(message):
+    console.write(message)
+    console.stdout.write("are you sure? ")
+    answer = raw_input()
+    return answer.lower() == "yes"

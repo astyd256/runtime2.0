@@ -140,7 +140,6 @@ def run(uuid_or_name, description=False, details=False):
     :param switch description: show attributes description
     :param switch details: show attribute details
     """
-
     subject = managers.memory.types.search(uuid_or_name)
     if subject:
         entity = TYPE

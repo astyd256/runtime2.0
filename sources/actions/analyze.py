@@ -172,7 +172,6 @@ def run(filename):
     analyze application
     :param filename: input file with application
     """
-
     try:
         file = managers.file_manager.open(file_access.FILE, None, filename, mode="rb")
     except Exception as error:

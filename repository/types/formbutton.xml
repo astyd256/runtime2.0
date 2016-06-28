@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>5be544cb-3d6b-4b75-ae79-b071fbe46094</ID>
+		<Name>formbutton</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_formbutton</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.16.6200</Version>
+		<Category>Form</Category>
+		<InterfaceType>3</InterfaceType>
+		<Icon>#Res(31f8a850-4a26-04f7-4fe4-1705bb8d4471)</Icon>
+		<EditorIcon>#Res(596cccb8-7b3b-90f8-8df0-1705fdae982e)</EditorIcon>
+		<StructureIcon>#Res(e38a4210-828f-58a9-4188-1706274768ce)</StructureIcon>
+		<Dynamic>0</Dynamic>
+		<Moveable>1</Moveable>
+		<Resizable>3</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>1</Container>
+		<Containers>form, password, dialog_2, container</Containers>
+		<Handlers>set_attr</Handlers>
+		<Languages>en_US, ru_RU, fr_FR</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d+$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>zindex</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>top</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>left</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>width</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue>90</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>height</Name>
+			<DisplayName>#Lang(107)</DisplayName>
+			<Description>#Lang(207)</Description>
+			<DefaultValue>25</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>type</Name>
+			<DisplayName>#Lang(108)</DisplayName>
+			<Description>#Lang(208)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[012]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(403)|0)|(#Lang(404)|1)|(#Lang(405)|2))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>tabindex</Name>
+			<DisplayName>#Lang(109)</DisplayName>
+			<Description>#Lang(209)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>label</Name>
+			<DisplayName>#Lang(111)</DisplayName>
+			<Description>#Lang(211)</Description>
+			<DefaultValue>Send</DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(311)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(100)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>classname</Name>
+			<DisplayName>#Lang(112)</DisplayName>
+			<Description>#Lang(212)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(312)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(500)</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>style</Name>
+			<DisplayName>#Lang(113)</DisplayName>
+			<Description>#Lang(213)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(10000)</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>skin</Name>
+			<DisplayName>#Lang(114)</DisplayName>
+			<Description>#Lang(214)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^d{1,4}%</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(406)|0)|(#Lang(407)|1))</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">Form button</Sentence>
+			<Sentence ID="002">The Form button type produces an object displayed as a button of a form, that provides a way to trigger an event. The Form button object has the appearance of a standard button and is rendered by the web browser. It can be contained only in the Form, Password, Dialog v2, and Container objects.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Top</Sentence>
+			<Sentence ID="105">Left</Sentence>
+			<Sentence ID="106">Width</Sentence>
+			<Sentence ID="107">Height</Sentence>
+			<Sentence ID="108">Type</Sentence>
+			<Sentence ID="109">TabIndex</Sentence>
+			<Sentence ID="111">Label</Sentence>
+			<Sentence ID="112">Class CSS</Sentence>
+			<Sentence ID="113">Style</Sentence>
+			<Sentence ID="114">Skin</Sentence>
+			<Sentence ID="201">Order of rendering the object on the page. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
+			<Sentence ID="202">Visibility of the object.</Sentence>
+			<Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the z-index indicates the order of their displaying. The larger z-index is, the upper the object lies.</Sentence>
+			<Sentence ID="204">Spacing between the top edge of the container and the object in pixels.</Sentence>
+			<Sentence ID="205">Spacing between the left edge of the container and the object in pixels.</Sentence>
+			<Sentence ID="206">Width of the object in pixels.</Sentence>
+			<Sentence ID="207">Height of the object in pixels.</Sentence>
+			<Sentence ID="208">The type of the button:
+Common - does not do anything, it can take a special action on the event;
+Reset - reset all the filled fields;
+Submit - send the from data using the request method selected in the Method attribute of the Form object.</Sentence>
+			<Sentence ID="209">The index number of switching the elements on pressing the Tab key. If the TabIndex is the same for all elements, they will be switched in the order they are written in the XML file of the application. If you want to switch the elements in a definite order, set the TabIndex attribute so that each next element&apos;s TabIndex was more then the previous one.</Sentence>
+			<Sentence ID="211">The label of the object.</Sentence>
+			<Sentence ID="212">The names of CSS classes divided by spaces.</Sentence>
+			<Sentence ID="213">The CSS style of the object. If the user changes CSS style, the Skin attribute is changed to the &quot;User defined&quot;.</Sentence>
+			<Sentence ID="214">The visual appearance of the object. If you select any skin, the CSS is copied to the Style attribute, so if you want to switch skin back to the User defined, you will have to delete everything from the Style attribute.</Sentence>
+			<Sentence ID="301">Incorrect value, must be positive integer from 0 to 99.</Sentence>
+			<Sentence ID="302">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="303">Incorrect value, must be positive integer from 0 to 9999.</Sentence>
+			<Sentence ID="304">Incorrect value, must be positive integer from 0 to 9999.</Sentence>
+			<Sentence ID="305">Incorrect value, must be positive integer from 0 to 9999.</Sentence>
+			<Sentence ID="306">Incorrect value, must be positive integer from 0 to 999999.</Sentence>
+			<Sentence ID="307">Incorrect value, must be positive integer from 0 to 999999.</Sentence>
+			<Sentence ID="308">Incorrect value, must be either 0, 1 or 2.</Sentence>
+			<Sentence ID="309">Incorrect value, must be even positive integer.</Sentence>
+			<Sentence ID="311">Incorrect value.</Sentence>
+			<Sentence ID="312">Incorrect value.</Sentence>
+			<Sentence ID="313">Incorrect value.</Sentence>
+			<Sentence ID="314">Incorrect value.</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="403">Submit</Sentence>
+			<Sentence ID="404">Reset</Sentence>
+			<Sentence ID="405">Common</Sentence>
+			<Sentence ID="406">Default</Sentence>
+			<Sentence ID="407">ProSuite</Sentence>
+			<Sentence ID="501">Hide the object.</Sentence>
+			<Sentence ID="502">Set new label of the object.</Sentence>
+			<Sentence ID="503">Set new CSS style of the object.</Sentence>
+			<Sentence ID="504">Show the object.</Sentence>
+			<Sentence ID="505"></Sentence>
+			<Sentence ID="506"></Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="601">Hide</Sentence>
+			<Sentence ID="602">setLabel</Sentence>
+			<Sentence ID="603">setStyle</Sentence>
+			<Sentence ID="604">Show</Sentence>
+			<Sentence ID="701">Fade</Sentence>
+			<Sentence ID="702">Label</Sentence>
+			<Sentence ID="703">cssStyleValue</Sentence>
+			<Sentence ID="704">Fade</Sentence>
+			<Sentence ID="801">Fade effect, time is indicated in milliseconds.</Sentence>
+			<Sentence ID="802">New label.</Sentence>
+			<Sentence ID="803">CSS style value.</Sentence>
+			<Sentence ID="804">Fade effect, time is indicated in milliseconds.</Sentence>
+			<Sentence ID="901">Current X-value</Sentence>
+			<Sentence ID="902">Current Y-value</Sentence>
+			<Sentence ID="903">Current X-value</Sentence>
+			<Sentence ID="904">Current Y-value</Sentence>
+			<Sentence ID="905">Current X-value</Sentence>
+			<Sentence ID="906">Current Y-value</Sentence>
+			<Sentence ID="907">Current X-value</Sentence>
+			<Sentence ID="908">Current Y-value</Sentence>
+			<Sentence ID="909">Current X-value</Sentence>
+			<Sentence ID="911">Current Y-value</Sentence>
+			<Sentence ID="912">Current X-value</Sentence>
+			<Sentence ID="913">Current Y-value</Sentence>
+			<Sentence ID="914">Current X-value</Sentence>
+			<Sentence ID="915">Current Y-value</Sentence>
+			<Sentence ID="916">Current X-value</Sentence>
+			<Sentence ID="917">Current Y-value</Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">Bouton de Formulaire</Sentence>
+			<Sentence ID="002">Bouton Formulaire</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hiérarchie</Sentence>
+			<Sentence ID="102">Visibilité</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Haut</Sentence>
+			<Sentence ID="105">Gauche</Sentence>
+			<Sentence ID="106">Largeur</Sentence>
+			<Sentence ID="107">Hauteur</Sentence>
+			<Sentence ID="108">Type</Sentence>
+			<Sentence ID="109">TabIndex</Sentence>
+			<Sentence ID="111">Texte</Sentence>
+			<Sentence ID="112">Class</Sentence>
+			<Sentence ID="113"></Sentence>
+			<Sentence ID="114"></Sentence>
+			<Sentence ID="201">Hiérarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="202">Afficher ou cacher l&apos;objet</Sentence>
+			<Sentence ID="203">Niveau de superposition de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="204">Distance depuis le bord haut de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="205">Distance depuis le bord gauche de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="206">Largeur de l&apos;objet en pixels</Sentence>
+			<Sentence ID="207">Hauteur de l&apos;objet en pixels</Sentence>
+			<Sentence ID="208">Type du bouton</Sentence>
+			<Sentence ID="209">Tab index</Sentence>
+			<Sentence ID="211">Texte apparaissant sur le bouton</Sentence>
+			<Sentence ID="212">CSS class name</Sentence>
+			<Sentence ID="213"></Sentence>
+			<Sentence ID="214"></Sentence>
+			<Sentence ID="301">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="302">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="303">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="304">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="305">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="306">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="307">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="308">Valeur Incorrecte</Sentence>
+			<Sentence ID="309">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="311">Valeur Incorrecte</Sentence>
+			<Sentence ID="312">Incorrect value</Sentence>
+			<Sentence ID="313"></Sentence>
+			<Sentence ID="314"></Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="403">Submit</Sentence>
+			<Sentence ID="404">Reset</Sentence>
+			<Sentence ID="405">Common</Sentence>
+			<Sentence ID="406"></Sentence>
+			<Sentence ID="407"></Sentence>
+			<Sentence ID="501">Hide the object</Sentence>
+			<Sentence ID="502">Set new button label</Sentence>
+			<Sentence ID="503">Set new CSS style</Sentence>
+			<Sentence ID="504">Show the object</Sentence>
+			<Sentence ID="505"></Sentence>
+			<Sentence ID="506"></Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="601">Hide</Sentence>
+			<Sentence ID="602">setLabel</Sentence>
+			<Sentence ID="603">setStyle</Sentence>
+			<Sentence ID="604">Show</Sentence>
+			<Sentence ID="701">Fade</Sentence>
+			<Sentence ID="702">Label</Sentence>
+			<Sentence ID="703">cssStyleValue</Sentence>
+			<Sentence ID="704">Fade</Sentence>
+			<Sentence ID="801">Fade time</Sentence>
+			<Sentence ID="802">New label value</Sentence>
+			<Sentence ID="803">New CSS style value</Sentence>
+			<Sentence ID="804">Time of appearance</Sentence>
+			<Sentence ID="901">Current X-value</Sentence>
+			<Sentence ID="902">Current Y-value</Sentence>
+			<Sentence ID="903">Current X-value</Sentence>
+			<Sentence ID="904">Current Y-value</Sentence>
+			<Sentence ID="905">Current X-value</Sentence>
+			<Sentence ID="906">Current X-value</Sentence>
+			<Sentence ID="907">Current X-value</Sentence>
+			<Sentence ID="908">Current Y-value</Sentence>
+			<Sentence ID="909">Current X-value</Sentence>
+			<Sentence ID="911">Current Y-value</Sentence>
+			<Sentence ID="912">Current X-value</Sentence>
+			<Sentence ID="913">Current Y-value</Sentence>
+			<Sentence ID="914">Current X-value</Sentence>
+			<Sentence ID="915">Current Y-value</Sentence>
+			<Sentence ID="916">Current X-value</Sentence>
+			<Sentence ID="917">Current Y-value</Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">Кнопка формы</Sentence>
+			<Sentence ID="002">Кнопка формы</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Иерархия</Sentence>
+			<Sentence ID="102">Отображение</Sentence>
+			<Sentence ID="103">Позиция</Sentence>
+			<Sentence ID="104">Сверху</Sentence>
+			<Sentence ID="105">Слева</Sentence>
+			<Sentence ID="106">Ширина</Sentence>
+			<Sentence ID="107">Высота</Sentence>
+			<Sentence ID="108">Тип</Sentence>
+			<Sentence ID="109">Индекс табуляции</Sentence>
+			<Sentence ID="111">Метка</Sentence>
+			<Sentence ID="112">Класс CSS</Sentence>
+			<Sentence ID="113"></Sentence>
+			<Sentence ID="114"></Sentence>
+			<Sentence ID="201">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
+			<Sentence ID="202">Режим отображения объекта</Sentence>
+			<Sentence ID="203">Положение в визуальной иерархии объектов</Sentence>
+			<Sentence ID="204">Расстояние от верхней границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="205">Расстояние от левой границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="206">Ширина объекта в пикселях</Sentence>
+			<Sentence ID="207">Высота объекта в пикселях</Sentence>
+			<Sentence ID="208">Тип кнопки</Sentence>
+			<Sentence ID="209">Индекс табуляции объекта на странице</Sentence>
+			<Sentence ID="211">Текст справа от кнопки</Sentence>
+			<Sentence ID="212">Имена классов CSS</Sentence>
+			<Sentence ID="213"></Sentence>
+			<Sentence ID="214"></Sentence>
+			<Sentence ID="301">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="302">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="303">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="304">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="305">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="306">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="307">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="308">Неправильное значение, дожен быть указан 0, 1 или 2</Sentence>
+			<Sentence ID="309">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="311">Неправильное значение</Sentence>
+			<Sentence ID="312">Неправильное значение</Sentence>
+			<Sentence ID="313"></Sentence>
+			<Sentence ID="314"></Sentence>
+			<Sentence ID="401">Не отображать</Sentence>
+			<Sentence ID="402">Отображать</Sentence>
+			<Sentence ID="403">Подтверждение</Sentence>
+			<Sentence ID="404">Сброс</Sentence>
+			<Sentence ID="405">Обычная</Sentence>
+			<Sentence ID="406"></Sentence>
+			<Sentence ID="407"></Sentence>
+			<Sentence ID="501">Скрыть объект</Sentence>
+			<Sentence ID="502">Установить новую метку для кнопки</Sentence>
+			<Sentence ID="503">Установить новый стиль CSS</Sentence>
+			<Sentence ID="504">Показать объект</Sentence>
+			<Sentence ID="505"></Sentence>
+			<Sentence ID="506"></Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="601">Скрыть</Sentence>
+			<Sentence ID="602">Установить метку</Sentence>
+			<Sentence ID="603">Установить стиль</Sentence>
+			<Sentence ID="604">Показать</Sentence>
+			<Sentence ID="701">Исчезновение</Sentence>
+			<Sentence ID="702">Метка</Sentence>
+			<Sentence ID="703">Стиль</Sentence>
+			<Sentence ID="704">Появление</Sentence>
+			<Sentence ID="801">Время исчезновения в миллисекундах</Sentence>
+			<Sentence ID="802">Новая метка</Sentence>
+			<Sentence ID="803">Новое значение стиля CSS</Sentence>
+			<Sentence ID="804">Время появления в миллисекундах</Sentence>
+			<Sentence ID="901">Текущее значение X</Sentence>
+			<Sentence ID="902">Текущее значение Y</Sentence>
+			<Sentence ID="903">Текущее значение X</Sentence>
+			<Sentence ID="904">Текущее значение Y</Sentence>
+			<Sentence ID="905">Текущее значение X</Sentence>
+			<Sentence ID="906">Текущее значение Y</Sentence>
+			<Sentence ID="907">Текущее значение X</Sentence>
+			<Sentence ID="908">Текущее значение Y</Sentence>
+			<Sentence ID="909">Текущее значение X</Sentence>
+			<Sentence ID="911">Текущее значение Y</Sentence>
+			<Sentence ID="912">Текущее значение X</Sentence>
+			<Sentence ID="913">Текущее значение Y</Sentence>
+			<Sentence ID="914">Текущее значение X</Sentence>
+			<Sentence ID="915">Текущее значение Y</Sentence>
+			<Sentence ID="916">Текущее значение X</Sentence>
+			<Sentence ID="917">Текущее значение Y</Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="e38a4210-828f-58a9-4188-1706274768ce" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjI4RTlCMkE1MUZFNDExRTFBODdDRDMzQjdBOTdDNTdDIiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjI4RTlCMkE2MUZFNDExRTFBODdDRDMzQjdBOTdDNTdDIj4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MjhFOUIyQTMxRkU0MTFFMUE4N0NE
+			MzNCN0E5N0M1N0MiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MjhFOUIyQTQxRkU0MTFFMUE4
+			N0NEMzNCN0E5N0M1N0MiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz4IdmPjAAAC8klEQVR42nRTXUiTURh+9uOXy4H7/MO/nJsr
+			p1Ko6LqQnMgudldQENSlIXSrXoQE3ShGZMJKJAuEMsqobBemmBB2E5pklLrUdKCpc7/f/Nnmflzv
+			+RRTqvfwcg7nvO9znvd9zpFsbPpx2CYnvxTSVE9uJC/d3/5KPkreXVZWPns4XnIYgJIbaGoJBLYV
+			DscaOI5DIBAAWysUCqhUfDAnJ/dmVdW5e0cAKJGjtZXcLAg+6PVFyMrKRnx3F6GdkBjo9XjwfmQY
+			Pp8XWq1uKC9PfZ7YhOX7QHco2ByOhFFdXYNYNILlZTtCoeCR8mpqjPj+bQqzcz/MXq+njQAaJaMf
+			P5xm7P1+n8xorMWG34fBwUF0dT06SExPT8PFSxdQUVGOeDyOgYEhxGKRGLE4I6Xzuu2tLZleX4xQ
+			MACny4E4DWYsyXL/Lra3Axh8N7xXs0SCkpIiuFxu2fLyUp1UrNsvIDMzC26PE/+z4mL9wVqjycf6
+			uouxMbMeaORyOaJUfzgchlQqhYQGs9ev3oquVufBYKgQVZFKZdihxvKqZASDwVzGgBJ3EIlGkZ2V
+			S0xykJiYKAJcuXoZfX29SEhIQHu7hYB0KNDqkZzMi+c+nyBnAEtut1usLTU1A+lpmcjIyBYDeFUa
+			SXaKADiRWdLxJBGMXbi09IsauetgAENMLqfTiSjJJ7LfqwCdnZ2orDRgZWUFzc3N4kGQGj09PQ12
+			qVKZNMJ60J2Sknp9bOyTjOPkyMk+AZPJBNOE6c9z3UdkN8/NT6P/jRUqXrXL86oHMovF4hR8QvrM
+			zJRhc3OLBIyKTeK4Y3tppDtL9HhdmJ+34cXzlxgfn4DuZEFva+vth+JLTFIqG+mN6+z2BfMM0TOc
+			raTahSMyLiws4umTZ1hdXUOBruCzRqO+9tdn6ul53ODxuFs2NjYVNtssNVEl7tvtdmIRYbQjWm1+
+			W0eH5dY/fyMzq7W/cHHxZ30sFqslLxUEgbods/E8P0wKdDU13TjynX8LMACZok8PndRe2QAAAABJ
+			RU5ErkJggg==
+		</Resource>
+		<Resource ID="596cccb8-7b3b-90f8-8df0-1705fdae982e" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+			jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVh
+			ZHlxyWU8AAADIGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78i
+			IGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9i
+			ZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAy
+			MDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93
+			d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJk
+			ZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5z
+			OnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0
+			cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JU
+			b29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5p
+			aWQ6RDk0OTVCMjkxRkRFMTFFMUE2NzFBNDEzOEM5Njg3NTciIHhtcE1NOkRvY3VtZW50SUQ9Inht
+			cC5kaWQ6RDk0OTVCMkExRkRFMTFFMUE2NzFBNDEzOEM5Njg3NTciPiA8eG1wTU06RGVyaXZlZEZy
+			b20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpEOTQ5NUIyNzFGREUxMUUxQTY3MUE0MTM4Qzk2
+			ODc1NyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpEOTQ5NUIyODFGREUxMUUxQTY3MUE0MTM4
+			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
+			yqh6WDW8AAAAAElFTkSuQmCC
+		</Resource>
+		<Resource ID="f704b515-d69d-24d9-5e81-8dc0984592fa" Type="png" Name="image">
+			iVBORw0KGgoAAAANSUhEUgAAAAIAAAAaCAIAAAASURqFAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOkZBOEM3OUM0MTk5RDExRTFCOTFEQzE0MUJBRjVERjM5IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOkZBOEM3OUM1MTk5RDExRTFCOTFEQzE0MUJBRjVERjM5Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkE4Qzc5QzIxOTlEMTFFMUI5MURD
+			MTQxQkFGNURGMzkiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RkE4Qzc5QzMxOTlEMTFFMUI5
+			MURDMTQxQkFGNURGMzkiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz4XuEDdAAAAIElEQVR42mL8//8/AwMDC1bq379/hHhUpYiw
+			FkIBBBgAKWVN6CHpGjUAAAAASUVORK5CYII=
+		</Resource>
+		<Resource ID="31f8a850-4a26-04f7-4fe4-1705bb8d4471" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOkQ5NDk1QjI5MUZERTExRTFBNjcxQTQxMzhDOTY4NzU3IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOkQ5NDk1QjJBMUZERTExRTFBNjcxQTQxMzhDOTY4NzU3Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RDk0OTVCMjcxRkRFMTFFMUE2NzFB
+			NDEzOEM5Njg3NTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RDk0OTVCMjgxRkRFMTFFMUE2
+			NzFBNDEzOEM5Njg3NTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz40+zXdAAAYoUlEQVR42pxaaZBc1XU+976l+/U2mzQardYO
+			BgkQYjNgAkJgkMBlYvAW24R4IbbL5Y0q73HiUPGflONKUpWyU6aMXTEY40gGYQgGgVmECiMJCQlJ
+			M9KMNLtmpvflvddvufnOfS2CsLylR5rp7vf63XvO+c53vnNei6VLl9JbHzdvueGN56VSXfT25hX9
+			4YdstppXxVH03kjFFwlB8w1hnyNIGIIiimIVhXE4SrFRjOPgWMN1d4yPTmyrVWs+1oreerHHf/Vr
+			+nMf5h874bQRtWpdFLr+z6AwDJ2W590sSd4lDblZGkZakEGGUNi+ojBgM5IlhIqNVGSukJZYIWL7
+			klwh/4H++b2x6/t7JqYnH5idqTw0NT4xWZwp0of/+gOK/h8P8cciwo+23xZ2ylb1WhN/TSOO6B5S
+			6lvSlOk44nVjEth9THoPMCXCaxhEEkcQLoEjoSCyBB/Gu/wm8Wf02SqMo3K1ft+RQ8e+7bUaUzg7
+			lnzgzzHEsi0xsGDgjA/94Ac/+J0Tt23/ufA876OIwL8qgwoKgMAWVAwbEB+9QfwowAg71dsnyRFh
+			Q6XQr03Bm0+MIQlL2HTBf2E03sJnveJM6bsH9x/6ZyXiqvbQn/iQbzXibI+HHvrp4iiIXrVM60fC
+			NAqExRUWx66FhEUK8OEVoziGLXiGP7w5ExYLw6IY1sYII58Z84/EkuwJU3Yih/MNSYZtpPsXzf/q
+			VddcdmBB//zNYRRnEqv/hByZnZuj+fPm0b333ku79+w8ixEPbjYM8Sg2l47hNhVFjHnkAjtbUBDz
+			RhStXr2aNly4gdZtWE9pO0UDAws7O+DfimbmZskNWnTwwEE68OqrdPzYoJIwWDGCBBvEvlFK4pq2
+			k1p43rrzHktlnG+PDI98z5BG85bbNsVB0BaWZasrNm6ib3zjG2cawkbcesc7k9Xe8vjZww9+3LLl
+			99nx0ox0oBWfxv+wYFdfgbbcdAtddulllC/k4fEYUQkZ8wQi0N5m+AjErdBViHuMHrH0xmVi641b
+			yQs8emn38+LRRx6La80aqTa7xdDX1uAD5lauWvV3pilWvLb/yNd2bNs5w8b8vogYXV1dNPj6KOXm
+			hyLyHORfROesWUc///lPbzdT5k8ijWoV62sznLBQKmXT1q230N/efTetXLkaAFVUb9SpUi1TpVym
+			UrWiKrWyKFVKqlarULVajRuNKjXdGrWCAIiMBK4hVi1fHV+/+QYyTZNGjo9QOwo46SQbE8EJeCK6
+			u7svxAa6Tk2e+u3I8Hhz7dtX0JJFK2jnzp2/awg/PvLBT9DEqWP6+asHXrvQts0nOCUN2BFrGxhD
+			sVq+fLX4yle+TuvXrSOv3aZquUTF0hxVKiWq16rKdZvC9Zui3fJU4Lnke22c5ykv9MhtutRwG8Jr
+			1anRalIQBsq0bHH+OefTtdddp4YGD1N5rsReQzB5PclUIHr6ui6q1ppusVQ+fHJ4wt20aZM6qyFb
+			3329WLp4BY1PnBBuM5pnmXI34FBgKEUSlnAY8OfKK64Un7r7U2ThRbFSpHJphirwuOs2qI0Nx1z8
+			uLzF7E3mUCkM9i9TUhzFeFMEQUSe74PSfXyuTp7rq3YcUCaXVddcfa2YLVfF+MkTQC6vywhmUhcS
+			deeKmbniEC5z+JlnnonOCq3Va1aKsfETWA7IkuYziMNaocHKMcFvbGzrllvp9tvuoKbXFEU2oFRE
+			8noUtgPwAJZE9sdABm+AGYiZSLE78T4ci2CimnBccV0UT509URACTm3yW24Y+h5oi+IrLr+SLycH
+			Dx9JGF0JkbC1YXb39l55bGjoJVxiCnA8wxjjPX+5RURRSFEY4WTri1jzLp32HFy+FBa/ftONdOvW
+			d7P3VbE0S41ajdqhr5NfJB5DKYH7JDgHVIQyEgvzdE0UHCgZGyLWnuJ/MX8GLwHcCJomhENc31N+
+			ELAOEOsu3Ch8vyWOHR0WHEh4AH6IhWPaWcMw105NTz+XTqUqbyYoo1Ss0sjwGJJ2ZQGQ+hXWtpId
+			anyq1avX0kc//BHgv0KzpRnhu03QLnbGR7ERBIugSOLYIGWijiiZVGsuggZvSy8mlQQNRdo/Qhf0
+			GL8MRh8CBOjiWKDCdlu6yCeulRs3bDSODA7SqdlZULJiEkMIFeXz+UXjo2MTYRjtbwd+ADqmjlDo
+			lHgh/wFLgLbYfZKrHTlOVvzNnR+jSqMm5kpzwm+0dGGLmYbZsYiXYfE2YAwngymVifctcKYZ8Ybj
+			SBqIkKnLPw6zQfo/B4ivo8MVGULXfKBCeY2mnJ2elOXyXPyJT35M5bIZofVDnKgHwNJYs3b1J12v
+			dQGMeUMrakNuuPFaxyT1Gc5p7BC7U3p379r0LnY64aLK8xoqYvt0CsBHiJqNJJCxiTQwJf8WwL5p
+			JZsl21KWYeGdFOKCi1gyubbmAlgQMnK51lOsixNLZMU8H6qW1wSET+n03HLzVhZAMoRzla4CsViy
+			ePFKrLgFn5p3hiFguk8jwBYHWMVMtYoKuZy64qrLVaU8S36jKULWTEok0GBjFCd0pJiUAEnlpFNc
+			X2IkoTJMQ3U7KZV2rNDO4rK5tLKhMDmFeM8CtU9oa/mKHCwt3BhikuUC2gFqNBqiVC6qd266ShS6
+			u/GZSJyWK1wTli9f/t4wClectsFMYKU+zi85B6XU2oOuvOqd1Go2Rb3RABFAkhjsTr0NvT6kO7FE
+			NZSJlWNat+4SXgSw1wpSJlmoWMl06gIRapO87IqN6kMf+mC8/qL1iToRIXO80rHmlFZGBB1tKj9S
+			9XpFZp0sXXPllbTj8cdFoupYPUsaWLhwzdCxoQ2+394PBzbNzTdc5yDy50LwMcUxHhVgqC7ZsEE1
+			3aYKA4DdVAk++TguZujt8Y/JmY5iYfKr+G0r3gb5G0owDZ8gFFQfKDfRwop5Qar9e/erl3bvoa9/
+			7R66fvO1HcUYJzzPT3BSiBwC2Ym27wLWFdp46aX02OP/g4SKSOs9nNjT1SWdtHON57Uen5mZHZFB
+			2L6NE5tZQaqESuf3zwfeTYkqzVmBnZrCkpzGQkGhKmmiJBp4FyF2LEOlrBRvW+qMZQgZgULV5hxQ
+			rL+QFOhGUFpxfjptGL2FtPHLh7arhQOLNSxY7RudcsF0zpqZ/RYiTh6KJlKNFizoh4sTh3KBjmVI
+			Pb29F4VRtLxvXo8Fl4rr9EHOAVPqZFqzag0Fbc1QTJvANt63mExJaEJlPjRTOvvAtpzdzKzSTMPu
+			yBd+O0U7n32COJBW2tSuePnlV9QXP/cFkpGNdwM1BhUhQotzXdfLKAmtNgmxiRFMyf1ZAP3FlL96
+			1SqanZrSrmHAShBWV7574cTkxMowCPdhb+o83UIgz4JIKVRYMbB4IcQoKjYSjL0PF2thlzJtyiCp
+			WTLgGFgMhikZ6erNvsJ7ISjPxH7OWXuuaLgl4J7Feiy33noD3fWxKqUtzqmIE0lZloXrZdE2x7Gd
+			Bq0hBCGCh2vDNQavQvA4ZI1Pi5cthY7zKJ1Jk6GxGlKukEkhTEuQ16YJ8ljLATNwAPgTZQg/hFG0
+			w4BDrFMWdUH19fZTPldg7Aid85z0XAtAc1HsC41J3nagEq2M455bhefYw5IGR0eU2/JiK5eVoGNa
+			1D/fWLRkIXKoxZMJgAG7NnRPKerNpqrHVUFtdATgAN9t08C8BVSs1NSiTCZhEyyXz2eBcepHTqbx
+			eepShtRCD/mFqETAvoGGyeU80DWje14fFfLdTLoIHHcXqqMODJaFKBE2a6zYdhwKUSC8QInPfeYz
+			8pmdOwHOWEYQYceHR7UOTKWtuCtfUL98dIdM6jXj1UIJOs1xFhLZFl7gUhv/+YwgjFEYLRRMT2lB
+			KnVrQXYqzfuYB9dlUHOlZYQJAbFTLckQY4yx8/k6UgCLCLOh9Cv+qFbEuhp39HYydLCko1KpQNio
+			9s8+9yKVizXtvTCqqu6cQ6mePIIljU2bb4pQsWWjXIpNw0k6ecl8pVgv6q4RBKJ80wXVxVzYhQdt
+			x4RDerwkdfUw0UYjAXsRVkcyfGKdYgYkeKQCCMgw8DXNco1i/BvS0kpYJkqCuzdKnqqORufqo1SK
+			tDJUbcHVQalcPi3wX/X2zFO9fT3M40K4Ujyy/Rdy3YXrxfGhYTAeDLQcGAQlgI0C7rEFJFimoXmE
+			XRQiwTk/fEQ2iJIWkqEFTPL8BuyhUuzggD+iO28ozWaziV6BT1CKpzd2MpzSGZEIF61SmG1ZDHJN
+			1KYxtqTJktMSGcDx4MED9PrxYTU0PKwGj5+QhwdHzEsv3qhC6UNnCzJtK/zxAw9RvjcvLCg8ywLA
+			pQyQjtzy8rUUJAJXP6GHF0j4Vr0loqDdiT8POwIdSy7UXCfm+Klu/bHbtufFbqMJjcZyjpLhQFL+
+			WXd3LsHI0uJd9/qdQGlhqJDsvmxpVaV0fvCPlvji81/8vOG3Gug6Ag3Qxx7fLk3HYUUZo1agEGsL
+			ETioTX0FdiKAg400Wy1yvaaeC2jdjCM+9/mKj8pIork5KTsaxuJ0xhbHJkexh5ATImnSo5ClNDSJ
+			0k2W4Ce8FdUx8nTuxwxRVwtofViPKLQ60W341MSUajbRx4AcOMT1SkNnOLQaNLIJswXZXHSFHYXI
+			W4M9HfNUM1CjI2PILlbXjAFUHSzRatW4yjcYfSa8NYjwXKaHMoZmPxo7MU6rVq9QKRhs27EKAg+h
+			TlEyWxOdOYcusZ2YKJ18kOEcRGwqUqdmpmlwZFDLQuRLXJ6aMb78pS+zYXFKsIaw5fqN6xMtkUpH
+			qQD8G7WhZyJTcwgcGemGkpuvWA2PjhJLAwMJrnRhgAW1FkoZFeGwthm0/V0UZ3iCqHhilUpn5KEj
+			h+J3XH2pdOwMEsVEzjRVOlPQ3ZLQ2aNHHLoCaxNYyOryEUBWwI64RZtvuIoOv34y5slFZ7TFgjcq
+			5LIiRuhlO6bb33dHp8ewuM1FDUKxjMzY9TyTMcQRbbfbIvJCXOs1dAY2Ez7JziSzVKkyt07gozWz
+			WCxv7+np/Q/OXabUtGOr148eFqViPU6nHZFxLGoAm3lNTx3m78z+dIbrRlQjTfqclSg1YczQieWa
+			c9cABVpokRlzuyZEs1Zhoo3v/NTd6s6P380Yl8yK7BFKSQuZLfx6UStmVhbtdqhKpap4/eAhWrJ0
+			yRtzL2atudlTFSw0AUTVzaFjw7PLVi4bSkt7LVSMcpycduG+A/tFvvAOkU1nyPHboOQWWTYfY2Ln
+			YFBHnetprla/IYhXtTlXQovrAdrfKDZYRbGWiiHX0KxtvYVuu+N2uunGdzHkjIROIHhFbGihjBfN
+			egP9T0CRG1KrURevHtyjicBxMuiQhR7NlItlaofhJKJ80krZHvcjaC/dh9Ld1tfR2IscGirHTqnf
+			7NwpL77gAmpmGyoLfVUpztL8gayWkAkjvTFh0d7jcabQaa7HOEk51S1hUjd1t9NpU5R+X3GJ4o8a
+			PAXWtIDnQVCDMnBFG3BquHW0Eg3x1FNPKyeXEwW03obOY0Unx0bRaQnkN40icm3NLmPjk99HNALe
+			YtqyRSafFdV6mfbu2aNKlbqo8EDNrQnX4wG5piyeXieNFg8ZGFs6e0AyrL14pqA4Pdjbsa7ODB3w
+			qKG0B5JJPv4ZSdnV0yQNm+lT08LzfGo0G9Ss18Rv9+6jerUu85kC2emU0l5CJRobHS9jzddAUBO5
+			fF7pwjA6OjbdrNS360ktimMh30tOJku/fvpJmpmdptKpOVGp1unUzASYCQwmRKe66BrJsxOh75FQ
+			p3nVM8mYOg0EvXE7hPTsSGNJNwP6fD0I0JY1aqd45CQa9RqVeWozV6Inf/Uk2u4s5bsgCU1GlUkn
+			j4+iwseHcNlXctlc9c1TlGhsYvLv0f0HLNfzubxgpesFIW3/xX/TbKmkZoolPdeamBwR+vaBhoIG
+			jZHc8zB0VIR485+kSHaqZqJsOi5IRmdCS3W+ThgH4viJEapVq1irDChX6eFHtkGntSnX00M9eSgA
+			MCgsoKFjx6rIjV1IhaOAWnjG7LdSrdV65/UuzBWcSxj5nNG+1xaT05N850YsGFhAUTvQrNXy69SN
+			qEkWktSpejoe/IxHJLpZ1PyiTt/bUfrNOMkZ1RnCJlMvFDwaPHoAUa+I0lxJ1KtVevb55+nAngPU
+			U+imefN7qavQhZ7IptePHlXTM7O7AZwHstksQ+tMQxj75VJlz8BA/4cs2yqwgPEhytq+R0cHjwuW
+			PT3zetDCRohIhJwpUcpJyZTtqGSy2WlCRUIGiWncHFKHFhKxlhhFHSFOyq2V5bFjh2i2BjgV53iS
+			L3a/8DI9/dTT2HyWCn091Nc9j1KQ7M16U728Zy8qIz2cMuwnU45T+Z1p/Cgq53e+809uw/MPLOyf
+			/z4DzXnS9EUcdjp2dIjqDU8sWrQw5iLlt5GQjbKqN9H1odZIw9Qz3c5dwqT0i0T2JxFS+g6FUMls
+			2kdtGhl5XZw8eYJKxXJcqVREvVJBTjwhnnthFw+1qQuQ6iv0UKaQI9Zwzz73fCNoB4+DOH+WLxQG
+			33xrznDSKXjbpH/53ndFOp2WjUpjHJKuNL+v9yaeGHIxU4GeB9LYqXE6OXKSC5NgVYeOD12gq8rV
+			OVmcnZLVVhnlL6DTyRGh30bfLxSkRxD6ouWV5dTsKJ08MSRGJ04gmWdpDlACpPC3LB7dto0OHT4i
+			cpk85bqylMt0Ub6vi7gl3vXi7na92XoK/Ptj5MVe27a9M26G9vX2irliUQwsHFDsUQueDcKwe/0F
+			5/3jsmVLP+25TVWslUW1XEVEGqrltoRlm/FfXHW1vPjiC1UmlUJrZlMa1JhB+DNZhwxoctvQvUkn
+			ADHfVVAeIgl1TWx8ywtE2PaV7/ti/94D9MILuwXPCfgmkpPnmpHnVpactEP79r4WjY5NvgjQ/qdp
+			mDucTKr21hulUJ6mbAcBLVmyRPCEEM8lvGiAFXovuGj9dxcvXfh+eF5UkYCVSplazO++q+J2iOKZ
+			oWs3bVJrVy4HFDI8/0VTZIIiZWzYsQhCJjRbBDz4i2I9Zg1jX4ZBqJp1T50YGZbP/uYZ1YRxaJcp
+			g01nM3mZzecom82hlTXp4P6hcGRkeJ8w1I8sw96WdlKn7r333vh37iGeJvrx8XHRP9DPkGGmDA1L
+			zB3Yd+Crrttqrli+8q5CIafvI5s8cjIN8s0WNVquenT7I8ihmNauWKXOfftKuXL1KpEy06qrkJd8
+			szqitm4Y6o0aBGAgRoaHaWjoGA0fGwZxm7ENueFks5S1MzAgi3zLqRwquMQa+/bub09OTu1B/XgA
+			jt1h29bvvY+oh/w/vO8+9fyux0BvhnjwgSeUyZNrcAxqCqBo9Xf3dn34/HXnfg1Uk603mugpGuS1
+			XOG6TQr0vZVAsdTWU+gw0JBi1ks5POZWqtWCaDBNnipLfdMahY2nJnxLwE6nhZNOqywkiJPJsCHk
+			o6195ZW99Wql9gLk7sOmpCdxzhSM0H4/611dLRQ6egkKj3b8cofasmULi1bDtKLQtszJVsP94a4X
+			dg++bdmKLw0snH+ZbUvp2sgL5IcfoJdu+1ob8TceIkhxpYt88m0HvCtTTpo1Pw8AiLUSwwgeknYa
+			/Tl6difjQEsVNEcfPTIUnhgdO47k2mWnnO0IzItIt8ZpI/7gd1GSTk9/l0Lc/1//Jj/wka304E8e
+			i0NI6OJchUwrVVy0uP/JEyOjo+Nj4zctW7HkzgX985anrLT0Qh951dY3aQLkGrd2iuFJkR66a9Fi
+			cgFHdwd5wTc/Jd9ywA7TNkcgxcaJ0ZHxcAzywg/CvTDoafTuzwEXI2Bu948ZcdqQRJFGIYR0coeJ
+			Nd77/+pm4+EHnwKrtIWTcuKZqVJtwcLefWjExkeGRl4aGx29acG8/q2FntxyVF0rDkPywzZ3iejQ
+			+BZ0p4EUenqk57fcCFsWz45TwoJ1lTJLnmkfmmoyDsKjyL1dgNFO07COQFzUYED0Z307yGCOMiyl
+			Z0sq+WoId+fved/1WkxlMo5OsB3bdobVL1Sn+v59fhXd5dDE+PSTJybC89GAbujv67u0qyu/GKU+
+			bYq0UejOkNB3Q5PBS9P14whKr9loxsXKtFuaK04jcidBlcdNqQ6AVg+h6Awjf6b5FvDvi8LlF193
+			1i83aENALerqy25G4yQBESYAE2Ir1IgDd6uMY4Pjff7qRHKBb1Hzs5/9bGvRokUTANSe0I0emysV
+			l8zMzZ4ThMFqLNMPqu3CRrtAxY7OblJ1qYwy2ifIb2sSTdZIZFiDKUuMwZFFt+W6mUxX9M1vfkV9
+			8u57xNWXbxVh6PKNGKTbGYE5q4HMTvK+H/4IayUn+G4sUo4842TbSGlDznaBO++8k+7ZskW+3GiY
+			p2anM62mX0Ce5w2L0mEoHKFCMKlEuhjoAsMmCLwhbdVIm6aXz0lvaspFbozR/fff/we+w2QkX8J5
+			0+OtrPW/AgwAhpTwLQQXxm8AAAAASUVORK5CYII=
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[
+class VDOM_formbutton(VDOM_object):
+
+	def render(self, contents=""):
+		display = u"display:none;" if self.visible == "0" else u""
+		type = ["submit", "reset", "button"][int(self.attributes["type"])]
+		if self.classname == "":
+			 clname = ""
+		else:
+			 clname = "class='%s'" % (self.classname).replace("'", "")
+		style = \
+			u"{disp} z-index:{zind}; position:{pos}; top:{top}px; left:{left}px; width:{wid}px; height:{hei}px; font:12px tahoma" \
+			.format(disp = display, zind = self.zindex, pos = self.position, 
+					top = self.top, left = self.left, wid = self.width, hei = self.height)
+		id = u"o_" + (self.id).replace('-', '_')
+
+		if VDOM_CONFIG_1["DEBUG"] == "1":
+			debug_info = u"objtype='formbutton' objname='%s'" % ( (self.label).replace("'", "") )
+		else:
+			debug_info = u""
+
+		result = u"""<style type="text/css">{css}</style>
+<input {debug_info} id="{id}" name="{name}" style="{style}" type="{type}" tabindex="{tabind}" value="{label}" {clname} />
+			""".format(
+					debug_info = debug_info,
+					css = self.style % {"id": id},
+					id = id,
+					name = self.name,
+					style = style,
+					type = type,
+					tabind = self.tabindex,
+					label = self.label,
+					clname = clname)
+			
+		return VDOM_object.render(self, contents=result)
+
+	def wysiwyg(self, contents=""):
+		label = u"<![CDATA[%s%s]>" % (self.label, "]")
+		result = \
+			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+					top="{top}" left="{left}" width="{width}" height="{height}">
+					<svg>
+						<rect x="0" y="0" width="{rec_wid}" height="{rec_hei}" fill="#CCCCCC" stroke="#000000"/>
+					</svg>
+					<text top="{txt_top}" width="{txt_wid}" color="#000000" textalign="center">{label}</text>{contents}
+				</container>
+			""".format(
+					id = self.id, vis = self.visible, zind = self.zindex, 
+					hierarchy = self.hierarchy, order = self.order, 
+					top = self.top, left = self.left, width = self.width, height = self.height,
+					rec_wid = int(self.width)-1, rec_hei = int(self.height)-1,
+					txt_top = int(self.height)/2-9, txt_wid = int(self.width)-4, label = label,
+					contents = contents)
+				
+		return VDOM_object.wysiwyg(self, contents=result)
+		
+def set_attr(app_id, object_id, param):
+	
+	pro_suite = """#%(id)s {
+text-align:center !important;
+background:#fff url("/f704b515-d69d-24d9-5e81-8dc0984592fa.png") !important;
+background-repeat:repeat-x;
+background-position:bottom center;
+text-decoration:none;
+line-height:25px;
+border:1px solid #c5c5c5;
+border-radius: 6px;
+-moz-border-radius:6px;
+-webkit-border-radius: 6px;
+-o-border-radius:6px;
+-ms-border-radius: 6px;
+cursor:pointer;
+outline:none !important;
+height:26px !important;
+box-shadow:inset 0px 0px 3px #fff;
+-moz-box-shadow:inset 0px 0px 3px #fff;
+-webkit-box-shadow:inset 0px 0px 3px #fff;
+-o-box-shadow:inset 0px 0px 3px #fff;
+-ms-box-shadow:inset 0px 0px 3px #fff;
+-webkit-transition: all 0.7s ease;
+-moz-transition: all 0.7s ease;
+-o-transition: all 0.7s ease;
+line-height:22px !important;
+font-size:14px !important;
+color:#000;
+font-family:Arial,sans-serif;
+}
+#%(id)s:hover {
+box-shadow:inset 0px 0px 6px #fff;
+-moz-box-shadow:inset 0px 0px 6px #fff;
+-webkit-box-shadow:inset 0px 0px 6px #fff;
+-o-box-shadow:inset 0px 0px 6px #fff;
+-ms-box-shadow:inset 0px 0px 6px #fff;
+border:1px solid #a8a8a8;
+}"""
+		
+	o = application.objects.search(object_id)
+		
+	# set attributes
+	
+	if "skin" in param:
+		if param["skin"]["value"] == "1":
+			o.set_attributes({"style": pro_suite})
+	if "style" in param and param["style"]["value"] and o.attributes.style != pro_suite:		
+		o.set_attributes({"skin": 0}) 	
+	
+	return ""	
+
+		
+]]>
+	</SourceCode>
+	<E2VDOM>
+		<Events>
+			<UserInterfaceEvents>
+				<Event Name="mouseup" Description="#Lang(513)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(916)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(917)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mousemove" Description="#Lang(509)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(909)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(911)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mousedown" Description="#Lang(508)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(907)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(908)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mouseout" Description="#Lang(511)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(912)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(913)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="ctrlclick" Description="#Lang(506)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(903)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(904)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mouseover" Description="#Lang(512)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(914)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(915)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="click" Description="#Lang(505)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(901)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(902)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="dblclick" Description="#Lang(507)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(905)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(906)" Order="0"/>
+					</Parameters>
+				</Event>
+			</UserInterfaceEvents>
+		</Events>
+		<Actions>
+			<Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
+				<Action Name="hide" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_hide(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="show" DisplayName="#Lang(604)" Description="#Lang(504)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(704)" Description="#Lang(804)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_show(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="removeClass" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).removeClass(className);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="addClass" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).addClass(className);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setLabel" DisplayName="#Lang(602)" Description="#Lang(502)">
+					<Parameters>
+						<Parameter Name="label" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[jQuery(this.domCont).val(label);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setStyle" DisplayName="#Lang(603)" Description="#Lang(503)">
+					<Parameters>
+						<Parameter Name="cssStyleValue" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[jQuery(this).attr('style', cssStyleValue);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setClass" DisplayName="#Lang(607)" Description="#Lang(507)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(709)" Description="#Lang(809)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).attr('class',className);]]>
+					</SourceCode>
+				</Action>
+			</Container>
+		</Actions>
+	</E2VDOM>
+</Type>

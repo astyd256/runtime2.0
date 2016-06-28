@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>8077aa1c-6762-4719-a6ea-fdfb0bcfa0c2</ID>
+		<Name>formcheckbox</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_formcheckbox</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.235.6200</Version>
+		<Category>Form</Category>
+		<InterfaceType>1</InterfaceType>
+		<Icon>#Res(af2e67c2-0f45-dcc4-e308-1707f5c779a4)</Icon>
+		<EditorIcon>#Res(afa894ef-eb99-0589-f7ba-17081d3ff6dd)</EditorIcon>
+		<StructureIcon>#Res(0d9cb289-4892-6ee9-7e0c-17084f28e785)</StructureIcon>
+		<Dynamic>0</Dynamic>
+		<Moveable>1</Moveable>
+		<Resizable>3</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>1</Container>
+		<Containers>form, container</Containers>
+		<Languages>en_US, ru_RU, fr_FR</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>zindex</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>top</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>left</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>width</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue>86</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>height</Name>
+			<DisplayName>#Lang(107)</DisplayName>
+			<Description>#Lang(207)</Description>
+			<DefaultValue>18</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>value</Name>
+			<DisplayName>#Lang(108)</DisplayName>
+			<Description>#Lang(208)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^.+$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(100)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>tabindex</Name>
+			<DisplayName>#Lang(109)</DisplayName>
+			<Description>#Lang(209)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>state</Name>
+			<DisplayName>#Lang(111)</DisplayName>
+			<Description>#Lang(211)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(311)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(403)|0)|(#Lang(404)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>disable</Name>
+			<DisplayName>#Lang(112)</DisplayName>
+			<Description>#Lang(212)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(312)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(405)|0)|(#Lang(406)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>label</Name>
+			<DisplayName>#Lang(113)</DisplayName>
+			<Description>#Lang(213)</Description>
+			<DefaultValue>CheckBox</DefaultValue>
+			<RegularExpressionValidation>^.+$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(100)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>fontweight</Name>
+			<DisplayName>#Lang(114)</DisplayName>
+			<Description>#Lang(214)</Description>
+			<DefaultValue>normal</DefaultValue>
+			<RegularExpressionValidation>^(bold|normal)$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(407)|bold)|(#Lang(408)|normal))</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>fontsize</Name>
+			<DisplayName>#Lang(115)</DisplayName>
+			<Description>#Lang(215)</Description>
+			<DefaultValue>12</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(315)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">Form checkbox</Sentence>
+			<Sentence ID="002">The Form checkbox type produces an object that allows user to mark the selected mode, status or action. It can be contained only in the Form and Container objects.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Top</Sentence>
+			<Sentence ID="105">Left</Sentence>
+			<Sentence ID="106">Width</Sentence>
+			<Sentence ID="107">Height</Sentence>
+			<Sentence ID="108">Value</Sentence>
+			<Sentence ID="109">TabIndex</Sentence>
+			<Sentence ID="111">State</Sentence>
+			<Sentence ID="112">Disable</Sentence>
+			<Sentence ID="113">Label</Sentence>
+			<Sentence ID="114">FontWeight</Sentence>
+			<Sentence ID="115">FontSize</Sentence>
+			<Sentence ID="201">Order of rendering the object on the page</Sentence>
+			<Sentence ID="202">Visibility of the object</Sentence>
+			<Sentence ID="203">Position in visual hierarchy of objects</Sentence>
+			<Sentence ID="204">Spacing between the top edge of the container and the object in pixels</Sentence>
+			<Sentence ID="205">Spacing between the left edge of the container and the object in pixels</Sentence>
+			<Sentence ID="206">Width of the object in pixels</Sentence>
+			<Sentence ID="207">Height of the object in pixels</Sentence>
+			<Sentence ID="208">Returned value of the object</Sentence>
+			<Sentence ID="209">Index number of switching the elements on pressing the tab key</Sentence>
+			<Sentence ID="211">Initial state of the checkbox</Sentence>
+			<Sentence ID="212">Define if the object is disabled or not</Sentence>
+			<Sentence ID="213">Label to the right of the checkbox</Sentence>
+			<Sentence ID="214">Font weight</Sentence>
+			<Sentence ID="215">Font size of the object in point</Sentence>
+			<Sentence ID="301">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="302">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="303">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="304">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="305">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="306">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="307">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="308">Incorrect value</Sentence>
+			<Sentence ID="309">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="311">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="312">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="313">Incorrect value</Sentence>
+			<Sentence ID="314">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="315">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="403">Unchecked</Sentence>
+			<Sentence ID="404">Checked</Sentence>
+			<Sentence ID="405">No</Sentence>
+			<Sentence ID="406">Yes</Sentence>
+			<Sentence ID="407">Bold</Sentence>
+			<Sentence ID="408">Normal</Sentence>
+			<Sentence ID="501">Изменит состояние на &quot;Выбран&quot;</Sentence>
+			<Sentence ID="502">Make the object enabled</Sentence>
+			<Sentence ID="503">Hide the object</Sentence>
+			<Sentence ID="504">Move the object to a new position</Sentence>
+			<Sentence ID="505">Change the object&apos;s state to &quot;Selected&quot;</Sentence>
+			<Sentence ID="506">Set label of the object</Sentence>
+			<Sentence ID="507">Set new CSS style of the object</Sentence>
+			<Sentence ID="508">Show the object</Sentence>
+			<Sentence ID="509">Test action</Sentence>
+			<Sentence ID="511">Change the object&apos;s state to &quot;Not selected&quot;</Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516"></Sentence>
+			<Sentence ID="517"></Sentence>
+			<Sentence ID="518"></Sentence>
+			<Sentence ID="519"></Sentence>
+			<Sentence ID="521"></Sentence>
+			<Sentence ID="522"></Sentence>
+			<Sentence ID="523"></Sentence>
+			<Sentence ID="601">disable</Sentence>
+			<Sentence ID="602">enable</Sentence>
+			<Sentence ID="603">Hide</Sentence>
+			<Sentence ID="604">moveTo</Sentence>
+			<Sentence ID="605">Select</Sentence>
+			<Sentence ID="606">setLabel</Sentence>
+			<Sentence ID="607">setStyle</Sentence>
+			<Sentence ID="608">Show</Sentence>
+			<Sentence ID="609">Test</Sentence>
+			<Sentence ID="611">Unselect</Sentence>
+			<Sentence ID="701">Fade</Sentence>
+			<Sentence ID="702">Effect</Sentence>
+			<Sentence ID="703">Координата по оси X</Sentence>
+			<Sentence ID="704">Координата по оси Y</Sentence>
+			<Sentence ID="705">Label</Sentence>
+			<Sentence ID="706">cssStyleValue</Sentence>
+			<Sentence ID="707">Fade</Sentence>
+			<Sentence ID="708">Text</Sentence>
+			<Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="802">Visual effect of moving, time is indicated in milliseconds</Sentence>
+			<Sentence ID="803">X-coordinate of the new position relative to the left upper corner of the container</Sentence>
+			<Sentence ID="804">Y-coordinate of the new position relative to the left upper corner of the container</Sentence>
+			<Sentence ID="805">New label value</Sentence>
+			<Sentence ID="806">CSS style value</Sentence>
+			<Sentence ID="807">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="808">Text to submit</Sentence>
+			<Sentence ID="901">New value of the object</Sentence>
+			<Sentence ID="902">Current X-value</Sentence>
+			<Sentence ID="903">Current Y-value</Sentence>
+			<Sentence ID="904">Current X-value</Sentence>
+			<Sentence ID="905">Current Y-value</Sentence>
+			<Sentence ID="906">Current X-value</Sentence>
+			<Sentence ID="907">Current Y-value</Sentence>
+			<Sentence ID="908">Current X-value</Sentence>
+			<Sentence ID="909">Current Y-value</Sentence>
+			<Sentence ID="911">Current X-value</Sentence>
+			<Sentence ID="912">Current Y-value</Sentence>
+			<Sentence ID="913">Current X-value</Sentence>
+			<Sentence ID="914">Current Y-value</Sentence>
+			<Sentence ID="915">Current X-value</Sentence>
+			<Sentence ID="916">Current Y-value</Sentence>
+			<Sentence ID="917">Current X-value</Sentence>
+			<Sentence ID="918">Current Y-value</Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">Case à cocher de Formulaire</Sentence>
+			<Sentence ID="002">Case à cocher Formulaire</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hiérarchie</Sentence>
+			<Sentence ID="102">Visibilité</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Haut</Sentence>
+			<Sentence ID="105">Gauche</Sentence>
+			<Sentence ID="106">Largeur</Sentence>
+			<Sentence ID="107">Hauteur</Sentence>
+			<Sentence ID="108">Valeur</Sentence>
+			<Sentence ID="109">TabIndex</Sentence>
+			<Sentence ID="111">Etat</Sentence>
+			<Sentence ID="112">Disable</Sentence>
+			<Sentence ID="113">Texte</Sentence>
+			<Sentence ID="114">Graisse</Sentence>
+			<Sentence ID="115">Taille</Sentence>
+			<Sentence ID="201">Hiérarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="202">Afficher ou cacher l&apos;objet</Sentence>
+			<Sentence ID="203">Niveau de superposition de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="204">Distance depuis le bord haut de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="205">Distance depuis le bord gauche de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="206">Largeur de l&apos;objet en pixels</Sentence>
+			<Sentence ID="207">Hauteur de l&apos;objet en pixels</Sentence>
+			<Sentence ID="208">Retourne la valeur de la checkbox</Sentence>
+			<Sentence ID="209">Tab index</Sentence>
+			<Sentence ID="211">Etat initial de la checkbox</Sentence>
+			<Sentence ID="212">Define if the object is disabled or not</Sentence>
+			<Sentence ID="213">Texte à droite de la checkbox</Sentence>
+			<Sentence ID="214">Graisse de la police</Sentence>
+			<Sentence ID="215">Taille de la police</Sentence>
+			<Sentence ID="301">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="302">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="303">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="304">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="305">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="306">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="307">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="308">Valeur Incorrecte</Sentence>
+			<Sentence ID="309">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="311">Valeur Incorrecte</Sentence>
+			<Sentence ID="312">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="313">Valeur Incorrecte</Sentence>
+			<Sentence ID="314">Valeur Incorrecte</Sentence>
+			<Sentence ID="315">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="403">Non-cochée</Sentence>
+			<Sentence ID="404">Cochée</Sentence>
+			<Sentence ID="405">No</Sentence>
+			<Sentence ID="406">Yes</Sentence>
+			<Sentence ID="407">Gras</Sentence>
+			<Sentence ID="408">Normal</Sentence>
+			<Sentence ID="501">Изменит состояние на &quot;Выбран&quot;</Sentence>
+			<Sentence ID="502">Make the object enabled</Sentence>
+			<Sentence ID="503">Hide the object</Sentence>
+			<Sentence ID="504">Move object to selected point</Sentence>
+			<Sentence ID="505">Set checkbox to selected state</Sentence>
+			<Sentence ID="506">Set new checkbox label</Sentence>
+			<Sentence ID="507">Set new CSS style</Sentence>
+			<Sentence ID="508">Show the object</Sentence>
+			<Sentence ID="509">Test action</Sentence>
+			<Sentence ID="511">Set checkbox to unselected state</Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516"></Sentence>
+			<Sentence ID="517"></Sentence>
+			<Sentence ID="518"></Sentence>
+			<Sentence ID="519"></Sentence>
+			<Sentence ID="521"></Sentence>
+			<Sentence ID="522"></Sentence>
+			<Sentence ID="523"></Sentence>
+			<Sentence ID="601">disable</Sentence>
+			<Sentence ID="602">enable</Sentence>
+			<Sentence ID="603">Hide</Sentence>
+			<Sentence ID="604">moveTo</Sentence>
+			<Sentence ID="605">Select</Sentence>
+			<Sentence ID="606">setLabel</Sentence>
+			<Sentence ID="607">setStyle</Sentence>
+			<Sentence ID="608">Show</Sentence>
+			<Sentence ID="609">Test</Sentence>
+			<Sentence ID="611">Unselect</Sentence>
+			<Sentence ID="701">Fade</Sentence>
+			<Sentence ID="702">Effect</Sentence>
+			<Sentence ID="703">newX</Sentence>
+			<Sentence ID="704">newY</Sentence>
+			<Sentence ID="705">Label</Sentence>
+			<Sentence ID="706">cssStyleValue</Sentence>
+			<Sentence ID="707">Fade</Sentence>
+			<Sentence ID="708">Text</Sentence>
+			<Sentence ID="801">Fade time</Sentence>
+			<Sentence ID="802">Visual effect by moving</Sentence>
+			<Sentence ID="803">X-coordinate of new point</Sentence>
+			<Sentence ID="804">Y-coordinate of new point</Sentence>
+			<Sentence ID="805">New label value</Sentence>
+			<Sentence ID="806">New CSS style value</Sentence>
+			<Sentence ID="807">Time of appearance</Sentence>
+			<Sentence ID="808">Text to submit</Sentence>
+			<Sentence ID="901">New value for checkbox</Sentence>
+			<Sentence ID="902">Current X-value</Sentence>
+			<Sentence ID="903">Current Y-value</Sentence>
+			<Sentence ID="904">Current X-value</Sentence>
+			<Sentence ID="905">Current Y-value</Sentence>
+			<Sentence ID="906">Current X-value</Sentence>
+			<Sentence ID="907">Current Y-value</Sentence>
+			<Sentence ID="908">Current X-value</Sentence>
+			<Sentence ID="909">Current Y-value</Sentence>
+			<Sentence ID="911">Current X-value</Sentence>
+			<Sentence ID="912">Current Y-value</Sentence>
+			<Sentence ID="913">Current X-value</Sentence>
+			<Sentence ID="914">Current Y-value</Sentence>
+			<Sentence ID="915">Current X-value</Sentence>
+			<Sentence ID="916">Current Y-value</Sentence>
+			<Sentence ID="917">Current X-value</Sentence>
+			<Sentence ID="918">Current Y-value</Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">Флажок формы</Sentence>
+			<Sentence ID="002">Добавление кнопки-флажка в форму</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Иерархия</Sentence>
+			<Sentence ID="102">Отображение</Sentence>
+			<Sentence ID="103">Позиция</Sentence>
+			<Sentence ID="104">Сверху</Sentence>
+			<Sentence ID="105">Слева</Sentence>
+			<Sentence ID="106">Ширина</Sentence>
+			<Sentence ID="107">Высота</Sentence>
+			<Sentence ID="108">Значение</Sentence>
+			<Sentence ID="109">Индекс табуляции</Sentence>
+			<Sentence ID="111">Состояние</Sentence>
+			<Sentence ID="112">Отключить</Sentence>
+			<Sentence ID="113">Метка</Sentence>
+			<Sentence ID="114">Выделение шрифта</Sentence>
+			<Sentence ID="115">Размер шрифта</Sentence>
+			<Sentence ID="201">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
+			<Sentence ID="202">Режим отображения объекта</Sentence>
+			<Sentence ID="203">Положение в визуальной иерархии объектов</Sentence>
+			<Sentence ID="204">Расстояние от верхней границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="205">Расстояние от левой границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="206">Ширина объекта в пикселях</Sentence>
+			<Sentence ID="207">Высота объекта в пикселях</Sentence>
+			<Sentence ID="208">Возвращаемое значение объекта</Sentence>
+			<Sentence ID="209">Индекс табуляции объекта на странице</Sentence>
+			<Sentence ID="211">Начальное состояние флажка</Sentence>
+			<Sentence ID="212">Определяет, включена кнопка-флажок или нет</Sentence>
+			<Sentence ID="213">Текст справа от флажка</Sentence>
+			<Sentence ID="214">Выделение шрифта</Sentence>
+			<Sentence ID="215">Размер шрифта</Sentence>
+			<Sentence ID="301">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="302">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="303">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="304">Неправильное значение, должно быть целое положительное число</Sentence>
+			<Sentence ID="305">Неправильное значение, должно быть целое положительное число</Sentence>
+			<Sentence ID="306">Неправильное значение, должно быть целое положительное число</Sentence>
+			<Sentence ID="307">Неправильное значение, должно быть целое положительное число</Sentence>
+			<Sentence ID="308">Неправильное значение</Sentence>
+			<Sentence ID="309">Неправильное значение, должно быть целое положительное число</Sentence>
+			<Sentence ID="311">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="312">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="313">Неправильное значение</Sentence>
+			<Sentence ID="314">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="315">Неправильное значение, должно быть целое положительное число</Sentence>
+			<Sentence ID="401">Не отображать</Sentence>
+			<Sentence ID="402">Отображать</Sentence>
+			<Sentence ID="403">Не отмечен</Sentence>
+			<Sentence ID="404">Отмечен</Sentence>
+			<Sentence ID="405">Нет</Sentence>
+			<Sentence ID="406">Да</Sentence>
+			<Sentence ID="407">Полужирный</Sentence>
+			<Sentence ID="408">Обычный</Sentence>
+			<Sentence ID="501">Отключить использование объекта</Sentence>
+			<Sentence ID="502">Включить использование объекта</Sentence>
+			<Sentence ID="503">Скрыть объект</Sentence>
+			<Sentence ID="504">Сдвинуть объект в заданную точку</Sentence>
+			<Sentence ID="505">Изменить состояние на &quot;Выбран&quot;</Sentence>
+			<Sentence ID="506">Установить новую метку флажка</Sentence>
+			<Sentence ID="507">Установить новый стиль CSS</Sentence>
+			<Sentence ID="508">Показать объект</Sentence>
+			<Sentence ID="509">Проверочное действие</Sentence>
+			<Sentence ID="511">Изменить состояние на &quot;Не выбран&quot;</Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516"></Sentence>
+			<Sentence ID="517"></Sentence>
+			<Sentence ID="518"></Sentence>
+			<Sentence ID="519"></Sentence>
+			<Sentence ID="521"></Sentence>
+			<Sentence ID="522"></Sentence>
+			<Sentence ID="523"></Sentence>
+			<Sentence ID="601">Отключить</Sentence>
+			<Sentence ID="602">Включить</Sentence>
+			<Sentence ID="603">Скрыть</Sentence>
+			<Sentence ID="604">Сдвинуть</Sentence>
+			<Sentence ID="605">Установить отметку</Sentence>
+			<Sentence ID="606">Установить метку</Sentence>
+			<Sentence ID="607">Установить стиль</Sentence>
+			<Sentence ID="608">Показать</Sentence>
+			<Sentence ID="609">Проверка</Sentence>
+			<Sentence ID="611">Снять отметку</Sentence>
+			<Sentence ID="701">Исчезновение</Sentence>
+			<Sentence ID="702">Эффект</Sentence>
+			<Sentence ID="703">Координата по оси X</Sentence>
+			<Sentence ID="704">Координата по оси Y</Sentence>
+			<Sentence ID="705">Метка</Sentence>
+			<Sentence ID="706">Стиль</Sentence>
+			<Sentence ID="707">Появление</Sentence>
+			<Sentence ID="708">Текст</Sentence>
+			<Sentence ID="801">Время исчезновения в миллисекундах</Sentence>
+			<Sentence ID="802">Визуальный эффект при перетаскивании</Sentence>
+			<Sentence ID="803">Координата новой точки по оси X</Sentence>
+			<Sentence ID="804">Координата новой точки по оси Y</Sentence>
+			<Sentence ID="805">Новое значение метки</Sentence>
+			<Sentence ID="806">Новое значение стиля CSS</Sentence>
+			<Sentence ID="807">Время появления в миллисекундах</Sentence>
+			<Sentence ID="808">Передаваемый текст</Sentence>
+			<Sentence ID="901">Новое значение</Sentence>
+			<Sentence ID="902">Текущее значение X</Sentence>
+			<Sentence ID="903">Текущее значение Y</Sentence>
+			<Sentence ID="904">Текущее значение X</Sentence>
+			<Sentence ID="905">Текущее значение Y</Sentence>
+			<Sentence ID="906">Текущее значение X</Sentence>
+			<Sentence ID="907">Текущее значение Y</Sentence>
+			<Sentence ID="908">Текущее значение X</Sentence>
+			<Sentence ID="909">Текущее значение Y</Sentence>
+			<Sentence ID="911">Текущее значение X</Sentence>
+			<Sentence ID="912">Текущее значение Y</Sentence>
+			<Sentence ID="913">Текущее значение X</Sentence>
+			<Sentence ID="914">Текущее значение Y</Sentence>
+			<Sentence ID="915">Текущее значение X</Sentence>
+			<Sentence ID="916">Текущее значение Y</Sentence>
+			<Sentence ID="917">Текущее значение X</Sentence>
+			<Sentence ID="918">Текущее значение Y</Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="af2e67c2-0f45-dcc4-e308-1707f5c779a4" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOkYyQThBMTk1MUZERTExRTE4NzY3RkQ0RTIyMDZEQzUyIiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOkYyQThBMTk2MUZERTExRTE4NzY3RkQ0RTIyMDZEQzUyIj4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RjJBOEExOTMxRkRFMTFFMTg3NjdG
+			RDRFMjIwNkRDNTIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RjJBOEExOTQxRkRFMTFFMTg3
+			NjdGRDRFMjIwNkRDNTIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz5BUJ8VAAAEb0lEQVR42txZz08TURCe2UUSIiAmFPECnuSg
+			wSvCTf8GDnrFC55IMCCaiATkKHDEfwH/AGOi3vEiwbtAMGApIr8Mpft2fD+2ZVl2X7fd17phm03b
+			7b7X+d5838y8WSQiiH0QIH9VMIDfXRypv5b4sKoeSSWDwoz3G0sXRhoGUTkQvTewjAcw5FoKPIIX
+			jKUylDHuBTNAhGVEGLHy/rOmAIwAQUTSqugMBEZ4Lx1AziymKBFjPWhVNZAipQLUKifomoLCivJI
+			uDfwzFJJNQyhWBCEcXolFrtnvAThBxUwnGodwRKLvUQzBUJHn3SHXxm5qEQriqBUOd38f42k5bDg
+			khyXCgheFiCXQiQNJhJUvpCnqLIKQyv6i0fjlUZMCiQ5tbittt0gwrFXdZHIMSUg5H0KDZsWAmPM
+			mEcSeUWYKkC4zJVpsZjjyTcleq+L2xoEExnA8lWtVU9HrgLhEgfiugoUv0Yuk9/FZ8bfGf/uyu8u
+			ZHd2YPX7KoCrPJiK8Fs0jjlMAmLB03HUySlU4O8HBwfwfHwctre2JWgB0CS1qj6EgdhgKa4jBBSh
+			NCIrCH7RKTB4PTUF62trSlegvGnKI4kEzzwKOXy1136swZdPnzkoxzuVl8TvjIOYnX0Dqysr8i87
+			MhnlET7OhEcS7w2EgWImoRGn4MD8wryMRv0DA6pv5AXnxXeL8HX5K4ji/+nwMPTe64XC6SkUmBkg
+			iZXmuMoQoRHhBaGXt3NzcrXv9/XJCPZ+6T18/PBRLtvjR49hcHAQjo+PwLJsOS4VCZFxL4i8IajV
+			2nYN2jPtkMvuwML8PMDICOzv78PS0pL8l4cPHsKToSH4e3wMh4dH0Ha9TY4zVcYn2k9vbKxTJtMB
+			2WxWzrD35zfMTM/ATi7HV9yS1wTt+gf6YfLVJOTzedjb25NjM1wnOX5fd3c3mhB7ojwiQqplq6gl
+			aNbaeg0mXryAjo4MMA6Ayxx6em7Dy4mXcFo4hdzuLqefyik2B+oayOznqt+QPXc8anGO25zrjswX
+			TFGspQXGxsbhRnsGurpuwTT3kACV/ZVVgB1X6smybbkQpsSeTCMij6C/ZlJTNjc3w+joM+i82QlN
+			TU2wtbUlveBt+Iv7fuO1VnHfXXnU4oZYQuwCEJ1PhFebr8LJyQls/twsJT6ZG1Gtni2jlmMMSCKv
+			kDCQW3b3zp2zjgOVGhT6dMvHiVosFQlRRKRvK99KiS/OlOQ9NSqWNMm3EkTGzuXlZTQ5XyWnvx2k
+			zSXFiIbniFNaen/N5tajIRcns2NIc40CmyL//VZI063ufQCrTGuTNNUxau5PRTsIq+jbBisD9M2N
+			9QJCEasap/2BGmD+37He1Ao+qMGIVdc9Lgh7HkK1BqProujEjzGoFjW25h6p5LFyXFFTjKBRs6gV
+			16jgtbiAsV5AokItakKt/3fSUItqBaohxiqGJUsIGF6JF6uhqBFqRT1O09FGFxjof2gEy2RynQeo
+			HtqIC6SS8gNjgEtB1CJtvRUXaM1qsX8CDAB1nv2FnvnkuAAAAABJRU5ErkJggg==
+		</Resource>
+		<Resource ID="afa894ef-eb99-0589-f7ba-17081d3ff6dd" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+			jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVh
+			ZHlxyWU8AAADIGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78i
+			IGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9i
+			ZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAy
+			MDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93
+			d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJk
+			ZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5z
+			OnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0
+			cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JU
+			b29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5p
+			aWQ6NDNCNzU0NkIxRkRGMTFFMUE0RjJGMkI0RDVFMjkzOUIiIHhtcE1NOkRvY3VtZW50SUQ9Inht
+			cC5kaWQ6NDNCNzU0NkMxRkRGMTFFMUE0RjJGMkI0RDVFMjkzOUIiPiA8eG1wTU06RGVyaXZlZEZy
+			b20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0M0I3NTQ2OTFGREYxMUUxQTRGMkYyQjRENUUy
+			OTM5QiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0M0I3NTQ2QTFGREYxMUUxQTRGMkYyQjRE
+			NUUyOTM5QiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94
+			cGFja2V0IGVuZD0iciI/PpdIlXMAAAKBSURBVEhL7VRLbxJRGD0z2PKWR3mMVKFICpSXQa2IYEpi
+			tMbUuHLDxqTpzoUr48YlceEfcGfi2ujK6MKkqY+mEW3SWqVuDQXE1NYWGEoFrnemlkLBtImyMPEm
+			k3vnzvc853zDELrQxcV2MbYY+n+CPRHuPkRdFtEWyfV6fc9W92fQrniGBhdvGYZpxCiVi3gxNYkS
+			X8TJ48Ow2wfb4m9UeDx7+gSr31fg9foROhXpXIMwaPV6TdjE9Sb5moTCJ4hraJB4A24SDHrI/Qf3
+			Gt+FQ2pxgURCQeJ02IjLaSdu1wC5dfMG4flSi53wwvy6ETvgSwWMXR7F5o8aBo7aYDSasVEuI5NJ
+			I5FIIOAbFqscPX+WtiyByWiERMKiXKkgm07j2vg4Jiaut3RyQCB5G575+VmwFLFoNIyr8Thkcimm
+			X05Dp9fg/ccFMUEqNQelXI4hvx8MS0T+GJaF2WzA3Ow78PEiFApVIwnbjH1lswJL/yGEz0Tgcrhh
+			MVrh8x2DwEmf3rDlRPVwxGGFWq2kgZR0V0OllIOzcND2aVGmHTcvFk3E22x2aPRaZHNLKKwVodPo
+			8PjRQ4DUKFwm0c/AcTDQM0uhkctlkEmldFegVq3CctiKg2rNrgQ74qFqcSISGUF6KY07d2/j0pUY
+			svnPMJk5eN0B0dFk4BAbOYf8ch7Lq9+wtr6OTC6DQolH+HQUPb29LQlEkptvBExnkq+QfDuDIiXd
+			7fTg4oUxqFU7lQkui58+YHLqOb5+yaGfVh6NxOD1+Nuk2pZg24JKl5LPtszHbu9qrYoafaQ9UmGQ
+			Os5BxwTNytrfBP/eqvs/u065m6X7b3bwp1W3DtrfjNYhVtdJ/gn6MQl9DCZ+OQAAAABJRU5ErkJg
+			gg==
+		</Resource>
+		<Resource ID="0d9cb289-4892-6ee9-7e0c-17084f28e785" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOkU2REMwMjNDMUZFMzExRTE4N0MyQzQ4QzA4MDJFRkY1IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOkU2REMwMjNEMUZFMzExRTE4N0MyQzQ4QzA4MDJFRkY1Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RTZEQzAyM0ExRkUzMTFFMTg3QzJD
+			NDhDMDgwMkVGRjUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RTZEQzAyM0IxRkUzMTFFMTg3
+			QzJDNDhDMDgwMkVGRjUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz6pTG9iAAACZklEQVR42mL4//8/Axp2AOL5UBrETwDiAijb
+			AF09MkcAmwIshq9HFmMEm8LAIADE64E4EIg/gAQePLouCqQMgJgTiM8qyGk+ZUAFID0fkA0AgQ+3
+			7lxku3r56pRDB4+kPHr0mJGFmYVBWVWJwd3TbamkpESGmor+F6j6fiBOBBngALX1QkFhDru5ufGJ
+			DWvWG3z8+AkoxAg2lRFISUlJMUTGRd7m5uY2szR3BKkPAOIDTEDCH6QZpFBDU61i1/adBr9//2bg
+			4+NhkJWXZpBXkGEQEORn+Pb9K8OR/YdVv3z51g517QaQxSxAYiLMU18+fY768eM7Azc3F4ORqQmD
+			hZUVWPzM6dMM165dZXj99jXD39//Y4FCmVAt/UzIocLI8E+Uk52NgYODjcHN3YtBVEQcjF1c3Bl+
+			//rJwMPHzcDIxMgNVCoC1fIRZEACzABOLq53zCzMDGxAQ9jYOBhERSXAmIGBmeEDMEz+/P3DICQk
+			/BcoIAnV0sAEizYQ4BPgX8cBdD4TCxPDqtWLGW7cuMZw+dJFhu7uVqDNQAs4uYAGir0DKn0O1eIA
+			CoMJMAP+/v3bqaiknPDo8QPR5y+eMsycM4nh43ugzX9+M/ALCjBYWNr+FRIUBqWXN9Co9AdFowLU
+			Gw0gQ6ZM61Hh4uLa8uHjB/VHjx8y/Pzxk0GAX5DB2dnjh4mR6R4BAaFEJAMEYAmpABotD0Cc7t4W
+			ZnYOjhAFeaUEHh5eMVFh0YeqquqrOTg4VwOl/0BT6AewerS0TigvwNT0Y8tMINyAlPPQsQJSDsXI
+			TNhAAxLtAHX2AuRYAwGAAAMAa3R43f0h6/EAAAAASUVORK5CYII=
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[
+class VDOM_formcheckbox(VDOM_object):
+
+  def render(self, contents=""):
+    display = u" display: none; " if self.visible == "0" else u""
+    weight = u" bold " if self.fontweight == "bold" else u""
+    disable = u"disabled='disabled'" if self.disable == "1" else u""
+    
+    state = [u"", u"""checked="checked" """][int(self.attributes["state"])]
+    style = u"""overflow: hidden; z-index: {zind}; position: {pos}; top: {top}px; left: {left}px; 
+          width: {width}px; height: {height}px; font: {weight} {size}px tahoma;{display} 
+        """.format(zind = self.zindex, pos = self.position, top = self.top, left = self.left,
+            width = self.width, height = self.height, weight = weight, size = self.fontsize, display = display)
+    
+    clean_id = (self.id).replace('-', '_')
+    id = u"o_" + clean_id
+
+    result = u"""<div id="%(id)s" style="%(style)s">
+            <input name="%(name)s" type="checkbox" %(state)s tabindex="%(tabind)s" value="%(value)s" 
+              id="inp_%(id)s" style="vertical-align:top;#vertical-align:middle" %(disable)s/> 
+            <label for="inp_%(id)s" style="vertical-align:middle">%(label)s</label>
+            %(contents)s
+          </div>
+          <script type="text/javascript">jQuery(document).ready(function($){
+$('#inp_%(id)s').click(function(){
+  var v = ($(this).is(':checked')) ? "1" : "0";
+  execEventBinded('%(clean_id)s', 'change', { "Value": v });
+  execEventBinded('%(clean_id)s', v == "1" ? 'checked' : 'unchecked', { "value": v })
+});
+          });</script>
+        """ % {"id": id, "style": style, "name": self.name, "state": state, 
+            "tabind": self.tabindex, "value": self.value, "disable": disable,"label": self.label, 
+            "contents": contents, "clean_id": clean_id}
+
+    return VDOM_object.render(self, contents=result)
+
+  def wysiwyg(self, contents=""):
+    fontsize = u" {fsize}px ".format(fsize = self.fontsize) if self.fontsize else u" "
+    state = [u"", u""" checked="checked" """][int(self.state)]
+    disable = u""" disabled="disabled" """ if self.disable == "1" else u""
+    
+    result = \
+      u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
+            top="{top}" left="{left}" width="{width}" height="{height}" >
+          <htmltext top="0" left="0" width="{width}" height="{height}" locked="true" overflow="hidden">
+            <input type="checkbox" {state} {disable}
+                  style="vertical-align:top; font: {fontweight} {fontsize} tahoma;" /> 
+            <label style="vertical-align:middle; font: {fontweight} {fontsize} tahoma;">{label}</label>
+            
+          </htmltext>
+        </container>
+      """.format(
+        id = self.id, vis = self.visible, zind = self.zindex, 
+        hierarchy = self.hierarchy, order = self.order, 
+        top = self.top, left = self.left, width = self.width, height = self.height,
+        label=self.label,
+        fontsize = fontsize,
+        fontweight = self.fontweight,
+        state = state,
+        disable = disable)
+
+    return VDOM_object.wysiwyg(self, contents=result)
+
+		
+]]>
+	</SourceCode>
+	<E2VDOM>
+		<Events>
+			<UserInterfaceEvents>
+				<Event Name="checked" Description="#Lang(523)">
+					<Parameters>
+						<Parameter Name="value" Description="#Lang(901)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mouseup" Description="#Lang(521)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(917)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(918)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mousemove" Description="#Lang(517)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(911)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(912)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="click" Description="#Lang(513)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(902)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(903)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mousedown" Description="#Lang(516)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(908)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(909)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="dblclick" Description="#Lang(515)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(906)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(907)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mouseout" Description="#Lang(518)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(913)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(914)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="ctrlclick" Description="#Lang(514)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(904)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(905)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mouseover" Description="#Lang(519)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(915)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(916)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="unchecked" Description="#Lang(522)">
+					<Parameters>
+						<Parameter Name="value" Description="#Lang(901)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="change" Description="#Lang(512)">
+					<Parameters>
+						<Parameter Name="Value" Description="#Lang(901)" Order="0"/>
+					</Parameters>
+				</Event>
+			</UserInterfaceEvents>
+		</Events>
+		<Actions>
+			<Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
+				<Action Name="disable" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<SourceCode>
+<![CDATA[jQuery('#inp_'+this.domCont.id).attr('disabled', 'disabled');]]>
+					</SourceCode>
+				</Action>
+				<Action Name="hide" DisplayName="#Lang(603)" Description="#Lang(503)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_hide(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="unselect" DisplayName="#Lang(611)" Description="#Lang(511)">
+					<SourceCode>
+<![CDATA[vdom_ui_unselect(this.domCont);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="show" DisplayName="#Lang(608)" Description="#Lang(508)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(707)" Description="#Lang(807)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_show(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setLabel" DisplayName="#Lang(606)" Description="#Lang(506)">
+					<Parameters>
+						<Parameter Name="label" DisplayName="#Lang(705)" Description="#Lang(805)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[jQuery(this.domCont).val(label);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="removeClass" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).removeClass(className);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="addClass" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).addClass(className);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="select" DisplayName="#Lang(605)" Description="#Lang(505)">
+					<SourceCode>
+<![CDATA[vdom_ui_select(this.domCont);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="enable" DisplayName="#Lang(602)" Description="#Lang(502)">
+					<SourceCode>
+<![CDATA[jQuery('#inp_'+this.domCont.id).removeAttr('disabled');]]>
+					</SourceCode>
+				</Action>
+				<Action Name="moveTo" DisplayName="#Lang(604)" Description="#Lang(504)">
+					<Parameters>
+						<Parameter Name="Effect" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="newX" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="newY" DisplayName="#Lang(704)" Description="#Lang(804)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_moveTo(this.domCont, newX, newY, Effect);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="test" DisplayName="#Lang(609)" Description="#Lang(509)">
+					<Parameters>
+						<Parameter Name="text" DisplayName="#Lang(708)" Description="#Lang(808)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[alert(text);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setStyle" DisplayName="#Lang(607)" Description="#Lang(507)">
+					<Parameters>
+						<Parameter Name="cssStyleValue" DisplayName="#Lang(706)" Description="#Lang(806)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[jQuery(this).attr('style', cssStyleValue);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setClass" DisplayName="#Lang(607)" Description="#Lang(507)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(709)" Description="#Lang(809)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).attr('class',className);]]>
+					</SourceCode>
+				</Action>
+			</Container>
+		</Actions>
+	</E2VDOM>
+</Type>

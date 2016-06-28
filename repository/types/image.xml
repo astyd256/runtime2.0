@@ -1,0 +1,1021 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>0d36c35d-9508-440f-bfec-668f3db8cfeb</ID>
+		<Name>image</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_image</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.5.8391</Version>
+		<Category>Standard</Category>
+		<InterfaceType>4</InterfaceType>
+		<Icon>#Res(e8115c4a-903a-a4c6-c0bc-08a336586d51)</Icon>
+		<EditorIcon>#Res(bed9889a-bb07-c48a-6cd2-08a39dd2f026)</EditorIcon>
+		<StructureIcon>#Res(ab7417f9-08b8-21c5-9669-08a3e1032958)</StructureIcon>
+		<Dynamic>0</Dynamic>
+		<Moveable>1</Moveable>
+		<Resizable>3</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>1</Container>
+		<Containers>htmlcontainer, dialog, container, tablecell, form, password, dialog_2, vdomclass</Containers>
+		<Handlers>on_update</Handlers>
+		<Languages>en_US, ru_RU, fr_FR</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>zindex</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>top</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>left</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>width</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^\d{0,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>height</Name>
+			<DisplayName>#Lang(107)</DisplayName>
+			<Description>#Lang(207)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^\d{0,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>tabindex</Name>
+			<DisplayName>#Lang(108)</DisplayName>
+			<Description>#Lang(208)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>value</Name>
+			<DisplayName>#Lang(109)</DisplayName>
+			<Description>#Lang(209)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>File()</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>externalurl</Name>
+			<DisplayName>#Lang(111)</DisplayName>
+			<Description>#Lang(211)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(311)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(1000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>base64stream</Name>
+			<DisplayName>#Lang(114)</DisplayName>
+			<Description>#Lang(209)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(100000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hint</Name>
+			<DisplayName>#Lang(112)</DisplayName>
+			<Description>#Lang(212)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^[^&quot;]{0,500}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(312)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(1000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>resource_cache</Name>
+			<DisplayName>#Lang(113)</DisplayName>
+			<Description>#Lang(213)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(5000)</CodeInterface>
+			<ColorGroup>0</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">Image</Sentence>
+			<Sentence ID="002">The Image type produces an object displayed as an image. As a resource file here can be used image of any well-known type format: png, jpg, gif, bmp. The &quot;Width&quot; and &quot;Height&quot; attributes of the Image object change their values according to the size of the resource file.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Top</Sentence>
+			<Sentence ID="105">Left</Sentence>
+			<Sentence ID="106">Width</Sentence>
+			<Sentence ID="107">Height</Sentence>
+			<Sentence ID="108">TabIndex</Sentence>
+			<Sentence ID="109">Value</Sentence>
+			<Sentence ID="111">External URL</Sentence>
+			<Sentence ID="112">Hint</Sentence>
+			<Sentence ID="113">Hierarchy</Sentence>
+			<Sentence ID="114">Base64 Stream</Sentence>
+			<Sentence ID="201">Order of rendering the object on the page. Must be positive integer from 0 to 99. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
+			<Sentence ID="202">Visibility of the object.</Sentence>
+			<Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the z-index indicates the order of their displaying. The larger z-index is, the upper the object lies.</Sentence>
+			<Sentence ID="204">Spacing between the top edge of the container and the object in pixels.</Sentence>
+			<Sentence ID="205">Spacing between the left edge of the container and the object in pixels.</Sentence>
+			<Sentence ID="206">Width of the object in pixels.</Sentence>
+			<Sentence ID="207">Height of the object in pixels.</Sentence>
+			<Sentence ID="208">The index number of switching the elements on pressing the Tab key. If the TabIndex is the same for all elements, they will be switched in the order they are written in the XML file of the application. If you want to switch the elements in a definite order, set the TabIndex attribute so that each next element&apos;s TabIndex was more then the previous one.</Sentence>
+			<Sentence ID="209">The image’s resource identifier. If both External URL and Value parameters are set, the prior will be the Value attribute.</Sentence>
+			<Sentence ID="211">The URL of the image located somewhere on the Internet.</Sentence>
+			<Sentence ID="212">The bubble help appearing when cursor points at the object.</Sentence>
+			<Sentence ID="213">Hierarchy of object</Sentence>
+			<Sentence ID="301">Incorrect value, must be positive integer</Sentence>
+			<Sentence ID="302">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="303">Incorrect value, must be positive integer</Sentence>
+			<Sentence ID="304">Incorrect value, must be positive integer</Sentence>
+			<Sentence ID="305">Incorrect value, must be positive integer</Sentence>
+			<Sentence ID="306">Incorrect value, must be positive integer</Sentence>
+			<Sentence ID="307">Incorrect value, must be positive integer</Sentence>
+			<Sentence ID="308">Incorrect value, must be positive integer</Sentence>
+			<Sentence ID="309">Incorrect value</Sentence>
+			<Sentence ID="311">Incorrect value</Sentence>
+			<Sentence ID="312">Incorrect value, must contain only printable chars</Sentence>
+			<Sentence ID="313">Incorrect value, must be positive integer.</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="501">Visibility</Sentence>
+			<Sentence ID="502">Visibility</Sentence>
+			<Sentence ID="503">Visibility</Sentence>
+			<Sentence ID="504">Visibility</Sentence>
+			<Sentence ID="505">Visibility</Sentence>
+			<Sentence ID="506">Visibility</Sentence>
+			<Sentence ID="507">Visibility</Sentence>
+			<Sentence ID="508">Visibility</Sentence>
+			<Sentence ID="509">Visibility</Sentence>
+			<Sentence ID="511">Visibility</Sentence>
+			<Sentence ID="512">Visibility</Sentence>
+			<Sentence ID="513">Visibility</Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516"></Sentence>
+			<Sentence ID="517"></Sentence>
+			<Sentence ID="518"></Sentence>
+			<Sentence ID="519"></Sentence>
+			<Sentence ID="521"></Sentence>
+			<Sentence ID="522"></Sentence>
+			<Sentence ID="523"></Sentence>
+			<Sentence ID="524"></Sentence>
+			<Sentence ID="601">Visibility</Sentence>
+			<Sentence ID="602">Visibility</Sentence>
+			<Sentence ID="603">Visibility</Sentence>
+			<Sentence ID="604">Visibility</Sentence>
+			<Sentence ID="605">Visibility</Sentence>
+			<Sentence ID="606">Visibility</Sentence>
+			<Sentence ID="607">Visibility</Sentence>
+			<Sentence ID="608">Visibility</Sentence>
+			<Sentence ID="609">Visibility</Sentence>
+			<Sentence ID="611">Visibility</Sentence>
+			<Sentence ID="612">Visibility</Sentence>
+			<Sentence ID="613">Visibility</Sentence>
+			<Sentence ID="701">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="702">Incorrect value, must be 0 or 1</Sentence>
+			<Sentence ID="703">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="704">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="705">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="706">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="707">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="708">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="709">Incorrect value, must be 0 or 1.</Sentence>
+			<Sentence ID="801">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="802">Incorrect value, must be 0 or 1.</Sentence>
+			<Sentence ID="803">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="804">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="805">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="806">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="807">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="808">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="809">Incorrect value, must be 0 or 1.</Sentence>
+			<Sentence ID="901">Left</Sentence>
+			<Sentence ID="902">Top</Sentence>
+			<Sentence ID="903">Left</Sentence>
+			<Sentence ID="904">Left</Sentence>
+			<Sentence ID="905">Top</Sentence>
+			<Sentence ID="906">Left</Sentence>
+			<Sentence ID="907">Top</Sentence>
+			<Sentence ID="908">Left</Sentence>
+			<Sentence ID="909">Left</Sentence>
+			<Sentence ID="911">Top</Sentence>
+			<Sentence ID="912">Left</Sentence>
+			<Sentence ID="913">Top</Sentence>
+			<Sentence ID="914">Left</Sentence>
+			<Sentence ID="915">Top</Sentence>
+			<Sentence ID="916">Left</Sentence>
+			<Sentence ID="917">Top</Sentence>
+			<Sentence ID="918"></Sentence>
+			<Sentence ID="919"></Sentence>
+			<Sentence ID="921">Left</Sentence>
+			<Sentence ID="922">Top</Sentence>
+			<Sentence ID="923">Left</Sentence>
+			<Sentence ID="924">Top</Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">Image</Sentence>
+			<Sentence ID="002">Image</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hiérarchie</Sentence>
+			<Sentence ID="102">Visibilité</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Haut</Sentence>
+			<Sentence ID="105">Gauche</Sentence>
+			<Sentence ID="106">Largeur</Sentence>
+			<Sentence ID="107">Hauteur</Sentence>
+			<Sentence ID="108">TabIndex</Sentence>
+			<Sentence ID="109">Fichier</Sentence>
+			<Sentence ID="111">External URL</Sentence>
+			<Sentence ID="112">Hint</Sentence>
+			<Sentence ID="113">Hiérarchie</Sentence>
+			<Sentence ID="114">Base64 Stream</Sentence>
+			<Sentence ID="201">Hiérarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="202">Afficher ou cacher l&apos;objet</Sentence>
+			<Sentence ID="203">Niveau de superposition de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="204">Distance depuis le bord haut de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="205">Distance depuis le bord gauche de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="206">Largeur de l&apos;objet en pixels</Sentence>
+			<Sentence ID="207">Hauteur de l&apos;objet en pixels</Sentence>
+			<Sentence ID="208">Tab index</Sentence>
+			<Sentence ID="209">Fichier image</Sentence>
+			<Sentence ID="211">External link to image</Sentence>
+			<Sentence ID="212">Hint(ToolTip) on mouseover</Sentence>
+			<Sentence ID="213">Hiérarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="301">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="302">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="303">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="304">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="305">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="306">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="307">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="308">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="309">Valeur Incorrecte</Sentence>
+			<Sentence ID="311">Valeur Incorrecte</Sentence>
+			<Sentence ID="312">Incorrect value, must contain only printable chars</Sentence>
+			<Sentence ID="313">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="501">Visibilité</Sentence>
+			<Sentence ID="502">Visibilité</Sentence>
+			<Sentence ID="503">Visibilité</Sentence>
+			<Sentence ID="504">Visibilité</Sentence>
+			<Sentence ID="505">Visibilité</Sentence>
+			<Sentence ID="506">Visibilité</Sentence>
+			<Sentence ID="507">Visibilité</Sentence>
+			<Sentence ID="508">Visibilité</Sentence>
+			<Sentence ID="509">Visibilité</Sentence>
+			<Sentence ID="511">Visibilité</Sentence>
+			<Sentence ID="512">Visibilité</Sentence>
+			<Sentence ID="513">Visibilité</Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516"></Sentence>
+			<Sentence ID="517"></Sentence>
+			<Sentence ID="518"></Sentence>
+			<Sentence ID="519"></Sentence>
+			<Sentence ID="521"></Sentence>
+			<Sentence ID="522"></Sentence>
+			<Sentence ID="523"></Sentence>
+			<Sentence ID="524"></Sentence>
+			<Sentence ID="601">Visibilité</Sentence>
+			<Sentence ID="602">Visibilité</Sentence>
+			<Sentence ID="603">Visibilité</Sentence>
+			<Sentence ID="604">Visibilité</Sentence>
+			<Sentence ID="605">Visibilité</Sentence>
+			<Sentence ID="606">Visibilité</Sentence>
+			<Sentence ID="607">Visibilité</Sentence>
+			<Sentence ID="608">Visibilité</Sentence>
+			<Sentence ID="609">Visibilité</Sentence>
+			<Sentence ID="611">Visibilité</Sentence>
+			<Sentence ID="612">Visibilité</Sentence>
+			<Sentence ID="613">Visibilité</Sentence>
+			<Sentence ID="701">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="702">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="703">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="704">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="705">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="706">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="707">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="708">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="709">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="801">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="802">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="803">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="804">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="805">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="806">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="807">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="808">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="809">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="901">Gauche</Sentence>
+			<Sentence ID="902">Haut</Sentence>
+			<Sentence ID="903">Gauche</Sentence>
+			<Sentence ID="904">Gauche</Sentence>
+			<Sentence ID="905">Haut</Sentence>
+			<Sentence ID="906">Gauche</Sentence>
+			<Sentence ID="907">Haut</Sentence>
+			<Sentence ID="908">Gauche</Sentence>
+			<Sentence ID="909">Gauche</Sentence>
+			<Sentence ID="911">Haut</Sentence>
+			<Sentence ID="912">Gauche</Sentence>
+			<Sentence ID="913">Haut</Sentence>
+			<Sentence ID="914">Gauche</Sentence>
+			<Sentence ID="915">Haut</Sentence>
+			<Sentence ID="916">Gauche</Sentence>
+			<Sentence ID="917">Haut</Sentence>
+			<Sentence ID="918"></Sentence>
+			<Sentence ID="919"></Sentence>
+			<Sentence ID="921">Gauche</Sentence>
+			<Sentence ID="922">Haut</Sentence>
+			<Sentence ID="923">Gauche</Sentence>
+			<Sentence ID="924">Haut</Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">Изображение</Sentence>
+			<Sentence ID="002">Изображение</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Иерархия</Sentence>
+			<Sentence ID="102">Отображение</Sentence>
+			<Sentence ID="103">Z-Индекс</Sentence>
+			<Sentence ID="104">Верх</Sentence>
+			<Sentence ID="105">Лево</Sentence>
+			<Sentence ID="106">Ширина</Sentence>
+			<Sentence ID="107">Высота</Sentence>
+			<Sentence ID="108">Tab индекс</Sentence>
+			<Sentence ID="109">Значение</Sentence>
+			<Sentence ID="111">Ссылка</Sentence>
+			<Sentence ID="112">Подсказка</Sentence>
+			<Sentence ID="113">Иерархия</Sentence>
+			<Sentence ID="114">Base64 данные</Sentence>
+			<Sentence ID="201">Приоритет в потоке гипертекста</Sentence>
+			<Sentence ID="202">Отображается объект или нет</Sentence>
+			<Sentence ID="203">Заголовок контейнера</Sentence>
+			<Sentence ID="204">Расстояние от верхней границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="205">Расстояние от левой границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="206">Ширина объекта в пикселях</Sentence>
+			<Sentence ID="207">Высота объекта в пикселях</Sentence>
+			<Sentence ID="208">Tab индекс</Sentence>
+			<Sentence ID="209">Значение</Sentence>
+			<Sentence ID="211">Ссылка на изображение</Sentence>
+			<Sentence ID="212">Всплывающая подсказка при наведении курсора мыши</Sentence>
+			<Sentence ID="213">Приоритет в потоке гипертекста</Sentence>
+			<Sentence ID="301">Неправильное значение, должно быть целое положительное число</Sentence>
+			<Sentence ID="302">Неправильное значение</Sentence>
+			<Sentence ID="303">Неправильное значение, должна быть строка</Sentence>
+			<Sentence ID="304">Неправильное значение, должно быть целое положительное число</Sentence>
+			<Sentence ID="305">Неправильное значение, должно быть целое положительное число</Sentence>
+			<Sentence ID="306">Неправильное значение, должно быть целое положительное число</Sentence>
+			<Sentence ID="307">Неправильное значение, должно быть целое положительное число</Sentence>
+			<Sentence ID="308">Неправильное значение, должно быть целое положительное число</Sentence>
+			<Sentence ID="309">Неправильное значение</Sentence>
+			<Sentence ID="311">Неправильное значение</Sentence>
+			<Sentence ID="312">Неправильное значение, должно содержать только печатные символы</Sentence>
+			<Sentence ID="313">Неправильное значение, должно быть целое положительное число</Sentence>
+			<Sentence ID="401">Не отображается</Sentence>
+			<Sentence ID="402">Отображается</Sentence>
+			<Sentence ID="501">Отображение</Sentence>
+			<Sentence ID="502">Отображение</Sentence>
+			<Sentence ID="503">Отображение</Sentence>
+			<Sentence ID="504">Отображение</Sentence>
+			<Sentence ID="505">Отображение</Sentence>
+			<Sentence ID="506">Отображение</Sentence>
+			<Sentence ID="507">Отображение</Sentence>
+			<Sentence ID="508">Отображение</Sentence>
+			<Sentence ID="509">Отображение</Sentence>
+			<Sentence ID="511">Отображение</Sentence>
+			<Sentence ID="512">Отображение</Sentence>
+			<Sentence ID="513">Отображение</Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516"></Sentence>
+			<Sentence ID="517"></Sentence>
+			<Sentence ID="518"></Sentence>
+			<Sentence ID="519"></Sentence>
+			<Sentence ID="521"></Sentence>
+			<Sentence ID="522"></Sentence>
+			<Sentence ID="523"></Sentence>
+			<Sentence ID="524"></Sentence>
+			<Sentence ID="601">Отображение</Sentence>
+			<Sentence ID="602">Отображение</Sentence>
+			<Sentence ID="603">Отображение</Sentence>
+			<Sentence ID="604">Отображение</Sentence>
+			<Sentence ID="605">Отображение</Sentence>
+			<Sentence ID="606">Отображение</Sentence>
+			<Sentence ID="607">Отображение</Sentence>
+			<Sentence ID="608">Отображение</Sentence>
+			<Sentence ID="609">Отображение</Sentence>
+			<Sentence ID="611">Отображение</Sentence>
+			<Sentence ID="612">Отображение</Sentence>
+			<Sentence ID="613">Отображение</Sentence>
+			<Sentence ID="701">Неправильное значение</Sentence>
+			<Sentence ID="702">Неправильное значение</Sentence>
+			<Sentence ID="703">Неправильное значение</Sentence>
+			<Sentence ID="704">Неправильное значение</Sentence>
+			<Sentence ID="705">Неправильное значение</Sentence>
+			<Sentence ID="706">Неправильное значение</Sentence>
+			<Sentence ID="707">Неправильное значение</Sentence>
+			<Sentence ID="708">Неправильное значение</Sentence>
+			<Sentence ID="709">Неправильное значение</Sentence>
+			<Sentence ID="801">Неправильное значение</Sentence>
+			<Sentence ID="802">Неправильное значение</Sentence>
+			<Sentence ID="803">Неправильное значение</Sentence>
+			<Sentence ID="804">Неправильное значение</Sentence>
+			<Sentence ID="805">Неправильное значение</Sentence>
+			<Sentence ID="806">Неправильное значение</Sentence>
+			<Sentence ID="807">Неправильное значение</Sentence>
+			<Sentence ID="808">Неправильное значение</Sentence>
+			<Sentence ID="809">Неправильное значение</Sentence>
+			<Sentence ID="901">Лево</Sentence>
+			<Sentence ID="902">Верх</Sentence>
+			<Sentence ID="903">Лево</Sentence>
+			<Sentence ID="904">Лево</Sentence>
+			<Sentence ID="905">Верх</Sentence>
+			<Sentence ID="906">Лево</Sentence>
+			<Sentence ID="907">Верх</Sentence>
+			<Sentence ID="908">Лево</Sentence>
+			<Sentence ID="909">Лево</Sentence>
+			<Sentence ID="911">Верх</Sentence>
+			<Sentence ID="912">Лево</Sentence>
+			<Sentence ID="913">Верх</Sentence>
+			<Sentence ID="914">Лево</Sentence>
+			<Sentence ID="915">Верх</Sentence>
+			<Sentence ID="916">Лево</Sentence>
+			<Sentence ID="917">Верх</Sentence>
+			<Sentence ID="918"></Sentence>
+			<Sentence ID="919"></Sentence>
+			<Sentence ID="921">Лево</Sentence>
+			<Sentence ID="922">Верх</Sentence>
+			<Sentence ID="923">Лево</Sentence>
+			<Sentence ID="924">Верх</Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="e8115c4a-903a-a4c6-c0bc-08a336586d51" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOkU4RkFFNUM0MTQyNDExRTE5NkQ3RENFODU5QzNGOTdBIiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOkU4RkFFNUM1MTQyNDExRTE5NkQ3RENFODU5QzNGOTdBIj4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RThGQUU1QzIxNDI0MTFFMTk2RDdE
+			Q0U4NTlDM0Y5N0EiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RThGQUU1QzMxNDI0MTFFMTk2
+			RDdEQ0U4NTlDM0Y5N0EiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			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
+		</Resource>
+		<Resource ID="ab7417f9-08b8-21c5-9669-08a3e1032958" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjNBN0ZCQjFCMUZFNTExRTE4Q0NGQzVGNjcyMTYyNTI2IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjNBN0ZCQjFDMUZFNTExRTE4Q0NGQzVGNjcyMTYyNTI2Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M0E3RkJCMTkxRkU1MTFFMThDQ0ZD
+			NUY2NzIxNjI1MjYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6M0E3RkJCMUExRkU1MTFFMThD
+			Q0ZDNUY2NzIxNjI1MjYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz6M95QTAAACyElEQVR42mxTTU8TURQ989HplNbS0lqDSAOa
+			2PIREqxEQnRh4s6VO3Yu3OrSlQt/gok7FyasTZTEhTHGnTtFEoHwGcRA5bsUSlunw7w3njdT4sbX
+			nL6Z++49995z32i+74OrkzhGuJRhgZgnZolvxBqxg/8srU0wVq7h69NpwDaBnhSQT4foJfXQ5cD3
+			gPhJzLSxTKycEzyseZh6u0LrFmDSJGlstgDHBS7EgZF+GgygLwkMZmiLAFGNvu1KblQdYLQXuMbD
+			vSPA9YByJdxB5zr3OL136Zfj85dd4EH+H8HNBv+ifOtl+TELOKWjHWXjVMZlpiiz59lOgmQnTeBK
+			R6jXOUHBUVn+hBmdMwQ9ZKlBJ0tu0HZC23YdGM4Cv0kQM4K4BUVwkchUWydIppiChxr79kkgie54
+			mFWROMQ+dekmaSYSEMwrguK7pSl82HyNpN2NR3fewGJ5p15IYOusiqK6zOjy3WRElWe5aEDwXVf9
+			Lx3O0NlDpbaBF59uY3nzM66rcVqhcJpSnAEpEmdYUWeMCCuYVRWUDp1tRCImDF2HEB6mF55h43gG
+			XeIJkpyhReeuLmanmKlEKFp7W1IEwzLqwOLPEwIRYeJMCvzYfo+I8RHafhId5lU+x9nKAaRWRyqW
+			wPNbr6oatD1FMGIYBq+kBV0XnIuEweFIISE8Cc+voOowUKmq5kY9vGY/GLyq3k1XOlq9lkQifUqj
+			yQ+BJPRSRCb7lp7AGeGzKilDkpSeRvs6w7R0G48HX6J8VMV6ZR077hpc6xekXYZuNeAbPqwoCRks
+			pR9UUErdDyYQEMzNzV3K5XJD+f5s8W6xZ9Sy7o3qut6naVp2sbyPxYM1bDVXUfXX0Yps8H41MNYz
+			oWIXg6+xVCp1OE7L9oVvM4dlGLophNAnJydz4+MTfQMDheF0Ol2MxWIF0zQLKkYF1uv1TCKROPor
+			wACLBhsn+wNC3gAAAABJRU5ErkJggg==
+		</Resource>
+		<Resource ID="bed9889a-bb07-c48a-6cd2-08a39dd2f026" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjNBN0ZCQjFCMUZFNTExRTE4Q0NGQzVGNjcyMTYyNTI2IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjNBN0ZCQjFDMUZFNTExRTE4Q0NGQzVGNjcyMTYyNTI2Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M0E3RkJCMTkxRkU1MTFFMThDQ0ZD
+			NUY2NzIxNjI1MjYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6M0E3RkJCMUExRkU1MTFFMThD
+			Q0ZDNUY2NzIxNjI1MjYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz6M95QTAAACyElEQVR42mxTTU8TURQ989HplNbS0lqDSAOa
+			2PIREqxEQnRh4s6VO3Yu3OrSlQt/gok7FyasTZTEhTHGnTtFEoHwGcRA5bsUSlunw7w3njdT4sbX
+			nL6Z++49995z32i+74OrkzhGuJRhgZgnZolvxBqxg/8srU0wVq7h69NpwDaBnhSQT4foJfXQ5cD3
+			gPhJzLSxTKycEzyseZh6u0LrFmDSJGlstgDHBS7EgZF+GgygLwkMZmiLAFGNvu1KblQdYLQXuMbD
+			vSPA9YByJdxB5zr3OL136Zfj85dd4EH+H8HNBv+ifOtl+TELOKWjHWXjVMZlpiiz59lOgmQnTeBK
+			R6jXOUHBUVn+hBmdMwQ9ZKlBJ0tu0HZC23YdGM4Cv0kQM4K4BUVwkchUWydIppiChxr79kkgie54
+			mFWROMQ+dekmaSYSEMwrguK7pSl82HyNpN2NR3fewGJ5p15IYOusiqK6zOjy3WRElWe5aEDwXVf9
+			Lx3O0NlDpbaBF59uY3nzM66rcVqhcJpSnAEpEmdYUWeMCCuYVRWUDp1tRCImDF2HEB6mF55h43gG
+			XeIJkpyhReeuLmanmKlEKFp7W1IEwzLqwOLPEwIRYeJMCvzYfo+I8RHafhId5lU+x9nKAaRWRyqW
+			wPNbr6oatD1FMGIYBq+kBV0XnIuEweFIISE8Cc+voOowUKmq5kY9vGY/GLyq3k1XOlq9lkQifUqj
+			yQ+BJPRSRCb7lp7AGeGzKilDkpSeRvs6w7R0G48HX6J8VMV6ZR077hpc6xekXYZuNeAbPqwoCRks
+			pR9UUErdDyYQEMzNzV3K5XJD+f5s8W6xZ9Sy7o3qut6naVp2sbyPxYM1bDVXUfXX0Yps8H41MNYz
+			oWIXg6+xVCp1OE7L9oVvM4dlGLophNAnJydz4+MTfQMDheF0Ol2MxWIF0zQLKkYF1uv1TCKROPor
+			wACLBhsn+wNC3gAAAABJRU5ErkJggg==
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[
+from scripting.utils.id import id2link1
+
+
+class VDOM_image(VDOM_object):
+
+    def render(self, contents=""):
+
+        if self.value:
+            link = id2link1(self.value)
+        elif self.externalurl:
+            link = self.externalurl
+        elif self.base64stream:
+            import base64
+            data = base64.b64decode(self.base64stream)
+            res_id = application.resources.create_temporary(self.id, "data", data, "png", "data")
+            link = "/%s.png"%res_id
+        else:
+            link = ""
+
+        visible = u"display:none;" if self.visible == "0" else ""
+
+        style = u"z-index: {zindex}; position: {position}; top: {top}px; left: {left}px".format(
+            zindex = self.zindex,
+            position = self.position,
+            top = self.top,
+            left = self.left)
+        id = 'o_' + (self.id).replace('-', '_')
+        title = iw = ih = ""
+        if self.hint:
+            title = u"""title="{hint}" """.format(hint = self.hint)
+        if self.width == "":
+            self.width = 0
+        if int(self.width) > 0:
+            iw = u"""width="{width}" """.format(width = self.width)
+        if self.height == "":
+            self.height = 0
+        if int(self.height) > 0:
+            ih = u"""height="{height}" """.format(height = self.height)
+
+        result = \
+            u"""<div id="{id}" style=" {visible} {style}">
+                    <img src="{link}" {width} {height} tabindex="{tabindex}" {title} />
+                </div>
+            """.format(
+                    id = id,
+                    visible = visible,
+                    style = style,
+                    link = link,
+                    width = iw,
+                    height = ih,
+                    tabindex = self.tabindex,
+                    title = title)
+
+        return VDOM_object.render(self, contents=result)
+
+    def is_correct_exturnal_url (self, url) :
+        if url.lower().startswith("http://") or url.lower().startswith("https://"):
+            return True
+        return False
+
+    def wysiwyg(self, contents=""):
+        from scripting.utils.wysiwyg import get_empty_wysiwyg_value
+
+        if self.value:      # show image from resources
+            editable = u' editable="value" '
+
+            result = \
+                u"""<container id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" top="{top}" left="{left}"
+                        width="{width}" height="{height}" backgroundcolor="#f0f0f0" bordercolor="#000000">
+                        <svg>
+                            <image x="{image_x}" y="{image_y}" href="#Res({image_id})"
+                                width="{width}" height="{height}" {editable}/>
+                        </svg>
+                    </container>
+                """.format(
+                        id = self.id,
+                        zindex = self.zindex,
+                        hierarchy = self.hierarchy,
+                        top = self.top,
+                        left = self.left,
+                        width = self.width or 50,
+                        height = self.height or 50,
+                        image_x = 0,
+                        image_y = 0,
+                        image_id = self.value,
+                        editable = editable)
+
+        elif self.externalurl:
+            url = self.externalurl
+            if not self.is_correct_exturnal_url(self.externalurl):
+                url = u"http://empty.png"
+
+            result = \
+                u"""<container id="{id}" visible="{visible}" zindex="{zindex}" hierarchy="{hierarchy}"
+                        order="{order}" top="{top}" left="{left}" width="{width}" height="{height}">
+                        <htmltext top="0" left="0" width="{width}" height="{height}" locked="true">
+                            <img width="{width}" height="{height}" src="{image_url}"/>
+                        </htmltext>
+                    </container>
+                """.format(
+                        id = self.id,
+                        visible = self.visible,
+                        zindex = self.zindex,
+                        hierarchy = self.hierarchy,
+                        order = self.order,
+                        top = self.top,
+                        left = self.left,
+                        width = self.width or 50,
+                        height = self.height or 50,
+                        image_url = url)
+
+        else:
+            image_id = "e8115c4a-903a-a4c6-c0bc-08a336586d51"
+            result = get_empty_wysiwyg_value(self, image_id)
+
+        return VDOM_object.wysiwyg(self, contents=result)
+
+# def set_attr(app_id, object_id, param):
+def on_update(object, attributes):
+    # o = application.objects.search(object_id)
+    o = object
+
+    # if "value" in param and not "width" in param and not "height" in param:
+    if "value" in attributes and not "width" in attributes and not "height" in attributes:
+        # attr = param["value"]
+        attr = attributes["value"]
+        # res_id = attr["value"]
+        res_id = attributes["value"]
+
+        ro = application.resources.get(res_id)
+        if not ro:
+            return "Resource not found"
+
+        # get image resource, obtain width and height and set width and height of the object
+        from PIL import Image
+        import cStringIO
+        s = cStringIO.StringIO()
+        s.write(ro.get_data())
+        s.seek(0, 0)
+        im = Image.open(s)
+        width, height = im.size
+        # set attributes
+        if o.attributes.width != width or o.attributes.height != height:
+            # o.set_attributes({"width": width, "height": height})
+            o.attributes.update(width=width, height=height)
+    else:
+        # if "width" in param and param["width"]["value"] != '' and int(param["width"]["value"]) > 2500:
+        #     o.set_attributes({"width": 2500})
+        if "width" in attributes and attributes["width"] != '' and int(attributes["width"]) > 2500:
+            o.attributes.update(width=2500)
+        # if "height" in param and param["height"]["value"] != '' and int(param["height"]["value"]) > 2500:
+        #     o.set_attributes({"height": 2500})
+        if "height" in attributes and attributes["height"] != '' and int(attributes["height"]) > 2500:
+            o.attributes.update(height=2500)
+    return ""
+
+        
+]]>
+	</SourceCode>
+	<E2VDOM>
+		<Events>
+			<UserInterfaceEvents>
+				<Event Name="mouseup" Description="#Lang(524)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(923)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(924)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mousemove" Description="#Lang(521)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(916)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(917)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mousedown" Description="#Lang(519)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(914)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(915)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mouseout" Description="#Lang(522)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(918)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(919)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="ctrlclick" Description="#Lang(517)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(909)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(911)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="corner" Description="#Lang(516)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(906)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(907)" Order="0"/>
+						<Parameter Name="pos" Description="#Lang(908)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mouseover" Description="#Lang(523)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(921)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(922)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="border" Description="#Lang(514)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(901)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(902)" Order="0"/>
+						<Parameter Name="pos" Description="#Lang(903)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="click" Description="#Lang(515)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(904)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(905)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="dblclick" Description="#Lang(518)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(912)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(913)" Order="0"/>
+					</Parameters>
+				</Event>
+			</UserInterfaceEvents>
+		</Events>
+		<Actions>
+			<Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
+				<Action Name="hide" DisplayName="#Lang(604)" Description="#Lang(504)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_hide(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="changeCursor" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="cursorType" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[this.domCont.style.cursor = cursorType;]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setImage" DisplayName="#Lang(608)" Description="#Lang(508)">
+					<Parameters>
+						<Parameter Name="resource" DisplayName="#Lang(708)" Description="#Lang(808)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[jQuery('img',this.domCont).attr('src', resource);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setAlt" DisplayName="#Lang(607)" Description="#Lang(507)">
+					<Parameters>
+						<Parameter Name="text" DisplayName="#Lang(707)" Description="#Lang(807)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[jQuery(this.domCont).attr('alt', text);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="startResizeXY" DisplayName="#Lang(612)" Description="#Lang(512)">
+					<SourceCode>
+<![CDATA[vdom_ui_startResizeXY(this.domCont);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="moveZindexTo" DisplayName="#Lang(606)" Description="#Lang(506)">
+					<Parameters>
+						<Parameter Name="newZindex" DisplayName="#Lang(706)" Description="#Lang(806)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_moveZindexTo(this.domCont, newZindex);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="moveTo" DisplayName="#Lang(605)" Description="#Lang(505)">
+					<Parameters>
+						<Parameter Name="newX" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="newY" DisplayName="#Lang(704)" Description="#Lang(804)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="Effect" DisplayName="#Lang(705)" Description="#Lang(805)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_moveTo(this.domCont, newX, newY, Effect);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="dragStart" DisplayName="#Lang(602)" Description="#Lang(502)">
+					<SourceCode>
+<![CDATA[vdom_ui_dragStart(this.domCont);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="dragStop" DisplayName="#Lang(603)" Description="#Lang(503)">
+					<SourceCode>
+<![CDATA[vdom_ui_dragStop();]]>
+					</SourceCode>
+				</Action>
+				<Action Name="show" DisplayName="#Lang(609)" Description="#Lang(509)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(709)" Description="#Lang(809)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_show(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="startResizeY" DisplayName="#Lang(613)" Description="#Lang(513)">
+					<SourceCode>
+<![CDATA[vdom_ui_startResizeY(this.domCont);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="startResizeX" DisplayName="#Lang(611)" Description="#Lang(511)">
+					<SourceCode>
+<![CDATA[vdom_ui_startResizeX(this.domCont);]]>
+					</SourceCode>
+				</Action>
+			</Container>
+		</Actions>
+	</E2VDOM>
+</Type>

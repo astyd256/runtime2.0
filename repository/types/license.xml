@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>7754df93-9fbe-40a1-bc9a-1bc9ef576dfd</ID>
+		<Name>license</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_license</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.4.6720</Version>
+		<Category>Additional</Category>
+		<InterfaceType>1</InterfaceType>
+		<Icon>#Res(d6242e2d-6aac-456c-8cb0-23a0e1b54810)</Icon>
+		<EditorIcon>#Res(84175f60-501c-470a-88ad-69d0482e2f42)</EditorIcon>
+		<StructureIcon>#Res(0c1d5dd3-a7b1-4d26-a000-d5416f59771b)</StructureIcon>
+		<Dynamic>0</Dynamic>
+		<Moveable>0</Moveable>
+		<Resizable>0</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>3</Container>
+		<Languages>en_US, ru_RU, fr_FR</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>zindex</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>title</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(100)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>description</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(100)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>licensetext</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(1000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>licensekey</Name>
+			<DisplayName>#Lang(107)</DisplayName>
+			<Description>#Lang(207)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField()</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">License container</Sentence>
+			<Sentence ID="002">A container that stores the license agreement text. It does not need to contain other VDOM types.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Title</Sentence>
+			<Sentence ID="105">Description</Sentence>
+			<Sentence ID="106">License text</Sentence>
+			<Sentence ID="107">License</Sentence>
+			<Sentence ID="201">The order of rendering the object on the page. The objects with identical values of the Hierarchy attribute are rendered in the order they are written in the XML-file of the VDOM application.</Sentence>
+			<Sentence ID="202">The visibility of the object. In any case the object will exist on the web page, this attribute only makes it invisible.</Sentence>
+			<Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the Z-Index indicates the order of their displaying. The larger Z-Index is, the upper the object is situated.</Sentence>
+			<Sentence ID="204">The title of the object to display, may be in HTML format. In some objects the title is not displayed if the Title appearance attribute is set to &apos;Title off&apos;.</Sentence>
+			<Sentence ID="205">The description of the object.</Sentence>
+			<Sentence ID="206">The license text for the application in XML format.</Sentence>
+			<Sentence ID="207">License key</Sentence>
+			<Sentence ID="301">Incorrect value, must be even integer from 0 to 99.</Sentence>
+			<Sentence ID="302">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="303">Incorrect value, must be even integer from 0 to 99.</Sentence>
+			<Sentence ID="304">Incorrect value, must be string.</Sentence>
+			<Sentence ID="305">Incorrect value, must be string.</Sentence>
+			<Sentence ID="306">Incorrect value.</Sentence>
+			<Sentence ID="307"></Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">Conteneur licence</Sentence>
+			<Sentence ID="002">Conteneur avec licence</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hiérarchie</Sentence>
+			<Sentence ID="102">Visibilité</Sentence>
+			<Sentence ID="103">Z-index</Sentence>
+			<Sentence ID="104">Titre</Sentence>
+			<Sentence ID="105">Description</Sentence>
+			<Sentence ID="106">Declaration</Sentence>
+			<Sentence ID="107"></Sentence>
+			<Sentence ID="201">Afficher ou cacher l&apos;objet</Sentence>
+			<Sentence ID="202">Titre du container</Sentence>
+			<Sentence ID="203">Distance depuis le bord haut de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="204">Distance depuis le bord haut de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="205">Description du container</Sentence>
+			<Sentence ID="206">declaration XML</Sentence>
+			<Sentence ID="207"></Sentence>
+			<Sentence ID="301">Valeur Incorrecte</Sentence>
+			<Sentence ID="302">Valeur Incorrecte, doit être une chaîne de caractères</Sentence>
+			<Sentence ID="303">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="304">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="305">Valeur Incorrecte, doit être une chaîne de caractères</Sentence>
+			<Sentence ID="306">Valeur Incorrecte</Sentence>
+			<Sentence ID="307"></Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">Контейнер лицензии</Sentence>
+			<Sentence ID="002">Контейнер для хранения лицензии</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Иерархия</Sentence>
+			<Sentence ID="102">Отображение</Sentence>
+			<Sentence ID="103">Позиция</Sentence>
+			<Sentence ID="104">Заголовок</Sentence>
+			<Sentence ID="105">Описание</Sentence>
+			<Sentence ID="106">Текст лицензии</Sentence>
+			<Sentence ID="107">Лицензия</Sentence>
+			<Sentence ID="201">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
+			<Sentence ID="202">Заголовок контейнера</Sentence>
+			<Sentence ID="203">Расстояние от верхней границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="204">Заголовок контейнера</Sentence>
+			<Sentence ID="205">Описание контейнера</Sentence>
+			<Sentence ID="206">Текст лицензии в виде кода XML</Sentence>
+			<Sentence ID="207">Ключ лицензии</Sentence>
+			<Sentence ID="301">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="302">Неправильное значение, должна быть строка</Sentence>
+			<Sentence ID="303">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="304">Неправильное значение, должна быть строка</Sentence>
+			<Sentence ID="305">Неправильное значение, должна быть строка</Sentence>
+			<Sentence ID="306">Неправильное значение</Sentence>
+			<Sentence ID="307"></Sentence>
+			<Sentence ID="401">Не отображать</Sentence>
+			<Sentence ID="402">Отображать</Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="0c1d5dd3-a7b1-4d26-a000-d5416f59771b" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjY5QTdGOTZDMUZEODExRTE5REE0RUVEMEJFQkZGODIwIiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjY5QTdGOTZEMUZEODExRTE5REE0RUVEMEJFQkZGODIwIj4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NjlBN0Y5NkExRkQ4MTFFMTlEQTRF
+			RUQwQkVCRkY4MjAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NjlBN0Y5NkIxRkQ4MTFFMTlE
+			QTRFRUQwQkVCRkY4MjAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz7yVW+RAAADc0lEQVR42lRTW0zbVRj/fef829KuZWu7K0iA
+			goXMyxxh6hIhASXShCxZRsBtj3PhTV/0YcFpIsnUzCdjosbpkhlnFueMLl7IIlOILjKRjMXCuJV2
+			MKAjhRZ6/V8+Tzdd9CTn6Xzn9/0u30fMjAcnO+GClOeRmzugJ35FKjpMBjtBJaXwVbWz5ttHLL1D
+			BK0D0pMqfqEHAMZ0GczkOC987JkY+BKJxQ1y79gGt8MN3VGCtVgcmwN7ub79JJG7Lgt2BUGO+fsA
+			hRk7eOVu+mafO/zzVap8IojtdbUK3kUQfsBRDtgqkJi7hejI9wiG+rBpR7NiIP1asTmz+R4S33oi
+			f0XQ0NmtVGQUqqEAdHVNgnQokC2W5XtGyMeCHB3+BHWhxz0kvW8JFBZthLme5ZkoPfJ8N0RpebGY
+			wEQws4qBwpJeHh1dopZnQ8hmJO3uOEOLNy6SIPGKljfWQw4tA5unGuRtUJJWAdMNWAYjP6sYVHB0
+			Xsehw8eRSYGFzQUIJwmXt+ggtI34VIujbBe8Vc2AVgGCom0PqpdKlco3bKbzfPhYL1IJVlJA8dX1
+			e55vDzyneqQgCmauXOUEsaleIZYq9Cr0/zRDV3+3AZvP4d0LAZoYX6atW+00ODiMUHunYpeHZnfD
+			yCwDU8OnP2Q9pnxcYEOf5J4X23h30MMtTbXmWjZm1FTa+NEaG0/+8RFzfoT1wjibhShb+RibuVss
+			5sP9P4IMMJyQYifeOPUOGvc/jejsbdHRuk+aStQHJ2tR7ZuAmRgBbUxB5ObAupKiL0Isxa79kIqH
+			dSaVKEns2laPs2cvoeuFg1iIrqL3iERjjQ4rPQMrOwmkI+DMHeVfHndnf7HkxYGCOfTV8YcDe47s
+			gVB5q4di/q37t0Cmb+JomwUhBEioBpLuOS/8T8HMTGPo8qnz8snyr7ESuTHIxlrnzpo2L8GhFKn4
+			ktfRULmkoozj/jBoRNID7aEeUCGO3y6/Prl0+84BFEe5eM+9KpsHPm0a0/MRyzILbKXH2Ii9bxbG
+			uk19+oRlxj9nKzvF6+ET1nenXdfPvCT3Fv/Rf7fxs15blSa0txvbjrVWB5r85CohsvvB69PIJcMc
+			Gb0U/3Mk0i+dtpeP9uWS/9/Gf86FNz0ym8x1GcyHNEKZ3y9cyytWQjDHLBJflPqcV7peS1n/1v8t
+			wAA0GqJrPeea3AAAAABJRU5ErkJggg==
+		</Resource>
+		<Resource ID="d6242e2d-6aac-456c-8cb0-23a0e1b54810" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjRERkU2QzRCMUZEODExRTE4RDM0RUQ5NzAyMDZERUI4IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjRERkU2QzRDMUZEODExRTE4RDM0RUQ5NzAyMDZERUI4Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NERGRTZDNDkxRkQ4MTFFMThEMzRF
+			RDk3MDIwNkRFQjgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NERGRTZDNEExRkQ4MTFFMThE
+			MzRFRDk3MDIwNkRFQjgiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			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
+			NPt/AgwAHVbDlSw3Bk0AAAAASUVORK5CYII=
+		</Resource>
+		<Resource ID="84175f60-501c-470a-88ad-69d0482e2f42" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+			jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVh
+			ZHlxyWU8AAADIGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78i
+			IGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9i
+			ZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAy
+			MDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93
+			d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJk
+			ZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5z
+			OnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0
+			cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JU
+			b29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5p
+			aWQ6NERGRTZDNEIxRkQ4MTFFMThEMzRFRDk3MDIwNkRFQjgiIHhtcE1NOkRvY3VtZW50SUQ9Inht
+			cC5kaWQ6NERGRTZDNEMxRkQ4MTFFMThEMzRFRDk3MDIwNkRFQjgiPiA8eG1wTU06RGVyaXZlZEZy
+			b20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0REZFNkM0OTFGRDgxMUUxOEQzNEVEOTcwMjA2
+			REVCOCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0REZFNkM0QTFGRDgxMUUxOEQzNEVEOTcw
+			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
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[
+class VDOM_license(VDOM_object):
+
+	def render(self, contents=""):
+		return self.licensetext or ""
+
+	def wysiwyg(self, contents=""):
+		result="<container id=\"%s\" visible=\"%s\" zindex=\"%s\" hierarchy=\"%s\" order=\"%s\"><svg>%s</svg></container>"%(self.id, self.visible, self.zindex, self.hierarchy, self.order,contents)
+		return VDOM_object.wysiwyg(self, contents=result)
+
+	def check_license(self,license_type=None):
+		key = "-".join((application.id,license_type or self.licensekey))
+		if key in system_options and system_options["key"]:
+			return True
+		else:
+			return False
+
+def check_license(license_type=0):
+	key = "-".join((application.id,license_type))
+	if key in system_options and system_options["key"]:
+		return True
+	else:
+		return False
+]]>
+	</SourceCode>
+</Type>

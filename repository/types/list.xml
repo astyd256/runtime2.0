@@ -1,0 +1,1081 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>2fa03ef7-5ebb-5d9a-6f49-ad4c87a673ab</ID>
+		<Name>list</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_list</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.132.8388</Version>
+		<Category>Standard</Category>
+		<InterfaceType>1</InterfaceType>
+		<Icon>#Res(4a582b3d-09ee-8ac1-1451-08a964bbb510)</Icon>
+		<EditorIcon>#Res(37845d76-d0ee-a176-9aee-08a99a34577f)</EditorIcon>
+		<StructureIcon>#Res(c0f9065a-cd07-eb98-7e88-08a9d0f57d30)</StructureIcon>
+		<Dynamic>1</Dynamic>
+		<Moveable>1</Moveable>
+		<Resizable>3</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>1</Container>
+		<Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, smartfolderdata</Containers>
+		<Languages>en_US, fr_FR, ru_RU</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>zindex</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>top</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>left</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>width</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue>150</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>height</Name>
+			<DisplayName>#Lang(107)</DisplayName>
+			<Description>#Lang(207)</Description>
+			<DefaultValue>200</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>data</Name>
+			<DisplayName>#Lang(108)</DisplayName>
+			<Description>#Lang(208)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(10000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>selectedrows</Name>
+			<DisplayName>#Lang(109)</DisplayName>
+			<Description>#Lang(209)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(10000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>selectionmode</Name>
+			<DisplayName>#Lang(111)</DisplayName>
+			<Description>#Lang(211)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(311)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(403)|0)|(#Lang(404)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>layout</Name>
+			<DisplayName>#Lang(112)</DisplayName>
+			<Description>#Lang(212)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(312)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(405)|0)|(#Lang(406)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>selecteditem</Name>
+			<DisplayName>#Lang(113)</DisplayName>
+			<Description>#Lang(213)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(1000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>dragdrop</Name>
+			<DisplayName>#Lang(114)</DisplayName>
+			<Description>#Lang(214)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(407)|0)|(#Lang(408)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>clickclass</Name>
+			<DisplayName>#Lang(118)</DisplayName>
+			<Description>#Lang(318)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(218)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(1000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>style</Name>
+			<DisplayName>#Lang(115)</DisplayName>
+			<Description>#Lang(215)</Description>
+			<DefaultValue>#%(id)s li.selected { background: #fdeeb5; } #%(id)s li.active { background: #fbdf75 !important; }</DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(315)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(100000)</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>skin</Name>
+			<DisplayName>#Lang(116)</DisplayName>
+			<Description>#Lang(216)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d+$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(316)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(409)|0)|(#Lang(411)|1))</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>cssclass</Name>
+			<DisplayName>#Lang(117)</DisplayName>
+			<Description>#Lang(217)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(1000)</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">List</Sentence>
+			<Sentence ID="002">The List type produces an object displayed as a horizontal or vertical list.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Top</Sentence>
+			<Sentence ID="105">Left</Sentence>
+			<Sentence ID="106">Width</Sentence>
+			<Sentence ID="107">Height</Sentence>
+			<Sentence ID="108">Data</Sentence>
+			<Sentence ID="109">Selected rows</Sentence>
+			<Sentence ID="111">Selection mode</Sentence>
+			<Sentence ID="112">Layout</Sentence>
+			<Sentence ID="113">Selected item</Sentence>
+			<Sentence ID="114">Drag-and-drop</Sentence>
+			<Sentence ID="115">Style</Sentence>
+			<Sentence ID="116">Skin</Sentence>
+			<Sentence ID="117">CSS class</Sentence>
+			<Sentence ID="118">Click on</Sentence>
+			<Sentence ID="201">The order of rendering the object on the page. The objects with identical values of the Hierarchy attribute are rendered in the order they are written in the XML-file of the VDOM application.</Sentence>
+			<Sentence ID="202">The visibility of the object. In any case the object will exist on the web page, this attribute only makes it invisible.</Sentence>
+			<Sentence ID="203">The position in visual hierarchy of objects. If you have several objects in one container situated on each other, the value of &apos;Z-Index&apos; attribute indicates the order of their displaying. The larger the value is, the upper the object is situated.</Sentence>
+			<Sentence ID="204">Spacing in pixels between the object and the top border of the container, in which the object is situated.</Sentence>
+			<Sentence ID="205">Spacing in pixels between the object and the left border of the container, in which the object is situated.</Sentence>
+			<Sentence ID="206">The width of the object in pixels.</Sentence>
+			<Sentence ID="207">The height of the object in pixels.</Sentence>
+			<Sentence ID="208">The data in JSON (JavaScript Object Notation) format.</Sentence>
+			<Sentence ID="209">The list of keys displayed as checked, specified by the &apos;Data&apos; attribute.</Sentence>
+			<Sentence ID="211">The mode of selecting the rows.</Sentence>
+			<Sentence ID="212">The way of items disposition inside the object.</Sentence>
+			<Sentence ID="213">The key displayed as selected and specified in the &apos;Data&apos; attribute.</Sentence>
+			<Sentence ID="214">The dragability of the object&apos;s items. If it is set to &apos;No&apos;, the records are not draggable, if &apos;Yes&apos;---the records can be dragged and dropped.</Sentence>
+			<Sentence ID="215">The CSS style of the object. If the user changes CSS style, the Skin attribute is changed to the &apos;User defined&apos;.</Sentence>
+			<Sentence ID="216">The skin of the object.</Sentence>
+			<Sentence ID="217">The necessary CSS code applied to all objects within the container.</Sentence>
+			<Sentence ID="218">Incorrect value</Sentence>
+			<Sentence ID="301">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="302"></Sentence>
+			<Sentence ID="303">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="304">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="305">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="306">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="307">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="308">Incorrect value</Sentence>
+			<Sentence ID="309">Incorrect value</Sentence>
+			<Sentence ID="311">Incorrect value</Sentence>
+			<Sentence ID="312">Incorrect value</Sentence>
+			<Sentence ID="313"></Sentence>
+			<Sentence ID="314">Incorrect value</Sentence>
+			<Sentence ID="315">Incorrect value</Sentence>
+			<Sentence ID="316"></Sentence>
+			<Sentence ID="317">Incorrect value</Sentence>
+			<Sentence ID="318">CSS class name, mouse click will be binded on element which contains this class</Sentence>
+			<Sentence ID="401">No</Sentence>
+			<Sentence ID="402">Yes</Sentence>
+			<Sentence ID="403">Single</Sentence>
+			<Sentence ID="404">Multi</Sentence>
+			<Sentence ID="405">Vertical</Sentence>
+			<Sentence ID="406">Horizontal</Sentence>
+			<Sentence ID="407">No</Sentence>
+			<Sentence ID="408">Yes</Sentence>
+			<Sentence ID="409">User defined</Sentence>
+			<Sentence ID="411">Default</Sentence>
+			<Sentence ID="501">Hide the object.</Sentence>
+			<Sentence ID="502">Select all rows.</Sentence>
+			<Sentence ID="503">Deselect all rows.</Sentence>
+			<Sentence ID="504">Show the object.</Sentence>
+			<Sentence ID="505">The test action.</Sentence>
+			<Sentence ID="506">The custom event.</Sentence>
+			<Sentence ID="507">Drop the item.</Sentence>
+			<Sentence ID="508">Click the item of the object.</Sentence>
+			<Sentence ID="509">Double-click the item of the object.</Sentence>
+			<Sentence ID="511">Click the checkbox.</Sentence>
+			<Sentence ID="601">hide</Sentence>
+			<Sentence ID="602">show</Sentence>
+			<Sentence ID="603"></Sentence>
+			<Sentence ID="604">show</Sentence>
+			<Sentence ID="605">toggle</Sentence>
+			<Sentence ID="701">fade</Sentence>
+			<Sentence ID="702">fade</Sentence>
+			<Sentence ID="703">id</Sentence>
+			<Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="802">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="803">id</Sentence>
+			<Sentence ID="901">Parameter</Sentence>
+			<Sentence ID="902"></Sentence>
+			<Sentence ID="903">List element id</Sentence>
+			<Sentence ID="904">List element id</Sentence>
+			<Sentence ID="905"></Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">List</Sentence>
+			<Sentence ID="002">Used to insert horizontal or vertical list</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Top</Sentence>
+			<Sentence ID="105">Left</Sentence>
+			<Sentence ID="106">Width</Sentence>
+			<Sentence ID="107">Height</Sentence>
+			<Sentence ID="108">Data</Sentence>
+			<Sentence ID="109">Selected rows</Sentence>
+			<Sentence ID="111">Selection mode</Sentence>
+			<Sentence ID="112">Layout</Sentence>
+			<Sentence ID="113">Selected item</Sentence>
+			<Sentence ID="114">Drag-and-drop</Sentence>
+			<Sentence ID="115">Style</Sentence>
+			<Sentence ID="116">Skin</Sentence>
+			<Sentence ID="117">CSS class</Sentence>
+			<Sentence ID="118"></Sentence>
+			<Sentence ID="201">Order of rendering the object on the page</Sentence>
+			<Sentence ID="202">Visibility of the object</Sentence>
+			<Sentence ID="203">Position in visual hierarchy of objects</Sentence>
+			<Sentence ID="204">Spacing between the top edge of the container and the object in pixels</Sentence>
+			<Sentence ID="205">Spacing between the left edge of the container and the object in pixels</Sentence>
+			<Sentence ID="206">Width of the object in pixels</Sentence>
+			<Sentence ID="207">Height of the object in pixels</Sentence>
+			<Sentence ID="208">Data in JSON format</Sentence>
+			<Sentence ID="209">Rows which should be checked</Sentence>
+			<Sentence ID="211">Mode of row selecting</Sentence>
+			<Sentence ID="212">Way of displaying the list</Sentence>
+			<Sentence ID="213">Set class &quot;active&quot; to item with this identifier</Sentence>
+			<Sentence ID="214">Define is drag-and-drop is used or not</Sentence>
+			<Sentence ID="215">CSS style of the object</Sentence>
+			<Sentence ID="216">Define the skin of the object</Sentence>
+			<Sentence ID="217">Names of CSS classes</Sentence>
+			<Sentence ID="218"></Sentence>
+			<Sentence ID="301">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="302"></Sentence>
+			<Sentence ID="303">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="304">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="305">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="306">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="307">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="308">Incorrect value</Sentence>
+			<Sentence ID="309">Incorrect value</Sentence>
+			<Sentence ID="311">Incorrect value</Sentence>
+			<Sentence ID="312">Incorrect value</Sentence>
+			<Sentence ID="313"></Sentence>
+			<Sentence ID="314">Incorrect value</Sentence>
+			<Sentence ID="315">Incorrect value</Sentence>
+			<Sentence ID="316"></Sentence>
+			<Sentence ID="317">Incorrect value</Sentence>
+			<Sentence ID="318"></Sentence>
+			<Sentence ID="401">No</Sentence>
+			<Sentence ID="402">Yes</Sentence>
+			<Sentence ID="403">Single</Sentence>
+			<Sentence ID="404">Multi</Sentence>
+			<Sentence ID="405">Vertical</Sentence>
+			<Sentence ID="406">Horizontal</Sentence>
+			<Sentence ID="407">No</Sentence>
+			<Sentence ID="408">Yes</Sentence>
+			<Sentence ID="409">User defined</Sentence>
+			<Sentence ID="411">Default</Sentence>
+			<Sentence ID="501">Hide the object</Sentence>
+			<Sentence ID="502">Select all the rows</Sentence>
+			<Sentence ID="503">Deselect all the rows</Sentence>
+			<Sentence ID="504">Show the object</Sentence>
+			<Sentence ID="505">toggle</Sentence>
+			<Sentence ID="506"></Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="601">hide</Sentence>
+			<Sentence ID="602">show</Sentence>
+			<Sentence ID="603"></Sentence>
+			<Sentence ID="604">show</Sentence>
+			<Sentence ID="605">toggle</Sentence>
+			<Sentence ID="701">fade</Sentence>
+			<Sentence ID="702">fade</Sentence>
+			<Sentence ID="703">id</Sentence>
+			<Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="802">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="803">id</Sentence>
+			<Sentence ID="901">Parametr</Sentence>
+			<Sentence ID="902"></Sentence>
+			<Sentence ID="903">list element id</Sentence>
+			<Sentence ID="904">list element id</Sentence>
+			<Sentence ID="905"></Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">Список</Sentence>
+			<Sentence ID="002">Используется для добавления горизонтальных или вертикальных списков</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Иерархия</Sentence>
+			<Sentence ID="102">Отображение</Sentence>
+			<Sentence ID="103">Позиция</Sentence>
+			<Sentence ID="104">Сверху</Sentence>
+			<Sentence ID="105">Слева</Sentence>
+			<Sentence ID="106">Ширина</Sentence>
+			<Sentence ID="107">Высота</Sentence>
+			<Sentence ID="108">Данные</Sentence>
+			<Sentence ID="109">Выбранные ряды</Sentence>
+			<Sentence ID="111">Режим выбора</Sentence>
+			<Sentence ID="112">Слой</Sentence>
+			<Sentence ID="113">Выбранные элементы</Sentence>
+			<Sentence ID="114">Перетаскивание</Sentence>
+			<Sentence ID="115">Стиль</Sentence>
+			<Sentence ID="116">Оформление</Sentence>
+			<Sentence ID="117">Класс CSS</Sentence>
+			<Sentence ID="118"></Sentence>
+			<Sentence ID="201">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
+			<Sentence ID="202">Отображение объекта</Sentence>
+			<Sentence ID="203">Положение в визуальной иерархии объектов</Sentence>
+			<Sentence ID="204">Расстояние от верхней границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="205">Расстояние от левой границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="206">Ширина объекта в пикселях</Sentence>
+			<Sentence ID="207">Высота объекта в пикселях</Sentence>
+			<Sentence ID="208">Данные в формате JSON</Sentence>
+			<Sentence ID="209">Ряды</Sentence>
+			<Sentence ID="211">Режим выборки рядов</Sentence>
+			<Sentence ID="212">Способ отображения списка</Sentence>
+			<Sentence ID="213">Set class &quot;active&quot; to item with this identifier</Sentence>
+			<Sentence ID="214">Использование перемещения</Sentence>
+			<Sentence ID="215">Стиль CSS</Sentence>
+			<Sentence ID="216">Оформление объекта</Sentence>
+			<Sentence ID="217">Имена классов CSS</Sentence>
+			<Sentence ID="218"></Sentence>
+			<Sentence ID="301">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="302"></Sentence>
+			<Sentence ID="303">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="304">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="305">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="306">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="307">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="308">Неправильное значение</Sentence>
+			<Sentence ID="309">Неправильное значение</Sentence>
+			<Sentence ID="311">Неправильное значение</Sentence>
+			<Sentence ID="312">Неправильное значение</Sentence>
+			<Sentence ID="313"></Sentence>
+			<Sentence ID="314">Неправильное значение</Sentence>
+			<Sentence ID="315">Неправильное значение</Sentence>
+			<Sentence ID="316"></Sentence>
+			<Sentence ID="317">Неправильное значение</Sentence>
+			<Sentence ID="318"></Sentence>
+			<Sentence ID="401">Нет</Sentence>
+			<Sentence ID="402">Да</Sentence>
+			<Sentence ID="403">Одиночный</Sentence>
+			<Sentence ID="404">Множественный</Sentence>
+			<Sentence ID="405">Вертикальный</Sentence>
+			<Sentence ID="406">Горизонтальный</Sentence>
+			<Sentence ID="407">Нет</Sentence>
+			<Sentence ID="408">Да</Sentence>
+			<Sentence ID="409">Определено пользователем</Sentence>
+			<Sentence ID="411">По умолчанию</Sentence>
+			<Sentence ID="501">Скрыть объект</Sentence>
+			<Sentence ID="502">Выбрать все ряды</Sentence>
+			<Sentence ID="503">Отменить выделение всех рядов</Sentence>
+			<Sentence ID="504">Показать объект</Sentence>
+			<Sentence ID="505">Переключение</Sentence>
+			<Sentence ID="506"></Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="601">Скрыть</Sentence>
+			<Sentence ID="602">Показать</Sentence>
+			<Sentence ID="603"></Sentence>
+			<Sentence ID="604">Показать</Sentence>
+			<Sentence ID="605">toggle</Sentence>
+			<Sentence ID="701">Исчезновение</Sentence>
+			<Sentence ID="702">Исчезновение</Sentence>
+			<Sentence ID="703">id</Sentence>
+			<Sentence ID="801">Время исчезновения в миллисекундах</Sentence>
+			<Sentence ID="802">Время исчезновения в миллисекундах</Sentence>
+			<Sentence ID="803">id</Sentence>
+			<Sentence ID="901">Параметр</Sentence>
+			<Sentence ID="902"></Sentence>
+			<Sentence ID="903">Идентификатор элемента списка</Sentence>
+			<Sentence ID="904">Идентификатор элемента списка</Sentence>
+			<Sentence ID="905"></Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="c0f9065a-cd07-eb98-7e88-08a9d0f57d30" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjlBNkY2NEM4MUZFNTExRTFCRjgxQTU0MEY4MDkxRjI3IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjlBNkY2NEM5MUZFNTExRTFCRjgxQTU0MEY4MDkxRjI3Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OUE2RjY0QzYxRkU1MTFFMUJGODFB
+			NTQwRjgwOTFGMjciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OUE2RjY0QzcxRkU1MTFFMUJG
+			ODFBNTQwRjgwOTFGMjciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz6vGdkMAAABBUlEQVR42pRTS25CMQz02OFzGvZIPdlbAOri
+			7TlI9110iVi3vUCFhDgGqZ3kuSli4WcpyihxxpmJg6/Dlmog19kmkAcaznd6CGz2Z0qerImb3Yki
+			8f364piJmcoAUzSunz+en4D/h4dhoHEcHT+G7YGhQxoBp6YTntAnPwugIyAF4Pj1C4HmQ1Il4LSc
+			VmdI0KKyaBIM6GEgLsFMRyucDBQjZ8hgER2NgBcrJRAniEgwAui5RrBWCeKuhiSIts/kASdlUkcn
+			gpAEK2iFiwcK0BGEXkH6ZzQPjABxCdYHfxKMwLpxhoT6alMrp1W9vi7e3o90+XjzxGxfONucG84F
+			U/cXfgUYAHsVRok/RxdeAAAAAElFTkSuQmCC
+		</Resource>
+		<Resource ID="4a582b3d-09ee-8ac1-1451-08a964bbb510" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjZFN0VFM0U0MTQyNTExRTFBQkI3RURFRjg4MjA5MTQzIiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjZFN0VFM0U1MTQyNTExRTFBQkI3RURFRjg4MjA5MTQzIj4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NkU3RUUzRTIxNDI1MTFFMUFCQjdF
+			REVGODgyMDkxNDMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NkU3RUUzRTMxNDI1MTFFMUFC
+			QjdFREVGODgyMDkxNDMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			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
+		</Resource>
+		<Resource ID="37845d76-d0ee-a176-9aee-08a99a34577f" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAEpklEQVR42q2Wy09bRxTGx/YBY2xj
+			jCAtsCEkETZSbdJswkNKaCskRBcwt6CGSoBZVbQ4qdoGhxBaMIYkLRQ5NE1Ioy6SdlHluryyIPuu
+			aHcg/gCqqsEvwMbPsd2ZATu01y4sOtLVtX3nzm/O+c75xjJ0OKwfW0GlUpFYLCY2v9WMU6kUoT+D
+			skCJlPlKlEgkUK4hk8tINBKFF6svXHl5eUI0GgXnnJPwZ0cBhYWFJBKJiGP2MVxUVMQB6GSD+Hw+
+			mBifcNFNCsFgUAoY/MgKBkMNmyg2NDXg0dFRDujt7UX9/f3I7/cjACmPRory8/N5BI4JBwcEAgEp
+			4OrgNTj/5nnidrvFqtNVuLPzPQ4YGRlBbW1tqL6+Puf2GxsbydLCEkxOTrr0er2wvb0tBXz6yWdg
+			MpmIx+sRz56rxl1YoBNSMHzrFhq0XkWrq6uSCGQyGUomk6iiooIYDUYegVqtFnZ3d6WAoc9tUKRW
+			k1A4LF6zXceqYh1J0Qjy6DPlCTTw+rzgGHfk1uDmjRHQVVaRUGBXHHj3ElasPCGJZArUl1pQYWMb
+			IkcnH9WAXgoK8B8n8pejY1BsrCNhn0fsOVeMdy0CiUcRVIwPo+2qC0h28wMEGhlT9dXiMjlSRJMo
+			UFNHtF88hUfz37vUxSWC588/pIAJuwP0BjMJ+b3ildNa7O/HJB5HUDliQ8nm91Fq6QekUMHhnjMq
+			IFk8hWKvV5LU5S5wzjpdhdoiwe9xSwF3bt8BlVZHyy0sfthzBWsSYULXAqTRIaTRZ9KRLUVyliK/
+			H+xjdpeqoEAI7u9LATNfz8Brp06R/f198fI7b+Nff/ud0BoHU20tumB+43iRvV6YnJh0FTBANg3u
+			Oed4mdKJIq0+3IE7eB/YhoZQb18fslgsSKFQ8MZKD7lczsuU9ggZvjHMy1Sn0wkMJgF8d/8BmM1m
+			DiCJOO7oOAAMUUDf/wF4NP8ISktLSTgUFi82XMRra2s8RUajEdHIjk3RsV7049OfQKNRE+qE3E3p
+			JB4BNT1UUlJyIg0c9v9otNmZWTCZTcTn9YmQD7i9vf1AA5sNDQwMoOnpaW4V6RQxm0inqLa2llDR
+			wD5ud9ENCSwaqVVct2VELtbrcE9PTwbQ1dXFzY4tygDszs4H9pkBmpqayNTUFDz7+ZlLq9UKOzs7
+			UgCtYWCmFQgGRXOdGS8uLjBnZcIjjDHfLbvSu6epRLSkMynyuD2wsrziotad/cC5e/suzQDQ7o2J
+			fRYLLi0rJRsbGxCn7Uxf4oseHekUsSjY6ffyr5ewuLCYGzD91TTUGAyEhifKFTLc3d1N6CJA76il
+			pQVtbW39w67TqWIpKisrI9XV1bC8uMwbLRQKZRF51glnz5whe3t7osfrxlarlWvAFt/c3OSAXINp
+			N/PNDDxfeu7SaDTZz4Nv5+5DeXk5oXQxEglj5z0+AVpbW1FnZyei4vNG+/dgkSiVShKPxWF5aZmn
+			iJ7rUsDDBw9BIVfQMyDBRaa1T2ilQJzEEX05I3A2AH1Gdvw7sPDLQm7A4/nHwP5+0BeoBnLq1YRH
+			wHatgAOLoOZM3fOVVfDvhwAm7Pr6uovOFwghGcDfTBa9Nz1vVyYAAAAASUVORK5CYII=
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[
+import collections, json, StringIO
+
+
+
+def on_update(object, attributes):
+	css = """"""
+	# if "skin" in param:
+	# 	if param["skin"]["value"] == "1":
+	# 		o.set_attributes({"style": css})
+	if attributes.get("skin") == "1":
+		object.attributes.update(style=css)
+	# if "style" in param and param["style"]["value"] and o.attributes.style != css:
+	# 	o.set_attributes({"skin": 0})
+	if attributes.get("style") and object.attributes["style"] != css:
+		object.attributes.update(skin=0)
+
+
+class VDOM_list(VDOM_object):
+
+	def render(self, contents=""):
+
+		woid = (self.id).replace('-', '_')
+		id = u"o_" + woid
+
+		display = u" display:none; " if self.visible == "0" else u""
+
+		style = u"""{display}z-index: {zind}; position: absolute; top: {top}px; left: {left}px; height: {height}px; width: {width}px"""\
+				.format(display = display, zind = self.zindex, top = self.top, left = self.left, height = self.height, width = self.width)
+
+		if self.cssclass != "" or self.selectionmode == "1":
+			cssclass = u"class='%s %s'" % ( self.cssclass if self.cssclass else "", u"multiselect" if self.selectionmode == "1" else "" )
+		else:
+			cssclass = ""
+
+		if self.data:
+			try:
+				data = json.loads(self.data, object_pairs_hook=collections.OrderedDict)
+				if isinstance(data, int):
+					raise Exception (u"Incorrect value in data %s" % self.data)
+			except:
+				raise Exception (u"Incorrect value in data %s" % self.data)
+		else:
+			data = {}
+
+		selectedRows = []
+		if self.selectedrows:
+			try:
+				selectedRows = json.loads(self.selectedrows)
+				if isinstance(selectedRows, list):
+					js_multiselect = ""
+				else:
+					raise Exception (u"Attribute must be list")
+			except:
+				raise Exception (u"Incorrect value in selected rows")
+		else:
+			js_multiselect = u""
+
+
+		hlayout = u"#%(id)s ul li{display: inline;}" % {"id": id} if self.layout == "1" else u""
+
+		css = u"#%(id)s ul{list-style: none outside none;margin: 0;padding: 0;}%(hlayout)s" % {"id": id, "hlayout": hlayout}
+
+		res_buffer = StringIO.StringIO(u"")
+		res_buffer.write(u"<style type='text/css'>")
+		res_buffer.write(css)
+		css = self.style % {"id": id}
+		res_buffer.write(css)
+		res_buffer.write(u"</style>")
+
+		if VDOM_CONFIG_1["DEBUG"] == "1":
+			debug_info = u"objtype='list' objname='%s' ver='%s'" % (self.name, self.type.version)
+		else:
+			debug_info = u""
+
+		rslt = u"""<div {debug_info} id="{id}" style="{style}" {cssclass}><ul>""".format(
+				debug_info = debug_info,
+				name = self.name,
+				id = id,
+				style = style,
+				cssclass = cssclass )
+		
+		res_buffer.write(rslt)
+
+		for key, value in data.items():
+			active = u'class="list-item-%s %s %s"' % ( key, "active" if key == self.selecteditem else "", "selected" if key in selectedRows else "")
+			if isinstance(value, list):
+				if len(value) == 3:
+					image = u"<img src=\"%s\" />" % value[1]
+					li = u"<li itemid=\"%(elem_id)s\" %(active)s>%(left_image)s%(content)s%(right_image)s</li>" % {
+						"elem_id":     unicode(key),
+						"content":     unicode(value[0]),
+						"active":      active,
+						"left_image":  image if value[2] == "left" else u"",
+						"right_image": image if value[2] == "right" else u"" }
+					res_buffer.write(li)
+				else:
+					raise Exception("Must be 3 parameters in string %s" % unicode(value))
+			elif isinstance(value, unicode):
+				li = u"<li itemid=\"%(elem_id)s\" %(active)s>%(content)s</li>" % {"elem_id": unicode(key), "active": active, "content": unicode(value)}
+				res_buffer.write(li)
+
+			else:
+				raise Exception("Incorrect value in string %s" % unicode(value))
+
+		if self.dragdrop == "1":
+			dragdrop = u"""
+$j('#%(id)s li').droppable({
+	//greedy: true,
+	//activeClass: "ui-state-hover",
+	hoverClass: "ui-state-active",
+	drop: function(e, ui) {
+		execEventBinded('%(woid)s', "drop", {itemid: $j(this).attr('itemid')});
+	}
+});
+			""" % { "id": id, "woid": woid }
+		else:
+			dragdrop = u""
+
+		if ((self.clickclass).strip() == ""):
+			clickclass = u""
+		else:
+			clickclass = self.clickclass
+			clickclass = u".%s" % clickclass.replace(' ', ' .')
+
+		handleclick = u"""
+	var %(id)s_doo = false, m = $j('#%(id)s').hasClass('multiselect');
+	$j('#%(id)s ul li %(clickclass)s').bind('click dblclick', function(e){
+		var tt = $j(this);
+		if (tt.is('li')) {
+			t = tt;
+		} else {
+			t = tt.closest('li');
+		}
+		t.parent().children().removeClass("active");
+		if (m) {
+			if (t.hasClass("selected")) t.removeClass("selected");
+			else t.addClass("selected");
+		}
+		t.addClass("active");
+		if (e.type == 'dblclick') {
+			%(id)s_doo = false;
+			if (m) {
+				var a = [];
+				t.parent().find('li.selected[itemid]').each(function(i,e){ a.push($q(e).attr('itemid')); });
+				execEventBinded('%(woid)s', "rowsselected", {keyList: a });
+			} else {
+				execEventBinded('%(woid)s', "itemdblclick", {itemid: t.attr('itemid')});
+			}
+		} else {
+			setTimeout(function() {
+				if (%(id)s_doo == true) {
+					%(id)s_doo = false;
+					if (m) {
+						var a = [];
+						t.parent().find('li.selected[itemid]').each(function(i,e){ a.push($q(e).attr('itemid')); });
+						execEventBinded('%(woid)s', "rowsselected", {keyList: a });
+					} else {
+						execEventBinded('%(woid)s', "itemclick", {itemid: t.attr('itemid')});
+					}
+				}
+			}, 300);
+			%(id)s_doo = true;
+		}
+		return false;
+	});
+		""" % { "id": id, "woid": woid, "clickclass": clickclass }
+
+		res_buffer.write(u"</ul></div>")
+		js_script = u"""<script type="text/javascript">
+$j(function(){
+	%(handleclick)s
+	%(dragdrop)s
+});
+</script>""" % { "woid": woid, "id": id, "dragdrop": dragdrop, "handleclick": handleclick }
+
+		res_buffer.write(js_script)
+		result = res_buffer.getvalue()
+		res_buffer.close()
+
+		return VDOM_object.render(self, contents=result)
+
+		
+	def __get_error_wysiwyg_obj (self, error_text) :
+		result = \
+			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" 
+							top="{top}" left="{left}" width="{width}" height="{height}">
+					<text top="0" left="5" color="#ff0000" textalign="left">{value}</text>
+				</container>
+			""".format(
+					id = self.id, vis = self.visible, 
+					zind = self.zindex, hierarchy = self.hierarchy, 
+					top = self.top, left = self.left,
+					width = self.width, height = self.height,
+					value = error_text)
+				
+		return VDOM_object.wysiwyg(self, contents=result)
+			
+			
+	def wysiwyg(self, contents=""):
+		incorrect_data_text = u"Incorrect value in data:\n{data}".format(data = self.data)
+
+		if self.data:
+			try:
+				data = json.loads(self.data, object_pairs_hook=collections.OrderedDict)
+				if isinstance(data, int):
+					return self.__get_error_wysiwyg_obj(incorrect_data_text)
+			except:
+				return self.__get_error_wysiwyg_obj(incorrect_data_text)
+		else:
+			data = {}
+
+		if not data :
+			import utils.wysiwyg
+
+			image_id = "4a582b3d-09ee-8ac1-1451-08a964bbb510"
+			result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
+			return VDOM_object.wysiwyg(self, contents=result)
+
+		try:
+			items = data.items()
+
+		except:
+			return self.__get_error_wysiwyg_obj(incorrect_data_text)
+
+		res_buffer = StringIO.StringIO(u"")
+		if self.layout == "1":
+			res_buffer.write(u"""<row backgroundcolor="#f0f0f0" bordercolor="#000000" borderwidth="0">""")
+			for key, value in items:
+				if isinstance(value, list):
+					li = u"<cell backgroundcolor=\"#f0f0f0\" bordercolor=\"#000000\" borderwidth=\"0\"><text fontsize=\"14\" color=\"#000000\" textalign=\"left\">%s</text></cell>" % unicode(value[0])
+					res_buffer.write(li)
+				elif isinstance(value, unicode):
+					li = u"<cell backgroundcolor=\"#f0f0f0\" bordercolor=\"#000000\" borderwidth=\"0\"><text fontsize=\"14\" color=\"#000000\" textalign=\"left\">%s</text></cell>" % unicode(value)
+					res_buffer.write(li)
+			res_buffer.write(u"</row>")
+		else:
+			for key, value in items:
+				if isinstance(value, list):
+					li = u"<row backgroundcolor=\"#f0f0f0\" bordercolor=\"#000000\" borderwidth=\"0\"><cell backgroundcolor=\"#f0f0f0\" bordercolor=\"#000000\" borderwidth=\"0\"><text fontsize=\"14\" color=\"#000000\" textalign=\"left\">%s</text></cell></row>" % unicode(value[0])
+					res_buffer.write(li)
+				elif isinstance(value, unicode):
+					li = u"<row backgroundcolor=\"#f0f0f0\" bordercolor=\"#000000\" borderwidth=\"0\"><cell backgroundcolor=\"#f0f0f0\" bordercolor=\"#000000\" borderwidth=\"0\"><text fontsize=\"14\" color=\"#000000\" textalign=\"left\">%s</text></cell></row>" % unicode(value)
+					res_buffer.write(li)
+
+		result = \
+			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}"
+					top="{top}" left="{left}" width="{width}" height="{height}">
+					<table zindex="{zind}" top="0" left="0" width="{width}" height="{height}" backgroundcolor="#f0f0f0" bordercolor="#000000" borderwidth="0" >
+						{res_buffer}
+					</table>
+				</container>
+			""".format(
+				id = self.id, vis = self.visible, zind = self.zindex,
+				hierarchy = self.hierarchy,
+				top = self.top, left = self.left, 
+				width = self.width, height = self.height,
+				res_buffer = res_buffer.getvalue())
+
+		res_buffer.close()
+		return VDOM_object.wysiwyg(self, contents=result)
+]]>
+	</SourceCode>
+	<E2VDOM>
+		<Events>
+			<UserInterfaceEvents>
+				<Event Name="rowsselected" Description="#Lang(511)">
+					<Parameters>
+						<Parameter Name="keyList" Description="#Lang(905)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="custom" Description="#Lang(506)">
+					<Parameters>
+						<Parameter Name="param" Description="#Lang(901)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="itemclick" Description="#Lang(508)">
+					<Parameters>
+						<Parameter Name="itemid" Description="#Lang(903)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="drop" Description="#Lang(507)">
+					<Parameters>
+						<Parameter Name="params" Description="#Lang(902)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="itemdblclick" Description="#Lang(509)">
+					<Parameters>
+						<Parameter Name="itemid" Description="#Lang(904)" Order="0"/>
+					</Parameters>
+				</Event>
+			</UserInterfaceEvents>
+		</Events>
+		<Actions>
+			<Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
+				<Action Name="hide" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_hide(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="toggle" DisplayName="#Lang(605)" Description="#Lang(505)">
+					<Parameters>
+						<Parameter Name="id" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[var t = $(this.domCont), ii = this.domCont.id;
+if (t.hasClass('multiselect')){
+	l = t.find('li[itemid="'+id+'"]');
+	if (l.hasClass('selected')){
+		l.removeClass('selected');
+	}else{
+		l.addClass('selected');
+	}
+	var a = [], k = t.find('li.selected[itemid]');
+	k.each(function(i,e){ a.push($q(e).attr('itemid')); });
+	execEventBinded(ii.substring(2, ii.length), "rowsselected", {keyList:a});}]]>
+					</SourceCode>
+				</Action>
+				<Action Name="show" DisplayName="#Lang(604)" Description="#Lang(504)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_show(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="selectNone" DisplayName="#Lang(603)" Description="#Lang(503)">
+					<SourceCode>
+<![CDATA[var t = $j(this.domCont), ii = this.domCont.id;
+if (t.hasClass('multiselect')){
+	t.find('li[itemid]').removeClass('selected');
+	execEventBinded(ii.substring(2, ii.length), "rowsselected", {keyList:[]});
+}]]>
+					</SourceCode>
+				</Action>
+				<Action Name="unselectItems" DisplayName="#Lang(605)" Description="#Lang(505)">
+					<Parameters>
+						<Parameter Name="items" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[var t = $(this.domCont), id = this.domCont.id;
+for (var i in items){
+  l = t.find('li[itemid="'+items[i]+'"]');
+  if (l.hasClass('selected')){
+    l.removeClass('selected');
+  }
+}
+var a = [];
+var k = t.find('li.selected[itemid]');
+k.each(function(i,e){ a.push($q(e).attr('itemid')); });
+execEventBinded(id.substring(2, id.length), "rowsselected", {keyList:a});]]>
+					</SourceCode>
+				</Action>
+				<Action Name="selectItems" DisplayName="#Lang(605)" Description="#Lang(505)">
+					<Parameters>
+						<Parameter Name="items" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[var t = $(this.domCont), id = this.domCont.id;
+var only1 = false;
+if (!t.hasClass('multiselect')){
+  t.find('li[itemid].selected').removeClass("selected");
+  only1 = true;
+}
+
+for (var i in items){
+  l = t.find('li[itemid="'+items[i]+'"]');
+  if (!l.hasClass('selected')){
+    l.addClass('selected');
+  }
+  if (only1) break;
+}
+
+var a = [];
+var k = t.find('li.selected[itemid]');
+k.each(function(i,e){ a.push($q(e).attr('itemid')); });
+execEventBinded(id.substring(2, id.length), "rowsselected", {keyList:a});]]>
+					</SourceCode>
+				</Action>
+				<Action Name="selectAll" DisplayName="#Lang(602)" Description="#Lang(502)">
+					<SourceCode>
+<![CDATA[var t = $j(this.domCont), ii = this.domCont.id;
+if (t.hasClass('multiselect')){
+	var a = [], k = t.find('li[itemid]');
+	k.addClass('selected');
+	k.each(function(i,e){ a.push($q(e).attr('itemid')); });
+	execEventBinded(ii.substring(2, ii.length), "rowsselected", {keyList:a});
+}]]>
+					</SourceCode>
+				</Action>
+				<Action Name="activateItem" DisplayName="#Lang(605)" Description="#Lang(505)">
+					<Parameters>
+						<Parameter Name="item" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[var t = $(this.domCont), id = this.domCont.id;
+t.find('li[itemid].active').removeClass("active");
+
+if (item){
+  t.find('li[itemid="'+item+'"]').addClass("active");
+}]]>
+					</SourceCode>
+				</Action>
+			</Container>
+		</Actions>
+	</E2VDOM>
+</Type>

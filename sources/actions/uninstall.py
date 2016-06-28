@@ -1,33 +1,29 @@
 
 import managers
 from logs import console
+from .auxiliary import confirm
+from .detecting import TYPE, search
 
 
-TYPE = "type"
-APPLICATION = "application"
-
-
-def run(uuid_or_name):
-    """
-    uninstall application or type
-    :param uuid_or_name uuid_or_name: application or type uuid or name
-    """
-
-    subject = managers.memory.types.search(uuid_or_name)
-    if subject:
-        console.write("uninstall type %s: %s" % (subject.id, subject.name))
-        entity = TYPE
-    else:
-        subject = managers.memory.applications.search(uuid_or_name)
-        if subject:
-            console.write("uninstall application %s: %s" % (subject.id, subject.name.lower()))
-            entity = APPLICATION
-        else:
-            console.error("unable to find application or type with such uuid")
-            return
-
+def uninstall(entity, subject):
+    console.write("uninstall %s %s: %s" % (entity, subject.id, subject.name.lower()))
     try:
         subject.uninstall()
     except Exception as error:
         console.error("unable to uninstall %s: %s" % (entity, error))
         raise
+
+
+def run(identifier):
+    """
+    uninstall application or type
+    :param uuid_or_name identifier: application or type uuid or name or types to uninstall all types
+    """
+    if identifier == "types":
+        if confirm("uninstall all types"):
+            for subject in tuple(managers.memory.types.itervalues()):
+                uninstall(TYPE, subject)
+    else:
+        entity, subject = search(identifier)
+        if entity:
+            uninstall(entity, subject)

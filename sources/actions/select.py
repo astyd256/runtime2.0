@@ -3,14 +3,13 @@ import managers
 from logs import console
 
 
-def run(uuid_or_name):
+def run(identifier):
     """
     select default application
-    :param uuid_or_name uuid_or_name: application uuid or name
+    :param uuid_or_name identifier: application uuid or name
     """
-
     try:
-        application = managers.memory.applications.search(uuid_or_name)
+        application = managers.memory.applications.search(identifier)
         console.write("select %s: %s as default application" % (application.id, application.name))
     except KeyError:
         console.error("unable to find application with such uuid or name")

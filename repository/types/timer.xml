@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>d07ae2ab-62fe-ff98-682a-abc15eb17f9c</ID>
+		<Name>timer</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_time</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.40.8507</Version>
+		<Category>Additional</Category>
+		<InterfaceType>1</InterfaceType>
+		<Icon>#Res(5aec5fea-8e46-3378-4783-16ef3fa46b04)</Icon>
+		<EditorIcon>#Res(4124adaf-430d-e3b3-46bf-16ef692d1468)</EditorIcon>
+		<StructureIcon>#Res(35fe8344-3dc7-7d75-eb99-16ef963edd2a)</StructureIcon>
+		<Dynamic>0</Dynamic>
+		<Moveable>1</Moveable>
+		<Resizable>0</Resizable>
+		<OptimizationPriority>2</OptimizationPriority>
+		<Container>1</Container>
+		<Containers>htmlcontainer, dialog, container, tablecell</Containers>
+		<Languages>en_US, ru_RU, fr_FR</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>top</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>left</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>width</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue>50</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>height</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue>50</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>interval</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue>200</DefaultValue>
+			<RegularExpressionValidation>^\d{1,8}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(8)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>active</Name>
+			<DisplayName>#Lang(107)</DisplayName>
+			<Description>#Lang(207)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>once</Name>
+			<DisplayName>#Lang(108)</DisplayName>
+			<Description>#Lang(208)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(403)|0)|(#Lang(404)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">Timer</Sentence>
+			<Sentence ID="002">The Timer type produces an object that is used for measuring time intervals.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Top</Sentence>
+			<Sentence ID="103">Left</Sentence>
+			<Sentence ID="104">Width</Sentence>
+			<Sentence ID="105">Height</Sentence>
+			<Sentence ID="106">Interval</Sentence>
+			<Sentence ID="107">Autostart</Sentence>
+			<Sentence ID="108">Once</Sentence>
+			<Sentence ID="201">The order of rendering the object on the page. The objects with identical values of the Hierarchy attribute are rendered in the order they are written in the XML-file of the VDOM application.</Sentence>
+			<Sentence ID="202">Spacing in pixels between the object and the top border of the container, in which the object is situated.</Sentence>
+			<Sentence ID="203">Spacing in pixels between the object and the left border of the container, in which the object is situated.</Sentence>
+			<Sentence ID="204">The width of the object in pixels.</Sentence>
+			<Sentence ID="205">The height of the object in pixels.</Sentence>
+			<Sentence ID="206">The event time in milliseconds.</Sentence>
+			<Sentence ID="207">Start the timer after loading the page.</Sentence>
+			<Sentence ID="208">The number of times of starting the timer.</Sentence>
+			<Sentence ID="301">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="302">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="303">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="304">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="305">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="306">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="307">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="308">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="401">No</Sentence>
+			<Sentence ID="402">Yes</Sentence>
+			<Sentence ID="403">No</Sentence>
+			<Sentence ID="404">Yes</Sentence>
+			<Sentence ID="501">Pause time reading.</Sentence>
+			<Sentence ID="502">Set new time interval.</Sentence>
+			<Sentence ID="503">Start time reading.</Sentence>
+			<Sentence ID="504">Start time reading.</Sentence>
+			<Sentence ID="505">Stop time reading.</Sentence>
+			<Sentence ID="506">The number of the time changes.</Sentence>
+			<Sentence ID="601">freezeTime</Sentence>
+			<Sentence ID="602">setInterval</Sentence>
+			<Sentence ID="603">Start</Sentence>
+			<Sentence ID="604">Start</Sentence>
+			<Sentence ID="605">Stop</Sentence>
+			<Sentence ID="701">Freeze period</Sentence>
+			<Sentence ID="702">New interval</Sentence>
+			<Sentence ID="703">New interval</Sentence>
+			<Sentence ID="704">New interval</Sentence>
+			<Sentence ID="801">Pause time, indicated in milliseconds</Sentence>
+			<Sentence ID="802">Interval, time is indicated in milliseconds</Sentence>
+			<Sentence ID="803">Interval, time is indicated in milliseconds</Sentence>
+			<Sentence ID="804">Interval, time is indicated in milliseconds</Sentence>
+			<Sentence ID="901">Number of time changes</Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">Timer</Sentence>
+			<Sentence ID="002">Timer</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hiérarchie</Sentence>
+			<Sentence ID="102">Haut</Sentence>
+			<Sentence ID="103">Gauche</Sentence>
+			<Sentence ID="104">Largeur</Sentence>
+			<Sentence ID="105">Hauteur</Sentence>
+			<Sentence ID="106">Intervalle</Sentence>
+			<Sentence ID="107">Démarrage Automatique</Sentence>
+			<Sentence ID="108">une seule fois</Sentence>
+			<Sentence ID="201">Hiérarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="202">Distance depuis le bord haut de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="203">Distance depuis le bord gauche de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="204">Largeur de l&apos;objet en pixels</Sentence>
+			<Sentence ID="205">Hauteur de l&apos;objet en pixels</Sentence>
+			<Sentence ID="206">Event time, msec</Sentence>
+			<Sentence ID="207">Démarrage après le chargement de la page</Sentence>
+			<Sentence ID="208">Génère seulement 1 seul evenement et s&apos;arrete</Sentence>
+			<Sentence ID="301">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="302">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="303">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="304">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="305">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="306">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="307">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="308">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="401">Non</Sentence>
+			<Sentence ID="402">Oui</Sentence>
+			<Sentence ID="403">Non</Sentence>
+			<Sentence ID="404">Oui</Sentence>
+			<Sentence ID="501">FreezeTime</Sentence>
+			<Sentence ID="502">Set Interval</Sentence>
+			<Sentence ID="503">Start timer</Sentence>
+			<Sentence ID="504">Start timer</Sentence>
+			<Sentence ID="505">Stop timer</Sentence>
+			<Sentence ID="506"></Sentence>
+			<Sentence ID="601">FreezeTime</Sentence>
+			<Sentence ID="602">SetInterval</Sentence>
+			<Sentence ID="603">Start</Sentence>
+			<Sentence ID="604">Start</Sentence>
+			<Sentence ID="605">Stop</Sentence>
+			<Sentence ID="701">Freeze period</Sentence>
+			<Sentence ID="702">New interval</Sentence>
+			<Sentence ID="703">New interval</Sentence>
+			<Sentence ID="704">New interval</Sentence>
+			<Sentence ID="801">Freeze period</Sentence>
+			<Sentence ID="802">New interval</Sentence>
+			<Sentence ID="803">New interval</Sentence>
+			<Sentence ID="804">New interval</Sentence>
+			<Sentence ID="901">Count of operations</Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">Таймер</Sentence>
+			<Sentence ID="002">Таймер</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Иерархия</Sentence>
+			<Sentence ID="102">Верх</Sentence>
+			<Sentence ID="103">Лево</Sentence>
+			<Sentence ID="104">Ширина</Sentence>
+			<Sentence ID="105">Высота</Sentence>
+			<Sentence ID="106">Интервал</Sentence>
+			<Sentence ID="107">Автозапуск</Sentence>
+			<Sentence ID="108">Один раз</Sentence>
+			<Sentence ID="201">Приоритет в потоке гипертекста</Sentence>
+			<Sentence ID="202">Расстояние от верхней границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="203">Расстояние от левой границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="204">Ширина объекта в пикселях</Sentence>
+			<Sentence ID="205">Высота объекта в пикселях</Sentence>
+			<Sentence ID="206">Интервал генерации события</Sentence>
+			<Sentence ID="207">Старт сразу после загрузки страницы</Sentence>
+			<Sentence ID="208">Сгенерировать только одно событие</Sentence>
+			<Sentence ID="301">Неправильное значение</Sentence>
+			<Sentence ID="302">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="303">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="304">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="305">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="306">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="307">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="308">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="401">Нет</Sentence>
+			<Sentence ID="402">Да</Sentence>
+			<Sentence ID="403">Нет</Sentence>
+			<Sentence ID="404">Да</Sentence>
+			<Sentence ID="501">Остановить время</Sentence>
+			<Sentence ID="502">Установить интервал</Sentence>
+			<Sentence ID="503">Запустить таймер</Sentence>
+			<Sentence ID="504">Запустить таймер</Sentence>
+			<Sentence ID="505">Остановить таймер</Sentence>
+			<Sentence ID="506"></Sentence>
+			<Sentence ID="601">Остановить время</Sentence>
+			<Sentence ID="602">Установить интервал</Sentence>
+			<Sentence ID="603">Старт</Sentence>
+			<Sentence ID="604">Старт</Sentence>
+			<Sentence ID="605">Стоп</Sentence>
+			<Sentence ID="701">Время остановки</Sentence>
+			<Sentence ID="702">Новый интервал</Sentence>
+			<Sentence ID="703">Новый интервал</Sentence>
+			<Sentence ID="704">Новый интервал</Sentence>
+			<Sentence ID="801">Время остановки</Sentence>
+			<Sentence ID="802">Новый интервал</Sentence>
+			<Sentence ID="803">Новый интервал</Sentence>
+			<Sentence ID="804">Новый интервал</Sentence>
+			<Sentence ID="901">Количество срабатываний</Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="5aec5fea-8e46-3378-4783-16ef3fa46b04" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjRGQUE0MDgxMTQyODExRTE4MTAwQkM4Mjk2MkMxQzk5IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjRGQUE0MDgyMTQyODExRTE4MTAwQkM4Mjk2MkMxQzk5Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NEZBQTQwN0YxNDI4MTFFMTgxMDBC
+			QzgyOTYyQzFDOTkiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NEZBQTQwODAxNDI4MTFFMTgx
+			MDBCQzgyOTYyQzFDOTkiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			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
+			YII=
+		</Resource>
+		<Resource ID="35fe8344-3dc7-7d75-eb99-16ef963edd2a" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjJGNDJBQzlCMUZFNTExRTE4RkE4OUY2NzEyOTUwNzM4IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjJGNDJBQzlDMUZFNTExRTE4RkE4OUY2NzEyOTUwNzM4Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MkY0MkFDOTkxRkU1MTFFMThGQTg5
+			RjY3MTI5NTA3MzgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MkY0MkFDOUExRkU1MTFFMThG
+			QTg5RjY3MTI5NTA3MzgiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz5B3KWnAAACj0lEQVR42kxTMWsUQRj9Zmd2wyWnuQSEqFEI
+			KLZW/gE5CFhIKkFIISnEVtBKzC+wOLBKJbHRfxBIlSaVha0iGmw8Dd7l9G53dma/Gd83m0gWvpud
+			nfe9ee/NnLLWklLqfG0olW3htY/34tvbXVJaT4loPzIPYuCDyIGCc+T/TMg0DVOWpcblLMveobmf
+			ZQH4DBUTEIAuJhsUwkak+B7jo+B9FZqGjPcO6/oSSA4zrW9o9IEkNcvDtiKVaczaOZofoHGNrb3L
+			ZTU1de1Ja97V0hwB0wLU+EZJhf87BYESVnBiXeR7fye4+pWbTB6LgnUOet0ELAggRFLtXlAWyY1H
+			IEiysBZSia1g7VYzm702tq43DbZjbcgwU8zzJDeHEA019tdPhGhaBUIAjHiHAg0LD421NULLyBiT
+			igESIs4DaXy3x8cpg1MHiSRwQ9F7UdI3VWUlQBIVBrs3YC9k9A0UIIOTSdr9P0H7k5SgrpuF+Q7/
+			Ho2RoaY8x7EYRw4EMhdirspWPp01yxDbQENgdXT0/euP4XBtNitT0/kSayo1R/JQJqo8pDuUjJdX
+			Vg5wjPVer9d7AitUlqXcCdJGp8bs9HZKqHI6cuka+Beby0tL1O0u7KlPn7/cBskH55wuy4rGJydJ
+			6VkztQKS7IAAJeTVq1eot3hxClU3DTAfARk455/KKVxbXaUco2884YSSVHnm5zvIKJddE2FZVS+w
+			NjRoFK/P89zcgo17VVWRudBNEosiT9c6ROyM1L1v5aNxB3YHjFtpRqMxWLsMkvtI/WVl7TMAOrL7
+			3FyRwhT/HFhIJrC1DbuD6XSWbCUCYe90OlwUxTbU7oQQNwHqMzeL7R+LjgHex/gGBCMJExgU0z8B
+			BgCPp7AR9UPThAAAAABJRU5ErkJggg==
+		</Resource>
+		<Resource ID="4124adaf-430d-e3b3-46bf-16ef692d1468" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+			jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVh
+			ZHlxyWU8AAADIGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78i
+			IGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9i
+			ZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAy
+			MDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93
+			d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJk
+			ZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5z
+			OnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0
+			cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JU
+			b29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5p
+			aWQ6NEZBQTQwODExNDI4MTFFMTgxMDBCQzgyOTYyQzFDOTkiIHhtcE1NOkRvY3VtZW50SUQ9Inht
+			cC5kaWQ6NEZBQTQwODIxNDI4MTFFMTgxMDBCQzgyOTYyQzFDOTkiPiA8eG1wTU06RGVyaXZlZEZy
+			b20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0RkFBNDA3RjE0MjgxMUUxODEwMEJDODI5NjJD
+			MUM5OSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0RkFBNDA4MDE0MjgxMUUxODEwMEJDODI5
+			NjJDMUM5OSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94
+			cGFja2V0IGVuZD0iciI/PoyYsVUAAARfSURBVEhLtZXZb1RlGMZ/s3Q63TudMlO6shpopVghIAIG
+			UaKJiXd6YSSYGIRojMTlQjRG0QQvjH8AXnjhrUZISaCVglWaNI3KoixDF+h0prO0Q2fpmTPnzDkz
+			vlNioXaxF/jmnJzkO9/3PO/2vJ8lL8b/aNblYitqhlcPv8ulkQhpZXq5x1g2gaPIjre2luISB+PB
+			4MMnGB2L8PtAP7ExP5VVVQ+fwOVy8+hjW3hi22Y83rplE1iWU+RoNMzoyBC6oqIYOt66Jla1tFBV
+			PTeSq75BGj0ealz315ck8F3/i7OnO7l2/QYNq1cR9IdwjwfQnSU4mxvZuncvT27fToWrlu87z9LV
+			08fXxz7Au8I9G+GiBBe6u+nuOsOOnbt5+tl9VFRW4LviY43vKurdGP6BP+iLBih++SU2bNjEqfN9
+			vP/GAdw11XPStyBBb89PnO85x6G336F+Zf3sAXM8SHpwiELvWRIp0qc6+e2XiyQ/+5iNm9rZ3NY2
+			rzbz2nTw2jV6BPytI+/NgBtmDiOXw5Sjhk22l5eC0wk1NZS9tp/W1lYcHx1lLBRkaFjI/2VzCLSM
+			ys8XzvHUnmfwSLF0w6Qg9HwuT46C4G3kHUVYix3ytQtZGa4jh3H775A6fZKrUrPC3gdtDsGtm9eJ
+			x1NslcLFEwlyZsFvyYjNIlmxYCktoaiqEtuKWook15k7d7j95XFyUvRySddkeJywvA+auHHfRoeH
+			qW9pIpczUVWVaSUF4pHFKuDOUjInf2DqxAn0iQiaksbUtEJQWEpsOCcmMCJhLl++xMr6hlnQ2QgM
+			wyAUGsdZWi6zRiWbzWJkDUyJovDPyGdRkyn0qUmydgv5YkF22GQ9j67LXkUjJQSxyejCXaRndb76
+			4hiGo5oXX3hO0uuUvOdmNheyapUoUjmDhGlgl7kkfssjkVlsEq1GIDyFr+tH2h7ZyP7XD86PwGa1
+			YYqnj7evFwA5pGXQtSyappPVdbSMhlM6ymsvwiO8HmH1iPcucWyFwO1aXUc6nqC+oWnhIttsNpG+
+			i4B/VFKUJhFPkhESQ1JVICikTMsIkaQvnc6gSI3iiWki4QnuTsUZvHVLvjE2dXQs3kVt7e0EpDOS
+			yQQTkzFC4chMNykCqKbVmShUuRcUJcPU3TjBsSB+eUWt9HZ109GxVQahd3ElZ6Woxz89ittbz8rm
+			tQQDQRzOYkpLpD2l760WK1nzXiSJVIrp5DTNq5sx0ykGfr3Ah598TsuatUuPimHfTb779hua1m0k
+			Z3Vw+7ZflGzMgEtN0dSsCFAThZusX7uO6nI7/b3nOXjoTbbt2j1PyQvOoht/XuFM5ykhsFPpaWA8
+			FGMyGiU6laS6qpSqigpaZJpG/UMo8Riv7D/Alh0754EXFhadphEZbP0XexmR+ZLRRA+iqEB4Eo+7
+			EkNGCqKL1tY29ux7nsaWVQuCL0nwz4lwMEAoMEZMIlBE2SVlFbhlVDQ0NlPX2HhPD0vYsm60JRH+
+			4+ffGEotYPGcF0IAAAAASUVORK5CYII=
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[
+import datetime
+
+
+class VDOM_time(VDOM_object):
+
+	def render(self, contents=""):
+		result = u''
+		id = (self.id).replace('-', '_')
+		oid = 'o_' + id
+		if self.active == '1':
+			if self.once == '1':
+				jstartscript = """vdom_ui_timerStartOnce("%s", %s);""" % ( oid, self.interval )
+			else:
+				jstartscript = """vdom_ui_timerStart2("%s", %s);""" % ( oid, self.interval )
+			jstart = """<script type='text/javascript'> $j(function(){ $j(function(){ %s }); }); </script>""" % ( jstartscript )
+		else:
+			jstart = ''
+		result += """<div id="%s" style="display:none">%s</div>""" % ( oid, jstart )
+		return VDOM_object.render(self, contents=result)
+
+	def wysiwyg(self, contents=""):
+		from scripting.utils.wysiwyg import get_empty_wysiwyg_value
+		
+		self.zindex = "0"
+		self.width = "50"
+		self.height = "50"
+		
+		image_id = "5aec5fea-8e46-3378-4783-16ef3fa46b04"
+		result = get_empty_wysiwyg_value(self, image_id, 0.4)
+		
+		return VDOM_object.wysiwyg(self, contents=result)
+]]>
+	</SourceCode>
+	<Libraries>
+		<Library Target="html"><![CDATA[<script type='text/javascript'>
+function vdom_ui_timerStartOnce(ob, interval)
+{
+	eval("var obj = Obj_" + ob.substring(2, ob.length) + ";");
+	if (typeof obj === 'undefined') return;
+	if (interval == undefined) return;/*interval = 500;*/
+	$q(obj).stopTime();
+	$q(obj).oneTime(interval, function(i){
+        eval("var freeze = window.timer_" + ob + "_freeze;");
+		if (freeze == undefined || parseInt(freeze, 10) == 0) {
+			execEventBinded(ob.substring(2, ob.length), 'timechange', {count: i});
+/*
+			var vdomEvent = new VDOM_Event();
+			vdomEvent.srcObj = obj.domCont;
+			vdomEvent.name = 'timechange';
+			vdomEvent.addParameter('count', i);
+			obj.execEvent(vdomEvent);
+*/
+		}
+	});
+}
+function vdom_ui_timerStart2(ob, interval)
+{
+	eval("var obj = Obj_" + ob.substring(2, ob.length) + ";");
+	if (typeof obj === 'undefined') return;
+	if (interval == undefined) return;/*interval = 500;*/
+    eval("var timer_id = window.timer_" + ob + ";");
+    if (timer_id != undefined) {
+        clearInterval(timer_id);
+    }
+    timer_id = setInterval(
+        function(i){
+            eval("var freeze = window.timer_" + ob + "_freeze;");
+            if (freeze == undefined || parseInt(freeze, 10) == 0) {
+                execEventBinded(ob.substring(2, ob.length), 'timechange', {count: i});
+            }
+        }, interval)
+    eval("window.timer_" + ob + "=timer_id;");
+}
+function vdom_ui_timerStop(ob)
+{
+    eval("var timer_id = window.timer_" + ob + ";");
+    if (timer_id == undefined) return;
+    clearInterval(timer_id);
+    eval("window.timer_" + ob + "=null;");
+}
+function vdom_ui_timerFreeze(ob, freeze)
+{
+    eval("window.timer_" + ob + "_freeze=freeze;");
+}
+</script>]]></Library>
+	</Libraries>
+	<E2VDOM>
+		<Events>
+			<UserInterfaceEvents>
+				<Event Name="timechange" Description="#Lang(506)">
+					<Parameters>
+						<Parameter Name="count" Description="#Lang(901)" Order="0"/>
+					</Parameters>
+				</Event>
+			</UserInterfaceEvents>
+		</Events>
+		<Actions>
+			<Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
+				<Action Name="stop" DisplayName="#Lang(605)" Description="#Lang(505)">
+					<SourceCode>
+<![CDATA[vdom_ui_timerStop(this.domCont.id);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="start" DisplayName="#Lang(603)" Description="#Lang(503)">
+					<Parameters>
+						<Parameter Name="interval" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="500" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_timerStart2(this.domCont.id, interval);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="startOnce" DisplayName="#Lang(604)" Description="#Lang(504)">
+					<Parameters>
+						<Parameter Name="interval" DisplayName="#Lang(704)" Description="#Lang(804)" DefaultValue="500" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_timerStartOnce(this.domCont.id, interval);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setInterval" DisplayName="#Lang(602)" Description="#Lang(502)">
+					<Parameters>
+						<Parameter Name="interval" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="500" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_timerStart2(this.domCont.id, interval);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="freezeTime" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="freeze" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_timerFreeze(this.domCont.id, freeze);]]>
+					</SourceCode>
+				</Action>
+			</Container>
+		</Actions>
+	</E2VDOM>
+</Type>

@@ -1,0 +1,1014 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>410ce9c6-5ae0-4c66-9c2b-80b7470e2927</ID>
+		<Name>formtext</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_formtext</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.86.6200</Version>
+		<Category>Form</Category>
+		<InterfaceType>1</InterfaceType>
+		<Icon>#Res(dc3697f6-3d20-e2d1-1630-f615db1dbd65)</Icon>
+		<EditorIcon>#Res(a9036d5d-e92b-714b-9c56-f616124f6cae)</EditorIcon>
+		<StructureIcon>#Res(19074d42-47dd-934c-a67a-fb403f54f122)</StructureIcon>
+		<Dynamic>1</Dynamic>
+		<Moveable>1</Moveable>
+		<Resizable>3</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>1</Container>
+		<Containers>form, password, container</Containers>
+		<Handlers>set_attr</Handlers>
+		<Languages>en_US, ru_RU, fr_FR</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>zindex</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>top</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>left</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>width</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue>130</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>height</Name>
+			<DisplayName>#Lang(107)</DisplayName>
+			<Description>#Lang(207)</Description>
+			<DefaultValue>22</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>multiline</Name>
+			<DisplayName>#Lang(108)</DisplayName>
+			<Description>#Lang(208)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(403)|0)|(#Lang(404)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>mode</Name>
+			<DisplayName>#Lang(109)</DisplayName>
+			<Description>#Lang(209)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[012]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(405)|2)|(#Lang(406)|0)|(#Lang(407)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>value</Name>
+			<DisplayName>#Lang(111)</DisplayName>
+			<Description>#Lang(211)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(311)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(100)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>title</Name>
+			<DisplayName>#Lang(112)</DisplayName>
+			<Description>#Lang(212)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(312)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(1000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>placeholder</Name>
+			<DisplayName>#Lang(113)</DisplayName>
+			<Description>#Lang(213)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(1000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>focused</Name>
+			<DisplayName>#Lang(114)</DisplayName>
+			<Description>#Lang(214)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(408)|0)|(#Lang(409)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>autocomplete</Name>
+			<DisplayName>#Lang(115)</DisplayName>
+			<Description>#Lang(215)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(315)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(411)|0)|(#Lang(412)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>tabindex</Name>
+			<DisplayName>#Lang(116)</DisplayName>
+			<Description>#Lang(216)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(316)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>classname</Name>
+			<DisplayName>#Lang(117)</DisplayName>
+			<Description>#Lang(217)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(500)</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>border</Name>
+			<DisplayName>#Lang(118)</DisplayName>
+			<Description>#Lang(218)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(318)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(413)|0)|(#Lang(414)|1))</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">Form text</Sentence>
+			<Sentence ID="002">The Form text type produces an object used for adding a single-line text input field. It can be contained only in the Form, Password, and Container objects.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Top</Sentence>
+			<Sentence ID="105">Left</Sentence>
+			<Sentence ID="106">Width</Sentence>
+			<Sentence ID="107">Height</Sentence>
+			<Sentence ID="108">Multiline</Sentence>
+			<Sentence ID="109">Mode</Sentence>
+			<Sentence ID="111">Value</Sentence>
+			<Sentence ID="112">Title</Sentence>
+			<Sentence ID="113">Placeholder</Sentence>
+			<Sentence ID="114">Focused</Sentence>
+			<Sentence ID="115">Autocomplete</Sentence>
+			<Sentence ID="116">TabIndex</Sentence>
+			<Sentence ID="117">CSS Class</Sentence>
+			<Sentence ID="118">Border</Sentence>
+			<Sentence ID="201">Order of rendering the object on the page</Sentence>
+			<Sentence ID="202">Visibility of the object</Sentence>
+			<Sentence ID="203">Position in visual hierarchy of objects</Sentence>
+			<Sentence ID="204">Spacing between the top edge of the container and the object in pixels</Sentence>
+			<Sentence ID="205">Spacing between the left edge of the container and the object in pixels</Sentence>
+			<Sentence ID="206">Width of the object in pixels</Sentence>
+			<Sentence ID="207">Height of the object in pixels</Sentence>
+			<Sentence ID="208">Define if the text presented as single line (can be submitted) or multiline (cannot be submitted)</Sentence>
+			<Sentence ID="209">Display mode</Sentence>
+			<Sentence ID="211">Text to display</Sentence>
+			<Sentence ID="212">Hint text</Sentence>
+			<Sentence ID="213">Displays text in a text field, which disappears when it receives focus</Sentence>
+			<Sentence ID="214">Define if the focus is set there after rendering the page or not</Sentence>
+			<Sentence ID="215">Define if the autocomplete option is on or off</Sentence>
+			<Sentence ID="216">Index number of switching the elements on pressing the tab key</Sentence>
+			<Sentence ID="217">CSS class name</Sentence>
+			<Sentence ID="218">Define if the border is visible or not</Sentence>
+			<Sentence ID="301">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="302">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="303">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="304">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="305">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="306">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="307">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="308">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="309">Incorrect value, must be either 0, 1 or 2</Sentence>
+			<Sentence ID="311">Incorrect value</Sentence>
+			<Sentence ID="312">Incorrect value</Sentence>
+			<Sentence ID="313">Incorrect value</Sentence>
+			<Sentence ID="314">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="315">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="316">Incorrect value, must be positive integer</Sentence>
+			<Sentence ID="317">Names of CSS classes</Sentence>
+			<Sentence ID="318">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="403">Single line</Sentence>
+			<Sentence ID="404">Multiline</Sentence>
+			<Sentence ID="405">Disabled</Sentence>
+			<Sentence ID="406">Normal</Sentence>
+			<Sentence ID="407">Read only</Sentence>
+			<Sentence ID="408">No</Sentence>
+			<Sentence ID="409">Yes</Sentence>
+			<Sentence ID="411">Off</Sentence>
+			<Sentence ID="412">On</Sentence>
+			<Sentence ID="413">Invisible</Sentence>
+			<Sentence ID="414">Visible</Sentence>
+			<Sentence ID="501">Hide the object</Sentence>
+			<Sentence ID="502">Move the object to a new position</Sentence>
+			<Sentence ID="503">Set focus on the object</Sentence>
+			<Sentence ID="504">Set new CSS style of the object</Sentence>
+			<Sentence ID="505">Set new text value</Sentence>
+			<Sentence ID="506">Show the object</Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516"></Sentence>
+			<Sentence ID="517"></Sentence>
+			<Sentence ID="518"></Sentence>
+			<Sentence ID="601">Hide</Sentence>
+			<Sentence ID="602">moveTo</Sentence>
+			<Sentence ID="603">setFocus</Sentence>
+			<Sentence ID="604">setStyle</Sentence>
+			<Sentence ID="605">setValue</Sentence>
+			<Sentence ID="606">Show</Sentence>
+			<Sentence ID="701">Fade</Sentence>
+			<Sentence ID="702">newX</Sentence>
+			<Sentence ID="703">newY</Sentence>
+			<Sentence ID="704">Effect</Sentence>
+			<Sentence ID="705">cssStyleValue</Sentence>
+			<Sentence ID="706">Value</Sentence>
+			<Sentence ID="707">Fade</Sentence>
+			<Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="802">X-coordinate of the new position relative to the left upper corner of the container</Sentence>
+			<Sentence ID="803">Y-coordinate of the new position relative to the left upper corner of the container</Sentence>
+			<Sentence ID="804">Visual effect of moving, time is indicated in milliseconds</Sentence>
+			<Sentence ID="805">CSS style value</Sentence>
+			<Sentence ID="806">New text value</Sentence>
+			<Sentence ID="807">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="901">Current X-value</Sentence>
+			<Sentence ID="902">Current Y-value</Sentence>
+			<Sentence ID="903">Current X-value</Sentence>
+			<Sentence ID="904">Current Y-value</Sentence>
+			<Sentence ID="905">Current X-value</Sentence>
+			<Sentence ID="906">Current Y-value</Sentence>
+			<Sentence ID="907">Current X-value</Sentence>
+			<Sentence ID="908">Current Y-value</Sentence>
+			<Sentence ID="909">Current X-value</Sentence>
+			<Sentence ID="911">Current Y-value</Sentence>
+			<Sentence ID="912">Current X-value</Sentence>
+			<Sentence ID="913">Current Y-value</Sentence>
+			<Sentence ID="914">Current X-value</Sentence>
+			<Sentence ID="915">Current Y-value</Sentence>
+			<Sentence ID="916">Current X-value</Sentence>
+			<Sentence ID="917">Current Y-value</Sentence>
+			<Sentence ID="918">Changed text</Sentence>
+			<Sentence ID="919">Changed text</Sentence>
+			<Sentence ID="921">Changed text</Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">Champs Texte de Formulaire</Sentence>
+			<Sentence ID="002">Champs Texte de Formulaire</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hiérarchie</Sentence>
+			<Sentence ID="102">Visibilité</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Haut</Sentence>
+			<Sentence ID="105">Gauche</Sentence>
+			<Sentence ID="106">Largeur</Sentence>
+			<Sentence ID="107">Hauteur</Sentence>
+			<Sentence ID="108">Multiligne</Sentence>
+			<Sentence ID="109">Mode</Sentence>
+			<Sentence ID="111">Valeur</Sentence>
+			<Sentence ID="112"></Sentence>
+			<Sentence ID="113"></Sentence>
+			<Sentence ID="114">Focused</Sentence>
+			<Sentence ID="115">Autocomplete</Sentence>
+			<Sentence ID="116">TabIndex</Sentence>
+			<Sentence ID="117">Class</Sentence>
+			<Sentence ID="118">Bordure</Sentence>
+			<Sentence ID="201">Hiérarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="202">Afficher ou cacher l&apos;objet</Sentence>
+			<Sentence ID="203">Niveau de superposition de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="204">Distance depuis le bord haut de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="205">Distance depuis le bord gauche de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="206">Largeur de l&apos;objet en pixels</Sentence>
+			<Sentence ID="207">Hauteur de l&apos;objet en pixels</Sentence>
+			<Sentence ID="208">Multiligne</Sentence>
+			<Sentence ID="209">Display mode</Sentence>
+			<Sentence ID="211">Texte dans le champs</Sentence>
+			<Sentence ID="212"></Sentence>
+			<Sentence ID="213"></Sentence>
+			<Sentence ID="214">Incorrect value</Sentence>
+			<Sentence ID="215">Autocomplete option</Sentence>
+			<Sentence ID="216">Tab index of the object on the page</Sentence>
+			<Sentence ID="217">CSS class name</Sentence>
+			<Sentence ID="218">Afficher ou masquer la bordure</Sentence>
+			<Sentence ID="301">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="302">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="303">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="304">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="305">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="306">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="307">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="308">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="309">Incorrect value, must be 0 or 1 or 2</Sentence>
+			<Sentence ID="311">Incorrect value</Sentence>
+			<Sentence ID="312"></Sentence>
+			<Sentence ID="313"></Sentence>
+			<Sentence ID="314">Set focus after render</Sentence>
+			<Sentence ID="315">Incorrect value</Sentence>
+			<Sentence ID="316">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="317">Incorrect value</Sentence>
+			<Sentence ID="318">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="403">ligne simple</Sentence>
+			<Sentence ID="404">Multiligne</Sentence>
+			<Sentence ID="405">Disabled</Sentence>
+			<Sentence ID="406">Normal</Sentence>
+			<Sentence ID="407">Read only</Sentence>
+			<Sentence ID="408">No</Sentence>
+			<Sentence ID="409">Yes</Sentence>
+			<Sentence ID="411">Off</Sentence>
+			<Sentence ID="412">On</Sentence>
+			<Sentence ID="413">Invisible</Sentence>
+			<Sentence ID="414">Visible</Sentence>
+			<Sentence ID="501">Hide the object</Sentence>
+			<Sentence ID="502">Move object to selected point</Sentence>
+			<Sentence ID="503">Set focus to the object</Sentence>
+			<Sentence ID="504">Set new CSS style</Sentence>
+			<Sentence ID="505">Set new text</Sentence>
+			<Sentence ID="506">Show the object</Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516"></Sentence>
+			<Sentence ID="517"></Sentence>
+			<Sentence ID="518"></Sentence>
+			<Sentence ID="601">Hide</Sentence>
+			<Sentence ID="602">moveTo</Sentence>
+			<Sentence ID="603">setFocus</Sentence>
+			<Sentence ID="604">setStyle</Sentence>
+			<Sentence ID="605">setValue</Sentence>
+			<Sentence ID="606">Show</Sentence>
+			<Sentence ID="701">Fade</Sentence>
+			<Sentence ID="702">newX</Sentence>
+			<Sentence ID="703">newY</Sentence>
+			<Sentence ID="704">Effect</Sentence>
+			<Sentence ID="705">cssStyleValue</Sentence>
+			<Sentence ID="706">Value</Sentence>
+			<Sentence ID="707">Fade</Sentence>
+			<Sentence ID="801">Fade time</Sentence>
+			<Sentence ID="802">X-coordinate of new point</Sentence>
+			<Sentence ID="803">Y-coordinate of new point</Sentence>
+			<Sentence ID="804">Visual effect by moving</Sentence>
+			<Sentence ID="805">New CSS style value</Sentence>
+			<Sentence ID="806">New text</Sentence>
+			<Sentence ID="807">Time of appearance</Sentence>
+			<Sentence ID="901">Current X-value</Sentence>
+			<Sentence ID="902">Current Y-value</Sentence>
+			<Sentence ID="903">Current X-value</Sentence>
+			<Sentence ID="904">Current Y-value</Sentence>
+			<Sentence ID="905">Current X-value</Sentence>
+			<Sentence ID="906">Current Y-value</Sentence>
+			<Sentence ID="907">Current X-value</Sentence>
+			<Sentence ID="908">Current Y-value</Sentence>
+			<Sentence ID="909">Current X-value</Sentence>
+			<Sentence ID="911">Current Y-value</Sentence>
+			<Sentence ID="912">Current X-value</Sentence>
+			<Sentence ID="913">Current Y-value</Sentence>
+			<Sentence ID="914">Current X-value</Sentence>
+			<Sentence ID="915">Current Y-value</Sentence>
+			<Sentence ID="916">Current X-value</Sentence>
+			<Sentence ID="917">Current Y-value</Sentence>
+			<Sentence ID="918">Changed text</Sentence>
+			<Sentence ID="919">Changed text</Sentence>
+			<Sentence ID="921">Changed text</Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">Поле ввода</Sentence>
+			<Sentence ID="002">Текстовое поле ввода формы</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Иерархия</Sentence>
+			<Sentence ID="102">Отображение</Sentence>
+			<Sentence ID="103">Позиция</Sentence>
+			<Sentence ID="104">Сверху</Sentence>
+			<Sentence ID="105">Слева</Sentence>
+			<Sentence ID="106">Ширина</Sentence>
+			<Sentence ID="107">Высота</Sentence>
+			<Sentence ID="108">Многострочный</Sentence>
+			<Sentence ID="109">Режим</Sentence>
+			<Sentence ID="111">Значение</Sentence>
+			<Sentence ID="112"></Sentence>
+			<Sentence ID="113"></Sentence>
+			<Sentence ID="114">Focused</Sentence>
+			<Sentence ID="115">Автозаполнение</Sentence>
+			<Sentence ID="116">Tab индекс</Sentence>
+			<Sentence ID="117">Класс CSS</Sentence>
+			<Sentence ID="118">Граница</Sentence>
+			<Sentence ID="201">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
+			<Sentence ID="202">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="203">Положение в визуальной иерархии объектов</Sentence>
+			<Sentence ID="204">Расстояние от верхней границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="205">Расстояние от левой границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="206">Ширина объекта в пикселях</Sentence>
+			<Sentence ID="207">Высота объекта в пикселях</Sentence>
+			<Sentence ID="208">Однострочный (передается с формой) или многострочный текст (не передается)</Sentence>
+			<Sentence ID="209">Режим ввода текста</Sentence>
+			<Sentence ID="211">Отображаемый текст</Sentence>
+			<Sentence ID="212"></Sentence>
+			<Sentence ID="213"></Sentence>
+			<Sentence ID="214">Оставлять фокус после рендеринга страницы или нет</Sentence>
+			<Sentence ID="215">Режим автозаполнения</Sentence>
+			<Sentence ID="216">Tab индекс объекта на странице</Sentence>
+			<Sentence ID="217">Имя класса CSS</Sentence>
+			<Sentence ID="218">Отображение границы</Sentence>
+			<Sentence ID="301">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="302">Неправильное значение</Sentence>
+			<Sentence ID="303">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="304">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="305">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="306">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="307">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="308">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="309">Неправильное значение, дожен быть указан 0, 1 или 2</Sentence>
+			<Sentence ID="311">Неправильное значение</Sentence>
+			<Sentence ID="312"></Sentence>
+			<Sentence ID="313"></Sentence>
+			<Sentence ID="314">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="315">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="316">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="317">Неправильное значение</Sentence>
+			<Sentence ID="318">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="401">Не отображать</Sentence>
+			<Sentence ID="402">Отображать</Sentence>
+			<Sentence ID="403">Однострочный</Sentence>
+			<Sentence ID="404">Многострочный</Sentence>
+			<Sentence ID="405">Недоступно</Sentence>
+			<Sentence ID="406">Нормальный</Sentence>
+			<Sentence ID="407">Только чтение</Sentence>
+			<Sentence ID="408">Нет</Sentence>
+			<Sentence ID="409">Да</Sentence>
+			<Sentence ID="411">Отключен</Sentence>
+			<Sentence ID="412">Включен</Sentence>
+			<Sentence ID="413">Невидимая</Sentence>
+			<Sentence ID="414">Видимая</Sentence>
+			<Sentence ID="501">Скрыть объект</Sentence>
+			<Sentence ID="502">Сдвинуть объект в заданную точку</Sentence>
+			<Sentence ID="503">Установить фокус на объекте</Sentence>
+			<Sentence ID="504">Установить новый стиль CSS</Sentence>
+			<Sentence ID="505">Установить новый текст</Sentence>
+			<Sentence ID="506">Показать объект</Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516"></Sentence>
+			<Sentence ID="517"></Sentence>
+			<Sentence ID="518"></Sentence>
+			<Sentence ID="601">Скрыть</Sentence>
+			<Sentence ID="602">Сдвинуть</Sentence>
+			<Sentence ID="603">Установить фокус</Sentence>
+			<Sentence ID="604">Установить стиль</Sentence>
+			<Sentence ID="605">Установить текст</Sentence>
+			<Sentence ID="606">Показать</Sentence>
+			<Sentence ID="701">Исчезновение</Sentence>
+			<Sentence ID="702">Координата по оси X</Sentence>
+			<Sentence ID="703">Координата по оси Y</Sentence>
+			<Sentence ID="704">Эффект</Sentence>
+			<Sentence ID="705">Стиль CSS</Sentence>
+			<Sentence ID="706">Текст</Sentence>
+			<Sentence ID="707">Появление</Sentence>
+			<Sentence ID="801">Время исчезновения в миллисекундах</Sentence>
+			<Sentence ID="802">Координата новой точки по оси X</Sentence>
+			<Sentence ID="803">Координата новой точки по оси Y</Sentence>
+			<Sentence ID="804">Визуальный эффект при перетаскивании</Sentence>
+			<Sentence ID="805">Новое значение стиля</Sentence>
+			<Sentence ID="806">Новый текст</Sentence>
+			<Sentence ID="807">Время появления в миллисекундах</Sentence>
+			<Sentence ID="901">Текущее значение X</Sentence>
+			<Sentence ID="902">Текущее значение Y</Sentence>
+			<Sentence ID="903">Текущее значение X</Sentence>
+			<Sentence ID="904">Текущее значение Y</Sentence>
+			<Sentence ID="905">Текущее значение X</Sentence>
+			<Sentence ID="906">Текущее значение Y</Sentence>
+			<Sentence ID="907">Текущее значение X</Sentence>
+			<Sentence ID="908">Текущее значение Y</Sentence>
+			<Sentence ID="909">Текущее значение X</Sentence>
+			<Sentence ID="911">Текущее значение Y</Sentence>
+			<Sentence ID="912">Текущее значение X</Sentence>
+			<Sentence ID="913">Текущее значение Y</Sentence>
+			<Sentence ID="914">Текущее значение X</Sentence>
+			<Sentence ID="915">Текущее значение Y</Sentence>
+			<Sentence ID="916">Текущее значение X</Sentence>
+			<Sentence ID="917">Текущее значение Y</Sentence>
+			<Sentence ID="918">Измененный текст</Sentence>
+			<Sentence ID="919">Измененный текст</Sentence>
+			<Sentence ID="921">Измененный текст</Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="dc3697f6-3d20-e2d1-1630-f615db1dbd65" Type="png" Name="FormText-.png">
+			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+			NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNl
+			SUQ9InhtcC5paWQ6NTZBOUJEREY3QjFFMTFFMjg0RTlCQzk1MzcxREM2ODUiIHhtcE1NOkRvY3Vt
+			ZW50SUQ9InhtcC5kaWQ6NTZBOUJERTA3QjFFMTFFMjg0RTlCQzk1MzcxREM2ODUiPiA8eG1wTU06
+			RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1NkE5QkRERDdCMUUxMUUyODRF
+			OUJDOTUzNzFEQzY4NSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1NkE5QkRERTdCMUUxMUUy
+			ODRFOUJDOTUzNzFEQzY4NSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1w
+			bWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjvAJ2YAAAMpSURBVHja7FkxS1tRFD5JnkRDrEVMIsVJ
+			iGlQF0Vog7hYGhGCk0Mnp4yOYnERQaSQLQ5u/gBd4tBASkMgIJZAMiVD0s1JTYZaMyhi7P0O3seL
+			iimtTfLS+8HJfffdvHC++5177nk3ltvbW+oEWKlDoIgoIoqIIqKIKCJ/Aw0f29vbXtF8EvZO2AuT
+			+P5T2FdhH5eXl79botGoT3S+CXtpUjF+CHsDRbZAolgs0v7+Pl1cXJDFYmlrz1Ef9vb20uLiIvl8
+			Pgiwpd2FE8ViMbq+viaHw2EKIvAVPq+uruLWe02uiVqtxiytVisTaVcyIAGDvyBzB6cmr6BEV1cX
+			2Ww2Uyhyc3NjJEI6ke7ubiYCRYB2VkRGECb9wT4CEjBN09jwpWbZ5ubmk32jSf+kvw8UkWujFVhf
+			X6eNjY26fiPAVxk9bbWzS+d/h8STJUqz1AiHw2zPAaPPnVVrNUIwGKTJyUmy2+3cx+6fyWQonU7T
+			4OAghUIhGhoa4rFKpUKpVIry+bz+bCAQ0MfwG+fn582vfsfGxtiRbDbL8buzs8P3p6enuZ2ZmaG+
+			vj6KRCJ6fM/NzXE7NTXFzyaTSR47PT3lTbclimBm5ewCJycndHx8TKOjo9wHCSNEJa1f+/1+VgHK
+			AXt7e7S2tta60HI6nTQ/P8/XHo+HBgYG9LGjoyMu3lZWVthpkDw4OOAxt9vNfSPK5XJriAwPD9PS
+			0hI7idAolUrcSkWkYlgLIDkxMcFju7u77bXYx8fH6erqqi5kHkufiUSijvjIyAidnZ0xOSNcLtc/
+			UaXhYr+8vORMAweBhYUFPUMB4u2MDeEHeL1ebqFcLpfjMIRaMoPJzNd0RQ4PD3l2McsyhRYKBQ4f
+			kMPLmFwjANRDlkJSgPX399Ps7CxnLzyL1N0SItVqtS6sHsNT48hYMmv9F6cosmg0Fo/Pnn6bQcJY
+			LN7vm0aR+07/SQWsThrbkQhO7Kinp8d0zht8roIIjh05z5uJDE595OuBwBccmb5G7UfmPjJ9a4vH
+			4xXxkhQTnVfCUHvYTUIAJcJnYR9EiVS0qP/ZFRFFRBFRRBQRRaSDiPwSYADhkDD4eb9xIQAAAABJ
+			RU5ErkJggg==
+		</Resource>
+		<Resource ID="19074d42-47dd-934c-a67a-fb403f54f122" Type="png" Name="FormText_16x16.png">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+			NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNl
+			SUQ9InhtcC5paWQ6NjA2NkI2NzA3QjFFMTFFMjhDQUE4RENFOEQyQkJBNkEiIHhtcE1NOkRvY3Vt
+			ZW50SUQ9InhtcC5kaWQ6NjA2NkI2NzE3QjFFMTFFMjhDQUE4RENFOEQyQkJBNkEiPiA8eG1wTU06
+			RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2MDY2QjY2RTdCMUUxMUUyOENB
+			QThEQ0U4RDJCQkE2QSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2MDY2QjY2RjdCMUUxMUUy
+			OENBQThEQ0U4RDJCQkE2QSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1w
+			bWV0YT4gPD94cGFja2V0IGVuZD0iciI/PoxJqqoAAADcSURBVHjazJNBCoMwEEUnMSp6Ac3G+xS8
+			RUMX3sC1excuXOnlBLGXUOsPRKIU2rQU+uE7ZJj3YYJhTdNciKjfLMlN0+arANx1nRyGwYnOskwq
+			pXoEyHEcSQhBjLG34HVdCQxYBFAQBMQ51wGvQgDDy7LoM8cnDEOKoojiONauqupQz8YsGEiYAKzg
+			eZ5u1nVNZVnqagZtzfO8z+oAwL7v700j9J4J6xrpAIDGts5nW4c7+EZ/GlAUBbVtq+tHAYDt+vMV
+			pjRNncEkSVDu+A9Unud4zq4peE23hwADAM4lOmQB6glmAAAAAElFTkSuQmCC
+		</Resource>
+		<Resource ID="cb185b0a-942e-5ea6-6410-51a426b39fcc" Type="js" Name="jquery.placeholder.min.js">
+			LyoKKiBQbGFjZWhvbGRlciBwbHVnaW4gZm9yIGpRdWVyeQoqIC0tLQoqIENvcHlyaWdodCAyMDEw
+			LCBEYW5pZWwgU3RvY2tzIChodHRwOi8vd2ViY2xvdWQuc2UpCiogUmVsZWFzZWQgdW5kZXIgdGhl
+			IE1JVCwgQlNELCBhbmQgR1BMIExpY2Vuc2VzLgoqLwoKKGZ1bmN0aW9uKGIpe2Z1bmN0aW9uIGQo
+			YSl7dGhpcy5pbnB1dD1hO2EuYXR0cigidHlwZSIpPT0icGFzc3dvcmQiJiZ0aGlzLmhhbmRsZVBh
+			c3N3b3JkKCk7YihhWzBdLmZvcm0pLnN1Ym1pdChmdW5jdGlvbigpe2lmKGEuaGFzQ2xhc3MoInBs
+			YWNlaG9sZGVyIikmJmFbMF0udmFsdWU9PWEuYXR0cigicGxhY2Vob2xkZXIiKSlhWzBdLnZhbHVl
+			PSIifSl9ZC5wcm90b3R5cGU9e3Nob3c6ZnVuY3Rpb24oYSl7aWYodGhpcy5pbnB1dFswXS52YWx1
+			ZT09PSIifHxhJiZ0aGlzLnZhbHVlSXNQbGFjZWhvbGRlcigpKXtpZih0aGlzLmlzUGFzc3dvcmQp
+			dHJ5e3RoaXMuaW5wdXRbMF0uc2V0QXR0cmlidXRlKCJ0eXBlIiwidGV4dCIpfWNhdGNoKGIpe3Ro
+			aXMuaW5wdXQuYmVmb3JlKHRoaXMuZmFrZVBhc3N3b3JkLnNob3coKSkuaGlkZSgpfXRoaXMuaW5w
+			dXQuYWRkQ2xhc3MoInBsYWNlaG9sZGVyIik7dGhpcy5pbnB1dFswXS52YWx1ZT10aGlzLmlucHV0
+			LmF0dHIoInBsYWNlaG9sZGVyIil9fSwKaGlkZTpmdW5jdGlvbigpe2lmKHRoaXMudmFsdWVJc1Bs
+			YWNlaG9sZGVyKCkmJnRoaXMuaW5wdXQuaGFzQ2xhc3MoInBsYWNlaG9sZGVyIikmJih0aGlzLmlu
+			cHV0LnJlbW92ZUNsYXNzKCJwbGFjZWhvbGRlciIpLHRoaXMuaW5wdXRbMF0udmFsdWU9IiIsdGhp
+			cy5pc1Bhc3N3b3JkKSl7dHJ5e3RoaXMuaW5wdXRbMF0uc2V0QXR0cmlidXRlKCJ0eXBlIiwicGFz
+			c3dvcmQiKX1jYXRjaChhKXt9dGhpcy5pbnB1dC5zaG93KCk7dGhpcy5pbnB1dFswXS5mb2N1cygp
+			fX0sdmFsdWVJc1BsYWNlaG9sZGVyOmZ1bmN0aW9uKCl7cmV0dXJuIHRoaXMuaW5wdXRbMF0udmFs
+			dWU9PXRoaXMuaW5wdXQuYXR0cigicGxhY2Vob2xkZXIiKX0saGFuZGxlUGFzc3dvcmQ6ZnVuY3Rp
+			b24oKXt2YXIgYT10aGlzLmlucHV0O2EuYXR0cigicmVhbFR5cGUiLCJwYXNzd29yZCIpO3RoaXMu
+			aXNQYXNzd29yZD0hMDtpZigoYi5icm93c2VyLm1zaWV8fGIuYnJvd3Nlci5vcGVyYSkmJmFbMF0u
+			b3V0ZXJIVE1MKXt2YXIgYz1iKGFbMF0ub3V0ZXJIVE1MLnJlcGxhY2UoL3R5cGU9KFsnIl0pP3Bh
+			c3N3b3JkXDEvZ2ksCiJ0eXBlPSQxdGV4dCQxIikpO3RoaXMuZmFrZVBhc3N3b3JkPWMudmFsKGEu
+			YXR0cigicGxhY2Vob2xkZXIiKSkuYWRkQ2xhc3MoInBsYWNlaG9sZGVyIikuZm9jdXMoZnVuY3Rp
+			b24oKXthLnRyaWdnZXIoImZvY3VzIik7Yih0aGlzKS5oaWRlKCl9KTtiKGFbMF0uZm9ybSkuc3Vi
+			bWl0KGZ1bmN0aW9uKCl7Yy5yZW1vdmUoKTthLnNob3coKX0pfX19O3ZhciBlPSEhKCJwbGFjZWhv
+			bGRlciJpbiBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJpbnB1dCIpKTtiLmZuLnBsYWNlaG9sZGVy
+			PWZ1bmN0aW9uKCl7cmV0dXJuIGU/dGhpczp0aGlzLmVhY2goZnVuY3Rpb24oKXt2YXIgYT1iKHRo
+			aXMpLGM9bmV3IGQoYSk7Yy5zaG93KCEwKTthLmZvY3VzKGZ1bmN0aW9uKCl7Yy5oaWRlKCl9KTth
+			LmJsdXIoZnVuY3Rpb24oKXtjLnNob3coITEpfSk7KGIuYnJvd3Nlci5tc2llfHxiLmJyb3dzZXIu
+			b3BlcmEpJiYoYih3aW5kb3cpLmxvYWQoZnVuY3Rpb24oKXthLnZhbCgpJiZhLnJlbW92ZUNsYXNz
+			KCJwbGFjZWhvbGRlciIpO2Muc2hvdyghMCl9KSwKYS5mb2N1cyhmdW5jdGlvbigpe2lmKHRoaXMu
+			dmFsdWU9PSIiKXt2YXIgYT10aGlzLmNyZWF0ZVRleHRSYW5nZSgpO2EuY29sbGFwc2UoITApO2Eu
+			bW92ZVN0YXJ0KCJjaGFyYWN0ZXIiLDApO2Euc2VsZWN0KCl9fSkpfSl9fSkoalF1ZXJ5KTsK
+		</Resource>
+		<Resource ID="a9036d5d-e92b-714b-9c56-f616124f6cae" Type="png" Name="FormText.png">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+			NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNl
+			SUQ9InhtcC5paWQ6NjA2NkI2NzA3QjFFMTFFMjhDQUE4RENFOEQyQkJBNkEiIHhtcE1NOkRvY3Vt
+			ZW50SUQ9InhtcC5kaWQ6NjA2NkI2NzE3QjFFMTFFMjhDQUE4RENFOEQyQkJBNkEiPiA8eG1wTU06
+			RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2MDY2QjY2RTdCMUUxMUUyOENB
+			QThEQ0U4RDJCQkE2QSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2MDY2QjY2RjdCMUUxMUUy
+			OENBQThEQ0U4RDJCQkE2QSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1w
+			bWV0YT4gPD94cGFja2V0IGVuZD0iciI/PoxJqqoAAADcSURBVHjazJNBCoMwEEUnMSp6Ac3G+xS8
+			RUMX3sC1excuXOnlBLGXUOsPRKIU2rQU+uE7ZJj3YYJhTdNciKjfLMlN0+arANx1nRyGwYnOskwq
+			pXoEyHEcSQhBjLG34HVdCQxYBFAQBMQ51wGvQgDDy7LoM8cnDEOKoojiONauqupQz8YsGEiYAKzg
+			eZ5u1nVNZVnqagZtzfO8z+oAwL7v700j9J4J6xrpAIDGts5nW4c7+EZ/GlAUBbVtq+tHAYDt+vMV
+			pjRNncEkSVDu+A9Unud4zq4peE23hwADAM4lOmQB6glmAAAAAElFTkSuQmCC
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[
+class VDOM_formtext(VDOM_object):
+
+	def render(self, contents=""):
+		display = u"display: none;" if self.visible == "0" else u""
+
+		if self.mode == "1":
+			mode = u"""readonly="readonly" """
+		elif self.mode == "2":
+			mode = u"""disabled="disabled" """
+		else:
+			mode = u""
+				
+		auto = u"off" if self.autocomplete == "0" else u"on"
+
+		clean_id = (self.id).replace('-', '_')
+		id = u"o_%s" % clean_id
+
+		# for doctype xhtml 1.0 - width|height depends on padding
+		fixw = int(self.width) - 10
+		fixh = int(self.height) - 4
+
+		border = u"border-width: 0px;" if self.multiline == "0" and self.border == "0" else u""
+		
+		style = u"""z-index: {zind}; position: {pos}; top: {top}px; left: {left}px; width: {width}px; height: {height}px;
+					padding: 2px 5px; {display} {border} font: 14px tahoma
+				""".format(zind = self.zindex, pos = self.position, top = self.top, left = self.left, 
+						width = fixw, height = fixh, display = display, border = border)
+
+		if self.title == "":
+			title = u""
+		else:
+			title = u"title=\"%s\"" % (self.title).replace('"', '&quot;')
+
+		if self.placeholder == "":
+			placeholder = u""
+		else:
+			placeholder = u"placeholder=\"%s\"" % (self.placeholder).replace('"', '&quot;')
+
+		if VDOM_CONFIG_1["DEBUG"] == "1":
+			debug_info = u"objtype='formtext' objname='%s' ver='2012-02-6'" % self.name
+		else:
+			debug_info = u""
+
+		if self.multiline == "0":
+			result = u"""<input {debug_info} id="{id}" name="{name}" style="{style}" type="text" tabindex="{tabind}" 
+							value="{value}" class="{classn}" autocomplete="{auto}" {mode} {title} {placeholder} />
+					""".format(id = id, name = self.name, style = style, tabind = self.tabindex, debug_info = debug_info,
+							value = unicode(self.value).replace('"', '&quot;'), classn = self.classname, auto = auto,
+							mode = mode, placeholder = placeholder, title = title)
+		else:
+			result = u"""<textarea {debug_info} id="{id}" name="{name}" tabindex="{tabind}" 
+							style="{style}" class="{classn}" {mode} {title} {placeholder}>{value}</textarea>
+					""".format(id = id, name = self.name, tabind = self.tabindex, debug_info = debug_info,
+							style = style, classn = self.classname, mode = mode, value = self.value, placeholder = placeholder, title = title)
+
+		focused = u"$q('#%s').focus();" % id if self.focused == "1" else ""
+
+		result += u"""<script type='text/javascript'>
+$j(document).ready(function(){
+	$j('#%(id)s').blur(function(){
+		var x = $j.trim($j(this).val());
+		execEventBinded("%(clean_id)s", "blur", { itemValue: x, charCount: x.length });
+	});
+	$j('#%(id)s').focusin(function(){
+		execEventBinded("%(clean_id)s", "focus", {});
+	});
+	%(focused)s
+});</script>""" % { "id": id, "clean_id": clean_id, "focused": focused }
+
+		return VDOM_object.render(self, contents=result)
+
+	def wysiwyg(self, contents=""):
+		
+		disabled = u""" disabled="disabled" """ if self.mode=="2" else u""
+		border = u"border-width:0;" if self.multiline == "0" and self.border == "0" else u""
+		placeholder = u"placeholder=\"%s\"" % (self.placeholder).replace('"', '&quot;') if self.placeholder!="" else u""
+		
+		style = u""" style="width: {width}px; height: {height}px; background-color:#ffffff; font: 14px tahoma; padding: 2px 5px; {border}" """.format(
+			border = border,
+			width = self.width, height = self.height)
+		
+		if self.multiline == "1" : #multiline
+			text = \
+				u"""<textarea objtype="formtext" {style} {disabled} {placeholder}>
+						{value}
+					</textarea>
+				""".format(
+						width = self.width, height = self.height,
+						value = self.value, placeholder = placeholder,
+						disabled = disabled, 
+						style = style)
+		else : #singleline
+			text = u"""<input objtype="formtext" value="{value}" {style} {disabled} {placeholder}/>""".format(
+				width = self.width, height = self.height,
+				value = self.value, placeholder = placeholder,
+				disabled = disabled,
+				style = style)
+			
+		result = \
+			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
+						top="{top}" left="{left}" width="{width}" height="{height}" >
+					<htmltext top="0" left="0" width="{width}" height="{height}" overflow="hidden" blendMode="normal">
+						{text}
+					</htmltext>
+				</container>
+			""".format(
+					id = self.id, vis = self.visible, zind = self.zindex, 
+					hierarchy = self.hierarchy, order = self.order, 
+					top = self.top, left = self.left, 
+					width = self.width, height = self.height,
+					text = text)
+				
+		return VDOM_object.wysiwyg(self, contents=result)
+
+def set_attr(app_id, object_id, param):
+	o = application.objects.search(object_id)
+
+	if "width" in param:
+		width = param["width"]["value"]
+		if int(width) < 10:
+			o.set_attributes({"width": "10"})
+
+	if "height" in param:
+		height = param["height"]["value"]
+		if int(height) < 4:
+			o.set_attributes({"height": "4"})
+
+
+]]>
+	</SourceCode>
+	<Libraries>
+		<Library Target="html"><![CDATA[<script type="text/javascript" src="/cb185b0a-942e-5ea6-6410-51a426b39fcc.res"></script>
+<script type="text/javascript">
+jQuery(function(){ $j('input[placeholder], textarea[placeholder]').placeholder(); });
+</script>]]></Library>
+	</Libraries>
+	<E2VDOM>
+		<Events>
+			<UserInterfaceEvents>
+				<Event Name="mouseout" Description="#Lang(513)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(912)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(913)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="focus" Description="#Lang(517)"/>
+				<Event Name="mouseup" Description="#Lang(515)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(916)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(917)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mousemove" Description="#Lang(512)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(909)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(911)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="valuechange" Description="#Lang(516)">
+					<Parameters>
+						<Parameter Name="itemValue" Description="#Lang(918)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mousedown" Description="#Lang(511)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(907)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(908)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="blur" Description="#Lang(518)">
+					<Parameters>
+						<Parameter Name="itemValue" Description="#Lang(919)" Order="0"/>
+						<Parameter Name="charCount" Description="#Lang(921)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="ctrlclick" Description="#Lang(508)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(903)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(904)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mouseover" Description="#Lang(514)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(914)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(915)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="click" Description="#Lang(507)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(901)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(902)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="dblclick" Description="#Lang(509)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(905)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(906)" Order="0"/>
+					</Parameters>
+				</Event>
+			</UserInterfaceEvents>
+		</Events>
+		<Actions>
+			<Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
+				<Action Name="hide" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_hide(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="show" DisplayName="#Lang(606)" Description="#Lang(506)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(707)" Description="#Lang(807)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_show(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="removeClass" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).removeClass(className);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="addClass" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).addClass(className);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setFocus" DisplayName="#Lang(603)" Description="#Lang(503)">
+					<SourceCode>
+<![CDATA[jQuery(this.domCont).focus();]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setValue" DisplayName="#Lang(605)" Description="#Lang(505)">
+					<Parameters>
+						<Parameter Name="value" DisplayName="#Lang(706)" Description="#Lang(806)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_evt_setvalue(this, value);
+/*vdom_evt_setvalue(this, $q('<div/>').html(value).html());*/]]>
+					</SourceCode>
+				</Action>
+				<Action Name="moveTo" DisplayName="#Lang(602)" Description="#Lang(502)">
+					<Parameters>
+						<Parameter Name="newX" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="newY" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="Effect" DisplayName="#Lang(704)" Description="#Lang(804)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_moveTo(this.domCont, newX, newY, Effect);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setStyle" DisplayName="#Lang(604)" Description="#Lang(504)">
+					<Parameters>
+						<Parameter Name="cssStyleValue" DisplayName="#Lang(705)" Description="#Lang(805)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[var t=$q(this.domCont);
+t.attr('style', t.attr('style') + ';' + cssStyleValue);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setClass" DisplayName="#Lang(607)" Description="#Lang(507)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(709)" Description="#Lang(809)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).attr('class',className);]]>
+					</SourceCode>
+				</Action>
+			</Container>
+		</Actions>
+	</E2VDOM>
+</Type>

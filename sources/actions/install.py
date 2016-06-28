@@ -1,51 +1,35 @@
 
-from contextlib import closing
+import os.path
 import managers
 import file_access
 from logs import console
-from utils.parsing import native, Parser
+from .detecting import TYPE, APPLICATION, EXTENSION, detect
 
 
-TYPE = "type"
-APPLICATION = "application"
+def install(filename):
+    entity = detect(filename)
+    if entity:
+        console.write("install %s from %s" % (entity, filename))
+        try:
+            if entity is TYPE:
+                subject = managers.memory.install_type(filename)
+            elif entity is APPLICATION:
+                subject = managers.memory.install_application(filename)
+        except Exception as error:
+            console.error("unable to install %s: %s" % (entity, error))
+        else:
+            console.write("contains %s:%s" % (subject.id, subject.name.lower()))
 
 
-def run(filename):
+def run(location):
     """
     install application or type
-    :param filename: input file with application or type
+    :param location: input filename with application or type or directory to search
     """
-
-    def builder(parser):
-        @native
-        def entity(name, attributes):
-            if name == u"Type":
-                parser.complete(TYPE)
-            if name == u"Application":
-                parser.complete(APPLICATION)
-            else:
-                parser.abort()
-        return entity
-
-    try:
-        file = managers.file_manager.open(file_access.FILE, None, filename, mode="rb")
-    except Exception as error:
-        console.error("unable to open file: %s" % error)
+    if os.path.isdir(location):
+        console.write("install from %s" % location)
+        for filename in managers.file_manager.list(file_access.FILE, None, location):
+            if filename.endswith(EXTENSION):
+                install(os.path.join(location, filename))
     else:
-        with closing(file):
-            try:
-                entity = Parser(builder=builder, supress=True).parse(file=file)
-                if entity is TYPE:
-                    console.write("install type from %s" % filename)
-                    subject = managers.memory.install_type(filename)
-                elif entity is APPLICATION:
-                    console.write("install application from %s" % filename)
-                    subject = managers.memory.install_application(filename)
-                else:
-                    console.error("file does not contain application or type")
-                    return
-            except Exception as error:
-                console.error("unable to install %s: %s" % (entity, error))
-                raise
-            else:
-                console.write("contains %s:%s" % (subject.id, subject.name.lower()))
+        install(location)

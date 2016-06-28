@@ -21,14 +21,6 @@ from .daemon import FileWriter
 
 TEMPORARY_DIRECTORY_SUFFIX = "-temporary"
 
-# application_path = "applications"
-# global_types_path = "types"
-# type_source_path = "objects"
-# py_files_cache = "cache"
-# resources_path = "resources"
-# application_file_name = "application.xml"
-# databases_path = "databases"
-
 
 class FileManager(object):
 
@@ -214,8 +206,8 @@ class FileManager(object):
 
     # directories
 
-    def prepare_directory(self, category, owner, cleanup=True):
-        location = self.locate(category, owner)
+    def prepare_directory(self, category, owner, name=None, cleanup=True):
+        location = self.locate(category, owner, name)
         try:
             if os.path.isdir(location):
                 if cleanup:

@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>5c1b98df-8609-4660-83b2-44ec7b2e7611</ID>
+		<Name>copy</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_copy</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.61.8388</Version>
+		<Category>Standard</Category>
+		<InterfaceType>1</InterfaceType>
+		<Icon>#Res(4d6060c5-5acd-bd35-8f4c-0888ae0306f0)</Icon>
+		<EditorIcon>#Res(767b4073-ad36-95eb-2ac6-088903b15a9b)</EditorIcon>
+		<StructureIcon>#Res(4b5fe60d-f570-eddf-278c-0889362f18e3)</StructureIcon>
+		<Dynamic>1</Dynamic>
+		<Moveable>1</Moveable>
+		<Resizable>1</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>1</Container>
+		<Containers>htmlcontainer, dialog, container, tablecell</Containers>
+		<Handlers>on_startup, on_create, on_delete, on_update, on_compile</Handlers>
+		<Languages>en_US, ru_RU, fr_FR</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>designcolor</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>EEEEEE</DefaultValue>
+			<RegularExpressionValidation>^(#?[0-9A-Fa-f]{6})?$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>Color()</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d+$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>zindex</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>top</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^\d{0,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>left</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^\d{0,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>source_object</Name>
+			<DisplayName>#Lang(107)</DisplayName>
+			<Description>#Lang(207)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>ObjectList()</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>source_object_cache</Name>
+			<DisplayName>#Lang(108)</DisplayName>
+			<Description>#Lang(208)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>ObjectList()</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">Copy</Sentence>
+			<Sentence ID="002">The Copy type produces an object displayed as the identical copy of some associated object specified by the &apos;Source&apos; attribute. Different Copy objects can use one and the same source object. After specifying a new source object the Copy object&apos;s position (Left and Top attributes) becomes exactly the same as that of the source object. The Copy object&apos;s position can be changed manually (without affecting the source object&apos;s position). All changes made to the source object are applied to all Copy objects associated with it. If you want to set an action on the object inserted into the Copy object, you must set the action on the source object, since the Copy object only reflects the appearance of the source object and can not have any actions.
+The Copy type does not make the copies of:
+- the top-level containers;
+- the objects situated on the same page as the Copy object;
+- the objects situated on the pages with other Copy objects.
+Such restriction is introduced in order to avoid the recursion problems. To avoid these problems, the Copy object should be placed on some other web page which does not contain any Copy object.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Color in WYSIWYG</Sentence>
+			<Sentence ID="102">Hierarchy</Sentence>
+			<Sentence ID="103">Visibility</Sentence>
+			<Sentence ID="104">Z-Index</Sentence>
+			<Sentence ID="105">Top</Sentence>
+			<Sentence ID="106">Left</Sentence>
+			<Sentence ID="107">Source object</Sentence>
+			<Sentence ID="108"></Sentence>
+			<Sentence ID="201">The background color of the object in the WYSIWYG mode of VDOM IDE. It helps to navigate the objects of the page if there are too many of them.</Sentence>
+			<Sentence ID="202">Order of rendering the object on the page. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
+			<Sentence ID="203">Visibility of the object.</Sentence>
+			<Sentence ID="204">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the z-index indicates the order of their displaying. The larger z-index is, the upper the object lies.</Sentence>
+			<Sentence ID="205">Spacing between the top edge of the container and the object in pixels.</Sentence>
+			<Sentence ID="206">Spacing between the left edge of the container and the object in pixels.</Sentence>
+			<Sentence ID="207">The object which is copied by the current Сopy object.</Sentence>
+			<Sentence ID="208">Cashed target object</Sentence>
+			<Sentence ID="301">Incorrect value.</Sentence>
+			<Sentence ID="302">Incorrect value, must be positive integer from 0 to 99.</Sentence>
+			<Sentence ID="303">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="304">Incorrect value, must be positive integer from 0 to 9999.</Sentence>
+			<Sentence ID="305">Incorrect value, must be positive integer from 0 to 9999.</Sentence>
+			<Sentence ID="306">Incorrect value, must be positive integer from 0 to 9999.</Sentence>
+			<Sentence ID="307">Incorrect object.</Sentence>
+			<Sentence ID="308"></Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">Copie d&apos;objet</Sentence>
+			<Sentence ID="002">Copie d&apos;objet</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Color in WYSIWYG</Sentence>
+			<Sentence ID="102">Hiérarchie</Sentence>
+			<Sentence ID="103">Visibilité</Sentence>
+			<Sentence ID="104">Z-Index</Sentence>
+			<Sentence ID="105">Haut</Sentence>
+			<Sentence ID="106">Gauche</Sentence>
+			<Sentence ID="107">Objet Source</Sentence>
+			<Sentence ID="108"></Sentence>
+			<Sentence ID="201">Color in design mode</Sentence>
+			<Sentence ID="202">Hiérarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="203">Afficher ou cacher l&apos;objet</Sentence>
+			<Sentence ID="204">Position in visual hierarchy of objects</Sentence>
+			<Sentence ID="205">Distance depuis le bord haut de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="206">Distance depuis le bord gauche de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="207">Objet source qui sera copié</Sentence>
+			<Sentence ID="208">Cashed target object</Sentence>
+			<Sentence ID="301">Incorrect value</Sentence>
+			<Sentence ID="302">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="303">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="304">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="305">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="306">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="307">Object Incorrect</Sentence>
+			<Sentence ID="308"></Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">Копия</Sentence>
+			<Sentence ID="002">Используется для создания копии объекта</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Цвет в WYSIWYG</Sentence>
+			<Sentence ID="102">Иерархия</Sentence>
+			<Sentence ID="103">Отображение</Sentence>
+			<Sentence ID="104">Позиция</Sentence>
+			<Sentence ID="105">Сверху</Sentence>
+			<Sentence ID="106">Слева</Sentence>
+			<Sentence ID="107">Исходный объект</Sentence>
+			<Sentence ID="108"></Sentence>
+			<Sentence ID="201">Цвет в режиме редактирования</Sentence>
+			<Sentence ID="202">Приоритет в потоке гипертекста</Sentence>
+			<Sentence ID="203">Режим отображения объекта</Sentence>
+			<Sentence ID="204">Положение в визуальной иерархии объектов</Sentence>
+			<Sentence ID="205">Расстояние от верхней границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="206">Расстояние от левой границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="207">Целевой объект для копирования</Sentence>
+			<Sentence ID="208">Копия целевого объекта в кэше</Sentence>
+			<Sentence ID="301">Неправильное значение</Sentence>
+			<Sentence ID="302">Неправильное значение</Sentence>
+			<Sentence ID="303">Неправильное значение</Sentence>
+			<Sentence ID="304">Неправильное значение, должно быть целое число от 0 до 99</Sentence>
+			<Sentence ID="305">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="306">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="307">Неправильный объект</Sentence>
+			<Sentence ID="308"></Sentence>
+			<Sentence ID="401">Не отображать</Sentence>
+			<Sentence ID="402">Отображать</Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="4d6060c5-5acd-bd35-8f4c-0888ae0306f0" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjM2REM4NTFGMjI0QzExRTFBRkRGQTRDMUVEODg3NTM5IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjM2REM4NTIwMjI0QzExRTFBRkRGQTRDMUVEODg3NTM5Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MzZEQzg1MUQyMjRDMTFFMUFGREZB
+			NEMxRUQ4ODc1MzkiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MzZEQzg1MUUyMjRDMTFFMUFG
+			REZBNEMxRUQ4ODc1MzkiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			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
+		</Resource>
+		<Resource ID="767b4073-ad36-95eb-2ac6-088903b15a9b" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAA2RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEu
+			MC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVz
+			b3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1N
+			Ok9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3Q0I5NjU0QjU0RjZFMDExQkM4MDk5RkU5QzUy
+			NDc4RCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowMDU5QjRFQzFGMjIxMUUxOEQzNEEyOEY1
+			NDFEOTI5OCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowMDU5QjRFQjFGMjIxMUUxOEQzNEEy
+			OEY1NDFEOTI5OCIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3Mi
+			PiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5NEEyNUM5QTRG
+			MTZFMTExQTQxNURENUVEMTNGQzBGQyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3Q0I5NjU0
+			QjU0RjZFMDExQkM4MDk5RkU5QzUyNDc4RCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRG
+			PiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PiVPkNoAAAFGSURBVHjarJK9SsRAEMdn
+			1vgWYnNqY21hI9wjiJVw2uZNbMQHCNhIrlL0AWz8BIsrFMXiLIXrJJ5was4kO85+5OIFsivikNmB
+			Yea3/5kNEBHU/SLuaJ8/uKLBKO27oqpD1VS3y+6Wjgvr+/3V494eOCwW0aZwFTBgCdwWqcMJudlY
+			efJAQi/kt0qCcv4mJQzyKfmfneD4Yzj9PDg5jPHrLR49hK7XCbgKksE9n/IHhfQHJHU+ezyMZpe3
+			Q3tzPZ5j+p7Qy3MPbJe+2fw7KjJE5nB9sjuca7XumtQERDkUXyNuKAzAgkoIcN4C2s0QWUCWvlYq
+			ylF4DK2I5KR4rRM3QIoMss9keh/asYJ6jJVkVgkCItooKiiiHyJ5cXn6ZprFjGlVEO2osn4I8E5y
+			Xqy53arQgoQBoPBDbk93VMsZgIS/2rcAAwClyMj+lNgSvwAAAABJRU5ErkJggg==
+		</Resource>
+		<Resource ID="4b5fe60d-f570-eddf-278c-0889362f18e3" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjAxNTcxNkE5MUZFNTExRTFCRDhDRjgwODBGRjdFQ0U3IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjAxNTcxNkFBMUZFNTExRTFCRDhDRjgwODBGRjdFQ0U3Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDE1NzE2QTcxRkU1MTFFMUJEOENG
+			ODA4MEZGN0VDRTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDE1NzE2QTgxRkU1MTFFMUJE
+			OENGODA4MEZGN0VDRTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz5E+dm9AAABL0lEQVR42rSSv0oDQRDGZ874FpImamNtYSP4
+			CGIbbfMw4gMc2EisFH0HYyBFmqBYxFJIJ2eEqKd7t+Ps7F4uCZexkAw3O7C332++/QNEBIt5125K
+			1i/uaTRJh1pFJ1iMzuWx1M3D8+HeTf8MlIi0nyzeBj1iFdA72n3+A9D6t4Nasd9lDhiyWgf4/Tme
+			vwacDj74lrauH1vLCDVeAcnogUc7QyD5gKzMm6ereH3nxEFiZ3u2YvqR0OtLH4JCOvq34SoDbAbd
+			29PxRqMxqHRAlEH+M+HFuRcHSAEAng/ig2qAzcGkb2X3wj5bFydkp4v3m+0KQG7AfCXz+5fEEqgE
+			OzDBAQIihhqVQEQdYPmQsvTdC6M1L3MASXSzOgD4DDI+RN81dBcjkRej+tbgV4ABAEJ1vyb9qSGJ
+			AAAAAElFTkSuQmCC
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[
+def on_startup(object):
+    source_object = object.application.objects.get(object.attributes["source_object"])
+    if source_object:
+        source_object.attach(object)
+
+
+def on_create(object):
+    source_object = object.application.objects.get(object.attributes["source_object"])
+    if source_object:
+        source_object.attach(object)
+
+
+def on_delete(object):
+    source_object = object.application.objects.get(object.attributes["source_object"])
+    if source_object:
+        source_object.detach(object)
+
+
+def on_update(object, attributes):
+    if "source_object" in attributes:
+        source_object = object.application.objects.get(object.attributes["source_object"])
+        if source_object:
+            source_object.detach(object)
+        source_object = object.application.objects.get(attributes["source_object"])
+        if source_object:
+            source_object.attach(object)
+
+
+def on_render(self, child):
+    if self.top != "":
+        child.top = self.top
+    if self.left != "":
+        child.left = self.left
+
+
+def on_wysiwyg(self, child):
+    child.top = 0
+    child.left = 0
+
+
+def on_compile(object, profile):
+    source_object = object.application.objects.catalog.get(object.attributes["source_object"])
+    if source_object:
+        profile.dynamic = 1
+        profile.optimization_priority = source_object.type.optimization_priority
+        profile.entries.new(source_object, on_render=on_render, on_wysiwyg=on_wysiwyg)
+
+
+class VDOM_copy(VDOM_object):
+
+    def check_cache(self):
+        if self.source_object_cache != self.source_object:
+            # reset copy position
+            self.source_object_cache = self.source_object
+            self.top = ""
+            self.left = ""
+            self.update("source_object_cache", "top", "left")
+
+    def render(self, contents=""):
+        self.check_cache()
+        result = contents if self.visible == "1" else u""
+        return VDOM_object.render(self, contents=result)
+
+    def empty_copy(self):
+        from scripting.utils.wysiwyg import get_centered_image_metrics
+        top = self.top if self.top else 10
+        left = self.left if self.left else 10
+        width = 100
+        height = 100
+
+        image_id = "4d6060c5-5acd-bd35-8f4c-0888ae0306f0"
+        image_x = image_y = 0
+        image_width = image_height = 50
+
+        image_x, image_y, image_width, image_height = get_centered_image_metrics(image_width, image_height, width, height)
+
+        designcolorvalue = u"#" + self.designcolor if self.designcolor != "" else "none"
+
+        result = \
+            u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+                    top="{top}" left="{left}" width="{width}" height="{height}"
+                    backgroundcolor="#EEEEEE" contents="static">
+                    <svg>
+                        <rect x="0" y="0" width="{width}" height="{height}" fill="{designcolorvalue}"/>
+                        <image href="#Res({image_id})" x="{image_x}" y="{image_y}" width="{image_width}" height="{image_height}" />
+                    </svg>
+                </container>
+            """.format(
+                id=self.id,
+                vis=self.visible,
+                zind=self.zindex,
+                hierarchy=self.hierarchy,
+                order=self.order,
+                designcolorvalue=designcolorvalue,
+                top=top,
+                left=left,
+                width=width,
+                height=height,
+                image_id=image_id,
+                image_width=image_width,
+                image_height=image_height,
+                image_x=image_x,
+                image_y=image_y)
+        return result
+
+    def wysiwyg(self, contents=""):
+        self.check_cache()
+
+        designcolorvalue = u"#" + self.designcolor if self.designcolor != "" else "none"
+
+        if self.source_object:
+            object = application.objects.search(self.source_object)
+
+            if object:
+                top = self.top if self.top else object.get_attributes()["top"].value
+                left = self.left if self.left else object.get_attributes()["left"].value
+                width = object.get_attributes()["width"].value
+
+                height1 = height2 = u""
+                if "height" in object.get_attributes():
+                    height = object.get_attributes()["height"].value
+                    height1 = u"""height="%s" """ % height
+                    height2 = u"""height="%s" """ % str(int(height) + 2)
+
+                zindex = self.zindex
+                if "zindex" in object.get_attributes():
+                    zindex = object.get_attributes()["zindex"].value
+
+                result = \
+                    u"""<container id="{id}" visible="{vis}" zindex="{zind}"
+                            top="{top}" left="{left}" width="{width2}" {height2} contents="static">
+                            <svg>
+                                <rect x="0" y="0" width="{width2}" {height2} fill="{designcolorvalue}"/>
+                            </svg>
+                            <container top="1" left="1" width="{width}" {height1} contents="static">
+                                {contents}
+                            </container>
+                        </container>
+                    """.format(
+                        id=self.id,
+                        vis=self.visible,
+                        zind=zindex,
+                        designcolorvalue=designcolorvalue,
+                        width2=str(int(width) + 2),
+                        height2=height2,
+                        top=top,
+                        left=left,
+                        width=width,
+                        height1=height1,
+                        contents=contents)
+            else:
+                result = self.empty_copy()
+        else:
+            result = self.empty_copy()
+
+        return VDOM_object.wysiwyg(self, contents=result)
+]]>
+	</SourceCode>
+</Type>

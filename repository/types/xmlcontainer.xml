@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>6cd1ad90-ca33-4a08-a3d0-ed60309db88b</ID>
+		<Name>xmlcontainer</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_xmlcontainer</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.8.6720</Version>
+		<Category>Standard</Category>
+		<InterfaceType>1</InterfaceType>
+		<Icon>#Res(f70c8403-0d8e-4266-bc87-c1bfef4a7a0c)</Icon>
+		<EditorIcon>#Res(8f7630ac-f801-49b2-a29b-d856726b235f)</EditorIcon>
+		<StructureIcon>#Res(ca4640de-7d46-4be3-918e-57f73c9d9b1e)</StructureIcon>
+		<Dynamic>1</Dynamic>
+		<Moveable>1</Moveable>
+		<Resizable>1</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>3</Container>
+		<RenderType>xml</RenderType>
+		<HTTPContentType>application/xml</HTTPContentType>
+		<Languages>en_US, ru_RU, fr_FR</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>zindex</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>title</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(100)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>description</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(100)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>declaration</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^$|^[\W\w\s]*&lt;!-- / --&gt;[\W\w\s]*&lt;!-- \\ --&gt;[\W\w\s]*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(1000)</CodeInterface>
+			<ColorGroup>3</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">XML container</Sentence>
+			<Sentence ID="002">A container for XML exchange; its values are usually used by third-party applications. It does not need to contain other VDOM types.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Title</Sentence>
+			<Sentence ID="105">Description</Sentence>
+			<Sentence ID="106">Declaration</Sentence>
+			<Sentence ID="201">The order of rendering the object on the page. The objects with identical values of the Hierarchy attribute are rendered in the order they are written in the XML-file of the VDOM application.</Sentence>
+			<Sentence ID="202">The visibility of the object. In any case the object will exist on the web page, this attribute only makes it invisible.</Sentence>
+			<Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the Z-Index indicates the order of their displaying. The larger Z-Index is, the upper the object is situated.</Sentence>
+			<Sentence ID="204">The title of the object to display, may be in HTML format. In some objects the title is not displayed if the Title appearance attribute is set to &apos;Title off&apos;.</Sentence>
+			<Sentence ID="205">The description of the object.</Sentence>
+			<Sentence ID="206">XML declaration</Sentence>
+			<Sentence ID="301">Incorrect value, must be even integer from 0 to 99.</Sentence>
+			<Sentence ID="302">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="303">Incorrect value, must be even integer from 0 to 99.</Sentence>
+			<Sentence ID="304">Incorrect value, must be string.</Sentence>
+			<Sentence ID="305">Incorrect value, must be string.</Sentence>
+			<Sentence ID="306">Incorrect value.</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">Conteneur XML</Sentence>
+			<Sentence ID="002">Conteneur avec XML primitives</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hiérarchie</Sentence>
+			<Sentence ID="102">Visibilité</Sentence>
+			<Sentence ID="103">Z-index</Sentence>
+			<Sentence ID="104">Titre</Sentence>
+			<Sentence ID="105">Description</Sentence>
+			<Sentence ID="106">Declaration</Sentence>
+			<Sentence ID="201">Afficher ou cacher l&apos;objet</Sentence>
+			<Sentence ID="202">Titre du container</Sentence>
+			<Sentence ID="203">Distance depuis le bord haut de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="204">Distance depuis le bord haut de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="205">Description du container</Sentence>
+			<Sentence ID="206">declaration XML</Sentence>
+			<Sentence ID="301">Valeur Incorrecte</Sentence>
+			<Sentence ID="302">Valeur Incorrecte, doit être une chaîne de caractères</Sentence>
+			<Sentence ID="303">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="304">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="305">Valeur Incorrecte, doit être une chaîne de caractères</Sentence>
+			<Sentence ID="306">Valeur Incorrecte</Sentence>
+			<Sentence ID="401"></Sentence>
+			<Sentence ID="402"></Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">XML Контейнер</Sentence>
+			<Sentence ID="002">Контейнер для XML обмена</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Иерархия</Sentence>
+			<Sentence ID="102">Отображение</Sentence>
+			<Sentence ID="103">Позиция</Sentence>
+			<Sentence ID="104">Заголовок</Sentence>
+			<Sentence ID="105">Описание</Sentence>
+			<Sentence ID="106">Описание</Sentence>
+			<Sentence ID="201">Отображается объект или нет</Sentence>
+			<Sentence ID="202">Режим отображения объекта</Sentence>
+			<Sentence ID="203">Расстояние от верхней границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="204">Заголовок контейнера</Sentence>
+			<Sentence ID="205">Описание контейнера</Sentence>
+			<Sentence ID="206">XML код</Sentence>
+			<Sentence ID="301">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
+			<Sentence ID="302">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="303">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="304">Неправильное значение, должна быть строка</Sentence>
+			<Sentence ID="305">Неправильное значение, должна быть строка</Sentence>
+			<Sentence ID="306">Неправильное значение</Sentence>
+			<Sentence ID="401">Не отображать</Sentence>
+			<Sentence ID="402">Отображать</Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="f70c8403-0d8e-4266-bc87-c1bfef4a7a0c" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjBCMjQ1RDhDMjQ4MTExRTFBMENFREU5NDAwRjZCNDkwIiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjBCMjQ1RDhEMjQ4MTExRTFBMENFREU5NDAwRjZCNDkwIj4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MEIyNDVEOEEyNDgxMTFFMUEwQ0VE
+			RTk0MDBGNkI0OTAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MEIyNDVEOEIyNDgxMTFFMUEw
+			Q0VERTk0MDBGNkI0OTAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			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
+			ZvBvAQYAtDjlyNS6n5QAAAAASUVORK5CYII=
+		</Resource>
+		<Resource ID="ca4640de-7d46-4be3-918e-57f73c9d9b1e" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjMxNTc5MUQ5MjQ3RjExRTFCNDJEOTU0OUM0Q0EyMkE5IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjMxNTc5MURBMjQ3RjExRTFCNDJEOTU0OUM0Q0EyMkE5Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MzE1NzkxRDcyNDdGMTFFMUI0MkQ5
+			NTQ5QzRDQTIyQTkiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MzE1NzkxRDgyNDdGMTFFMUI0
+			MkQ5NTQ5QzRDQTIyQTkiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz6/v1/tAAABoUlEQVR42mJ8lJfHQApg+ff3L1YJNhkZJh6e
+			HzduEKtBICT4FwvTjXOX5diZkMWZ/v75g4m4jI3/y4u9E/z8VFfpD6oUy5/fv9HMZuLgEAj0f/H9
+			4aU3e1mc/l6+8FeL8R/CSX8xNAgHBf3g+X//9cWb70/8+/9HxEHn26677EyMUOOANiAjRl5eXme7
+			51/v3Plw5s2Px29/PP1j9PYiDzdCwRl/fzQbvv79v+z1t9///8NFGBkZQoW5RFhBvmf58+sXmgZ2
+			BoZEIVaoUhYWdjGxH8+eMfz/8wesEOpp603TkfUc9csEkmJubsp5eUzs7N8eP75eVfXjxQtUG55P
+			hWu4/PatnqysSkEBIyvIKi5ZWeGsrJulpRzMzFBPo7kKGN5s4uIQ1RDAJyV17cMHoEomYLBihuy/
+			P38+3rz56+NHuMjd48e//voFVInThp8fP57KzX1+7drvHz8ubNy4tbWVl4EBFKybtLUhim59/46s
+			R42TE0h+/vv39vfv3//9E2FlVeHgYGZkRCQ+FTY2FFeBxbkZGAzAOsFC/4ApBCDAAAQyAagCQmsK
+			AAAAAElFTkSuQmCC
+		</Resource>
+		<Resource ID="8f7630ac-f801-49b2-a29b-d856726b235f" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjMxNTc5MUQ5MjQ3RjExRTFCNDJEOTU0OUM0Q0EyMkE5IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjMxNTc5MURBMjQ3RjExRTFCNDJEOTU0OUM0Q0EyMkE5Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MzE1NzkxRDcyNDdGMTFFMUI0MkQ5
+			NTQ5QzRDQTIyQTkiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MzE1NzkxRDgyNDdGMTFFMUI0
+			MkQ5NTQ5QzRDQTIyQTkiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz6/v1/tAAABoUlEQVR42mJ8lJfHQApg+ff3L1YJNhkZJh6e
+			HzduEKtBICT4FwvTjXOX5diZkMWZ/v75g4m4jI3/y4u9E/z8VFfpD6oUy5/fv9HMZuLgEAj0f/H9
+			4aU3e1mc/l6+8FeL8R/CSX8xNAgHBf3g+X//9cWb70/8+/9HxEHn26677EyMUOOANiAjRl5eXme7
+			51/v3Plw5s2Px29/PP1j9PYiDzdCwRl/fzQbvv79v+z1t9///8NFGBkZQoW5RFhBvmf58+sXmgZ2
+			BoZEIVaoUhYWdjGxH8+eMfz/8wesEOpp603TkfUc9csEkmJubsp5eUzs7N8eP75eVfXjxQtUG55P
+			hWu4/PatnqysSkEBIyvIKi5ZWeGsrJulpRzMzFBPo7kKGN5s4uIQ1RDAJyV17cMHoEomYLBihuy/
+			P38+3rz56+NHuMjd48e//voFVInThp8fP57KzX1+7drvHz8ubNy4tbWVl4EBFKybtLUhim59/46s
+			R42TE0h+/vv39vfv3//9E2FlVeHgYGZkRCQ+FTY2FFeBxbkZGAzAOsFC/4ApBCDAAAQyAagCQmsK
+			AAAAAElFTkSuQmCC
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[
+class VDOM_xmlcontainer(VDOM_object):
+
+    def render(self, contents=""):
+        return self.declaration or ""
+    
+    def wysiwyg(self, contents=""):
+        result="<container id=\"%s\" visible=\"%s\" zindex=\"%s\" hierarchy=\"%s\" order=\"%s\"><svg>%s</svg></container>"%(self.id, self.visible, self.zindex, self.hierarchy, self.order,contents)
+        return VDOM_object.wysiwyg(self, contents=result)
+        
+        
+]]>
+	</SourceCode>
+</Type>
