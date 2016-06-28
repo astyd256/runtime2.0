@@ -7,12 +7,12 @@ def run():
     """
     show installed applications and types
     """
-    types = sorted(managers.memory.types.itervalues(), key=lambda item: item.name)
     with section("types"):
-        for type in types:
-            show(type.id + (":%s" % type.name if type else ""))
+        types = sorted(managers.memory.types.itervalues(), key=lambda item: item.name)
+        for vdomtype in types:
+            show(vdomtype.id + ":%s" % vdomtype.name)
 
-    applications = sorted(managers.memory.applications.itervalues(), key=lambda item: item.name)
     with section("applications"):
+        applications = sorted(managers.memory.applications.itervalues(), key=lambda item: item.name)
         for application in applications:
-                show(application.id + ":%s" % application.name.lower())
+            show(application.id + ":%s" % application.name.lower())

@@ -1,5 +1,9 @@
 
 
+def forfeit(value):
+    return value[:1].lower() + value[1:]
+
+
 def lfill(pattern, length):
     pattern_length = len(pattern)
     return pattern * (length // pattern_length) + pattern[:length % pattern_length]

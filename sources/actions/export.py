@@ -1,17 +1,19 @@
 
 import os.path
+
 import managers
-from logs import console
+
+from .auxiliary import section, show
 from .detecting import TYPE, EXTENSION, search
 
 
 def export(entity, subject, location):
-    console.write("export %s %s: %s to %s" % (entity, subject.id, subject.name, location))
-    try:
-        subject.export(location)
-    except Exception as error:
-        console.error("unable to export %s: %s" % (entity, error))
-        raise
+    with section("export %s %s: %s to %s" % (entity, subject.id, subject.name, location), instant=True):
+        try:
+            subject.export(location)
+        except Exception as error:
+            show("unable to export %s: %s" % (entity, error))
+            raise
 
 
 def run(identifier, location):
@@ -21,12 +23,11 @@ def run(identifier, location):
     :param location: output file or directory
     """
     if identifier == "types":
-        if not os.path.isdir(location):
-            console.error("for exporting types location must be directory")
-            return
-
-        for subject in managers.memory.types.itervalues():
-            export(TYPE, subject, os.path.join(location, subject.name + EXTENSION))
+        if os.path.isdir(location):
+            for subject in managers.memory.types.itervalues():
+                export(TYPE, subject, os.path.join(location, subject.name + EXTENSION))
+        else:
+            show("for exporting types location must be directory")
     else:
         if os.path.isdir(location):
             location = os.path.join(location, subject.name + EXTENSION)

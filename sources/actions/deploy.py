@@ -5,7 +5,7 @@ import settings
 import managers
 import file_access
 
-from logs import console
+from .auxiliary import section, show
 from .install import run as install
 
 
@@ -24,8 +24,9 @@ def run():
     """
     deploy runtime on the system
     """
-    for caption, segments in LOCATIONS:
-        console.write("prepare %s" % caption)
-        managers.file_manager.prepare_directory(*segments, cleanup=False)
+    with section("initialize directories"):
+        for caption, segments in LOCATIONS:
+            show(caption)
+            managers.file_manager.prepare_directory(*segments, cleanup=False)
 
     install(os.path.join(settings.REPOSITORY_LOCATION, settings.REPOSITORY_TYPES_DIRECTORY))

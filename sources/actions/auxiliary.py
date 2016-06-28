@@ -23,7 +23,7 @@ def escape(value):
 
 
 @contextmanager
-def section(name=None, value=MISSING):
+def section(name=None, value=MISSING, instant=False):
     global global_indent, global_section
 
     indent = global_indent
@@ -37,7 +37,7 @@ def section(name=None, value=MISSING):
         global_section = None
         show(name, value, indent=indent)
 
-    if value is MISSING:
+    if value is MISSING and not instant:
         global_section = show_section
     else:
         show_section()

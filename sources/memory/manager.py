@@ -19,6 +19,10 @@ from .application import application_builder, MemoryApplications
 from .daemon import MemoryWriter
 
 
+class AlreadyExistsError(Exception):
+    pass
+
+
 class Memory(object):
 
     def __init__(self):
@@ -106,17 +110,17 @@ class Memory(object):
 
     # installation
 
-    def install_type(self, filename):
+    def install_type(self, filename, into=None):
 
         def cleanup(uuid):
             if uuid:
                 self.cleanup_type(uuid)
 
         def on_information(type):
+            if managers.file_manager.exists(file_access.TYPE, type.id):
+                raise AlreadyExistsError("Type already installed")
             context.uuid = type.id
             managers.resource_manager.invalidate_resources(type.id)
-            if managers.file_manager.exists(file_access.TYPE, type.id):
-                raise Exception("Type already installed")
             for category in (file_access.TYPE, file_access.RESOURCE):
                 managers.file_manager.prepare_directory(category, type.id, cleanup=True)
 
@@ -126,13 +130,19 @@ class Memory(object):
         try:
             type = parser.parse(filename=filename)
             if parser.report:
-                log.warning("Install type notifications")
-                for lineno, message in parser.report:
-                    log.warning("    %s at line %s" % (message, lineno))
+                if into is None:
+                    log.warning("Install type notifications")
+                    for lineno, message in parser.report:
+                        log.warning("    %s, line %s" % (message, lineno))
+                else:
+                    for lineno, message in parser.report:
+                        into.append((lineno, message))
             type.save()
             return type
         except IOError as error:
             raise Exception("Unable to read from \"%s\": %s" % (os.path.basename(filename), error.strerror))
+        except AlreadyExistsError as error:
+            raise
         except ParsingException as error:
             cleanup(context.uuid)
             raise Exception("Unable to parse %s, line %s: %s" % (os.path.basename(filename), error.lineno, error))
@@ -140,7 +150,7 @@ class Memory(object):
             cleanup(context.uuid)
             raise
 
-    def install_application(self, filename):
+    def install_application(self, filename, into=None):
 
         def cleanup(uuid):
             # TODO: check this later
@@ -149,11 +159,11 @@ class Memory(object):
                 self.cleanup_application(uuid)
 
         def on_information(application):
+            if managers.file_manager.exists(file_access.APPLICATION, application.id):
+                raise AlreadyExistsError("Application already installed")
             context.uuid = application.id
             managers.resource_manager.invalidate_resources(application.id)
             managers.database_manager.delete_database(application.id)
-            if managers.file_manager.exists(file_access.APPLICATION, application.id):
-                raise Exception("Application already installed")
             for category in (file_access.APPLICATION, file_access.RESOURCE, file_access.DATABASE,
                     file_access.LIBRARY, file_access.CACHE, file_access.STORAGE):
                 managers.file_manager.prepare_directory(category, application.id, cleanup=True)
@@ -173,14 +183,20 @@ class Memory(object):
         try:
             application = parser.parse(file=file)
             if parser.report:
-                log.warning("Install application notifications")
-                for lineno, message in parser.report:
-                    log.warning("    %s at line %s" % (message, lineno))
+                if into is None:
+                    log.warning("Install application notifications")
+                    for lineno, message in parser.report:
+                        log.warning("    %s, line %s" % (message, lineno))
+                else:
+                    for lineno, message in parser.report:
+                        into.append((lineno, message))
             application.unimport_libraries()
             application.save()
             return application
         except IOError as error:
             raise Exception("Unable to read from \"%s\": %s" % (os.path.basename(filename), error.strerror))
+        except AlreadyExistsError as error:
+            raise
         except ParsingException as error:
             cleanup(context.uuid)
             raise Exception("Unable to parse \"%s\", line %s: %s" % (os.path.basename(filename), error.lineno, error))

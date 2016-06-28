@@ -1,5 +1,5 @@
 
-from logs import console
+from .auxiliary import section, show
 from .detecting import search
 
 
@@ -10,9 +10,9 @@ def run(identifier):
     """
     entity, subject = search(identifier)
     if subject:
-        console.write("re-save %s %s: %s" % (entity, subject.id, subject.name))
-        try:
-            subject.save()
-        except Exception as error:
-            console.error("unable to save %s: %s" % (entity, error))
-            raise
+        with section("re-save %s %s: %s" % (entity, subject.id, subject.name), instant=True):
+            try:
+                subject.save()
+            except Exception as error:
+                show("unable to save %s: %s" % (entity, error))
+                raise
