@@ -226,10 +226,10 @@ class VDOMObject(object):
         self._origin.attributes.update(attributes)
 
     def separate_render(self, chunks=None):
-        log.write("Separate render %s" % self)
         if chunks is None:
             chunks = {}
         if self._update_state is STATE_MODIFIED:
+            log.write("Separate render %s" % self)
             chunks[self._id] = self.render()
         else:
             for name in self._objects:

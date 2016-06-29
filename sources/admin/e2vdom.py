@@ -144,12 +144,15 @@ def run(request):
 							continue
 						params = ev.events[ob, nm]
 						params["sender"] = [ob]
+						params["sender_event"] = [nm]
 						request.arguments().arguments(params)
+						request.container_id = callee.owner
 						result=managers.engine.execute(callee, render=1)
 						for key in result:
 							k_ob=app.objects.catalog.get(key)
 							k_ob_parent_id = k_ob.parent.id if k_ob.parent else ""
 							r[key] = (result[key],k_ob_parent_id,k_ob.type.container,k_ob.type.id)
+
 			except Exception as e:
 				sys.excepthook(*sys.exc_info())
 				# from utils.tracing import format_exception_trace

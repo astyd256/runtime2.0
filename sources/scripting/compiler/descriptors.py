@@ -77,8 +77,8 @@ def create_attribute_descriptor(name):
         "STATE_MODIFIED": STATE_MODIFIED,
         "STATE_UP_TO_DATE": STATE_UP_TO_DATE,
         "STATE_REQUIRE_RECOMPUTE": STATE_REQUIRE_RECOMPUTE,
-        "STATE_RECOMPUTE": STATE_RECOMPUTE,
-        "STATE_AVOID_RECOMPUTE": STATE_AVOID_RECOMPUTE
+        "STATE_RECOMPUTE": STATE_RECOMPUTE
+        # "STATE_AVOID_RECOMPUTE": STATE_AVOID_RECOMPUTE
     }
 
     class_name = make_descriptor_class_name(name)
@@ -94,8 +94,8 @@ def create_attribute_descriptor(name):
     def __set__(self, instance, value):
         if instance._compute_state is STATE_UP_TO_DATE:
             instance._compute_state = STATE_REQUIRE_RECOMPUTE
-        elif instance._compute_state is STATE_AVOID_RECOMPUTE:
-            raise AvoidRecomputeError(instance, "{name}")
+        # elif instance._compute_state is STATE_AVOID_RECOMPUTE:
+        #     raise AvoidRecomputeError(instance, "{name}")
         if instance._update_state is STATE_UNMODIFIED:
             instance._update_state = STATE_MODIFIED
         instance.{attribute_name} = value
@@ -116,8 +116,8 @@ def create_stateful_attribute_descriptor(name):
         "STATE_MODIFIED": STATE_MODIFIED,
         "STATE_UP_TO_DATE": STATE_UP_TO_DATE,
         "STATE_REQUIRE_RECOMPUTE": STATE_REQUIRE_RECOMPUTE,
-        "STATE_RECOMPUTE": STATE_RECOMPUTE,
-        "STATE_AVOID_RECOMPUTE": STATE_AVOID_RECOMPUTE
+        "STATE_RECOMPUTE": STATE_RECOMPUTE
+        # "STATE_AVOID_RECOMPUTE": STATE_AVOID_RECOMPUTE
     }
 
     class_name = make_descriptor_class_name(name)
@@ -132,8 +132,8 @@ def create_stateful_attribute_descriptor(name):
     def __set__(self, instance, value):
         if instance._compute_state is STATE_UP_TO_DATE:
             instance._compute_state = STATE_REQUIRE_RECOMPUTE
-        elif instance._compute_state is STATE_AVOID_RECOMPUTE:
-            raise AvoidRecomputeError(instance, "{name}")
+        # elif instance._compute_state is STATE_AVOID_RECOMPUTE:
+        #     raise AvoidRecomputeError(instance, "{name}")
         if instance._update_state is STATE_UNMODIFIED:
             instance._update_state = STATE_MODIFIED
             instance._switch()
