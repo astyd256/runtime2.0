@@ -152,7 +152,6 @@ def run(request):
 							k_ob=app.objects.catalog.get(key)
 							k_ob_parent_id = k_ob.parent.id if k_ob.parent else ""
 							r[key] = (result[key],k_ob_parent_id,k_ob.type.container,k_ob.type.id)
-
 			except Exception as e:
 				sys.excepthook(*sys.exc_info())
 				# from utils.tracing import format_exception_trace

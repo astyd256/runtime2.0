@@ -27,7 +27,10 @@ class Console(object):
                 (levels.DEBUG, debug) if debug is not None else \
                 (levels.MESSAGE, "")
 
-        if not isinstance(message, basestring):
+        if isinstance(message, unicode):
+            message = message.encode(self.stderr.encoding if level is levels.ERROR
+                else self.stdout.encoding, "replace")
+        elif not isinstance(message, basestring):
             message = str(message)
 
         message = self._formatter.format(module, level, message)
