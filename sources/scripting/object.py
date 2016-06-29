@@ -239,7 +239,7 @@ class VDOMObject(object):
         return chunks
 
     def write(self, data):
-        log.write(u"Write data to client")
+        log.write(u"Write data to client: %d characters" % len(data))
 
         render_type = managers.request_manager.current.render_type
         if render_type != "e2vdom":
@@ -251,11 +251,12 @@ class VDOMObject(object):
         #     from importlib import import_module
         #     format_thread_trace = import_module("utils.tracing").format_thread_trace
         #     log.debug(format_thread_trace(statements=False, skip=("write", "action"), until="scripting.executable"))
-        log.debug(
-            u"- - - - - - - - - - - - - - - - - - - -\n"
-            u"%s\n"
-            u"- - - - - - - - - - - - - - - - - - - -\n" %
-            data, module=False)
+
+        # log.debug(
+        #     u"- - - - - - - - - - - - - - - - - - - -\n"
+        #     u"%s\n"
+        #     u"- - - - - - - - - - - - - - - - - - - -\n" %
+        #     data, module=False)
 
         # self._compute_state = STATE_AVOID_RECOMPUTE
 
