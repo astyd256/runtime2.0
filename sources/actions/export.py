@@ -29,11 +29,13 @@ def run(identifier, location):
         else:
             show("for exporting types location must be directory")
     else:
+        entity, subject = search(identifier)
+        if not entity:
+            return
+
         if os.path.isdir(location):
             location = os.path.join(location, subject.name + EXTENSION)
         elif not location.endswith(EXTENSION):
             location += EXTENSION
 
-        entity, subject = search(identifier)
-        if entity:
-            export(entity, subject, location)
+        export(entity, subject, location)
