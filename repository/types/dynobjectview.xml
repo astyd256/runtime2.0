@@ -2237,7 +2237,7 @@ $("#" + this.domCont.id).dynamicObjectView("unmarkAsSelected", idlist, start, le
 				</Action>
 				<Action Name="selectNone" DisplayName="#Lang(613)" Description="#Lang(513)">
 					<SourceCode>
-<![CDATA[$("#" + this.domCont.id).dynamicObjectView("unmarkAsSelected");]]>
+<![CDATA[$("#" + this.domCont.id).dynamicObjectView("unmarkAsSelected", undefined, undefined, undefined, true);]]>
 					</SourceCode>
 				</Action>
 				<Action Name="unmarkLoadingAll" DisplayName="#Lang(609)" Description="#Lang(509)">
@@ -2295,8 +2295,8 @@ $("#" + this.domCont.id).dynamicObjectView("toogleSelection", idlist, start, len
 				</Action>
 				<Action Name="selectAll" DisplayName="#Lang(612)" Description="#Lang(512)">
 					<SourceCode>
-<![CDATA[$("#" + this.domCont.id).dynamicObjectView("markAsSelected");]]>
-					</SourceCode>
+<![CDATA[$("#" + this.domCont.id).dynamicObjectView("markAsSelected", undefined, undefined, undefined, true);]]>
+ 					</SourceCode>
 				</Action>
 				<Action Name="unmarkAsActive" DisplayName="#Lang(609)" Description="#Lang(509)">
 					<Parameters>
