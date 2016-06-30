@@ -628,7 +628,7 @@ $q(function(){
 
 	def wysiwyg(self, contents=""):
 		if len(contents) == 0:
-			from scripting.utils.wysiwyg import get_empty_wysiwyg_value
+			from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
 			
 			image_id = "f3cba395-7df9-a844-075e-13e34400048d"
 			result = get_empty_wysiwyg_value(self, image_id)

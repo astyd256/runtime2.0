@@ -1,10 +1,9 @@
 
-from importlib import import_module
 from threading import RLock
 from logs import log
 
-# from utils.properties import roproperty
-# from utils.tracing import format_exception_trace
+from utils.properties import roproperty
+from utils.tracing import format_exception_trace
 # import SOAPpy
 
 # import managers
@@ -15,10 +14,6 @@ from logs import log
 
 
 UNKNOWN = "UNKNOWN"
-
-
-roproperty = import_module("utils.properties").roproperty
-format_exception_trace = import_module("utils.tracing").format_exception_trace
 
 
 class DispatcherEntry(object):

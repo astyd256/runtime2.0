@@ -240,16 +240,13 @@ class VDOMObject(object):
 
     def write(self, data):
         log.write(u"Write data to client: %d characters" % len(data))
-
         render_type = managers.request_manager.current.render_type
         if render_type != "e2vdom":
             log.warning("Perform write when render type is \"%s\"" % render_type)
-            from importlib import import_module
-            format_thread_trace = import_module("utils.tracing").format_thread_trace
+            from utils.tracing import format_thread_trace
             log.debug(format_thread_trace(statements=False, skip=("write", "action"), until="scripting.executable"))
         # else:
-        #     from importlib import import_module
-        #     format_thread_trace = import_module("utils.tracing").format_thread_trace
+        #     from utils.tracing import format_thread_trace
         #     log.debug(format_thread_trace(statements=False, skip=("write", "action"), until="scripting.executable"))
 
         # log.debug(

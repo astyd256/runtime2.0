@@ -1317,7 +1317,7 @@ $j('#%(id)s tr').draggable({
 
 
 	def wysiwyg(self, contents=""):
-		from scripting.utils.wysiwyg import get_empty_wysiwyg_value
+		from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
 
 		# parse data
 		try:

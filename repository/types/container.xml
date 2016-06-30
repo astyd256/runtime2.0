@@ -1005,7 +1005,8 @@
 	</Resources>
 	<SourceCode>
 <![CDATA[
-from scripting import e2vdom, utils
+from scripting import e2vdom
+from scripting.legacy.id import id2link1
 
 
 class VDOM_container(VDOM_object):
@@ -1034,7 +1035,7 @@ class VDOM_container(VDOM_object):
 
         background_color = u"background-color: #%s;" % self.backgroundcolor if self.backgroundcolor != "" else u""
 
-        background_image = u"background-image: url('%s');" % utils.id.id2link1(self.backgroundimage) if self.backgroundimage != "" else u""
+        background_image = u"background-image: url('%s');" % id2link1(self.backgroundimage) if self.backgroundimage != "" else u""
 
         if self.backgroundrepeat == '1':
             background_repeat = 'background-repeat:no-repeat;'
@@ -1081,7 +1082,7 @@ class VDOM_container(VDOM_object):
 
 
     def wysiwyg(self, contents=""):
-        from scripting.utils.wysiwyg import get_centered_image_metrics
+        from scripting.legacy.wysiwyg import get_centered_image_metrics
 
         colorNumber = self.backgroundcolor if self.backgroundcolor != "" else self.designcolor
         colorValue = "#" + colorNumber if colorNumber != "" else "none"

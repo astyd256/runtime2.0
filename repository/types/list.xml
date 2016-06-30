@@ -882,10 +882,9 @@ $j(function(){
 			data = {}
 
 		if not data :
-			import utils.wysiwyg
-
+			from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
 			image_id = "4a582b3d-09ee-8ac1-1451-08a964bbb510"
-			result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
+			result = get_empty_wysiwyg_value(self, image_id)
 			return VDOM_object.wysiwyg(self, contents=result)
 
 		try:

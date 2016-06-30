@@ -716,7 +716,7 @@ class VDOM_growl(VDOM_object):
     return res
 
   def wysiwyg(self, contents=""):
-    from scripting.utils.wysiwyg import get_empty_wysiwyg_value
+    from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
 
     self.zindex = "0"
     self.width = "50"

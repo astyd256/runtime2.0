@@ -980,7 +980,7 @@
 	</Resources>
 	<SourceCode>
 <![CDATA[
-import utils
+from scripting.legacy.id import id2link1
 
 class VDOM_progressbar(VDOM_object):
 
@@ -992,8 +992,8 @@ class VDOM_progressbar(VDOM_object):
 		if self.visible == "0":
 			css1 += u" display:none; "
 
-		image1 = utils.id.id2link1(self.image1)
-		image2 = utils.id.id2link1(self.image2)
+		image1 = id2link1(self.image1)
+		image2 = id2link1(self.image2)
 
 		if self.skin == "1":
 			css1 += u""" width:250px; height:26px; background:url("/361b54a5-a944-8020-ff02-e5d396cd8d04.res"); """
@@ -1046,10 +1046,9 @@ class VDOM_progressbar(VDOM_object):
 
 		if self.skin == "0":	 # user defined skin
 			if not self.image1 and not self.image2 :
-				import utils.wysiwyg
-
+				from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
 				image_id = "3c36e7e5-2d35-51ae-d589-16c14c1237e3"
-				result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
+				result = get_empty_wysiwyg_value(self, image_id)
 				return VDOM_object.wysiwyg(self, contents=result)
 			else :
 				image_id1 = self.image1

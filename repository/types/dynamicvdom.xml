@@ -587,7 +587,7 @@ class VDOM_DynamicObject(VDOM_object):
         return super(VDOM_DynamicObject, self).render(contents=contents)
 
     def wysiwyg(self, contents=""):
-        from scripting.utils.wysiwyg import get_empty_wysiwyg_value
+        from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
         contents += get_empty_wysiwyg_value(self, WYSIWYG_IMAGE_UUID)
         return super(VDOM_DynamicObject, self).wysiwyg(contents=contents)
 ]]>

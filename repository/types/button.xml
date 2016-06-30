@@ -1113,7 +1113,7 @@ There are the following ways of displaying the Button object: if the &apos;Text&
 	</Resources>
 	<SourceCode>
 <![CDATA[
-from scripting import utils
+from scripting.legacy.id import id2link1
 import StringIO
 
 
@@ -1127,7 +1127,7 @@ class VDOM_button(VDOM_object):
         if self.text:
             if self.image or self.rollover or self.disabledimg:
                 try:
-                    from scripting.utils.imaging import VDOM_imaging
+                    from scripting.legacy.imaging import VDOM_imaging
                     im = VDOM_imaging()
                     im.create_font(name = self.fontfamily, size = int(self.fontsize), 
                             fontstyle = self.fontstyle, fontweight = self.fontweight)
@@ -1160,9 +1160,9 @@ class VDOM_button(VDOM_object):
 
     def get_anchor(self, link):
         if self.ispressed == "0":
-            bgimg = u"background:url('%s');" % utils.id.id2link1(self.finalimage) if self.image and self.rollover else u""
+            bgimg = u"background:url('%s');" % id2link1(self.finalimage) if self.image and self.rollover else u""
         else:
-            bgimg = u"background:url('%s');" % utils.id.id2link1(self.finalrollover) if self.image and self.rollover else u""
+            bgimg = u"background:url('%s');" % id2link1(self.finalrollover) if self.image and self.rollover else u""
         height = u"height:%spx;" % self.height if self.height else u""
         #clname = u"""class="%s" """ % self.classname if self.classname else u""
         if self.disabled == "1":
@@ -1197,12 +1197,12 @@ class VDOM_button(VDOM_object):
         representation = u""
         if self.image:
             if self.rollover:
-                rover_link = utils.id.id2link1(self.finalrollover)
+                rover_link = id2link1(self.finalrollover)
                 overcss =  u"""<style>#%(id)s a:hover {background-image:url("%(image)s")!important}</style>
                                 <div style="display:none"><img src="%(image)s" /></div>
                             """ % {"id": id_out, "image": rover_link}
             else:
-                hover_link = utils.id.id2link1(self.finalimage)
+                hover_link = id2link1(self.finalimage)
                 if self.ishover == "0":
                     representation = \
                         u"""<img src="{image}" width={width} height={height} 
@@ -1234,7 +1234,7 @@ class VDOM_button(VDOM_object):
             if self.disabledimg:
                 disablecss =  u"""<style>#%(id)s .disabled {background-image:url("%(image)s")!important}</style>
                                 <div style="display:none"><img src="%(image)s" /></div>
-                            """ % {"id": id_out, "image": utils.id.id2link1(self.finaldisabledimg)}
+                            """ % {"id": id_out, "image": id2link1(self.finaldisabledimg)}
         else:
             spstyle = StringIO.StringIO()
             spstyle.write(u"font: ")

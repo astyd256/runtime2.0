@@ -5,7 +5,7 @@ from .. import errors
 from ..subtypes import integer, generic, string, v_mismatch
 
 
-VDOM_imaging = import_module("scripting.utils.imaging").VDOM_imaging
+VDOM_imaging = import_module("scripting.legacy.imaging").VDOM_imaging
 
 
 def as_integer(value):

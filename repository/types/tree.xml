@@ -2559,7 +2559,7 @@ jQuery(document).ready(function($){
     
     
   def wysiwyg(self, contents=""):
-    from scripting.utils.wysiwyg import get_empty_wysiwyg_value, get_centered_image_metrics
+    from scripting.legacy.wysiwyg import get_empty_wysiwyg_value, get_centered_image_metrics
       
     image_id = "cbd47a55-cfad-bba6-e2a5-16f2a90371de"
     

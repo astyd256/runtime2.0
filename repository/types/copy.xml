@@ -409,7 +409,7 @@ class VDOM_copy(VDOM_object):
         return VDOM_object.render(self, contents=result)
 
     def empty_copy(self):
-        from scripting.utils.wysiwyg import get_centered_image_metrics
+        from scripting.legacy.wysiwyg import get_centered_image_metrics
         top = self.top if self.top else 10
         left = self.left if self.left else 10
         width = 100

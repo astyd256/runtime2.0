@@ -758,8 +758,7 @@ class VDOM_pagination(VDOM_object):
 
 	def wysiwyg(self, contents=""):
 		if not self.need_to_render():
-			import utils.wysiwyg
-			from scripting.utils.wysiwyg import get_empty_wysiwyg_value
+			from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
 
 			image_id = "2ff58b6b-d20a-a45b-7c2a-16bad6d574ec"
 			result = get_empty_wysiwyg_value(self, image_id)

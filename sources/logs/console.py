@@ -29,7 +29,7 @@ class Console(object):
 
         if isinstance(message, unicode):
             message = message.encode(self.stderr.encoding if level is levels.ERROR
-                else self.stdout.encoding, "replace")
+                else self.stdout.encoding, "backslashreplace")
         elif not isinstance(message, basestring):
             message = str(message)
 
