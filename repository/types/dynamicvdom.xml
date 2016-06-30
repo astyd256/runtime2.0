@@ -528,6 +528,8 @@ Visible - the whole content will always be shown without reference to the object
 	</Resources>
 	<SourceCode>
 <![CDATA[
+from xml.sax.saxutils import escape as xml_escape
+
 import managers
 from scripting import e2vdom
 from memory import vdomxml, vdomjson
@@ -561,7 +563,13 @@ class VDOM_DynamicObject(VDOM_object):
             if self.debugmode == "1":
                 raise
             else:
-                message = self.rendererrormsg or u"Render error: %s" % error
+                if self.rendererrormsg:
+                    message = self.rendererrormsg
+                else:
+                    lines = xml_escape(self.vdomxml).split("\n")
+                    for i in range(len(lines)):
+                        lines[i] = u"{}: {}".format(i + 1, lines[i])
+                    message = u"Render error: {}<br>{}".format(error, u"<br>".join(lines))
                 return u"<span class=\"render-error\">%s</span>" % message
 
     # use inner_render for raw_content
