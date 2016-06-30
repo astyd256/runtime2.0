@@ -56,8 +56,9 @@ class MemoryObjects(MemoryBase, MutableMapping):
                     item._name = generate_unique_name(item._name or type.name, self._items_by_name)
                 item._order = len(self._items)
 
-                self._items[item.id] = item
-                self._items_by_name[item.name] = item
+                if item.virtual == self._owner.virtual:
+                    self._items[item.id] = item
+                    self._items_by_name[item.name] = item
 
                 if not item.virtual:
                     self._all_items[item.id] = item

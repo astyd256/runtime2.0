@@ -1,6 +1,6 @@
 
 # from .compiler import compile_declarations_n_libraries, compile_registations
-from .interface import initiate, process, generate, select, update
+from .interface import process, generate, select
 
 
 

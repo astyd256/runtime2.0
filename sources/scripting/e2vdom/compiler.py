@@ -156,7 +156,7 @@ def compile_declaration(render_container, vdomtype, lines, dynamic=False):
         class_name=class_name,
         extra=DEFINE_CLASS_REGISTERATION.format(events=events) if events else ""))
 
-    actions = vdomtype.actions.get(render_container)
+    actions = vdomtype.actions.get(render_container)  # was "2330fe83-8cd6-4ed5-907d-11874e7ebcf4"
     if actions:
         for action in actions:
             source_code = action.source_code.strip()
@@ -169,17 +169,15 @@ def compile_declaration(render_container, vdomtype, lines, dynamic=False):
     if dynamic:
         lines.append(DYNAMIC_CLOSE.format(class_name=class_name))
 
-    lines.append("") # REMOVE
+    lines.append("")  # just for code readability
 
 
 def compile_declarations_n_libraries(types, render_type, render_container, registrations, dynamic=False):
     declarations = []
 
     if dynamic:
-        # TODO: check form with method="event" work in dynamic object
         declarations.append(WINDOW_OPEN)
-        # declarations.append(DEFINE_WINDOW_EVENT_QUEUE)
-        pass
+        declarations.append(DEFINE_WINDOW_EVENT_QUEUE)
     else:
         declarations.append(DEFINE_EVENT_QUEUE)
 
@@ -188,7 +186,7 @@ def compile_declarations_n_libraries(types, render_type, render_container, regis
             declarations.append(DEFINE_CLASS.format(
                 class_name=OBJECT_TYPE_NAME % vdomtype.id.replace("-", "_"),
                 extra=""))
-        compile_declaration(render_container, vdomtype, declarations, dynamic=dynamic) # , in_window=dynamic
+        compile_declaration(render_container, vdomtype, declarations, dynamic=dynamic)
 
     if not dynamic:
         declarations.append(INIT_OPEN)
