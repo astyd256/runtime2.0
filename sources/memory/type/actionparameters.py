@@ -13,7 +13,7 @@ class MemoryTypeActionParameters(MemoryBase, Sequence):
 
     owner = roproperty("_owner")
 
-    def new_sketch(self):
+    def new_sketch(self, restore=False):
         return MemoryTypeActionParameterSketch(self._items.append, self._owner)
 
     # unsafe

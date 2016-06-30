@@ -39,53 +39,47 @@ class MemoryObjects(MemoryBase, MutableMapping):
     owner = roproperty("_owner")
     catalog = roproperty("_catalog")
 
-    def _on_complete(self, item):
-        with self._owner.lock:
-            if not item.name or item.name in self._items_by_name:
-                item.name = generate_unique_name(item.name or type.name, self._items_by_name)
-
-            item._order = len(self._items)
-
-            self._items[item.id] = item
-            self._items_by_name[item.name] = item
-
-            if not item.virtual:
-                self._all_items[item.id] = item
-
-            return self._on_rename
-
-    def _on_rename(self, item, name):
-        with self._owner.lock:
-            del self._items_by_name[item.name]
-            self._items_by_name[name] = item
-            self._owner.invalidate(upward=True)
-            self._owner.autosave()
-
-    def new_sketch(self, type, virtual=False, attributes=None):
+    def new_sketch(self, type, virtual=False, attributes=None, restore=False):
         if self._owner.is_object and virtual != self._owner.virtual:
             raise Exception("Virtual objects can only be created in application or another virtual object")
 
-        return MemoryObjectSketch(self._on_complete, type,
+        def on_rename(item, name):
+            with self._owner.lock:
+                del self._items_by_name[item.name]
+                self._items_by_name[name] = item
+                self._owner.invalidate(upward=True)
+                self._owner.autosave()
+
+        def on_complete(item):
+            with self._owner.lock:
+                if not item._name or item._name in self._items_by_name:
+                    item._name = generate_unique_name(item._name or type.name, self._items_by_name)
+                item._order = len(self._items)
+
+                self._items[item.id] = item
+                self._items_by_name[item.name] = item
+
+                if not item.virtual:
+                    self._all_items[item.id] = item
+
+                if not restore:
+                    managers.dispatcher.dispatch_handler(item, "on_create")
+                    if self._owner.is_object and item.virtual == self._owner.virtual:
+                        managers.dispatcher.dispatch_handler(self._owner, "on_insert", item)
+                        self._owner.invalidate(upward=True)
+                    item.autosave()
+
+                return on_rename
+
+        return MemoryObjectSketch(on_complete, type,
             self._owner.application, None if self._owner.is_application else self._owner,
             virtual=virtual, attributes=attributes)
 
     def new(self, type, name=None, virtual=False, attributes=None):
         item = self.new_sketch(type, virtual=virtual, attributes=attributes)
         item.id = str(uuid4())
-        with self._owner.lock:
-            if not name or name in self._items_by_name:
-                name = generate_unique_name(name or type.name, self._items_by_name)
-
-            item.name = name
-            ~item
-
-            managers.dispatcher.dispatch_handler(item, "on_create")
-            if self._owner.is_object and item.virtual == self._owner.virtual:
-                managers.dispatcher.dispatch_handler(self._owner, "on_insert", item)
-                self._owner.invalidate(upward=True)
-            item.autosave()
-
-        return item
+        item.name = name
+        return ~item
 
     # unsafe
     def compose(self, ident=u"", file=None, shorter=False):

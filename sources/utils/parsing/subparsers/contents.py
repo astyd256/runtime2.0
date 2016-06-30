@@ -1,5 +1,5 @@
 
-from ..auxiliary import subparser
+from ..auxiliary import subparser, lower
 
 
 def encode_data(value):
@@ -65,7 +65,7 @@ def contents(self, selector, iterator):
     self._parser.StartCdataSectionHandler = cdata_section
     self._parser.EndCdataSectionHandler = close_cdata_section
     self._parser.DefaultHandler = default
-    self._parser.StartElementHandler = element
+    self._parser.StartElementHandler = lower(element) if self._lower else element
     self._parser.EndElementHandler = close_element
 
 

@@ -39,40 +39,37 @@ class MemoryActions(MemoryBase, MutableMapping):
     catalog = roproperty("_catalog")
     generic = roproperty("_generic")
 
-    def _on_complete(self, item):
-        with self._owner.lock:
-            if not item.name or item.name in self._items_by_name:
-                item.name = generate_unique_name(item.name or NAME_BASE, self._items_by_name)
+    def new_sketch(self, restore=False):
 
-            self._items[item.id] = item
-            self._items_by_name[item.name] = item
+        def on_rename(item, name):
+            with self._owner.lock:
+                del self._items_by_name[item.name]
+                self._items_by_name[name] = item
 
-            if not self._owner.virtual:
-                self._all_items[item.id] = item
+        def on_complete(item):
+            with self._owner.lock:
+                if not item._name or item._name in self._items_by_name:
+                    item._name = generate_unique_name(item._name or NAME_BASE, self._items_by_name)
 
-            return self._on_rename
+                self._items[item.id] = item
+                self._items_by_name[item.name] = item
 
-    def _on_rename(self, item, name):
-        with self._owner.lock:
-            del self._items_by_name[item.name]
-            self._items_by_name[name] = item
+                if not self._owner.virtual:
+                    self._all_items[item.id] = item
 
-    def new_sketch(self):
-        return MemoryActionSketch(self._on_complete, self._owner)
+                if not restore:
+                    self._owner.invalidate(contexts=(item.id, item.name), downward=True, upward=True)
+                    self._owner.autosave()
+
+                return on_rename
+
+        return MemoryActionSketch(on_complete, self._owner)
 
     def new(self, name=None):
         item = self.new_sketch()
         item.id = str(uuid4())
-        with self._owner.lock:
-            if not name or name in self._items_by_name:
-                name = generate_unique_name(name or NAME_BASE, self._items_by_name)
-
-            item.name = name
-            ~item
-
-            self._owner.invalidate(contexts=(item.id, item.name), downward=True, upward=True)
-            self._owner.autosave()
-        return item
+        item.name = name
+        return ~item
 
     # unsafe
     def compose(self, ident=u"", file=None):

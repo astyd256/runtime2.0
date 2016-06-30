@@ -1,7 +1,7 @@
 
 import inspect
 from ..exceptions import UnexpectedAttributeError
-from ..auxiliary import subparser
+from ..auxiliary import subparser, lower
 
 
 @subparser
@@ -40,5 +40,5 @@ def native(self, selector, iterator):
             except StopIteration:
                 pass
 
-    self._parser.StartElementHandler = element
+    self._parser.StartElementHandler = lower(element) if self._lower else element
     self._parser.EndElementHandler = close_element

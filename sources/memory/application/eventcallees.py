@@ -20,8 +20,8 @@ class MemoryEventCalleesSketch(MemoryBase, MutableSequence):
 
     owner = roproperty("_owner")
 
-    def new_sketch(self, target_object, name, parameters=None):
-        return MemoryBindingSketch(self.add, target_object, name, parameters=parameters)
+    def new_sketch(self, target_object, name, parameters=None, restore=False):
+        return MemoryBindingSketch(self.append, target_object, name, parameters=parameters)
 
     def insert(self, index, callee):
         self._items.insert(index, callee)

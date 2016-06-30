@@ -29,19 +29,23 @@ class MemoryEvents(MemoryBase, MutableMapping):
     owner = roproperty("_owner")
     catalog = roproperty("_catalog")
 
-    def _on_complete(self, item):
-        with self._owner.lock:
-            self._items[item.source_object.id, item.name] = item
-            if not self._owner._virtual:
-                self._all_items[item.source_object.id, item.name] = item
+    def new_sketch(self, name, restore=False):
 
-    def new_sketch(self, name):
-        return MemoryEventSketch(self._on_complete, self._owner, name)
+        def on_complete(item):
+            with self._owner.lock:
+                self._items[item.source_object.id, item.name] = item
+
+                if not self._owner._virtual:
+                    self._all_items[item.source_object.id, item.name] = item
+
+                if not restore:
+                    self._owner.autosave()
+
+        return MemoryEventSketch(on_complete, self._owner, name)
 
     def new(self, name):
-        item = ~self.new_sketch(name)
-        self._owner.autosave()
-        return item
+        item = self.new_sketch(name)
+        return ~item
 
     def clear(self):
         with self._owner.lock:

@@ -1,5 +1,6 @@
 
 from .exceptions import UnexpectedElementError, UnexpectedAttributeError
+from .auxiliary import lower
 from .subparsers import VALUE, CONTENTS
 
 
@@ -71,7 +72,7 @@ class LegacyInterface(object):
                 close_handler(name)
 
         handler = handler or self.reject_elements
-        self._parser.StartElementHandler = handler
+        self._parser.StartElementHandler = lower(handler) if self._lower else handler
         self._parser.EndElementHandler = close_element_handler
 
     def reject_elements(self, name, attributes):
@@ -106,5 +107,5 @@ class LegacyInterface(object):
         def close_element_handler(name):
             self._parser.StartElementHandler, self._parser.EndElementHandler = context
 
-        self._parser.StartElementHandler = element_handler
+        self._parser.StartElementHandler = lower(element_handler) if self._lower else element_handler
         self._parser.EndElementHandler = close_element_handler

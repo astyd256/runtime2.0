@@ -1,6 +1,6 @@
 
 from ..exceptions import UnexpectedElementError
-from ..auxiliary import subparser
+from ..auxiliary import subparser, lower
 
 
 @subparser
@@ -57,7 +57,7 @@ def value(self, selector, iterator):
                 pass
 
     self._parser.CharacterDataHandler = data
-    self._parser.StartElementHandler = element
+    self._parser.StartElementHandler = lower(element) if self._lower else element
     self._parser.EndElementHandler = close_element
 
 

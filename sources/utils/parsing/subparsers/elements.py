@@ -2,7 +2,7 @@
 import inspect
 from itertools import chain, izip
 from ..exceptions import UnexpectedElementError, UnexpectedAttributeError, MissingAttributeError
-from ..auxiliary import subparser, uncover
+from ..auxiliary import subparser, uncover, lower
 from .nothing import nothing
 
 
@@ -68,5 +68,5 @@ def elements(self, selector, iterator):
             except StopIteration:
                 pass
 
-    self._parser.StartElementHandler = element
+    self._parser.StartElementHandler = lower(element) if self._lower else element
     self._parser.EndElementHandler = close_element

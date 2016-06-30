@@ -5,7 +5,7 @@ from .builder import vdomxml_builder
 
 
 def loads(vdomxml, application, profile=None):
-    parser = Parser(builder=vdomxml_builder, options=application, notify=True)
+    parser = Parser(builder=vdomxml_builder, lower=True, options=application, notify=True)
     try:
         object = parser.parse(vdomxml)
         if parser.report:

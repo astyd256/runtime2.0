@@ -25,12 +25,13 @@ class MemoryTypes(MemoryBase, Mapping):
 
     owner = roproperty("_owner")
 
-    def _on_complete(self, item):
-        with self._owner._lock:
-            self._items[item.id] = item
+    def new_sketch(self, restore=False):
 
-    def new_sketch(self):
-        return MemoryTypeSketch(self._on_complete)
+        def on_complete(item):
+            with self._owner._lock:
+                self._items[item.id] = item
+
+        return MemoryTypeSketch(on_complete)
 
     def _load(self, uuid):
         log.write("Load type %s" % uuid)

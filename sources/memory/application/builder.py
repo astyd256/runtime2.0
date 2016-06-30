@@ -24,7 +24,7 @@ def application_builder(parser, callback=None):
     def document_handler(name, attributes):
         if name == u"Application":
             # <Application>
-            application = managers.memory.applications.new_sketch()
+            application = managers.memory.applications.new_sketch(restore=True)
             containers = {}
             objects = OrderedDict()
             bindings = OrderedDict()
@@ -133,7 +133,7 @@ def application_builder(parser, callback=None):
                                 object_type = managers.memory.types[object_type_id]
                             except KeyError:
                                 raise ParsingException(u"Type %s not found" % object_type_id)
-                            object = context.container.new_sketch(object_type)
+                            object = context.container.new_sketch(object_type, restore=True)
                             try:
                                 object.id = str(attributes.pop(u"ID").lower())
                             except KeyError:
@@ -175,7 +175,7 @@ def application_builder(parser, callback=None):
                                     def scripts_handler(name, attributes):
                                         if name == u"Script":
                                             # <Script>
-                                            action = object.actions.new_sketch()
+                                            action = object.actions.new_sketch(restore=True)
                                             try:
                                                 attributes.pop(u"Language")
                                             except KeyError:
@@ -196,7 +196,7 @@ def application_builder(parser, callback=None):
                                     def actions_handler(name, attributes):
                                         if name == u"Action":
                                             # <Action>
-                                            action = object.actions.new_sketch()
+                                            action = object.actions.new_sketch(restore=True)
                                             try:
                                                 action.id = str(attributes.pop(u"ID").lower())
                                             except KeyError:
@@ -260,7 +260,7 @@ def application_builder(parser, callback=None):
                     def actions_handler(name, attributes):
                         if name == u"Action":
                             # <Action>
-                            action = application.actions.new_sketch()
+                            action = application.actions.new_sketch(restore=True)
                             try:
                                 action.id = str(attributes.pop(u"ID").lower())
                             except KeyError:
@@ -564,7 +564,7 @@ def application_builder(parser, callback=None):
                                         event_name = attributes.pop(u"Name")
                                     except KeyError:
                                         raise MissingAttributeError(u"Name")
-                                    event = event_source_object.events.new_sketch(event_name)
+                                    event = event_source_object.events.new_sketch(event_name, restore=True)
                                     try:
                                         # Here "or 0" is the hack to handle Top="" elements
                                         event.top = int(attributes.pop(u"Top") or u"0")
@@ -677,7 +677,7 @@ def application_builder(parser, callback=None):
                                         else:
                                             parser.reject_elements(name)
                                     def close_action_handler(name):
-                                        binding = application.bindings.new_sketch(target_object, binding_name, parameters=binding_parameters)
+                                        binding = application.bindings.new_sketch(target_object, binding_name, parameters=binding_parameters, restore=True)
                                         binding.id = binding_id
                                         binding.top = binding_top
                                         binding.left = binding_left

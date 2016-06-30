@@ -24,21 +24,21 @@ class MemoryApplications(MemoryBase, Mapping):
         self._items = {}
         self._lazy = True
 
-    def _on_complete(self, item):
-        with self._owner._lock:
-            self._items[item.id] = item
-            for object in item._objects.itervalues():
-                managers.dispatcher.dispatch_handler(object, "on_startup")
+    def new_sketch(self, restore=False):
 
-    def new_sketch(self):
-        return MemoryApplicationSketch(self._on_complete)
+        def on_complete(item):
+            with self._owner._lock:
+                self._items[item.id] = item
+                for object in item._objects.itervalues():
+                    managers.dispatcher.dispatch_handler(object, "on_startup")
 
-    def new(self):
+        return MemoryApplicationSketch(on_complete)
+
+    def new(self, name=DEFAULT_APPLICATION_NAME):
         item = self.new_sketch()
         item.id = str(uuid4())
-        with self._owner._lock:
-            item.name = DEFAULT_APPLICATION_NAME
-            return ~item
+        item.name = name
+        return ~item
 
     def _load(self, uuid):
         log.write("Load application %s" % uuid)

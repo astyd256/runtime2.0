@@ -1,16 +1,18 @@
 
+from uuid import uuid4
 import managers
 from utils.structure import Structure
-from utils.parsing import native, UnexpectedAttributeValueError, MissingAttributeError
+from utils.parsing import VALUE, native, UnexpectedAttributeValueError, MissingAttributeError
 
 
 def vdomxml_builder(parser, application):
     # TODO: think much more about type indexing
     catalog = {type.name: type for type in managers.memory.types.itervalues()}
+    objects = []
 
-    def create_object(objects, name, attributes):
+    def create_object(parent_objects, name, attributes):
         try:
-            object_type = catalog[name.lower()]
+            object_type = catalog[name]
         except KeyError:
             raise UnexpectedAttributeValueError("Unknown type: %s" % name)
 
@@ -19,9 +21,14 @@ def vdomxml_builder(parser, application):
         except KeyError:
             raise MissingAttributeError("Require name")
 
-        object = objects.new(object_type, name=object_name, virtual=True)
+        object = parent_objects.new_sketch(object_type, virtual=True)
+        object.id = str(uuid4())
+        object.name = object_name
+
         object.attributes.update(attributes)
         attributes.clear()
+
+        objects.append(object)
         return object
 
     # <element>
@@ -31,13 +38,22 @@ def vdomxml_builder(parser, application):
         # <element>
         @native
         def element(name, attributes):
-            parent = context.parent
-            context.parent = create_object(parent.objects, name, attributes)
-            yield element
-            context.parent = parent
+            if name == "attribute":
+                key = attributes.pop("name")
+                value = yield VALUE
+                context.parent.attributes[key] = value
+            else:
+                parent = context.parent
+                context.parent = create_object(parent.objects, name, attributes)
+                yield element
+                context.parent = parent
         # </element>
         context.parent = create_object(application.objects, name, attributes)
+
         yield element
+        for object in objects:
+            ~object
+
         parser.accept(context.parent)
     # </element>
 

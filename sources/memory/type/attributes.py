@@ -14,11 +14,12 @@ class MemoryTypeAttributes(MemoryBase, Mapping):
 
     owner = roproperty("_owner")
 
-    def _on_comlete(self, item):
-        self._items[item.name] = item
+    def new_sketch(self, restore=False):
 
-    def new_sketch(self):
-        return MemoryTypeAttributeSketch(self._on_comlete, self._owner)
+        def on_comlete(item):
+            self._items[item.name] = item
+
+        return MemoryTypeAttributeSketch(on_comlete, self._owner)
 
     # unsafe
     def compose(self, ident=u"", file=None):

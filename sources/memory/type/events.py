@@ -13,11 +13,12 @@ class MemoryTypeEvents(MemoryBase, Mapping):
 
     owner = roproperty("_owner")
 
-    def _on_comlete(self, item):
-        self._items[item.name] = item
+    def new_sketch(self, restore=False):
 
-    def new_sketch(self):
-        return MemoryTypeEventSketch(self._on_comlete, self._owner)
+        def on_comlete(item):
+            self._items[item.name] = item
+
+        return MemoryTypeEventSketch(on_comlete, self._owner)
 
     def __getitem__(self, key):
         return self._items[key]

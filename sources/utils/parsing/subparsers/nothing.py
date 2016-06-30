@@ -1,6 +1,6 @@
 
 from ..exceptions import UnexpectedElementError
-from ..auxiliary import subparser
+from ..auxiliary import subparser, lower
 
 
 @subparser
@@ -48,7 +48,7 @@ def nothing(self, selector, iterator):
         self._parser.StartElementHandler, \
             self._parser.EndElementHandler = context
 
-    self._parser.StartElementHandler = element
+    self._parser.StartElementHandler = lower(element) if self._lower else element
     self._parser.EndElementHandler = close_element
 
 

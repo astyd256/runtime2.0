@@ -20,7 +20,7 @@ def type_builder(parser, callback=None):
     def document_handler(name, attributes):
         if name == u"Type":
             # <Type>
-            type = managers.memory.types.new_sketch()
+            type = managers.memory.types.new_sketch(restore=True)
             sections = {}
             def type_handler(name, attributes):
                 sections[name] = True
@@ -195,7 +195,7 @@ def type_builder(parser, callback=None):
                     def attributes_handler(name, attributes):
                         if name == u"Attribute":
                             # <Attribute>
-                            attribute = type.attributes.new_sketch()
+                            attribute = type.attributes.new_sketch(restore=True)
                             def attribute_handler(name, attributes):
                                 if name == u"Name":
                                     # <Name>
@@ -384,7 +384,7 @@ def type_builder(parser, callback=None):
                                     def userinterface_handler(name, attributes):
                                         if name == u"Event":
                                             # <Event>
-                                            event = type.user_interface_events.new_sketch()
+                                            event = type.user_interface_events.new_sketch(restore=True)
                                             try:
                                                 event.name = attributes.pop(u"Name")
                                             except KeyError:
@@ -402,7 +402,7 @@ def type_builder(parser, callback=None):
                                                     def parameters_handler(name, attributes):
                                                         if name == u"Parameter":
                                                             # <Parameter>
-                                                            parameter = event.parameters.new_sketch()
+                                                            parameter = event.parameters.new_sketch(restore=True)
                                                             try:
                                                                 parameter.name = attributes.pop(u"Name")
                                                             except KeyError:
@@ -447,7 +447,7 @@ def type_builder(parser, callback=None):
                                     def objectevents_handler(name, attributes):
                                         if name == u"Event":
                                             # <Event>
-                                            event = type.object_events.new_sketch()
+                                            event = type.object_events.new_sketch(restore=True)
                                             try:
                                                 event.name = attributes.pop(u"Name")
                                             except KeyError:
@@ -465,7 +465,7 @@ def type_builder(parser, callback=None):
                                                     def parameters_handler(name, attributes):
                                                         if name == u"Parameter":
                                                             # <Parameter>
-                                                            parameter = event.parameters.new_sketch()
+                                                            parameter = event.parameters.new_sketch(restore=True)
                                                             try:
                                                                 parameter.name = attributes.pop(u"Name")
                                                             except KeyError:
@@ -517,7 +517,7 @@ def type_builder(parser, callback=None):
                                     def container_handler(name, attributes):
                                         if name == u"Action":
                                             # <Action>
-                                            action = type.actions.new_sketch()
+                                            action = type.actions.new_sketch(restore=True)
                                             action.scope = container_id
                                             try:
                                                 action.name = attributes.pop(u"Name")
@@ -546,7 +546,7 @@ def type_builder(parser, callback=None):
                                                     def parameters_handler(name, attributes):
                                                         if name == u"Parameter":
                                                             # <Parameter>
-                                                            parameter = action.parameters.new_sketch()
+                                                            parameter = action.parameters.new_sketch(restore=True)
                                                             try:
                                                                 parameter.name = attributes.pop(u"Name")
                                                             except KeyError:

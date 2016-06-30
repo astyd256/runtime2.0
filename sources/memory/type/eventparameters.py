@@ -13,11 +13,12 @@ class MemoryTypeEventParameters(MemoryBase, Sequence):
 
     owner = roproperty("_owner")
 
-    def _on_comlete(self, item):
-        self._items.append(item)
+    def new_sketch(self, restore=False):
 
-    def new_sketch(self):
-        return MemoryTypeEventParameterSketch(self._on_comlete, self._owner)
+        def on_comlete(item):
+            self._items.append(item)
+
+        return MemoryTypeEventParameterSketch(on_comlete, self._owner)
 
     def compose(self, ident=u"", file=None):
         if self.__dict__.get("_items"):

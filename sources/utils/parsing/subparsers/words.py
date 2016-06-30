@@ -1,7 +1,7 @@
 
 import re
 from ..exceptions import UnexpectedElementError
-from ..auxiliary import subparser
+from ..auxiliary import subparser, lower
 
 
 SPACES = re.compile(r"[\r\n\s\t]+", re.IGNORECASE | re.MULTILINE)
@@ -83,7 +83,7 @@ def words(self, selector, iterator):
     self._parser.CharacterDataHandler = data
     self._parser.StartCdataSectionHandler = cdata_section
     self._parser.EndCdataSectionHandler = close_cdata_section
-    self._parser.StartElementHandler = element
+    self._parser.StartElementHandler = lower(element) if self._lower else element
     self._parser.EndElementHandler = close_element
 
 

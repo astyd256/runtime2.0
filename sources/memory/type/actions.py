@@ -14,16 +14,17 @@ class MemoryTypeActions(MemoryBase, Mapping):
 
     owner = roproperty("_owner")
 
-    def _on_complete(self, item):
-        self._items[item.scope, item.name] = item
-        try:
-            items = self._items_by_scope[item.scope]
-        except KeyError:
-            self._items_by_scope[item.scope] = items = {}
-        items[item.scope, item.name] = item
+    def new_sketch(self, restore=False):
 
-    def new_sketch(self):
-        return MemoryTypeActionSketch(self._on_complete, self._owner)
+        def on_complete(item):
+            self._items[item.scope, item.name] = item
+            try:
+                items = self._items_by_scope[item.scope]
+            except KeyError:
+                self._items_by_scope[item.scope] = items = {}
+            items[item.scope, item.name] = item
+
+        return MemoryTypeActionSketch(on_complete, self._owner)
 
     # unsafe
     def compose(self, ident=u"", file=None):

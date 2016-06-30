@@ -17,24 +17,24 @@ class MemoryBindings(MemoryBase, MutableMapping):
 
     owner = roproperty("_owner")
 
-    def _on_complete(self, item):
-        if item.target_object.virtual:
-            return
-        with self._owner.lock:
-            self._items[item.id] = item
+    def new_sketch(self, target_object, name, parameters=None, restore=False):
 
-    def new_sketch(self, target_object, name, parameters=None):
-        return MemoryBindingSketch(self._on_complete, target_object, name, parameters=parameters)
+        def on_complete(item):
+            if item.target_object.virtual:
+                return
+            with self._owner.lock:
+                self._items[item.id] = item
+
+            if not restore:
+                if not item.target_object.virtual:
+                    self._owner.autosave()
+
+        return MemoryBindingSketch(on_complete, target_object, name, parameters=parameters)
 
     def new(self, target_object, name, parameters=None):
         item = self.new_sketch(target_object, name, parameters=parameters)
         item.id = str(uuid4())
-        ~item
-
-        if not item.target_object.virtual:
-            self._owner.autosave()
-
-        return item
+        return ~item
 
     # unsafe
     def compose(self, ident=u"", file=None):

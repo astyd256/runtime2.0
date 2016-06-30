@@ -5,7 +5,7 @@ from utils.properties import roproperty, rwproperty
 from .exceptions import AbortingError, ParsingException, \
     UnableToChangeError, OutOfMemoryError, JunkAfterDocumentError
 from .subparsers import elements, nothing
-from .auxiliary import empty_builder, uncover
+from .auxiliary import empty_builder, uncover, lower as lower_decorator
 from .legacy import LegacyInterface
 
 
@@ -54,7 +54,7 @@ ERRATIC = {
 
 class Parser(LegacyInterface):
 
-    def __init__(self, builder=None, options=MISSING, result=None, notify=False, supress=False):
+    def __init__(self, builder=None, lower=False, options=MISSING, result=None, notify=False, supress=False):
         """
         :param builder: Callable that return document handler
         :param options: Optional arguments or keywords for builder
@@ -63,6 +63,7 @@ class Parser(LegacyInterface):
         :param supress: Suppress parsing exceptions and just notify about them
         """
         self._legacy = builder.__doc__ == "legacy"
+        self._lower = lower
 
         if builder is None:
             builder = empty_builder
@@ -80,7 +81,7 @@ class Parser(LegacyInterface):
         self._parser.buffer_text = DEFAULT_BUFFER_TEXT
 
         if self._legacy:
-            self._parser.StartElementHandler = self._handler
+            self._parser.StartElementHandler = lower_decorator(self._handler) if lower else self._handler
         else:
             self._handle(self._handler)
 

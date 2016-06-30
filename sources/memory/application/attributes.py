@@ -13,7 +13,7 @@ FORCE_CDATA_REGEX = re.compile(u"[\u0000-\u0019\"<=>]", re.MULTILINE)
 DEREFERENCE_REGEX = re.compile(r"\#RES\(([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})\)", re.IGNORECASE)
 
 
-class MemoryAttributesSketch(MemoryBase):
+class MemoryAttributesSketch(MemoryBase, MutableMapping):
 
     @lazy
     def _attributes(self):
@@ -42,6 +42,15 @@ class MemoryAttributesSketch(MemoryBase):
         self._query.add(name)
         self._items[name] = value
 
+    def __delitem__(self, name):
+        del self._items[name]
+
+    def __iter__(self):
+        return iter(self._owner.type.attributes)
+
+    def __len__(self):
+        return len(self._owner.type.attributes)
+
     def __invert__(self):
         self.__class__ = MemoryAttributes
         return self
@@ -50,7 +59,7 @@ class MemoryAttributesSketch(MemoryBase):
         return "attributes sketch of %s" % self._owner
 
 
-class MemoryAttributes(MemoryAttributesSketch, MutableMapping):
+class MemoryAttributes(MemoryAttributesSketch):
 
     def __init__(self):
         raise Exception(u"Use 'new' to create new attribute")
@@ -117,18 +126,18 @@ class MemoryAttributes(MemoryAttributesSketch, MutableMapping):
             if updates:
                 managers.dispatcher.dispatch_handler(self._owner, "on_update", updates)
 
-            if updates:
-                for name, value in updates.iteritems():
-                    if not isinstance(value, basestring):
-                        value = str(value)
+                if updates:
+                    for name, value in updates.iteritems():
+                        if not isinstance(value, basestring):
+                            value = str(value)
 
-                    self._query.add(name)
+                        self._query.add(name)
 
-                    log.write("Update %s attrbiute \"%s\" to \"%s\"" % (self._owner, name, value.replace('"', '\"')))
-                    self._items[name] = value
+                        log.write("Update %s attrbiute \"%s\" to \"%s\"" % (self._owner, name, value.replace('"', '\"')))
+                        self._items[name] = value
 
-                self._owner.invalidate(upward=1)
-                self._owner.autosave()
+                    self._owner.invalidate(upward=1)
+                    self._owner.autosave()
 
     def __getitem__(self, name):
         try:
@@ -142,15 +151,9 @@ class MemoryAttributes(MemoryAttributesSketch, MutableMapping):
     def __delitem__(self, name):
         managers.dispatcher.dispatch_handler(self._owner, "on_update", self._owner.type.attributes[name].default_value)
         log.write("Reset %s attrbiute \"%s\"" % (self._owner, name))
-        del self._items[name]
+        self._items.pop(name, None)
         self._owner.invalidate(upward=1)
         self._owner.autosave()
-
-    def __iter__(self):
-        return iter(self._owner.type.attributes)
-
-    def __len__(self):
-        return len(self._owner.type.attributes)
 
     def __invert__(self):
         raise NotImplementedError
