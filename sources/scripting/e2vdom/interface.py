@@ -1,6 +1,6 @@
 
-from threading import current_thread
 from contextlib import contextmanager
+import managers
 from utils.properties import roproperty
 from .compiler import compile_declarations_n_libraries, compile_registations
 
@@ -21,12 +21,11 @@ class Context(object):
 
 
 def process(container, parent=None):
-    thread = current_thread()
     try:
-        context = getattr(thread, ATTRIBUTE_NAME)
+        context = getattr(managers.request_manager.current, ATTRIBUTE_NAME)
     except AttributeError:
         context = Context(dynamic=False)
-        setattr(thread, ATTRIBUTE_NAME, context)
+        setattr(managers.request_manager.current, ATTRIBUTE_NAME, context)
 
     parent = container._parent.id if container._parent else None
     registrations = compile_registations(container, parent, dynamic=context.dynamic)
@@ -34,12 +33,11 @@ def process(container, parent=None):
 
 
 def generate(container):
-    thread = current_thread()
     try:
-        context = getattr(thread, ATTRIBUTE_NAME)
+        context = getattr(managers.request_manager.current, ATTRIBUTE_NAME)
     except AttributeError:
         context = Context(dynamic=False)
-        setattr(thread, ATTRIBUTE_NAME, context)
+        setattr(managers.request_manager.current, ATTRIBUTE_NAME, context)
 
     types = container._types
     render_type = container._origin.type.render_type
@@ -51,16 +49,13 @@ def generate(container):
 
 @contextmanager
 def select(dynamic=False):
-    thread = current_thread()
-    previous = getattr(thread, ATTRIBUTE_NAME, None)
-
+    previous = getattr(managers.request_manager.current, ATTRIBUTE_NAME, None)
     context = Context(dynamic=dynamic)
-    setattr(thread, ATTRIBUTE_NAME, context)
-
+    setattr(managers.request_manager.current, ATTRIBUTE_NAME, context)
     try:
         yield
     finally:
         if previous:
-            setattr(thread, ATTRIBUTE_NAME, previous)
+            setattr(managers.request_manager.current, ATTRIBUTE_NAME, previous)
         else:
-            delattr(thread, ATTRIBUTE_NAME)
+            delattr(managers.request_manager.current, ATTRIBUTE_NAME)
