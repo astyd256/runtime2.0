@@ -551,7 +551,7 @@ class VDOM_DynamicObject(VDOM_object):
         e2vdom.process(self)
         try:
             try:
-                root = vdomxml.loads(self.vdomxml.encode("utf8"), managers.engine.application)
+                root = vdomxml.loads(self.vdomxml.encode("utf8"), self._origin)  # managers.engine.application
             except:
                 if self.vdomxml.strip():
                     raise

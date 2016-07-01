@@ -5,7 +5,7 @@ from utils.structure import Structure
 from utils.parsing import VALUE, native, UnexpectedAttributeValueError, MissingAttributeError
 
 
-def vdomxml_builder(parser, application):
+def vdomxml_builder(parser, origin):
     # TODO: think much more about type indexing
     catalog = {type.name: type for type in managers.memory.types.itervalues()}
     objects = []
@@ -48,7 +48,7 @@ def vdomxml_builder(parser, application):
                 yield element
                 context.parent = parent
         # </element>
-        context.parent = create_object(application.objects, name, attributes)
+        context.parent = create_object(origin.objects, name, attributes)
 
         yield element
         for object in objects:

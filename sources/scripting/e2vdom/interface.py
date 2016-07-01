@@ -41,7 +41,7 @@ def generate(container):
 
     types = container._types
     render_type = container._origin.type.render_type
-    render_container = container._origin.container.type.id  # container._origin.type.id
+    render_container = container._origin.container.type.id
 
     return compile_declarations_n_libraries(types,
         render_type, render_container, context.registrations, dynamic=context.dynamic)

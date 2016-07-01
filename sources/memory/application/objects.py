@@ -40,8 +40,8 @@ class MemoryObjects(MemoryBase, MutableMapping):
     catalog = roproperty("_catalog")
 
     def new_sketch(self, type, virtual=False, attributes=None, restore=False):
-        if self._owner.is_object and virtual != self._owner.virtual:
-            raise Exception("Virtual objects can only be created in application or another virtual object")
+        # if self._owner.is_object and virtual != self._owner.virtual:
+        #     raise Exception("Virtual objects can only be created in application or another virtual object")
 
         def on_rename(item, name):
             with self._owner.lock:

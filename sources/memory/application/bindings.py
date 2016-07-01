@@ -22,6 +22,7 @@ class MemoryBindings(MemoryBase, MutableMapping):
         def on_complete(item):
             if item.target_object.virtual:
                 return
+
             with self._owner.lock:
                 self._items[item.id] = item
 
