@@ -1,7 +1,7 @@
 *.pyc
-applications
-cache
-data
-resources
-temp
-types
+applications/*
+cache/*
+data/*
+resources/*
+temp/*
+types/*
