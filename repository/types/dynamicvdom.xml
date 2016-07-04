@@ -580,8 +580,8 @@ class VDOM_DynamicObject(VDOM_object):
                     message = self.rendererrormsg
                 else:
                     lines = xml_escape(self.vdomxml).split("\n")
-                    for i in range(len(lines)):
-                        lines[i] = u"{}: {}".format(i + 1, lines[i])
+                    for i, txt in enumerate(lines):
+                        lines[i] = u"{}: {}".format(i + 1, txt)
                     message = u"Render error: {}<br>{}".format(error, u"<br>".join(lines))
                 return u"<span class=\"render-error\">%s</span>" % message, "", ""
 
