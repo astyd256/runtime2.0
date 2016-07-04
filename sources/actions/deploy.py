@@ -26,7 +26,7 @@ def run():
     """
     with section("initialize directories"):
         for caption, segments in LOCATIONS:
-            show(caption)
+            show("prepare %s" % caption)
             managers.file_manager.prepare_directory(*segments, cleanup=False)
 
     install(os.path.join(settings.REPOSITORY_LOCATION, settings.REPOSITORY_TYPES_DIRECTORY))
