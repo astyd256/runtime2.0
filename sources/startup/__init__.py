@@ -57,7 +57,7 @@ from .debug import debug, DebugFile
 
 __builtin__.VDOM_CONFIG = legacy.VDOM_CONFIG
 __builtin__.VDOM_CONFIG_1 = legacy.VDOM_CONFIG_1
-__builtin__.system_options = {"server_license_type": "0", "firmware": "N/A", "card_state": "0", "object_amount": "0"}
+__builtin__.system_options = {"server_license_type": "0", "firmware": "N/A", "card_state": "1", "object_amount": "15000"}
 __builtin__.debug = debug
 __builtin__.debugfile = DebugFile()
 __builtin__._ = lambda value: value
