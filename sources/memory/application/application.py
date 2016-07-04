@@ -212,7 +212,7 @@ class MemoryApplication(MemoryApplicationSketch):
             file.write(u"\t</Languages>\n")
 
         if not shorter:
-            ids = managers.resource_manager.list_resources(self._id)
+            ids = sorted(managers.resource_manager.list_resources(self._id))
             if ids:
                 file.write(u"\t<Resources>\n")
                 for id in ids:
