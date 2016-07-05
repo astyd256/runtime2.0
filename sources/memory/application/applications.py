@@ -7,6 +7,7 @@ import managers
 import file_access
 
 from utils import verificators
+from utils.properties import lazy
 from logs import log
 
 from ..generic import MemoryBase
@@ -18,6 +19,13 @@ NOT_LOADED = "NOT LOADED"
 
 
 class MemoryApplications(MemoryBase, Mapping):
+
+    @lazy
+    def default(self):
+        try:
+            return self[settings.DEFAULT_APPLICATION or iter(self).next()]
+        except (StopIteration, KeyError):
+            return None
 
     def __init__(self, owner):
         self._owner = owner
