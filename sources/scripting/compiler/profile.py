@@ -80,7 +80,7 @@ class CompilationProfile(CompilationProfileEntity):
         self._optimization_priority = origin.type.optimization_priority
 
         self._action = origin.actions.get(context)
-        self._class_name = "%s_%s" % (origin.type.class_name, origin.id.replace("-", "_"))
+        self._class_name = "%s_%s_%s" % (origin.type.class_name, origin.id.replace("-", "_"), context.replace("-", "_"))
         self._entries = CompilationProfileEntries(self)
 
     def __enter__(self):

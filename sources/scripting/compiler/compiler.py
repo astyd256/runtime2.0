@@ -2,13 +2,13 @@
 import re
 import managers
 from logs import log
-from utils.auxiliary import fit
 from .profile import CompilationProfile
 from .descriptors import make_attribute_name, make_object_name, make_descriptor_name, \
     create_attribute_descriptor, create_stateful_attribute_descriptor, \
     create_object_descriptor, create_ghost_object_descriptor
 
 
+DEFAULT_MODULE_NAME = "scripting"
 MAXIMAL_LINE_LENGTH = 99
 UUID_REGEX = re.compile(r"^([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})$", re.IGNORECASE)
 # RENDER_TYPE = "html"
@@ -43,6 +43,8 @@ class Compiler(object):
         # prepare class namespace
         module_namespace = {}
         class_namespace = {
+            "__module__": DEFAULT_MODULE_NAME,
+
             # internal attributes
             "_origin": origin,
             "_action": profile.action,

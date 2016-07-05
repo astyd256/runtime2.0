@@ -34,6 +34,8 @@ BINARY_PATH = os.path.dirname(sys.argv[0]) or os.getcwd()
 PYTHON_PATH = sys.prefix
 SERVER_PATH = os.path.split(BINARY_PATH)[0]
 
+WELL_KNOWN_MODULES = "_json", "_ast", "thread", "operator", "itertools", "exceptions"
+
 
 # auxiliary
 
@@ -121,14 +123,22 @@ def is_builtin_object(object):
     return type(object).__module__ == "__builtin__"
 
 
-def is_server_object(object, unknown=False):
+def is_server_object(object, default=True):
     module_name = type(object).__module__
     if module_name == "__builtin__":
         return False
-    try:
-        return sys.modules[module_name].__file__.startswith(BINARY_PATH)
-    except:
-        return unknown
+    else:
+        try:
+            module_location = sys.modules[module_name].__file__
+            if os.path.isabs(module_location):
+                return module_location.startswith(BINARY_PATH)
+        except:
+            pass
+
+        if module_name in WELL_KNOWN_MODULES:
+            return False
+        else:
+            return default
 
 
 # describers

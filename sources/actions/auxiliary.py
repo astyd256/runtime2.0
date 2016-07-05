@@ -10,7 +10,7 @@ MISSING = "MISSING"
 INDENT = "    "
 
 NAME_WIDTH = 36
-LONG_NAME_WIDTH = NAME_WIDTH * 2
+LONG_NAME_WIDTH = 96
 VALUE_WIDTH = 68
 
 
@@ -60,6 +60,7 @@ def show(name=None, value=MISSING, indent=None, longer=False):
         indent = global_indent
 
     if value is MISSING:
+        name_width = NAME_WIDTH
         value = name
         caption = indent
     else:
@@ -74,7 +75,7 @@ def show(name=None, value=MISSING, indent=None, longer=False):
         wrap(part,
             initial_indent=caption,
             subsequent_indent=" " * len(caption),
-            width=NAME_WIDTH + VALUE_WIDTH,
+            width=name_width + VALUE_WIDTH,
             replace_whitespace=False,
             break_long_words=False)) for part in value.splitlines()))
     console.write(message)

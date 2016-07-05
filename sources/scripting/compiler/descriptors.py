@@ -52,6 +52,8 @@ def create_type_object(type):
 
     source = """class {class_name}(object):
 
+    __module__ = "scripting"
+
     _id = _id
     _name = _name
     _version = _version
@@ -85,6 +87,8 @@ def create_attribute_descriptor(name):
     attribute_name = make_attribute_name(name)
 
     source = """class {class_name}(object):
+
+    __module__ = "scripting"
 
     def __get__(self, instance, owner):
         if instance._compute_state is STATE_REQUIRE_RECOMPUTE:
@@ -124,6 +128,8 @@ def create_stateful_attribute_descriptor(name):
 
     source = """class {class_name}(object):
 
+    __module__ = "scripting"
+
     def __get__(self, instance, owner):
         if instance._compute_state is STATE_REQUIRE_RECOMPUTE:
             instance.recompute()
@@ -155,6 +161,8 @@ def create_object_descriptor(name):
 
     source = """class {class_name}(object):
 
+    __module__ = "scripting"
+
     def __get__(self, instance, owner):
         return instance.{attribute_name}
 
@@ -175,6 +183,8 @@ def create_ghost_object_descriptor(name):
 
     source = """
 class {class_name}(object):
+
+    __module__ = "scripting"
 
     def __get__(self, instance, owner):
         try:

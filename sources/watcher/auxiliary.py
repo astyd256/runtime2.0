@@ -68,28 +68,28 @@ def search_object(string):
         return None
 
 
-def select_types(server=True, unknown=False):
+def select_types(server=True, unknown=True):
     types = set()
     for object in gc.get_objects():
-        if server and not is_server_object(object, unknown=unknown):
+        if server and not is_server_object(object, default=unknown):
             continue
         types.add(get_type_name(object))
     return tuple(types)
 
 
-def select_objects(string=None, server=True, unknown=False, source=None):
+def select_objects(string=None, server=True, unknown=True, source=None):
     if source is None:
         source = gc.get_objects()
     if not string:
         return tuple(object for object in source
-            if ((is_server_object(object, unknown=unknown) if server else True)))
+            if ((is_server_object(object, default=unknown) if server else True)))
     elif string[0] in "0123456789":
         number = int(string, 16)
         return tuple(object for object in source
-            if id(object) == number and ((is_server_object(object, unknown=unknown) if server else True)))
+            if id(object) == number and ((is_server_object(object, default=unknown) if server else True)))
     else:
         return tuple(object for object in source
-            if get_type_name(object) == string and ((is_server_object(object, unknown=unknown) if server else True)))
+            if get_type_name(object) == string and ((is_server_object(object, default=unknown) if server else True)))
 
 
 def get_thread_traceback(thread):

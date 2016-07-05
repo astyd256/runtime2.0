@@ -1,4 +1,5 @@
 
+import re
 from logs import console
 from utils.structure import Structure
 from utils.parsing import VALUE, Parser, ParsingException
@@ -6,8 +7,9 @@ from ...auxiliary import section, show
 from ..auxiliary import query
 
 
-REQUEST = "<action name=\"analyze\"><option name=\"objects\">server only</option></action>"
-REQUEST_ALL = "<action name=\"analyze\"><option name=\"objects\"/></action>"
+REQUEST = "<action name=\"analyze\"><option name=\"objects\"/>%s</action>"
+FILTER_BY_SERVER_OPTION = "<option name=\"filter\">server</option>"
+GROUP_BY_NAME_OPTION = "<option name=\"group\">name</option>"
 
 SORT_BY_NAME = "SORT BY NAME"
 SORT_BY_COUNTER = "SORT BY COUNTYER"
@@ -23,13 +25,15 @@ ORDER_VALUES = {
     "desc": ORDER_BY_DESCENDING
 }
 
+COUNTER_REGEX = re.compile("(\d+)(?:\s*\((\d+)\))?")
+
 
 def sort_by_name(x):
     return x[0]
 
 
 def sort_by_counter(x):
-    return x[1], x[0]
+    return x[1], -x[2], x[0]
 
 
 def builder(parser):
@@ -41,8 +45,13 @@ def builder(parser):
             result.counters = []
             # <counter>
             def counter(object):
-                counter = yield VALUE
-                result.counters.append((object, int(counter)))
+                value = yield VALUE
+                match = COUNTER_REGEX.match(value)
+                if match:
+                    counter, items = int(match.group(1)), int(match.group(2) or 0)
+                    result.counters.append((object, counter, items, value))
+                else:
+                    result.counters.append((object, 0, 0, "error: " + value))
             # </counter>
             return counter
         # </counters>
@@ -52,13 +61,14 @@ def builder(parser):
     return reply
 
 
-def run(address=None, port=None, timeout=None, all=False, sort=None, order=None, limit=None):
+def run(address=None, port=None, timeout=None, all=False, nogroup=False, sort=None, order=None, limit=None):
     """
     analyze server objects
     :param address: specifies server address
     :param int port: specifies server port
     :param float timeout: specifies timeout to wait for reply
     :param switch all: disable objects filtering
+    :param switch nogroup: disable grouping by name
     :param sort: sort entries by "name" or by "counter"
     :param order: sort entries "asc"ending or "desc"ending
     :param int limit: limit output
@@ -68,7 +78,10 @@ def run(address=None, port=None, timeout=None, all=False, sort=None, order=None,
         if sort is SORT_BY_COUNTER and order is None:
             order = "desc"
         order = ORDER_VALUES.get((order or "").lower(), ORDER_BY_ASCENDING)
-        request = REQUEST_ALL if all else REQUEST
+
+        options = "".join(filter(None, (None if all else FILTER_BY_SERVER_OPTION,
+            None if nogroup else GROUP_BY_NAME_OPTION)))
+        request = REQUEST % options
 
         message = query("analyze objects", address, port, request, timeout=timeout)
         parser = Parser(builder=builder, notify=True, supress=True)
@@ -88,7 +101,7 @@ def run(address=None, port=None, timeout=None, all=False, sort=None, order=None,
                 entries = sorted(result.counters, key=key, reverse=reverse)
                 if limit is not None:
                     entries = entries[:limit]
-                for name, counter in entries:
-                    show(name, counter, longer=True)
+                for name, counter, items, value in entries:
+                    show(name, value, longer=True)
             else:
                 show("no objects")

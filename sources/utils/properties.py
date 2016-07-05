@@ -4,6 +4,8 @@ def lazy(initializer):
     exec("""
 class LazyProperty(object):
 
+    __module__ = "utils"
+
     def __get__(self, instance, owner=None):
         instance.{name} = value = self._initializer(instance)
         return value
@@ -17,6 +19,8 @@ def constant(value):
     namespace = {}
     exec("""
 class ConstProperty(object):
+
+    __module__ = "utils"
 
     def __get__(self, instance, owner=None):
         return {value}
@@ -34,6 +38,8 @@ def roproperty(name):
     namespace = {}
     exec("""
 class ReadOnlyProperty(object):
+
+    __module__ = "utils"
 
     def __get__(self, instance, owner=None):
         return instance.{name}
@@ -63,6 +69,8 @@ def rwproperty(name, setter=None, notify=None):
         exec("""
 class ReadWriteProperty(object):
 
+    __module__ = "utils"
+
     def __init__(self, setter):
         self._setter = setter
 
@@ -79,6 +87,8 @@ class ReadWriteProperty(object):
     else:
         exec("""
 class ReadWriteProperty(object):
+
+    __module__ = "utils"
 
     def __get__(self, instance, owner=None):
         return instance.{name}
