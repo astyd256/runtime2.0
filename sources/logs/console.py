@@ -28,8 +28,8 @@ class Console(object):
                 (levels.MESSAGE, "")
 
         if isinstance(message, unicode):
-            message = message.encode(self.stderr.encoding if level is levels.ERROR
-                else self.stdout.encoding, "backslashreplace")
+            message = message.encode((self.stderr.encoding if level is levels.ERROR
+                else self.stdout.encoding) or "ascii", "backslashreplace")
         elif not isinstance(message, basestring):
             message = str(message)
 
