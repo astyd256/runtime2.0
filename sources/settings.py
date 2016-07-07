@@ -14,7 +14,7 @@ SERVER_PORT = 80
 # locations
 
 REPOSITORY_LOCATION = "../repository"
-TYPES_LOCATION = REPOSITORY_LOCATION + "/types"
+TYPES_LOCATION = "../types"
 APPLICATIONS_LOCATION = "../applications"
 RESOURCES_LOCATION = "../resources"
 CACHE_LOCATION = "../cache"
