@@ -8,6 +8,11 @@ import traceback
 import threading
 
 from utils.tracing import is_server_object
+from utils.auxiliary import fit
+
+
+DEFAULT_GRAPH_DEPTH = 10
+MAXIMAL_GRAPH_DETAILS_LENGTH = 96
 
 
 class OptionError(Exception):
@@ -77,81 +82,101 @@ def select_types(server=True, unknown=True):
     return tuple(types)
 
 
-def select_objects(string=None, server=True, unknown=True, source=None):
+def select_objects(string=None, server=True, unknown=True, source=None, filter=None):
     if source is None:
         source = gc.get_objects()
+
     if not string:
-        return tuple(object for object in source
-            if ((is_server_object(object, default=unknown) if server else True)))
-    elif string[0] in "0123456789":
-        number = int(string, 16)
-        return tuple(object for object in source
-            if id(object) == number and ((is_server_object(object, default=unknown) if server else True)))
+        objects = (object for object in source)
+    elif string.isdigit():
+        identifier = int(string, 16)
+        objects = (object for object in source if id(object) == identifier)
     else:
-        return tuple(object for object in source
-            if get_type_name(object) == string and ((is_server_object(object, default=unknown) if server else True)))
+        objects = (object for object in source if get_type_name(object) == string)
+
+    if server:
+        objects = (object for object in source if is_server_object(object, default=unknown))
+
+    if filter:
+        objects = (object for object in source if filter(object))
+
+    return tuple(objects)
 
 
 def get_thread_traceback(thread):
     return traceback.extract_stack(sys._current_frames()[thread.ident])
 
 
-def generate_graph(objects, depth=5, optimize=True, collapse_dicts=True, skip_functions=True):
+def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH, optimize=True, minify=True, skip_functions=True):
     print "Generate graph for %s" % \
         (", ".join("%08X" % id(object) for object in objects)
             if len(objects) < 10 else "%d objects" % len(objects))
     # TODO: __del__
     # TODO: Dereference members
 
-    def check_dicts(target):
-        if not collapse_dicts:
-            return None
-        if not isinstance(target, dict):
-            return None
-        if id(target) in dicts:
-            return dicts[id(target)]
+    def check_owners(target):
+        if id(target) in owners:
+            return
 
         ignore.add(id(sys._getframe()))
         sources = gc.get_referrers(target)
         ignore.add(id(sources))
         try:
             master = None
-            for source in sources:
-                if id(source) in ignore:
-                    continue
-                if skip_functions \
-                    and isinstance(source, types.FunctionType) \
-                        and source.__globals__ is target:
-                            continue
-                source_dict = getattr(source, "__dict__", None)
-                if isinstance(source_dict, types.DictProxyType):
-                    source_dict = gc.get_referents(gc.get_referents(source_dict))[0]
-                if target is source_dict:
-                    if master is None:
-                        master = source
-                    else:
-                        dicts[id(target)] = None
-                        return None
-                # else:
-                #     dicts[id(target)]=None
-                #     return None
-                del source
+
+            if isinstance(target, dict):
+                for source in sources:
+                    if id(source) in ignore:
+                        continue
+
+                    if skip_functions and \
+                            isinstance(source, types.FunctionType) and \
+                            source.__globals__ is target:
+                        continue
+
+                    reference = getattr(source, "__dict__", None)
+                    if isinstance(reference, types.DictProxyType):
+                        reference = gc.get_referents(gc.get_referents(reference))[0]
+
+                    if target is reference:
+                        if master is None:
+                            master = source
+                        else:
+                            owners[id(target)] = None
+                            return
+            elif isinstance(target, tuple):
+                for source in sources:
+                    if id(source) in ignore:
+                        continue
+
+                    if getattr(source, "__bases__", None) is target or getattr(source, "__mro__", None) is target:
+                        if master is None:
+                            master = source
+                        else:
+                            owners[id(target)] = None
+                            return
+
             if master is None:
-                return None
+                return
             else:
-                dicts[id(target)] = master
-                return master
+                owners[id(target)] = master
+                return
         finally:
             ignore.remove(id(sources))
             ignore.remove(id(sys._getframe()))
             del sources
 
     def show_edge(source, target):
-        if collapse_dicts and id(source) in dicts:
-            for key, value in source.iteritems():
-                if value is target:
-                    membership_edges.append((id(dicts[id(source)]), mapping.get(id(target), id(target)), quote(key)))
-                    return
+        if minify and id(source) in owners:
+            if isinstance(source, dict):
+                for key, value in source.iteritems():
+                    if value is target:
+                        membership_edges.append((id(owners[id(source)]), mapping.get(id(target), id(target)), quote(key)))
+                        return
+            elif isinstance(source, tuple):
+                for item in source:
+                    if item is target:
+                        return
 
         if mapping.get(id(target), None) == id(source):
             return
@@ -161,11 +186,13 @@ def generate_graph(objects, depth=5, optimize=True, collapse_dicts=True, skip_fu
             if isinstance(source_dict, types.DictProxyType):
                 source_dict = gc.get_referents(gc.get_referents(source_dict))[0]
             if target is source_dict:
-                elementary_edges.append((id(source), mapping.get(id(target), id(target)), "__dict__"))
+                ownership_edges.append((id(source), mapping.get(id(target), id(target)), "__dict__"))
                 return
+
         if isinstance(source, type):
             if target in source.__bases__:
-                inheritance_edges.append((id(source), mapping.get(id(target), id(target)), ""))
+                if minify:
+                    inheritance_edges.append((id(source), mapping.get(id(target), id(target)), ""))
                 return
 
         if getattr(source, "__class__", None) is target:
@@ -198,58 +225,79 @@ def generate_graph(objects, depth=5, optimize=True, collapse_dicts=True, skip_fu
             except:
                 pass
 
+        if getattr(source, "__bases__", None) is target:
+            inheritance_edges.append((id(source), mapping.get(id(target), id(target)), "__bases__"))
+            return
+
+        if getattr(source, "__mro__", None) is target:
+            inheritance_edges.append((id(source), mapping.get(id(target), id(target)), "__mro__"))
+            return
+
         reference_edges.append((id(source), mapping.get(id(target), id(target)), ""))
 
     def show_node(target):
         kind = type(target).__name__
+
         if isinstance(target, type):
             name = target.__name__
+            details = " "
             module = target.__module__
             storage = inheritance_nodes
         elif isinstance(target, types.ModuleType):
             name = target.__name__
+            details = " "
             module = " "  # target.__package__
             storage = module_nodes
         elif isinstance(target, (types.BuiltinMethodType, types.BuiltinFunctionType)):
             name = target.__name__
+            details = " "
             module = " "
             storage = elementary_nodes
         elif isinstance(target, types.FunctionType):
             name = target.__name__
+            details = " "
             module = getattr(inspect.getmodule(target), "__name__", " ")
             storage = callable_nodes
         elif isinstance(target, types.CodeType):
             name = target.co_name
+            details = " "
             module = getattr(inspect.getmodule(target), "__name__", " ")
             storage = callable_nodes
         elif isinstance(target, types.MethodType):
             if target.__self__ is not None:
                 kind = "bound " + kind
             name = target.__func__.__name__
+            details = " "
             module = getattr(inspect.getmodule(target), "__name__", " ")
             storage = callable_nodes
         elif isinstance(target, types.FrameType):
             name = target.f_code.co_name  # clarify_source_path(target.f_code.co_filename), target.f_lineno
+            details = " "
             module = getattr(inspect.getmodule(target), "__name__", " ")
             storage = callable_nodes
         elif isinstance(target, types.InstanceType):
             name = target.__class__.__name__
+            details = " "
             module = target.__module__
             storage = elementary_nodes
         elif type(target).__module__ == "__builtin__":
             name = quote(repr(target))[:40] if isinstance(target, (basestring, numbers.Number, bool, types.NoneType)) else " "
+            details = " "
             module = " "
             storage = elementary_nodes
         else:
             kind = "object"
             name = type(target).__name__
+            details = fit(repr(target), MAXIMAL_GRAPH_DETAILS_LENGTH)
             module = type(target).__module__
             storage = object_nodes
+
         for primary in objects:
             if target is primary:
                 storage = primary_nodes
                 break
-        storage.append((id(target), quote("\n".join((kind, name, module, "%08X" % id(target))))))
+
+        storage.append((id(target), quote("\n".join((kind, name, details, module, "%08X" % id(target))))))
 
     primary_nodes = []
     inheritance_nodes = []
@@ -267,15 +315,16 @@ def generate_graph(objects, depth=5, optimize=True, collapse_dicts=True, skip_fu
     inheritance_edges = []
     elementary_edges = []
 
-    objects, queue, levels, ignore, mapping, dicts = tuple(objects), [], {}, set(), {}, {}
+    objects, queue, levels, ignore, mapping, owners = tuple(objects), [], {}, set(), {}, {}
 
     ignore.add(id(objects))
     ignore.add(id(sys._getframe()))
     ignore.add(id(queue))
-    ignore.add(id(dicts))
+    ignore.add(id(owners))
 
     for target in objects:
-        check_dicts(target)
+        if minify:
+            check_owners(target)
         levels[id(target)] = 0
         queue.append(target)
 
@@ -284,34 +333,35 @@ def generate_graph(objects, depth=5, optimize=True, collapse_dicts=True, skip_fu
         target = queue.pop(0)
         level = levels[id(target)]
 
-        if collapse_dicts and id(target) in dicts:
-            mapping[id(target)] = id(dicts[id(target)])
+        if minify and id(target) in owners:
+            mapping[id(target)] = id(owners[id(target)])
         else:
             show_node(target)
 
         if level > depth:
             continue
-        if isinstance(target, types.ModuleType):
-            continue
-        if isinstance(target, (basestring, numbers.Number, bool)):
+        if isinstance(target, (types.ModuleType, basestring, numbers.Number, bool)):
             continue
 
         sources = gc.get_referrers(target)
         ignore.add(id(sources))
-        for source in sources:
-            if id(source) in ignore:
-                continue
-            if skip_functions \
-                and isinstance(source, types.FunctionType) \
-                    and source.__globals__ is target:
-                        continue
-            check_dicts(source)
-            if id(source) not in levels:
-                levels[id(source)] = level + 1
-                queue.append(source)
-            show_edge(source, target)
-        ignore.remove(id(sources))
-        del sources
+        try:
+            for source in sources:
+                if id(source) in ignore:
+                    continue
+                if skip_functions and isinstance(source, types.FunctionType) and source.__globals__ is target:
+                    continue
+
+                if id(source) not in levels:
+                    if minify:
+                        check_owners(source)
+                    levels[id(source)] = level + 1
+                    queue.append(source)
+
+                show_edge(source, target)
+        finally:
+            ignore.remove(id(sources))
+            del sources
 
     # D69191 A06C6C		Light Red			Unknown References
     # DEB887 A68A65		Light Brown			Objects, Membership
@@ -346,14 +396,14 @@ def generate_graph(objects, depth=5, optimize=True, collapse_dicts=True, skip_fu
         for name, label in storage:
             yield "\t%s%s;\n" % (name, '[label="%s"]' % label if label else "")
     for storage, style in (
+            (elementary_edges, 'color="#D8D8D8", fontcolor="#A2A2A2", arrowhead=normal, weight=1'),
             (membership_edges, 'color="#DEB887", fontcolor="#A68A65", arrowhead=normal, weight=10'),
             (callable_edges, 'color="#DEB887", fontcolor="#A68A65", arrowhead=normal, weight=30'),
             (traceback_edges, 'color="#76A3C9", fontcolor="#A68A65", arrowhead=normal, weight=30'),
             (reference_edges, 'color="#D69191", fontcolor="#A06C6C", arrowhead=normal, weight=1'),
             (ownership_edges, 'color="#DEB887", fontcolor="#A68A65", arrowhead=empty, weight=1'),
             (instance_edges, 'color="#D497E3", fontcolor="#9F71AA", arrowhead=empty, weight=1'),
-            (inheritance_edges, 'color="#D497E3", fontcolor="#9F71AA", arrowhead=normal, weight=1'),
-            (elementary_edges, 'color="#D8D8D8", fontcolor="#A2A2A2", arrowhead=normal, weight=1')):
+            (inheritance_edges, 'color="#D497E3", fontcolor="#9F71AA", arrowhead=normal, weight=10')):
         if not storage:
             continue
         yield "\tedge[%s];\n" % style

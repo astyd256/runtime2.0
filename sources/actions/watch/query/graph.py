@@ -7,7 +7,11 @@ from ...auxiliary import section, show
 from ..auxiliary import query
 
 
-REQUEST = "<action name=\"query\"><option name=\"graph\">%s</option></action>"
+REQUEST = "<action name=\"query\"><option name=\"graph\">%s</option>%s</action>"
+
+FILTER_OPTION = "<option name=\"filter\">%s</option>"
+DEPTH_OPTION = "<option name=\"depth\">%s</option>"
+MINIFY_OPTION = "<option name=\"minify\">0</option>"
 
 
 def builder(parser):
@@ -28,7 +32,7 @@ def generate_filename(object):
     return "%s.dot" % "-".join((part.lower() for part in object.split(".")))
 
 
-def run(object, location=None, address=None, port=None, timeout=None):
+def run(object, location=None, address=None, port=None, timeout=None, depth=None, filter=None, nominify=True):
     """
     query object graph
     :param object: specifies origin object by its type name or identifier to make graph
@@ -36,6 +40,9 @@ def run(object, location=None, address=None, port=None, timeout=None):
     :param address: specifies server address
     :param int port: specifies server port
     :param float timeout: specifies timeout to wait for reply
+    :param int depth: specifies depth to scan
+    :param str filter: specifies filter
+    :param switch nominify: disable output minifying
     """
     try:
         if location is None:
@@ -45,7 +52,16 @@ def run(object, location=None, address=None, port=None, timeout=None):
         elif not location.endswith(".dot"):
             location += ".dot"
 
-        message = query("query object graph", address, port, REQUEST % object, timeout=timeout)
+        options = []
+        if filter:
+            options.append(FILTER_OPTION % filter)
+        if depth:
+            options.append(DEPTH_OPTION % depth)
+        if not nominify:
+            options.append(MINIFY_OPTION)
+        request = REQUEST % (object, "".join(options))
+
+        message = query("query object graph", address, port, request, timeout=timeout)
         parser = Parser(builder=builder, notify=True, supress=True)
         result = parser.parse(message)
         if not result or not result.graph:

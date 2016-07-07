@@ -1,10 +1,13 @@
 
 import sys
 import gc
+
+from logs import log
 from ..auxiliary import select_types, select_objects, generate_graph
 
 
 SERVER_ONLY = "server only"
+MISSING = "MISSING"
 
 
 def query(options):
@@ -62,9 +65,40 @@ def query(options):
         yield "</reply>"
 
     elif "graph" in options:
-        objects = select_objects(options["graph"], server=False)
+        filter = options.get("filter")
+        depth = options.get("depth")
+        minify = options.get("minify")
+
+        if filter:
+            try:
+                filter_name, filter_value = filter.split("=")
+                filter_value = eval(filter_value)
+
+                def filter(object):
+                    try:
+                        return getattr(object, filter_name, MISSING) == filter_value
+                    except:
+                        return False
+            except:
+                log.warning("Ignore wrong filter: %s" % filter)
+                filter = None
+
+        objects = select_objects(options["graph"], server=False, filter=filter)
+        keywords = {}
+
+        if depth:
+            try:
+                keywords["depth"] = int(depth)
+            except ValueError:
+                log.warning("Ignore wrond depth: %s" % depth)
+
+        if minify:
+            minify = bool(int(minify))
+            keywords["minify"] = minify
+            keywords["skip_functions"] = minify
+
         yield "<reply>"
         yield "<graph>"
-        yield "".join(generate_graph(objects, depth=10)).encode("xml")
+        yield "".join(generate_graph(objects, **keywords)).encode("xml")
         yield "</graph>"
         yield "</reply>"
