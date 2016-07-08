@@ -1,8 +1,11 @@
 
+from weakref import ref
 from collections import MutableMapping
 from uuid import uuid4
+
 from utils.generators import generate_unique_name
-from utils.properties import lazy, roproperty
+from utils.properties import lazy, weak, roproperty
+
 from ..generic import MemoryBase
 from .catalogs import MemoryActionsCatalog, MemoryActionsDynamicCatalog
 from .action import MemoryActionSketch, MemoryActionDuplicationSketch
@@ -11,10 +14,19 @@ from .action import MemoryActionSketch, MemoryActionDuplicationSketch
 NAME_BASE = "action"
 
 
-class MemoryActions(MemoryBase, MutableMapping):
+def wrap_rename(instance):
+    instance = ref(instance)
 
-    def __init__(self, owner):
-        self._owner = owner
+    def on_rename(item, name):
+        self = instance()
+        with self._owner.lock:
+            del self._items_by_name[item.name]
+            self._items_by_name[name] = item
+
+    return on_rename
+
+
+class MemoryActions(MemoryBase, MutableMapping):
 
     @lazy
     def _items(self):
@@ -35,16 +47,16 @@ class MemoryActions(MemoryBase, MutableMapping):
         else:
             return MemoryActionsDynamicCatalog(self)
 
+    _owner = weak("owner")
+
+    def __init__(self, owner):
+        self._owner = owner
+
     owner = roproperty("_owner")
     catalog = roproperty("_catalog")
     generic = roproperty("_generic")
 
     def new_sketch(self, restore=False):
-
-        def on_rename(item, name):
-            with self._owner.lock:
-                del self._items_by_name[item.name]
-                self._items_by_name[name] = item
 
         def on_complete(item):
             with self._owner.lock:
@@ -61,7 +73,7 @@ class MemoryActions(MemoryBase, MutableMapping):
                     self._owner.invalidate(contexts=(item.id, item.name), downward=True, upward=True)
                     self._owner.autosave()
 
-                return on_rename
+                return wrap_rename(self)
 
         return MemoryActionSketch(on_complete, self._owner)
 

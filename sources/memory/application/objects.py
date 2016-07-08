@@ -1,4 +1,5 @@
 
+from weakref import ref
 from collections import OrderedDict, MutableMapping
 from itertools import islice
 from uuid import uuid4
@@ -6,16 +7,27 @@ from uuid import uuid4
 import managers
 
 from utils.generators import generate_unique_name
-from utils.properties import lazy, roproperty
+from utils.properties import lazy, weak, roproperty
 
 from ..generic import MemoryBase
 from .catalogs import MemoryObjectsCatalog, MemoryObjectsDynamicCatalog
 
 
-class MemoryObjects(MemoryBase, MutableMapping):
+def wrap_rename(instance):
+    instance = ref(instance)
 
-    def __init__(self, owner):
-        self._owner = owner
+    def on_rename(item, name):
+        self = instance()
+        with self._owner.lock:
+            del self._items_by_name[item.name]
+            self._items_by_name[name] = item
+            self._owner.invalidate(upward=True)
+            self._owner.autosave()
+
+    return on_rename
+
+
+class MemoryObjects(MemoryBase, MutableMapping):
 
     @lazy
     def _items(self):
@@ -36,19 +48,17 @@ class MemoryObjects(MemoryBase, MutableMapping):
         else:
             return MemoryObjectsDynamicCatalog(self)
 
+    _owner = weak("owner")
+
+    def __init__(self, owner):
+        self._owner = owner
+
     owner = roproperty("_owner")
     catalog = roproperty("_catalog")
 
     def new_sketch(self, type, virtual=False, attributes=None, restore=False):
         # if self._owner.is_object and virtual != self._owner.virtual:
         #     raise Exception("Virtual objects can only be created in application or another virtual object")
-
-        def on_rename(item, name):
-            with self._owner.lock:
-                del self._items_by_name[item.name]
-                self._items_by_name[name] = item
-                self._owner.invalidate(upward=True)
-                self._owner.autosave()
 
         def on_complete(item):
             with self._owner.lock:
@@ -70,7 +80,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
                         self._owner.invalidate(upward=True)
                     item.autosave()
 
-                return on_rename
+                return wrap_rename(self)
 
         return MemoryObjectSketch(on_complete, type,
             self._owner.application, None if self._owner.is_application else self._owner,

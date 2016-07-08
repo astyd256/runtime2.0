@@ -8,11 +8,10 @@ import traceback
 import threading
 
 from utils.tracing import is_server_object
-from utils.auxiliary import fit
+from memory.generic import MemoryBase
 
 
 DEFAULT_GRAPH_DEPTH = 10
-MAXIMAL_GRAPH_DETAILS_LENGTH = 96
 
 
 class OptionError(Exception):
@@ -195,6 +194,14 @@ def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH, optimize=True, minify=Tru
                     inheritance_edges.append((id(source), mapping.get(id(target), id(target)), ""))
                 return
 
+        if getattr(source, "__bases__", None) is target:
+            inheritance_edges.append((id(source), mapping.get(id(target), id(target)), "__bases__"))
+            return
+
+        if getattr(source, "__mro__", None) is target:
+            inheritance_edges.append((id(source), mapping.get(id(target), id(target)), "__mro__"))
+            return
+
         if getattr(source, "__class__", None) is target:
             instance_edges.append((id(source), mapping.get(id(target), id(target)), ""))
             return
@@ -202,10 +209,19 @@ def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH, optimize=True, minify=Tru
             ownership_edges.append((id(source), mapping.get(id(target), id(target)), ""))
             return
         elif isinstance(source, dict):
-            for key, value in source.iteritems():
-                if value is target:
-                    elementary_edges.append((id(source), mapping.get(id(target), id(target)), quote(repr(key))))
-            return
+            try:
+                label = quote(repr(source.keys()[source.values().index(target)]))
+                elementary_edges.append((id(source), mapping.get(id(target), id(target)), label))
+                return
+            except ValueError:
+                pass
+        elif isinstance(source, (tuple, list)):
+            try:
+                label = str(source.index(target))
+                elementary_edges.append((id(source), mapping.get(id(target), id(target)), label))
+                return
+            except ValueError:
+                pass
         elif isinstance(source, types.FrameType) and source.f_back is target:
             traceback_edges.append((id(source), mapping.get(id(target), id(target)), ""))
             return
@@ -225,12 +241,8 @@ def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH, optimize=True, minify=Tru
             except:
                 pass
 
-        if getattr(source, "__bases__", None) is target:
-            inheritance_edges.append((id(source), mapping.get(id(target), id(target)), "__bases__"))
-            return
-
-        if getattr(source, "__mro__", None) is target:
-            inheritance_edges.append((id(source), mapping.get(id(target), id(target)), "__mro__"))
+        if getattr(source, "cell_contents", None) is target:
+            elementary_edges.append((id(source), mapping.get(id(target), id(target)), "cell_contents"))
             return
 
         reference_edges.append((id(source), mapping.get(id(target), id(target)), ""))
@@ -282,13 +294,22 @@ def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH, optimize=True, minify=Tru
             storage = elementary_nodes
         elif type(target).__module__ == "__builtin__":
             name = quote(repr(target))[:40] if isinstance(target, (basestring, numbers.Number, bool, types.NoneType)) else " "
-            details = " "
+            if isinstance(target, (dict, tuple, list, set)):
+                count = len(target)
+                details = "1 item" if count == 1 else "%d items" % count
+            else:
+                details = " "
             module = " "
             storage = elementary_nodes
         else:
             kind = "object"
             name = type(target).__name__
-            details = fit(repr(target), MAXIMAL_GRAPH_DETAILS_LENGTH)
+            if isinstance(target, MemoryBase):
+                details = ":".join(filter(None, (getattr(target, "id", None), getattr(target, "name", None)))).lower()
+                if getattr(target, "virtual", None):
+                    name += " (Virtual)"
+            else:
+                details = " "
             module = type(target).__module__
             storage = object_nodes
 
@@ -375,13 +396,13 @@ def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH, optimize=True, minify=Tru
     # CDC9A5			Light Light Yellow
     # 87D5DE			Light Blue
 
+    # "\tpack=true;\n" \
     yield "digraph ObjectGraph\n" \
         "{\n" \
-        "\tpack=true;\n" \
         "\toverlap=false;\n" \
         "\toutputorder=nodesfirst;\n" \
         "\tbgcolor=\"#FFFFFF\";\n" \
-        "\tnode[shape=rectangle, style=filled, penwidth=6, color=\"#FFFFFF\", fillcolor=\"#000000\", fontname=Consolas, fontsize=8]\n" \
+        "\tnode[shape=rectangle, style=filled, penwidth=6, color=\"#FFFFFF\", fillcolor=\"#000000\", fontname=Consolas, fontsize=8];\n" \
         "\tedge[arrowsize=0.75, penwidth=2, color=\"#000000\", fontcolor=\"#000000\", fontname=Consolas, fontsize=8];\n"
     for storage, style in (
             (primary_nodes, 'fillcolor="#65B488"'),

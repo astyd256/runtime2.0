@@ -1,8 +1,10 @@
 
+from weakref import WeakValueDictionary
+
 import managers
 
 from logs import log
-from utils.properties import lazy, constant, roproperty, rwproperty
+from utils.properties import lazy, weak, constant, roproperty, rwproperty
 from utils import verificators
 
 from ..constants import NON_CONTAINER, CONTAINER, TOP_CONTAINER, RENDER_CONTEXT
@@ -35,11 +37,15 @@ class MemoryObjectSketch(MemoryBase):
 
     @lazy
     def _classes(self):
-        return {}
+        # return {}
+        return WeakValueDictionary()
 
     @lazy
     def _structure(self):
         return None if self._parent or self._virtual else MemoryStructureSketch(self)
+
+    _parent = weak("parent")
+    _application = weak("application")
 
     def __init__(self, callback, type, application, parent, virtual=False, attributes=None):
         self._callback = callback

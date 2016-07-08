@@ -7,7 +7,7 @@ import managers
 import file_access
 
 from utils import verificators
-from utils.properties import lazy
+from utils.properties import lazy, weak
 from logs import log
 
 from ..generic import MemoryBase
@@ -26,6 +26,8 @@ class MemoryApplications(MemoryBase, Mapping):
             return self[settings.DEFAULT_APPLICATION or iter(self).next()]
         except (StopIteration, KeyError):
             return None
+
+    _owner = weak("owner")
 
     def __init__(self, owner):
         self._owner = owner

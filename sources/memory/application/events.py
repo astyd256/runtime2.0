@@ -1,15 +1,12 @@
 
 from collections import MutableMapping
-from utils.properties import lazy, roproperty
+from utils.properties import lazy, weak, roproperty
 from ..generic import MemoryBase
 from .catalogs import MemoryEventsCatalog, MemoryEventsDynamicCatalog
 from .event import MemoryEventSketch
 
 
 class MemoryEvents(MemoryBase, MutableMapping):
-
-    def __init__(self, owner):
-        self._owner = owner
 
     @lazy
     def _items(self):
@@ -25,6 +22,11 @@ class MemoryEvents(MemoryBase, MutableMapping):
             return MemoryEventsCatalog(self)
         else:
             return MemoryEventsDynamicCatalog(self)
+
+    _owner = weak("owner")
+
+    def __init__(self, owner):
+        self._owner = owner
 
     owner = roproperty("_owner")
     catalog = roproperty("_catalog")

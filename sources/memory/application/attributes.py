@@ -3,7 +3,7 @@ import re
 from collections import Mapping, MutableMapping
 import settings
 import managers
-from utils.properties import lazy
+from utils.properties import lazy, weak
 from logs import log
 from ..generic import MemoryBase
 
@@ -26,6 +26,8 @@ class MemoryAttributesSketch(MemoryBase, MutableMapping):
     @lazy
     def _query(self):
         return set()
+
+    _owner = weak("owner")
 
     def __init__(self, owner, attributes=None):
         self._owner = owner

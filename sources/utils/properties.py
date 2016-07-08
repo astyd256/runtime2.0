@@ -1,4 +1,7 @@
 
+from weakref import ref
+
+
 def lazy(initializer):
     namespace = {}
     exec("""
@@ -12,6 +15,27 @@ class LazyProperty(object):
         """.format(name=initializer.__name__), namespace)
     instance = namespace["LazyProperty"]()
     instance._initializer = initializer
+    return instance
+
+
+def weak(name):
+    namespace = {"ref": ref}
+    exec("""
+
+class WeakProperty(object):
+
+    __module__ = "utils"
+
+    def __get__(self, instance, owner=None):
+        return instance._weak_{name} if instance._weak_{name} is None else instance._weak_{name}()
+
+    def __set__(self, instance, value):
+        instance._weak_{name} = None if value is None else ref(value)
+
+    def __delete__(self, instance):
+        del instance._weak_{name}
+        """.format(name=name), namespace)
+    instance = namespace["WeakProperty"]()
     return instance
 
 
