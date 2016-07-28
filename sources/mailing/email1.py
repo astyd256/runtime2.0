@@ -2,7 +2,7 @@ import thread, time, email, email.generator, copy
 from smtplib import SMTP,SMTP_SSL,SMTPConnectError,SMTPHeloError,SMTPAuthenticationError,SMTPException,\
 	SMTPRecipientsRefused,SMTPSenderRefused,SMTPDataError,SSLFakeFile
 from socket import create_connection, error as socket_error
-from ssl import PROTOCOL_SSLv23, PROTOCOL_SSLv3, PROTOCOL_TLSv1, wrap_socket
+from ssl import PROTOCOL_SSLv23, PROTOCOL_TLSv1, wrap_socket
 from email import encoders
 from email.mime.nonmultipart import MIMENonMultipart
 from email.mime.text import MIMEText
