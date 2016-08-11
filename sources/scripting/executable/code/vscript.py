@@ -1,6 +1,7 @@
 
 from importlib import import_module
 from json import loads, dumps
+import settings
 from utils.properties import lazy
 from memory import PYTHON_EXTENSION, SYMBOLS_EXTENSION, VSCRIPT_LANGUAGE
 from .generic import Code
@@ -21,7 +22,7 @@ class VScriptCode(Code):
             self._symbols = loads(self._read(SYMBOLS_EXTENSION))
         else:
             python_source_code, self._symbols = vengine.vcompile(self._source_code,
-                filename=self._signature, package=self._package, bytecode=0, listing=False)
+                filename=self._signature, package=self._package, bytecode=0, listing=settings.SHOW_VSCRIPT_LISTING)
             if store:
                 self._write(PYTHON_EXTENSION, python_source_code)
                 self._write(SYMBOLS_EXTENSION, unicode(dumps(self._symbols)))
