@@ -210,8 +210,8 @@ class Message(object):
 				msg.attach(a.as_mime())
 		
 		subject = self.subject
-		if isinstance(subject, unicode):
-			subject = subject.encode("utf-8")
+		# if isinstance(subject, unicode):
+		# 	subject = subject.encode("utf-8")
 		msg['Subject'] = subject
 		msg['From'] = self.from_email
 		msg['To'] = self.to_email
