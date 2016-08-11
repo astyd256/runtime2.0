@@ -3,13 +3,14 @@ import managers
 from ... import errors
 from ...subtypes import boolean, generic, string, true, false, v_empty, v_mismatch
 from ...variables import variant
-from .request import v_cookiescollection
+from .request import v_cookiescollection, v_sharedvariablescollection
 
 
 class v_response(generic):
 
 	def __init__(self):
 		self._cookies=v_cookiescollection()
+		self._sharedvariables=v_sharedvariablescollection()
 
 
 	def v_cookies(self, name=None, **keywords):
@@ -20,7 +21,16 @@ class v_response(generic):
 				return self._cookies
 		else:
 			return self._cookies(name, **keywords)
-	
+
+	def v_sharedvariables(self, name=None, **keywords):
+		if name is None:
+			if "let" in keywords or "set" in keywords:
+				raise errors.object_has_no_property("sharedvariables")
+			else:
+				return self._sharedvariables
+		else:
+			return self._sharedvariables(name, **keywords)
+
 	def v_isclientconnected(self, **keywords):
 		if "let" in keywords or "set" in keywords:
 			raise errors.object_has_no_property("isclientconnected")

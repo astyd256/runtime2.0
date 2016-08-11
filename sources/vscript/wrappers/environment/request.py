@@ -4,6 +4,7 @@ from utils.file_argument import File_argument
 from ... import errors
 from ...subtypes import integer, generic, string, binary, v_empty, v_mismatch, v_nothing
 from ...variables import variant
+from ...conversions import pack, unpack
 
 
 class v_cookiescollection(generic):
@@ -178,6 +179,24 @@ class v_parameterscollection(generic):
 			yield variant(string(unicode(parameters)))
 
 
+class v_sharedvariablescollection(generic):
+
+	def __call__(self, name, **keywords):
+		if "let" in keywords:
+			managers.request_manager.current.shared_variables[name.as_string]=unpack(keywords["let"].as_simple)
+		elif "set" in keywords:
+			raise errors.object_has_no_property
+		else:
+			try:
+				return pack(managers.request_manager.current.shared_variables[name.as_string])
+			except KeyError:
+				return v_empty
+
+	def __iter__(self):
+		for name in managers.request_manager.current.shared_variables:
+			yield variant(string(unicode(name)))
+
+
 class v_request(generic):
 
 	def __init__(self):
@@ -186,6 +205,7 @@ class v_request(generic):
 		self._files=v_filescollection()
 		self._servervariables=v_servervariablescollection()
 		self._parameters=v_parameterscollection()
+		self._sharedvariables=v_sharedvariablescollection()
 
 	def v_cookies(self, name=None, **keywords):
 		if name is None:
@@ -242,10 +262,19 @@ class v_request(generic):
 			return self._servervariables(name, **keywords)
 
 	def v_parameters(self, index=None, **keywords):
-		if name is None:
+		if index is None:
 			if "let" in keywords or "set" in keywords:
 				raise errors.object_has_no_property("parameters")
 			else:
 				return self._parameters
 		else:
 			return self._parameters(index, **keywords)
+
+	def v_sharedvariables(self, name=None, **keywords):
+		if name is None:
+			if "let" in keywords or "set" in keywords:
+				raise errors.object_has_no_property("sharedvariables")
+			else:
+				return self._sharedvariables
+		else:
+			return self._sharedvariables(name, **keywords)
