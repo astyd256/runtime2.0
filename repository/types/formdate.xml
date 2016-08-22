@@ -1,0 +1,1720 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>9173329e-7000-1d18-f4c8-93a35421c8cf</ID>
+		<Name>formdate</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_formdate</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.59.6200</Version>
+		<Category>Form</Category>
+		<InterfaceType>1</InterfaceType>
+		<Icon>#Res(69700edb-2c43-5f3b-b3b3-170c441abb1d)</Icon>
+		<EditorIcon>#Res(7ccbdd01-eedc-c1fa-e900-170c6d52eb78)</EditorIcon>
+		<StructureIcon>#Res(6b65199b-1b73-c11d-c313-170c974397ae)</StructureIcon>
+		<Dynamic>1</Dynamic>
+		<Moveable>1</Moveable>
+		<Resizable>3</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>1</Container>
+		<Containers>form, password, container</Containers>
+		<Handlers>set_attr</Handlers>
+		<Languages>en_US, ru_RU, fr_FR</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>zindex</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>top</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>left</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>width</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue>130</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>height</Name>
+			<DisplayName>#Lang(107)</DisplayName>
+			<Description>#Lang(207)</Description>
+			<DefaultValue>22</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>inputmode</Name>
+			<DisplayName>#Lang(108)</DisplayName>
+			<Description>#Lang(208)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(403)|0)|(#Lang(404)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>mode</Name>
+			<DisplayName>#Lang(109)</DisplayName>
+			<Description>#Lang(209)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[012]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(405)|2)|(#Lang(406)|0)|(#Lang(407)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>regional</Name>
+			<DisplayName>#Lang(111)</DisplayName>
+			<Description>#Lang(211)</Description>
+			<DefaultValue>vdom</DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(311)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(408)|vdom)|(#Lang(409)|bg)|(#Lang(411)|en)|(#Lang(412)|fr)|(#Lang(413)|de)|(#Lang(414)|ru))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>value</Name>
+			<DisplayName>#Lang(112)</DisplayName>
+			<Description>#Lang(212)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(312)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(500)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>autocomplete</Name>
+			<DisplayName>#Lang(113)</DisplayName>
+			<Description>#Lang(213)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(415)|0)|(#Lang(416)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>tabindex</Name>
+			<DisplayName>#Lang(114)</DisplayName>
+			<Description>#Lang(214)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>showbuttonpanel</Name>
+			<DisplayName>#Lang(115)</DisplayName>
+			<Description>#Lang(215)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(315)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(417)|0)|(#Lang(418)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>classname</Name>
+			<DisplayName>#Lang(116)</DisplayName>
+			<Description>#Lang(216)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(316)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(50)</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">Form date</Sentence>
+			<Sentence ID="002">The Form date type produces an object used as a form date input field. It can be contained only in the Form, Password, and Container objects.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Top</Sentence>
+			<Sentence ID="105">Left</Sentence>
+			<Sentence ID="106">Width</Sentence>
+			<Sentence ID="107">Height</Sentence>
+			<Sentence ID="108">Input mode</Sentence>
+			<Sentence ID="109">Mode</Sentence>
+			<Sentence ID="111">Regional</Sentence>
+			<Sentence ID="112">Value</Sentence>
+			<Sentence ID="113">Autocomplete</Sentence>
+			<Sentence ID="114">TabIndex</Sentence>
+			<Sentence ID="115">Show buttons panel</Sentence>
+			<Sentence ID="116">CSS Class</Sentence>
+			<Sentence ID="201">Order of rendering the object on the page</Sentence>
+			<Sentence ID="202">Visibility of the object</Sentence>
+			<Sentence ID="203">Position in visual hierarchy of objects</Sentence>
+			<Sentence ID="204">Spacing between the top edge of the container and the object in pixels</Sentence>
+			<Sentence ID="205">Spacing between the left edge of the container and the object in pixels</Sentence>
+			<Sentence ID="206">Width of the object in pixels</Sentence>
+			<Sentence ID="207">Height of the object in pixels</Sentence>
+			<Sentence ID="208">Define the input mode</Sentence>
+			<Sentence ID="209">Define the display mode</Sentence>
+			<Sentence ID="211">Define the regional settings</Sentence>
+			<Sentence ID="212">Text value of the object</Sentence>
+			<Sentence ID="213">Define if the autocomplete option is on or off</Sentence>
+			<Sentence ID="214">Index number of switching the elements on pressing the tab key</Sentence>
+			<Sentence ID="215"></Sentence>
+			<Sentence ID="216">Names of CSS classes</Sentence>
+			<Sentence ID="301">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="302">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="303">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="304">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="305">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="306">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="307">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="308">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="309">Incorrect value, must be either 0, 1 or 2</Sentence>
+			<Sentence ID="311">Incorrect value</Sentence>
+			<Sentence ID="312">Incorrect value</Sentence>
+			<Sentence ID="313">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="314">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="315">Incorrect value, must be either 0 or 1</Sentence>
+			<Sentence ID="316">Incorrect value</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="403">Normal</Sentence>
+			<Sentence ID="404">Date</Sentence>
+			<Sentence ID="405">Disabled</Sentence>
+			<Sentence ID="406">Normal</Sentence>
+			<Sentence ID="407">Read only</Sentence>
+			<Sentence ID="408">default</Sentence>
+			<Sentence ID="409">Bulgarian</Sentence>
+			<Sentence ID="411">English</Sentence>
+			<Sentence ID="412">French</Sentence>
+			<Sentence ID="413">German</Sentence>
+			<Sentence ID="414">Russian</Sentence>
+			<Sentence ID="415">Off</Sentence>
+			<Sentence ID="416">On</Sentence>
+			<Sentence ID="417">No</Sentence>
+			<Sentence ID="418">Yes</Sentence>
+			<Sentence ID="501">Hide the object</Sentence>
+			<Sentence ID="502">Move the object to a new position</Sentence>
+			<Sentence ID="503">Set focus on the object</Sentence>
+			<Sentence ID="504">Set new CSS style of the object</Sentence>
+			<Sentence ID="505">Set new text value</Sentence>
+			<Sentence ID="506">Show the object</Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516"></Sentence>
+			<Sentence ID="601">Hide</Sentence>
+			<Sentence ID="602">moveTo</Sentence>
+			<Sentence ID="603">setFocus</Sentence>
+			<Sentence ID="604">setStyle</Sentence>
+			<Sentence ID="605">setValue</Sentence>
+			<Sentence ID="606">Show</Sentence>
+			<Sentence ID="701">Fade</Sentence>
+			<Sentence ID="702">newX</Sentence>
+			<Sentence ID="703">newY</Sentence>
+			<Sentence ID="704">Effect</Sentence>
+			<Sentence ID="705">cssStyleValue</Sentence>
+			<Sentence ID="706">Value</Sentence>
+			<Sentence ID="707">Fade</Sentence>
+			<Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="802">X-coordinate of the new position relative to the left upper corner of the container</Sentence>
+			<Sentence ID="803">Y-coordinate of the new position relative to the left upper corner of the container</Sentence>
+			<Sentence ID="804">Visual effect of moving, time is indicated in milliseconds</Sentence>
+			<Sentence ID="805">CSS style value</Sentence>
+			<Sentence ID="806">New text value</Sentence>
+			<Sentence ID="807">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="901">Current X-value</Sentence>
+			<Sentence ID="902">Current Y-value</Sentence>
+			<Sentence ID="903">Current X-value</Sentence>
+			<Sentence ID="904">Current Y-value</Sentence>
+			<Sentence ID="905">Current X-value</Sentence>
+			<Sentence ID="906">Current Y-value</Sentence>
+			<Sentence ID="907">Current X-value</Sentence>
+			<Sentence ID="908">Current Y-value</Sentence>
+			<Sentence ID="909">Current X-value</Sentence>
+			<Sentence ID="911">Current Y-value</Sentence>
+			<Sentence ID="912">Current X-value</Sentence>
+			<Sentence ID="913">Current Y-value</Sentence>
+			<Sentence ID="914">Current X-value</Sentence>
+			<Sentence ID="915">Current Y-value</Sentence>
+			<Sentence ID="916">Current X-value</Sentence>
+			<Sentence ID="917">Current Y-value</Sentence>
+			<Sentence ID="918">Changed text</Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">Form Date</Sentence>
+			<Sentence ID="002">Form date input field</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hiérarchie</Sentence>
+			<Sentence ID="102">Visibilité</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Haut</Sentence>
+			<Sentence ID="105">Gauche</Sentence>
+			<Sentence ID="106">Largeur</Sentence>
+			<Sentence ID="107">Hauteur</Sentence>
+			<Sentence ID="108">Multiligne</Sentence>
+			<Sentence ID="109">Mode</Sentence>
+			<Sentence ID="111">Regional</Sentence>
+			<Sentence ID="112">Valeur</Sentence>
+			<Sentence ID="113">Autocomplete</Sentence>
+			<Sentence ID="114">TabIndex</Sentence>
+			<Sentence ID="115"></Sentence>
+			<Sentence ID="116">Class</Sentence>
+			<Sentence ID="201">Hiérarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="202">Afficher ou cacher l&apos;objet</Sentence>
+			<Sentence ID="203">Niveau de superposition de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="204">Distance depuis le bord haut de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="205">Distance depuis le bord gauche de l&apos;objet parent en pixels</Sentence>
+			<Sentence ID="206">Largeur de l&apos;objet en pixels</Sentence>
+			<Sentence ID="207">Hauteur de l&apos;objet en pixels</Sentence>
+			<Sentence ID="208">Multiligne</Sentence>
+			<Sentence ID="209">Display mode</Sentence>
+			<Sentence ID="211">Regional settings</Sentence>
+			<Sentence ID="212">Texte dans le champs</Sentence>
+			<Sentence ID="213">Autocomplete option</Sentence>
+			<Sentence ID="214">Tab index of the object on the page</Sentence>
+			<Sentence ID="215"></Sentence>
+			<Sentence ID="216">CSS class name</Sentence>
+			<Sentence ID="301">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="302">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="303">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="304">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="305">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="306">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="307">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="308">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="309">Incorrect value, must be 0 or 1 or 2</Sentence>
+			<Sentence ID="311">Incorrect value</Sentence>
+			<Sentence ID="312">Incorrect value</Sentence>
+			<Sentence ID="313">Incorrect value</Sentence>
+			<Sentence ID="314">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="315">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+			<Sentence ID="316">Incorrect value</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="403">ligne simple</Sentence>
+			<Sentence ID="404">Multiligne</Sentence>
+			<Sentence ID="405">Disabled</Sentence>
+			<Sentence ID="406">Normal</Sentence>
+			<Sentence ID="407">Read only</Sentence>
+			<Sentence ID="408">default</Sentence>
+			<Sentence ID="409">Bulgarian</Sentence>
+			<Sentence ID="411">English</Sentence>
+			<Sentence ID="412">French</Sentence>
+			<Sentence ID="413">German</Sentence>
+			<Sentence ID="414">Russian</Sentence>
+			<Sentence ID="415">Off</Sentence>
+			<Sentence ID="416">On</Sentence>
+			<Sentence ID="417"></Sentence>
+			<Sentence ID="418"></Sentence>
+			<Sentence ID="501">Hide the object</Sentence>
+			<Sentence ID="502">Move object to selected point</Sentence>
+			<Sentence ID="503">Set focus to the object</Sentence>
+			<Sentence ID="504">Set new CSS style</Sentence>
+			<Sentence ID="505">Set new text</Sentence>
+			<Sentence ID="506">Show the object</Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516"></Sentence>
+			<Sentence ID="601">Hide</Sentence>
+			<Sentence ID="602">moveTo</Sentence>
+			<Sentence ID="603">setFocus</Sentence>
+			<Sentence ID="604">setStyle</Sentence>
+			<Sentence ID="605">setValue</Sentence>
+			<Sentence ID="606">Show</Sentence>
+			<Sentence ID="701">Fade</Sentence>
+			<Sentence ID="702">newX</Sentence>
+			<Sentence ID="703">newY</Sentence>
+			<Sentence ID="704">Effect</Sentence>
+			<Sentence ID="705">cssStyleValue</Sentence>
+			<Sentence ID="706">Value</Sentence>
+			<Sentence ID="707">Fade</Sentence>
+			<Sentence ID="801">Fade time</Sentence>
+			<Sentence ID="802">X-coordinate of new point</Sentence>
+			<Sentence ID="803">Y-coordinate of new point</Sentence>
+			<Sentence ID="804">Visual effect by moving</Sentence>
+			<Sentence ID="805">New CSS style value</Sentence>
+			<Sentence ID="806">New text</Sentence>
+			<Sentence ID="807">Time of appearance</Sentence>
+			<Sentence ID="901">Current X-value</Sentence>
+			<Sentence ID="902">Current Y-value</Sentence>
+			<Sentence ID="903">Current X-value</Sentence>
+			<Sentence ID="904">Current Y-value</Sentence>
+			<Sentence ID="905">Current X-value</Sentence>
+			<Sentence ID="906">Current Y-value</Sentence>
+			<Sentence ID="907">Current X-value</Sentence>
+			<Sentence ID="908">Current Y-value</Sentence>
+			<Sentence ID="909">Current X-value</Sentence>
+			<Sentence ID="911">Current Y-value</Sentence>
+			<Sentence ID="912">Current X-value</Sentence>
+			<Sentence ID="913">Current Y-value</Sentence>
+			<Sentence ID="914">Current X-value</Sentence>
+			<Sentence ID="915">Current Y-value</Sentence>
+			<Sentence ID="916">Current X-value</Sentence>
+			<Sentence ID="917">Current Y-value</Sentence>
+			<Sentence ID="918">Changed text</Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">Поле ввода даты</Sentence>
+			<Sentence ID="002">Добавление поля ввода даты</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Иерархия</Sentence>
+			<Sentence ID="102">Отображение</Sentence>
+			<Sentence ID="103">Позиция</Sentence>
+			<Sentence ID="104">Сверху</Sentence>
+			<Sentence ID="105">Слева</Sentence>
+			<Sentence ID="106">Ширина</Sentence>
+			<Sentence ID="107">Высота</Sentence>
+			<Sentence ID="108">Режим ввода</Sentence>
+			<Sentence ID="109">Режим</Sentence>
+			<Sentence ID="111">Регион</Sentence>
+			<Sentence ID="112">Значение</Sentence>
+			<Sentence ID="113">Автозаполнение</Sentence>
+			<Sentence ID="114">Индекс табуляции</Sentence>
+			<Sentence ID="115"></Sentence>
+			<Sentence ID="116">Класс CSS</Sentence>
+			<Sentence ID="201">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
+			<Sentence ID="202">Режим отображения объектов</Sentence>
+			<Sentence ID="203">Положение в визуальной иерархии объектов</Sentence>
+			<Sentence ID="204">Расстояние от верхней границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="205">Расстояние от левой границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="206">Ширина объекта в пикселях</Sentence>
+			<Sentence ID="207">Высота объекта в пикселях</Sentence>
+			<Sentence ID="208">Однострочный (передается с формой) или многострочный текст</Sentence>
+			<Sentence ID="209">Режим ввода текста</Sentence>
+			<Sentence ID="211">Региональные настройки</Sentence>
+			<Sentence ID="212">Отображаемый текст</Sentence>
+			<Sentence ID="213">Режим автозаполнения</Sentence>
+			<Sentence ID="214">Индекс табуляции объекта на странице</Sentence>
+			<Sentence ID="215"></Sentence>
+			<Sentence ID="216">Имя класса CSS</Sentence>
+			<Sentence ID="301">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="302">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="303">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="304">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="305">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="306">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="307">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="308">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="309">Неправильное значение, дожен быть указан 0, 1 или 2</Sentence>
+			<Sentence ID="311">Неправильное значение</Sentence>
+			<Sentence ID="312">Неправильное значение</Sentence>
+			<Sentence ID="313">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="314">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="315">Неправильное значение, должен быть указан 0 или 1</Sentence>
+			<Sentence ID="316">Неправильное значение</Sentence>
+			<Sentence ID="401">Не отображать</Sentence>
+			<Sentence ID="402">Отображать</Sentence>
+			<Sentence ID="403">Однострочный</Sentence>
+			<Sentence ID="404">Многострочный</Sentence>
+			<Sentence ID="405">Недоступно</Sentence>
+			<Sentence ID="406">Нормальный</Sentence>
+			<Sentence ID="407">Только чтение</Sentence>
+			<Sentence ID="408">По умолчанию</Sentence>
+			<Sentence ID="409">Болгарский</Sentence>
+			<Sentence ID="411">Английский</Sentence>
+			<Sentence ID="412">Французский</Sentence>
+			<Sentence ID="413">Немецкий</Sentence>
+			<Sentence ID="414">Русский</Sentence>
+			<Sentence ID="415">Отключено</Sentence>
+			<Sentence ID="416">Включено</Sentence>
+			<Sentence ID="417"></Sentence>
+			<Sentence ID="418"></Sentence>
+			<Sentence ID="501">Скрыть объект</Sentence>
+			<Sentence ID="502">Сдвинуть объект в заданную точку</Sentence>
+			<Sentence ID="503">Установить фокус на объекте</Sentence>
+			<Sentence ID="504">Установить новый стиль CSS</Sentence>
+			<Sentence ID="505">Установить новый текст</Sentence>
+			<Sentence ID="506">Показать объект</Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516"></Sentence>
+			<Sentence ID="601">Скрыть</Sentence>
+			<Sentence ID="602">Сдвинуть</Sentence>
+			<Sentence ID="603">Установить фокус</Sentence>
+			<Sentence ID="604">Установить стиль</Sentence>
+			<Sentence ID="605">Установить текст</Sentence>
+			<Sentence ID="606">Показать</Sentence>
+			<Sentence ID="701">Исчезновение</Sentence>
+			<Sentence ID="702">Координата по оси X</Sentence>
+			<Sentence ID="703">Координата по оси Y</Sentence>
+			<Sentence ID="704">Эффект</Sentence>
+			<Sentence ID="705">Стиль</Sentence>
+			<Sentence ID="706">Текст</Sentence>
+			<Sentence ID="707">Появление</Sentence>
+			<Sentence ID="801">Время исчезновения в миллисекундах</Sentence>
+			<Sentence ID="802">Координата новой точки по оси X</Sentence>
+			<Sentence ID="803">Координата новой точки по оси Y</Sentence>
+			<Sentence ID="804">Визуальный эффект при сдвиге</Sentence>
+			<Sentence ID="805">Новое значение стиля CSS</Sentence>
+			<Sentence ID="806">Новый текст</Sentence>
+			<Sentence ID="807">Время появления в миллисекундах</Sentence>
+			<Sentence ID="901">Текущее значение X</Sentence>
+			<Sentence ID="902">Текущее значение Y</Sentence>
+			<Sentence ID="903">Текущее значение X</Sentence>
+			<Sentence ID="904">Текущее значение Y</Sentence>
+			<Sentence ID="905">Текущее значение X</Sentence>
+			<Sentence ID="906">Текущее значение Y</Sentence>
+			<Sentence ID="907">Текущее значение X</Sentence>
+			<Sentence ID="908">Текущее значение Y</Sentence>
+			<Sentence ID="909">Текущее значение X</Sentence>
+			<Sentence ID="911">Текущее значение Y</Sentence>
+			<Sentence ID="912">Текущее значение X</Sentence>
+			<Sentence ID="913">Текущее значение Y</Sentence>
+			<Sentence ID="914">Текущее значение X</Sentence>
+			<Sentence ID="915">Текущее значение Y</Sentence>
+			<Sentence ID="916">Текущее значение X</Sentence>
+			<Sentence ID="917">Текущее значение Y</Sentence>
+			<Sentence ID="918">Измененный текст</Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="0f94d563-04ee-0283-2138-62c68af01145" Type="png" Name="calendar">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAABGdBTUEAAK/INwWK6QAAABl0RVh0
+			U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAI0SURBVHjajFLPTxNBFJ7ZnV3bLbSUQjdA
+			aUtBUA9ENF6IejDxpPEP9V8g4UKM8VcQYwQElBZKu+u67HZ3Zmdnd2YcrPHgQf3evGQO7+V973sf
+			lFKCcfwT8CrQ7x/4P1w1vHvxKgyDPMuBaeRcZhktlYoAwhhHk2WLpzIII72o2bP1+5sPEU7YF1rV
+			rboQMEtpKrhERtdPUg4EmCN+DqShm/o3jzxrzAMgkAQo0Rbr1QKmMoUyVi+RIy5ICkIiCBVqSZVB
+			LNpH/uM7AGlQTJlRrQCTmM6VkeLl6dnNObPr0KmWEeDMG7GZinXY9cuGB0BLNcjVeX5jqVAqsrZd
+			ZLnoOWy9U9rZZxsdqx+Dcye6d73yfGuIYkcqldTEgZcKRA57YURyR7Fn2Sgv4IM9fOyKs4vMWtxK
+			nnz6fL46zZSUagcwUdTWFqyIsI5t1cqWG6adpqWfjkDzrllptd/v0HbB6S+IIPwpqwSci4CAoU+q
+			E+bwkkUYXyYV7WzAzXknECaFdARO+9+bBT6+g/Rj2nMilqY9N4linGTgqEcMZLc+bBuUD2fX0wFG
+			UOi6DsaUZsvmxvJkJkTDLuG00nfxUsN6nT2izaeCwbxPluxS76wmE/fXpYce3t4dvNw7ses1x4sE
+			zw9O6vvHXwftBfcS5yzpzjTevN19sKYrAyGka9dQPux+nNYi4jiTkqvRuX+xUpVaFNka1y1NYndz
+			Bdy+taxsB4WyBIRXnv27UyEYl/y79A/8EGAA881LnyS5F0UAAAAASUVORK5CYII=
+		</Resource>
+		<Resource ID="69700edb-2c43-5f3b-b3b3-170c441abb1d" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOkI2NzFDMEU5MUZERjExRTE5NkEyRkE3OTM5RkVDQTExIiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOkI2NzFDMEVBMUZERjExRTE5NkEyRkE3OTM5RkVDQTExIj4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QjY3MUMwRTcxRkRGMTFFMTk2QTJG
+			QTc5MzlGRUNBMTEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QjY3MUMwRTgxRkRGMTFFMTk2
+			QTJGQTc5MzlGRUNBMTEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			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
+		</Resource>
+		<Resource ID="6b65199b-1b73-c11d-c313-170c974397ae" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjFEODI4NjQ3MUZFNDExRTFBRUE5QjQ2MjgwNjYyREM2IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjFEODI4NjQ4MUZFNDExRTFBRUE5QjQ2MjgwNjYyREM2Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MUQ4Mjg2NDUxRkU0MTFFMUFFQTlC
+			NDYyODA2NjJEQzYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MUQ4Mjg2NDYxRkU0MTFFMUFF
+			QTlCNDYyODA2NjJEQzYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz569zTJAAACN0lEQVR42jxSPWgUURB+b2+Nub+ch8V5FxRE
+			CTYqEpEjRQjRSsUiiiCI2IhEBSOExM4iSqzSmUZtVJQQxVMRFImKxbWW5qJimhMMKrldcmZ358eZ
+			3dPh7ey8ed988/OeXXkybZgYIgr/yDIYMZFRYZMIs36ILICg7YYry4ZAAhhCJuyArIhj/kcgaAAE
+			gnHhd1P2miRmUpy1xkl1AqyN0WBUR8zkYrv1j8mqclKKlmjraEJCDSAwUidrfvuzDXGNWrKmIStu
+			Uk8s8RGybvWQjJtAFYFiWhBvgu5AE0sNYoU5QCRL0rY8f/LKpcND1aND1fmH9wXx4d3CyMGB44cG
+			Rs+cWGo0ACmK0FF60tDm9+be/gPP3tZHTp2+d3t2aXGxOjg897p+5/GrNd9/dHc2AAoAXdChWyTe
+			vrNv244+yZvJ9ojL9zxAKZpXW6uy3VwqhwDlni5X6eP2khJ933/zsrZ73/5de/pDwGtj55a/NDK5
+			/PCxk+X8hi35jfbrr0D7lraM8XxvavKy8E3cmOlO5+IM5PmtmxMXXMc+r9VkoK7Saw8s3FNXx7K5
+			/Pj1GekviFAEiFNd3YWe/Hp7LUIj49GSWC/APJ178O1zQ+jPHhkUPT5962P9/cKLebErvb3nRy8G
+			Mk9k++lHW0qXpuV2hE+4wwgjkL8IVzaltxazoEckGUJkF7nzMrV79So6gVeKmUoxG8irIw4VLafs
+			JjeqI5KnIx/oKAVdKmRKhfQ6dIgFGpHqvwIMAGrK10sYuXdaAAAAAElFTkSuQmCC
+		</Resource>
+		<Resource ID="7ccbdd01-eedc-c1fa-e900-170c6d52eb78" Type="jpg" Name="Icon">
+			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
+		</Resource>
+		<Resource ID="aaae709d-2dab-ce1a-35bf-182f195b9336" Type="js" Name="jquery.ui.datepicker.regionals.js">
+			alF1ZXJ5KGZ1bmN0aW9uKCQpewoKJC5kYXRlcGlja2VyLnJlZ2lvbmFsWyd2ZG9tJ109ewpjbG9z
+			ZVRleHQ6ICdEb25lJywKcHJldlRleHQ6ICdQcmV2JywKbmV4dFRleHQ6ICdOZXh0JywKY3VycmVu
+			dFRleHQ6ICdUb2RheScsCm1vbnRoTmFtZXM6IFsnSmFudWFyeScsJ0ZlYnJ1YXJ5JywnTWFyY2gn
+			LCdBcHJpbCcsJ01heScsJ0p1bmUnLCAnSnVseScsJ0F1Z3VzdCcsJ1NlcHRlbWJlcicsJ09jdG9i
+			ZXInLCdOb3ZlbWJlcicsJ0RlY2VtYmVyJ10sCm1vbnRoTmFtZXNTaG9ydDogWydKYW4nLCAnRmVi
+			JywgJ01hcicsICdBcHInLCAnTWF5JywgJ0p1bicsICdKdWwnLCAnQXVnJywgJ1NlcCcsICdPY3Qn
+			LCAnTm92JywgJ0RlYyddLApkYXlOYW1lczogWydTdW5kYXknLCAnTW9uZGF5JywgJ1R1ZXNkYXkn
+			LCAnV2VkbmVzZGF5JywgJ1RodXJzZGF5JywgJ0ZyaWRheScsICdTYXR1cmRheSddLApkYXlOYW1l
+			c1Nob3J0OiBbJ1N1bicsICdNb24nLCAnVHVlJywgJ1dlZCcsICdUaHUnLCAnRnJpJywgJ1NhdCdd
+			LApkYXlOYW1lc01pbjogWydTdScsJ01vJywnVHUnLCdXZScsJ1RoJywnRnInLCdTYSddLAp3ZWVr
+			SGVhZGVyOiAnV2snLApkYXRlRm9ybWF0OiAneXktbW0tZGQnLApmaXJzdERheTogMSwKaXNSVEw6
+			IGZhbHNlLApzaG93TW9udGhBZnRlclllYXI6IGZhbHNlLAp5ZWFyU3VmZml4OiAnJ307CgovKiBB
+			ZnJpa2FhbnMgKi8KJC5kYXRlcGlja2VyLnJlZ2lvbmFsWydhZiddPXsKY2xvc2VUZXh0OiAnU2Vs
+			ZWt0ZWVyJywKcHJldlRleHQ6ICdWb3JpZ2UnLApuZXh0VGV4dDogJ1ZvbGdlbmRlJywKY3VycmVu
+			dFRleHQ6ICdWYW5kYWcnLAptb250aE5hbWVzOiBbJ0phbnVhcmllJywnRmVicnVhcmllJywnTWFh
+			cnQnLCdBcHJpbCcsJ01laScsJ0p1bmllJywnSnVsaWUnLCdBdWd1c3R1cycsJ1NlcHRlbWJlcics
+			J09rdG9iZXInLCdOb3ZlbWJlcicsJ0Rlc2VtYmVyJ10sCm1vbnRoTmFtZXNTaG9ydDogWydKYW4n
+			LCAnRmViJywgJ01ydCcsICdBcHInLCAnTWVpJywgJ0p1bicsJ0p1bCcsICdBdWcnLCAnU2VwJywg
+			J09rdCcsICdOb3YnLCAnRGVzJ10sCmRheU5hbWVzOiBbJ1NvbmRhZycsICdNYWFuZGFnJywgJ0Rp
+			bnNkYWcnLCAnV29lbnNkYWcnLCAnRG9uZGVyZGFnJywgJ1ZyeWRhZycsICdTYXRlcmRhZyddLApk
+			YXlOYW1lc1Nob3J0OiBbJ1NvbicsICdNYWEnLCAnRGluJywgJ1dvZScsICdEb24nLCAnVnJ5Jywg
+			J1NhdCddLApkYXlOYW1lc01pbjogWydTbycsJ01hJywnRGknLCdXbycsJ0RvJywnVnInLCdTYSdd
+			LAp3ZWVrSGVhZGVyOiAnV2snLApkYXRlRm9ybWF0OiAnZGQvbW0veXknLApmaXJzdERheTogMSwK
+			aXNSVEw6IGZhbHNlLApzaG93TW9udGhBZnRlclllYXI6IGZhbHNlLAp5ZWFyU3VmZml4OiAnJ307
+			CgovKiBBcmFiaWMgKi8KJC5kYXRlcGlja2VyLnJlZ2lvbmFsWydhciddPXsKY2xvc2VUZXh0OiAn
+			2KXYutmE2KfZgicsCnByZXZUZXh0OiAnJiN4M2M72KfZhNiz2KfYqNmCJywKbmV4dFRleHQ6ICfY
+			p9mE2KrYp9mE2YomI3gzZTsnLApjdXJyZW50VGV4dDogJ9in2YTZitmI2YUnLAptb250aE5hbWVz
+			OiBbJ9mD2KfZhtmI2YYg2KfZhNir2KfZhtmKJywgJ9i02KjYp9i3JywgJ9ii2LDYp9ixJywgJ9mG
+			2YrYs9in2YYnLCAn2KLYsNin2LEnLCAn2K3YstmK2LHYp9mGJywn2KrZhdmI2LInLCAn2KLYqCcs
+			ICfYo9mK2YTZiNmEJywJJ9iq2LTYsdmK2YYg2KfZhNij2YjZhCcsICfYqti02LHZitmGINin2YTY
+			q9in2YbZiicsICfZg9in2YbZiNmGINin2YTYo9mI2YQnXSwKbW9udGhOYW1lc1Nob3J0OiBbJzEn
+			LCcyJywnMycsJzQnLCc1JywnNicsJzcnLCc4JywnOScsJzEwJywnMTEnLCcxMiddLApkYXlOYW1l
+			czogWyfYp9mE2LPYqNiqJywgJ9in2YTYo9it2K8nLCAn2KfZhNin2KvZhtmK2YYnLCAn2KfZhNir
+			2YTYp9ir2KfYoScsICfYp9mE2KPYsdio2LnYp9ihJywgJ9in2YTYrtmF2YrYsycsICfYp9mE2KzZ
+			hdi52KknXSwKZGF5TmFtZXNTaG9ydDogWyfYs9io2KonLCAn2KPYrdivJywgJ9in2KvZhtmK2YYn
+			LCAn2KvZhNin2KvYp9ihJywgJ9ij2LHYqNi52KfYoScsICfYrtmF2YrYsycsICfYrNmF2LnYqSdd
+			LApkYXlOYW1lc01pbjogWyfYs9io2KonLCAn2KPYrdivJywgJ9in2KvZhtmK2YYnLCAn2KvZhNin
+			2KvYp9ihJywgJ9ij2LHYqNi52KfYoScsICfYrtmF2YrYsycsICfYrNmF2LnYqSddLAp3ZWVrSGVh
+			ZGVyOiAn2KPYs9io2YjYuScsCmRhdGVGb3JtYXQ6ICdkZC9tbS95eScsCmZpcnN0RGF5OiAwLApp
+			c1JUTDogdHJ1ZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVhclN1ZmZpeDogJyd9OwoK
+			LyogQXplcmJhaWphbmkgKi8KJC5kYXRlcGlja2VyLnJlZ2lvbmFsWydheiddPXsKY2xvc2VUZXh0
+			OiAnQmHEn2xhJywKcHJldlRleHQ6ICcmI3gzYztHZXJpJywKbmV4dFRleHQ6ICfEsHLJmWxpJiN4
+			M2U7JywKY3VycmVudFRleHQ6ICdCdWfDvG4nLAptb250aE5hbWVzOiBbJ1lhbnZhcicsJ0ZldnJh
+			bCcsJ01hcnQnLCdBcHJlbCcsJ01heScsJ8SweXVuJywnxLB5dWwnLCdBdnF1c3QnLCdTZW50eWFi
+			cicsJ09rdHlhYnInLCdOb3lhYnInLCdEZWthYnInXSwKbW9udGhOYW1lc1Nob3J0OiBbJ1lhbics
+			J0ZldicsJ01hcicsJ0FwcicsJ01heScsJ8SweXVuJywnxLB5dWwnLCdBdnEnLCdTZW4nLCdPa3Qn
+			LCdOb3knLCdEZWsnXSwKZGF5TmFtZXM6IFsnQmF6YXInLCdCYXphciBlcnTJmXNpJywnw4fJmXLF
+			n8mZbmLJmSBheMWfYW3EsScsJ8OHyZlyxZ/JmW5iyZknLCdDw7xtyZkgYXjFn2FtxLEnLCdDw7xt
+			yZknLCfFnsmZbmLJmSddLApkYXlOYW1lc1Nob3J0OiBbJ0InLCdCZScsJ8OHYScsJ8OHJywnQ2En
+			LCdDJywnxZ4nXSwKZGF5TmFtZXNNaW46IFsnQicsJ0InLCfDhycsJ9ChJywnw4cnLCdDJywnxZ4n
+			XSwKd2Vla0hlYWRlcjogJ0hmJywKZGF0ZUZvcm1hdDogJ2RkLm1tLnl5JywKZmlyc3REYXk6IDEs
+			CmlzUlRMOiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVhclN1ZmZpeDogJyd9
+			OwoKLyogQnVsZ2FyaWFuICovCiQuZGF0ZXBpY2tlci5yZWdpb25hbFsnYmcnXT17CmNsb3NlVGV4
+			dDogJ9C30LDRgtCy0L7RgNC4JywKcHJldlRleHQ6ICcmI3gzYzvQvdCw0LfQsNC0JywKbmV4dFRl
+			eHQ6ICfQvdCw0L/RgNC10LQmI3gzZTsnLApuZXh0QmlnVGV4dDogJyYjeDNlOyYjeDNlOycsCmN1
+			cnJlbnRUZXh0OiAn0LTQvdC10YEnLAptb250aE5hbWVzOiBbJ9Cv0L3Rg9Cw0YDQuCcsJ9Ck0LXQ
+			stGA0YPQsNGA0LgnLCfQnNCw0YDRgicsJ9CQ0L/RgNC40LsnLCfQnNCw0LknLCfQrtC90LgnLCfQ
+			rtC70LgnLCfQkNCy0LPRg9GB0YInLCfQodC10L/RgtC10LzQstGA0LgnLCfQntC60YLQvtC80LLR
+			gNC4Jywn0J3QvtC10LzQstGA0LgnLCfQlNC10LrQtdC80LLRgNC4J10sCm1vbnRoTmFtZXNTaG9y
+			dDogWyfQr9C90YMnLCfQpNC10LInLCfQnNCw0YAnLCfQkNC/0YAnLCfQnNCw0LknLCfQrtC90Lgn
+			LCfQrtC70LgnLCfQkNCy0LMnLCfQodC10L8nLCfQntC60YInLCfQndC+0LInLCfQlNC10LonXSwK
+			ZGF5TmFtZXM6IFsn0J3QtdC00LXQu9GPJywn0J/QvtC90LXQtNC10LvQvdC40LonLCfQktGC0L7R
+			gNC90LjQuicsJ9Ch0YDRj9C00LAnLCfQp9C10YLQstGK0YDRgtGK0LonLCfQn9C10YLRitC6Jywn
+			0KHRitCx0L7RgtCwJ10sCmRheU5hbWVzU2hvcnQ6IFsn0J3QtdC0Jywn0J/QvtC9Jywn0JLRgtC+
+			Jywn0KHRgNGPJywn0KfQtdGCJywn0J/QtdGCJywn0KHRitCxJ10sCmRheU5hbWVzTWluOiBbJ9Cd
+			0LUnLCfQn9C+Jywn0JLRgicsJ9Ch0YAnLCfQp9C1Jywn0J/QtScsJ9Ch0YonXSwKd2Vla0hlYWRl
+			cjogJ1drJywKZGF0ZUZvcm1hdDogJ2RkLm1tLnl5JywKZmlyc3REYXk6IDEsCmlzUlRMOiBmYWxz
+			ZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVhclN1ZmZpeDogJyd9OwoKLyogQm9zbmlh
+			biAqLwokLmRhdGVwaWNrZXIucmVnaW9uYWxbJ2JzJ109ewpjbG9zZVRleHQ6ICdaYXR2b3JpJywK
+			cHJldlRleHQ6ICcmI3gzYzsnLApuZXh0VGV4dDogJyYjeDNlOycsCmN1cnJlbnRUZXh0OiAnRGFu
+			YXMnLAptb250aE5hbWVzOiBbJ0phbnVhcicsJ0ZlYnJ1YXInLCdNYXJ0JywnQXByaWwnLCdNYWon
+			LCdKdW5pJywnSnVsaScsJ0F1Z3VzdCcsJ1NlcHRlbWJhcicsJ09rdG9iYXInLCdOb3ZlbWJhcics
+			J0RlY2VtYmFyJ10sCm1vbnRoTmFtZXNTaG9ydDogWydKYW4nLCdGZWInLCdNYXInLCdBcHInLCdN
+			YWonLCdKdW4nLCdKdWwnLCdBdWcnLCdTZXAnLCdPa3QnLCdOb3YnLCdEZWMnXSwKZGF5TmFtZXM6
+			IFsnTmVkZWxqYScsJ1BvbmVkZWxqYWsnLCdVdG9yYWsnLCdTcmlqZWRhJywnxIxldHZydGFrJywn
+			UGV0YWsnLCdTdWJvdGEnXSwKZGF5TmFtZXNTaG9ydDogWydOZWQnLCdQb24nLCdVdG8nLCdTcmkn
+			LCfEjGV0JywnUGV0JywnU3ViJ10sCmRheU5hbWVzTWluOiBbJ05lJywnUG8nLCdVdCcsJ1NyJywn
+			xIxlJywnUGUnLCdTdSddLAp3ZWVrSGVhZGVyOiAnV2snLApkYXRlRm9ybWF0OiAnZGQubW0ueXkn
+			LApmaXJzdERheTogMSwKaXNSVEw6IGZhbHNlLApzaG93TW9udGhBZnRlclllYXI6IGZhbHNlLAp5
+			ZWFyU3VmZml4OiAnJ307CgovKiBDYXRhbMOgICovCiQuZGF0ZXBpY2tlci5yZWdpb25hbFsnY2En
+			XT17CmNsb3NlVGV4dDogJ1RhbmNhcicsCnByZXZUZXh0OiAnJiN4M2M7QW50JywKbmV4dFRleHQ6
+			ICdTZWcmI3gzZTsnLApjdXJyZW50VGV4dDogJ0F2dWknLAptb250aE5hbWVzOiBbJ0dlbmVyJywn
+			RmVicmVyJywnTWFyJmNjZWRpbDsnLCdBYnJpbCcsJ01haWcnLCdKdW55JywnSnVsaW9sJywnQWdv
+			c3QnLCdTZXRlbWJyZScsJ09jdHVicmUnLCdOb3ZlbWJyZScsJ0Rlc2VtYnJlJ10sCm1vbnRoTmFt
+			ZXNTaG9ydDogWydHZW4nLCdGZWInLCdNYXInLCdBYnInLCdNYWknLCdKdW4nLCdKdWwnLCdBZ28n
+			LCdTZXQnLCdPY3QnLCdOb3YnLCdEZXMnXSwKZGF5TmFtZXM6IFsnRGl1bWVuZ2UnLCdEaWxsdW5z
+			JywnRGltYXJ0cycsJ0RpbWVjcmVzJywnRGlqb3VzJywnRGl2ZW5kcmVzJywnRGlzc2FidGUnXSwK
+			ZGF5TmFtZXNTaG9ydDogWydEdWcnLCdEbG4nLCdEbXQnLCdEbWMnLCdEanMnLCdEdm4nLCdEc2In
+			XSwKZGF5TmFtZXNNaW46IFsnRGcnLCdEbCcsJ0R0JywnRGMnLCdEaicsJ0R2JywnRHMnXSwKd2Vl
+			a0hlYWRlcjogJ1NtJywKZGF0ZUZvcm1hdDogJ2RkL21tL3l5JywKZmlyc3REYXk6IDEsCmlzUlRM
+			OiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVhclN1ZmZpeDogJyd9OwoKLyog
+			Q3plY2ggKi8KJC5kYXRlcGlja2VyLnJlZ2lvbmFsWydjcyddPXsKY2xvc2VUZXh0OiAnWmF2xZnD
+			rXQnLApwcmV2VGV4dDogJyYjeDNjO0TFmcOtdmUnLApuZXh0VGV4dDogJ1BvemTEm2ppJiN4M2U7
+			JywKY3VycmVudFRleHQ6ICdOeW7DrScsCm1vbnRoTmFtZXM6IFsnbGVkZW4nLCfDum5vcicsJ2LF
+			mWV6ZW4nLCdkdWJlbicsJ2t2xJt0ZW4nLCfEjWVydmVuJywnxI1lcnZlbmVjJywnc3JwZW4nLCd6
+			w6HFmcOtJywnxZnDrWplbicsJ2xpc3RvcGFkJywncHJvc2luZWMnXSwKbW9udGhOYW1lc1Nob3J0
+			OiBbJ2xlZCcsJ8O6bm8nLCdixZllJywnZHViJywna3bEmycsJ8SNZXInLCfEjXZjJywnc3JwJywn
+			esOhxZknLCfFmcOtaicsJ2xpcycsJ3BybyddLApkYXlOYW1lczogWyduZWTEm2xlJywgJ3BvbmTE
+			m2zDrScsICfDunRlcsO9JywgJ3N0xZllZGEnLCAnxI10dnJ0ZWsnLCAncMOhdGVrJywgJ3NvYm90
+			YSddLApkYXlOYW1lc1Nob3J0OiBbJ25lJywgJ3BvJywgJ8O6dCcsICdzdCcsICfEjXQnLCAncMOh
+			JywgJ3NvJ10sCmRheU5hbWVzTWluOiBbJ25lJywncG8nLCfDunQnLCdzdCcsJ8SNdCcsJ3DDoScs
+			J3NvJ10sCndlZWtIZWFkZXI6ICdUw71kJywKZGF0ZUZvcm1hdDogJ2RkLm1tLnl5JywKZmlyc3RE
+			YXk6IDEsCmlzUlRMOiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVhclN1ZmZp
+			eDogJyd9OwoKLyogRGFuaXNoICovCiQuZGF0ZXBpY2tlci5yZWdpb25hbFsnZGEnXT17CmNsb3Nl
+			VGV4dDogJ0x1aycsCnByZXZUZXh0OiAnJiN4M2M7Rm9ycmlnZScsCm5leHRUZXh0OiAnTsOmc3Rl
+			JiN4M2U7JywKY3VycmVudFRleHQ6ICdJZGFnJywKbW9udGhOYW1lczogWydKYW51YXInLCdGZWJy
+			dWFyJywnTWFydHMnLCdBcHJpbCcsJ01haicsJ0p1bmknLCdKdWxpJywnQXVndXN0JywnU2VwdGVt
+			YmVyJywnT2t0b2JlcicsJ05vdmVtYmVyJywnRGVjZW1iZXInXSwKbW9udGhOYW1lc1Nob3J0OiBb
+			J0phbicsJ0ZlYicsJ01hcicsJ0FwcicsJ01haicsJ0p1bicsJ0p1bCcsJ0F1ZycsJ1NlcCcsJ09r
+			dCcsJ05vdicsJ0RlYyddLApkYXlOYW1lczogWydTw7huZGFnJywnTWFuZGFnJywnVGlyc2RhZycs
+			J09uc2RhZycsJ1RvcnNkYWcnLCdGcmVkYWcnLCdMw7hyZGFnJ10sCmRheU5hbWVzU2hvcnQ6IFsn
+			U8O4bicsJ01hbicsJ1RpcicsJ09ucycsJ1RvcicsJ0ZyZScsJ0zDuHInXSwKZGF5TmFtZXNNaW46
+			IFsnU8O4JywnTWEnLCdUaScsJ09uJywnVG8nLCdGcicsJ0zDuCddLAp3ZWVrSGVhZGVyOiAnVWdl
+			JywKZGF0ZUZvcm1hdDogJ2RkLW1tLXl5JywKZmlyc3REYXk6IDEsCmlzUlRMOiBmYWxzZSwKc2hv
+			d01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVhclN1ZmZpeDogJyd9OwoKLyogR3JlZWsgKi8KJC5k
+			YXRlcGlja2VyLnJlZ2lvbmFsWydlbCddPXsKY2xvc2VUZXh0OiAnzprOu861zq/Pg865zrzOvycs
+			CnByZXZUZXh0OiAnzqDPgc6/zrfOs86/z43OvM61zr3Ov8+CJywKbmV4dFRleHQ6ICfOlc+Az4zO
+			vM61zr3Ov8+CJywKY3VycmVudFRleHQ6ICfOpM+Bzq3Ph8+Jzr0gzpzOrs69zrHPgicsCm1vbnRo
+			TmFtZXM6IFsnzpnOsc69zr/Phc6sz4HOuc6/z4InLCfOps61zrLPgc6/z4XOrM+BzrnOv8+CJywn
+			zpzOrM+Bz4TOuc6/z4InLCfOkc+Az4HOr867zrnOv8+CJywnzpzOrM65zr/PgicsJ86Zzr/Pjc69
+			zrnOv8+CJywnzpnOv8+NzrvOuc6/z4InLCfOkc+NzrPOv8+Fz4PPhM6/z4InLCfOo861z4DPhM6t
+			zrzOss+BzrnOv8+CJywnzp/Ous+Ez47Oss+BzrnOv8+CJywnzp3Ov86tzrzOss+BzrnOv8+CJywn
+			zpTOtc66zq3OvM6yz4HOuc6/z4InXSwKbW9udGhOYW1lc1Nob3J0OiBbJ86ZzrHOvScsJ86mzrXO
+			sicsJ86czrHPgScsJ86Rz4DPgScsJ86czrHOuScsJ86Zzr/Phc69JywnzpnOv8+FzrsnLCfOkc+F
+			zrMnLCfOo861z4AnLCfOn866z4QnLCfOnc6/zrUnLCfOlM61zronXSwKZGF5TmFtZXM6IFsnzprP
+			hc+BzrnOsc66zq4nLCfOlM61z4XPhM6tz4HOsScsJ86kz4HOr8+EzrcnLCfOpM61z4TOrM+Bz4TO
+			tycsJ86gzq3OvM+Az4TOtycsJ86gzrHPgc6xz4POus61z4XOricsJ86jzqzOss6yzrHPhM6/J10s
+			CmRheU5hbWVzU2hvcnQ6IFsnzprPhc+BJywnzpTOtc+FJywnzqTPgc65JywnzqTOtc+EJywnzqDO
+			tc68JywnzqDOsc+BJywnzqPOsc6yJ10sCmRheU5hbWVzTWluOiBbJ86az4UnLCfOlM61JywnzqTP
+			gScsJ86kzrUnLCfOoM61JywnzqDOsScsJ86jzrEnXSwKd2Vla0hlYWRlcjogJ86VzrLOtCcsCmRh
+			dGVGb3JtYXQ6ICdkZC9tbS95eScsCmZpcnN0RGF5OiAxLAppc1JUTDogZmFsc2UsCnNob3dNb250
+			aEFmdGVyWWVhcjogZmFsc2UsCnllYXJTdWZmaXg6ICcnfTsKCi8qIEFsYmFuaWFuICovCiQuZGF0
+			ZXBpY2tlci5yZWdpb25hbFsnc3EnXT17CmNsb3NlVGV4dDogJ21ieWxsZScsCnByZXZUZXh0OiAn
+			JiN4M2M7bWJyYXBhJywKbmV4dFRleHQ6ICdQw6tycGFyYSYjeDNlOycsCmN1cnJlbnRUZXh0OiAn
+			c290JywKbW9udGhOYW1lczogWydKYW5hcicsJ1Noa3VydCcsJ01hcnMnLCdQcmlsbCcsJ01haics
+			J1FlcnNob3InLCdLb3JyaWsnLCdHdXNodCcsJ1NodGF0b3InLCdUZXRvcicsJ07Dq250b3InLCdE
+			aGpldG9yJ10sCm1vbnRoTmFtZXNTaG9ydDogWydKYW4nLCdTaGsnLCdNYXInLCdQcmknLCdNYWon
+			LCdRZXInLCdLb3InLCdHdXMnLCdTaHQnLCdUZXQnLCdOw6tuJywnRGhqJ10sCmRheU5hbWVzOiBb
+			J0UgRGllbCcsJ0UgSMOrbsOrJywnRSBNYXJ0w6snLCdFIE3Dq3JrdXLDqycsJ0UgRW5qdGUnLCdF
+			IFByZW10ZScsJ0UgU2h0dW5lJ10sCmRheU5hbWVzU2hvcnQ6IFsnRGknLCdIw6snLCdNYScsJ03D
+			qycsJ0VuJywnUHInLCdTaCddLApkYXlOYW1lc01pbjogWydEaScsJ0jDqycsJ01hJywnTcOrJywn
+			RW4nLCdQcicsJ1NoJ10sCndlZWtIZWFkZXI6ICdKYScsCmRhdGVGb3JtYXQ6ICdkZC5tbS55eScs
+			CmZpcnN0RGF5OiAxLAppc1JUTDogZmFsc2UsCnNob3dNb250aEFmdGVyWWVhcjogZmFsc2UsCnll
+			YXJTdWZmaXg6ICcnfTsKCi8qIFNsb3ZlbmlhbiAqLwokLmRhdGVwaWNrZXIucmVnaW9uYWxbJ3Ns
+			J109ewpjbG9zZVRleHQ6ICdaYXByaScsCnByZXZUZXh0OiAnJmx0O1ByZWomI3gxNjE7bmppJywK
+			bmV4dFRleHQ6ICdOYXNsZWRuamkmZ3Q7JywKY3VycmVudFRleHQ6ICdUcmVudXRuaScsCm1vbnRo
+			TmFtZXM6IFsnSmFudWFyJywnRmVicnVhcicsJ01hcmVjJywnQXByaWwnLCdNYWonLCdKdW5paics
+			J0p1bGlqJywnQXZndXN0JywnU2VwdGVtYmVyJywnT2t0b2JlcicsJ05vdmVtYmVyJywnRGVjZW1i
+			ZXInXSwKbW9udGhOYW1lc1Nob3J0OiBbJ0phbicsJ0ZlYicsJ01hcicsJ0FwcicsJ01haicsJ0p1
+			bicsJ0p1bCcsJ0F2ZycsJ1NlcCcsJ09rdCcsJ05vdicsJ0RlYyddLApkYXlOYW1lczogWydOZWRl
+			bGphJywnUG9uZWRlbGplaycsJ1RvcmVrJywnU3JlZGEnLCcmI3gxMEM7ZXRydGVrJywnUGV0ZWsn
+			LCdTb2JvdGEnXSwKZGF5TmFtZXNTaG9ydDogWydOZWQnLCdQb24nLCdUb3InLCdTcmUnLCcmI3gx
+			MEM7ZXQnLCdQZXQnLCdTb2InXSwKZGF5TmFtZXNNaW46IFsnTmUnLCdQbycsJ1RvJywnU3InLCcm
+			I3gxMEM7ZScsJ1BlJywnU28nXSwKd2Vla0hlYWRlcjogJ1RlZGVuJywKZGF0ZUZvcm1hdDogJ2Rk
+			Lm1tLnl5JywKZmlyc3REYXk6IDEsCmlzUlRMOiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBm
+			YWxzZSwKeWVhclN1ZmZpeDogJyd9OwoKLyogU2xvdmFrICovCiQuZGF0ZXBpY2tlci5yZWdpb25h
+			bFsnc2snXT17CmNsb3NlVGV4dDogJ1phdnJpZcWlJywKcHJldlRleHQ6ICcmI3gzYztQcmVkY2jD
+			oWR6YWrDumNpJywKbmV4dFRleHQ6ICdOYXNsZWR1asO6Y2kmI3gzZTsnLApjdXJyZW50VGV4dDog
+			J0RuZXMnLAptb250aE5hbWVzOiBbJ0phbnXDoXInLCdGZWJydcOhcicsJ01hcmVjJywnQXByw61s
+			JywnTcOhaicsJ0rDum4nLCdKw7psJywnQXVndXN0JywnU2VwdGVtYmVyJywnT2t0w7NiZXInLCdO
+			b3ZlbWJlcicsJ0RlY2VtYmVyJ10sCm1vbnRoTmFtZXNTaG9ydDogWydKYW4nLCdGZWInLCdNYXIn
+			LCdBcHInLCdNw6FqJywnSsO6bicsJ0rDumwnLCdBdWcnLCdTZXAnLCdPa3QnLCdOb3YnLCdEZWMn
+			XSwKZGF5TmFtZXM6IFsnTmVkZWxcJ2EnLCdQb25kZWxvaycsJ1V0b3JvaycsJ1N0cmVkYScsJ8Wg
+			dHZydG9rJywnUGlhdG9rJywnU29ib3RhJ10sCmRheU5hbWVzU2hvcnQ6IFsnTmVkJywnUG9uJywn
+			VXRvJywnU3RyJywnxaB0dicsJ1BpYScsJ1NvYiddLApkYXlOYW1lc01pbjogWydOZScsJ1BvJywn
+			VXQnLCdTdCcsJ8WgdCcsJ1BpYScsJ1NvJ10sCndlZWtIZWFkZXI6ICdUeScsCmRhdGVGb3JtYXQ6
+			ICdkZC5tbS55eScsCmZpcnN0RGF5OiAwLAppc1JUTDogZmFsc2UsCnNob3dNb250aEFmdGVyWWVh
+			cjogZmFsc2UsCnllYXJTdWZmaXg6ICcnfTsKCi8qIFJvbWFuaWFuICovCiQuZGF0ZXBpY2tlci5y
+			ZWdpb25hbFsncm8nXT17CmNsb3NlVGV4dDogJ8OObmNoaWRlJywKcHJldlRleHQ6ICcmbGFxdW87
+			IEx1bmEgcHJlY2VkZW50xIMnLApuZXh0VGV4dDogJ0x1bmEgdXJtxIN0b2FyZSAmcmFxdW87JywK
+			Y3VycmVudFRleHQ6ICdBemknLAptb250aE5hbWVzOiBbJ0lhbnVhcmllJywnRmVicnVhcmllJywn
+			TWFydGllJywnQXByaWxpZScsJ01haScsJ0l1bmllJywnSXVsaWUnLCdBdWd1c3QnLCdTZXB0ZW1i
+			cmllJywnT2N0b21icmllJywnTm9pZW1icmllJywnRGVjZW1icmllJ10sCm1vbnRoTmFtZXNTaG9y
+			dDogWydJYW4nLCAnRmViJywgJ01hcicsICdBcHInLCAnTWFpJywgJ0l1bicsJ0l1bCcsICdBdWcn
+			LCAnU2VwJywgJ09jdCcsICdOb2knLCAnRGVjJ10sCmRheU5hbWVzOiBbJ0R1bWluaWPEgycsICdM
+			dW5pJywgJ01hcsWjaScsICdNaWVyY3VyaScsICdKb2knLCAnVmluZXJpJywgJ1PDom1ixIN0xIMn
+			XSwKZGF5TmFtZXNTaG9ydDogWydEdW0nLCAnTHVuJywgJ01hcicsICdNaWUnLCAnSm9pJywgJ1Zp
+			bicsICdTw6JtJ10sCmRheU5hbWVzTWluOiBbJ0R1JywnTHUnLCdNYScsJ01pJywnSm8nLCdWaScs
+			J1PDoiddLAp3ZWVrSGVhZGVyOiAnU8SDcHQnLApkYXRlRm9ybWF0OiAnZGQubW0ueXknLApmaXJz
+			dERheTogMSwKaXNSVEw6IGZhbHNlLApzaG93TW9udGhBZnRlclllYXI6IGZhbHNlLAp5ZWFyU3Vm
+			Zml4OiAnJ307CgovKiBSdXNzaWFuICovCiQuZGF0ZXBpY2tlci5yZWdpb25hbFsncnUnXT17CmNs
+			b3NlVGV4dDogJ9CX0LDQutGA0YvRgtGMJywKcHJldlRleHQ6ICcmI3gzYzvQn9GA0LXQtCcsCm5l
+			eHRUZXh0OiAn0KHQu9C10LQmI3gzZTsnLApjdXJyZW50VGV4dDogJ9Ch0LXQs9C+0LTQvdGPJywK
+			bW9udGhOYW1lczogWyfQr9C90LLQsNGA0YwnLCfQpNC10LLRgNCw0LvRjCcsJ9Cc0LDRgNGCJywn
+			0JDQv9GA0LXQu9GMJywn0JzQsNC5Jywn0JjRjtC90YwnLCfQmNGO0LvRjCcsJ9CQ0LLQs9GD0YHR
+			gicsJ9Ch0LXQvdGC0Y/QsdGA0YwnLCfQntC60YLRj9Cx0YDRjCcsJ9Cd0L7Rj9Cx0YDRjCcsJ9CU
+			0LXQutCw0LHRgNGMJ10sCm1vbnRoTmFtZXNTaG9ydDogWyfQr9C90LInLCfQpNC10LInLCfQnNCw
+			0YAnLCfQkNC/0YAnLCfQnNCw0LknLCfQmNGO0L0nLCfQmNGO0LsnLCfQkNCy0LMnLCfQodC10L0n
+			LCfQntC60YInLCfQndC+0Y8nLCfQlNC10LonXSwKZGF5TmFtZXM6IFsn0LLQvtGB0LrRgNC10YHQ
+			tdC90YzQtScsJ9C/0L7QvdC10LTQtdC70YzQvdC40LonLCfQstGC0L7RgNC90LjQuicsJ9GB0YDQ
+			tdC00LAnLCfRh9C10YLQstC10YDQsycsJ9C/0Y/RgtC90LjRhtCwJywn0YHRg9Cx0LHQvtGC0LAn
+			XSwKZGF5TmFtZXNTaG9ydDogWyfQstGB0LonLCfQv9C90LQnLCfQstGC0YAnLCfRgdGA0LQnLCfR
+			h9GC0LInLCfQv9GC0L0nLCfRgdCx0YInXSwKZGF5TmFtZXNNaW46IFsn0JLRgScsJ9Cf0L0nLCfQ
+			ktGCJywn0KHRgCcsJ9Cn0YInLCfQn9GCJywn0KHQsSddLAp3ZWVrSGVhZGVyOiAn0J3QtScsCmRh
+			dGVGb3JtYXQ6ICdkZC5tbS55eScsCmZpcnN0RGF5OiAxLAppc1JUTDogZmFsc2UsCnNob3dNb250
+			aEFmdGVyWWVhcjogZmFsc2UsCnllYXJTdWZmaXg6ICcnfTsKCi8qIEdlcm1hbiAqLwokLmRhdGVw
+			aWNrZXIucmVnaW9uYWxbJ2RlJ109ewpjbG9zZVRleHQ6ICdzY2hsaWXDn2VuJywKcHJldlRleHQ6
+			ICcmI3gzYzt6dXLDvGNrJywKbmV4dFRleHQ6ICdWb3ImI3gzZTsnLApjdXJyZW50VGV4dDogJ2hl
+			dXRlJywKbW9udGhOYW1lczogWydKYW51YXInLCdGZWJydWFyJywnTcOkcnonLCdBcHJpbCcsJ01h
+			aScsJ0p1bmknLCdKdWxpJywnQXVndXN0JywnU2VwdGVtYmVyJywnT2t0b2JlcicsJ05vdmVtYmVy
+			JywnRGV6ZW1iZXInXSwKbW9udGhOYW1lc1Nob3J0OiBbJ0phbicsJ0ZlYicsJ03DpHInLCdBcHIn
+			LCdNYWknLCdKdW4nLCdKdWwnLCdBdWcnLCdTZXAnLCdPa3QnLCdOb3YnLCdEZXonXSwKZGF5TmFt
+			ZXM6IFsnU29ubnRhZycsJ01vbnRhZycsJ0RpZW5zdGFnJywnTWl0dHdvY2gnLCdEb25uZXJzdGFn
+			JywnRnJlaXRhZycsJ1NhbXN0YWcnXSwKZGF5TmFtZXNTaG9ydDogWydTbycsJ01vJywnRGknLCdN
+			aScsJ0RvJywnRnInLCdTYSddLApkYXlOYW1lc01pbjogWydTbycsJ01vJywnRGknLCdNaScsJ0Rv
+			JywnRnInLCdTYSddLAp3ZWVrSGVhZGVyOiAnV28nLApkYXRlRm9ybWF0OiAnZGQubW0ueXknLApm
+			aXJzdERheTogMSwKaXNSVEw6IGZhbHNlLApzaG93TW9udGhBZnRlclllYXI6IGZhbHNlLAp5ZWFy
+			U3VmZml4OiAnJ307CgovKiBTd2lzcy1HZXJtYW4gKi8KJC5kYXRlcGlja2VyLnJlZ2lvbmFsWydk
+			ZS1DSCddPXsKY2xvc2VUZXh0OiAnc2NobGllc3NlbicsCnByZXZUZXh0OiAnJiN4M2M7enVyw7xj
+			aycsCm5leHRUZXh0OiAnbsOkY2hzdGVyJiN4M2U7JywKY3VycmVudFRleHQ6ICdoZXV0ZScsCm1v
+			bnRoTmFtZXM6IFsnSmFudWFyJywnRmVicnVhcicsJ03DpHJ6JywnQXByaWwnLCdNYWknLCdKdW5p
+			JywnSnVsaScsJ0F1Z3VzdCcsJ1NlcHRlbWJlcicsJ09rdG9iZXInLCdOb3ZlbWJlcicsJ0RlemVt
+			YmVyJ10sCm1vbnRoTmFtZXNTaG9ydDogWydKYW4nLCdGZWInLCdNw6RyJywnQXByJywnTWFpJywn
+			SnVuJywnSnVsJywnQXVnJywnU2VwJywnT2t0JywnTm92JywnRGV6J10sCmRheU5hbWVzOiBbJ1Nv
+			bm50YWcnLCdNb250YWcnLCdEaWVuc3RhZycsJ01pdHR3b2NoJywnRG9ubmVyc3RhZycsJ0ZyZWl0
+			YWcnLCdTYW1zdGFnJ10sCmRheU5hbWVzU2hvcnQ6IFsnU28nLCdNbycsJ0RpJywnTWknLCdEbycs
+			J0ZyJywnU2EnXSwKZGF5TmFtZXNNaW46IFsnU28nLCdNbycsJ0RpJywnTWknLCdEbycsJ0ZyJywn
+			U2EnXSwKd2Vla0hlYWRlcjogJ1dvJywKZGF0ZUZvcm1hdDogJ2RkLm1tLnl5JywKZmlyc3REYXk6
+			IDEsCmlzUlRMOiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVhclN1ZmZpeDog
+			Jyd9OwoKLyogRW5nbGlzaC9VSyBlbi1HQiAqLwokLmRhdGVwaWNrZXIucmVnaW9uYWxbJ2VuJ109
+			ewpjbG9zZVRleHQ6ICdEb25lJywKcHJldlRleHQ6ICdQcmV2JywKbmV4dFRleHQ6ICdOZXh0JywK
+			Y3VycmVudFRleHQ6ICdUb2RheScsCm1vbnRoTmFtZXM6IFsnSmFudWFyeScsJ0ZlYnJ1YXJ5Jywn
+			TWFyY2gnLCdBcHJpbCcsJ01heScsJ0p1bmUnLCdKdWx5JywnQXVndXN0JywnU2VwdGVtYmVyJywn
+			T2N0b2JlcicsJ05vdmVtYmVyJywnRGVjZW1iZXInXSwKbW9udGhOYW1lc1Nob3J0OiBbJ0phbics
+			ICdGZWInLCAnTWFyJywgJ0FwcicsICdNYXknLCAnSnVuJywnSnVsJywgJ0F1ZycsICdTZXAnLCAn
+			T2N0JywgJ05vdicsICdEZWMnXSwKZGF5TmFtZXM6IFsnU3VuZGF5JywgJ01vbmRheScsICdUdWVz
+			ZGF5JywgJ1dlZG5lc2RheScsICdUaHVyc2RheScsICdGcmlkYXknLCAnU2F0dXJkYXknXSwKZGF5
+			TmFtZXNTaG9ydDogWydTdW4nLCAnTW9uJywgJ1R1ZScsICdXZWQnLCAnVGh1JywgJ0ZyaScsICdT
+			YXQnXSwKZGF5TmFtZXNNaW46IFsnU3UnLCdNbycsJ1R1JywnV2UnLCdUaCcsJ0ZyJywnU2EnXSwK
+			d2Vla0hlYWRlcjogJ1drJywKZGF0ZUZvcm1hdDogJ2RkL21tL3l5JywKZmlyc3REYXk6IDEsCmlz
+			UlRMOiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVhclN1ZmZpeDogJyd9OwoK
+			LyogRXNwZXJhbnRvICovCiQuZGF0ZXBpY2tlci5yZWdpb25hbFsnZW8nXT17CmNsb3NlVGV4dDog
+			J0Zlcm1pJywKcHJldlRleHQ6ICcmbHQ7QW50YScsCm5leHRUZXh0OiAnU2VrdiZndDsnLApjdXJy
+			ZW50VGV4dDogJ051bmEnLAptb250aE5hbWVzOiBbJ0phbnVhcm8nLCdGZWJydWFybycsJ01hcnRv
+			JywnQXByaWxvJywnTWFqbycsJ0p1bmlvJywnSnVsaW8nLCdBxa1ndXN0bycsJ1NlcHRlbWJybycs
+			J09rdG9icm8nLCdOb3ZlbWJybycsJ0RlY2VtYnJvJ10sCm1vbnRoTmFtZXNTaG9ydDogWydKYW4n
+			LCdGZWInLCdNYXInLCdBcHInLCdNYWonLCdKdW4nLCdKdWwnLCdBxa1nJywnU2VwJywnT2t0Jywn
+			Tm92JywnRGVjJ10sCmRheU5hbWVzOiBbJ0RpbWFuxIlvJywnTHVuZG8nLCdNYXJkbycsJ01lcmty
+			ZWRvJywnxLRhxa1kbycsJ1ZlbmRyZWRvJywnU2FiYXRvJ10sCmRheU5hbWVzU2hvcnQ6IFsnRGlt
+			JywnTHVuJywnTWFyJywnTWVyJywnxLRhxa0nLCdWZW4nLCdTYWInXSwKZGF5TmFtZXNNaW46IFsn
+			RGknLCdMdScsJ01hJywnTWUnLCfEtGEnLCdWZScsJ1NhJ10sCndlZWtIZWFkZXI6ICdTYicsCmRh
+			dGVGb3JtYXQ6ICdkZC9tbS95eScsCmZpcnN0RGF5OiAwLAppc1JUTDogZmFsc2UsCnNob3dNb250
+			aEFmdGVyWWVhcjogZmFsc2UsCnllYXJTdWZmaXg6ICcnfTsKCi8qIEVzcGHDsW9sICovCiQuZGF0
+			ZXBpY2tlci5yZWdpb25hbFsnZXMnXT17CmNsb3NlVGV4dDogJ0NlcnJhcicsCnByZXZUZXh0OiAn
+			JiN4M2M7QW50JywKbmV4dFRleHQ6ICdTaWcmI3gzZTsnLApjdXJyZW50VGV4dDogJ0hveScsCm1v
+			bnRoTmFtZXM6IFsnRW5lcm8nLCdGZWJyZXJvJywnTWFyem8nLCdBYnJpbCcsJ01heW8nLCdKdW5p
+			bycsJ0p1bGlvJywnQWdvc3RvJywnU2VwdGllbWJyZScsJ09jdHVicmUnLCdOb3ZpZW1icmUnLCdE
+			aWNpZW1icmUnXSwKbW9udGhOYW1lc1Nob3J0OiBbJ0VuZScsJ0ZlYicsJ01hcicsJ0FicicsJ01h
+			eScsJ0p1bicsJ0p1bCcsJ0FnbycsJ1NlcCcsJ09jdCcsJ05vdicsJ0RpYyddLApkYXlOYW1lczog
+			WydEb21pbmdvJywnTHVuZXMnLCdNYXJ0ZXMnLCdNaSZlYWN1dGU7cmNvbGVzJywnSnVldmVzJywn
+			Vmllcm5lcycsJ1MmYWFjdXRlO2JhZG8nXSwKZGF5TmFtZXNTaG9ydDogWydEb20nLCdMdW4nLCdN
+			YXInLCdNaSZlYWN1dGU7JywnSnV2JywnVmllJywnUyZhYWN1dGU7YiddLApkYXlOYW1lc01pbjog
+			WydEbycsJ0x1JywnTWEnLCdNaScsJ0p1JywnVmknLCdTJmFhY3V0ZTsnXSwKd2Vla0hlYWRlcjog
+			J1NtJywKZGF0ZUZvcm1hdDogJ2RkL21tL3l5JywKZmlyc3REYXk6IDEsCmlzUlRMOiBmYWxzZSwK
+			c2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVhclN1ZmZpeDogJyd9OwoKLyogRXN0b25pYW4g
+			Ki8KJC5kYXRlcGlja2VyLnJlZ2lvbmFsWydldCddPXsKY2xvc2VUZXh0OiAnU3VsZ2UnLApwcmV2
+			VGV4dDogJ0VlbG5ldicsCm5leHRUZXh0OiAnSsOkcmduZXYnLApjdXJyZW50VGV4dDogJ1TDpG5h
+			JywKbW9udGhOYW1lczogWydKYWFudWFyJywnVmVlYnJ1YXInLCdNw6RydHMnLCdBcHJpbGwnLCdN
+			YWknLCdKdXVuaScsJ0p1dWxpJywnQXVndXN0JywnU2VwdGVtYmVyJywnT2t0b29iZXInLCdOb3Zl
+			bWJlcicsJ0RldHNlbWJlciddLAptb250aE5hbWVzU2hvcnQ6IFsnSmFhbicsICdWZWVicicsICdN
+			w6RydHMnLCAnQXByJywgJ01haScsICdKdXVuaScsJ0p1dWxpJywgJ0F1ZycsICdTZXB0JywgJ09r
+			dCcsICdOb3YnLCAnRGV0cyddLApkYXlOYW1lczogWydQw7xoYXDDpGV2JywgJ0VzbWFzcMOkZXYn
+			LCAnVGVpc2lww6RldicsICdLb2xtYXDDpGV2JywgJ05lbGphcMOkZXYnLCAnUmVlZGUnLCAnTGF1
+			cMOkZXYnXSwKZGF5TmFtZXNTaG9ydDogWydQw7xoYXAnLCAnRXNtYXNwJywgJ1RlaXNpcCcsICdL
+			b2xtYXAnLCAnTmVsamFwJywgJ1JlZWRlJywgJ0xhdXAnXSwKZGF5TmFtZXNNaW46IFsnUCcsJ0Un
+			LCdUJywnSycsJ04nLCdSJywnTCddLAp3ZWVrSGVhZGVyOiAnU20nLApkYXRlRm9ybWF0OiAnZGQu
+			bW0ueXknLApmaXJzdERheTogMSwKaXNSVEw6IGZhbHNlLApzaG93TW9udGhBZnRlclllYXI6IGZh
+			bHNlLAp5ZWFyU3VmZml4OiAnJ307CgovKiBFdXNrYXJha28gKi8KJC5kYXRlcGlja2VyLnJlZ2lv
+			bmFsWydldSddPXsKY2xvc2VUZXh0OiAnRWdpbmEnLApwcmV2VGV4dDogJyYjeDNjO0F1cicsCm5l
+			eHRUZXh0OiAnSHVyJiN4M2U7JywKY3VycmVudFRleHQ6ICdHYXVyJywKbW9udGhOYW1lczogWydV
+			cnRhcnJpbGEnLCdPdHNhaWxhJywnTWFydHhvYScsJ0FwaXJpbGEnLCdNYWlhdHphJywnRWthaW5h
+			JywnVXp0YWlsYScsJ0FidXp0dWEnLCdJcmFpbGEnLCdVcnJpYScsJ0F6YXJvYScsJ0FiZW5kdWEn
+			XSwKbW9udGhOYW1lc1Nob3J0OiBbJ1VydCcsJ090cycsJ01hcicsJ0FwaScsJ01haScsJ0VrYScs
+			J1V6dCcsJ0FidScsJ0lyYScsJ1VycicsJ0F6YScsJ0FiZSddLApkYXlOYW1lczogWydJZ2FuZGVh
+			JywnQXN0ZWxlaGVuYScsJ0FzdGVhcnRlYScsJ0FzdGVhemtlbmEnLCdPc3RlZ3VuYScsJ09zdGly
+			YWxhJywnTGFydW5iYXRhJ10sCmRheU5hbWVzU2hvcnQ6IFsnSWdhJywnQXN0JywnQXN0JywnQXN0
+			JywnT3N0JywnT3N0JywnTGFyJ10sCmRheU5hbWVzTWluOiBbJ0lnJywnQXMnLCdBcycsJ0FzJywn
+			T3MnLCdPcycsJ0xhJ10sCndlZWtIZWFkZXI6ICdXaycsCmRhdGVGb3JtYXQ6ICd5eS9tbS9kZCcs
+			CmZpcnN0RGF5OiAxLAppc1JUTDogZmFsc2UsCnNob3dNb250aEFmdGVyWWVhcjogZmFsc2UsCnll
+			YXJTdWZmaXg6ICcnfTsKCi8qIFBlcnNpYW4gKEZhcnNpKSAqLwokLmRhdGVwaWNrZXIucmVnaW9u
+			YWxbJ2ZhJ109ewpjbG9zZVRleHQ6ICfYqNiz2KrZhicsCnByZXZUZXh0OiAnJiN4M2M72YLYqNmE
+			2YonLApuZXh0VGV4dDogJ9io2LnYr9mKJiN4M2U7JywKY3VycmVudFRleHQ6ICfYp9mF2LHZiNiy
+			JywKbW9udGhOYW1lczogWyfZgdix2YjYsdiv2YrZhicsJ9in2LHYr9mK2KjZh9i02KonLCfYrtix
+			2K/Yp9ivJywn2KrZitixJywn2YXYsdiv2KfYrycsJ9i02YfYsdmK2YjYsScsJ9mF2YfYsScsJ9ii
+			2KjYp9mGJywn2KLYsNixJywn2K/ZiicsJ9io2YfZhdmGJywn2KfYs9mB2YbYryddLAptb250aE5h
+			bWVzU2hvcnQ6IFsnMScsJzInLCczJywnNCcsJzUnLCc2JywnNycsJzgnLCc5JywnMTAnLCcxMScs
+			JzEyJ10sCmRheU5hbWVzOiBbJ9mK2qnYtNmG2KjZhycsJ9iv2YjYtNmG2KjZhycsJ9iz2YfigIzY
+			tNmG2KjZhycsJ9qG2YfYp9ix2LTZhtio2YcnLCfZvtmG2KzYtNmG2KjZhycsJ9is2YXYudmHJywn
+			2LTZhtio2YcnXSwKZGF5TmFtZXNTaG9ydDogWyfZiicsJ9ivJywn2LMnLCfahicsJ9m+Jywn2Kwn
+			LCAn2LQnXSwKZGF5TmFtZXNNaW46IFsn2YonLCfYrycsJ9izJywn2oYnLCfZvicsJ9isJywgJ9i0
+			J10sCndlZWtIZWFkZXI6ICfZh9mBJywKZGF0ZUZvcm1hdDogJ3l5L21tL2RkJywKZmlyc3REYXk6
+			IDYsCmlzUlRMOiB0cnVlLApzaG93TW9udGhBZnRlclllYXI6IGZhbHNlLAp5ZWFyU3VmZml4OiAn
+			J307CgovKiBGaW5uaXNoICovCiQuZGF0ZXBpY2tlci5yZWdpb25hbFsnZmknXT17CmNsb3NlVGV4
+			dDogJ1N1bGplJywKcHJldlRleHQ6ICcmbGFxdW87RWRlbGxpbmVuJywKbmV4dFRleHQ6ICdTZXVy
+			YWF2YSZyYXF1bzsnLApjdXJyZW50VGV4dDogJ1QmYXVtbDtuJmF1bWw7JmF1bWw7bicsCm1vbnRo
+			TmFtZXM6IFsnVGFtbWlrdXUnLCdIZWxtaWt1dScsJ01hYWxpc2t1dScsJ0h1aHRpa3V1JywnVG91
+			a29rdXUnLCdLZXMmYXVtbDtrdXUnLCdIZWluJmF1bWw7a3V1JywnRWxva3V1JywnU3l5c2t1dScs
+			J0xva2FrdXUnLCdNYXJyYXNrdXUnLCdKb3VsdWt1dSddLAptb250aE5hbWVzU2hvcnQ6IFsnVGFt
+			bWknLCdIZWxtaScsJ01hYWxpcycsJ0h1aHRpJywnVG91a28nLCdLZXMmYXVtbDsnLCdIZWluJmF1
+			bWw7JywnRWxvJywnU3l5cycsJ0xva2EnLCdNYXJyYXMnLCdKb3VsdSddLApkYXlOYW1lc1Nob3J0
+			OiBbJ1N1JywnTWEnLCdUaScsJ0tlJywnVG8nLCdQZScsJ1N1J10sCmRheU5hbWVzOiBbJ1N1bm51
+			bnRhaScsJ01hYW5hbnRhaScsJ1RpaXN0YWknLCdLZXNraXZpaWtrbycsJ1RvcnN0YWknLCdQZXJq
+			YW50YWknLCdMYXVhbnRhaSddLApkYXlOYW1lc01pbjogWydTdScsJ01hJywnVGknLCdLZScsJ1Rv
+			JywnUGUnLCdMYSddLAp3ZWVrSGVhZGVyOiAnVmsnLApkYXRlRm9ybWF0OiAnZGQubW0ueXknLApm
+			aXJzdERheTogMSwKaXNSVEw6IGZhbHNlLApzaG93TW9udGhBZnRlclllYXI6IGZhbHNlLAp5ZWFy
+			U3VmZml4OiAnJ307CgovKiBGYXJvZXNlICovCiQuZGF0ZXBpY2tlci5yZWdpb25hbFsnZm8nXT17
+			CmNsb3NlVGV4dDogJ0xhdCBhZnR1cicsCnByZXZUZXh0OiAnJiN4M2M7RnlycmEnLApuZXh0VGV4
+			dDogJ07DpnN0YSYjeDNlOycsCmN1cnJlbnRUZXh0OiAnw40gZGFnJywKbW9udGhOYW1lczogWydK
+			YW51YXInLCdGZWJydWFyJywnTWFycycsJ0FwcsOtbCcsJ01laScsJ0p1bmknLCdKdWxpJywnQXVn
+			dXN0JywnU2VwdGVtYmVyJywnT2t0b2JlcicsJ05vdmVtYmVyJywnRGVzZW1iZXInXSwKbW9udGhO
+			YW1lc1Nob3J0OiBbJ0phbicsJ0ZlYicsJ01hcicsJ0FwcicsJ01laScsJ0p1bicsJ0p1bCcsJ0F1
+			ZycsJ1NlcCcsJ09rdCcsJ05vdicsJ0RlcyddLApkYXlOYW1lczogWydTdW5udWRhZ3VyJywnTcOh
+			bmFkYWd1cicsJ1TDvXNkYWd1cicsJ01pa3VkYWd1cicsJ0jDs3NkYWd1cicsJ0Zyw61nZ2phZGFn
+			dXInLCdMZXlhcmRhZ3VyJ10sCmRheU5hbWVzU2hvcnQ6IFsnU3VuJywnTcOhbicsJ1TDvXMnLCdN
+			aWsnLCdIw7NzJywnRnLDrScsJ0xleSddLApkYXlOYW1lc01pbjogWydTdScsJ03DoScsJ1TDvScs
+			J01pJywnSMOzJywnRnInLCdMZSddLAp3ZWVrSGVhZGVyOiAnVmsnLApkYXRlRm9ybWF0OiAnZGQt
+			bW0teXknLApmaXJzdERheTogMCwKaXNSVEw6IGZhbHNlLApzaG93TW9udGhBZnRlclllYXI6IGZh
+			bHNlLAp5ZWFyU3VmZml4OiAnJ307CgovKiBGcmVuY2ggKi8KJC5kYXRlcGlja2VyLnJlZ2lvbmFs
+			WydmciddPXsKY2xvc2VUZXh0OiAnRmVybWVyJywKcHJldlRleHQ6ICcmI3gzYztQcsOpYycsCm5l
+			eHRUZXh0OiAnU3VpdiYjeDNlOycsCmN1cnJlbnRUZXh0OiAnQ291cmFudCcsCm1vbnRoTmFtZXM6
+			IFsnSmFudmllcicsJ0bDqXZyaWVyJywnTWFycycsJ0F2cmlsJywnTWFpJywnSnVpbicsJ0p1aWxs
+			ZXQnLCdBb8O7dCcsJ1NlcHRlbWJyZScsJ09jdG9icmUnLCdOb3ZlbWJyZScsJ0TDqWNlbWJyZSdd
+			LAptb250aE5hbWVzU2hvcnQ6IFsnSmFuJywnRsOpdicsJ01hcicsJ0F2cicsJ01haScsJ0p1bics
+			J0p1bCcsJ0Fvw7snLCdTZXAnLCdPY3QnLCdOb3YnLCdEw6ljJ10sCmRheU5hbWVzOiBbJ0RpbWFu
+			Y2hlJywnTHVuZGknLCdNYXJkaScsJ01lcmNyZWRpJywnSmV1ZGknLCdWZW5kcmVkaScsJ1NhbWVk
+			aSddLApkYXlOYW1lc1Nob3J0OiBbJ0RpbScsJ0x1bicsJ01hcicsJ01lcicsJ0pldScsJ1Zlbics
+			J1NhbSddLApkYXlOYW1lc01pbjogWydEaScsJ0x1JywnTWEnLCdNZScsJ0plJywnVmUnLCdTYSdd
+			LAp3ZWVrSGVhZGVyOiAnU20nLApkYXRlRm9ybWF0OiAnZGQvbW0veXknLApmaXJzdERheTogMSwK
+			aXNSVEw6IGZhbHNlLApzaG93TW9udGhBZnRlclllYXI6IGZhbHNlLAp5ZWFyU3VmZml4OiAnJ307
+			CgovKiBTd2lzcy1GcmVuY2ggKi8KJC5kYXRlcGlja2VyLnJlZ2lvbmFsWydmci1DSCddPXsKY2xv
+			c2VUZXh0OiAnRmVybWVyJywKcHJldlRleHQ6ICcmI3gzYztQctC5YycsCm5leHRUZXh0OiAnU3Vp
+			diYjeDNlOycsCmN1cnJlbnRUZXh0OiAnQ291cmFudCcsCm1vbnRoTmFtZXM6IFsnSmFudmllcics
+			J0bQuXZyaWVyJywnTWFycycsJ0F2cmlsJywnTWFpJywnSnVpbicsJ0p1aWxsZXQnLCdBb9GLdCcs
+			J1NlcHRlbWJyZScsJ09jdG9icmUnLCdOb3ZlbWJyZScsJ0TQuWNlbWJyZSddLAptb250aE5hbWVz
+			U2hvcnQ6IFsnSmFuJywnRtC5dicsJ01hcicsJ0F2cicsJ01haScsJ0p1bicsJ0p1bCcsJ0Fv0Ysn
+			LCdTZXAnLCdPY3QnLCdOb3YnLCdE0LljJ10sCmRheU5hbWVzOiBbJ0RpbWFuY2hlJywnTHVuZGkn
+			LCdNYXJkaScsJ01lcmNyZWRpJywnSmV1ZGknLCdWZW5kcmVkaScsJ1NhbWVkaSddLApkYXlOYW1l
+			c1Nob3J0OiBbJ0RpbScsJ0x1bicsJ01hcicsJ01lcicsJ0pldScsJ1ZlbicsJ1NhbSddLApkYXlO
+			YW1lc01pbjogWydEaScsJ0x1JywnTWEnLCdNZScsJ0plJywnVmUnLCdTYSddLAp3ZWVrSGVhZGVy
+			OiAnU20nLApkYXRlRm9ybWF0OiAnZGQubW0ueXknLApmaXJzdERheTogMSwKaXNSVEw6IGZhbHNl
+			LApzaG93TW9udGhBZnRlclllYXI6IGZhbHNlLAp5ZWFyU3VmZml4OiAnJ307CgovKiBIZWJyZXcg
+			Ki8KJC5kYXRlcGlja2VyLnJlZ2lvbmFsWydoZSddPXsKY2xvc2VUZXh0OiAn16HXkteV16gnLApw
+			cmV2VGV4dDogJyYjeDNjO9eU16fXldeT150nLApuZXh0VGV4dDogJ9eU15HXkCYjeDNlOycsCmN1
+			cnJlbnRUZXh0OiAn15TXmdeV150nLAptb250aE5hbWVzOiBbJ9eZ16DXldeQ16gnLCfXpNeR16jX
+			ldeQ16gnLCfXnteo16UnLCfXkNek16jXmdecJywn157XkNeZJywn15nXldeg15knLCfXmdeV15zX
+			mScsJ9eQ15XXkteV16HXmCcsJ9eh16TXmNee15HXqCcsJ9eQ15XXp9eY15XXkdeoJywn16DXldeR
+			157XkdeoJywn15PXptee15HXqCddLAptb250aE5hbWVzU2hvcnQ6IFsnMScsJzInLCczJywnNCcs
+			JzUnLCc2JywnNycsJzgnLCc5JywnMTAnLCcxMScsJzEyJ10sCmRheU5hbWVzOiBbJ9eo15DXqdeV
+			158nLCfXqdeg15knLCfXqdec15nXqdeZJywn16jXkdeZ16LXmScsJ9eX157Xmdep15knLCfXqdeZ
+			16nXmScsJ9ep15HXqiddLApkYXlOYW1lc1Nob3J0OiBbJ9eQXCcnLCfXkVwnJywn15JcJycsJ9eT
+			XCcnLCfXlFwnJywn15VcJycsJ9ep15HXqiddLApkYXlOYW1lc01pbjogWyfXkFwnJywn15FcJycs
+			J9eSXCcnLCfXk1wnJywn15RcJycsJ9eVXCcnLCfXqdeR16onXSwKd2Vla0hlYWRlcjogJ1drJywK
+			ZGF0ZUZvcm1hdDogJ2RkL21tL3l5JywKZmlyc3REYXk6IDAsCmlzUlRMOiB0cnVlLApzaG93TW9u
+			dGhBZnRlclllYXI6IGZhbHNlLAp5ZWFyU3VmZml4OiAnJ307CgovKiBIdW5nYXJpYW4gKi8KJC5k
+			YXRlcGlja2VyLnJlZ2lvbmFsWydodSddPXsKY2xvc2VUZXh0OiAnYmV6w6Fyw6FzJywKcHJldlRl
+			eHQ6ICcmbGFxdW87Jm5ic3A7dmlzc3phJywKbmV4dFRleHQ6ICdlbMWRcmUmbmJzcDsmcmFxdW87
+			JywKY3VycmVudFRleHQ6ICdtYScsCm1vbnRoTmFtZXM6IFsnSmFudcOhcicsICdGZWJydcOhcics
+			ICdNw6FyY2l1cycsICfDgXByaWxpcycsICdNw6FqdXMnLCAnSsO6bml1cycsJ0rDumxpdXMnLCAn
+			QXVndXN6dHVzJywgJ1N6ZXB0ZW1iZXInLCAnT2t0w7NiZXInLCAnTm92ZW1iZXInLCAnRGVjZW1i
+			ZXInXSwKbW9udGhOYW1lc1Nob3J0OiBbJ0phbicsICdGZWInLCAnTcOhcicsICfDgXByJywgJ03D
+			oWonLCAnSsO6bicsJ0rDumwnLCAnQXVnJywgJ1N6ZXAnLCAnT2t0JywgJ05vdicsICdEZWMnXSwK
+			ZGF5TmFtZXM6IFsnVmFzw6FybmFwJywgJ0jDqXRmw7YnLCAnS2VkZCcsICdTemVyZGEnLCAnQ3PD
+			vHTDtnJ0w7ZrJywgJ1DDqW50ZWsnLCAnU3pvbWJhdCddLApkYXlOYW1lc1Nob3J0OiBbJ1Zhcycs
+			ICdIw6l0JywgJ0tlZCcsICdTemUnLCAnQ3PDvCcsICdQw6luJywgJ1N6byddLApkYXlOYW1lc01p
+			bjogWydWJywgJ0gnLCAnSycsICdTemUnLCAnQ3MnLCAnUCcsICdTem8nXSwKd2Vla0hlYWRlcjog
+			J0jDqScsCmRhdGVGb3JtYXQ6ICd5eS1tbS1kZCcsCmZpcnN0RGF5OiAxLAppc1JUTDogZmFsc2Us
+			CnNob3dNb250aEFmdGVyWWVhcjogZmFsc2UsCnllYXJTdWZmaXg6ICcnfTsKCi8qIEFybWVuaWFu
+			ICovCiQuZGF0ZXBpY2tlci5yZWdpb25hbFsnaHknXT17CmNsb3NlVGV4dDogJ9WT1aHVr9Wl1awn
+			LApwcmV2VGV4dDogJyYjeDNjO9WG1aHVrS4nLApuZXh0VGV4dDogJ9WA1aHVuy4mI3gzZTsnLApj
+			dXJyZW50VGV4dDogJ9Sx1bXVvdaF1oAnLAptb250aE5hbWVzOiBbJ9WA1bjWgtW21b7VodaAJywn
+			1ZPVpdW/1oDVvtWh1oAnLCfVhNWh1oDVvycsJ9Sx1brWgNWr1awnLCfVhNWh1bXVq9W9Jywn1YDV
+			uNaC1bbVq9W9Jywn1YDVuNaC1azVq9W9Jywn1ZXVo9W41b3Vv9W41b0nLCfVjdWl1brVv9Wl1bTV
+			otWl1oAnLCfVgNW41a/Vv9Wl1bTVotWl1oAnLCfVhtW41bXVpdW01aLVpdaAJywn1LTVpdWv1b/V
+			pdW01aLVpdaAJ10sCm1vbnRoTmFtZXNTaG9ydDogWyfVgNW41oLVttW+Jywn1ZPVpdW/1oAnLCfV
+			hNWh1oDVvycsJ9Sx1brWgCcsJ9WE1aHVtdWr1b0nLCfVgNW41oLVttWr1b0nLCfVgNW41oLVrCcs
+			J9WV1aPVvScsJ9WN1aXVuicsJ9WA1bjVrycsJ9WG1bjVtScsJ9S01aXVryddLApkYXlOYW1lczog
+			WyfVr9Wr1oDVodWv1asnLCfVpdWv1bjWgtW31aHVotWp1asnLCfVpdaA1aXWhNW31aHVotWp1asn
+			LCfVudW41oDVpdaE1bfVodWi1anVqycsJ9Ww1avVttWj1bfVodWi1anVqycsJ9W41oLWgNWi1aHV
+			qScsJ9W31aHVotWh1aknXSwKZGF5TmFtZXNTaG9ydDogWyfVr9Wr1oAnLCfVpdaA1a8nLCfVpdaA
+			1oQnLCfVudaA1oQnLCfVsNW21aMnLCfVuNaC1oDVoicsJ9W31aLVqSddLApkYXlOYW1lc01pbjog
+			WyfVr9Wr1oAnLCfVpdaA1a8nLCfVpdaA1oQnLCfVudaA1oQnLCfVsNW21aMnLCfVuNaC1oDVoics
+			J9W31aLVqSddLAp3ZWVrSGVhZGVyOiAn1YfUstWPJywKZGF0ZUZvcm1hdDogJ2RkLm1tLnl5JywK
+			Zmlyc3REYXk6IDEsCmlzUlRMOiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVh
+			clN1ZmZpeDogJyd9OwoKLyogSW5kb25lc2lhbiAqLwokLmRhdGVwaWNrZXIucmVnaW9uYWxbJ2lk
+			J109ewpjbG9zZVRleHQ6ICdUdXR1cCcsCnByZXZUZXh0OiAnJiN4M2M7bXVuZHVyJywKbmV4dFRl
+			eHQ6ICdtYWp1JiN4M2U7JywKY3VycmVudFRleHQ6ICdoYXJpIGluaScsCm1vbnRoTmFtZXM6IFsn
+			SmFudWFyaScsJ0ZlYnJ1YXJpJywnTWFyZXQnLCdBcHJpbCcsJ01laScsJ0p1bmknLCdKdWxpJywn
+			QWd1c3R1cycsJ1NlcHRlbWJlcicsJ09rdG9iZXInLCdOb3BlbWJlcicsJ0Rlc2VtYmVyJ10sCm1v
+			bnRoTmFtZXNTaG9ydDogWydKYW4nLCdGZWInLCdNYXInLCdBcHInLCdNZWknLCdKdW4nLCdKdWwn
+			LCdBZ3VzJywnU2VwJywnT2t0JywnTm9wJywnRGVzJ10sCmRheU5hbWVzOiBbJ01pbmdndScsJ1Nl
+			bmluJywnU2VsYXNhJywnUmFidScsJ0thbWlzJywnSnVtYXQnLCdTYWJ0dSddLApkYXlOYW1lc1No
+			b3J0OiBbJ01pbicsJ1NlbicsJ1NlbCcsJ1JhYicsJ2thbScsJ0p1bScsJ1NhYiddLApkYXlOYW1l
+			c01pbjogWydNZycsJ1NuJywnU2wnLCdSYicsJ0ttJywnam0nLCdTYiddLAp3ZWVrSGVhZGVyOiAn
+			TWcnLApkYXRlRm9ybWF0OiAnZGQvbW0veXknLApmaXJzdERheTogMCwKaXNSVEw6IGZhbHNlLApz
+			aG93TW9udGhBZnRlclllYXI6IGZhbHNlLAp5ZWFyU3VmZml4OiAnJ307CgovKiBJY2VsYW5kaWMg
+			Ki8KJC5kYXRlcGlja2VyLnJlZ2lvbmFsWydpcyddPXsKY2xvc2VUZXh0OiAnTG9rYScsCnByZXZU
+			ZXh0OiAnJiN4M2M7IEZ5cnJpJywKbmV4dFRleHQ6ICdOJmFlbGlnO3N0aSAmI3gzZTsnLApjdXJy
+			ZW50VGV4dDogJyZJYWN1dGU7IGRhZycsCm1vbnRoTmFtZXM6IFsnSmFuJnVhY3V0ZTthcicsJ0Zl
+			YnImdWFjdXRlO2FyJywnTWFycycsJ0FwciZpYWN1dGU7bCcsJ01hJmlhY3V0ZScsJ0omdWFjdXRl
+			O24maWFjdXRlOycsJ0omdWFjdXRlO2wmaWFjdXRlOycsJyZBYWN1dGU7ZyZ1YWN1dGU7c3QnLCdT
+			ZXB0ZW1iZXInLCdPa3Qmb2FjdXRlO2JlcicsJ04mb2FjdXRlO3ZlbWJlcicsJ0Rlc2VtYmVyJ10s
+			Cm1vbnRoTmFtZXNTaG9ydDogWydKYW4nLCdGZWInLCdNYXInLCdBcHInLCdNYSZpYWN1dGU7Jywn
+			SiZ1YWN1dGU7bicsJ0omdWFjdXRlO2wnLCcmQWFjdXRlO2cmdWFjdXRlOycsJ1NlcCcsJ09rdCcs
+			J04mb2FjdXRlO3YnLCdEZXMnXSwKZGF5TmFtZXM6IFsnU3VubnVkYWd1cicsJ00mYWFjdXRlO251
+			ZGFndXInLCcmVEhPUk47cmkmZXRoO2p1ZGFndXInLCdNaSZldGg7dmlrdWRhZ3VyJywnRmltbXR1
+			ZGFndXInLCdGJm91bWw7c3R1ZGFndXInLCdMYXVnYXJkYWd1ciddLApkYXlOYW1lc1Nob3J0OiBb
+			J1N1bicsJ00mYWFjdXRlO24nLCcmVEhPUk47cmknLCdNaSZldGg7JywnRmltJywnRiZvdW1sO3Mn
+			LCdMYXUnXSwKZGF5TmFtZXNNaW46IFsnU3UnLCdNJmFhY3V0ZTsnLCcmVEhPUk47cicsJ01pJywn
+			RmknLCdGJm91bWw7JywnTGEnXSwKd2Vla0hlYWRlcjogJ1Zpa2EnLApkYXRlRm9ybWF0OiAnZGQv
+			bW0veXknLApmaXJzdERheTogMCwKaXNSVEw6IGZhbHNlLApzaG93TW9udGhBZnRlclllYXI6IGZh
+			bHNlLAp5ZWFyU3VmZml4OiAnJ307CgovKiBJdGFsaWFuICovCiQuZGF0ZXBpY2tlci5yZWdpb25h
+			bFsnaXQnXT17CmNsb3NlVGV4dDogJ0NoaXVkaScsCnByZXZUZXh0OiAnJiN4M2M7UHJlYycsCm5l
+			eHRUZXh0OiAnU3VjYyYjeDNlOycsCmN1cnJlbnRUZXh0OiAnT2dnaScsCm1vbnRoTmFtZXM6IFsn
+			R2VubmFpbycsJ0ZlYmJyYWlvJywnTWFyem8nLCdBcHJpbGUnLCdNYWdnaW8nLCdHaXVnbm8nLCdM
+			dWdsaW8nLCdBZ29zdG8nLCdTZXR0ZW1icmUnLCdPdHRvYnJlJywnTm92ZW1icmUnLCdEaWNlbWJy
+			ZSddLAptb250aE5hbWVzU2hvcnQ6IFsnR2VuJywnRmViJywnTWFyJywnQXByJywnTWFnJywnR2l1
+			JywnTHVnJywnQWdvJywnU2V0JywnT3R0JywnTm92JywnRGljJ10sCmRheU5hbWVzOiBbJ0RvbWVu
+			aWNhJywnTHVuZWQmIzIzNicsJ01hcnRlZCYjMjM2JywnTWVyY29sZWQmIzIzNicsJ0dpb3ZlZCYj
+			MjM2JywnVmVuZXJkJiMyMzYnLCdTYWJhdG8nXSwKZGF5TmFtZXNTaG9ydDogWydEb20nLCdMdW4n
+			LCdNYXInLCdNZXInLCdHaW8nLCdWZW4nLCdTYWInXSwKZGF5TmFtZXNNaW46IFsnRG8nLCdMdScs
+			J01hJywnTWUnLCdHaScsJ1ZlJywnU2EnXSwKd2Vla0hlYWRlcjogJ1NtJywKZGF0ZUZvcm1hdDog
+			J2RkL21tL3l5JywKZmlyc3REYXk6IDEsCmlzUlRMOiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZZWFy
+			OiBmYWxzZSwKeWVhclN1ZmZpeDogJyd9OwoKLyogSmFwYW5lc2UgKi8KJC5kYXRlcGlja2VyLnJl
+			Z2lvbmFsWydqYSddPXsKY2xvc2VUZXh0OiAn6ZaJ44GY44KLJywKcHJldlRleHQ6ICcmI3gzYzvl
+			iY0nLApuZXh0VGV4dDogJ+asoSYjeDNlOycsCmN1cnJlbnRUZXh0OiAn5LuK5pelJywKbW9udGhO
+			YW1lczogWycx5pyIJywnMuaciCcsJzPmnIgnLCc05pyIJywnNeaciCcsJzbmnIgnLCc35pyIJywn
+			OOaciCcsJznmnIgnLCcxMOaciCcsJzEx5pyIJywnMTLmnIgnXSwKbW9udGhOYW1lc1Nob3J0OiBb
+			JzHmnIgnLCcy5pyIJywnM+aciCcsJzTmnIgnLCc15pyIJywnNuaciCcsJzfmnIgnLCc45pyIJywn
+			OeaciCcsJzEw5pyIJywnMTHmnIgnLCcxMuaciCddLApkYXlOYW1lczogWyfml6Xmm5zml6UnLCfm
+			nIjmm5zml6UnLCfngavmm5zml6UnLCfmsLTmm5zml6UnLCfmnKjmm5zml6UnLCfph5Hmm5zml6Un
+			LCflnJ/mm5zml6UnXSwKZGF5TmFtZXNTaG9ydDogWyfml6UnLCfmnIgnLCfngasnLCfmsLQnLCfm
+			nKgnLCfph5EnLCflnJ8nXSwKZGF5TmFtZXNNaW46IFsn5pelJywn5pyIJywn54GrJywn5rC0Jywn
+			5pyoJywn6YeRJywn5ZyfJ10sCndlZWtIZWFkZXI6ICfpgLEnLApkYXRlRm9ybWF0OiAneXkvbW0v
+			ZGQnLApmaXJzdERheTogMCwKaXNSVEw6IGZhbHNlLApzaG93TW9udGhBZnRlclllYXI6IHRydWUs
+			CnllYXJTdWZmaXg6ICflubQnfTsKCi8qIEtvcmVhbiAqLwokLmRhdGVwaWNrZXIucmVnaW9uYWxb
+			J2tvJ109ewpjbG9zZVRleHQ6ICfri6vquLAnLApwcmV2VGV4dDogJ+ydtOyghOuLrCcsCm5leHRU
+			ZXh0OiAn64uk7J2M64usJywKY3VycmVudFRleHQ6ICfsmKTripgnLAptb250aE5hbWVzOiBbJzHs
+			m5QoSkFOKScsJzLsm5QoRkVCKScsJzPsm5QoTUFSKScsJzTsm5QoQVBSKScsJzXsm5QoTUFZKScs
+			Jzbsm5QoSlVOKScsJzfsm5QoSlVMKScsJzjsm5QoQVVHKScsJznsm5QoU0VQKScsJzEw7JuUKE9D
+			VCknLCcxMeyblChOT1YpJywnMTLsm5QoREVDKSddLAptb250aE5hbWVzU2hvcnQ6IFsnMeyblChK
+			QU4pJywnMuyblChGRUIpJywnM+yblChNQVIpJywnNOyblChBUFIpJywnNeyblChNQVkpJywnNuyb
+			lChKVU4pJywnN+yblChKVUwpJywnOOyblChBVUcpJywnOeyblChTRVApJywnMTDsm5QoT0NUKScs
+			JzEx7JuUKE5PViknLCcxMuyblChERUMpJ10sCmRheU5hbWVzOiBbJ+ydvCcsJ+yblCcsJ+2ZlCcs
+			J+yImCcsJ+uqqScsJ+q4iCcsJ+2GoCddLApkYXlOYW1lc1Nob3J0OiBbJ+ydvCcsJ+yblCcsJ+2Z
+			lCcsJ+yImCcsJ+uqqScsJ+q4iCcsJ+2GoCddLApkYXlOYW1lc01pbjogWyfsnbwnLCfsm5QnLCft
+			mZQnLCfsiJgnLCfrqqknLCfquIgnLCfthqAnXSwKd2Vla0hlYWRlcjogJ1drJywKZGF0ZUZvcm1h
+			dDogJ3l5LW1tLWRkJywKZmlyc3REYXk6IDAsCmlzUlRMOiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZ
+			ZWFyOiBmYWxzZSwKeWVhclN1ZmZpeDogJ+uFhCd9OwoKLyogTGl0aHVhbmlhbiAqLwokLmRhdGVw
+			aWNrZXIucmVnaW9uYWxbJ2x0J109ewpjbG9zZVRleHQ6ICdVxb5kYXJ5dGknLApwcmV2VGV4dDog
+			JyYjeDNjO0F0Z2FsJywKbmV4dFRleHQ6ICdQaXJteW4mI3gzZTsnLApjdXJyZW50VGV4dDogJ8Wg
+			aWFuZGllbicsCm1vbnRoTmFtZXM6IFsnU2F1c2lzJywnVmFzYXJpcycsJ0tvdmFzJywnQmFsYW5k
+			aXMnLCdHZWd1xb7ElycsJ0JpcsW+ZWxpcycsJ0xpZXBhJywnUnVncGrFq3RpcycsJ1J1Z3PEl2pp
+			cycsJ1NwYWxpcycsJ0xhcGtyaXRpcycsJ0dydW9kaXMnXSwKbW9udGhOYW1lc1Nob3J0OiBbJ1Nh
+			dScsJ1ZhcycsJ0tvdicsJ0JhbCcsJ0dlZycsJ0JpcicsJ0xpZScsJ1J1Z3AnLCdSdWdzJywnU3Bh
+			JywnTGFwJywnR3J1J10sCmRheU5hbWVzOiBbJ3Nla21hZGllbmlzJywncGlybWFkaWVuaXMnLCdh
+			bnRyYWRpZW5pcycsJ3RyZcSNaWFkaWVuaXMnLCdrZXR2aXJ0YWRpZW5pcycsJ3Blbmt0YWRpZW5p
+			cycsJ8WhZcWhdGFkaWVuaXMnXSwKZGF5TmFtZXNTaG9ydDogWydzZWsnLCdwaXInLCdhbnQnLCd0
+			cmUnLCdrZXQnLCdwZW4nLCfFoWXFoSddLApkYXlOYW1lc01pbjogWydTZScsJ1ByJywnQW4nLCdU
+			cicsJ0tlJywnUGUnLCfFoGUnXSwKd2Vla0hlYWRlcjogJ1drJywKZGF0ZUZvcm1hdDogJ3l5LW1t
+			LWRkJywKZmlyc3REYXk6IDEsCmlzUlRMOiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxz
+			ZSwKeWVhclN1ZmZpeDogJyd9OwoKLyogTGF0dmlhbiAqLwokLmRhdGVwaWNrZXIucmVnaW9uYWxb
+			J2x2J109ewpjbG9zZVRleHQ6ICdBaXp2xJNydCcsCnByZXZUZXh0OiAnSWVwcicsCm5leHRUZXh0
+			OiAnTsSBa2EnLApjdXJyZW50VGV4dDogJ8Wgb2RpZW4nLAptb250aE5hbWVzOiBbJ0phbnbEgXJp
+			cycsJ0ZlYnJ1xIFyaXMnLCdNYXJ0cycsJ0FwcsSrbGlzJywnTWFpanMnLCdKxatuaWpzJywnSsWr
+			bGlqcycsJ0F1Z3VzdHMnLCdTZXB0ZW1icmlzJywnT2t0b2JyaXMnLCdOb3ZlbWJyaXMnLCdEZWNl
+			bWJyaXMnXSwKbW9udGhOYW1lc1Nob3J0OiBbJ0phbicsJ0ZlYicsJ01hcicsJ0FwcicsJ01haScs
+			J0rFq24nLCdKxatsJywnQXVnJywnU2VwJywnT2t0JywnTm92JywnRGVjJ10sCmRheU5hbWVzOiBb
+			J3N2xJN0ZGllbmEnLCdwaXJtZGllbmEnLCdvdHJkaWVuYScsJ3RyZcWhZGllbmEnLCdjZXR1cnRk
+			aWVuYScsJ3BpZWt0ZGllbmEnLCdzZXN0ZGllbmEnXSwKZGF5TmFtZXNTaG9ydDogWydzdnQnLCdw
+			cm0nLCdvdHInLCd0cmUnLCdjdHInLCdwa3QnLCdzc3QnXSwKZGF5TmFtZXNNaW46IFsnU3YnLCdQ
+			cicsJ090JywnVHInLCdDdCcsJ1BrJywnU3MnXSwKd2Vla0hlYWRlcjogJ05hdicsCmRhdGVGb3Jt
+			YXQ6ICdkZC1tbS15eScsCmZpcnN0RGF5OiAxLAppc1JUTDogZmFsc2UsCnNob3dNb250aEFmdGVy
+			WWVhcjogZmFsc2UsCnllYXJTdWZmaXg6ICcnfTsKCi8qIE1hbGF5c2lhbiAqLwokLmRhdGVwaWNr
+			ZXIucmVnaW9uYWxbJ21zJ109ewpjbG9zZVRleHQ6ICdUdXR1cCcsCnByZXZUZXh0OiAnJiN4M2M7
+			U2ViZWx1bScsCm5leHRUZXh0OiAnU2VsZXBhcyYjeDNlOycsCmN1cnJlbnRUZXh0OiAnaGFyaSBp
+			bmknLAptb250aE5hbWVzOiBbJ0phbnVhcmknLCdGZWJydWFyaScsJ01hYycsJ0FwcmlsJywnTWVp
+			JywnSnVuJywnSnVsYWknLCdPZ29zJywnU2VwdGVtYmVyJywnT2t0b2JlcicsJ05vdmVtYmVyJywn
+			RGlzZW1iZXInXSwKbW9udGhOYW1lc1Nob3J0OiBbJ0phbicsJ0ZlYicsJ01hYycsJ0FwcicsJ01l
+			aScsJ0p1bicsJ0p1bCcsJ09nbycsJ1NlcCcsJ09rdCcsJ05vdicsJ0RpcyddLApkYXlOYW1lczog
+			WydBaGFkJywnSXNuaW4nLCdTZWxhc2EnLCdSYWJ1JywnS2hhbWlzJywnSnVtYWF0JywnU2FidHUn
+			XSwKZGF5TmFtZXNTaG9ydDogWydBaGEnLCdJc24nLCdTZWwnLCdSYWInLCdraGEnLCdKdW0nLCdT
+			YWInXSwKZGF5TmFtZXNNaW46IFsnQWgnLCdJcycsJ1NlJywnUmEnLCdLaCcsJ0p1JywnU2EnXSwK
+			d2Vla0hlYWRlcjogJ01nJywKZGF0ZUZvcm1hdDogJ2RkL21tL3l5JywKZmlyc3REYXk6IDAsCmlz
+			UlRMOiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVhclN1ZmZpeDogJyd9OwoK
+			LyogRHV0Y2ggKi8KJC5kYXRlcGlja2VyLnJlZ2lvbmFsWydubCddPXsKY2xvc2VUZXh0OiAnU2x1
+			aXRlbicsCnByZXZUZXh0OiAn4oaQJywKbmV4dFRleHQ6ICfihpInLApjdXJyZW50VGV4dDogJ1Zh
+			bmRhYWcnLAptb250aE5hbWVzOiBbJ2phbnVhcmknLCAnZmVicnVhcmknLCAnbWFhcnQnLCAnYXBy
+			aWwnLCAnbWVpJywgJ2p1bmknLCdqdWxpJywgJ2F1Z3VzdHVzJywgJ3NlcHRlbWJlcicsICdva3Rv
+			YmVyJywgJ25vdmVtYmVyJywgJ2RlY2VtYmVyJ10sCm1vbnRoTmFtZXNTaG9ydDogWydqYW4nLCAn
+			ZmViJywgJ21hYScsICdhcHInLCAnbWVpJywgJ2p1bicsJ2p1bCcsICdhdWcnLCAnc2VwJywgJ29r
+			dCcsICdub3YnLCAnZGVjJ10sCmRheU5hbWVzOiBbJ3pvbmRhZycsICdtYWFuZGFnJywgJ2RpbnNk
+			YWcnLCAnd29lbnNkYWcnLCAnZG9uZGVyZGFnJywgJ3ZyaWpkYWcnLCAnemF0ZXJkYWcnXSwKZGF5
+			TmFtZXNTaG9ydDogWyd6b24nLCAnbWFhJywgJ2RpbicsICd3b2UnLCAnZG9uJywgJ3ZyaScsICd6
+			YXQnXSwKZGF5TmFtZXNNaW46IFsnem8nLCAnbWEnLCAnZGknLCAnd28nLCAnZG8nLCAndnInLCAn
+			emEnXSwKd2Vla0hlYWRlcjogJ1drJywKZGF0ZUZvcm1hdDogJ2RkLW1tLXl5JywKZmlyc3REYXk6
+			IDEsCmlzUlRMOiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVhclN1ZmZpeDog
+			Jyd9OwoKLyogRHV0Y2gvQmVsZ2lhbiAqLwokLmRhdGVwaWNrZXIucmVnaW9uYWxbJ25sLUJFJ109
+			ewpjbG9zZVRleHQ6ICdTbHVpdGVuJywKcHJldlRleHQ6ICfihpAnLApuZXh0VGV4dDogJ+KGkics
+			CmN1cnJlbnRUZXh0OiAnVmFuZGFhZycsCm1vbnRoTmFtZXM6IFsnamFudWFyaScsICdmZWJydWFy
+			aScsICdtYWFydCcsICdhcHJpbCcsICdtZWknLCAnanVuaScsJ2p1bGknLCAnYXVndXN0dXMnLCAn
+			c2VwdGVtYmVyJywgJ29rdG9iZXInLCAnbm92ZW1iZXInLCAnZGVjZW1iZXInXSwKbW9udGhOYW1l
+			c1Nob3J0OiBbJ2phbicsICdmZWInLCAnbWFhJywgJ2FwcicsICdtZWknLCAnanVuJywnanVsJywg
+			J2F1ZycsICdzZXAnLCAnb2t0JywgJ25vdicsICdkZWMnXSwKZGF5TmFtZXM6IFsnem9uZGFnJywg
+			J21hYW5kYWcnLCAnZGluc2RhZycsICd3b2Vuc2RhZycsICdkb25kZXJkYWcnLCAndnJpamRhZycs
+			ICd6YXRlcmRhZyddLApkYXlOYW1lc1Nob3J0OiBbJ3pvbicsICdtYWEnLCAnZGluJywgJ3dvZScs
+			ICdkb24nLCAndnJpJywgJ3phdCddLApkYXlOYW1lc01pbjogWyd6bycsICdtYScsICdkaScsICd3
+			bycsICdkbycsICd2cicsICd6YSddLAp3ZWVrSGVhZGVyOiAnV2snLApkYXRlRm9ybWF0OiAnZGQv
+			bW0veXknLApmaXJzdERheTogMSwKaXNSVEw6IGZhbHNlLApzaG93TW9udGhBZnRlclllYXI6IGZh
+			bHNlLAp5ZWFyU3VmZml4OiAnJ307CgovKiBOb3J3ZWdpYW4gKi8KJC5kYXRlcGlja2VyLnJlZ2lv
+			bmFsWydubyddPXsKY2xvc2VUZXh0OiAnTHVraycsCnByZXZUZXh0OiAnJmxhcXVvO0ZvcnJpZ2Un
+			LApuZXh0VGV4dDogJ05lc3RlJnJhcXVvOycsCmN1cnJlbnRUZXh0OiAnSSBkYWcnLAptb250aE5h
+			bWVzOiBbJ0phbnVhcicsJ0ZlYnJ1YXInLCdNYXJzJywnQXByaWwnLCdNYWknLCdKdW5pJywnSnVs
+			aScsJ0F1Z3VzdCcsJ1NlcHRlbWJlcicsJ09rdG9iZXInLCdOb3ZlbWJlcicsJ0Rlc2VtYmVyJ10s
+			Cm1vbnRoTmFtZXNTaG9ydDogWydKYW4nLCdGZWInLCdNYXInLCdBcHInLCdNYWknLCdKdW4nLCdK
+			dWwnLCdBdWcnLCdTZXAnLCdPa3QnLCdOb3YnLCdEZXMnXSwKZGF5TmFtZXNTaG9ydDogWydTw7hu
+			JywnTWFuJywnVGlyJywnT25zJywnVG9yJywnRnJlJywnTMO4ciddLApkYXlOYW1lczogWydTw7hu
+			ZGFnJywnTWFuZGFnJywnVGlyc2RhZycsJ09uc2RhZycsJ1RvcnNkYWcnLCdGcmVkYWcnLCdMw7hy
+			ZGFnJ10sCmRheU5hbWVzTWluOiBbJ1PDuCcsJ01hJywnVGknLCdPbicsJ1RvJywnRnInLCdMw7gn
+			XSwKd2Vla0hlYWRlcjogJ1VrZScsCmRhdGVGb3JtYXQ6ICd5eS1tbS1kZCcsCmZpcnN0RGF5OiAw
+			LAppc1JUTDogZmFsc2UsCnNob3dNb250aEFmdGVyWWVhcjogZmFsc2UsCnllYXJTdWZmaXg6ICcn
+			fTsKCi8qIFBvbGlzaCAqLwokLmRhdGVwaWNrZXIucmVnaW9uYWxbJ3BsJ109ewpjbG9zZVRleHQ6
+			ICdaYW1rbmlqJywKcHJldlRleHQ6ICcmI3gzYztQb3ByemVkbmknLApuZXh0VGV4dDogJ05hc3TE
+			mXBueSYjeDNlOycsCmN1cnJlbnRUZXh0OiAnRHppxZsnLAptb250aE5hbWVzOiBbJ1N0eWN6ZcWE
+			JywnTHV0eScsJ01hcnplYycsJ0t3aWVjaWXFhCcsJ01haicsJ0N6ZXJ3aWVjJywnTGlwaWVjJywn
+			U2llcnBpZcWEJywnV3J6ZXNpZcWEJywnUGHFumR6aWVybmlrJywnTGlzdG9wYWQnLCdHcnVkemll
+			xYQnXSwKbW9udGhOYW1lc1Nob3J0OiBbJ1N0eScsJ0x1JywnTWFyJywnS3cnLCdNYWonLCdDemUn
+			LCdMaXAnLCdTaWUnLCdXcnonLCdQYScsJ0xpcycsJ0dydSddLApkYXlOYW1lczogWydOaWVkemll
+			bGEnLCdQb25pZWR6aWFsZWsnLCdXdG9yZWsnLCfFmnJvZGEnLCdDendhcnRlaycsJ1BpxIV0ZWsn
+			LCdTb2JvdGEnXSwKZGF5TmFtZXNTaG9ydDogWydOaWUnLCdQbicsJ1d0JywnxZpyJywnQ3p3Jywn
+			UHQnLCdTbyddLApkYXlOYW1lc01pbjogWydOJywnUG4nLCdXdCcsJ8WacicsJ0N6JywnUHQnLCdT
+			byddLAp3ZWVrSGVhZGVyOiAnVHlkeicsCmRhdGVGb3JtYXQ6ICd5eS1tbS1kZCcsCmZpcnN0RGF5
+			OiAxLAppc1JUTDogZmFsc2UsCnNob3dNb250aEFmdGVyWWVhcjogZmFsc2UsCnllYXJTdWZmaXg6
+			ICcnfTsKCi8qIEJyYXppbGlhbiAqLwokLmRhdGVwaWNrZXIucmVnaW9uYWxbJ3B0LUJSJ109ewpj
+			bG9zZVRleHQ6ICdGZWNoYXInLApwcmV2VGV4dDogJyYjeDNjO0FudGVyaW9yJywKbmV4dFRleHQ6
+			ICdQciZvYWN1dGU7eGltbyYjeDNlOycsCmN1cnJlbnRUZXh0OiAnSG9qZScsCm1vbnRoTmFtZXM6
+			IFsnSmFuZWlybycsJ0ZldmVyZWlybycsJ01hciZjY2VkaWw7bycsJ0FicmlsJywnTWFpbycsJ0p1
+			bmhvJywnSnVsaG8nLCdBZ29zdG8nLCdTZXRlbWJybycsJ091dHVicm8nLCdOb3ZlbWJybycsJ0Rl
+			emVtYnJvJ10sCm1vbnRoTmFtZXNTaG9ydDogWydKYW4nLCdGZXYnLCdNYXInLCdBYnInLCdNYWkn
+			LCdKdW4nLCdKdWwnLCdBZ28nLCdTZXQnLCdPdXQnLCdOb3YnLCdEZXonXSwKZGF5TmFtZXM6IFsn
+			RG9taW5nbycsJ1NlZ3VuZGEtZmVpcmEnLCdUZXImY2NlZGlsO2EtZmVpcmEnLCdRdWFydGEtZmVp
+			cmEnLCdRdWludGEtZmVpcmEnLCdTZXh0YS1mZWlyYScsJ1NhYmFkbyddLApkYXlOYW1lc1Nob3J0
+			OiBbJ0RvbScsJ1NlZycsJ1RlcicsJ1F1YScsJ1F1aScsJ1NleCcsJ1NhYiddLApkYXlOYW1lc01p
+			bjogWydEb20nLCdTZWcnLCdUZXInLCdRdWEnLCdRdWknLCdTZXgnLCdTYWInXSwKd2Vla0hlYWRl
+			cjogJ1NtJywKZGF0ZUZvcm1hdDogJ2RkL21tL3l5JywKZmlyc3REYXk6IDAsCmlzUlRMOiBmYWxz
+			ZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVhclN1ZmZpeDogJyd9OwoKLyogU2VyYmlh
+			biAqLwokLmRhdGVwaWNrZXIucmVnaW9uYWxbJ3NyJ109ewpjbG9zZVRleHQ6ICfQl9Cw0YLQstC+
+			0YDQuCcsCnByZXZUZXh0OiAnJiN4M2M7JywKbmV4dFRleHQ6ICcmI3gzZTsnLApjdXJyZW50VGV4
+			dDogJ9CU0LDQvdCw0YEnLAptb250aE5hbWVzOiBbJ9CI0LDQvdGD0LDRgCcsJ9Ck0LXQsdGA0YPQ
+			sNGAJywn0JzQsNGA0YInLCfQkNC/0YDQuNC7Jywn0JzQsNGYJywn0IjRg9C9Jywn0IjRg9C7Jywn
+			0JDQstCz0YPRgdGCJywn0KHQtdC/0YLQtdC80LHQsNGAJywn0J7QutGC0L7QsdCw0YAnLCfQndC+
+			0LLQtdC80LHQsNGAJywn0JTQtdGG0LXQvNCx0LDRgCddLAptb250aE5hbWVzU2hvcnQ6IFsn0IjQ
+			sNC9Jywn0KTQtdCxJywn0JzQsNGAJywn0JDQv9GAJywn0JzQsNGYJywn0IjRg9C9Jywn0IjRg9C7
+			Jywn0JDQstCzJywn0KHQtdC/Jywn0J7QutGCJywn0J3QvtCyJywn0JTQtdGGJ10sCmRheU5hbWVz
+			OiBbJ9Cd0LXQtNC10ZnQsCcsJ9Cf0L7QvdC10LTQtdGZ0LDQuicsJ9Cj0YLQvtGA0LDQuicsJ9Ch
+			0YDQtdC00LAnLCfQp9C10YLQstGA0YLQsNC6Jywn0J/QtdGC0LDQuicsJ9Ch0YPQsdC+0YLQsCdd
+			LApkYXlOYW1lc1Nob3J0OiBbJ9Cd0LXQtCcsJ9Cf0L7QvScsJ9Cj0YLQvicsJ9Ch0YDQtScsJ9Cn
+			0LXRgicsJ9Cf0LXRgicsJ9Ch0YPQsSddLApkYXlOYW1lc01pbjogWyfQndC1Jywn0J/QvicsJ9Cj
+			0YInLCfQodGAJywn0KfQtScsJ9Cf0LUnLCfQodGDJ10sCndlZWtIZWFkZXI6ICfQodC10LQnLApk
+			YXRlRm9ybWF0OiAnZGQvbW0veXknLApmaXJzdERheTogMSwKaXNSVEw6IGZhbHNlLApzaG93TW9u
+			dGhBZnRlclllYXI6IGZhbHNlLAp5ZWFyU3VmZml4OiAnJ307CgovKiBTZXJiaWFuICovCiQuZGF0
+			ZXBpY2tlci5yZWdpb25hbFsnc3ItU1InXT17CmNsb3NlVGV4dDogJ1phdHZvcmknLApwcmV2VGV4
+			dDogJyYjeDNjOycsCm5leHRUZXh0OiAnJiN4M2U7JywKY3VycmVudFRleHQ6ICdEYW5hcycsCm1v
+			bnRoTmFtZXM6IFsnSmFudWFyJywnRmVicnVhcicsJ01hcnQnLCdBcHJpbCcsJ01haicsJ0p1bics
+			J0p1bCcsJ0F2Z3VzdCcsJ1NlcHRlbWJhcicsJ09rdG9iYXInLCdOb3ZlbWJhcicsJ0RlY2VtYmFy
+			J10sCm1vbnRoTmFtZXNTaG9ydDogWydKYW4nLCdGZWInLCdNYXInLCdBcHInLCdNYWonLCdKdW4n
+			LCdKdWwnLCdBdmcnLCdTZXAnLCdPa3QnLCdOb3YnLCdEZWMnXSwKZGF5TmFtZXM6IFsnTmVkZWxq
+			YScsJ1BvbmVkZWxqYWsnLCdVdG9yYWsnLCdTcmVkYScsJ8SMZXR2cnRhaycsJ1BldGFrJywnU3Vi
+			b3RhJ10sCmRheU5hbWVzU2hvcnQ6IFsnTmVkJywnUG9uJywnVXRvJywnU3JlJywnxIxldCcsJ1Bl
+			dCcsJ1N1YiddLApkYXlOYW1lc01pbjogWydOZScsJ1BvJywnVXQnLCdTcicsJ8SMZScsJ1BlJywn
+			U3UnXSwKd2Vla0hlYWRlcjogJ1NlZCcsCmRhdGVGb3JtYXQ6ICdkZC9tbS95eScsCmZpcnN0RGF5
+			OiAxLAppc1JUTDogZmFsc2UsCnNob3dNb250aEFmdGVyWWVhcjogZmFsc2UsCnllYXJTdWZmaXg6
+			ICcnfTsKCi8qIFN3ZWRpc2ggKi8KJC5kYXRlcGlja2VyLnJlZ2lvbmFsWydzdiddPXsKY2xvc2VU
+			ZXh0OiAnU3TDpG5nJywKcHJldlRleHQ6ICcmbGFxdW87RsO2cnJhJywKbmV4dFRleHQ6ICdOw6Rz
+			dGEmcmFxdW87JywKY3VycmVudFRleHQ6ICdJZGFnJywKbW9udGhOYW1lczogWydKYW51YXJpJywn
+			RmVicnVhcmknLCdNYXJzJywnQXByaWwnLCdNYWonLCdKdW5pJywnSnVsaScsJ0F1Z3VzdGknLCdT
+			ZXB0ZW1iZXInLCdPa3RvYmVyJywnTm92ZW1iZXInLCdEZWNlbWJlciddLAptb250aE5hbWVzU2hv
+			cnQ6IFsnSmFuJywnRmViJywnTWFyJywnQXByJywnTWFqJywnSnVuJywnSnVsJywnQXVnJywnU2Vw
+			JywnT2t0JywnTm92JywnRGVjJ10sCmRheU5hbWVzU2hvcnQ6IFsnU8O2bicsJ03DpW4nLCdUaXMn
+			LCdPbnMnLCdUb3InLCdGcmUnLCdMw7ZyJ10sCmRheU5hbWVzOiBbJ1PDtm5kYWcnLCdNw6VuZGFn
+			JywnVGlzZGFnJywnT25zZGFnJywnVG9yc2RhZycsJ0ZyZWRhZycsJ0zDtnJkYWcnXSwKZGF5TmFt
+			ZXNNaW46IFsnU8O2JywnTcOlJywnVGknLCdPbicsJ1RvJywnRnInLCdMw7YnXSwKd2Vla0hlYWRl
+			cjogJ1ZlJywKZGF0ZUZvcm1hdDogJ3l5LW1tLWRkJywKZmlyc3REYXk6IDEsCmlzUlRMOiBmYWxz
+			ZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVhclN1ZmZpeDogJyd9OwoKLyogVGFtaWwg
+			Ki8KJC5kYXRlcGlja2VyLnJlZ2lvbmFsWyd0YSddPXsKY2xvc2VUZXh0OiAn4K6u4K+C4K6f4K+B
+			JywKcHJldlRleHQ6ICfgrq7gr4Hgrqngr43grqngr4jgrq/grqTgr4EnLApuZXh0VGV4dDogJ+Cu
+			heCun+CvgeCupOCvjeCupOCupOCvgScsCmN1cnJlbnRUZXh0OiAn4K6H4K6p4K+N4K6x4K+BJywK
+			bW9udGhOYW1lczogWyfgrqTgr4gnLCfgrq7grr7grprgrr8nLCfgrqrgrpngr43grpXgr4Hgrqng
+			rr8nLCfgrprgrr/grqTgr43grqTgrr/grrDgr4gnLCfgrrXgr4jgrpXgrr7grprgrr8nLCfgrobg
+			rqngrr8nLCfgrobgrp/grr8nLCfgrobgrrXgrqPgrr8nLCfgrqrgr4HgrrDgrp/gr43grp/grr7g
+			rprgrr8nLCfgrpDgrqrgr43grqrgrprgrr8nLCfgrpXgrr7grrDgr43grqTgr43grqTgrr/grpXg
+			r4gnLCfgrq7grr7grrDgr43grpXgrrTgrr8nXSwKbW9udGhOYW1lc1Nob3J0OiBbJ+CupOCviCcs
+			J+CuruCuvuCumuCuvycsJ+CuquCumeCvjScsJ+CumuCuv+CupOCvjScsJ+CuteCviOCuleCuvics
+			J+CuhuCuqeCuvycsJ+CuhuCun+CuvycsJ+CuhuCutScsJ+CuquCvgeCusCcsJ+CukOCuquCvjScs
+			J+CuleCuvuCusOCvjScsJ+CuruCuvuCusOCvjSddLApkYXlOYW1lczogWyfgrp7grr7grq/grr/g
+			rrHgr43grrHgr4HgrpXgr43grpXgrr/grrTgrq7gr4gnLCfgrqTgrr/grpngr43grpXgrp/gr43g
+			rpXgrr/grrTgrq7gr4gnLCfgrprgr4bgrrXgr43grrXgrr7grq/gr43grpXgr43grpXgrr/grrTg
+			rq7gr4gnLCfgrqrgr4HgrqTgrqngr43grpXgrr/grrTgrq7gr4gnLCfgrrXgrr/grq/grr7grrTg
+			rpXgr43grpXgrr/grrTgrq7gr4gnLCfgrrXgr4bgrrPgr43grrPgrr/grpXgr43grpXgrr/grrTg
+			rq7gr4gnLCfgrprgrqngrr/grpXgr43grpXgrr/grrTgrq7gr4gnXSwKZGF5TmFtZXNTaG9ydDog
+			Wyfgrp7grr7grq/grr/grrHgr4EnLCfgrqTgrr/grpngr43grpXgrrPgr40nLCfgrprgr4bgrrXg
+			r43grrXgrr7grq/gr40nLCfgrqrgr4HgrqTgrqngr40nLCfgrrXgrr/grq/grr7grrTgrqngr40n
+			LCfgrrXgr4bgrrPgr43grrPgrr8nLCfgrprgrqngrr8nXSwKZGF5TmFtZXNNaW46IFsn4K6e4K6+
+			Jywn4K6k4K6/Jywn4K6a4K+GJywn4K6q4K+BJywn4K614K6/Jywn4K614K+GJywn4K6aJ10sCndl
+			ZWtIZWFkZXI6ICfQndC1JywKZGF0ZUZvcm1hdDogJ2RkL21tL3l5JywKZmlyc3REYXk6IDEsCmlz
+			UlRMOiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiBmYWxzZSwKeWVhclN1ZmZpeDogJyd9OwoK
+			LyogVGhhaSAqLwokLmRhdGVwaWNrZXIucmVnaW9uYWxbJ3RoJ109ewpjbG9zZVRleHQ6ICfguJvg
+			uLTguJQnLApwcmV2VGV4dDogJyZsYXF1bzsmbmJzcDvguKLguYnguK3guJknLApuZXh0VGV4dDog
+			J+C4luC4seC4lOC5hOC4myZuYnNwOyZyYXF1bzsnLApjdXJyZW50VGV4dDogJ+C4p+C4seC4meC4
+			meC4teC5iScsCm1vbnRoTmFtZXM6IFsn4Lih4LiB4Lij4Liy4LiE4LihJywn4LiB4Li44Lih4Lig
+			4Liy4Lie4Lix4LiZ4LiY4LmMJywn4Lih4Li14LiZ4Liy4LiE4LihJywn4LmA4Lih4Lip4Liy4Lii
+			4LiZJywn4Lie4Lik4Lip4Lig4Liy4LiE4LihJywn4Lih4Li04LiW4Li44LiZ4Liy4Lii4LiZJywn
+			4LiB4Lij4LiB4LiP4Liy4LiE4LihJywn4Liq4Li04LiH4Lir4Liy4LiE4LihJywn4LiB4Lix4LiZ
+			4Lii4Liy4Lii4LiZJywn4LiV4Li44Lil4Liy4LiE4LihJywn4Lie4Lik4Lio4LiI4Li04LiB4Liy
+			4Lii4LiZJywn4LiY4Lix4LiZ4Lin4Liy4LiE4LihJ10sCm1vbnRoTmFtZXNTaG9ydDogWyfguKEu
+			4LiELicsJ+C4gS7guJ4uJywn4Lih4Li1LuC4hC4nLCfguYDguKEu4LiiLicsJ+C4ni7guIQuJywn
+			4Lih4Li0LuC4oi4nLCfguIEu4LiELicsJ+C4qi7guIQuJywn4LiBLuC4oi4nLCfguJUu4LiELics
+			J+C4ni7guKIuJywn4LiYLuC4hC4nXSwKZGF5TmFtZXM6IFsn4Lit4Liy4LiX4Li04LiV4Lii4LmM
+			Jywn4LiI4Lix4LiZ4LiX4Lij4LmMJywn4Lit4Lix4LiH4LiE4Liy4LijJywn4Lie4Li44LiYJywn
+			4Lie4Lik4Lir4Lix4Liq4Lia4LiU4Li1Jywn4Lio4Li44LiB4Lij4LmMJywn4LmA4Liq4Liy4Lij
+			4LmMJ10sCmRheU5hbWVzU2hvcnQ6IFsn4Lit4LiyLicsJ+C4iC4nLCfguK0uJywn4LieLicsJ+C4
+			nuC4pC4nLCfguKguJywn4LiqLiddLApkYXlOYW1lc01pbjogWyfguK3guLIuJywn4LiILicsJ+C4
+			rS4nLCfguJ4uJywn4Lie4LikLicsJ+C4qC4nLCfguKouJ10sCndlZWtIZWFkZXI6ICdXaycsCmRh
+			dGVGb3JtYXQ6ICdkZC9tbS95eScsCmZpcnN0RGF5OiAwLAppc1JUTDogZmFsc2UsCnNob3dNb250
+			aEFmdGVyWWVhcjogZmFsc2UsCnllYXJTdWZmaXg6ICcnfTsKCi8qIFR1cmtpc2ggKi8KJC5kYXRl
+			cGlja2VyLnJlZ2lvbmFsWyd0ciddPXsKY2xvc2VUZXh0OiAna2FwYXQnLApwcmV2VGV4dDogJyYj
+			eDNjO2dlcmknLApuZXh0VGV4dDogJ2lsZXJpJiN4M2UnLApjdXJyZW50VGV4dDogJ2J1Z8O8bics
+			Cm1vbnRoTmFtZXM6IFsnT2NhaycsJ8WedWJhdCcsJ01hcnQnLCdOaXNhbicsJ01hecSxcycsJ0hh
+			emlyYW4nLCdUZW1tdXonLCdBxJ91c3RvcycsJ0V5bMO8bCcsJ0VraW0nLCdLYXPEsW0nLCdBcmFs
+			xLFrJ10sCm1vbnRoTmFtZXNTaG9ydDogWydPY2EnLCfFnnViJywnTWFyJywnTmlzJywnTWF5Jywn
+			SGF6JywnVGVtJywnQcSfdScsJ0V5bCcsJ0VraScsJ0thcycsJ0FyYSddLApkYXlOYW1lczogWydQ
+			YXphcicsJ1BhemFydGVzaScsJ1NhbMSxJywnw4dhcsWfYW1iYScsJ1BlcsWfZW1iZScsJ0N1bWEn
+			LCdDdW1hcnRlc2knXSwKZGF5TmFtZXNTaG9ydDogWydQeicsJ1B0JywnU2EnLCfDh2EnLCdQZScs
+			J0N1JywnQ3QnXSwKZGF5TmFtZXNNaW46IFsnUHonLCdQdCcsJ1NhJywnw4dhJywnUGUnLCdDdScs
+			J0N0J10sCndlZWtIZWFkZXI6ICdIZicsCmRhdGVGb3JtYXQ6ICdkZC5tbS55eScsCmZpcnN0RGF5
+			OiAxLAppc1JUTDogZmFsc2UsCnNob3dNb250aEFmdGVyWWVhcjogZmFsc2UsCnllYXJTdWZmaXg6
+			ICcnfTsKCi8qIFVrcmFpbmlhbiAqLwokLmRhdGVwaWNrZXIucmVnaW9uYWxbJ3VrJ109ewpjbG9z
+			ZVRleHQ6ICfQl9Cw0LrRgNC40YLQuCcsCnByZXZUZXh0OiAnJiN4M2M7JywKbmV4dFRleHQ6ICcm
+			I3gzZTsnLApjdXJyZW50VGV4dDogJ9Ch0YzQvtCz0L7QtNC90ZYnLAptb250aE5hbWVzOiBbJ9Ch
+			0ZbRh9C10L3RjCcsJ9Cb0Y7RgtC40LknLCfQkdC10YDQtdC30LXQvdGMJywn0JrQstGW0YLQtdC9
+			0YwnLCfQotGA0LDQstC10L3RjCcsJ9Cn0LXRgNCy0LXQvdGMJywn0JvQuNC/0LXQvdGMJywn0KHQ
+			tdGA0L/QtdC90YwnLCfQktC10YDQtdGB0LXQvdGMJywn0JbQvtCy0YLQtdC90YwnLCfQm9C40YHR
+			gtC+0L/QsNC0Jywn0JPRgNGD0LTQtdC90YwnXSwKbW9udGhOYW1lc1Nob3J0OiBbJ9Ch0ZbRhycs
+			J9Cb0Y7RgicsJ9CR0LXRgCcsJ9Ca0LLRlicsJ9Ci0YDQsCcsJ9Cn0LXRgCcsJ9Cb0LjQvycsJ9Ch
+			0LXRgCcsJ9CS0LXRgCcsJ9CW0L7QsicsJ9Cb0LjRgScsJ9CT0YDRgyddLApkYXlOYW1lczogWyfQ
+			vdC10LTRltC70Y8nLCfQv9C+0L3QtdC00ZbQu9C+0LonLCfQstGW0LLRgtC+0YDQvtC6Jywn0YHQ
+			tdGA0LXQtNCwJywn0YfQtdGC0LLQtdGAJywn0L/igJnRj9GC0L3QuNGG0Y8nLCfRgdGD0LHQvtGC
+			0LAnXSwKZGF5TmFtZXNTaG9ydDogWyfQvdC10LQnLCfQv9C90LQnLCfQstGW0LInLCfRgdGA0LQn
+			LCfRh9GC0LInLCfQv9GC0L0nLCfRgdCx0YInXSwKZGF5TmFtZXNNaW46IFsn0J3QtCcsJ9Cf0L0n
+			LCfQktGCJywn0KHRgCcsJ9Cn0YInLCfQn9GCJywn0KHQsSddLAp3ZWVrSGVhZGVyOiAn0J3QtScs
+			CmRhdGVGb3JtYXQ6ICdkZC9tbS95eScsCmZpcnN0RGF5OiAxLAppc1JUTDogZmFsc2UsCnNob3dN
+			b250aEFmdGVyWWVhcjogZmFsc2UsCnllYXJTdWZmaXg6ICcnfTsKCi8qIFZpZXRuYW1lc2UgKi8K
+			JC5kYXRlcGlja2VyLnJlZ2lvbmFsWyd2aSddPXsKY2xvc2VUZXh0OiAnxJDDs25nJywKcHJldlRl
+			eHQ6ICcmI3gzYztUcsaw4bubYycsCm5leHRUZXh0OiAnVGnhur9wJiN4M2U7JywKY3VycmVudFRl
+			eHQ6ICdIw7RtIG5heScsCm1vbnRoTmFtZXM6IFsnVGjDoW5nIE3hu5l0JywgJ1Row6FuZyBIYWkn
+			LCAnVGjDoW5nIEJhJywgJ1Row6FuZyBUxrAnLCAnVGjDoW5nIE7Eg20nLCAnVGjDoW5nIFPDoXUn
+			LCdUaMOhbmcgQuG6o3knLCAnVGjDoW5nIFTDoW0nLCAnVGjDoW5nIENow61uJywgJ1Row6FuZyBN
+			xrDhu51pJywgJ1Row6FuZyBNxrDhu51pIE3hu5l0JywgJ1Row6FuZyBNxrDhu51pIEhhaSddLApt
+			b250aE5hbWVzU2hvcnQ6IFsnVGjDoW5nIDEnLCAnVGjDoW5nIDInLCAnVGjDoW5nIDMnLCAnVGjD
+			oW5nIDQnLCAnVGjDoW5nIDUnLCAnVGjDoW5nIDYnLCdUaMOhbmcgNycsICdUaMOhbmcgOCcsICdU
+			aMOhbmcgOScsICdUaMOhbmcgMTAnLCAnVGjDoW5nIDExJywgJ1Row6FuZyAxMiddLApkYXlOYW1l
+			czogWydDaOG7pyBOaOG6rXQnLCAnVGjhu6kgSGFpJywgJ1Ro4bupIEJhJywgJ1Ro4bupIFTGsCcs
+			ICdUaOG7qSBOxINtJywgJ1Ro4bupIFPDoXUnLCAnVGjhu6kgQuG6o3knXSwKZGF5TmFtZXNTaG9y
+			dDogWydDTicsICdUMicsICdUMycsICdUNCcsICdUNScsICdUNicsICdUNyddLApkYXlOYW1lc01p
+			bjogWydDTicsICdUMicsICdUMycsICdUNCcsICdUNScsICdUNicsICdUNyddLAp3ZWVrSGVhZGVy
+			OiAnVHUnLApkYXRlRm9ybWF0OiAnZGQvbW0veXknLApmaXJzdERheTogMCwKaXNSVEw6IGZhbHNl
+			LApzaG93TW9udGhBZnRlclllYXI6IGZhbHNlLAp5ZWFyU3VmZml4OiAnJ307CgovKiBDaGluZXNl
+			ICovCiQuZGF0ZXBpY2tlci5yZWdpb25hbFsnemgtQ04nXT17CmNsb3NlVGV4dDogJ+WFs+mXrScs
+			CnByZXZUZXh0OiAnJiN4M2M75LiK5pyIJywKbmV4dFRleHQ6ICfkuIvmnIgmI3gzZTsnLApjdXJy
+			ZW50VGV4dDogJ+S7iuWkqScsCm1vbnRoTmFtZXM6IFsn5LiA5pyIJywn5LqM5pyIJywn5LiJ5pyI
+			Jywn5Zub5pyIJywn5LqU5pyIJywn5YWt5pyIJywn5LiD5pyIJywn5YWr5pyIJywn5Lmd5pyIJywn
+			5Y2B5pyIJywn5Y2B5LiA5pyIJywn5Y2B5LqM5pyIJ10sCm1vbnRoTmFtZXNTaG9ydDogWyfkuIAn
+			LCfkuownLCfkuIknLCflm5snLCfkupQnLCflha0nLCfkuIMnLCflhasnLCfkuZ0nLCfljYEnLCfl
+			jYHkuIAnLCfljYHkuownXSwKZGF5TmFtZXM6IFsn5pif5pyf5pelJywn5pif5pyf5LiAJywn5pif
+			5pyf5LqMJywn5pif5pyf5LiJJywn5pif5pyf5ZubJywn5pif5pyf5LqUJywn5pif5pyf5YWtJ10s
+			CmRheU5hbWVzU2hvcnQ6IFsn5ZGo5pelJywn5ZGo5LiAJywn5ZGo5LqMJywn5ZGo5LiJJywn5ZGo
+			5ZubJywn5ZGo5LqUJywn5ZGo5YWtJ10sCmRheU5hbWVzTWluOiBbJ+aXpScsJ+S4gCcsJ+S6jCcs
+			J+S4iScsJ+WbmycsJ+S6lCcsJ+WFrSddLAp3ZWVrSGVhZGVyOiAn5ZGoJywKZGF0ZUZvcm1hdDog
+			J3l5LW1tLWRkJywKZmlyc3REYXk6IDEsCmlzUlRMOiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZZWFy
+			OiB0cnVlLAp5ZWFyU3VmZml4OiAn5bm0J307CgovKiBDaGluZXNlICovCiQuZGF0ZXBpY2tlci5y
+			ZWdpb25hbFsnemgtSEsnXT17CmNsb3NlVGV4dDogJ+mXnOmWiScsCnByZXZUZXh0OiAnJiN4M2M7
+			5LiK5pyIJywKbmV4dFRleHQ6ICfkuIvmnIgmI3gzZTsnLApjdXJyZW50VGV4dDogJ+S7iuWkqScs
+			Cm1vbnRoTmFtZXM6IFsn5LiA5pyIJywn5LqM5pyIJywn5LiJ5pyIJywn5Zub5pyIJywn5LqU5pyI
+			Jywn5YWt5pyIJywn5LiD5pyIJywn5YWr5pyIJywn5Lmd5pyIJywn5Y2B5pyIJywn5Y2B5LiA5pyI
+			Jywn5Y2B5LqM5pyIJ10sCm1vbnRoTmFtZXNTaG9ydDogWyfkuIAnLCfkuownLCfkuIknLCflm5sn
+			LCfkupQnLCflha0nLCfkuIMnLCflhasnLCfkuZ0nLCfljYEnLCfljYHkuIAnLCfljYHkuownXSwK
+			ZGF5TmFtZXM6IFsn5pif5pyf5pelJywn5pif5pyf5LiAJywn5pif5pyf5LqMJywn5pif5pyf5LiJ
+			Jywn5pif5pyf5ZubJywn5pif5pyf5LqUJywn5pif5pyf5YWtJ10sCmRheU5hbWVzU2hvcnQ6IFsn
+			5ZGo5pelJywn5ZGo5LiAJywn5ZGo5LqMJywn5ZGo5LiJJywn5ZGo5ZubJywn5ZGo5LqUJywn5ZGo
+			5YWtJ10sCmRheU5hbWVzTWluOiBbJ+aXpScsJ+S4gCcsJ+S6jCcsJ+S4iScsJ+WbmycsJ+S6lCcs
+			J+WFrSddLAp3ZWVrSGVhZGVyOiAn5ZGoJywKZGF0ZUZvcm1hdDogJ2RkLW1tLXl5JywKZmlyc3RE
+			YXk6IDAsCmlzUlRMOiBmYWxzZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiB0cnVlLAp5ZWFyU3VmZml4
+			OiAn5bm0J307CgovKiBDaGluZXNlICovCiQuZGF0ZXBpY2tlci5yZWdpb25hbFsnemgtVFcnXT17
+			CmNsb3NlVGV4dDogJ+mXnOmWiScsCnByZXZUZXh0OiAnJiN4M2M75LiK5pyIJywKbmV4dFRleHQ6
+			ICfkuIvmnIgmI3gzZTsnLApjdXJyZW50VGV4dDogJ+S7iuWkqScsCm1vbnRoTmFtZXM6IFsn5LiA
+			5pyIJywn5LqM5pyIJywn5LiJ5pyIJywn5Zub5pyIJywn5LqU5pyIJywn5YWt5pyIJywn5LiD5pyI
+			Jywn5YWr5pyIJywn5Lmd5pyIJywn5Y2B5pyIJywn5Y2B5LiA5pyIJywn5Y2B5LqM5pyIJ10sCm1v
+			bnRoTmFtZXNTaG9ydDogWyfkuIAnLCfkuownLCfkuIknLCflm5snLCfkupQnLCflha0nLCfkuIMn
+			LCflhasnLCfkuZ0nLCfljYEnLCfljYHkuIAnLCfljYHkuownXSwKZGF5TmFtZXM6IFsn5pif5pyf
+			5pelJywn5pif5pyf5LiAJywn5pif5pyf5LqMJywn5pif5pyf5LiJJywn5pif5pyf5ZubJywn5pif
+			5pyf5LqUJywn5pif5pyf5YWtJ10sCmRheU5hbWVzU2hvcnQ6IFsn5ZGo5pelJywn5ZGo5LiAJywn
+			5ZGo5LqMJywn5ZGo5LiJJywn5ZGo5ZubJywn5ZGo5LqUJywn5ZGo5YWtJ10sCmRheU5hbWVzTWlu
+			OiBbJ+aXpScsJ+S4gCcsJ+S6jCcsJ+S4iScsJ+WbmycsJ+S6lCcsJ+WFrSddLAp3ZWVrSGVhZGVy
+			OiAn5ZGoJywKZGF0ZUZvcm1hdDogJ3l5L21tL2RkJywKZmlyc3REYXk6IDEsCmlzUlRMOiBmYWxz
+			ZSwKc2hvd01vbnRoQWZ0ZXJZZWFyOiB0cnVlLAp5ZWFyU3VmZml4OiAn5bm0J307Cgp9KTsK
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[class VDOM_formdate(VDOM_object):
+
+	def render(self, contents=""):
+		display = u"display: none;" if self.visible == "0" else u""
+
+		if self.mode == "1":
+			mode = u"""readonly="readonly" """
+		elif self.mode == "2":
+			mode = u"""disabled="disabled" """
+		else:
+			mode = u""
+
+		auto = u"off" if self.autocomplete == "0" else u"on"
+
+		clean_id = (self.id).replace('-', '_')
+		id = u"o_%s" % clean_id
+
+		# for doctype xhtml 1.0 - width|height depends on padding
+		fixw = int(self.width) - 10
+		fixh = int(self.height) - 4
+
+		if self.inputmode == "1":
+			js = u"""<script type='text/javascript'>$j(function(){
+$j.datepicker.setDefaults($j.datepicker.regional['%(regional)s']);
+/*$j.datepicker.setDefaults({ dateFormat: 'yy-mm-dd', showButtonPanel: %(showb)s });*/
+$j('#%(id)s').datepicker('destroy').datepicker({
+	dateFormat: 'yy-mm-dd', showButtonPanel: %(showb)s,
+	onSelect: function(d,i) { execEventBinded('%(clean_id)s', "valuechange", {"itemValue": d}); }
+});
+});</script>""" % { "id": id, "clean_id": clean_id, "regional": self.regional, "showb": "true" if self.showbuttonpanel == "1" else "false"  }
+			modestyle = u"background:url('/0f94d563-04ee-0283-2138-62c68af01145.res') right 50% no-repeat;"
+		else:
+			js = u""
+			modestyle = u""
+
+		style = u"""z-index: {zind}; position: {pos}; top: {top}px; left: {left}px; width: {width}px; height: {height}px;
+					padding: 2px 5px; {display} font: 14px tahoma; {modestyle}
+				""".format(zind = self.zindex, pos = self.position, top = self.top, left = self.left,
+						width = fixw, height = fixh, display = display, modestyle = modestyle)
+
+		result = u"""<input id="{id}" ver="2011-12-26" name="{name}" style="{style}" type="text" tabindex="{tabind}"
+					value="{value}" class="{classn}" autocomplete="{auto}" {mode} /> {js}
+			""".format(id = id, name = self.name, style = style, tabind = self.tabindex,
+						value = self.value, classn = self.classname, auto = auto, mode = mode, js = js)
+
+		return VDOM_object.render(self, contents=result)
+
+	def wysiwyg(self, contents=""):
+		image_width = image_height = 16
+		image_x = image_y = 0
+
+		if int(self.width) > image_width-2 :
+			image_x = int(self.width) - image_width - 2
+		else :
+			image_x = 1
+			image_width = int(self.width)-2
+
+		if int(self.height) > image_height :
+			image_y = (int(self.height) - image_height - 2)/2
+		else :
+			image_y = 1
+			image_height = int(self.height)-2
+
+		modestyle = u""
+		if self.inputmode == "1": # input mode "date"
+			modestyle = \
+				u"""<image x="{image_x}" y="{image_y}" width="{image_width}" height="{image_height}" href="#Res(0f94d563-04ee-0283-2138-62c68af01145)" />
+				""".format(image_x = image_x, image_y = image_y, image_width = image_width, image_height = image_height)
+
+		text = u""
+		if self.value :
+			text = u"""<text left="{text_x}" top="{text_y}" width="{text_width}" color="#000000">{value}</text>""".format(
+				text_x = 2, text_y = image_y,
+				text_width = self.width if self.value else 0,
+				value = self.value)
+
+		result = \
+			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+					top="{top}" left="{left}" width="{width}" height="{height}">
+					<svg>
+						<rect x="0" y="0" width="{rect_width}" height="{rect_height}" fill="#FFFFFF" stroke="#000000"/>
+						{modestyle}
+					</svg>
+					{text}
+				</container>
+			 """.format(
+					id = self.id, vis = self.visible, zind = self.zindex,
+					hierarchy = self.hierarchy, order = self.order,
+					modestyle = modestyle, text = text,
+					top = self.top, left = self.left,
+					width = self.width, height = self.height,
+					rect_width = int(self.width)-1,
+					rect_height = int(self.height)-1)
+
+		return VDOM_object.wysiwyg(self, contents=result)
+
+def set_attr(app_id, object_id, param):
+	o = application.objects.search(object_id)
+
+	if "width" in param:
+		width = param["width"]["value"]
+		if int(width) < 10:
+			o.set_attributes({"width": "10"})
+
+	if "height" in param:
+		height = param["height"]["value"]
+		if int(height) < 4:
+			o.set_attributes({"height": "4"})]]>
+	</SourceCode>
+	<Libraries>
+		<Library Target="html"><![CDATA[<script type='text/javascript' src='/aaae709d-2dab-ce1a-35bf-182f195b9336.res'></script>]]></Library>
+	</Libraries>
+	<E2VDOM>
+		<Events>
+			<UserInterfaceEvents>
+				<Event Name="mouseup" Description="#Lang(515)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(916)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(917)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mousemove" Description="#Lang(512)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(909)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(911)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="valuechange" Description="#Lang(516)">
+					<Parameters>
+						<Parameter Name="itemValue" Description="#Lang(918)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mousedown" Description="#Lang(511)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(907)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(908)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mouseout" Description="#Lang(513)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(912)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(913)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="ctrlclick" Description="#Lang(508)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(903)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(904)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="mouseover" Description="#Lang(514)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(914)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(915)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="click" Description="#Lang(507)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(901)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(902)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="dblclick" Description="#Lang(509)">
+					<Parameters>
+						<Parameter Name="X" Description="#Lang(905)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(906)" Order="0"/>
+					</Parameters>
+				</Event>
+			</UserInterfaceEvents>
+		</Events>
+		<Actions>
+			<Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
+				<Action Name="hide" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_hide(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="show" DisplayName="#Lang(606)" Description="#Lang(506)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(707)" Description="#Lang(807)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_show(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="removeClass" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).removeClass(className);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="addClass" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).addClass(className);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setFocus" DisplayName="#Lang(603)" Description="#Lang(503)">
+					<SourceCode>
+<![CDATA[jQuery(this.domCont).focus();]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setValue" DisplayName="#Lang(605)" Description="#Lang(505)">
+					<Parameters>
+						<Parameter Name="value" DisplayName="#Lang(706)" Description="#Lang(806)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_evt_setvalue(this, value);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="moveTo" DisplayName="#Lang(602)" Description="#Lang(502)">
+					<Parameters>
+						<Parameter Name="newX" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="newY" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="Effect" DisplayName="#Lang(704)" Description="#Lang(804)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_moveTo(this.domCont, newX, newY, Effect);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setStyle" DisplayName="#Lang(604)" Description="#Lang(504)">
+					<Parameters>
+						<Parameter Name="cssStyleValue" DisplayName="#Lang(705)" Description="#Lang(805)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[var t=$q(this.domCont);
+t.attr('style', t.attr('style') + ';' + cssStyleValue);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setClass" DisplayName="#Lang(607)" Description="#Lang(507)">
+					<Parameters>
+						<Parameter Name="className" DisplayName="#Lang(709)" Description="#Lang(809)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q(this.domCont).attr('class',className);]]>
+					</SourceCode>
+				</Action>
+			</Container>
+		</Actions>
+	</E2VDOM>
+</Type>

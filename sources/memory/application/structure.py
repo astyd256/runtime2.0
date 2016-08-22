@@ -25,8 +25,9 @@ class MemoryStructureSketch(MemoryBase, Mapping):
     state = rwproperty("_state")
 
     def __invert__(self):
-        for item in self.__dict__.get("_items", ()):
-            ~item
+        if "_items" in self.__dict__:
+            for item in self._items.itervalues():
+                ~item
         self.__class__ = MemoryStructure
         return self
 
@@ -59,7 +60,7 @@ class MemoryStructure(MemoryStructureSketch):
                 self._top, self._left, self._state)
         if self.__dict__.get("_items"):
             file.write(u"%s<Object %s>\n" % (ident, information))
-            for item in self._items:
+            for item in self._items.itervalues():
                 item.compose(ident=ident + u"\t", file=file)
             file.write(u"%s</Object>\n" % ident)
         else:

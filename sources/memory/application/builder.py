@@ -353,7 +353,7 @@ def application_builder(parser, callback=None):
                                             level_name = attributes.pop(u"Index")
                                         except KeyError:
                                             raise MissingAttributeError(u"Name")
-                                    level, obsolete_objects = structure[level_name], defaultdict(set)
+                                    level = structure[level_name]
                                     def level_handler(name, attributes):
                                         if name == u"Object":
                                             # <Object>
@@ -361,21 +361,15 @@ def application_builder(parser, callback=None):
                                                 child_id = str(attributes.pop(u"ID").lower())
                                             except KeyError:
                                                 raise MissingAttributeError(u"ID")
-                                            child = application.cotainers.get(child_id)
-                                            if not child_id:
-                                                parser.handle_elements(name, attributes)
-                                                return
-                                            try:
-                                                obsolete_objects[attributes.pop(u"Index")].add(child)
-                                            except KeyError:
-                                                level.add(child)
+                                            if child_id:
+                                                # child = application.containers.get(child_id)
+                                                child = containers.get(child_id)
+                                                if child:
+                                                    level.add(child)
                                             parser.handle_elements(name, attributes)
                                             # </Object>
                                         else:
                                             parser.reject_elements(name, attributes)
-                                    def close_level_handler(name):
-                                        for objects in obsolete_objects.itervalues():
-                                            level.update(objects)
                                     parser.handle_elements(name, attributes, level_handler)
                                     # </Level>
                                 else:

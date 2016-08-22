@@ -55,7 +55,7 @@ class MemoryStructureLevel(MemoryStructureLevelSketch):
         if items:
             file.write(u"%s<Level%s>\n" % (ident, attributes))
             for item in items:
-                file.write(u"%s\t<Object ID=\"%s\"/>" % (ident, item.id))
+                file.write(u"%s\t<Object ID=\"%s\"/>\n" % (ident, item.id))
             file.write(u"%s</Level>\n" % ident)
         else:
             file.write(u"%s<Level%s/>\n" % (ident, attributes))

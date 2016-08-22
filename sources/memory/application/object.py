@@ -93,7 +93,7 @@ class MemoryObjectSketch(MemoryBase):
             raise Exception(u"Object require name")
 
         ~self._attributes
-        if "_structure" in self.__dict__:
+        if self.__dict__.get("_structure") is not None:
             ~self._structure
 
         self.__class__ = MemoryObject
