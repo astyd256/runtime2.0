@@ -2,6 +2,7 @@
 import string
 import base64
 
+from operator import itemgetter
 from collections import defaultdict, OrderedDict
 from uuid import uuid4
 
@@ -353,7 +354,7 @@ def application_builder(parser, callback=None):
                                             level_name = attributes.pop(u"Index")
                                         except KeyError:
                                             raise MissingAttributeError(u"Name")
-                                    level = structure[level_name]
+                                    level, level_objects = structure[level_name], defaultdict(list)
                                     def level_handler(name, attributes):
                                         if name == u"Object":
                                             # <Object>
@@ -365,12 +366,24 @@ def application_builder(parser, callback=None):
                                                 # child = application.containers.get(child_id)
                                                 child = containers.get(child_id)
                                                 if child:
-                                                    level.add(child)
+                                                    try:
+                                                        level_objects[int(attributes.pop(u"Index"))].append(child)
+                                                    except KeyError:
+                                                        level_objects[None].append(child)
+                                                    except ValueError:
+                                                        raise UnexpectedAttributeValueError(u"Index")
+                                                else:
+                                                    parser.notify("Unable to find %s object for %s:%s level" % (child_id, parent.id, level_name))
+                                            else:
+                                                parser.notify("Ignore empty object ID for %s:%s level" % (parent.id, level_name))
                                             parser.handle_elements(name, attributes)
                                             # </Object>
                                         else:
                                             parser.reject_elements(name, attributes)
-                                    parser.handle_elements(name, attributes, level_handler)
+                                    def close_level_handler(name):
+                                        for index, index_objects in sorted(level_objects.iteritems(), key=itemgetter(0)):
+                                            level.extend(index_objects)
+                                    parser.handle_elements(name, attributes, level_handler, close_level_handler)
                                     # </Level>
                                 else:
                                     parser.reject_elements(name, attributes)

@@ -1,14 +1,17 @@
 
-from collections import MutableSet
+from collections import MutableSequence
 from utils.properties import lazy, roproperty, rwproperty
 from ..generic import MemoryBase
 
 
-class MemoryStructureLevelSketch(MemoryBase, MutableSet):
+EMPTY_LIST = []
+
+
+class MemoryStructureLevelSketch(MemoryBase, MutableSequence):
 
     @lazy
     def _items(self):
-        return set()
+        return []
 
     def __init__(self, owner, name):
         self._owner = owner
@@ -17,22 +20,20 @@ class MemoryStructureLevelSketch(MemoryBase, MutableSet):
     owner = roproperty("_owner")
     name = rwproperty("_name")
 
-    def add(self, item):
-        with self._owner.owner.lock:
-            self._items.add(item)
+    def insert(self, index, item):
+        self._items.insert(index, item)
 
-    def discard(self, item):
-        with self._owner.owner.lock:
-            self.__dict__.get("_items", ()).discard(item)
+    def __getitem__(self, index):
+        return self.__dict__.get("_items", EMPTY_LIST)[index]
 
-    def __contains__(self, item):
-        return item in self.__dict__.get("_items", ())
+    def __setitem__(self, index, item):
+        self._items[index] = item
 
-    def __iter__(self):
-        return iter(self.__dict__.get("_items", ()))
+    def __delitem__(self, index):
+        del self.__dict__.get("_items", EMPTY_LIST)[index]
 
     def __len__(self):
-        return len(self.__dict__.get("_items", ()))
+        return len(self.__dict__.get("_items", EMPTY_LIST))
 
     def __invert__(self):
         self.__class__ = MemoryStructureLevel
@@ -60,13 +61,20 @@ class MemoryStructureLevel(MemoryStructureLevelSketch):
         else:
             file.write(u"%s<Level%s/>\n" % (ident, attributes))
 
-    def add(self, item):
-        super(MemoryStructureLevel, self).add(item)
-        self._owner.owner.autosave()
+    def insert(self, index, item):
+        with self._owner.owner.lock:
+            self._items.insert(index, item)
+            self._owner.owner.autosave()
 
-    def discard(self, item):
-        super(MemoryStructureLevel, self).discard(item)
-        self._owner.owner.autosave()
+    def __setitem__(self, index, item):
+        with self._owner.owner.lock:
+            self._items[index] = item
+            self._owner.owner.autosave()
+
+    def __delitem__(self, index):
+        with self._owner.owner.lock:
+            del self.__dict__.get("_items", EMPTY_LIST)[index]
+            self._owner.owner.autosave()
 
     def __invert__(self):
         raise NotImplementedError
