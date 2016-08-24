@@ -232,6 +232,12 @@ class Memory(object):
                 log.write("Load %s" % application)
                 for lineno, message in parser.report:
                     log.warning("    %s at line %s" % (message, lineno))
+
+            if settings.SERVER:
+                action = application.actions.get("applicationonstart")
+                if action and action.source_code:
+                    managers.engine.execute(action)
+
             return application
         except IOError as error:
             raise Exception("Unable to read from \"%s\": %s" % (os.path.basename(location), error.strerror))

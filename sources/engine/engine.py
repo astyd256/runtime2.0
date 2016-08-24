@@ -4,6 +4,7 @@ from threading import local, current_thread
 import managers
 from logs import log
 from memory import COMPUTE_CONTEXT, RENDER_CONTEXT, WYSIWYG_CONTEXT
+from utils.exception import VDOM_exception
 from .exceptions import RenderTermination
 
 
@@ -69,11 +70,17 @@ class Engine(object):
         log.write("Execute%s %s" % (" and render" if render else "", action))
         previous = self.select(action.owner.application)
         try:
+            # get current context or return empty for some global actions
+            try:
+                context = managers.request_manager.get_request().session().context
+            except VDOM_exception:
+                context = {}
+
             if action.owner.is_application:
-                action.execute(None, managers.request_manager.get_request().session().context)
+                action.execute(None, context)
             else:
                 instance = action.owner.factory(context or action.id)(parent)
-                instance.execute(managers.request_manager.get_request().session().context)
+                instance.execute(context)
                 return instance.separate_render() if render else None
         except RenderTermination:
             return "" if render else None
