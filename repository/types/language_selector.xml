@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>aa3fad0a-7010-1871-9437-d9a200000000</ID>
+		<Name>language_selector</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_langsel</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.242.6720</Version>
+		<Category>Additional</Category>
+		<InterfaceType>1</InterfaceType>
+		<Icon>#Res(f98203b6-655b-0f39-83fb-16b5bf07fb6f)</Icon>
+		<EditorIcon>#Res(24edfde2-38e8-9fe1-a260-16b5ed6583b3)</EditorIcon>
+		<StructureIcon>#Res(13d380b7-dc60-8f7f-c2dc-16b61c1b3a72)</StructureIcon>
+		<Dynamic>0</Dynamic>
+		<Moveable>1</Moveable>
+		<Resizable>0</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>1</Container>
+		<Containers>htmlcontainer</Containers>
+		<Languages>en_US, ru_RU, fr_FR</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>zindex</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>top</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>left</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>layout</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(403)|0)|(#Lang(404)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>lang_display</Name>
+			<DisplayName>#Lang(107)</DisplayName>
+			<Description>#Lang(207)</Description>
+			<DefaultValue>fr_FR,en_US,bg_BG,ru_RU</DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>3</InterfaceType>
+			<CodeInterface>MultiLine(1000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>lang_res</Name>
+			<DisplayName>#Lang(108)</DisplayName>
+			<Description>#Lang(208)</Description>
+			<DefaultValue>{
+&quot;ru_RU&quot; : [&quot;Russian&quot;, 			&quot;5663c096-66aa-176a-2c68-df26a3993b49&quot;],
+&quot;en_US&quot; : [&quot;English (US)&quot;,  	&quot;723ced32-cfaa-2549-de6b-df268404e310&quot;],
+&quot;fr_FR&quot; : [&quot;French (France)&quot;, 	&quot;cf458c69-26a4-945d-9d60-df2622323a7d&quot;],
+&quot;bg_BG&quot; : [&quot;Bulgarian&quot;, 		&quot;e54cf632-7695-0ae3-0621-df25c70b825a&quot;]
+}</DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>3</InterfaceType>
+			<CodeInterface>MultiLine(10000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">Language selector</Sentence>
+			<Sentence ID="002">The Language selector type produces an object that allows selecting the displayed language of a web page and application.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Z-index</Sentence>
+			<Sentence ID="104">Top</Sentence>
+			<Sentence ID="105">Left</Sentence>
+			<Sentence ID="106">Layout</Sentence>
+			<Sentence ID="107">Display languages</Sentence>
+			<Sentence ID="108">Language resources</Sentence>
+			<Sentence ID="201">Order of rendering the object on the page</Sentence>
+			<Sentence ID="202">Visibility of the object</Sentence>
+			<Sentence ID="203">Position in visual hierarchy of objects</Sentence>
+			<Sentence ID="204">Spacing between the top edge of the container and the object in pixels</Sentence>
+			<Sentence ID="205">Spacing between the left edge of the container and the object in pixels</Sentence>
+			<Sentence ID="206">Way of displaying the list of languages</Sentence>
+			<Sentence ID="207">Languages to display</Sentence>
+			<Sentence ID="208">The identifiers of the resources which are used by the object (images, abbreviations, displayed names)</Sentence>
+			<Sentence ID="301">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="302">Incorrect value</Sentence>
+			<Sentence ID="303">Incorrect value, must be even integer from 0 to 99</Sentence>
+			<Sentence ID="304">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="305">Incorrect value, must be even positive integer</Sentence>
+			<Sentence ID="306">Incorrect value</Sentence>
+			<Sentence ID="307">Incorrect value</Sentence>
+			<Sentence ID="308">Incorrect value</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="403">Icon</Sentence>
+			<Sentence ID="404">List</Sentence>
+			<Sentence ID="501"></Sentence>
+			<Sentence ID="901">Send language name - en_US, ru_RU</Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">Le Délecteur de Langue</Sentence>
+			<Sentence ID="002">Laisser choisir la langue de localisation</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hiérarchie</Sentence>
+			<Sentence ID="102">Visibilité</Sentence>
+			<Sentence ID="103">Z-index</Sentence>
+			<Sentence ID="104">Haut</Sentence>
+			<Sentence ID="105">Gauche</Sentence>
+			<Sentence ID="106">Layout</Sentence>
+			<Sentence ID="107">Liste des langues</Sentence>
+			<Sentence ID="108">Language resources</Sentence>
+			<Sentence ID="201">Hiérarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="202">Afficher ou cacher l&apos;objet</Sentence>
+			<Sentence ID="203">Niveau de superposition de l&apos;objet par rapport aux autres</Sentence>
+			<Sentence ID="204">Spacing between the top edge of the container and the object in pixels</Sentence>
+			<Sentence ID="205">Spacing between the left edge of the container and the object in pixels</Sentence>
+			<Sentence ID="206">Style d&apos;objet</Sentence>
+			<Sentence ID="207">Langues supportées: fr_FR,en_US, ru_RU, bg_BG</Sentence>
+			<Sentence ID="208">The identifiers of the resources which are used by the object (images, abbreviations, displayed names)</Sentence>
+			<Sentence ID="301">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="302">Valeur Incorrecte</Sentence>
+			<Sentence ID="303">Valeur Incorrecte, doit être compris entre 0 et 99</Sentence>
+			<Sentence ID="304">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="305">Valeur Incorrecte, doit être positive</Sentence>
+			<Sentence ID="306">Valeur Incorrecte</Sentence>
+			<Sentence ID="307">Valeur Incorrecte</Sentence>
+			<Sentence ID="308">Valeur Incorrecte</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="403">Icon</Sentence>
+			<Sentence ID="404">List</Sentence>
+			<Sentence ID="501"></Sentence>
+			<Sentence ID="901">Send language name - en_US, ru_RU</Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">Выбор языка</Sentence>
+			<Sentence ID="002">Позволяет выбирать язык локализации</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Иерархия</Sentence>
+			<Sentence ID="102">Отображение</Sentence>
+			<Sentence ID="103">Позиция</Sentence>
+			<Sentence ID="104">Сверху</Sentence>
+			<Sentence ID="105">Слева</Sentence>
+			<Sentence ID="106">Стиль</Sentence>
+			<Sentence ID="107">Отображаемые языки</Sentence>
+			<Sentence ID="108">Ресурсы</Sentence>
+			<Sentence ID="201">Приоритет в потоке гипертекста</Sentence>
+			<Sentence ID="202">Режим отображения объекта</Sentence>
+			<Sentence ID="203">Положение в визуальной иерархии объектов</Sentence>
+			<Sentence ID="204">Расстояние от верхней границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="205">Расстояние от левой границы родительского контейнера до объекта в пикселях</Sentence>
+			<Sentence ID="206">Способ отображения списка языков</Sentence>
+			<Sentence ID="207">Отображаемые языки</Sentence>
+			<Sentence ID="208">Идентификаторы ресурсов, которые используются объектом (иконки, аббревиатуры, отображаемые имена)</Sentence>
+			<Sentence ID="301">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="302">Неправильное значание</Sentence>
+			<Sentence ID="303">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
+			<Sentence ID="304">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="305">Неправильное значение, должно быть указано целое положительное число</Sentence>
+			<Sentence ID="306">Неправильное значание</Sentence>
+			<Sentence ID="307">Неправильное значание</Sentence>
+			<Sentence ID="308">Неправильное значание</Sentence>
+			<Sentence ID="401">Не отображать</Sentence>
+			<Sentence ID="402">Отображать</Sentence>
+			<Sentence ID="403">Иконка</Sentence>
+			<Sentence ID="404">Выпадающий список</Sentence>
+			<Sentence ID="501"></Sentence>
+			<Sentence ID="901">Отсылает серверу выбранный язык</Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="13d380b7-dc60-8f7f-c2dc-16b61c1b3a72" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjUwRkZBNDkyMUZFNTExRTE5QTc1OUI4RTczMUFFMjcwIiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjUwRkZBNDkzMUZFNTExRTE5QTc1OUI4RTczMUFFMjcwIj4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTBGRkE0OTAxRkU1MTFFMTlBNzU5
+			QjhFNzMxQUUyNzAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTBGRkE0OTExRkU1MTFFMTlB
+			NzU5QjhFNzMxQUUyNzAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz4UHOdUAAADTklEQVR42lST32scVRTHv7Mz2R/ZJtlN2kaT
+			tcma0kAaRfqLYhQ01QZ8CFVoKZTVUhD76ovFBwP+ASLUJxFpU1JRBO2LImhBsIqtWWtqtnU3JtG4
+			u9nNbCazOzu/7ty51zuTavXCmYd7+H7Od845V+KcQ5IkBOeV2UUlk6KvHRjuffXYvsHH7mk0wsS9
+			YRFW0axfi+v6B/UWfX/25f0U94/0D+Ds5V/6D+8xrxzNrhzf2fM4PHkcK1YEvs/RtCk0w4VkLWC1
+			bN2o6smTc+cnagEgElb+MJ8c76efPTFw87hOAJtlcXfTBqVMABgY82HRDnDhZyL75VOc5L8+cPqN
+			vkCrBJ+HEvqFsf7Ck4VaHRX6Ika8KAhn6IwSCIOwXAabEDyfZbi9ehgdMhsnO+x3hfRcCBjqqZxf
+			Xr+DW43TiKW7QBsGuuMKTFfeBngcmkmQSY1iLfkNIrKFgczI9CIwGgJst2vX54VTSA0Oo88zobVl
+			WMRHVI5A6GESCZND90TlIRhOEQq7ge5opkekHg0BMtYQjfWBeo/AaDOYTgLJuAtFEdPhEhzXx3C3
+			ibJ+HVttFc22BN2sBtJY2MTq1kHU6hEc2nkJbx37CzPPyhhIAHXNg27YaDRdXJtvoFj+DtWNGPQ2
+			Ea4d/NtET+oE9R3Yra+QX/oRY0MTmHluBh/9vIar86bIAV8sZLFQPIE/aw5k/3fEFf0BgLqWo2t2
+			vLTWBqGOsCkqNXJ4Jvs6fGc3Ln67IUbJcUfrhSNo3V4fOnwxJmxuAxxL/9R1e3O3S5NiXJ9gY8tC
+			VS3jev4yblbPiMYR4cKHJ/bCNDzs6kqg/BNbEFIeAlxC3s50kek/Nkd7KqqH+lYFlfrDWNFGYSZs
+			SCDhQnkuATNFvjpiq/M/fCyk9bCJV958aXkQ5TNJqjVjCS7sKiisvoCauxe21RJVLdhNE74h/t9U
+			m2r++3c49UpCWpD++5iOPD05XeOr77UTR/foyhQincEYRYIxSE4LWM8ver9dm4XbKorbW4GDEJDL
+			5QJCh4h4qbR05O6yesKMpsekzt0pzkTXrI0WNyorsBqLiqIspdPp+ampKXVubo7/z8H9xyWL2CEi
+			eCypAIptH8Hgg9mpwfKK8ANvfwswAPZAwC/LPaAVAAAAAElFTkSuQmCC
+		</Resource>
+		<Resource ID="24edfde2-38e8-9fe1-a260-16b5ed6583b3" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAAA8AAAAQCAYAAADJViUEAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAA2RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEu
+			MC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVz
+			b3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1N
+			Ok9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3Q0I5NjU0QjU0RjZFMDExQkM4MDk5RkU5QzUy
+			NDc4RCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowQzczNkIwODFGMjIxMUUxODUwQUM2REJD
+			NzM5RkYwNSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowQzczNkIwNzFGMjIxMUUxODUwQUM2
+			REJDNzM5RkYwNSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3Mi
+			PiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5NEEyNUM5QTRG
+			MTZFMTExQTQxNURENUVEMTNGQzBGQyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3Q0I5NjU0
+			QjU0RjZFMDExQkM4MDk5RkU5QzUyNDc4RCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRG
+			PiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PpVNPmwAAAM7SURBVHjaPFPfaxxVFP5m
+			5mZ/ZJtkN2kbTdYma4qBGEWqLcUoaKoN+BCqoBSa/kAQ+9qXig8G/ANE0CcRsSlRFEH7oghaEKxi
+			a9aamm3djUnadHezm9lMZnd2ft2ZueOZxnrhuw/n8J3v3POdK+G/c3puiWXT/psHhnvfOPLI4GO3
+			NF8WFDcsLiqa9VdxQ/+43vI/mjv1qH+fI0XXmQt/9h/cZ148nFs9urvncXjKOFYtGUEQomn70AwX
+			krWItbJ1paqnXp0/O1GLePLpT/Kp8X7/6ycGrh7VOWCLHG5u2fB9QWQBIQJYfgdC6mMi990zIc//
+			cOD4+b6IzB5I6m+N9ReeLtTqqPgvY8SLgYcCnTGOMAQsV8DmHC/mBK6vHUSHIsb5Lvt94r7Ohnoq
+			Z1c2buBa4zjimS74DQPdCQbTVXbIXgjN5MimR7Ge+hGyYmEgOzK9BIwy2+3a803hNaQHh9HnmdDa
+			CiweIKbIIC5MLmFy6BYpDsFwimDiCrpj2R5KPcwUrCMW74PvPQSjLWA6SaQSLhijWYYSHDfAcLeJ
+			sn4Z220VzbYE3axGT47L1e0nUavLeGr3p3jnyF3MPq9gIAnUNQ+6YaPRdHFpoYFi+WdUN+PQ2xy2
+			69yzinlSJ/zAgd36Hvnl3zA2NIHZF2bx+R/r+GzBpBzw7WIOi8VjuFNzoAT/IMH0HbLvWo6u2YnS
+			ehvcd6g1UmicxHO5cwicvfjgp02yK8QNrRcOVer2+tARkB3YAnMs/SvX7T15vTRJlnyJzW0LVbWM
+			y/kLuFo9QUPipB7AI99Nw8OeriTKv4tFEg6Zy/m72S4+fXtrtKeieqhvV1CpP4hVbRRm0qYV5PeW
+			xXM5hEn56oitLvz6BZHr8sW3X1kZRPlEytea8WRILTIU1l5Czd0P22qRmgW7aSIw6L2m2lTzv7wX
+			+l6JyAXp/pIfenZyuhaufdhOHt6nsynInZFVlBACktMCNvJL3t+X5uC2ihS9FilLMzMzUYEOQqJU
+			Wj50c0U9ZsYyY1Ln3nQoaELWZis0KquwGkuMseVMJrMwNTWlzs/Ph/8rR5+EoBB2EaLFT0cFsaMf
+			GRv5oxJsQhD19K8AAwBnv7EvbBpNpwAAAABJRU5ErkJggg==
+		</Resource>
+		<Resource ID="5663c096-66aa-176a-2c68-df26a3993b49" Type="png" Name="ru.png">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0
+			U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAE2SURBVHjaYvz69T8DAvz79w9CQVj/0MCf
+			fwwAAcQClObiAin6/x+okxHMgPCAbOb//5n+I4EXL74ABBALxGSwagTjPzbAyMgItAQggBg9Pf9n
+			ZPx//x7kjL9////9C2QAyf9//qCQQCQkxFhY+BEggFi2b/+nq8v46BEDSPQ3w+8//3//BqFfv9BJ
+			eXmQEwACCOSkP38YgHy4Bog0RN0vIOMXVOTPH6Cv/gEEEEgDxFKgHEgDXCmGDUAE1AAQQCybGZg1
+			f/d8//XsH0jTn3+///z79RtE/v4NZfz68xfI/vOX+4/0ZoZFAAHE4gYMvD+3/v2+h91wCANo9Z+/
+			jH9VxBkYAAKIBRg9TL//MEhKAuWAogxgZzGC2CCfgUggAoYdGAEVAwQQ41egu5AQAyoXTQoIAAIM
+			AD+JZR7YOGEWAAAAAElFTkSuQmCC
+		</Resource>
+		<Resource ID="723ced32-cfaa-2549-de6b-df268404e310" Type="png" Name="us.png">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0
+			U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHzSURBVHjaYkxOP8IAB//+Mfz7w8Dwi4Hh
+			P5CcJb/n/7evb16/APL/gRFQDiAAw3JuAgAIBEDQ/iswEERjGzBQLEru97ll0g0+3HvqMn1Spqlq
+			GsZMsZsIe0SICA5gt5a/AGIEarCPtFh+6N/ffwxA9OvP/7//QYwff/6fZahmePeB4dNHhi+fGb59
+			Y4zyvHHmCEAAAW3YDzQYaJJ93a+vX79aVf58//69fvEPlpIfnz59+vDhw7t37968efP3b/SXL59O
+			njwIEEAsDP+YgY53b2b89++/awvLn98MDi2cVxl+/vl6mituCtBghi9f/v/48e/XL86krj9XzwEE
+			EENy8g6gu22rfn78+NGs5Ofr16+ZC58+fvyYwX8rxOxXr169fPny+fPn1//93bJlBUAAsQADZMEB
+			xj9/GBxb2P/9+S/R8u3vzxuyaX8ZHv3j8/YGms3w8ycQARmi2eE37t4ACCDGR4/uSkrKAS35B3TT
+			////wADOgLOBIaXIyjBlwxKAAGKRXjCB0SOEaeu+/y9fMnz4AHQxCP348R/o+l+//sMZQBNLEvif
+			3AcIIMZbty7Ly6t9ZmXl+fXj/38GoHH/UcGfP79//BBiYHjy9+8/oUkNAAHEwt1V/vI/KBY/QSIS
+			FqM/GBg+MzB8A6PfYC5EFiDAABqgW776MP0rAAAAAElFTkSuQmCC
+		</Resource>
+		<Resource ID="cf458c69-26a4-945d-9d60-df2622323a7d" Type="png" Name="fr.png">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0
+			U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGzSURBVHjaYiyeepkBBv79+Zfnx/f379+f
+			P38CyT9//jAyMiq5GP77wvDnJ8MfoAIGBoAAYgGqC7STApL///3/9++/pCTv////Qdz/QO4/IMna
+			0vf/z+9/v379//37bUUTQACBNDD8Z/j87fffvyAVX79+/Q8GQDbQeKA9fM+e/Pv18/+vnwzCIkBL
+			AAKQOAY5AIAwCEv4/4PddNUm3ji0QJyxW3rgzE0iLfqDGr2oYuu0l54AYvnz5x9Q6d+/QPQfyAQq
+			Ain9B3EOyG1A1UDj//36zfjr1y8GBoAAFI9BDgAwCMIw+P8Ho3GDO6XQ0l4MN8b2kUwYaLszqgKM
+			/KHcDXwBxAJUD3TJ779A8h9Q5D8SAHoARP36+Rfo41+/mcA2AAQQy49ff0Cu//MPpAeI/0FdA1QN
+			YYNVA/3wmwEYVgwMAAHE8uPHH5BqoD1//gJJLADoJKDS378Z//wFhhJAALF8A3rizz8uTmYg788f
+			Jkj4QOKREQyYxSWBhjEC/fcXZANAALF8+/anbcHlHz9+ffvx58uPX9KckkCn/gby/wLd8uvHjx96
+			k+cD1UGiGQgAAgwA7q17ZpsMdUQAAAAASUVORK5CYII=
+		</Resource>
+		<Resource ID="e54cf632-7695-0ae3-0621-df25c70b825a" Type="png" Name="bg.png">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0
+			U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFgSURBVHjaYvz69SsDEvj37x+ERGbAwZ9/
+			/wACiAUoysXFBST///8P0QOm//+HU0jgxYsXAAHEAlP0H5nxHxtgZGQEWgIQQCx3Pt2RYZL5+/8v
+			Qobh/z8gBIN/MAhErEwst77dAgggRoZmhjKXskefH/359weIfv/7DUJ/f//6CyR//fr7C8j99QdE
+			yvPKH5x0ECAAhWOQAgAMg7D+/8nWNVMQDwmCvWTessZJ9VWHCIns0yWxc/MF4FgMUgCAYRBmpf9/
+			sDqY2yWEQBbEYcK0ZuKxIY0FGZ98Z/8KFlcAsTAcYZDX/M369tefv3/+/AGSIJf8+fMbxPgDYoC4
+			QOP//JER+XPqIANAALH83M7ALPvn3z2gcSBTQK4AOwRKQhh/fjP8+cuo8reOgQEggFiA0cP0+w+D
+			pCRQDijK8AekE+SuP38YICQQ/f0LQUDFAAHECIznf0iIAZWLJgUEAAEGADzQZYYqa4w6AAAAAElF
+			TkSuQmCC
+		</Resource>
+		<Resource ID="f98203b6-655b-0f39-83fb-16b5bf07fb6f" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjNDQjEzQTExMTQyODExRTFCQkNDOTQ4OEZGMDM1OUUwIiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjNDQjEzQTEyMTQyODExRTFCQkNDOTQ4OEZGMDM1OUUwIj4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M0NCMTNBMEYxNDI4MTFFMUJCQ0M5
+			NDg4RkYwMzU5RTAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6M0NCMTNBMTAxNDI4MTFFMUJC
+			Q0M5NDg4RkYwMzU5RTAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			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
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[import re
+import json
+
+class VDOM_langsel(VDOM_object):
+
+	def render(self, contents=""):
+
+		if self.visible == "1":
+			lang_display = self.lang_display.split(",")
+			id = 'o_' + (self.id).replace('-', '_')
+			style="position: absolute; white-space:nowrap; z-index: "+self.zindex+"; top: "+self.top+"px; left: "+self.left+"px;"
+			if len(lang_display) == 0 or len(self.lang_res) == 0:
+
+				return ""
+
+			try:
+				lang_res = json.loads(self.lang_res)
+			except:
+				return ""
+
+			if self.layout == "1":
+
+				htmlcode = "<select id=\"%s\"><option disabled>Select your language</option>"%(id)
+
+				for lang in lang_display:
+
+					key = lang.strip()
+					lang = lang_res[key][0] if key in lang_res.keys() else key
+					htmlcode += "<option value=\"%s\">%s</option>"%(key,lang)
+
+				htmlcode += "</select>"
+				script = u"""<script type='text/javascript' charset="UTF-8">
+								jQuery(document).ready(function(){
+									$('select#%s').change(function(){
+										execEventBinded("%s", "select", {
+											lang: $(this).val()
+										});
+									});
+								});
+							</script>""" %(id, id[2:])
+
+
+			elif self.layout == "0":
+
+				htmlcode = ""
+				for lang in lang_display:
+
+					key = lang.strip()
+					img = lang_res[key][1] if key in lang_res.keys() else None
+
+					if img:
+
+						htmlcode += "<img style=\"margin-left:5px;\" name=\"%s\" src=\"/%s.png\"/>"%(key,img)
+
+					else:
+
+						htmlcode += "<span style=\"margin-left:5px;\" name=\"%s\">%s</span>"%(key,key)
+
+				script = u"""<script type='text/javascript' charset="UTF-8">
+								jQuery(document).ready(function(){
+									$('div#%s img').click(function(){
+										execEventBinded("%s", "select", {
+											lang: $(this).attr("name")
+										});
+									});
+									$('div#%s span').click(function(){
+										execEventBinded("%s", "select", {
+											lang: $(this).attr("name")
+										});
+									});
+								});
+							</script>""" %(id, id[2:],id, id[2:])
+
+			result = "<div id=\"%s\" style=\"%s\">%s</div>"%(id, style, htmlcode)
+			result += script
+			return result
+
+		else:
+			return ""
+
+	def get_error_content(self, text) :
+		result = \
+			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" top="{top}" left="{left}">
+					<text top="0" left="5" color="#ff0000" textalign="left">{value}</text>
+				</container>
+			""".format(id = self.id, vis = self.visible, 
+				zind = self.zindex, hierarchy = self.hierarchy, 
+				top = self.top, left = self.left,
+				value = text)
+				
+		return result
+	
+	def get_dropdown_rect(self, width, height) :
+		btn_width = 15
+		btn_height = height
+		btn_x = width - btn_width - 1
+		btn_y = 0
+		
+		triangle_width = 5 
+		triangle_height = 4 
+		triangle_x = btn_x + (btn_width - triangle_width) / 2 + 1
+		triangle_y = (btn_height - triangle_height) / 2
+		
+		color = "#000000"
+		result = \
+			u"""<svg>
+					<rect y="0" x="0" width="{width}" height="{height}" fill="#FFFFFF" stroke="{color}"/>
+					<rect x="{btn_x}" y="{btn_y}" width="{btn_width}" height="{btn_height}" fill="#EEEEEE" stroke="{color}"/>
+					<polygon fill="{color}" stroke="{color}" points="{xa},{ya} {xb},{yb} {xc},{yc}"/>
+				</svg>
+			""".format(width = width, height = height,
+				btn_x = btn_x, btn_y = btn_y,
+				btn_width = btn_width, btn_height = btn_height,
+				xa = triangle_x, ya = triangle_y,
+				xb = triangle_x+triangle_width, yb = triangle_y,
+				xc = triangle_x+triangle_width/2, yc = triangle_y+triangle_height,
+				color = color)
+				
+		return result
+	
+	def get_max_text_len (self, lang_display, lang_res) :
+		cur_text = "Select your language"
+		max_len = len(cur_text)
+		
+		for lang in lang_display:
+			key = lang.strip()
+			lang = lang_res[key][0] if key in lang_res.keys() else key
+			
+			if len(lang) > max_len :
+				max_len = len(lang)
+					
+		return max_len
+		
+	def get_first_lang_value (self, lang_display, lang_res) :
+		lang = lang_display[0]
+		key = lang.strip()
+		lang = lang_res[key][0] if key in lang_res.keys() else key
+		
+		return lang
+		
+	def wysiwyg(self, contents=""):
+
+		if not self.lang_display :
+			return VDOM_object.wysiwyg(self, contents=self.get_error_content('Empty attribute "Display languages"'))
+		
+		if not self.lang_res :
+			return VDOM_object.wysiwyg(self, contents=self.get_error_content('Empty attribute "Language resources"'))
+		
+		lang_display = self.lang_display.split(",")
+		
+		try:
+			lang_res = json.loads(self.lang_res)
+		except:
+			return VDOM_object.wysiwyg(self, contents=self.get_error_content('No JSON object could be decoded. Check syntax.'))
+		
+		if len(lang_res) == 0 :
+			return VDOM_object.wysiwyg(self, contents=self.get_error_content('Empty attribute "Language resources"'))
+
+
+		if self.layout == "1": #List
+			text_width = self.get_max_text_len(lang_display, lang_res) * 7 + 5
+			width = text_width + 25
+			height = 20
+			
+			result = \
+				u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" 
+								top="{top}" left="{left}" width="{width}" height="{height}">
+						{dropdown_rect}
+						<svg>
+							<text x="5" y="15" width="{text_width}" font-size="14" font-family="tahoma">{lang}</text>
+						</svg>
+					</container>
+				""".format(id = self.id, vis = self.visible, 
+					zind = self.zindex, hierarchy = self.hierarchy, 
+					top = self.top, left = self.left, 
+					text_width=text_width,
+					width = width, height = height,
+					dropdown_rect = self.get_dropdown_rect(width, height),
+					lang = self.get_first_lang_value(lang_display, lang_res))
+					
+			return VDOM_object.wysiwyg(self, contents=result)
+			
+		elif self.layout == "0": #Icon
+			result = \
+				u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" top="{top}" left="{left}" width="{width}" height="{height}">
+				""".format(id = self.id, vis = self.visible, 
+					zind = self.zindex, hierarchy = self.hierarchy, 
+					top = self.top, left = self.left, 
+					width = 5+len(lang_display)*21, height = 17)
+
+			left = 0
+			for key in lang_display:
+				
+				key = key.strip()
+				res = lang_res[key] if key in lang_res.keys() else None
+
+				if res:
+					img = \
+						u"""<svg>
+								<image href="#Res({image})" x="{x}" y="0" width="16" height="11"/>
+							</svg>
+						""".format(image = res[1], x = left)
+					left+=21
+				else:
+					img = \
+						u"""<text top="0" left="{x}" width="30" color="#000000" textalign="center">
+								{value}
+							</text>
+						""".format(x = left, value = key)
+					left+=30
+
+				result += img
+
+			result += u"""</container>"""
+			
+		return VDOM_object.wysiwyg(self, contents=result)]]>
+	</SourceCode>
+	<E2VDOM>
+		<Events>
+			<UserInterfaceEvents>
+				<Event Name="select" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="lang" Description="#Lang(901)" Order="0"/>
+					</Parameters>
+				</Event>
+			</UserInterfaceEvents>
+		</Events>
+	</E2VDOM>
+</Type>

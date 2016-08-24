@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>1a43b186-5c83-92fa-7a7f-5b6c252df941</ID>
+		<Name>webdavcontainer</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_webdavcontainer</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.4.6720</Version>
+		<Category>Standard</Category>
+		<InterfaceType>1</InterfaceType>
+		<Icon>#Res(4968d3de-dc60-c927-365d-5b6c252d631c)</Icon>
+		<EditorIcon>#Res(5d2ac106-4f55-2299-c7e0-fb40b96b7cd4)</EditorIcon>
+		<StructureIcon>#Res(53d2acd1-efd4-699f-6fda-fb40af85fe50)</StructureIcon>
+		<Dynamic>1</Dynamic>
+		<Moveable>0</Moveable>
+		<Resizable>0</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>3</Container>
+		<Handlers>set_name, on_delete</Handlers>
+		<Languages>en_US</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d+$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">WebDAV container</Sentence>
+			<Sentence ID="002">A container used for WebDAV services maintenance. It does not need to contain other VDOM types.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="201">The order of rendering the object on the page. The objects with identical values of the Hierarchy attribute are rendered in the order they are written in the XML-file of the VDOM application.</Sentence>
+			<Sentence ID="202">The visibility of the object. In any case the object will exist on the web page, this attribute only makes it invisible.</Sentence>
+			<Sentence ID="301">Incorrect value.</Sentence>
+			<Sentence ID="302">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="4968d3de-dc60-c927-365d-5b6c252d631c" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+			NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNl
+			SUQ9InhtcC5paWQ6RERFREE1MTQwNjI4MTFFMkEzRjc4OTc0MDA4MkRGNTIiIHhtcE1NOkRvY3Vt
+			ZW50SUQ9InhtcC5kaWQ6RERFREE1MTUwNjI4MTFFMkEzRjc4OTc0MDA4MkRGNTIiPiA8eG1wTU06
+			RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpEREVEQTUxMjA2MjgxMUUyQTNG
+			Nzg5NzQwMDgyREY1MiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpEREVEQTUxMzA2MjgxMUUy
+			QTNGNzg5NzQwMDgyREY1MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1w
+			bWV0YT4gPD94cGFja2V0IGVuZD0iciI/PlqFqA8AAAyQSURBVHjaxFoLcFTlFf7uvjfZJJsXiZtA
+			yAMTILwfOgqt8lJbGYHpWGcK1sIIZZzRaR2tpYPY0tHWGbUzMlo7PjqiM2CnysOKioICZYryCBAS
+			Agnhkc2LvLPv3Xtvz//fu3cf2c1ulJF/OLl3zz3/+c/5//N/5/z3IkBtf3hypemJDfdtyrCaN+h0
+			QnGYD0EAZHnkfVSTJLnT4/W/sX3n4Rc2rl3qxw1sGSUPJ+TLcXYI7M+any+0vPL8Ix9lWE33RrFH
+			abIqI8eo8ngDn/9m0z8feOOV9b6x9R1hkvY8w7EmbUf0V8++9qeC/OxNN2IGu68PPj9xxmPPetrf
+			E2/IijhWp+WIjsiak525/kaFQq7dxnRZ8QM37ojRaChIHlJCHCHuPrYZjfoCxZHUsjeyGRSSY+Jy
+			ZEynw4vXK6cre8NWRBiz7XLc6o20WUi6z+Ov0TRiHHlMK5IYSOSkQJJ4EDmpU6PIxQ0sq/fy2FdS
+			p2YC1TBZuddI5clS1DM57nmcLJHHud2pKGQkqRR9H8+TE9zTqJLc0X3hH8+9tHW1OU1HELu+sjyS
+			l3jtMbJ/onhBrO40SSfIxbYM05ZfPrRwz5oHF1hSOxKjQBrjgFICGkU+4SaRkpDSJ8NiWrb19z/b
+			zHLe6HsE0lhRKRLe1Nrbu3Hy+BmcrTuDLmc7RDHI+XqDEcUlJaidMQ2z50yHwzEOCSMg5VAy7HYr
+			y08vELmS1QMOz7W3neEO7J9ANRXLnOwa5guq1dH8hoZm/GfXJ+hpb0V+th55WXrYLAIMeuV5SJTh
+			8knoG5bQOySiwFGOn674CSZPrkwBj0ICBJKROWE9m4nriTK7QWFKMVMcFlL4EWfC94GADzve242W
+			+m9Qkq9HzYw8WAxBmPQSiipmYbCtjstlO6aj+/JpBEQdfCEjOrrbsPPN11FZOw8PrV5BydMYFwRy
+			FEKy+xEIZkixR0Q1tsXIPRLFvgjX8DC2vfR39F0+jplVmVi8/EGML5uADJOE3LL5mHzXWnj8Eqcp
+			ix7lPPZsfFkZl2V9+i6fIB2vky5XjO7wntBQUtuD2t4VxrbZmVIprEDUBvP7fHjrtbeQKbVjanUx
+			Fv9iMxVq+XC2NiGATNTcsQqSvxtDHgnDROye8dgzZ+t5ZOQUYMnqZ3nfTKmDdL0Nv9cfGUuKmjRJ
+			pajx00CtRIgTvo84+uEHe5AhdqCyrBALVj2NbNoTx48cRIjgv7hmCYw6D5cPhij8Qko/xiuuWcr3
+			y7dHDiDLpqe+T3EdTNeH/9odO77mgBS7Guk7Io/sGBVqTeebKd7rUFJowexlG2AxeuBzD6L7WjPh
+			vR5lNdPIgJAaIuE4Jx2EYGU1tdDp9OgiWZ97gPaTh3Ss57rYHmo635IExiW+TzlJaTiiCIsjr1JY
+			SQhHDnyJ0jwyePoS5OZZyd4gLjS1wGaWYCusIMdkbdCIHyIHDotRkckiWdZHloLIzbWibNpirvPI
+			wQMRg/l4okqhyGRidEc4/Lqa/+ZMeGpTgaqtrROf7nwT5UVG9BCMNrUF4fJKKC0wYFKpET6/jHNX
+			AvxZkV2PGZVKRXG6xY+uAYJdguapZSZYzAIuUt+2nhBsVh2qqS971toVxL0PrkNpaXGCdCZrhthu
+			/W0JS1tJ4ReSmKBCjChramjCuBzKEVaBh0gGGcSqInZlBgXNMmZWmvi+sJgE2DOViGUO+QIyTDRK
+			doYORoOAyROMKCsyUDiC92U6mO6mhgso1RJmdObXqQgmplP9yqNm9f4uJ2xGAZV3PoqiiTM0Z7/5
+			aAv8rh7MW/EsbPbIbB7e/hi/Lv/1a1pScw104tTePyOvYBzuXfmcNlb31Xr073sdfV1tcRMabmJa
+			1UbUisTX6pHsGvT0IEh7wGI1Qxxu1jp39QxBECXoxUHiD2nnlAG3Es/i0EVNjRAUMcj43iHiN2vj
+			mGm5goRooWCvusGTvZtIy5FEdU9keXWyl+onOr+a9Ao0qs3l8sBI5YjJqIviyzycImioOGc06Dg/
+			KHrUiVNkrGYd183GYDq4H3K4kkj/kGUIo8tozahX9AT9XujMRm3FDBTofArUInHEHEY5LYuSeqY3
+			cESM5rN55GOo8nL8CshyynO/Tn3DpsySRlIUT4LZnMnfzQ0NDcc8M5qVlyVetzeKL0W/udN0+Dxe
+			bprBaFEigC0D0fDgsBJiNEZiG8JZX0wNv8N1f3RGvI73XsbBLz+Ht/8SGq8G0N4bAptcBrPTK0yE
+			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
+			g3UXeoe3HMQAAAAASUVORK5CYII=
+		</Resource>
+		<Resource ID="53d2acd1-efd4-699f-6fda-fb40af85fe50" Type="png" Name="web_dav_cont_16x16.png">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+			NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNl
+			SUQ9InhtcC5paWQ6RUM0OTlDRUE3QkRCMTFFMkE3QzI4OUQxOEFGRTQyRDAiIHhtcE1NOkRvY3Vt
+			ZW50SUQ9InhtcC5kaWQ6RUM0OTlDRUI3QkRCMTFFMkE3QzI4OUQxOEFGRTQyRDAiPiA8eG1wTU06
+			RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFQzQ5OUNFODdCREIxMUUyQTdD
+			Mjg5RDE4QUZFNDJEMCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFQzQ5OUNFOTdCREIxMUUy
+			QTdDMjg5RDE4QUZFNDJEMCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1w
+			bWV0YT4gPD94cGFja2V0IGVuZD0iciI/PoT5s/UAAAH1SURBVHjapJPPTxNREMc/210QQ9BKxbYo
+			BBQV/FGl1hMHPeLJxD/ASz3ogcS/wIPx4EnjyYs9kDR6NJ5MvOjBRA4miJoaQ0IbqP1BbUpZaW27
+			u89pa2sTLWKc5JPdeTszO2/e92mlVPQSEBH8/G5pISw8p4tppeR8qktyZ5Hhbh8N5djbJfOX4hg4
+			Fjsw1W17BvaOCnTrLGIou8Z/mN/AahZ4GHlG7MMSLhc4Dpw4fYYb4cvMP3nBu6UY9+/ebMS9ev2e
+			6OOn3L41x7BvkHYH3n39TMxeYPbKVfK5daKP7rGwsEgoGCCXeEsqlcXvHWSzUGDm3HFJ3o+yK7iw
+			qtTZ3aswtBpWIYZ7l0kgEGQtvsLRsQMM7dVJrqYbcblkjLPTQVTFbPjtDpT0Xa7IU/w6uq7JAX3H
+			cLYYn7xI/muebNaNXS0ycshHK6/dgVRo8tMvbX2jr68famW83iEyyc9k0uu4PaN4ZLkV56JeqY5S
+			TeR9o1BkLfGJwxNTDX/soIceTFbjMaZOhlBVk1aebKGpA020kkt/5M6DRXQ5ifPTIU4dG8Ep52Q2
+			JkcmZ0gn3uCT36sO7WjFl9cbKtP3jKP1DPySXs3E3oy3fX1gFK1XZlBcRlnlzrtg1SXptzaWt1WM
+			VVz503JGZmBfEzIC/8gXIfxDgAEANtsFN1ImJvIAAAAASUVORK5CYII=
+		</Resource>
+		<Resource ID="5d2ac106-4f55-2299-c7e0-fb40b96b7cd4" Type="png" Name="web_dav_cont_16x16.png">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+			NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNl
+			SUQ9InhtcC5paWQ6RUM0OTlDRUE3QkRCMTFFMkE3QzI4OUQxOEFGRTQyRDAiIHhtcE1NOkRvY3Vt
+			ZW50SUQ9InhtcC5kaWQ6RUM0OTlDRUI3QkRCMTFFMkE3QzI4OUQxOEFGRTQyRDAiPiA8eG1wTU06
+			RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFQzQ5OUNFODdCREIxMUUyQTdD
+			Mjg5RDE4QUZFNDJEMCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFQzQ5OUNFOTdCREIxMUUy
+			QTdDMjg5RDE4QUZFNDJEMCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1w
+			bWV0YT4gPD94cGFja2V0IGVuZD0iciI/PoT5s/UAAAH1SURBVHjapJPPTxNREMc/210QQ9BKxbYo
+			BBQV/FGl1hMHPeLJxD/ASz3ogcS/wIPx4EnjyYs9kDR6NJ5MvOjBRA4miJoaQ0IbqP1BbUpZaW27
+			u89pa2sTLWKc5JPdeTszO2/e92mlVPQSEBH8/G5pISw8p4tppeR8qktyZ5Hhbh8N5djbJfOX4hg4
+			Fjsw1W17BvaOCnTrLGIou8Z/mN/AahZ4GHlG7MMSLhc4Dpw4fYYb4cvMP3nBu6UY9+/ebMS9ev2e
+			6OOn3L41x7BvkHYH3n39TMxeYPbKVfK5daKP7rGwsEgoGCCXeEsqlcXvHWSzUGDm3HFJ3o+yK7iw
+			qtTZ3aswtBpWIYZ7l0kgEGQtvsLRsQMM7dVJrqYbcblkjLPTQVTFbPjtDpT0Xa7IU/w6uq7JAX3H
+			cLYYn7xI/muebNaNXS0ycshHK6/dgVRo8tMvbX2jr68famW83iEyyc9k0uu4PaN4ZLkV56JeqY5S
+			TeR9o1BkLfGJwxNTDX/soIceTFbjMaZOhlBVk1aebKGpA020kkt/5M6DRXQ5ifPTIU4dG8Ep52Q2
+			JkcmZ0gn3uCT36sO7WjFl9cbKtP3jKP1DPySXs3E3oy3fX1gFK1XZlBcRlnlzrtg1SXptzaWt1WM
+			VVz503JGZmBfEzIC/8gXIfxDgAEANtsFN1ImJvIAAAAASUVORK5CYII=
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[import managers
+
+
+class VDOM_webdavcontainer(VDOM_object):
+
+    def wysiwyg(self, contents=""):
+        result = "<container id=\"%s\" visible=\"%s\" hierarchy=\"%s\" >%s</container>" % (self.id, self.visible, self.hierarchy, contents)
+        return VDOM_object.wysiwyg(self, contents=result)
+
+
+#def set_name(application_id, object_id, param):
+def on_rename(object, name):
+    actions = {"authentication": ["path", "user", "password"],
+               "getResourseProperties": ["path"],
+               "isCollection": ["path"],
+               "getMembers": ["path"],
+               "open": ["path"]
+               }
+    application_id = object.application.id
+    object_id = object.id
+    # object = managers.xml_manager.search_object(application_id, object_id)
+    for act in actions:
+        # if act not in object.actions["name"]:
+        if act not in object.actions:
+            # object.create_action(act, "")
+            object.actions.new(act)
+    sharePath = "/" + object.name
+    oldSharePath = managers.webdav_manager.get_webdav_share_path(application_id, object_id)
+    if oldSharePath and oldSharePath != sharePath:
+        managers.webdav_manager.del_webdav(application_id, object_id, oldSharePath)
+    managers.webdav_manager.add_webdav(application_id, object_id, sharePath)
+
+
+# def on_delete(application_id, object_id, param):
+def on_delete(object):
+    application_id = object.application.id
+    object_id = object.id
+    SharePath = managers.webdav_manager.get_webdav_share_path(application_id, object_id)
+    if SharePath:
+        managers.webdav_manager.del_webdav(application_id, object_id, SharePath)
+]]>
+	</SourceCode>
+</Type>
