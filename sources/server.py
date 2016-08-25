@@ -45,7 +45,7 @@ managers.register("server", VDOM_server)
 
 
 if arguments.preload:
-    print managers.memory.applications.default
+    managers.memory.applications.default
 
 
 managers.server.start()

@@ -23,9 +23,22 @@ class MemoryApplications(MemoryBase, Mapping):
     @lazy
     def default(self):
         try:
-            return self[settings.DEFAULT_APPLICATION or iter(self).next()]
-        except (StopIteration, KeyError):
-            return None
+            return self._default
+        except AttributeError:
+            if self._lazy:
+                self._discover()
+
+            uuid = settings.DEFAULT_APPLICATION or iter(self._items).next()
+
+            try:
+                item = self._items[uuid]
+            except (StopIteration, KeyError):
+                item = None
+            else:
+                if item is NOT_LOADED:
+                    item = self._load(uuid)
+
+            return item
 
     _owner = weak("owner")
 
