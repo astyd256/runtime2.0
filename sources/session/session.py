@@ -14,12 +14,12 @@ class VDOM_session(dict):
 		"""session constructor"""
 		dict.__init__(self)
 
-		self.__id = managers.session_manager.get_unique_sid()
+		self.__id = sid or managers.session_manager.get_unique_sid()
 		self.context={}
 		self.on_start_executed = False
 		self.__user = ""
 		self.update()
-
+		self.files = {}
 		self.states=[{"#": 0}]
 
 	def id(self):
@@ -79,6 +79,12 @@ class VDOM_session(dict):
 			raise TypeError()
 		return dict.__contains__(self, key)
 
+	def get(self, key, default=None):
+		self.update()
+		if not isinstance(key, basestring):
+			raise TypeError()
+		return dict.get(self, key, default)
+	
 	def set_user(self, login, password, md5 = False):
 		if md5:
 			if managers.user_manager.match_user_md5(login, password):
@@ -94,3 +100,7 @@ class VDOM_session(dict):
 		return self.__user
 
 	user = property(__get_user)
+
+	def clean_files(self):
+		for uploaded_file in self.files.itervalues():
+			uploaded_file.remove()

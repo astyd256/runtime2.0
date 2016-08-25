@@ -1,8 +1,5 @@
 
-import string
-import random
-import math
-import time
+import string, random, math, time, os
 from hashlib import md5
 import managers
 
@@ -33,19 +30,46 @@ class VDOM_id:
         return r
 
 
+def vdomid():
+    """generate new id"""
+    return md5(b''.join([str(time.time()),_urandom(),str(math.sin(random.random()))])).hexdigest()
+
+def hexstr(s):
+    """convert byte array to hex string"""
+    h = string.hexdigits
+    r = ""
+    for c in s:
+        i = ord(c)
+        r = r + h[(i >> 4) & 0xF] + h[i & 0xF]
+    return r
+
+
+def _urandom():
+    if hasattr(os, 'urandom'):
+        return os.urandom(30)
+    return text_type(random()).encode('ascii')
+
+
+def generate_key(salt=None):
+    if salt is None:
+        salt = repr(salt).encode('ascii')
+    return sha1(b''.join([
+        salt,
+        str(time.time()).encode('ascii'),
+        _urandom()
+        ])).hexdigest()
+
 def guid2mod(guid):
     """transform guid to module name"""
     return "module_" + "_".join(guid.split("-"))
 
-# def id2res(owner_id, res_id, res_type):
-#     transform owner id and resource id to resource name"""
-#         "res_" + owner_id + "_" + res_id + "." + res_type
-
+#def id2res(owner_id, res_id, res_type):
+#	"""transform owner id and resource id to resource name"""
+#	return "res_" + owner_id + "_" + res_id + "." + res_type
 
 def id2link(res_id):
     """transform resource id to resource URL"""
-    return "/%s.res" % res_id
-
+    return "/%s.res"%res_id
 
 def id2link1(res_id):
     """transform resource id to resource URL"""
@@ -54,14 +78,12 @@ def id2link1(res_id):
         return ""
     return "".join(["/", res_id, ".", o.res_format])
 
-# def id2tempres(owner_id, tempres_id, res_type):
-#   """transform owner id and temporary resource id to temporary resource name"""
-#   return "temp_" + owner_id + "_" + tempres_id + "." + res_type
-
+#def id2tempres(owner_id, tempres_id, res_type):
+    #"""transform owner id and temporary resource id to temporary resource name"""
+    #return "temp_" + owner_id + "_" + tempres_id + "." + res_type
 
 def is_valid_identifier(value):
-    if value is "":
-        return False
+    if value is "": return False
     first = value[0]
     if not ('_' == first or first.isalpha()):
         return False

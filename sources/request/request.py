@@ -109,6 +109,8 @@ class VDOM_request:
 		self.action_result = ""
 
 		self.application_id = self.__app_id
+		if self.__app_id:
+			self.__session.context["application_id"] = self.__app_id		
 		self.sid = sid
 		self.method = arguments["method"]
 		self.vdom = VDOM_memory_interface(self)

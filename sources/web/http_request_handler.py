@@ -202,6 +202,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         # process requested URI, call module manager
         try:
             (code, ret) = managers.module_manager.process_request(self.__request)
+            self.__request.collect_files()
         except Exception as e:
             raise  # CHECK: TODO: ONLY FOR DEBUG
             requestline = "<br>"
@@ -211,6 +212,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 self.request_version = "HTTP/1.1"
             fe = "".join(["<br><br>", '-' * 80, requestline, "<br>Exception happened during processing of request:",
                           traceback.format_exc(), '-' * 40])
+            self.__request.collect_files()
             self.send_error(500, excinfo=fe)
             return None
 
@@ -252,6 +254,9 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             else:
                 return StringIO(ret)
         elif "" == ret:
+            self.send_response(204)
+            self.send_headers()
+            self.end_headers()
             return None
         elif code:
             self.send_error(code, self.responses[code][0])
@@ -282,11 +287,6 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         self.server.notify_finish(self.client_address)
 
         # remove request
-        try:
-            managers.request_manager.current.collect_files()
-        except VDOM_exception as error:
-            print "WARNING: %s" % error
-            pass
         del managers.request_manager.current
         try:
             del(self.__request.vdom)

@@ -15,7 +15,7 @@ from database.dbobject import VDOM_sql_query
 from utils.properties import constant, roproperty, rwproperty
 
 from .. import PYTHON_LANGUAGE, VSCRIPT_LANGUAGE, PYTHON_EXTENSION, VSCRIPT_EXTENSION, \
-    APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT
+    APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
 from ..generic import MemoryBase
 from ..auxiliary import write_as_base64, copy_as_base64
 from .objects import MemoryObjects
@@ -32,7 +32,7 @@ class MemoryApplicationSketch(MemoryBase):
     is_application = constant(True)
     is_object = constant(False)
 
-    generic = APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT
+    generic = APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
 
     def get_library_executable(self, name):
         from scripting.executable import select_library_class

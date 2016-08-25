@@ -17,7 +17,7 @@ WYSIWYG_CONTEXT = "onwysiwyg"
 APPLICATION_START_CONTEXT = "onstart"
 SESSION_START_CONTEXT = "sessiononstart" # "onsessionstart"
 REQUEST_START_CONTEXT = "requestonstart" # "onrequeststart"
-
+SESSION_FINISH_CONTEXT = "sessiononfinish" #sessiononfinish
 # ON_START="onstart"
 # ON_FINISH="onfinish"
 # ON_UNINSTALL="onuninstall"
