@@ -1,0 +1,1536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+	<Information>
+		<ID>9c164e48-4540-4f67-fd8f-f7a0c4289edd</ID>
+		<Name>smartfolderdata</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_smartfolderdata</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.28.8388</Version>
+		<Category>Additional</Category>
+		<InterfaceType>1</InterfaceType>
+		<Icon>#Res(3da66ba6-5c23-4e4a-7b77-16e671733af3)</Icon>
+		<EditorIcon>#Res(fc2ada16-d8de-3980-b9f1-16e69fc23233)</EditorIcon>
+		<StructureIcon>#Res(f8f9bd67-a935-58b0-7196-16e6c5a04f04)</StructureIcon>
+		<Dynamic>1</Dynamic>
+		<Moveable>1</Moveable>
+		<Resizable>3</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>2</Container>
+		<Containers>htmlcontainer, dialog, container, tablecell, accordeon, dialog_2, vdomclass, form</Containers>
+		<Languages>en_US, ru_RU, fr_FR</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>Stateful</DisplayName>
+			<Description>Stateful</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d+$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>zindex</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>top</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>left</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>width</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue>400</DefaultValue>
+			<RegularExpressionValidation>^\d{1,5}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(5)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>height</Name>
+			<DisplayName>#Lang(107)</DisplayName>
+			<Description>#Lang(207)</Description>
+			<DefaultValue>300</DefaultValue>
+			<RegularExpressionValidation>^\d{1,5}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(5)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>itemwidth</Name>
+			<DisplayName>#Lang(108)</DisplayName>
+			<Description>#Lang(208)</Description>
+			<DefaultValue>100</DefaultValue>
+			<RegularExpressionValidation>^\d{1,5}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(5)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>itemheight</Name>
+			<DisplayName>#Lang(109)</DisplayName>
+			<Description>#Lang(209)</Description>
+			<DefaultValue>100</DefaultValue>
+			<RegularExpressionValidation>^\d{1,5}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(5)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>metadata</Name>
+			<DisplayName>#Lang(111)</DisplayName>
+			<Description>#Lang(211)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(311)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(30000)</CodeInterface>
+			<ColorGroup>3</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>currentpage</Name>
+			<DisplayName>#Lang(112)</DisplayName>
+			<Description>#Lang(212)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^\d*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(312)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(10)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>itemsperpage</Name>
+			<DisplayName>#Lang(113)</DisplayName>
+			<Description>#Lang(213)</Description>
+			<DefaultValue>6</DefaultValue>
+			<RegularExpressionValidation>^\d*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(10)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>classname</Name>
+			<DisplayName>#Lang(114)</DisplayName>
+			<Description>#Lang(214)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(100)</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>style</Name>
+			<DisplayName>#Lang(115)</DisplayName>
+			<Description>#Lang(215)</Description>
+			<DefaultValue>#%(id)s caption {font: 18px Arial;text-align:left;}</DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(315)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(100000)</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>skin</Name>
+			<DisplayName>#Lang(116)</DisplayName>
+			<Description>#Lang(216)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^\d+$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(316)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(403)|0)|(#Lang(404)|1))</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>testhtml</Name>
+			<DisplayName>#Lang(117)</DisplayName>
+			<Description>#Lang(217)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(10000)</CodeInterface>
+			<ColorGroup>3</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">Smart Folder data container</Sentence>
+			<Sentence ID="002">The Smart Folder data container type produces an object that represents a Smart Folder.</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visiblility</Sentence>
+			<Sentence ID="103">Z-index</Sentence>
+			<Sentence ID="104">Top</Sentence>
+			<Sentence ID="105">Left</Sentence>
+			<Sentence ID="106">Width</Sentence>
+			<Sentence ID="107">Height</Sentence>
+			<Sentence ID="108">Item Width</Sentence>
+			<Sentence ID="109">Item Height</Sentence>
+			<Sentence ID="111">MetaData</Sentence>
+			<Sentence ID="112">Current page</Sentence>
+			<Sentence ID="113">Items per page</Sentence>
+			<Sentence ID="114">CSS Class</Sentence>
+			<Sentence ID="115">Style</Sentence>
+			<Sentence ID="116">Skin</Sentence>
+			<Sentence ID="117">testHTML</Sentence>
+			<Sentence ID="201">The order of rendering the object on the page. The objects with identical values of the Hierarchy attribute are rendered in the order they are written in the XML-file of the VDOM application.</Sentence>
+			<Sentence ID="202">The visibility of the object. In any case the object will exist on the web page, this attribute only makes it invisible.</Sentence>
+			<Sentence ID="203">The position in visual hierarchy of objects. If you have several objects in one container situated on each other, the value of &apos;Z-Index&apos; attribute indicates the order of their displaying. The larger the value is, the upper the object is situated.</Sentence>
+			<Sentence ID="204">Spacing in pixels between the object and the top border of the container, in which the object is situated.</Sentence>
+			<Sentence ID="205">Spacing in pixels between the object and the left border of the container, in which the object is situated.</Sentence>
+			<Sentence ID="206">The width of the object in pixels.</Sentence>
+			<Sentence ID="207">The height of the object in pixels.</Sentence>
+			<Sentence ID="208">The width of the item in pixels.</Sentence>
+			<Sentence ID="209">The height of the item in pixels.</Sentence>
+			<Sentence ID="211">The folder metadata in JSON format.</Sentence>
+			<Sentence ID="212">The number of the currently active pages.</Sentence>
+			<Sentence ID="213">The number of items per page.</Sentence>
+			<Sentence ID="214">The necessary CSS code applied to all objects within the container.</Sentence>
+			<Sentence ID="215">The CSS style of the object. If the user changes CSS style, the Skin attribute is changed to the &apos;User defined&apos;.</Sentence>
+			<Sentence ID="216">The skin of the object.</Sentence>
+			<Sentence ID="217"></Sentence>
+			<Sentence ID="301"></Sentence>
+			<Sentence ID="302"></Sentence>
+			<Sentence ID="303"></Sentence>
+			<Sentence ID="304"></Sentence>
+			<Sentence ID="305"></Sentence>
+			<Sentence ID="306"></Sentence>
+			<Sentence ID="307"></Sentence>
+			<Sentence ID="308"></Sentence>
+			<Sentence ID="309"></Sentence>
+			<Sentence ID="311"></Sentence>
+			<Sentence ID="312"></Sentence>
+			<Sentence ID="313">Numer items per page</Sentence>
+			<Sentence ID="314"></Sentence>
+			<Sentence ID="315"></Sentence>
+			<Sentence ID="316"></Sentence>
+			<Sentence ID="317"></Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="403">User defined</Sentence>
+			<Sentence ID="404">Default</Sentence>
+			<Sentence ID="501">Make the object disabled.</Sentence>
+			<Sentence ID="502">Make the object enabled.</Sentence>
+			<Sentence ID="503">Hide the object.</Sentence>
+			<Sentence ID="504">Load the data.</Sentence>
+			<Sentence ID="505">Move the object to a new position.</Sentence>
+			<Sentence ID="506">Set new value of the &apos;Z-Index&apos; attribute.</Sentence>
+			<Sentence ID="507">Load the items of the object on scrolling to them.</Sentence>
+			<Sentence ID="508">Resize the object&apos;s width and height.</Sentence>
+			<Sentence ID="509">Show the object.</Sentence>
+			<Sentence ID="511">Delete the specified items.</Sentence>
+			<Sentence ID="512">Group the items.</Sentence>
+			<Sentence ID="513">Click the item of the object.</Sentence>
+			<Sentence ID="514">Double-click the item of the object.</Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516">Rename the smart folder.</Sentence>
+			<Sentence ID="517"></Sentence>
+			<Sentence ID="518"></Sentence>
+			<Sentence ID="519"></Sentence>
+			<Sentence ID="601"></Sentence>
+			<Sentence ID="602"></Sentence>
+			<Sentence ID="603"></Sentence>
+			<Sentence ID="604"></Sentence>
+			<Sentence ID="605"></Sentence>
+			<Sentence ID="606"></Sentence>
+			<Sentence ID="607"></Sentence>
+			<Sentence ID="608"></Sentence>
+			<Sentence ID="609"></Sentence>
+			<Sentence ID="701"></Sentence>
+			<Sentence ID="702"></Sentence>
+			<Sentence ID="703"></Sentence>
+			<Sentence ID="704"></Sentence>
+			<Sentence ID="705"></Sentence>
+			<Sentence ID="706"></Sentence>
+			<Sentence ID="707"></Sentence>
+			<Sentence ID="708"></Sentence>
+			<Sentence ID="709"></Sentence>
+			<Sentence ID="801"></Sentence>
+			<Sentence ID="802"></Sentence>
+			<Sentence ID="803"></Sentence>
+			<Sentence ID="804"></Sentence>
+			<Sentence ID="805"></Sentence>
+			<Sentence ID="806"></Sentence>
+			<Sentence ID="807"></Sentence>
+			<Sentence ID="808"></Sentence>
+			<Sentence ID="809"></Sentence>
+			<Sentence ID="901"></Sentence>
+			<Sentence ID="902"></Sentence>
+			<Sentence ID="903"></Sentence>
+			<Sentence ID="904"></Sentence>
+			<Sentence ID="905"></Sentence>
+			<Sentence ID="906"></Sentence>
+			<Sentence ID="907"></Sentence>
+			<Sentence ID="908"></Sentence>
+			<Sentence ID="909"></Sentence>
+			<Sentence ID="911"></Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">Smart Folder Data Container</Sentence>
+			<Sentence ID="002">Smart Folder Data Container</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101"></Sentence>
+			<Sentence ID="102"></Sentence>
+			<Sentence ID="103"></Sentence>
+			<Sentence ID="104"></Sentence>
+			<Sentence ID="105"></Sentence>
+			<Sentence ID="106"></Sentence>
+			<Sentence ID="107"></Sentence>
+			<Sentence ID="108">Item Width</Sentence>
+			<Sentence ID="109">Item Height</Sentence>
+			<Sentence ID="111"></Sentence>
+			<Sentence ID="112"></Sentence>
+			<Sentence ID="113"></Sentence>
+			<Sentence ID="114"></Sentence>
+			<Sentence ID="115"></Sentence>
+			<Sentence ID="116"></Sentence>
+			<Sentence ID="117">testHTML</Sentence>
+			<Sentence ID="201"></Sentence>
+			<Sentence ID="202"></Sentence>
+			<Sentence ID="203"></Sentence>
+			<Sentence ID="204"></Sentence>
+			<Sentence ID="205"></Sentence>
+			<Sentence ID="206"></Sentence>
+			<Sentence ID="207"></Sentence>
+			<Sentence ID="208"></Sentence>
+			<Sentence ID="209"></Sentence>
+			<Sentence ID="211"></Sentence>
+			<Sentence ID="212"></Sentence>
+			<Sentence ID="213"></Sentence>
+			<Sentence ID="214"></Sentence>
+			<Sentence ID="215"></Sentence>
+			<Sentence ID="216"></Sentence>
+			<Sentence ID="217"></Sentence>
+			<Sentence ID="301"></Sentence>
+			<Sentence ID="302"></Sentence>
+			<Sentence ID="303"></Sentence>
+			<Sentence ID="304"></Sentence>
+			<Sentence ID="305"></Sentence>
+			<Sentence ID="306"></Sentence>
+			<Sentence ID="307"></Sentence>
+			<Sentence ID="308"></Sentence>
+			<Sentence ID="309"></Sentence>
+			<Sentence ID="311"></Sentence>
+			<Sentence ID="312"></Sentence>
+			<Sentence ID="313"></Sentence>
+			<Sentence ID="314"></Sentence>
+			<Sentence ID="315"></Sentence>
+			<Sentence ID="316"></Sentence>
+			<Sentence ID="317"></Sentence>
+			<Sentence ID="401"></Sentence>
+			<Sentence ID="402"></Sentence>
+			<Sentence ID="403">User defined</Sentence>
+			<Sentence ID="404">Default</Sentence>
+			<Sentence ID="501"></Sentence>
+			<Sentence ID="502"></Sentence>
+			<Sentence ID="503"></Sentence>
+			<Sentence ID="504"></Sentence>
+			<Sentence ID="505"></Sentence>
+			<Sentence ID="506"></Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516"></Sentence>
+			<Sentence ID="517"></Sentence>
+			<Sentence ID="518"></Sentence>
+			<Sentence ID="519"></Sentence>
+			<Sentence ID="601"></Sentence>
+			<Sentence ID="602"></Sentence>
+			<Sentence ID="603"></Sentence>
+			<Sentence ID="604"></Sentence>
+			<Sentence ID="605"></Sentence>
+			<Sentence ID="606"></Sentence>
+			<Sentence ID="607"></Sentence>
+			<Sentence ID="608"></Sentence>
+			<Sentence ID="609"></Sentence>
+			<Sentence ID="701"></Sentence>
+			<Sentence ID="702"></Sentence>
+			<Sentence ID="703"></Sentence>
+			<Sentence ID="704"></Sentence>
+			<Sentence ID="705"></Sentence>
+			<Sentence ID="706"></Sentence>
+			<Sentence ID="707"></Sentence>
+			<Sentence ID="708"></Sentence>
+			<Sentence ID="709"></Sentence>
+			<Sentence ID="801"></Sentence>
+			<Sentence ID="802"></Sentence>
+			<Sentence ID="803"></Sentence>
+			<Sentence ID="804"></Sentence>
+			<Sentence ID="805"></Sentence>
+			<Sentence ID="806"></Sentence>
+			<Sentence ID="807"></Sentence>
+			<Sentence ID="808"></Sentence>
+			<Sentence ID="809"></Sentence>
+			<Sentence ID="901"></Sentence>
+			<Sentence ID="902"></Sentence>
+			<Sentence ID="903"></Sentence>
+			<Sentence ID="904"></Sentence>
+			<Sentence ID="905"></Sentence>
+			<Sentence ID="906"></Sentence>
+			<Sentence ID="907"></Sentence>
+			<Sentence ID="908"></Sentence>
+			<Sentence ID="909"></Sentence>
+			<Sentence ID="911"></Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">Умный фолдер контейнер</Sentence>
+			<Sentence ID="002">Умный фолдер контейнер</Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101"></Sentence>
+			<Sentence ID="102"></Sentence>
+			<Sentence ID="103"></Sentence>
+			<Sentence ID="104"></Sentence>
+			<Sentence ID="105"></Sentence>
+			<Sentence ID="106"></Sentence>
+			<Sentence ID="107"></Sentence>
+			<Sentence ID="108">Item Width</Sentence>
+			<Sentence ID="109">Item Height</Sentence>
+			<Sentence ID="111"></Sentence>
+			<Sentence ID="112"></Sentence>
+			<Sentence ID="113"></Sentence>
+			<Sentence ID="114"></Sentence>
+			<Sentence ID="115"></Sentence>
+			<Sentence ID="116"></Sentence>
+			<Sentence ID="117">testHTML</Sentence>
+			<Sentence ID="201"></Sentence>
+			<Sentence ID="202"></Sentence>
+			<Sentence ID="203"></Sentence>
+			<Sentence ID="204"></Sentence>
+			<Sentence ID="205"></Sentence>
+			<Sentence ID="206"></Sentence>
+			<Sentence ID="207"></Sentence>
+			<Sentence ID="208"></Sentence>
+			<Sentence ID="209"></Sentence>
+			<Sentence ID="211"></Sentence>
+			<Sentence ID="212"></Sentence>
+			<Sentence ID="213"></Sentence>
+			<Sentence ID="214"></Sentence>
+			<Sentence ID="215"></Sentence>
+			<Sentence ID="216"></Sentence>
+			<Sentence ID="217"></Sentence>
+			<Sentence ID="301"></Sentence>
+			<Sentence ID="302"></Sentence>
+			<Sentence ID="303"></Sentence>
+			<Sentence ID="304"></Sentence>
+			<Sentence ID="305"></Sentence>
+			<Sentence ID="306"></Sentence>
+			<Sentence ID="307"></Sentence>
+			<Sentence ID="308"></Sentence>
+			<Sentence ID="309"></Sentence>
+			<Sentence ID="311"></Sentence>
+			<Sentence ID="312"></Sentence>
+			<Sentence ID="313"></Sentence>
+			<Sentence ID="314"></Sentence>
+			<Sentence ID="315"></Sentence>
+			<Sentence ID="316"></Sentence>
+			<Sentence ID="317"></Sentence>
+			<Sentence ID="401"></Sentence>
+			<Sentence ID="402"></Sentence>
+			<Sentence ID="403">User defined</Sentence>
+			<Sentence ID="404">Default</Sentence>
+			<Sentence ID="501"></Sentence>
+			<Sentence ID="502"></Sentence>
+			<Sentence ID="503"></Sentence>
+			<Sentence ID="504"></Sentence>
+			<Sentence ID="505"></Sentence>
+			<Sentence ID="506"></Sentence>
+			<Sentence ID="507"></Sentence>
+			<Sentence ID="508"></Sentence>
+			<Sentence ID="509"></Sentence>
+			<Sentence ID="511"></Sentence>
+			<Sentence ID="512"></Sentence>
+			<Sentence ID="513"></Sentence>
+			<Sentence ID="514"></Sentence>
+			<Sentence ID="515"></Sentence>
+			<Sentence ID="516"></Sentence>
+			<Sentence ID="517"></Sentence>
+			<Sentence ID="518"></Sentence>
+			<Sentence ID="519"></Sentence>
+			<Sentence ID="601"></Sentence>
+			<Sentence ID="602"></Sentence>
+			<Sentence ID="603"></Sentence>
+			<Sentence ID="604"></Sentence>
+			<Sentence ID="605"></Sentence>
+			<Sentence ID="606"></Sentence>
+			<Sentence ID="607"></Sentence>
+			<Sentence ID="608"></Sentence>
+			<Sentence ID="609"></Sentence>
+			<Sentence ID="701"></Sentence>
+			<Sentence ID="702"></Sentence>
+			<Sentence ID="703"></Sentence>
+			<Sentence ID="704"></Sentence>
+			<Sentence ID="705"></Sentence>
+			<Sentence ID="706"></Sentence>
+			<Sentence ID="707"></Sentence>
+			<Sentence ID="708"></Sentence>
+			<Sentence ID="709"></Sentence>
+			<Sentence ID="801"></Sentence>
+			<Sentence ID="802"></Sentence>
+			<Sentence ID="803"></Sentence>
+			<Sentence ID="804"></Sentence>
+			<Sentence ID="805"></Sentence>
+			<Sentence ID="806"></Sentence>
+			<Sentence ID="807"></Sentence>
+			<Sentence ID="808"></Sentence>
+			<Sentence ID="809"></Sentence>
+			<Sentence ID="901"></Sentence>
+			<Sentence ID="902"></Sentence>
+			<Sentence ID="903"></Sentence>
+			<Sentence ID="904"></Sentence>
+			<Sentence ID="905"></Sentence>
+			<Sentence ID="906"></Sentence>
+			<Sentence ID="907"></Sentence>
+			<Sentence ID="908"></Sentence>
+			<Sentence ID="909"></Sentence>
+			<Sentence ID="911"></Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="3da66ba6-5c23-4e4a-7b77-16e671733af3" Type="png" Name="Icon">
+			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
+		</Resource>
+		<Resource ID="4194403e-246d-7ae9-79e1-f01ffd375348" Type="png" Name="folder-one-48.png">
+			iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAEDElEQVR42u2ZW2wMURjH/+fMrO66
+			VlXi1gsSEiIS8ULc4sG7iLbuKihxCc8SIfHghXhCiBASFFV3rVtJFS8uKRoeBAlB3CKNbXc7F9/s
+			zuh00t3uOduakfRLvuw5Z86c8/2+7ztnZs4y/OfC/DagF8BvA3oB/DagpwGs6zyL8Q1S0y8AbhuQ
+			rXTXOMIA6BvB0GgLJlFRgZgnrXENRcUrXcNHu94jkWAp2qzJ5pMeiqjID/WxZ+euHm6TPL/WJU0D
+			ojE0U3EH6d6egug0AkMGI/f7T7xdU4LcnbugKZQAprMauAvAMdpwlW1lOcCRg1C37QbUECa3taEx
+			CxsZUqShFyCRr4xjhspR/+4JtBETqO03Oi5lM80IblGgDStC6MtXbKDaASRTUc8CxOyssbNOcyj/
+			7zTdg1FUDKa1gjHBvcgwYCphoGQZUFWLb9T0BeJryZIPpPtIazKOAOnsSBh3m2qhFxeBxQmACwAk
+			sohGUWjt/PoE80IN+E9aDZwu6Lo9g7PBmui42ZrtZctpDc+A6sdUZphpmrjvjUQqgDmRHNS9qIY+
+			pgA81pocTASAJoQRoyjkgYXGpXgemCnKTt2aMwpt1jTk1D/HMaqtgicN0wI0Hoc+dgR4S5wuCDyz
+			TTMJ3BYFwlOA0CAaVEtCiYhOacgGQi8vg3qiEueoqQSe50pagKf7oI/OB6ftsD0CzHOXezdye4+U
+			5wP9ptr3SmygupWGg6EtKUXo1FlUUlNZ5hFQCWA/RWAGuDWQs4Uy71bqGGcbaNrJYnlbzU32T0RE
+			3P4EgDoE2uKFBFAlChBC3etH0Asm0tqLenpm6k3dXg8SxncAKJUBiBDAQwIoAjdaxfO3O+QvwCIC
+			OC8KECaABgIoDgjABRmAelcEsnmpzgYgjwCWygLcC0gKLSOAizIAdQEAsCKwggAuyQDcsgFiPgOs
+			JIDLMgA3AhABK4VWyQLQy1xBYQBSaDUBXJEBuGYD+JlC9CqxeC0BXJUBuBKQCFQQwDVRgBwboMBn
+			ACsC6wngugzAJQIYFYAU2iALUG1HIObPEZ5u2gAbCaBGBqAqIBHYTAC1MgBnAwCQSwBbCOCGGMBs
+			Arj7uhL6qJEEEPcHwHAAthLAzcwA2o9Vwrjz8giMwmFgWlz8WKXbAAZCW74d6snbOGMDdP1NrHBM
+			5xwNb09DGznWPtiSOdGRFceNlp+HQ1tQDuV8PaqoVoouIpCQ/EEY8O0X3pTNxdAdFdD7UHdD8rtW
+			Rhw/KSHgQSP4uj1gzS1YS02H0UUE3PzzrBsUhkJVTX6Y+yFxDfQYxVHSTejkWDKtU/MGoP+PZoyn
+			oop/l0Be+z6Tvk/XIZX06B8TgpLSlkz+YvL7fzTXqZM4QOClF8Bv6QXwW/57gD8r4u5AdlhT0gAA
+			AABJRU5ErkJggg==
+		</Resource>
+		<Resource ID="4d2612a4-ff65-e333-5421-5c5c5843d1bb" Type="png" Name="sprite.png">
+			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
+		</Resource>
+		<Resource ID="f7d6bb10-e69f-edd5-77dd-f02020b2f05a" Type="png" Name="folder-many-48.png">
+			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
+			AABJRU5ErkJggg==
+		</Resource>
+		<Resource ID="f8f9bd67-a935-58b0-7196-16e6c5a04f04" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACxElEQVR42nWT20tUURTGv7X3ycuQ
+			lqSZQzM644UsA4ugf6AgqicfguglwiSoIIrMMnuOhN4qCrFJpFDEimrKoJsGikrTBbopKhp0g26M
+			0zln5uzd2o5RlG5YnLX3Put3vnU5hHlWa0sbGo8fMa6MRu+MlISKQ8pTnpRC9w8M6eGhJxsyMjJ6
+			aT5Ay4UIaut2Gle8evl6tKy8NOS6rpJSor9/kD68//h8YmKyxgAkETQ/9d+A8+daULenlixL0NPY
+			i5FwOMQAR4GEmJqaSn398t0aGBhsokAhMPnhfwX19afR3HzQuAtiT569KQkFQ47jKmhNWVlZyrZt
+			6ujobjAKtm/eiJpAAHlJBWV0CFaTSi0UN3virXv3bbuyedPhsWBwOQMcj4ikEOTZtiOvX4s2UH4e
+			Pj26iYLKVUDKBjgdaMWQTOBYIz5Wrd1/zl+89UBFReXi6URCCeIcpPBcx5U3bt1toKJ8jD44g0D5
+			cgjbheJ4o8pURYsArFefQT/sy8hful6nknFzQ4Jkyk26sqfnXgMV5mLsYRuC5StArsNBAoKz0KyC
+			sv3wuOzq8dN2a3HeOuF5cWW6wp3wkgyI3mFA0VKM991GsLQc5P2Envm8AGlWQB5gc1r3n52lLN9q
+			piZMp/iWFbhJGhqOHaVlBQzoZkDpLIAl0p/pMED6Fl+IZFJyVp62coTovEqJE6cyt/h82TEqMoAO
+			BoQZYKcD6J/xIpmGzfRoEeTFdkzvOoSVfDZpijje245gWQiUcv4D6NmCmvZDKa2tXBKtnUjsPoY1
+			fPWWli3BWF8EwXAxSDnpAJpjwPUMBFrmsIIuTNc2oZqPR8mfj8mhCIr8Qd7OAjDXH5Iedo1ciMtd
+			cHYcNwrwlnJ9iEUaUV0V5niuuEhPwZwAxZbhAyJRxE9eQiVv35lXC9jq2Pxs3jzhv5eZA1PSXkug
+			kwHWLymOKnw4ElVZAAAAAElFTkSuQmCC
+		</Resource>
+		<Resource ID="fc2ada16-d8de-3980-b9f1-16e69fc23233" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAEjUlEQVR42pWUfUxVZRzHv89zzpEL
+			TMZ4ucC9YH8kWK0tNith5az1V63QBBTKBYo2c9JC1j/Jpki+YBGlFRFvS1n90dYkV1tz2sugRstS
+			xN5mvHPvBRNFlPt2znn6nede3syh99l57rnn2fn9Pr/v7+UwRLBam48pExNXDVVR8laveawjKTlJ
+			Z4AK+mFggjFmdHb+yAf7h8unpr0fZmQ4NBYJoKXpE8Xt9hiaquZtfKGwY9mydD0QCKjkGNY2DMM8
+			c/o7TE5OuQYGhgrorDsiQFNjm+LxjBkqAYqKCzvSM5y61+sjACRA13WcOnXazMrM5GfP/jbW03Px
+			gYgAjQ0tfMwzbqqaBSjocDgdus/nlwBAwDBN0XPuAgvqenDy2nXt2zPfZ80A+IOpEL0eIDubkqrS
+			iU4X7XO9wMP3AQmpYOsKmwgwpmualrdhY36Hw5Gi+/yUInrdNE2pQtNUERMbY/b9M8B37ti1XAIy
+			M4C/hxaPvqQAeOKZ43C73Jaz5woKn/8yNc0uFcj4LQDnMCgqW3S0MTg4rFS9US0BiZyh/J405FI/
+			GIKBS8mCLiHvQuNQRjzweP3Yt7Vsx6V0p2Pt+vx1J9IIYNVgfiCWkmgCDA+NKFVVNRJwsmI7nq18
+			HTC89KRYBQu/bUFMIDoO+PoroHS72rTmyadfzln1yNqiDXkn7Pbk4PS0T5sp8hzAZgwPu5Tq6oMS
+			8NNnDVhZtIV8XQbnmuUWLAwQ8k7QoB+sZCu76R6Pu5SYmhW/t7b93hibIvyBIGWGL1Rgsxkjo27l
+			zf1vSUBn8x7kbCkGuzkBaCHBbFZBGGMdsAzGp0yBvv7l8OMk7MkggM4YY/8DjLrcyqHa+hDg453I
+			3ZYHMXEdTNOsoSSXczZMBCFYPFjsSi74UtP86/wKNnLlcyXVzsxAQOe3AmwEoIFUDtcdkYCu5hqs
+			KisH810FUzXpnEo9W2ipgC8hY+oAJUrg9z+y4J76lNmTBIIBnfI/lyLdMFlUlC3g9ozz+iMNKySg
+			7QPklG6jPF8mgBpyvGDJRqcmMDnUaNM8f+F+PnSjgzlTGKXImEsR2WmaibilClzuMRyorc+UgNZ6
+			5GwuAwJXwoDbLMmwelgTYsSVzn7+swAxtgApZKF4rDqRyr5+xgaGYn/x+ryjN6YmXgkpqCMFm0nB
+			IoCZZc0GV2RnCVIVqpflnqYeVPR36qBW7kE+PX1hTwh1fFfbYQKUEuDfxQHh/rUYTAhO1kIWTI5L
+			kD4xSRBHG6FUVnMKV7Q7U0K90tV2kAAldwYsAhamQYBEiPcI8Fo1yBuOZaRCDQH2E2DT3aXojoAm
+			AtQsBHS27SPAi2DhIs9NcgQMgwBaAgFaCHDgVgV7CVAMEVbAbtOod6eAAO+2Qa04FAakhAA/tFQh
+			96X14MFrYIoSHrQIFUhAPMT77WAVdRLQ7kyGYjn69fhuZG8qpUYjBdAii372bQKAanD0Iyx59W3Q
+			VKGVelQq2LX6IewufAoJ9M0JFSCS+GcqZs2HRmF/g8nui3icTnpVPufKSfvReWaRpsicZ9NN22X9
+			UWkg/wONZwc80H6yigAAAABJRU5ErkJggg==
+		</Resource>
+	</Resources>
+	<SourceCode>
+<![CDATA[import sys
+import json
+import collections
+from scripting import e2vdom
+
+class VDOM_smartfolderdata(VDOM_object):
+
+	def render(self, contents=""):
+
+		woid = u"" + (self.id).replace('-', '_')
+		id = u"o_" + woid
+
+		display = u"display:none;" if self.visible == "0" else u"display:block;"
+
+		e2vdom.process(self)
+
+		classname = u"""class="%s" """ % self.classname if self.classname else u""
+		classname_item = 'sf-item'
+
+		style_zindex = u"z-index:%s;" % self.zindex if int(self.zindex) <> 0 else u""
+
+		#style = u"""{display} {zind} position: {pos}; top: {top}px; left: {left}px;  height: {height}px; """\
+		style = u"""{display} {zind} position: {pos}; top: {top}px; left: {left}px; width: {width}px;"""\
+			.format( display = display, zind = style_zindex, pos = self.position, 
+				top = self.top, left = self.left, width = self.width, height = self.height )
+
+		html_items = u""
+		js_items_data = u""
+
+		### javascript
+
+		js_base = u"""
+$j('#%(id)s')
+	%(js_items_data)s
+;
+$j("#%(id)s .items .%(class)s").bind('click dblclick', function(e){
+	if (e.preventDefault) e.preventDefault(); else e.returnValue = false;
+	var t = $j(this);
+	if (e.type == 'dblclick') {
+		%(id)s_doo = false;
+		execEventBinded('%(woid)s', "itemdblclick", {"id":t.attr("index")});
+	} else {
+		setTimeout(function() {
+			if (%(id)s_doo == true) {
+
+var x = $j('#%(id)s').data("sf"), i = $j(this).attr('index');
+%(id)s_current_item = x[i];
+$j('#%(id)s>.%(class)s').removeClass('selected');
+$j(this).addClass('selected');
+
+				execEventBinded('%(woid)s', "itemclick", {"id":t.attr("index")});
+			}
+		}, 300);
+		%(id)s_doo = true;
+	}
+	return false;
+});
+$j("#%(id)s .items .%(class)s").hover(function(e){
+	execEventBinded('%(woid)s', "itemmouseover", {"id":$j(this).attr("index")});
+	return false;
+},function(e){
+	execEventBinded('%(woid)s', "itemmouseout", {"id":$j(this).attr("index")});
+	return false;
+});
+""" % { "id": id, "woid": woid, "class": classname_item, "js_items_data": js_items_data }
+
+		if self.testhtml != '':
+			js_add = ""
+			testhtml = self.testhtml % { "id": id, "woid": woid, "class": classname_item }
+		else:
+			testhtml = ""
+			js_add = u"""
+
+$q(function(){
+	vdom_sfd_init('%(woid)s', %(page_current)s, %(page_itemsper)s);
+});
+
+
+""" % { "id": id, "woid": woid, "class": classname_item, "page_current": int(self.currentpage), "page_itemsper": int(self.itemsperpage) }
+
+		### pages
+
+		currentpage = int(self.currentpage)
+		if currentpage <= 0: currentpage = 1
+
+		itemsperpage = int(self.itemsperpage)
+		if itemsperpage <= 0: itemsperpage = 1
+
+		### consolidate javascript
+
+		js = u"""<script type="text/javascript">
+%(id)s_doo = false;
+%(id)s_current_item = null;
+$j(function(){
+	%(js_base)s
+	%(js_add)s
+	execEventBinded('%(woid)s', "requestmeta", {}, true);
+});
+</script>""" % { "id": id, "woid": woid, "class": classname_item, "js_base": js_base, "js_add": js_add,
+			"offset": str(itemsperpage*(currentpage-1)), "limit": str(itemsperpage) }
+
+		### styles
+
+		css = u"""<style type='text/css'>
+#%(id)s {
+}
+#%(id)s .items {
+width: %(width)spx;
+height: %(height)spx;
+overflow: hidden;
+}
+
+#%(id)s {
+background: #999;
+border: 1px solid #888;
+border-left: 1px solid #ddd;
+border-top: 1px solid #ddd;
+padding: 1px;
+}
+#%(id)s .sf-disabled {
+background: #fff;
+position: absolute;
+left: 0;
+top: 0;
+width: 100%%;
+height: 100%%;
+opacity: 0.7;
+}
+#%(id)s .ui-state-disabled {
+opacity: 1;
+}
+#%(id)s .info {
+position: relative;
+}
+#%(id)s .title {
+color: #fff;
+font-size: 16px;
+margin-left: 4px;
+}
+#%(id)s .metafields {
+background: #ececec;
+padding: 4px 1px;
+position: relative;
+border-bottom: 1px solid gray;
+}
+	#%(id)s .metafields .clear {
+	clear: both;
+	display: block;
+	}
+	#%(id)s .metafields .meta {
+	width: 45%%;
+	float: left;
+	padding-left: 5px;
+	border-right: 1px solid gray;
+	position: relative;
+	}
+		#%(id)s .metafields .meta span,
+		#%(id)s .metafields .meta input {
+		display: block;
+		float: right;
+		width: 39%%;
+		}
+		#%(id)s .metafields .meta span {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		}
+		#%(id)s .metafields .meta a.del {
+		display: block;
+		width: 12px;
+		height: 12px;
+		border: 1px solid red;
+		background: #f99;
+		float: left;
+		margin: 0 2px 0 0;
+
+		}
+	#%(id)s .info .btn-save,
+	#%(id)s .info .btn-cancel,
+	#%(id)s .info .btn-edit,
+	#%(id)s .info .btn-add {
+	display: block;
+	width: 20px;
+	height: 20px;
+	color: #fff;
+	background: blue;
+	border: 1px solid #444;
+	border-left: 1px solid #fff;
+	border-top: 1px solid #fff;
+	position: absolute;
+	right: 2px;
+	top: 2px;
+	text-decoration: none;
+	text-align: center;
+	font-weight: bold;
+	line-height: 18px;
+	font-size: 20px;
+	}
+	#%(id)s .info .btn-save,
+	#%(id)s .info .btn-add {
+	top: 26px;
+	background: green;
+	}
+	#%(id)s .info .btn-cancel {
+	background: red;
+	}
+#%(id)s .items {
+background: #fcfcfa;
+position: relative;
+}
+#%(id)s .pages {
+}
+	#%(id)s .pages a {
+	color: #eee;
+	}
+	#%(id)s .pages a:hover {
+	color: #fff;
+	text-decoration: none;
+	}
+	#%(id)s .pages a,
+	#%(id)s .pages span {
+	padding: 2px 4px;
+	margin: 1px;
+	display: block;
+	float: left;
+	}
+	#%(id)s .pages span {
+	background: #eee;
+	}
+
+</style>""" % {
+			"id": id, "class": classname_item,
+			"itemwidth": self.itemwidth, "itemheight": self.itemheight,
+			"width": self.width, "height": self.height
+		}
+
+		shide = u"style='display:none'"
+
+		toolbar = u"""<div class='' >
+<div style='clear:both'></div>
+		</div>""" % {
+			"id":     id,
+			"class":  classname_item
+		}
+
+		### debug info
+
+		if VDOM_CONFIG_1["DEBUG"] == "1":
+			debug_info = u"objtype='smartfolder' objname='%s' ver='%s'" % (self.name, self.type.version)
+		else:
+			debug_info = u""
+
+		### out
+
+		result = u"""
+			{css}
+			<div {debug_info} {classname} id="{id}" style="{style}">
+				<div class="title"></div>
+				<div class="info">
+					<form class="metafields"></form>
+					<a class="btn-edit" href="#"></a><a class="btn-add" href="#"></a>
+					<a class="btn-save" style='display:none' href="#"></a><a class="btn-cancel" style='display:none' href="#"></a>
+				</div>
+				<div class='items'>{contents}</div>
+				<div class='pages'></div>
+				<div class='sf-disabled' style='display:none'></div>
+			</div>
+			{js}
+			{testhtml}
+			""".format(
+					debug_info = debug_info, id = id, style = style, js = js, css = css, classname = classname,
+					testhtml = testhtml, toolbar = toolbar, contents = contents
+				)
+
+		return VDOM_object.render(self, contents=result)
+
+
+	def wysiwyg(self, contents = ""):
+		import utils.wysiwyg
+		
+		image_id = "3da66ba6-5c23-4e4a-7b77-16e671733af3"
+		result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
+		
+		return VDOM_object.wysiwyg(self, contents=result)
+
+
+# def set_attr(app_id, object_id, param):
+def on_update(object, attributes):
+	css = """
+#%(id)s {
+}
+#%(id)s .items {
+}
+#%(id)s .items .%(class)s {
+}
+#%(id)s .items .%(class)s-hover {
+}
+#%(id)s .controls {
+}
+	#%(id)s .controls .control {
+	}
+	#%(id)s .controls .control {
+	}
+	#%(id)s .controls .control:hover {
+	}
+	#%(id)s .controls .control:active {
+	}
+"""
+
+	# o = application.objects.search(object_id)
+	o = object
+
+	# if "skin" in param:
+	if "skin" in attributes:
+		# if param["skin"]["value"] == "1":
+		if attributes["skin"] == "1":
+			# o.set_attributes({"style": css})
+			o.attributes.update(style=css)
+		# # elif param["skin"]["value"] == "2":
+		# elif attributes["skin"] == "2":
+		# #	o.set_attributes({"style": eof_style})
+		# o.attributes.update(style=eof_style)
+	# if "style" in param and param["style"]["value"] and o.attributes.style != css:
+	if "style" in attributes and attributes["style"] and o.attributes["style"] != css:
+		# o.set_attributes({"skin": 0})
+		o.attributes.update(skin=0)
+
+	return ""]]>
+	</SourceCode>
+	<Libraries>
+		<Library Target="html"><![CDATA[<script type='text/javascript'>
+
+function vdom_sfd_selected_add(sfid, guid){
+	var sa = sfid.data('sfd_items_selected');
+	var x = $j.inArray(guid, sa);
+	if (x < 0) {
+		sa.push(guid);
+		sfid.data('sfd_items_selected', sa);
+	}
+}
+
+function vdom_sfd_selected_remove(sfid, guid){
+	var sa = sfid.data('sfd_items_selected');
+	var x = $j.inArray(guid, sa);
+	if (x >= 0) {
+		sa.splice(x,1);
+		sfid.data('sfd_items_selected', sa);
+	}
+}
+
+function vdom_sfd_refresh(sf){
+	$j('.info .btn-add, .info .btn-edit',sf).show(0);
+	$j('.info .btn-save, .info .btn-cancel',sf).hide(0);
+	//execEventBinded('%(woid)s', "requestmeta", {});
+	var ddr = sf.data('sfd');
+	if (typeof ddr === 'array' || typeof ddr === 'object') {
+		var dr = $j('<div></div>');
+		if (ddr['data'] !== 'undefined')
+		$j.each(ddr['data'], function(i,e){
+			var a = {
+				type:     e['type'] || 'string',
+				name:     e['name'] || '',
+				title:    e['title'] || 'no title',
+				value:    e['value'] || 'no value',
+				editable: !!e['editable']
+			};
+			var at = a['type'], inp = '', aq = a['value'].replace("'",'&prime;');
+			if (at == 'date') {
+				inp = "<label>"+a['title']+"<span title='"+aq+"'>"+a['value']+"</span></label>";
+			} else
+			if (at == 'link') {
+				inp = "<label>"+a['title']+"<span title=''><a href='"+a['value']+"'>"+a['valuetitle']+"</a></span></label>";
+/*			} else
+			if (at == 'smartfolderlink') {
+				inp = "<label>"+a['title']+"<span>"+a['value']+"</span></label>";
+			} else
+			if (at == 'contactlink') {
+*/
+			} else { // string
+				inp = "<label>"+a['title']+"<span title='"+aq+"'>"+a['value']+"</span></label>";
+			}
+			var s = $j('<div class="meta type-'+a['type']+'">'+inp+'<div class="clear"></div></div>');
+			s.appendTo(dr);
+		});
+	}
+	$j('.metafields',sf).html('').append($j('>div',dr)).append('<div class="clear"></div>');
+}
+
+function vdom_sfd_disable(id){
+	$j('#'+id+' .sf-disabled').fadeIn('fast');
+}
+
+function vdom_sfd_enable(id){
+	$j('#'+id+' .sf-disabled').fadeOut('fast');
+}
+
+function vdom_sfd_load(id,data){
+	var sf = $j('#'+id);
+	var dd = data || '';
+	if (dd == '') {
+		dd = sf.data('sfd');
+	} else {
+		dd = data;
+	}
+	sf.data('sfd', dd);
+	vdom_sfd_refresh(sf);
+	$j('.title',sf).text(dd['title'] || '');
+/*
+	// pages
+	d = [];
+	var ii, tot = parseInt(total, 10), ipp = parseInt(sf.data('sfd_items_per_page'),10), curp = parseInt(sf.data('sf_current_page'),10);
+	if (tot <= 0) tot = 1;
+	if (ipp <= 0) ipp = 1;
+	if (curp <= 0) curp = 1;
+	var pages = parseInt(tot / ipp, 10);
+	if (tot %% ipp > 0) pages++;
+	for (ii = 1; ii <= pages; ii++) {
+		if (curp == ii) {
+			d.push("<span>"+ii+"</span>");
+		} else {
+			d.push("<a href='#' rel='"+ii+"'>"+ii+"</a>");
+		}
+	}
+	//$j('.pages',sf).html(d.join(' '));
+*/
+}
+
+function vdom_sfd_set_handlers(sf){
+	$j(".pages a",sf).live('click',function(){
+		var page = 	parseInt($j(this).attr('rel'),10);
+		if (page <= 0) page = 1;
+		sf.data('sfd_current_page', page);
+		var pa = sf.data('sfd_path');
+		var p = (pa.length > 0) ? pa[pa.length-1] : '';
+		execEventBinded(sf.data('sfd_woid'), "requestmeta", {"guid": p.guid, 'offset': sf.data('sfd_items_per_page')*(page-1), 'limit': sf.data('sfd_items_per_page') }, true);
+		return false;
+	});
+	$j(".info .btn-edit",sf).live('click',function(){
+		dd = sf.data('sfd');
+		if (typeof dd === 'array' || typeof dd === 'object') {
+			var d = $j('<div></div>');
+			if (dd['data'] !== 'undefined')
+			$j.each(dd['data'], function(i,e){
+				var a = {
+					type:      e['type'] || 'string',
+					name:      e['name'] || '',
+					title:     e['title'] || 'no title',
+					value:     e['value'] || 'no value',
+					editable:  !!e['editable'],
+					deletable: !!e['deletable']
+				};
+				var at = a['type'], inp = '', hdel = '', hedit = '';
+				//if (at == 'date') {
+				//	inp = "<label>"+a['title']+"<input type='text' name='"+a['name']+"' value='"+a['value']+"' /></label>";
+				/*} else
+				if (at == 'list') {
+					inp = "<label>"+a['title']+"<input type='text' name='"+a['name']+"' /></label>";
+				} else
+				if (at == 'smartfolderlink') {
+
+				} else
+				if (at == 'contactlink') {
+*/
+				//} else { // string
+					//inp = "<label><a href='#' class='del'></a> "+a['title']+"<input type='text' name='"+a['name']+"' value='"+a['value']+"' /></label>";
+					if (a['deletable']) hdel = "<a href='#' class='del'></a> ";
+					if (!a['editable']) hedit = " disabled readonly ";
+					inp = "<label>"+hdel+a['title']+"<input type='text' name='"+a['name']+"' value='"+a['value']+"'"+hedit+" /></label>";
+				//}
+				var s = $j('<div class="meta type-'+a['type']+'">'+inp+'<div class="clear"></div></div>');
+				s.appendTo(d);
+			});
+		}
+		$j('.metafields',sf).html('').append($j('>div',d)).append('<div class="clear"></div>');
+		$j('.info .btn-add, .info .btn-edit',sf).hide(0);
+		$j('.info .btn-save, .info .btn-cancel',sf).show(0);
+	});
+	$j(".info .metafields .meta a.del",sf).live('click',function(){
+		$j(this).parent().remove();
+		// todo: remove from data[]
+		return false;
+	});
+	$j(".info .btn-add",sf).live('click',function(){
+		execEventBinded(sf.data('sfd_woid'), "addmeta", {});
+		return false;
+	});
+	$j(".info .btn-save",sf).live('click',function(){
+		//$j('.sf-disabled',sf).fadeIn('fast');
+		execEventBinded(sf.data('sfd_woid'), "editmeta", {data: $j('.metafields',sf).serializeArray()});
+		return false;
+	});
+	$j(".info .btn-cancel",sf).live('click',function(){
+		vdom_sfd_refresh(sf);
+		return false;
+	});
+}
+
+function vdom_sfd_init(woid,page,per,sel){
+	var sf=$j('#o_'+woid);
+	sf.data('sfd_woid', woid);
+	/*
+	sf.data({
+		'sfd_selectmode': 0,
+		'sfd_current_item': null,
+		'sfd_current_page': parseInt(page,10) || 1,
+		'sfd_items_count': 0,
+		'sfd_items_per_page': parseInt(per,10) || 6,
+		'sfd_items_selected': sel || []
+	}).find('.items').html('');
+	$j('.sf-disabled',sf).css({
+		opacity: 0.7,
+		width: '100%%',
+		height: '100%%'
+	});
+	*/
+	vdom_sfd_set_handlers(sf);
+}
+
+</script>]]></Library>
+	</Libraries>
+	<E2VDOM>
+		<Events>
+			<UserInterfaceEvents>
+				<Event Name="rename" Description="#Lang(516)">
+					<Parameters>
+						<Parameter Name="guid" Description="#Lang(907)" Order="0"/>
+						<Parameter Name="name" Description="#Lang(908)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="itemclick" Description="#Lang(513)">
+					<Parameters>
+						<Parameter Name="guid" Description="#Lang(904)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="editmeta" Description="#Lang(518)">
+					<Parameters>
+						<Parameter Name="data" Description="#Lang(909)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="group" Description="#Lang(512)">
+					<Parameters>
+						<Parameter Name="name" Description="#Lang(902)" Order="0"/>
+						<Parameter Name="guidlist" Description="#Lang(903)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="itemdblclick" Description="#Lang(514)">
+					<Parameters>
+						<Parameter Name="guid" Description="#Lang(905)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="newmetadata" Description="#Lang(515)">
+					<Parameters>
+						<Parameter Name="name" Description="#Lang(906)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="requestmeta" Description="#Lang(517)"/>
+				<Event Name="addmeta" Description="#Lang(519)">
+					<Parameters>
+						<Parameter Name="data" Description="#Lang(911)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="delete" Description="#Lang(511)">
+					<Parameters>
+						<Parameter Name="guidlist" Description="#Lang(901)" Order="0"/>
+					</Parameters>
+				</Event>
+			</UserInterfaceEvents>
+		</Events>
+		<Actions>
+			<Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
+				<Action Name="disable" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<SourceCode>
+<![CDATA[vdom_sfd_disable(this.domCont.id);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="hide" DisplayName="#Lang(603)" Description="#Lang(503)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_hide(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="show" DisplayName="#Lang(609)" Description="#Lang(509)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(709)" Description="#Lang(809)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_show(this.domCont, fade);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="moveZindexTo" DisplayName="#Lang(606)" Description="#Lang(506)">
+					<Parameters>
+						<Parameter Name="newZindex" DisplayName="#Lang(706)" Description="#Lang(806)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[this.domCont.style.zindex = parseInt(newZindex,10);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="enable" DisplayName="#Lang(602)" Description="#Lang(502)">
+					<SourceCode>
+<![CDATA[vdom_sfd_enable(this.domCont.id);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="moveTo" DisplayName="#Lang(605)" Description="#Lang(505)">
+					<Parameters>
+						<Parameter Name="newX" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="newY" DisplayName="#Lang(704)" Description="#Lang(804)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="Effect" DisplayName="#Lang(705)" Description="#Lang(805)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_ui_moveTo(this.domCont, newX, newY, Effect);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="resizeTo" DisplayName="#Lang(608)" Description="#Lang(508)">
+					<Parameters>
+						<Parameter Name="width" DisplayName="#Lang(707)" Description="#Lang(807)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="height" DisplayName="#Lang(708)" Description="#Lang(808)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[this.domCont.style.width = parseInt(width,10);
+this.domCont.style.height = parseInt(height,10);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="loadMeta" DisplayName="#Lang(604)" Description="#Lang(504)">
+					<Parameters>
+						<Parameter Name="data" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[vdom_sfd_load(this.domCont.id, data);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="refresh" DisplayName="#Lang(607)" Description="#Lang(507)">
+					<SourceCode>
+<![CDATA[vdom_sfd_refresh(this.domCont.id);]]>
+					</SourceCode>
+				</Action>
+			</Container>
+		</Actions>
+	</E2VDOM>
+</Type>
