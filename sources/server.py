@@ -19,6 +19,8 @@ from server import VDOM_server
 from session import VDOM_session_manager
 from module import VDOM_module_manager
 
+from startup.server import arguments
+
 
 managers.register("log_manager", VDOM_log_manager)
 managers.register("file_manager", VDOM_file_manager, lazy=True)
@@ -40,5 +42,10 @@ managers.register("resource_editor", VDOM_resource_editor, lazy=True)
 # managers.register("email_manager", VDOM_email_manager, lazy=True)
 managers.register("module_manager", VDOM_module_manager)
 managers.register("server", VDOM_server)
+
+
+if arguments.preload:
+    print managers.memory.applications.default
+
 
 managers.server.start()

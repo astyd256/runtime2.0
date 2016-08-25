@@ -3,7 +3,7 @@ import sys
 from socket import socket
 from argparse import ArgumentParser
 import settings
-from utils.verificators import port
+from utils.verificators import port, uuid
 
 
 # verify that server is not running
@@ -23,8 +23,9 @@ parser = ArgumentParser(prog="server")
 
 parser.add_argument("-l", "--listen", type=port, metavar="address", help="Override server listening address")
 parser.add_argument("-p", "--port", type=port, metavar="port", help="Override server listening port")
-parser.add_argument("-a", "--application", metavar="identifier", help="Application to start")
+parser.add_argument("-a", "-d", "--application", "--default", type=uuid, metavar="identifier", help="Application to start")
 parser.add_argument("-c", "--configure", metavar="filename", help="Load configuration from the file")
+parser.add_argument("-e", "--preload", action='store_true', help="Preload default application",)
 
 arguments = parser.parse_args()
 
