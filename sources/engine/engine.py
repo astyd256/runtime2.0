@@ -79,7 +79,7 @@ class Engine(object):
             if action.owner.is_application:
                 action.execute(None, context)
             else:
-                instance = action.owner.factory(context or action.id)(parent)
+                instance = action.owner.factory(action.id)(parent)
                 instance.execute(context)
                 return instance.separate_render() if render else None
         except RenderTermination:
