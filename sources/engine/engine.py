@@ -72,15 +72,15 @@ class Engine(object):
         try:
             # get current context or return empty for some global actions
             try:
-                context = managers.request_manager.get_request().session().context
+                namespace = managers.request_manager.get_request().session().context
             except VDOM_exception:
-                context = {}
+                namespace = {}
 
             if action.owner.is_application:
-                action.execute(None, context)
+                action.execute(None, namespace)
             else:
-                instance = action.owner.factory(action.id)(parent)
-                instance.execute(context)
+                instance = action.owner.factory(context or action.id)(parent)
+                instance.execute(namespace)
                 return instance.separate_render() if render else None
         except RenderTermination:
             return "" if render else None
