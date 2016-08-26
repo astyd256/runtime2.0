@@ -32,7 +32,8 @@ class VDOM_resource_descriptor(object):
         # Cleaning fields
         if getattr(self, "object_id", None):
             self.__loaded = True
-        else:
+        
+        if not self.__loaded:
             self.object_id = None
             self.use_counting = False
             # self.dependences = {}
@@ -57,6 +58,7 @@ class VDOM_resource_descriptor(object):
         if not getattr(self, "res_type", None):  # Means it's new
             self.res_type = "permanent"
             self.label = ""
+        self.__loaded = True
         # storage.save_resource_record(self)
         managers.storage.save_resource_record(self)  # ?????
 
@@ -66,7 +68,7 @@ class VDOM_resource_descriptor(object):
         if fn:
             return fn
         else:
-            self.__filename = str(uuid.uuid4())
+            self.__filename = str(self.id)#str(uuid.uuid4())
             return self.__filename
 
     def __set_filename(self, value):
@@ -117,7 +119,7 @@ class VDOM_resource_descriptor(object):
 class VDOM_resource_object:
     """resource object class"""
 
-    def __init__(self, owner_id, object_id, id):
+    def __init__(self, owner_id, object_id, res_id):
         """constructor"""
         self.application_id = owner_id
         self.use_counting = False
@@ -125,7 +127,7 @@ class VDOM_resource_object:
         self.res_type = "permanent"
         self.res_format = ""
         self.label = ""
-        self.id = id
+        self.id = res_id
         self.name = ""
-        self.filename = str(uuid.uuid4())
+        self.filename = str(res_id)
         self.showtimes = None
