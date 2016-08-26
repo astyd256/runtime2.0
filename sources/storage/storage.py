@@ -23,7 +23,7 @@ class VDOM_storage(object):
 
     def __init__(self):
         """constructor"""
-        self.__dir = VDOM_CONFIG["STORAGE-DIRECTORY"]
+        self.__dir = VDOM_CONFIG["CACHE_LOCATION"]
         self.__fname = self.__dir + "/vdom.storage.db.sql"
         self.__sem = VDOM_semaphore()
         self.__queue = []
