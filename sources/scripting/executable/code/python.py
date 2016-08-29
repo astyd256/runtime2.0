@@ -8,7 +8,8 @@ from logs import server_log
 from ...wrappers import server, application, session, log, request, response, obsolete_request
 from ...object import VDOMObject
 from .generic import Code
-
+import managers
+from engine.exceptions import RenderTermination
 
 MISSING = "MISSING"
 REMOVE_ENCODING_REGEX = re.compile(r"^[ \t\v]*#.*?coding[:=][ \t]*([-_.a-zA-Z0-9]+).*$", re.MULTILINE)
@@ -66,6 +67,12 @@ class PythonCode(Code):
 
         try:
             exec self._code in namespace
+        except RenderTermination:
+            raise
+        except Exception as e:
+            managers.log_manager.error_bug("Python script error: %s"%e)
+            raise
+            
         finally:
             # restore package and instance
             namespace["__package__"] = previous_package

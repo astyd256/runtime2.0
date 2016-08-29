@@ -109,19 +109,21 @@ class VDOM_request:
 		self.action_result = ""
 
 		self.application_id = self.__app_id
-		if self.__app_id:
-			self.__session.context["application_id"] = self.__app_id		
+				
 		self.sid = sid
 		self.method = arguments["method"]
-		self.vdom = VDOM_memory_interface(self)
+		self.vdom = None#VDOM_memory_interface(self) #CHECK: Not used??
 
 		self.args = self.__arguments
-		try:
-			self.__app = managers.memory.applications[self.__app_id]
-			# self.__app = managers.xml_manager.get_application(self.__app_id)
-		except:
-			sys.excepthook(*sys.exc_info())
-			self.__app = None
+		self.__app = None
+		if self.__app_id:
+			self.__session.context["application_id"] = self.__app_id		
+			try:
+				self.__app = managers.memory.applications[self.__app_id]
+				# self.__app = managers.xml_manager.get_application(self.__app_id)
+			except:
+				sys.excepthook(*sys.exc_info())
+				
 		# special flags
 		self.redirect_to = None
 		self.wfile = handler.wfile
