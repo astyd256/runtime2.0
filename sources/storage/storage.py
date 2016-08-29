@@ -7,7 +7,7 @@ import traceback
 from utils.semaphore import VDOM_semaphore
 from utils.exception import VDOM_exception
 from utils.mutex import VDOM_named_mutex_auto
-
+import settings
 from daemon import VDOM_storage_writer
 
 _save_sql = "INSERT OR REPLACE INTO Resource_index (res_id, app_id, filename, name, res_type,res_format) VALUES (?, ?,?,?,?,?)"
@@ -23,7 +23,7 @@ class VDOM_storage(object):
 
     def __init__(self):
         """constructor"""
-        self.__dir = VDOM_CONFIG["STORAGE-DIRECTORY"]
+        self.__dir = settings.CACHE_LOCATION
         self.__fname = self.__dir + "/vdom.storage.db.sql"
         self.__sem = VDOM_semaphore()
         self.__queue = []
