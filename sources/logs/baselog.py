@@ -7,9 +7,7 @@ class BaseLog(object):
 
     def __init__(self, name=None):
         if name is not None:
-            self._name = name
-
-    name = property(lambda self: self._name)
+            self.name = "/".join((self.name, name))
 
     def _format(self, *values):
         self._format = self.formatter().format

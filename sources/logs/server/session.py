@@ -47,7 +47,7 @@ class LogServerSession(SmartDaemon):
     _revoke_request = create_packer("B")
 
     def _do_revoke(self):
-        id = self._revoke_request.unpack_from(self._stream)
+        id, = self._revoke_request.unpack_from(self._stream)
         del self._mapping[id]
 
     # write

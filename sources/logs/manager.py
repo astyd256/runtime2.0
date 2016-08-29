@@ -23,7 +23,7 @@ class VDOM_log_manager_logs(object):
             try:
                 return self._application_logs[id]
             except KeyError:
-                self._application_logs[id] = log = ApplicationLog("/".join((ApplicationLog.name, id)))
+                self._application_logs[id] = log = ApplicationLog(id)
                 return log
 
 
