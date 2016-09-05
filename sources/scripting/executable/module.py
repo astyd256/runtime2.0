@@ -1,45 +1,40 @@
 
-import settings
 import managers
 import file_access
 
-from utils.properties import lazy, roproperty
-from memory import PYTHON_EXTENSION, COMPILED_EXTENSION
+from utils.properties import lazy
+from memory import PYTHON_LANGUAGE
 
-from .storage import FileCodeStorage
-from .code import PythonCode
+from ..object import VDOMObject
+from .constants import LISTING
+from .storage import FileStorage
 from .generic import Executable
 
 
-class ModuleCodeStorage(FileCodeStorage):
+class ModuleStorage(FileStorage):
+
+    def locate(self, entity):
+        return managers.file_manager.locate(file_access.MODULE,
+            self.id, self.name) + self.subsystem.extensions[entity]
+
+
+class ModuleExecutable(Executable):
 
     @lazy
-    def _location(self):
-        return managers.file_manager.locate(file_access.MODULE, self._type.id, self._name)
-
-
-class Module(Executable, ModuleCodeStorage):
+    def scripting_language(self):
+        return PYTHON_LANGUAGE
 
     @lazy
-    def _name(self):
-        return settings.TYPE_MODULE_NAME
+    def package(self):
+        return None
 
     @lazy
-    def _source_extension(self):
-        return PYTHON_EXTENSION
+    def signature(self):
+        return self.locate(LISTING) or "<%s module %s:%s>" % (self.scripting_language, self.id, self.name.lower())
 
-    @lazy
-    def _extension(self):
-        return COMPILED_EXTENSION
-
-    def __init__(self, type):
-        self._type = type
-
-    owner = type = roproperty("_type")
-
-    def __str__(self):
-        return "module %s" % self._type.id
-
-
-class PythonModule(Module, PythonCode):
-    pass
+    def execute(self, context=None, namespace=None):
+        if self.scripting_language == PYTHON_LANGUAGE:
+            if namespace is None:
+                namespace = {}
+            namespace.update(VDOMObject=VDOMObject, VDOM_object=VDOMObject)
+        return super(ModuleExecutable, self).execute(context=context, namespace=namespace)

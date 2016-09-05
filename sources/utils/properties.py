@@ -1,66 +1,76 @@
 
 from weakref import ref
+from threading import RLock
+
+
+WEAK_NAME_TEMPLATE = "_weak_%s"
 
 
 def lazy(initializer):
-    namespace = {}
-    exec("""
-class LazyProperty(object):
+    name = initializer.__name__
+    lock = RLock()
 
-    __module__ = "utils"
+    class LazyProperty(object):
 
-    def __get__(self, instance, owner=None):
-        instance.{name} = value = self._initializer(instance)
-        return value
-        """.format(name=initializer.__name__), namespace)
-    instance = namespace["LazyProperty"]()
-    instance._initializer = initializer
-    return instance
+        def __get__(self, instance, owner=None):
+            with lock:
+                try:
+                    return instance.__dict__[name]
+                except KeyError:
+                    return instance.__dict__.setdefault(name, initializer(instance))
+
+    return LazyProperty()
 
 
-def weak(name):
-    namespace = {"ref": ref}
-    exec("""
+def _weak(name):
 
-class WeakProperty(object):
+    class WeakProperty(object):
 
-    __module__ = "utils"
+        def __get__(self, instance, owner=None):
+            try:
+                value = instance.__dict__[name]
+            except KeyError:
+                raise AttributeError(name)
+            return None if value is None else value()
 
-    def __get__(self, instance, owner=None):
-        return instance._weak_{name} if instance._weak_{name} is None else instance._weak_{name}()
+        def __set__(self, instance, value):
+            instance.__dict__[name] = None if value is None else ref(value)
 
-    def __set__(self, instance, value):
-        instance._weak_{name} = None if value is None else ref(value)
+        def __delete__(self, instance):
+            del instance.__dict__[name]
 
-    def __delete__(self, instance):
-        del instance._weak_{name}
-        """.format(name=name), namespace)
-    instance = namespace["WeakProperty"]()
-    return instance
+    return WeakProperty()
+
+
+def weak(*names):
+
+    def wrapper(cls):
+        for name in names:
+            setattr(cls, name, _weak(WEAK_NAME_TEMPLATE % name))
+        return cls
+
+    return wrapper
 
 
 def constant(value):
-    namespace = {}
-    exec("""
-class ConstProperty(object):
 
-    __module__ = "utils"
+    class ConstantProperty(object):
 
-    def __get__(self, instance, owner=None):
-        return {value}
+        def __get__(self, instance, owner=None):
+            return value
 
-    def __set__(self, instance, value):
-        raise AttributeError
+        def __set__(self, instance, value):
+            raise AttributeError
 
-    def __delete__(self, instance):
-        raise AttributeError
-        """.format(value=repr(value)), namespace)
-    return namespace["ConstProperty"]()
+        def __delete__(self, instance):
+            raise AttributeError
+
+    return ConstantProperty()
 
 
 def roproperty(name):
     namespace = {}
-    exec("""
+    bytecode = compile("""
 class ReadOnlyProperty(object):
 
     __module__ = "utils"
@@ -74,7 +84,8 @@ class ReadOnlyProperty(object):
 
     def __delete__(self, instance):
         raise AttributeError
-        """.format(name=name), namespace)
+        """.format(name=name), "<roproperty>", "exec")
+    exec(bytecode, namespace)
     return namespace["ReadOnlyProperty"]()
 
 
@@ -90,26 +101,23 @@ def rwproperty(name, setter=None, notify=None):
             notify = "instance.%s()" % notify
 
     if setter:
-        exec("""
+        bytecode = compile("""
 class ReadWriteProperty(object):
 
     __module__ = "utils"
-
-    def __init__(self, setter):
-        self._setter = setter
 
     def __get__(self, instance, owner=None):
         return instance.{name}
 
     def __set__(self, instance, value):
-        self._setter(instance, value);{notify}
+        setter(instance, value);{notify}
 
     def __delete__(self, instance):
         raise AttributeError
-            """.format(name=name, notify=notify), namespace)
-        return namespace["ReadWriteProperty"](setter)
+            """.format(name=name, notify=notify), "<rwproperty>", "exec")
+        namespace["setter"] = setter
     else:
-        exec("""
+        bytecode = compile("""
 class ReadWriteProperty(object):
 
     __module__ = "utils"
@@ -122,5 +130,6 @@ class ReadWriteProperty(object):
 
     def __delete__(self, instance):
         raise AttributeError("{name}")
-            """.format(name=name, notify=notify), namespace)
-        return namespace["ReadWriteProperty"]()
+            """.format(name=name, notify=notify), "<rwproperty>", "exec")
+    exec(bytecode, namespace)
+    return namespace["ReadWriteProperty"]()

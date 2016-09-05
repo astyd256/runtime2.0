@@ -1,28 +1,48 @@
 
+from marshal import dumps, loads
+import errno
 import managers
 import file_access
-from utils.properties import lazy, roproperty
-from .generic import CodeStorage
+from ..constants import BYTECODE
+from .generic import Storage
 
 
-class FileCodeStorage(CodeStorage):
+class FileStorage(Storage):
 
-    @lazy
-    def _location(self):
-        raise NotImplementedError
+    def exists(self, entity):
+        return managers.file_manager.exists(file_access.FILE, None, self.locate(entity))
 
-    location = roproperty("_location")
+    def read(self, entity):
+        if entity is BYTECODE:
+            mode, encoding = "rb", None
+        else:
+            mode, encoding = "rU", "utf8"
 
-    def _exists(self, extension):
-        return managers.file_manager.exists(file_access.FILE, None, self._location + extension)
+        try:
+            with managers.file_manager.open(file_access.FILE, None,
+                    self.locate(entity), mode=mode, encoding=encoding) as file:
+                value = file.read()
+        except Exception as error:
+            if error.errno == errno.ENOENT:
+                return
+            else:
+                raise
 
-    def _read(self, extension):
-        with managers.file_manager.open(file_access.FILE, None, self._location + extension, mode="rU", encoding="utf8") as file:
-            return file.read()
+        if entity is BYTECODE:
+            value = loads(value)
 
-    def _write(self, extension, value):
-        with managers.file_manager.open(file_access.FILE, None, self._location + extension, mode="w", encoding="utf8") as file:
+        return value
+
+    def write(self, entity, value):
+        if entity is BYTECODE:
+            mode, encoding = "wb+", None
+            value = dumps(value)
+        else:
+            mode, encoding = "w+", "utf8"
+
+        with managers.file_manager.open(file_access.FILE, None,
+                self.locate(entity), mode=mode, encoding=encoding) as file:
             return file.write(value)
 
-    def _delete(self, extension):
-        managers.file_manager.delete(file_access.FILE, None, self._location + extension)
+    def delete(self, entity):
+        managers.file_manager.delete(file_access.FILE, None, self.locate(entity))

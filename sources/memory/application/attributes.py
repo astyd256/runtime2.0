@@ -13,6 +13,7 @@ FORCE_CDATA_REGEX = re.compile(u"[\u0000-\u0019\"<=>]", re.MULTILINE)
 DEREFERENCE_REGEX = re.compile(r"\#RES\(([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})\)", re.IGNORECASE)
 
 
+@weak("_owner")
 class MemoryAttributesSketch(MemoryBase, MutableMapping):
 
     @lazy
@@ -26,8 +27,6 @@ class MemoryAttributesSketch(MemoryBase, MutableMapping):
     @lazy
     def _query(self):
         return set()
-
-    _owner = weak("owner")
 
     def __init__(self, owner, attributes=None):
         self._owner = owner

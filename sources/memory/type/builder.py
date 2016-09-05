@@ -14,7 +14,7 @@ from utils.parsing import \
 from ..constants import PYTHON_EXTENSION
 
 
-def type_builder(parser, callback=None):
+def type_builder(parser, installation_callback=None):
     "legacy"  # select legacy builder mode
     # TODO: Check attributes values for validity
     def document_handler(name, attributes):
@@ -186,8 +186,8 @@ def type_builder(parser, callback=None):
                             raise MissingElementError(u"ID")
                         if type.name is None:
                             raise MissingElementError(u"Name")
-                        if callback:
-                            callback(type)
+                        if installation_callback:
+                            installation_callback(type)
                     parser.handle_elements(name, attributes, information_handler, close_information_handler)
                     # </Information>
                 elif name == u"Attributes":
@@ -340,8 +340,10 @@ def type_builder(parser, callback=None):
                     if u"Information" not in sections:
                         raise SectionMustPrecedeError(u"Information")
                     def handle_sourcecode(value):
-                        managers.file_manager.write(file_access.MODULE, type.id,
-                            settings.TYPE_MODULE_NAME + PYTHON_EXTENSION, value, encoding="utf8")
+                        # managers.file_manager.write(file_access.MODULE, type.id,
+                        #     settings.TYPE_MODULE_NAME + PYTHON_EXTENSION, value, encoding="utf8")
+                        if installation_callback:
+                            type.source_code = value
                     parser.handle_value(name, attributes, handle_sourcecode)
                     # </SourceCode>
                 elif name == u"Libraries":

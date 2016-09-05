@@ -1,6 +1,7 @@
 
 import io
 import os
+import errno
 import shutil
 
 from collections import deque
@@ -202,7 +203,8 @@ class FileManager(object):
             try:
                 os.remove(location)
             except Exception as error:
-                print "Delete %s file error: %s" % (location, error)
+                if error.errno != errno.ENOENT:
+                    print "Delete %s file error: %s" % (location, error)
 
     # directories
 

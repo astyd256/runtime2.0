@@ -6,8 +6,11 @@ from operator import itemgetter
 from collections import defaultdict, OrderedDict
 from uuid import uuid4
 
+import settings
 import managers
 
+from logs import server_log
+from memory import VSCRIPT_LANGUAGE
 from utils.structure import VDOM_structure
 from utils.parsing import ParsingException, \
     SectionMustPrecedeError, MissingSectionError, \
@@ -19,7 +22,7 @@ from ..constants import SCRIPT_CONTEXT
 from ..auxiliary import clean_attribute_value, clean_source_code
 
 
-def application_builder(parser, callback=None):
+def application_builder(parser, installation_callback=None):
     "legacy"  # select legacy builder mode
     # TODO: Check attributes values for validity
     def document_handler(name, attributes):
@@ -114,8 +117,8 @@ def application_builder(parser, callback=None):
                             MissingElementError(u"ID")
                         if application.name is None:
                             MissingElementError(u"Name")
-                        if callback:
-                            callback(application)
+                        if installation_callback:
+                            installation_callback(application)
                     parser.handle_elements(name, attributes, information_handler, close_information_handler)
                     # </Information>
                 elif name == u"Objects":
@@ -184,7 +187,7 @@ def application_builder(parser, callback=None):
                                             action.id = str(uuid4())
                                             action.name = SCRIPT_CONTEXT
                                             def script_handler(value):
-                                                action.source_code = clean_source_code(value)
+                                                action.source_code_value = clean_source_code(value)
                                                 actions[action.id] = action
                                             parser.handle_value(name, attributes, script_handler)
                                             # </Script>
@@ -233,7 +236,7 @@ def application_builder(parser, callback=None):
                                             except KeyError:
                                                 pass
                                             def action_handler(value):
-                                                action.source_code = clean_source_code(value)
+                                                action.source_code_value = clean_source_code(value)
                                                 actions[action.id] = action
                                             parser.handle_value(name, attributes, action_handler)
                                             # </Action>
@@ -296,7 +299,7 @@ def application_builder(parser, callback=None):
                             except KeyError:
                                 pass
                             def action_handler(value):
-                                action.source_code = value
+                                action.source_code_value = clean_source_code(value)
                                 actions[action.id] = action
                             parser.handle_value(name, attributes, action_handler)
                             # </Action>
@@ -401,32 +404,16 @@ def application_builder(parser, callback=None):
                     def libraries_handler(name, attributes):
                         if name == u"Library":
                             # <Library>
+                            library = application.libraries.new_sketch()
                             try:
-                                library_name = attributes.pop(u"Name")
+                                library.name = attributes.pop(u"Name")
                             except KeyError:
                                 raise MissingAttributeError(u"Name")
                             # if not is_valid_identifier(name): raise VDOM_incorrect_value_error, u"Name"
+                            libraries.append(library)
                             def library_handler(value):
-                                # application.libraries[library_name] = value
-                                # if application.scripting_language == u"vscript":
-                                #     # TODO: Check this thread using
-                                #     threading.currentThread().application = application.id
-                                #     try:
-                                #         value, source = vcompile(value, bytecode=0)
-                                #     finally:
-                                #         threading.currentThread().application = None
-
-                                managers.file_manager.write_library(application.id,
-                                    library_name + application.scripting_extension, value)
-                                libraries.append(library_name)
-
-                                # previous = managers.engine.select(application.id)
-                                # try:
-                                #     code, source = vcompile(value, bytecode=0)
-                                # finally:
-                                #     managers.engine.select(previous)
-
-                                # managers.file_manager.write_library(application.id, library_name + ".py", value)
+                                if installation_callback:
+                                    library.source_code = value
                             parser.handle_value(name, attributes, library_handler)
                             # </Library>
                         else:
@@ -886,10 +873,13 @@ def application_builder(parser, callback=None):
                 if not sections.get("Information", False):
                     raise MissingSectionError("Information")
 
-                from scripting.executable import select_library_class
-                for library in libraries:
-                    executable = select_library_class(application.scripting_language)(application, library)
-                    executable.compile(store=True)
+                # HACK: vscript libraries require precompile
+                if application.scripting_language == VSCRIPT_LANGUAGE \
+                        and not (settings.STORE_BYTECODE or settings.STORE_SYMBOLS):
+                    server_log.write("Precompile libraries")
+                    for library in libraries:
+                        server_log.write("    %s" % library.name)
+                        library.compile()
 
                 for object in objects.itervalues():
                     ~object
@@ -899,6 +889,8 @@ def application_builder(parser, callback=None):
                     ~action
                 for event in events:
                     ~event
+                for library in libraries:
+                    ~library
                 ~application
 
                 # def handle_on_create(container):

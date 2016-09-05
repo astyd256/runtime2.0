@@ -1,20 +1,14 @@
 
 from uuid import uuid4
 from utils.properties import lazy, constant, roproperty, rwproperty
+from scripting.executable import ActionStorage, ActionExecutable
 from ..generic import MemoryBase
 
 
-class MemoryActionSketch(MemoryBase):
+class MemoryActionSketch(MemoryBase, ActionStorage, ActionExecutable):
 
     is_action = constant(True)
     is_binding = constant(False)
-
-    @lazy
-    def _executable(self):
-        from scripting.executable import select_action_class
-        return select_action_class(self._owner.application.scripting_language)(self, self._name)
-        # import scripting
-        # return scripting.actions.select(self._owner.application.scripting_language)(self)
 
     def __init__(self, callback, owner):
         self._callback = callback
@@ -24,8 +18,9 @@ class MemoryActionSketch(MemoryBase):
         self._top = 0
         self._left = 0
         self._state = False
-        self._source_code = u""
+        self._source_code_value = u""
 
+    lock = roproperty("_owner.lock")
     owner = roproperty("_owner")
     application = roproperty("_owner.application")
 
@@ -34,7 +29,7 @@ class MemoryActionSketch(MemoryBase):
     top = rwproperty("_top")
     left = rwproperty("_left")
     state = rwproperty("_state")
-    source_code = rwproperty("_source_code")
+    source_code_value = rwproperty("_source_code_value")
 
     def __invert__(self):
         if self._id is None:
@@ -63,7 +58,7 @@ class MemoryActionDuplicationSketch(MemoryActionSketch):
         self._top = another._top
         self._left = another._left
         self._state = another._state
-        self._source_code = another._source_code
+        self._source_code_value = another._source_code_value
 
 
 class MemoryAction(MemoryActionSketch):
@@ -80,11 +75,13 @@ class MemoryAction(MemoryActionSketch):
                 self._owner.invalidate(contexts=contexts, downward=True, upward=True)
                 self._owner.autosave()
 
+    def _get_source_code(self):
+        with self._owner.lock:
+            return super(MemoryAction, self)._get_source_code()
+
     def _set_source_code(self, value):
         with self._owner.lock:
-            self._source_code = value
-            if "_executable" in self.__dict__:
-                del self._executable
+            super(MemoryAction, self)._set_source_code(value)
             self._owner.invalidate(contexts=(self._id, self._name), downward=True, upward=True)
             self._owner.autosave()
 
@@ -93,23 +90,18 @@ class MemoryAction(MemoryActionSketch):
     top = rwproperty("_top", notify="_owner.autosave")
     left = rwproperty("_left", notify="_owner.autosave")
     state = rwproperty("_state", notify="_owner.autosave")
-    source_code = rwproperty("_source_code", _set_source_code)
+    source_code = property(_get_source_code, _set_source_code)
 
     # unsafe
     def compose(self, ident=u"", file=None):
         information = u"ID=\"%s\" Name=\"%s\" Top=\"%s\" Left=\"%s\" State=\"%s\"" % \
             (self._id, self._name.encode("xml"), self._top, self._left, self._state)
-        if self._source_code:
+        if self.source_code:
             file.write(u"%s<Action %s>\n" % (ident, information))
-            file.write(u"%s\n" % self._source_code.encode("cdata"))
+            file.write(u"%s\n" % self.source_code_value.encode("cdata"))
             file.write(u"%s</Action>\n" % ident)
         else:
             file.write(u"%s<Action %s/>\n" % (ident, information))
-
-    # unsafe
-    def execute(self, object, namespace):
-        if self._source_code:
-            self._executable.execute(namespace, context=object)
 
     def __invert__(self):
         raise NotImplementedError

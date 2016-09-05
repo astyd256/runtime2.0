@@ -43,7 +43,8 @@ class ActualScriptingFinder(object):
             if module:
                 # console.stdout.write("IMPORT MODULE >>> %s\n" % module)
                 uuid = module.replace("_", "-")
-                loader = ScriptingLoader(fullname, managers.memory.types[uuid].executable)
+                # loader = ScriptingLoader(fullname, managers.memory.types[uuid].executable)
+                loader = ScriptingLoader(fullname, managers.memory.types[uuid])
                 return loader
             else:
                 package = match.group(2)
@@ -61,7 +62,7 @@ class ActualScriptingFinder(object):
                     elif package != application.id:
                         raise ImportError("Unable to load \"%s\" library from \"%s\" context" %
                             (package, application.id))
-                    executable = application.get_library_executable(library)
+                    executable = application.libraries.get(library)
                     if executable:
                         # console.stdout.write("IMPORT LIBRARY >>> %s . %s\n" % (package, library))
                         return ScriptingLoader(fullname, executable)
@@ -133,11 +134,11 @@ class ScriptingLoader(object):
         if not module:
             module = imp.new_module(self._fullname)
 
-        module.__file__ = self._executable._signature
+        module.__file__ = self._executable.signature
         module.__loader__ = None  # self
-        module.__package__ = self._executable._package
+        module.__package__ = self._executable.package
 
         sys.modules[self._fullname] = module
-        self._executable.execute(module.__dict__)
+        self._executable.execute(None, module.__dict__)
 
         return module

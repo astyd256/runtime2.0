@@ -1,6 +1,7 @@
 
 import os.path
 
+import settings
 import managers
 import file_access
 
@@ -35,6 +36,9 @@ def run(location):
     install application or type
     :param location: input filename with application or type or directory to search
     """
+    if location == "types":
+        location = os.path.join(settings.REPOSITORY_LOCATION, settings.REPOSITORY_TYPES_DIRECTORY)
+
     if os.path.isdir(location):
         with section("install everything from %s" % location):
             for filename in managers.file_manager.list(file_access.FILE, None, location):

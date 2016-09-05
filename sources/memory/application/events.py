@@ -6,6 +6,7 @@ from .catalogs import MemoryEventsCatalog, MemoryEventsDynamicCatalog
 from .event import MemoryEventSketch
 
 
+@weak("_owner")
 class MemoryEvents(MemoryBase, MutableMapping):
 
     @lazy
@@ -22,8 +23,6 @@ class MemoryEvents(MemoryBase, MutableMapping):
             return MemoryEventsCatalog(self)
         else:
             return MemoryEventsDynamicCatalog(self)
-
-    _owner = weak("owner")
 
     def __init__(self, owner):
         self._owner = owner

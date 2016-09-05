@@ -167,7 +167,7 @@ class Compiler(object):
 
         # append execute sources
         if execute:
-            source.append(u"def execute(self, namespace):\n")
+            source.append(u"def execute(self, namespace=None):\n")
             source.extend(execute)
             source.append(u"\tsuper(%s, self).execute(namespace)\n" % profile.class_name)
 

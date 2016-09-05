@@ -1,14 +1,17 @@
 
-class CodeStorage(object):
+class Storage(object):
 
-    def _exists(self, extension):
+    def locate(self, entity):
         raise NotImplementedError
 
-    def _read(self, extension):
+    def exists(self, entity):
         raise NotImplementedError
 
-    def _write(self, extension, value):
+    def read(self, entity):
         raise NotImplementedError
 
-    def _delete(self, extension):
+    def write(self, entity, value):
+        raise NotImplementedError
+
+    def delete(self, entity):
         raise NotImplementedError

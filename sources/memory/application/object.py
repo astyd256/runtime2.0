@@ -16,6 +16,7 @@ from .events import MemoryEvents
 from .structure import MemoryStructureSketch, MemoryStructure
 
 
+@weak("_parent", "_application")
 class MemoryObjectSketch(MemoryBase):
 
     is_application = constant(False)
@@ -43,9 +44,6 @@ class MemoryObjectSketch(MemoryBase):
     @lazy
     def _structure(self):
         return None if self._parent or self._virtual else MemoryStructureSketch(self)
-
-    _parent = weak("parent")
-    _application = weak("application")
 
     def __init__(self, callback, type, application, parent, virtual=False, attributes=None):
         self._callback = callback

@@ -207,8 +207,10 @@ def format_trace(stack, limit=sys.maxint,
 
 
 def format_thread_trace(thread=None, limit=sys.maxint,
-        statements=True, caption=False, compact=COMPACT_DEFAULT_MODE,
+        statements=True, caption=None, header=False, compact=COMPACT_DEFAULT_MODE,
         indent="", filler=DEFAULT_FILLER, skip=None, until=None, into=None):
+    lines = [] if into is None else into
+
     if thread is None:
         stack = extract_stack(skip=skip, until=until)
     else:
@@ -216,18 +218,27 @@ def format_thread_trace(thread=None, limit=sys.maxint,
         stack = extract_stack(frame, skip=skip, until=until)
 
     if caption:
+        lines.append(caption)
+
+    if header:
         if thread is None:
             thread = threading.current_thread()
         caption = describe_thread(thread)
+    else:
+        caption = None
 
-    return format_trace(stack,
+    format_trace(stack,
         limit=limit,
         statements=statements,
         caption=caption,
         compact=compact,
         indent=indent,
         filler=filler,
-        into=into)
+        into=lines)
+
+    if into is None:
+        lines.append("")
+        return "\n".join(lines)
 
 
 def format_threads_trace(limit=sys.maxint,
@@ -242,7 +253,7 @@ def format_threads_trace(limit=sys.maxint,
         format_thread_trace(thread,
             limit=limit,
             statements=statements,
-            caption=True,
+            header=True,
             compact=compact,
             indent=indent,
             filler=filler,
@@ -255,7 +266,8 @@ def format_threads_trace(limit=sys.maxint,
         return "\n".join(lines)
 
 
-def format_exception_locals(information=None, ignore_builtins=True, indent="", filler=DEFAULT_FILLER, into=None):
+def format_exception_locals(information=None, ignore_builtins=True,
+        indent="", filler=DEFAULT_FILLER, into=None):
     lines = [] if into is None else into
     extype, exvalue, extraceback = information or sys.exc_info()
     frame = inspect.getinnerframes(extraceback)[-1][0]
@@ -274,7 +286,8 @@ def format_exception_locals(information=None, ignore_builtins=True, indent="", f
 
 
 def format_exception_trace(information=None, limit=sys.maxint,
-        statements=True, compact=COMPACT_DEFAULT_MODE, locals=False, threads=False, separate=False,
+        statements=True, caption=None, label=None, compact=COMPACT_DEFAULT_MODE,
+        locals=False, threads=False, separate=False,
         indent="", filler=DEFAULT_FILLER, into=None):
     lines = [] if into is None else into
     extype, exvalue, extraceback = information = information or sys.exc_info()
@@ -285,7 +298,13 @@ def format_exception_trace(information=None, limit=sys.maxint,
         separator = lfill("- ", LOCATION_WIDTH + STATEMENT_WIDTH + (CAPTION_WIDTH if compact else 0))
         lines.append(separator)
 
-    lines.append("%s%s" % (indent, describe_exception(extype, exvalue)))
+    if caption:
+        lines.append(caption)
+
+    description = describe_exception(extype, exvalue)
+    if label:
+        description = "%s: %s" % (label, description)
+    lines.append("%s%s" % (indent, description))
 
     if locals:
         format_exception_locals(information, indent="    ", into=lines)
@@ -352,10 +371,10 @@ def show_trace(stack, limit=sys.maxint,
 
 
 def show_thread_trace(thread=None, limit=sys.maxint,
-        statements=True, caption=False, compact=COMPACT_DEFAULT_MODE,
+        statements=True, caption=None, header=False, compact=COMPACT_DEFAULT_MODE,
         indent="", filler=DEFAULT_FILLER, skip=None, until=None, output=None):
     (output or sys.stdout).write(format_thread_trace(
-        thread, limit, statements, caption, compact, indent, filler, skip, until))
+        thread, limit, statements, caption, header, compact, indent, filler, skip, until))
 
 
 def show_threads_trace(limit=sys.maxint,
@@ -372,7 +391,9 @@ def show_exception_locals(information=None,
 
 
 def show_exception_trace(information=None, limit=sys.maxint,
-        statements=True, compact=COMPACT_DEFAULT_MODE, locals=False, threads=False, separate=False,
+        statements=True, caption=None, label=None, compact=COMPACT_DEFAULT_MODE,
+        locals=False, threads=False, separate=False,
         indent="", filler=DEFAULT_FILLER, output=None):
     (output or sys.stderr).write(format_exception_trace(
-        information, limit, statements, compact, locals, threads, separate, indent, filler))
+        information, limit, statements, caption, label, compact,
+            locals, threads, separate, indent, filler))

@@ -14,6 +14,7 @@ from utils.properties import roproperty  # rwproperty
 from utils.tracing import format_exception_trace
 from utils.parsing import Parser, ParsingException
 
+from .constants import APPLICATION_START_CONTEXT
 from .type import type_builder, MemoryTypes
 from .application import application_builder, MemoryApplications
 from .daemon import MemoryWriter
@@ -57,6 +58,7 @@ class Memory(object):
         #         # managers.file_manager.clear(file_access.type_source, type, None)
         #         managers.file_manager.cleanup_directory(file_access.type_source, type)
 
+    lock = roproperty("_lock")
     types = roproperty("_types")
     applications = roproperty("_applications")
 
@@ -234,7 +236,7 @@ class Memory(object):
                     log.warning("    %s at line %s" % (message, lineno))
 
             if settings.SERVER:
-                action = application.actions.get("applicationonstart")
+                action = application.actions.get(APPLICATION_START_CONTEXT)
                 if action and action.source_code:
                     managers.engine.execute(action)
 

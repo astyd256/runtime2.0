@@ -147,11 +147,11 @@ class VDOMObject(object):
 
     id4code = id_special = property(lambda self: u"o_" + self._id.replace('-', '_'))
 
-    def execute(self, namespace):
+    def execute(self, namespace=None):
         action = self._action
         if action:
             log.write("Execute %s" % action)
-            action.execute(self, namespace)
+            action.execute(context=self, namespace=namespace)
 
     def compute(self):
         # log.write("Compute %s" % self)
@@ -244,7 +244,7 @@ class VDOMObject(object):
         if render_type != "e2vdom":
             log.warning("Perform write when render type is \"%s\"" % render_type)
             from utils.tracing import format_thread_trace
-            log.debug(format_thread_trace(statements=False, skip=("write", "action"), until="scripting.executable"))
+            log.warning(format_thread_trace(statements=False, skip=("write", "action"), until="scripting.executable"))
         # else:
         #     from utils.tracing import format_thread_trace
         #     log.debug(format_thread_trace(statements=False, skip=("write", "action"), until="scripting.executable"))

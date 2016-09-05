@@ -1,11 +1,11 @@
 
 PYTHON_LANGUAGE = "python"
 VSCRIPT_LANGUAGE = "vscript"
-SYMBOLS_EXTENSION = ".sym"
 
 PYTHON_EXTENSION = ".py"
 VSCRIPT_EXTENSION = ".vs"
-COMPILED_EXTENSION = ".pyc"
+BYTECODE_EXTENSION = COMPILED_EXTENSION = ".bin"
+SYMBOLS_EXTENSION = ".sym"
 
 NON_CONTAINER = 1
 CONTAINER = 2
@@ -14,7 +14,7 @@ TOP_CONTAINER = 3
 COMPUTE_CONTEXT = RENDER_CONTEXT = SCRIPT_CONTEXT = "onload" # "onrender"
 WYSIWYG_CONTEXT = "onwysiwyg"
 
-APPLICATION_START_CONTEXT = "onstart"
+APPLICATION_START_CONTEXT = "applicationonstart"
 SESSION_START_CONTEXT = "sessiononstart" # "onsessionstart"
 REQUEST_START_CONTEXT = "requestonstart" # "onrequeststart"
 SESSION_FINISH_CONTEXT = "sessiononfinish" #sessiononfinish

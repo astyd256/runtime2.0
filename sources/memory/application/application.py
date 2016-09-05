@@ -1,8 +1,6 @@
 
-
 import sys
 
-from threading import RLock
 from collections import defaultdict
 from cStringIO import StringIO
 
@@ -22,6 +20,7 @@ from .objects import MemoryObjects
 from .events import MemoryEvents
 from .actions import MemoryActions
 from .bindings import MemoryBindings
+from .libraries import MemoryLibraries
 
 
 NOT_LOADED = "NOT LOADED"
@@ -34,14 +33,6 @@ class MemoryApplicationSketch(MemoryBase):
 
     generic = APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
 
-    def get_library_executable(self, name):
-        from scripting.executable import select_library_class
-        executable = select_library_class(self._scripting_language)(self, name)
-        if executable.exists():
-            return executable
-        else:
-            return None
-
     @property
     def scripting_extension(self):
         if self._scripting_language == PYTHON_LANGUAGE:
@@ -53,7 +44,7 @@ class MemoryApplicationSketch(MemoryBase):
 
     def __init__(self, callback):
         self._callback = callback
-        self._lock = RLock()
+        self._lock = managers.memory.lock
         self._save_queue = False
 
         self._id = None
@@ -74,7 +65,7 @@ class MemoryApplicationSketch(MemoryBase):
         self._events = MemoryEvents(self)
         self._actions = MemoryActions(self)
 
-        self._libraries = {}
+        self._libraries = MemoryLibraries(self)
         self._sentences = {}
         self._bindings = MemoryBindings(self)
 
@@ -184,20 +175,7 @@ class MemoryApplication(MemoryApplicationSketch):
             container.structure.compose(ident=u"\t\t", file=file)
         file.write(u"\t</Structure>\n")
 
-        if not shorter:
-            extension = self.scripting_extension
-            filenames = managers.file_manager.list(file_access.LIBRARY, self._id)
-            names = {name[:-3] for name in filenames if name.endswith(extension)}
-            if names:
-                file.write(u"\t<Libraries>\n")
-                for name in names:
-                    file.write(u"\t\t<Library Name=\"%s\">\n" % name)
-                    with managers.file_manager.open(file_access.LIBRARY, self._id, name + extension,
-                            mode="rU", encoding="utf8") as library_file:
-                        library_source_code = library_file.read()
-                    file.write(u"%s\n" % library_source_code.encode("cdata"))
-                    file.write(u"\t\t</Library>\n")
-                file.write(u"\t</Libraries>\n")
+        self._libraries.compose(ident=u"\t", file=file, shorter=shorter)
 
         if self._sentences:
             file.write(u"\t<Languages>\n")

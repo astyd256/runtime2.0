@@ -18,6 +18,7 @@ DEFAULT_APPLICATION_NAME = "Application"
 NOT_LOADED = "NOT LOADED"
 
 
+@weak("_owner")
 class MemoryApplications(MemoryBase, Mapping):
 
     @lazy
@@ -39,8 +40,6 @@ class MemoryApplications(MemoryBase, Mapping):
                     item = self._load(uuid)
 
             return item
-
-    _owner = weak("owner")
 
     def __init__(self, owner):
         self._owner = owner

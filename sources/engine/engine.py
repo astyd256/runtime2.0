@@ -50,7 +50,8 @@ class Engine(object):
         previous = self.select(object.application)
         try:
             instance = object.factory(RENDER_CONTEXT)(parent)
-            instance.execute(managers.request_manager.get_request().session().context)
+            # instance.execute(namespace=managers.request_manager.get_request().session().context)
+            instance.execute()
             return instance.render()
         except RenderTermination:
             return ""
@@ -70,17 +71,17 @@ class Engine(object):
         log.write("Execute%s %s" % (" and render" if render else "", action))
         previous = self.select(action.owner.application)
         try:
-            # get current context or return empty for some global actions
-            try:
-                namespace = managers.request_manager.get_request().session().context
-            except VDOM_exception:
-                namespace = {}
-
+            # try:
+            #     namespace = managers.request_manager.get_request().session().context
+            # except VDOM_exception:
+            #     namespace = {}
             if action.owner.is_application:
-                action.execute(None, namespace)
+                # action.execute(namespace=namespace)
+                action.execute()
             else:
                 instance = action.owner.factory(context or action.id)(parent)
-                instance.execute(namespace)
+                # instance.execute(namespace=namespace)
+                instance.execute()
                 return instance.separate_render() if render else None
         except RenderTermination:
             return "" if render else None

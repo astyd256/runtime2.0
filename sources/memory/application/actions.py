@@ -26,6 +26,7 @@ def wrap_rename(instance):
     return on_rename
 
 
+@weak("_owner")
 class MemoryActions(MemoryBase, MutableMapping):
 
     @lazy
@@ -46,8 +47,6 @@ class MemoryActions(MemoryBase, MutableMapping):
             return MemoryActionsCatalog(self)
         else:
             return MemoryActionsDynamicCatalog(self)
-
-    _owner = weak("owner")
 
     def __init__(self, owner):
         self._owner = owner
