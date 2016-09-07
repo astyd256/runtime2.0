@@ -24,3 +24,4 @@ main.name = settings.MAIN_NAME
 
 sys.excepthook = excepthook
 atexit.register(exithook)
+intercept(exithook)
