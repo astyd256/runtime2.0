@@ -2,16 +2,30 @@
 import pstats
 import re
 
+from itertools import izip
+
 import settings
 import managers
 import file_access
 
 from utils.tracing import format_source_point
-from utils.auxiliary import fit
+from utils.auxiliary import fit, fill
 from .auxiliary import section, show
 
 
 LOCATION_WIDTH = 69
+CALLS_WIDTH = 6
+TIME_WIDTH = 10
+
+COLUMNS = (
+    (-LOCATION_WIDTH, "name", "%*s"),
+    (CALLS_WIDTH, "calls", "%*d"),
+    (TIME_WIDTH, "total", "%*.4f"),
+    (TIME_WIDTH, "cumulative", "%*.4f")
+)
+
+SEPARATOR = " "
+FILLER = "-"
 
 SORT_BY_NAME = "SORT BY NAME"
 SORT_BY_CALLS = "SORT BY CALLS"
@@ -30,7 +44,6 @@ ORDER_VALUES = {
     "asc": ORDER_BY_ASCENDING,
     "desc": ORDER_BY_DESCENDING
 }
-
 
 SORT_MAPPING = {
     SORT_BY_NAME: lambda item: item[0],
@@ -59,11 +72,13 @@ def make_name(path, line, function):
         return format_source_point(path, line, function, width=LOCATION_WIDTH)
 
 
-def run(location=None, sort=None, order=None):
+def run(location=None, sort=None, order=None, heading=False):
     """
-    show server profile statistics: name, calls, total and cumulative times
+    show server last profile statistics: name, calls, total and cumulative times
+    :param location: input file location with stored profile statistics
     :param sort: sort entries by "name", by "calls", by "total" or by "cumulative"
     :param order: sort entries "asc"ending or "desc"ending
+    :param switch heading: show heading
     """
 
     if location is None:
@@ -87,7 +102,9 @@ def run(location=None, sort=None, order=None):
     reverse = order is ORDER_BY_DESCENDING
     entries = sorted(statistics, key=key, reverse=reverse)
 
-    with section("statistics"):
-        # show("%-*s%10s%10s%10s" % (LOCATION_WIDTH, "name", "calls", "total", "cumulative"))
-        for name, calls, total, cumulative in entries:
-            show("%-*s%10d%10.4f%10.4f" % (LOCATION_WIDTH, name, calls, total, cumulative), longer=True)
+    with section("last profile statistics"):
+        if heading:
+            show(SEPARATOR.join("%*s" % (width, label) for width, label, template in COLUMNS))
+            show(SEPARATOR.join(fill(FILLER, abs(width)) for width, label, template in COLUMNS))
+        for entry in entries:
+            show(SEPARATOR.join(template % (width, value) for value, (width, label, template) in izip(entry, COLUMNS)))
