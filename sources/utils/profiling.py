@@ -4,6 +4,7 @@ from cProfile import Profile
 from pstats import Stats
 
 import settings
+from logs import server_log
 
 
 class ProfilerLocal(local):
@@ -51,6 +52,7 @@ class Profiler(object):
 
         if self._stats:
             self._stats.dump_stats(location)
+            server_log.write("Save profiling statistics to \"%s\"" % location)
 
 
 profiler = Profiler()
