@@ -49,7 +49,7 @@ def section(name=None, value=MISSING, instant=False):
     global_section = context.global_section
 
 
-def show(name=None, value=MISSING, indent=None, longer=False):
+def show(name="", value=MISSING, indent=None, longer=False):
     global global_indent, global_section
 
     if global_section is not None:

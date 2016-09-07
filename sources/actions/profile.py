@@ -106,5 +106,14 @@ def run(location=None, sort=None, order=None, heading=False):
         if heading:
             show(SEPARATOR.join("%*s" % (width, label) for width, label, template in COLUMNS))
             show(SEPARATOR.join(fill(FILLER, abs(width)) for width, label, template in COLUMNS))
+        # for entry in entries:
+        #     show(SEPARATOR.join(template % (width, value) for value, (width, label, template) in izip(entry, COLUMNS)))
         for entry in entries:
+            if not entry[0].startswith("<server>"):
+                continue
             show(SEPARATOR.join(template % (width, value) for value, (width, label, template) in izip(entry, COLUMNS)))
+        # show("")
+        # for entry in entries:
+        #     if entry[0].startswith("<server>"):
+        #         continue
+        #     show(SEPARATOR.join(template % (width, value) for value, (width, label, template) in izip(entry, COLUMNS)))

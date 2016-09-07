@@ -4,7 +4,7 @@ from threading import local, current_thread
 import managers
 from logs import log
 from memory import COMPUTE_CONTEXT, RENDER_CONTEXT, WYSIWYG_CONTEXT
-from utils.exception import VDOM_exception
+from utils.profiling import profiler
 from .exceptions import RenderTermination
 
 
@@ -40,8 +40,9 @@ class Engine(object):
         log.write("Compute %s" % object)
         previous = self.select(object.application)
         try:
-            instance = object.factory(COMPUTE_CONTEXT)(parent)
-            instance.recompute()
+            with profiler:
+                instance = object.factory(COMPUTE_CONTEXT)(parent)
+                instance.recompute()
         finally:
             self.select(previous)
 
@@ -49,10 +50,11 @@ class Engine(object):
         log.write("Render %s" % object)
         previous = self.select(object.application)
         try:
-            instance = object.factory(RENDER_CONTEXT)(parent)
-            # instance.execute(namespace=managers.request_manager.get_request().session().context)
-            instance.execute()
-            return instance.render()
+            with profiler:
+                instance = object.factory(RENDER_CONTEXT)(parent)
+                # instance.execute(namespace=managers.request_manager.get_request().session().context)
+                instance.execute()
+                return instance.render()
         except RenderTermination:
             return ""
         finally:
@@ -62,8 +64,9 @@ class Engine(object):
         log.write("Wysiwyg %s" % object)
         previous = self.select(object.application)
         try:
-            instance = object.factory(WYSIWYG_CONTEXT)(parent)
-            return instance.wysiwyg()
+            with profiler:
+                instance = object.factory(WYSIWYG_CONTEXT)(parent)
+                return instance.wysiwyg()
         finally:
             self.select(previous)
 
@@ -77,12 +80,14 @@ class Engine(object):
             #     namespace = {}
             if action.owner.is_application:
                 # action.execute(namespace=namespace)
-                action.execute()
+                with profiler:
+                    action.execute()
             else:
-                instance = action.owner.factory(context or action.id)(parent)
-                # instance.execute(namespace=namespace)
-                instance.execute()
-                return instance.separate_render() if render else None
+                with profiler:
+                    instance = action.owner.factory(context or action.id)(parent)
+                    # instance.execute(namespace=namespace)
+                    instance.execute()
+                    return instance.separate_render() if render else None
         except RenderTermination:
             return "" if render else None
         finally:

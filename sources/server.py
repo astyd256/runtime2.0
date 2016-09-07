@@ -47,8 +47,9 @@ if settings.PRELOAD_DEFAULT_APPLICATION:
     managers.memory.applications.default
 
 
-if settings.PROFILING:
-    import cProfile
-    cProfile.run("managers.server.start()", settings.PROFILE_LOCATION)
-else:
+try:
     managers.server.start()
+finally:
+    if settings.PROFILING:
+        from utils.profiling import profiler
+        profiler.save()
