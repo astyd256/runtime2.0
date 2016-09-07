@@ -59,13 +59,17 @@ def make_name(path, line, function):
         return format_source_point(path, line, function, width=LOCATION_WIDTH)
 
 
-def run(sort=None, order=None):
+def run(location=None, sort=None, order=None):
     """
     show server profile statistics: name, calls, total and cumulative times
     :param sort: sort entries by "name", by "calls", by "total" or by "cumulative"
     :param order: sort entries "asc"ending or "desc"ending
     """
-    if not managers.file_manager.exists(file_access.FILE, None, settings.PROFILE_LOCATION):
+
+    if location is None:
+        location = settings.PROFILE_LOCATION
+
+    if not managers.file_manager.exists(file_access.FILE, None, location):
         show("no profile")
         return
 
@@ -74,7 +78,7 @@ def run(sort=None, order=None):
         order = "asc"
     order = ORDER_VALUES.get((order or "").lower(), ORDER_BY_DESCENDING)
 
-    profile = pstats.Stats(settings.PROFILE_LOCATION)
+    profile = pstats.Stats(location)
     statistics = tuple((make_name(path, line, function), calls, total, cumulative)
         for (path, line, function), (calls, stack, total, cumulative, more)
         in profile.stats.iteritems())
