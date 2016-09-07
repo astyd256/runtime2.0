@@ -11,4 +11,5 @@ import save
 import select
 import generate
 import watch
+import profile
 import shell

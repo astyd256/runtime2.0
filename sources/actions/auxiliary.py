@@ -81,6 +81,16 @@ def show(name=None, value=MISSING, indent=None, longer=False):
     console.write(message)
 
 
+def get_current_indent():
+    global global_indent, global_section
+
+    if global_section is not None:
+        global_section()
+        global_section = None
+
+    return global_indent
+
+
 def confirm(message):
     console.write(message)
     console.stdout.write("are you sure? ")

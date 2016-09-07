@@ -171,6 +171,12 @@ def describe_thread(thread):
 
 # formatting
 
+def format_source_point(path, line, function, indent="", width=LOCATION_WIDTH):
+    ending = fit(":%s:%s" % (line, function), NAME_WIDTH)
+    fullname = fit(clarify_source_path(path), width - len(indent) - len(ending))
+    return fullname + ending
+
+
 def format_trace(stack, limit=sys.maxint,
         statements=True, caption=None, compact=COMPACT_DEFAULT_MODE,
         indent="", filler=DEFAULT_FILLER, into=None):

@@ -26,6 +26,7 @@ parser.add_argument("-p", "--port", type=port, metavar="port", help="Override se
 parser.add_argument("-a", "-d", "--application", "--default", type=uuid, metavar="identifier", help="Application to start")
 parser.add_argument("-c", "--configure", metavar="filename", help="Load configuration from the file")
 parser.add_argument("-e", "--preload", action='store_true', help="Preload default application",)
+parser.add_argument("-i", "--profile", action='store_true', help="Enable profiling",)
 
 arguments = parser.parse_args()
 
@@ -39,5 +40,8 @@ if arguments.port:
 if arguments.application:
     settings.DEFAULT_APPLICATION = arguments.application
 
-if arguments.configure:
-    raise NotImplementedError
+if arguments.preload:
+    settings.PRELOAD_DEFAULT_APPLICATION = True
+
+if arguments.profile:
+    settings.PROFILING = True

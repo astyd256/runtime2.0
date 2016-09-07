@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import startup.server
+import settings
 import managers
 
 from logs import VDOM_log_manager
@@ -18,8 +19,6 @@ from server import VDOM_server
 # from mailing import VDOM_email_manager
 from session import VDOM_session_manager
 from module import VDOM_module_manager
-
-from startup.server import arguments
 
 
 managers.register("log_manager", VDOM_log_manager)
@@ -44,8 +43,12 @@ managers.register("module_manager", VDOM_module_manager)
 managers.register("server", VDOM_server)
 
 
-if arguments.preload:
+if settings.PRELOAD_DEFAULT_APPLICATION:
     managers.memory.applications.default
 
 
-managers.server.start()
+if settings.PROFILING:
+    import cProfile
+    cProfile.run("managers.server.start()", settings.PROFILE_LOCATION)
+else:
+    managers.server.start()

@@ -86,14 +86,16 @@ class FileManager(object):
         elif category == file_access.CACHE:
             # VDOM_CONFIG["FILE-ACCESS-DIRECTORY"] / application_path="applications" / application_id / py_files_cache="cache" / object_name
             segments = settings.CACHE_LOCATION, owner, name
-        elif category == file_access.CERTIFICATE:
-            # VDOM_CONFIG["FILE-ACCESS-DIRECTORY"] / certificates="cert" / file_name
-            assert owner is None
-            segments = settings.CERTIFICATES_LOCATION, name
-        elif category == file_access.LOG:
-            # VDOM_CONFIG["FILE-ACCESS-DIRECTORY"] / certificates="cert" / file_name
-            assert owner is None
-            segments = settings.LOGS_LOCATION, name
+        # elif category == file_access.CERTIFICATE:
+        #     # VDOM_CONFIG["FILE-ACCESS-DIRECTORY"] / certificates="cert" / file_name
+        #     assert owner is None
+        #     segments = settings.CERTIFICATES_LOCATION, name
+        # elif category == file_access.LOG:
+        #     # VDOM_CONFIG["FILE-ACCESS-DIRECTORY"] / certificates="cert" / file_name
+        #     assert owner is None
+        #     segments = settings.LOGS_LOCATION, name
+        elif category == file_access.TEMPORARY:
+            segments = settings.TEMPORARY_LOCATION, owner, name
         else:
             raise Exception("Unknown category: %r" % category)
         return os.path.join(*filter(None, segments))

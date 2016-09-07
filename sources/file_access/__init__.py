@@ -21,3 +21,5 @@ STORAGE = storage = 6
 
 # CERTIFICATE = certificate = 7
 # LOG = 9
+
+TEMPORARY = 10
