@@ -46,6 +46,8 @@ Configuration can be found in the settings.py file, also server supports several
 * -p, --port - specify port
 * -a, --applicaiton - specify application to serve
 * -c, --configure - specify filename to load settings
+* --preload - preload default application
+* --profile - enable profiling
 
 ### Override settings
 
@@ -65,6 +67,8 @@ This utility can be used to perform several maintenance tasks, for example:
 * install or uninstall application
 * select default application
 * list available applications and types
+* query internal state from server
+* show last stored profile
 
 To perform action utility can be called from the command line as follow:
 

@@ -25,8 +25,8 @@ parser.add_argument("-l", "--listen", type=port, metavar="address", help="Overri
 parser.add_argument("-p", "--port", type=port, metavar="port", help="Override server listening port")
 parser.add_argument("-a", "-d", "--application", "--default", type=uuid, metavar="identifier", help="Application to start")
 parser.add_argument("-c", "--configure", metavar="filename", help="Load configuration from the file")
-parser.add_argument("-e", "--preload", action='store_true', help="Preload default application",)
-parser.add_argument("-i", "--profile", action='store_true', help="Enable profiling",)
+parser.add_argument("--preload", action='store_true', help="Preload default application",)
+parser.add_argument("--profile", action='store_true', help="Enable profiling",)
 
 arguments = parser.parse_args()
 
