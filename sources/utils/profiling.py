@@ -47,6 +47,9 @@ class Profiler(object):
                 self._stats.add(profile_or_stats)
 
     def save(self, location=None):
+        if not settings.PROFILING:
+            return
+
         if location is None:
             location = settings.PROFILE_LOCATION
 

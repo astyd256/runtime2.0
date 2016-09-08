@@ -21,6 +21,7 @@ SWITCH_VALUES = {
     "false": False, "true": True,
     "disabled": False, "enabled": True
 }
+DEFAULT_ACTION_NAME = "default"
 
 
 def switch(value):
@@ -146,6 +147,9 @@ class AutoArgumentParser(ArgumentParser):
             subparsers = self.add_subparsers(dest=self._name)
 
             for name in dir(module):
+                if name.startswith("_") or name == DEFAULT_ACTION_NAME:
+                    continue
+
                 submodule = getattr(module, name)
                 if not isinstance(submodule, ModuleType):
                     continue
@@ -158,11 +162,15 @@ class AutoArgumentParser(ArgumentParser):
                 if isinstance(run, FunctionType):
                     self._repository[name] = autoparse(name, run, subparsers)
                 elif run is None and submodule.__package__.endswith(submodule.__name__):
+                    default_module = submodule.__dict__.get(DEFAULT_ACTION_NAME)
+                    default_action = default_module.__dict__.get("run") if default_module else None
                     self._parsers[name] = subparsers.add_parser(name, help=description,
-                        package=self._package, module=submodule, alias=name,
+                        package=self._package, module=submodule, alias=name, default=default_action,
                         formatter_class=HiddenHelpFormatter)
         else:
             self._name = None
+
+    default = property(lambda self: self._default)
 
     def parse_args(self, args=None, namespace=None):
         arguments = super(AutoArgumentParser, self).parse_args(args=args, namespace=namespace)
@@ -185,7 +193,7 @@ class AutoArgumentParser(ArgumentParser):
             else:
                 arguments.action = Structure(
                     name=name,
-                    run=self._default,
+                    run=parser.default, # run=self._default,
                     arguments=())
 
         return arguments

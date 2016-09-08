@@ -47,9 +47,4 @@ if settings.PRELOAD_DEFAULT_APPLICATION:
     managers.memory.applications.default
 
 
-try:
-    managers.server.start()
-finally:
-    if settings.PROFILING:
-        from utils.profiling import profiler
-        profiler.save()
+managers.server.start()

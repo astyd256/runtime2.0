@@ -2,9 +2,12 @@
 import sys
 import signal
 from threading import current_thread, enumerate as enumerate_threads
-from utils.tracing import format_thread_trace
+
 import settings
+from utils.tracing import format_thread_trace
+from utils.profiling import profiler
 import utils.threads
+
 from .thread import SmartThread
 from .daemon import SmartDaemon
 
@@ -48,6 +51,8 @@ def intercept(handler=None, ctrlc=None):
 
 
 def shutdown(quantum=settings.QUANTUM):
+    profiler.save()
+
     server = getattr(utils.threads.main, SERVER_VARIABLE_NAME, None)
     if server:
         server.stop()

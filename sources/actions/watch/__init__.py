@@ -7,3 +7,6 @@ import ping
 import state
 import analyze
 import query
+
+
+default = ping

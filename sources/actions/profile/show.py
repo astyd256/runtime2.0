@@ -10,7 +10,7 @@ import file_access
 
 from utils.tracing import format_source_point
 from utils.auxiliary import fit, fill
-from .auxiliary import section, show
+from ..auxiliary import section, show
 
 
 LOCATION_WIDTH = 69
@@ -72,13 +72,16 @@ def make_name(path, line, function):
         return format_source_point(path, line, function, width=LOCATION_WIDTH)
 
 
-def run(location=None, sort=None, order=None, heading=False):
+def run(location=None, headers=False, sort=None, order=None, limit=50, nolimit=False, all=False):
     """
     show server last profile statistics: name, calls, total and cumulative times
     :param location: input file location with stored profile statistics
+    :param switch headers: show columns headers
     :param sort: sort entries by "name", by "calls", by "total" or by "cumulative"
     :param order: sort entries "asc"ending or "desc"ending
-    :param switch heading: show heading
+    :param switch nolimit: disable output entries limit
+    :param int limit: limit output to specified number of entries
+    :param switch all: show all entries including from non-server code
     """
 
     if location is None:
@@ -92,6 +95,8 @@ def run(location=None, sort=None, order=None, heading=False):
     if sort is SORT_BY_NAME and order is None:
         order = "asc"
     order = ORDER_VALUES.get((order or "").lower(), ORDER_BY_DESCENDING)
+    if nolimit:
+        limit = None
 
     profile = pstats.Stats(location)
     statistics = tuple((make_name(path, line, function), calls, total, cumulative)
@@ -103,17 +108,14 @@ def run(location=None, sort=None, order=None, heading=False):
     entries = sorted(statistics, key=key, reverse=reverse)
 
     with section("last profile statistics"):
-        if heading:
+        if headers:
             show(SEPARATOR.join("%*s" % (width, label) for width, label, template in COLUMNS))
             show(SEPARATOR.join(fill(FILLER, abs(width)) for width, label, template in COLUMNS))
+        index = 0
         for entry in entries:
+            if not (all or entry[0].startswith("<server>")):
+                continue
             show(SEPARATOR.join(template % (width, value) for value, (width, label, template) in izip(entry, COLUMNS)))
-        # for entry in entries:
-        #     if not entry[0].startswith("<server>"):
-        #         continue
-        #     show(SEPARATOR.join(template % (width, value) for value, (width, label, template) in izip(entry, COLUMNS)))
-        # show("")
-        # for entry in entries:
-        #     if entry[0].startswith("<server>"):
-        #         continue
-        #     show(SEPARATOR.join(template % (width, value) for value, (width, label, template) in izip(entry, COLUMNS)))
+            index += 1
+            if index == limit:
+                break

@@ -25,7 +25,7 @@ def run():
         except SystemExit:
             pass
         else:
-            if arguments.action.name:
+            if arguments.action.run:
                 try:
                     arguments.action.run(*arguments.action.arguments)
                 except Exception:
