@@ -8,7 +8,7 @@ import settings
 import managers
 import file_access
 
-from utils.tracing import format_source_point
+from utils.tracing import BINARY_ALIAS, SERVER_ALIAS, format_source_point
 from utils.auxiliary import fit, fill
 from ..auxiliary import section, show
 
@@ -113,7 +113,7 @@ def run(location=None, headers=False, sort=None, order=None, limit=50, nolimit=F
             show(SEPARATOR.join(fill(FILLER, abs(width)) for width, label, template in COLUMNS))
         index = 0
         for entry in entries:
-            if not (all or entry[0].startswith("<server>")):
+            if not (all or entry[0].startswith(BINARY_ALIAS) or entry[0].startswith(SERVER_ALIAS)):
                 continue
             show(SEPARATOR.join(template % (width, value) for value, (width, label, template) in izip(entry, COLUMNS)))
             index += 1

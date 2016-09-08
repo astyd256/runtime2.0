@@ -15,8 +15,9 @@ from utils.console import width
 LOGGING = None
 TRACING = None
 
-PYTHON_ALIAS = "<python>"
+BINARY_ALIAS = "<sources>"
 SERVER_ALIAS = "<server>"
+PYTHON_ALIAS = "<python>"
 
 UNKNOWN_STATEMENT = "???"
 COMPACT_DEFAULT_MODE = False
@@ -31,8 +32,8 @@ NAME_WIDTH = 32
 VALUE_WIDTH = DESIRED_WIDTH - NAME_WIDTH
 
 BINARY_PATH = os.path.dirname(sys.argv[0]) or os.getcwd()
-PYTHON_PATH = sys.prefix
 SERVER_PATH = os.path.split(BINARY_PATH)[0]
+PYTHON_PATH = sys.prefix
 
 WELL_KNOWN_MODULES = "_json", "_ast", "thread", "operator", "itertools", "exceptions"
 
@@ -53,7 +54,9 @@ def clarify_source_path(path):
     if path.startswith("<"):
         return path
     path = os.path.normpath(path if os.path.isabs(path) else os.path.join(BINARY_PATH, path))
-    if path.startswith(SERVER_PATH):
+    if path.startswith(BINARY_PATH):
+        return BINARY_ALIAS + path[len(BINARY_PATH):]
+    elif path.startswith(SERVER_PATH):
         return SERVER_ALIAS + path[len(SERVER_PATH):]
     elif path.startswith(PYTHON_PATH):
         return PYTHON_ALIAS + path[len(PYTHON_PATH):]
@@ -62,7 +65,9 @@ def clarify_source_path(path):
 
 
 def restore_source_path(path):
-    if path.startswith(SERVER_ALIAS):
+    if path.startswith(BINARY_ALIAS):
+        return BINARY_PATH + path[len(BINARY_ALIAS):]
+    elif path.startswith(SERVER_ALIAS):
         return SERVER_PATH + path[len(SERVER_ALIAS):]
     elif path.startswith(PYTHON_ALIAS):
         return PYTHON_PATH + path[len(PYTHON_PATH):]
