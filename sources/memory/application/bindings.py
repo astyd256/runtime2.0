@@ -1,9 +1,28 @@
 
+from weakref import ref
 from collections import MutableMapping
 from uuid import uuid4
 from utils.properties import lazy, roproperty
 from ..generic import MemoryBase
 from .binding import MemoryBindingSketch
+
+
+def wrap_complete(instance, restore):
+    instance = ref(instance)
+
+    def on_complete(item):
+        self = instance()
+        if item._target_object.virtual:
+            return
+
+        with self._owner.lock:
+            self._items[item.id] = item
+
+        if not restore:
+            if not item._target_object.virtual:
+                self._owner.autosave()
+
+    return on_complete
 
 
 class MemoryBindings(MemoryBase, MutableMapping):
@@ -18,19 +37,7 @@ class MemoryBindings(MemoryBase, MutableMapping):
     owner = roproperty("_owner")
 
     def new_sketch(self, target_object, name, parameters=None, restore=False):
-
-        def on_complete(item):
-            if item.target_object.virtual:
-                return
-
-            with self._owner.lock:
-                self._items[item.id] = item
-
-            if not restore:
-                if not item.target_object.virtual:
-                    self._owner.autosave()
-
-        return MemoryBindingSketch(on_complete, target_object, name, parameters=parameters)
+        return MemoryBindingSketch(wrap_complete(self, restore), target_object, name, parameters=parameters)
 
     def new(self, target_object, name, parameters=None):
         item = self.new_sketch(target_object, name, parameters=parameters)

@@ -24,6 +24,20 @@ def wrap_rename(instance):
     return on_rename
 
 
+def wrap_complete(instance):
+    instance = ref(instance)
+
+    def on_complete(item):
+        self = instance()
+        with self._owner.lock:
+            if item._name is None or item._name in self._items:
+                item._name = generate_unique_name(item._name or NAME_BASE, self._items)
+            self._items[item._name] = item
+            return wrap_rename(self)
+
+    return on_complete
+
+
 @weak("_owner")
 class MemoryLibraries(MemoryBase, MutableMapping):
 
@@ -37,15 +51,7 @@ class MemoryLibraries(MemoryBase, MutableMapping):
     owner = roproperty("_owner")
 
     def new_sketch(self):
-
-        def on_complete(item):
-            with self._owner.lock:
-                if not item._name or item._name in self._items:
-                    item._name = generate_unique_name(item._name or NAME_BASE, self._items)
-                self._items[item.name] = item
-                return wrap_rename(self)
-
-        return MemoryLibrarySketch(on_complete, self._owner)
+        return MemoryLibrarySketch(wrap_complete(self), self._owner)
 
     def new(self, name=None):
         item = self.new_sketch()

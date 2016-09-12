@@ -97,13 +97,14 @@ class MemoryApplicationSketch(MemoryBase):
     bindings = roproperty("_bindings")
 
     def __invert__(self):
+        self.__class__ = MemoryApplication
+        self._callback = self._callback(self)
+
         if self._id is None:
             raise Exception(u"Application require identifier")
         if self._name is None:
             raise Exception(u"Application require name")
 
-        self.__class__ = MemoryApplication
-        self._callback = self._callback(self)
         return self
 
     def __str__(self):

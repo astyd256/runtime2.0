@@ -38,7 +38,6 @@ class MemoryObjectSketch(MemoryBase):
 
     @lazy
     def _classes(self):
-        # return {}
         return WeakValueDictionary()
 
     @lazy
@@ -85,17 +84,18 @@ class MemoryObjectSketch(MemoryBase):
     hierarchy = property(lambda self: int(self._attributes.get("hierarchy", 0)))
 
     def __invert__(self):
-        if self.id is None:
-            raise Exception(u"Object require identifier")
-        if self.name is None:
-            raise Exception(u"Object require name")
-
         ~self._attributes
         if self.__dict__.get("_structure") is not None:
             ~self._structure
 
         self.__class__ = MemoryObject
         self._callback = self._callback(self)
+
+        if self.id is None:
+            raise Exception(u"Object require identifier")
+        if self.name is None:
+            raise Exception(u"Object require name")
+
         return self
 
     def __str__(self):
@@ -112,7 +112,6 @@ class MemoryObjectDuplicationSketch(MemoryObjectSketch):
         super(MemoryObjectDuplicationSketch, self).__init__(callback,
             another.type, application, parent,
             virtual=parent.virtual, attributes=another.attributes)
-        self._objects += another.objects
 
 
 class MemoryObject(MemoryObjectSketch):

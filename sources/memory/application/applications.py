@@ -1,4 +1,5 @@
 
+from weakref import ref
 from collections import Mapping
 from uuid import uuid4
 
@@ -16,6 +17,19 @@ from .application import MemoryApplicationSketch
 
 DEFAULT_APPLICATION_NAME = "Application"
 NOT_LOADED = "NOT LOADED"
+
+
+def wrap_complete(instance, restore):
+    instance = ref(instance)
+
+    def on_complete(item):
+        self = instance()
+        with self._owner._lock:
+            self._items[item._id] = item
+            for object in item._objects.itervalues():
+                managers.dispatcher.dispatch_handler(object, "on_startup")
+
+    return on_complete
 
 
 @weak("_owner")
@@ -47,14 +61,7 @@ class MemoryApplications(MemoryBase, Mapping):
         self._lazy = True
 
     def new_sketch(self, restore=False):
-
-        def on_complete(item):
-            with self._owner._lock:
-                self._items[item.id] = item
-                for object in item._objects.itervalues():
-                    managers.dispatcher.dispatch_handler(object, "on_startup")
-
-        return MemoryApplicationSketch(on_complete)
+        return MemoryApplicationSketch(wrap_complete(self, restore))
 
     def new(self, name=DEFAULT_APPLICATION_NAME):
         item = self.new_sketch()

@@ -22,11 +22,12 @@ class MemoryLibrarySketch(MemoryBase, LibraryStorage, LibraryExecutable):
     name = rwproperty("_name")
 
     def __invert__(self):
+        self.__class__ = MemoryLibrary
+        self._callback = self._callback(self)
+
         if self._name is None:
             raise Exception(u"Library require name")
 
-        self.__class__ = MemoryLibrary
-        self._callback = self._callback(self)
         return self
 
     def __str__(self):

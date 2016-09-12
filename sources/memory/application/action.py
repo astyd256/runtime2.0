@@ -32,13 +32,14 @@ class MemoryActionSketch(MemoryBase, ActionStorage, ActionExecutable):
     source_code_value = rwproperty("_source_code_value")
 
     def __invert__(self):
+        self.__class__ = MemoryAction
+        self._callback = self._callback(self)
+
         if self._id is None:
             raise Exception(u"Action require identifier")
         if self._name is None:
             raise Exception(u"Action require name")
 
-        self.__class__ = MemoryAction
-        self._callback = self._callback(self)
         return self
 
     def __str__(self):

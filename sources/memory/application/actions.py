@@ -26,6 +26,30 @@ def wrap_rename(instance):
     return on_rename
 
 
+def wrap_complete(instance, restore):
+    instance = ref(instance)
+
+    def on_complete(item):
+        self = instance()
+        with self._owner.lock:
+            if item._name is None or item._name in self._items_by_name:
+                item._name = generate_unique_name(item._name or NAME_BASE, self._items_by_name)
+
+            self._items[item.id] = item
+            self._items_by_name[item.name] = item
+
+            if not self._owner.virtual:
+                self._all_items[item.id] = item
+
+            if not restore:
+                self._owner.invalidate(contexts=(item._id, item._name), downward=True, upward=True)
+                self._owner.autosave()
+
+            return wrap_rename(self)
+
+    return on_complete
+
+
 @weak("_owner")
 class MemoryActions(MemoryBase, MutableMapping):
 
@@ -56,25 +80,7 @@ class MemoryActions(MemoryBase, MutableMapping):
     generic = roproperty("_generic")
 
     def new_sketch(self, restore=False):
-
-        def on_complete(item):
-            with self._owner.lock:
-                if not item._name or item._name in self._items_by_name:
-                    item._name = generate_unique_name(item._name or NAME_BASE, self._items_by_name)
-
-                self._items[item.id] = item
-                self._items_by_name[item.name] = item
-
-                if not self._owner.virtual:
-                    self._all_items[item.id] = item
-
-                if not restore:
-                    self._owner.invalidate(contexts=(item.id, item.name), downward=True, upward=True)
-                    self._owner.autosave()
-
-                return wrap_rename(self)
-
-        return MemoryActionSketch(on_complete, self._owner)
+        return MemoryActionSketch(wrap_complete(self, restore), self._owner)
 
     def new(self, name=None):
         item = self.new_sketch()
@@ -111,7 +117,8 @@ class MemoryActions(MemoryBase, MutableMapping):
             with self._owner.lock:
                 contexts = set()
                 for item in actions._items.itervalues():
-                    copy = MemoryActionDuplicationSketch(self._on_complete, self._owner, item)
+                    copy = MemoryActionDuplicationSketch(wrap_complete(self, False), self._owner, item)
+                    copy.id = str(uuid4())
                     ~copy
                     contexts.update({item.id, item.name})
                 self._owner.invalidate(contexts=contexts, downward=True, upward=True)

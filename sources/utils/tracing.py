@@ -8,6 +8,7 @@ import pprint
 import threading
 import os
 from itertools import islice
+import settings
 from utils.auxiliary import fit, align, lfill
 from utils.console import width
 
@@ -17,6 +18,7 @@ TRACING = None
 
 BINARY_ALIAS = "<sources>"
 SERVER_ALIAS = "<server>"
+TYPES_ALIAS = "<types>"
 PYTHON_ALIAS = "<python>"
 
 UNKNOWN_STATEMENT = "???"
@@ -33,6 +35,7 @@ VALUE_WIDTH = DESIRED_WIDTH - NAME_WIDTH
 
 BINARY_PATH = os.path.dirname(sys.argv[0]) or os.getcwd()
 SERVER_PATH = os.path.split(BINARY_PATH)[0]
+TYPES_PATH = os.path.abspath(os.path.join(BINARY_PATH, settings.TYPES_LOCATION))
 PYTHON_PATH = sys.prefix
 
 WELL_KNOWN_MODULES = "_json", "_ast", "thread", "operator", "itertools", "exceptions"
@@ -56,6 +59,8 @@ def clarify_source_path(path):
     path = os.path.normpath(path if os.path.isabs(path) else os.path.join(BINARY_PATH, path))
     if path.startswith(BINARY_PATH):
         return BINARY_ALIAS + path[len(BINARY_PATH):]
+    elif path.startswith(TYPES_PATH):
+        return TYPES_ALIAS + path[len(TYPES_PATH):]
     elif path.startswith(SERVER_PATH):
         return SERVER_ALIAS + path[len(SERVER_PATH):]
     elif path.startswith(PYTHON_PATH):
@@ -67,6 +72,8 @@ def clarify_source_path(path):
 def restore_source_path(path):
     if path.startswith(BINARY_ALIAS):
         return BINARY_PATH + path[len(BINARY_ALIAS):]
+    elif path.startswith(TYPES_ALIAS):
+        return TYPES_PATH + path[len(TYPES_ALIAS):]
     elif path.startswith(SERVER_ALIAS):
         return SERVER_PATH + path[len(SERVER_ALIAS):]
     elif path.startswith(PYTHON_ALIAS):

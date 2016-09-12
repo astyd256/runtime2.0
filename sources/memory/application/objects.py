@@ -27,6 +27,35 @@ def wrap_rename(instance):
     return on_rename
 
 
+def wrap_complete(instance, restore):
+    instance = ref(instance)
+
+    def on_complete(item):
+        self = instance()
+        with self._owner.lock:
+            if item._name is None or item._name in self._items_by_name:
+                item._name = generate_unique_name(item._name or item._type.name, self._items_by_name)
+            item._order = len(self._items)
+
+            if item._virtual == self._owner.virtual:
+                self._items[item.id] = item
+                self._items_by_name[item.name] = item
+
+            if not item._virtual:
+                self._all_items[item.id] = item
+
+            if not restore:
+                managers.dispatcher.dispatch_handler(item, "on_create")
+                if self._owner.is_object and item._virtual == self._owner.virtual:
+                    managers.dispatcher.dispatch_handler(self._owner, "on_insert", item)
+                    self._owner.invalidate(upward=True)
+                item.autosave()
+
+            return wrap_rename(self)
+
+    return on_complete
+
+
 @weak("_owner")
 class MemoryObjects(MemoryBase, MutableMapping):
 
@@ -58,30 +87,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
     def new_sketch(self, type, virtual=False, attributes=None, restore=False):
         # if self._owner.is_object and virtual != self._owner.virtual:
         #     raise Exception("Virtual objects can only be created in application or another virtual object")
-
-        def on_complete(item):
-            with self._owner.lock:
-                if not item._name or item._name in self._items_by_name:
-                    item._name = generate_unique_name(item._name or type.name, self._items_by_name)
-                item._order = len(self._items)
-
-                if item.virtual == self._owner.virtual:
-                    self._items[item.id] = item
-                    self._items_by_name[item.name] = item
-
-                if not item.virtual:
-                    self._all_items[item.id] = item
-
-                if not restore:
-                    managers.dispatcher.dispatch_handler(item, "on_create")
-                    if self._owner.is_object and item.virtual == self._owner.virtual:
-                        managers.dispatcher.dispatch_handler(self._owner, "on_insert", item)
-                        self._owner.invalidate(upward=True)
-                    item.autosave()
-
-                return wrap_rename(self)
-
-        return MemoryObjectSketch(on_complete, type,
+        return MemoryObjectSketch(wrap_complete(self, restore), type,
             self._owner.application, None if self._owner.is_application else self._owner,
             virtual=virtual, attributes=attributes)
 
@@ -109,9 +115,11 @@ class MemoryObjects(MemoryBase, MutableMapping):
                 copy = None
 
                 for item in another._items.itervalues():
-                    copy = MemoryObjectDuplicationSketch(self._on_complete,
+                    copy = MemoryObjectDuplicationSketch(wrap_complete(self, False),
                         self._owner.application, None if self._owner.is_application else self._owner,
                         item)
+                    copy.id = str(uuid4())
+                    copy.name = item.name
                     ~copy
 
                     managers.dispatcher.dispatch_handler(copy, "on_create")
