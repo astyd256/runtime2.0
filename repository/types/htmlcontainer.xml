@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_htmlcontainer</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>2.94.6723</Version>
+		<Version>2.99.6723</Version>
 		<Category>Standard</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(135aaf50-6055-4db3-8c14-7d9ac93dd30f)</Icon>
@@ -334,6 +334,30 @@
 			<CodeInterface>TextField(1000)</CodeInterface>
 			<ColorGroup>4</ColorGroup>
 		</Attribute>
+		<Attribute>
+			<Name>cookiewarning</Name>
+			<DisplayName>#Lang(128)</DisplayName>
+			<DefaultValue>0</DefaultValue>
+			<Visible>1</Visible>
+			<Help>#Lang(228)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(413)|0)|(#Lang(414)|1))</CodeInterface>
+			<Colorgroup>2</Colorgroup>
+			<ErrorValidationMessage>#Lang(328)</ErrorValidationMessage>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+		</Attribute>
+		<Attribute>
+			<Name>cookiewarningtext</Name>
+			<DisplayName>#Lang(129)</DisplayName>
+			<DefaultValue>En poursuivant votre navigation, vous acceptez le dépôt de cookies tiers destinés à vous proposer des vidéos, des boutons de partage, des remontées de contenus de plateformes sociales</DefaultValue>
+			<Visible>1</Visible>
+			<Help>#Lang(229)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(1000)</CodeInterface>
+			<Colorgroup>2</Colorgroup>
+			<ErrorValidationMessage>#Lang(329)</ErrorValidationMessage>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+		</Attribute>
 	</Attributes>
 	<Languages>
 		<Language Code="en_US">
@@ -365,6 +389,8 @@
 			<Sentence ID="125">Background color</Sentence>
 			<Sentence ID="126">CSS</Sentence>
 			<Sentence ID="127">Class CSS</Sentence>
+			<Sentence ID="128">Cookie warning</Sentence>
+			<Sentence ID="129">Cookie warning text</Sentence>
 			<Sentence ID="201">The order of rendering the object on the page. The objects with identical values of the Hierarchy attribute are rendered in the order they are written in the XML-file of the VDOM application.</Sentence>
 			<Sentence ID="202">The visibility of the object. In any case the object will exist on the web page, this attribute only makes it invisible.</Sentence>
 			<Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the Z-Index indicates the order of their displaying. The larger Z-Index is, the upper the object is situated.</Sentence>
@@ -390,6 +416,8 @@
 			<Sentence ID="225">The background color of the object.</Sentence>
 			<Sentence ID="226">The necessary CSS code applied to all objects within the container.</Sentence>
 			<Sentence ID="227">The names of CSS classes. The names can consist only of Latin characters, may include hyphen (-) and underscore (_).</Sentence>
+			<Sentence ID="228">Display a warning message indicating that application may create cookies on client side.</Sentence>
+			<Sentence ID="229">Text to display as message when Cookie warning attribute is enabled.</Sentence>
 			<Sentence ID="301">Incorrect value.</Sentence>
 			<Sentence ID="302">Incorrect value, must be string.</Sentence>
 			<Sentence ID="303">Incorrect value, must be positive integer.</Sentence>
@@ -415,6 +443,8 @@
 			<Sentence ID="325">Incorrect value.</Sentence>
 			<Sentence ID="326">Incorrect value.</Sentence>
 			<Sentence ID="327">Incorrect value.</Sentence>
+			<Sentence ID="328">Incorrect value, must be 0 or 1.</Sentence>
+			<Sentence ID="329">Incorrect value.</Sentence>
 			<Sentence ID="401">Invisible</Sentence>
 			<Sentence ID="402">Visible</Sentence>
 			<Sentence ID="403">Repeat</Sentence>
@@ -426,6 +456,8 @@
 			<Sentence ID="409">Left</Sentence>
 			<Sentence ID="411">Center</Sentence>
 			<Sentence ID="412">JS Center</Sentence>
+			<Sentence ID="413">Disabled</Sentence>
+			<Sentence ID="414">Enabled</Sentence>
 			<Sentence ID="501">Visibility</Sentence>
 			<Sentence ID="502">Visibility</Sentence>
 			<Sentence ID="503">Visibility</Sentence>
@@ -9316,6 +9348,9 @@
 	</Resources>
 	<SourceCode>
 <![CDATA[import json
+import time
+import email
+import email.utils
 import managers
 from scripting import e2vdom
 
@@ -9374,6 +9409,7 @@ TEMPLATE = u"""{doctype}
 <!--[if lt IE 9]><script src="/62bfaaa0-c2fd-02d5-2a32-49056e416a65.res"></script><![endif]-->
 </head>
 <body id="{element_name}" style="{style}"{inline_style}{inline_class}>
+{cookiewarning}
 {noscript}
 <div id='container'>
 {contents}
@@ -9479,6 +9515,19 @@ class VDOM_htmlcontainer(VDOM_object):
         else:
             noscript = ""
 
+        cookie_name = 'cookiewarning'
+        cookiewarning = ""
+        if self.cookiewarning == "1":
+            if cookie_name not in request.cookies:
+                cookiewarning=u"""<div id="cookieWarningDiv" style="display: block; text-align: center; background: #333; color: #fff; font-size: 15px !important; width: 90%%; box-sizing: content-box; font-family: sans-serif !important; padding-top: 5px; padding-right: 5%%; padding-bottom: 5px; padding-left: 5%%; vertical-align: initial;">
+                                  <span id="cookieWarningAlert" style="font: 15px verdana;"> %(text)s </span>
+                                  <span id="cookieWarningOK" style="cursor: pointer; display: inline-block; font-size: 16px; background: #4596ec !important; border-radius: 10px; font-family: sans-serif !important; box-sizing: initial; vertical-align: initial; padding-top: 5px; padding-right: 10px; padding-bottom: 5px; padding-left: 10px; margin-left: 7px;" onclick="$j(function(){ document.cookie = '%(cookie)s=1; expires=%(cookie_exp)s'; $('#cookieWarningDiv').hide(); });">&#x2713; OK</span>
+                                  </div>""" % {
+                                                   "text": self.cookiewarningtext,
+                                                   "cookie": cookie_name,
+                                                   "cookie_exp": email.utils.formatdate(time.time()+31536000, usegmt=True) # set one year expiration
+                                  }
+
         result = TEMPLATE.format(
             doctype=DOCTYPE,
             type_version=self.type.version,
@@ -9500,6 +9549,7 @@ class VDOM_htmlcontainer(VDOM_object):
             style=style,
             inline_style=inline_style,
             inline_class=" class='%s'" % classname if classname else "",
+            cookiewarning=cookiewarning,
             noscript=noscript,
             contents=contents,
             javascript=javascript,
