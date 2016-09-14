@@ -31,6 +31,12 @@ class Executable(object):
     subsystem = roproperty("_subsystem")
     source_code = property(_get_source_code, _set_source_code)
 
+    def cleanup(self, source_code=False):
+        if source_code:
+            self.delete(SOURCE_CODE)
+        self.delete(BYTECODE)
+        self.subsystem.cleanup(self)
+
     def compile(self):
         with self.lock:
             source_code = self.read(SOURCE_CODE)

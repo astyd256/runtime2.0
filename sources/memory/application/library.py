@@ -15,9 +15,9 @@ class MemoryLibrarySketch(MemoryBase, LibraryStorage, LibraryExecutable):
         self._left = 0
         self._state = False
 
-    lock = roproperty("_owner.lock")
+    lock = property(lambda self: self._owner.lock)
     owner = roproperty("_owner")
-    application = roproperty("_owner.application")
+    application = property(lambda self: self._owner.application)
 
     name = rwproperty("_name")
 
@@ -42,11 +42,14 @@ class MemoryLibrary(MemoryLibrarySketch):
     def __init__(self):
         raise Exception(u"Use 'new' to create new library")
 
-    def _set_name(self, value):
-        with self._owner.lock:
-            if self._name != value:
-                self._callback(self, value)
-                self._name = value
+    # NOTE: currently is read-only property
+    #       in the future must rename source and other files on rename...
+    # def _set_name(self, value):
+    #     with self._owner.lock:
+    #         if self._name != value:
+    #             self._callback(self, value)
+    #             self._name = value
+    #             self._owner.autosave()
 
     def _get_source_code(self):
         with self._owner.lock:
@@ -56,7 +59,7 @@ class MemoryLibrary(MemoryLibrarySketch):
         with self._owner.lock:
             super(MemoryLibrary, self)._set_source_code(value)
 
-    name = rwproperty("_name", _set_name)
+    name = roproperty("_name")
     source_code = property(_get_source_code, _set_source_code)
 
     # unsafe

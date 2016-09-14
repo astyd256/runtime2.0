@@ -48,7 +48,11 @@ class MemoryStructureLevelSketch(MemoryBase, MutableSequence):
 
 class MemoryStructureLevel(MemoryStructureLevelSketch):
 
-    name = rwproperty("_name", notify="_owner.owner.autosave")
+    def _set_name(self, value):
+        self._name = value
+        self._owner.owner.autosave()
+
+    name = rwproperty("_name", _set_name)
 
     def compose(self, ident=u"", file=None):
         items = self.__dict__.get("_items")

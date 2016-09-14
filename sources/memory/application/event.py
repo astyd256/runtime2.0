@@ -18,7 +18,7 @@ class MemoryEventSketch(MemoryBase):
         self._callees = MemoryEventCalleesSketch(self)
 
     owner = roproperty("_owner")
-    container = roproperty("_owner.container")
+    container = property(lambda self: self._owner.container)
 
     source_object = roproperty("_owner")
     name = rwproperty("_name")
@@ -45,10 +45,26 @@ class MemoryEvent(MemoryEventSketch):
     def __init__(self):
         raise Exception(u"Use 'new' to create new event")
 
-    name = rwproperty("_name", notify="_owner.autosave")
-    top = rwproperty("_top", notify="_owner.autosave")
-    left = rwproperty("_left", notify="_owner.autosave")
-    state = rwproperty("_state", notify="_owner.autosave")
+    def _set_name(self, value):
+        self._name = value
+        self._owner.autosave()
+
+    def _set_top(self, value):
+        self._top = value
+        self._owner.autosave()
+
+    def _set_left(self, value):
+        self._left = value
+        self._owner.autosave()
+
+    def _set_state(self, value):
+        self._state = value
+        self._owner.autosave()
+
+    name = rwproperty("_name", _set_name)
+    top = rwproperty("_top", _set_top)
+    left = rwproperty("_left", _set_left)
+    state = rwproperty("_state", _set_state)
 
     # unsafe
     def compose(self, ident=u"", file=None):

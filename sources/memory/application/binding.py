@@ -44,12 +44,24 @@ class MemoryBinding(MemoryBindingSketch):
     def __init__(self):
         raise Exception(u"Use 'new' to create new binding")
 
+    def _set_top(self, value):
+        self._top = value
+        self._target_object.autosave()
+
+    def _set_left(self, value):
+        self._left = value
+        self._target_object.autosave()
+
+    def _set_state(self, value):
+        self._state = value
+        self._target_object.autosave()
+
     id = roproperty("_id")
     target_object = roproperty("_target_object")
     name = roproperty("_name")
-    top = rwproperty("_top", notify="_target_object.autosave")
-    left = rwproperty("_left", notify="_target_object.autosave")
-    state = rwproperty("_state", notify="_target_object.autosave")
+    top = rwproperty("_top", _set_top)
+    left = rwproperty("_left", _set_left)
+    state = rwproperty("_state", _set_state)
     parameters = roproperty("_parameters")
 
     # unsafe

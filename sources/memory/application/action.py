@@ -20,9 +20,9 @@ class MemoryActionSketch(MemoryBase, ActionStorage, ActionExecutable):
         self._state = False
         self._source_code_value = u""
 
-    lock = roproperty("_owner.lock")
+    lock = property(lambda self: self._owner.lock)
     owner = roproperty("_owner")
-    application = roproperty("_owner.application")
+    application = property(lambda self: self._owner.application)
 
     id = rwproperty("_id")
     name = rwproperty("_name")
@@ -76,6 +76,18 @@ class MemoryAction(MemoryActionSketch):
                 self._owner.invalidate(contexts=contexts, downward=True, upward=True)
                 self._owner.autosave()
 
+    def _set_top(self, value):
+        self._top = value
+        self._owner.autosave()
+
+    def _set_left(self, value):
+        self._left = value
+        self._owner.autosave()
+
+    def _set_state(self, value):
+        self._state = value
+        self._owner.autosave()
+
     def _get_source_code(self):
         with self._owner.lock:
             return super(MemoryAction, self)._get_source_code()
@@ -88,9 +100,9 @@ class MemoryAction(MemoryActionSketch):
 
     id = roproperty("_id")
     name = rwproperty("_name", _set_name)
-    top = rwproperty("_top", notify="_owner.autosave")
-    left = rwproperty("_left", notify="_owner.autosave")
-    state = rwproperty("_state", notify="_owner.autosave")
+    top = rwproperty("_top", _set_top)
+    left = rwproperty("_left", _set_left)
+    state = rwproperty("_state", _set_state)
     source_code = property(_get_source_code, _set_source_code)
 
     # unsafe

@@ -52,10 +52,26 @@ class MemoryStructureSketch(MemoryBase, Mapping):
 
 class MemoryStructure(MemoryStructureSketch):
 
-    resource = rwproperty("_resource", notify="_owner.autosave")
-    top = rwproperty("_top", notify="_owner.autosave")
-    left = rwproperty("_left", notify="_owner.autosave")
-    state = rwproperty("_state", notify="_owner.autosave")
+    def _set_resource(self, value):
+        self._resource = value
+        self._owner.autosave()
+
+    def _set_top(self, value):
+        self._top = value
+        self._owner.autosave()
+
+    def _set_left(self, value):
+        self._left = value
+        self._owner.autosave()
+
+    def _set_state(self, value):
+        self._state = value
+        self._owner.autosave()
+
+    resource = rwproperty("_resource", _set_resource)
+    top = rwproperty("_top", _set_top)
+    left = rwproperty("_left", _set_left)
+    state = rwproperty("_state", _set_state)
 
     def compose(self, ident=u"", file=None):
         information = u"ID=\"%s\"%s Top=\"%s\" Left=\"%s\" State=\"%s\"" % \

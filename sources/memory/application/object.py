@@ -62,7 +62,7 @@ class MemoryObjectSketch(MemoryBase):
         self._events = MemoryEvents(self)
         self._actions = MemoryActions(self)
 
-    lock = roproperty("_application.lock")
+    lock = property(lambda self: self._application.lock)
     order = rwproperty("_order")
     is_virtual = virtual = roproperty("_virtual")
     application = rwproperty("_application")

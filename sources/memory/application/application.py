@@ -12,8 +12,7 @@ from logs import log
 from database.dbobject import VDOM_sql_query
 from utils.properties import constant, roproperty, rwproperty
 
-from .. import PYTHON_LANGUAGE, VSCRIPT_LANGUAGE, PYTHON_EXTENSION, VSCRIPT_EXTENSION, \
-    APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
+from .. import APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
 from ..generic import MemoryBase
 from ..auxiliary import write_as_base64, copy_as_base64
 from .objects import MemoryObjects
@@ -32,15 +31,6 @@ class MemoryApplicationSketch(MemoryBase):
     is_object = constant(False)
 
     generic = APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
-
-    @property
-    def scripting_extension(self):
-        if self._scripting_language == PYTHON_LANGUAGE:
-            return PYTHON_EXTENSION
-        elif self._scripting_language == VSCRIPT_LANGUAGE:
-            return VSCRIPT_EXTENSION
-        else:
-            return ""
 
     def __init__(self, callback):
         self._callback = callback
@@ -119,19 +109,63 @@ class MemoryApplication(MemoryApplicationSketch):
     def __init__(self):
         raise Exception(u"Use 'new' to create new application")
 
+    def _set_name(self, value):
+        self._name = value
+        self.autosave()
+
+    def _set_description(self, value):
+        self._description = value
+        self.autosave()
+
+    def _set_version(self, value):
+        self._version = value
+        self.autosave()
+
+    def _set_owner(self, value):
+        self._owner = value
+        self.autosave()
+
+    def _set_password(self, value):
+        self._password = value
+        self.autosave()
+
+    def _set_active(self, value):
+        self._active = value
+        self.autosave()
+
+    def _set_index(self, value):
+        self._index = value
+        self.autosave()
+
+    def _set_icon(self, value):
+        self._icon = value
+        self.autosave()
+
+    def _set_server_version(self, value):
+        self._server_version = value
+        self.autosave()
+
+    def _set_default_language(self, value):
+        self._default_language = value
+        self.autosave()
+
+    def _set_current_language(self, value):
+        self._current_language = value
+        self.autosave()
+
     id = roproperty("_id")
-    name = rwproperty("_name", notify="autosave")
-    description = rwproperty("_description", notify="autosave")
-    version = rwproperty("_version", notify="autosave")
-    owner = rwproperty("_owner", notify="autosave")
-    password = rwproperty("_password", notify="autosave")
-    active = rwproperty("_active", notify="autosave")
-    index = rwproperty("_index", notify="autosave")
-    icon = rwproperty("_icon", notify="autosave")
-    server_version = rwproperty("_server_version", notify="autosave")
-    scripting_language = rwproperty("_scripting_language", notify="autosave")
-    default_language = rwproperty("_default_language", notify="autosave")
-    current_language = rwproperty("_current_language", notify="autosave")
+    name = rwproperty("_name", _set_name)
+    description = rwproperty("_description", _set_description)
+    version = rwproperty("_version", _set_version)
+    owner = rwproperty("_owner", _set_owner)
+    password = rwproperty("_password", _set_password)
+    active = rwproperty("_active", _set_active)
+    index = rwproperty("_index", _set_index)
+    icon = rwproperty("_icon", _set_icon)
+    server_version = rwproperty("_server_version", _set_server_version)
+    scripting_language = roproperty("_scripting_language")
+    default_language = rwproperty("_default_language", _set_default_language)
+    current_language = rwproperty("_current_language", _set_current_language)
 
     # unsafe
     def compose(self, file=None, shorter=False):
