@@ -1,5 +1,6 @@
 
 from utils.threads import SmartServer
+from utils.profiling import profiler
 from watcher import Watcher
 from web import VDOM_web_server_thread
 
@@ -14,12 +15,8 @@ class Server(SmartServer):
         self._web_server = VDOM_web_server_thread()
         self._web_server.start()
 
-    # def work(self):
-    #     data = raw_input()
-    #     try:
-    #         exec(data, self._namespace)
-    #     except Exception as error:
-    #         console.error(error)
+    def work(self):
+        profiler.save()
 
 
 VDOM_server = Server

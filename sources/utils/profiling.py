@@ -1,4 +1,5 @@
 
+from time import time
 from threading import local, RLock
 from cProfile import Profile
 from pstats import Stats
@@ -19,6 +20,8 @@ class Profiler(object):
         self._lock = RLock()
         self._stats = None
         self._local = ProfilerLocal()
+        self._notch = time() - 1
+        self._updates = False
 
     def __enter__(self):
         if not settings.PROFILING:
@@ -27,6 +30,7 @@ class Profiler(object):
         if not self._local.counter:
             self._local.profile = Profile()
             self._local.profile.enable()
+
         self._local.counter += 1
         return self
 
@@ -45,17 +49,26 @@ class Profiler(object):
                 self._stats = Stats(profile_or_stats)
             else:
                 self._stats.add(profile_or_stats)
+            self._updates = True
 
-    def save(self, location=None):
-        if not settings.PROFILING:
+    def save(self, location=None, force=False):
+        if not (settings.PROFILING and self._updates):
             return
 
-        if location is None:
-            location = settings.PROFILE_LOCATION
+        with self._lock:
+            now = time()
+            if not force and now < self._notch:
+                return
 
-        if self._stats:
-            self._stats.dump_stats(location)
-            server_log.write("Save profiling statistics to \"%s\"" % location)
+            if location is None:
+                location = settings.PROFILE_LOCATION
+
+            if self._stats:
+                self._stats.dump_stats(location)
+                server_log.write("Save profiling statistics to \"%s\"" % location)
+
+            self._notch = now + settings.PROFILING_SAVE_PERIODICITY
+            self._updates = False
 
 
 profiler = Profiler()

@@ -51,7 +51,7 @@ def intercept(handler=None, ctrlc=None):
 
 
 def shutdown(quantum=settings.QUANTUM):
-    profiler.save()
+    profiler.save(force=True)
 
     server = getattr(utils.threads.main, SERVER_VARIABLE_NAME, None)
     if server:
