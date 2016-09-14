@@ -21,9 +21,11 @@ class VDOM_module_python(VDOM_module):
 			exec "admin." + script_name + ".run(request)"
 		except VDOM_exception, e:
 			if str(e) != "Authentication failed":#TODO: replace it with VDOM_exception_auth_failed
-				traceback.print_exc(file=debugfile)
+				# traceback.print_exc(file=debugfile)
+				sys.excepthook(*sys.exc_info())
 			debug("Error: %s" % str(e))
 		except Exception, e:
 			debug("Error: %s" % str(e))
-			traceback.print_exc(file=debugfile)
+			# traceback.print_exc(file=debugfile)
+			sys.excepthook(*sys.exc_info())
 		return request.output()
