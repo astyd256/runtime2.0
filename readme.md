@@ -143,9 +143,11 @@ Manage utility also have several actions to help with debugging and profiling.
 This action require enabled watcher.
 
 Action:
+
     watch analyze objects
 
 Example:
+
     watch analyze objects --sort counter --lim 75
 
 This command show 75 most common object types sorted by count.
@@ -155,4 +157,5 @@ This command show 75 most common object types sorted by count.
 This command require enabled profiler.
 
 Action:
+
     profile show
