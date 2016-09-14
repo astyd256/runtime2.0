@@ -4,6 +4,7 @@ from __builtin__ import compile as python_compile
 from logs import server_log
 from memory import PYTHON_EXTENSION, SYMBOLS_EXTENSION, BYTECODE_EXTENSION
 from ...wrappers import server, application, session, log, request, response, obsolete_request
+from ... import packages
 from ..constants import SOURCE_CODE, LISTING, SYMBOLS, BYTECODE
 
 
@@ -47,6 +48,7 @@ def execute(executable, bytecode, context, namespace):
         response=response,
         session=session,
         application=application,
-        obsolete_request=obsolete_request)
+        obsolete_request=obsolete_request,
+        packages=packages)
 
     exec(bytecode, namespace)
