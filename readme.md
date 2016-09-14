@@ -133,3 +133,26 @@ Action:
 Example:
 
     show form
+
+## Debugging and profiling
+
+Manage utility also have several actions to help with debugging and profiling.
+
+### Show object statistics
+
+This action require enabled watcher.
+
+Action:
+    watch analyze objects
+
+Example:
+    watch analyze objects --sort counter --lim 75
+
+This command show 75 most common object types sorted by count.
+
+### Show profiling statistics
+
+This command require enabled profiler.
+
+Action:
+    profile show
