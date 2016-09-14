@@ -1,5 +1,8 @@
 
 from collections import Mapping
+import managers
+import security
+from utils.exception import VDOMSecurityError
 from utils.properties import lazy, roproperty, rwproperty
 from ..generic import MemoryBase
 from .structurelevel import MemoryStructureLevel, MemoryStructureLevelSketch

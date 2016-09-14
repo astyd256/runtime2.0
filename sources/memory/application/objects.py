@@ -5,7 +5,9 @@ from itertools import islice
 from uuid import uuid4
 
 import managers
+import security
 
+from utils.exception import VDOMSecurityError
 from utils.generators import generate_unique_name
 from utils.properties import lazy, weak, roproperty
 

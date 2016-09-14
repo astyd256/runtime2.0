@@ -38,10 +38,14 @@ class VDOM_acl_manager:
 
 	def __allow(self, object_id):
 		# allow access if processing vdom request and accessing within the same application
-		request = managers.request_manager.get_request()
+		try:
+			request = managers.request_manager.get_request()
+		except VDOM_exception:
+			return True
 		if hasattr(request, "request_type") and request.request_type in ["vdom", "action"]:
 			app = request.application()
-			if app and (app.id == object_id or app.search_object(object_id)):
+			# if app and (app.id == object_id or app.search_object(object_id)):
+			if app and (app.id == object_id or app.objects.catalog.get(object_id)):
 				return True
 
 ### PUBLIC INTERFACE ###

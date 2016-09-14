@@ -21,7 +21,7 @@ class VDOM_exception_param(VDOM_exception): # SOAP
     pass
 
 
-class VDOM_exception_sec(VDOM_exception):  # for security checks
+class VDOMSecurityError(VDOM_exception):  # for security checks
     pass
 
 
@@ -48,3 +48,6 @@ class VDOMSecureServerError(VDOM_exception):
 class VDOMDatabaseAccessError(VDOM_exception):
     def __init__(self, s):
         VDOM_exception.__init__(self, "Database request failed: " + s)
+
+
+VDOM_exception_sec = VDOMSecurityError
