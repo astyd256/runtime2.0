@@ -4,7 +4,7 @@ import re
 
 from types import FunctionType, ModuleType
 from itertools import izip, chain
-from argparse import OPTIONAL, REMAINDER, ArgumentParser, ArgumentTypeError, HelpFormatter, Action
+from argparse import OPTIONAL, REMAINDER, SUPPRESS, ArgumentParser, ArgumentTypeError, HelpFormatter, Action, RawDescriptionHelpFormatter
 
 import utils.verificators
 from utils.structure import Structure
@@ -133,6 +133,8 @@ def autoparse(alias, routine, subparsers, letters=None):
 class AutoArgumentParser(ArgumentParser):
 
     def __init__(self, *arguments, **keywords):
+        self._disable_usage = False
+        self._disable_help = False
         self._default = keywords.pop("default", None)
         package = keywords.pop("package", None)
         module = keywords.pop("module", None)
@@ -202,3 +204,24 @@ class AutoArgumentParser(ArgumentParser):
         if self._default and message.endswith("too few arguments"):
             return
         super(AutoArgumentParser, self).error(message)
+
+    def disable(self, optional_actions=False, usage=False, help=False):
+        if optional_actions:
+            for action in self._get_optional_actions():
+                action.help = SUPPRESS
+        if usage:
+            self._disable_usage = True
+        if help:
+            self._disable_help = True
+
+    def print_usage(self, *arguments, **keywords):
+        if self._disable_usage:
+            return
+        else:
+            super(AutoArgumentParser, self).print_usage(*arguments, **keywords)
+
+    def print_help(self, *arguments, **keywords):
+        if self._disable_help:
+            return
+        else:
+            super(AutoArgumentParser, self).print_help(*arguments, **keywords)
