@@ -89,19 +89,15 @@ class ReadOnlyProperty(object):
     return namespace["ReadOnlyProperty"]()
 
 
-def rwproperty(name, setter=None, notify=None):
-    namespace = {}
-
-    if notify is None:
-        notify = ""
+def rwproperty(name, setter=None):
+    if setter is None:
+        namespace = {}
+        assigment = "instance.%s = value" % name
     else:
-        if notify[-1] == ")":
-            notify = "instance.%s" % notify
-        else:
-            notify = "instance.%s()" % notify
+        namespace = {"setter": setter}
+        assigment = "setter(instance, value)"
 
-    if setter:
-        bytecode = compile("""
+    bytecode = compile("""
 class ReadWriteProperty(object):
 
     __module__ = "utils"
@@ -110,26 +106,11 @@ class ReadWriteProperty(object):
         return instance.{name}
 
     def __set__(self, instance, value):
-        setter(instance, value);{notify}
+        {assigment}
 
     def __delete__(self, instance):
         raise AttributeError
-            """.format(name=name, notify=notify), "<rwproperty>", "exec")
-        namespace["setter"] = setter
-    else:
-        bytecode = compile("""
-class ReadWriteProperty(object):
+        """.format(name=name, assigment=assigment), "<rwproperty>", "exec")
 
-    __module__ = "utils"
-
-    def __get__(self, instance, owner=None):
-        return instance.{name}
-
-    def __set__(self, instance, value):
-        instance.{name} = value;{notify}
-
-    def __delete__(self, instance):
-        raise AttributeError("{name}")
-            """.format(name=name, notify=notify), "<rwproperty>", "exec")
     exec(bytecode, namespace)
     return namespace["ReadWriteProperty"]()
