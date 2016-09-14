@@ -120,8 +120,8 @@ class Parser(LegacyInterface):
     cache = rwproperty("_parser.buffer_text", _set_cache)
     cache_size = rwproperty("_parser.buffer_size", _set_cache_size)
 
-    position = roproperty("_parser.CurrentByteIndex")
-    lineno = roproperty("_parser.CurrentLineNumber")
+    position = property(lambda self: self._parser.CurrentByteIndex)
+    lineno = property(lambda self: self._parser.CurrentLineNumber)
 
     unexpected_element_handler = rwproperty("_unexpected_element_handler", _set_unexpected_element_handler)
     unexpected_attribute_handler = rwproperty("_unexpected_attribute_handler", _set_unexpected_attribute_handler)
