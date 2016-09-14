@@ -4,7 +4,7 @@ import re
 
 from types import FunctionType, ModuleType
 from itertools import izip, chain
-from argparse import OPTIONAL, REMAINDER, SUPPRESS, ArgumentParser, ArgumentTypeError, HelpFormatter, Action, RawDescriptionHelpFormatter
+from argparse import OPTIONAL, REMAINDER, SUPPRESS, ArgumentParser, ArgumentTypeError, HelpFormatter, Action
 
 import utils.verificators
 from utils.structure import Structure
