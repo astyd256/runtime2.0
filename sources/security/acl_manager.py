@@ -40,14 +40,17 @@ class VDOM_acl_manager:
 		# allow access if processing vdom request and accessing within the same application
 		try:
 			request = managers.request_manager.get_request()
-		except VDOM_exception:
+		except:
 			return True
 		if hasattr(request, "request_type") and request.request_type in ["vdom", "action"]:
 			app = request.application()
-			# if app and (app.id == object_id or app.search_object(object_id)):
-			if app and (app.id == object_id or app.objects.catalog.get(object_id)):
+			if app and (app.id == object_id or app.search_object(object_id)):
 				return True
-
+			
+	def __deny_protected(self,appid, access_type):
+		if (access_type == security.access_to_application) and managers.xml_manager.get_application(appid).protected == "1":
+			return True	
+		
 ### PUBLIC INTERFACE ###
 	def check_access(self, object_id, username, access_type):
 		"""Returns True or False - have account "rule"-access to this object, also checks groups"""
@@ -108,10 +111,22 @@ class VDOM_acl_manager:
 		"""Returns True or False - have account "rule"-access to this object, including inheritance"""
 		if self.__allow(object_id):
 			return True
+		
+		if self.__deny_protected(app_id,access_type):
+			return False
+		
+		
 		username = managers.request_manager.get_request().session().user
 		if username:
 			return self.check_access2(app_id, object_id, username, access_type)
 		return False
+	
+	def session_user_can_manage(self):
+		"""Returns True or False - if account in management group"""
+		username = managers.request_manager.get_request().session().user
+		if username:
+			return self.check_membership(username, "ManagementLogin")
+		return False		
 
 	def grant_access_to_application(self, aid):
 		"""grant access to application for the session user"""

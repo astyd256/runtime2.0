@@ -1,6 +1,7 @@
 """
 User class module
 """
+from hashlib import md5
 
 class VDOM_user:
 	"""User class defines behaviour of account"""
@@ -15,3 +16,6 @@ class VDOM_user:
 		self.security_level = ""
 		self.member_of = []	# list of group names
 		self.system = False
+
+	def get_password_hash(self):
+		return md5(self.password).hexdigest()

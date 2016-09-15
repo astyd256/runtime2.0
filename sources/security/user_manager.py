@@ -5,7 +5,7 @@ User Manager module
 from hashlib import md5
 
 import managers
-import utils.id as theid
+from utils.id import vdomid
 from storage.storage import VDOM_config
 from security.user import VDOM_user
 from security.group import VDOM_usergroup
@@ -41,6 +41,7 @@ class VDOM_user_manager:
 		for uid in self.users.keys():
 			self.users_by_name[self.users[uid].login] = self.users[uid]
 		self.__check_system()
+		self.__check_membership()
 
 	def __check_system(self):
 		sys_users = [("Admin", "VDMNK22YK")]
@@ -56,12 +57,19 @@ class VDOM_user_manager:
 				for m in members:
 					self.users_by_name[name].members.append(m)
 
+	def __check_membership(self):
+		for user in self.get_all_users():
+			for group_name in user.member_of:
+				group = self.get_group_by_name(group_name)
+				if group and user.login not in group.members:
+					group.members.append(user.login)
+		
 	def create_user(self, login, password, name1="", name2="", email="", slv="", system=False):
 		"""Creates new user and adds it to system"""
 		if(self.name_exists(login)):
 			raise VDOM_exception(_("Login %s already exists in the system" % login))
 		user = VDOM_user()
-		user.id = theid.VDOM_id().new()
+		user.id = vdomid()
 		user.login = login
 		user.password = password
 		user.first_name = name1
@@ -79,7 +87,7 @@ class VDOM_user_manager:
 		if(self.name_exists(name)):
 			raise VDOM_exception(_("Name %s already exists in the system" % name))
 		group = VDOM_usergroup()
-		group.id = theid.VDOM_id().new()
+		group.id = vdomid()
 		group.login = name
 		group.description = descr
 		group.system = system
