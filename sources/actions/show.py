@@ -1,13 +1,12 @@
 
 import re
 from itertools import izip_longest
-import managers
+
 from logs import console
-from .auxiliary import escape, section, show
 
+from .auxiliary.constants import TYPE, APPLICATION
+from .auxiliary import escape, section, show, search
 
-TYPE = "type"
-APPLICATION = "application"
 
 COLORS = {
     1: "gray",
@@ -15,6 +14,7 @@ COLORS = {
     3: "red",
     4: "blue"
 }
+
 EXPLANATIONS = {
     "dynamic": {0: "no", 1: "yes"},
     "moveable": {0: "no", 1: "yes"},
@@ -29,8 +29,6 @@ EXPLANATIONS = {
     },
     "container": {1: "non-container", 2: "container", 3: "top level container"}
 }
-NAME_WIDTH = 36
-DESCRIPTION_WIDTH = 79
 
 
 name_regex = re.compile(r"^([0-9A-Z]+)\((.*)\)", re.IGNORECASE)
@@ -133,29 +131,25 @@ def validation_pattern(subject, attribute):
         else escape(attribute.validation_pattern)
 
 
-def run(uuid_or_name, description=False, details=False):
+def run(identifier, description=False, details=False):
     """
     show application or type
-    :param uuid_or_name uuid_or_name: application or type uuid or name
+    :param uuid_or_name identifier: application or type uuid or name
     :param switch description: show attributes description
     :param switch details: show attribute details
     """
-    subject = managers.memory.types.search(uuid_or_name)
-    if subject:
-        entity = TYPE
+    entity, subject = search(identifier)
+    if entity is TYPE:
         names = ("id", "module_name", "name", "class_name",
         "category", "interface_type", "dynamic", "moveable", "resizable",
         "optimization_priority", "container", "containers", "render_type",
         "http_content_type", "remote_methods", "handlers", "languages", "version")
+    elif entity is APPLICATION:
+        names = ("id", "name", "owner", "password", "active", "index",
+            "server_version", "scripting_language", "default_language")
     else:
-        subject = managers.memory.applications.search(uuid_or_name)
-        if subject:
-            entity = APPLICATION
-            names = ("id", "name", "owner", "password", "active", "index",
-                "server_version", "scripting_language", "default_language")
-        else:
-            console.error("unable to find application or type with such uuid or name")
-            return
+        console.error("unable to find: %s" % identifier)
+        return
 
     if description:
         names = "id", "name"
@@ -206,4 +200,3 @@ def run(uuid_or_name, description=False, details=False):
 
     except Exception as error:
         console.error("unable to show %s: %s" % (entity, error))
-        raise

@@ -19,6 +19,7 @@ TRACING = None
 BINARY_ALIAS = "<sources>"
 SERVER_ALIAS = "<server>"
 TYPES_ALIAS = "<types>"
+APPLICATIONS_ALIAS = "<applications>"
 PYTHON_ALIAS = "<python>"
 
 UNKNOWN_STATEMENT = "???"
@@ -36,6 +37,7 @@ VALUE_WIDTH = DESIRED_WIDTH - NAME_WIDTH
 BINARY_PATH = os.path.dirname(sys.argv[0]) or os.getcwd()
 SERVER_PATH = os.path.split(BINARY_PATH)[0]
 TYPES_PATH = os.path.abspath(os.path.join(BINARY_PATH, settings.TYPES_LOCATION))
+APPLICATIONS_PATH = os.path.abspath(os.path.join(BINARY_PATH, settings.APPLICATIONS_LOCATION))
 PYTHON_PATH = sys.prefix
 
 WELL_KNOWN_MODULES = "_json", "_ast", "thread", "operator", "itertools", "exceptions"
@@ -61,6 +63,8 @@ def clarify_source_path(path):
         return BINARY_ALIAS + path[len(BINARY_PATH):]
     elif path.startswith(TYPES_PATH):
         return TYPES_ALIAS + path[len(TYPES_PATH):]
+    elif path.startswith(APPLICATIONS_PATH):
+        return APPLICATIONS_ALIAS + path[len(APPLICATIONS_PATH):]
     elif path.startswith(SERVER_PATH):
         return SERVER_ALIAS + path[len(SERVER_PATH):]
     elif path.startswith(PYTHON_PATH):
@@ -74,6 +78,8 @@ def restore_source_path(path):
         return BINARY_PATH + path[len(BINARY_ALIAS):]
     elif path.startswith(TYPES_ALIAS):
         return TYPES_PATH + path[len(TYPES_ALIAS):]
+    elif path.startswith(APPLICATIONS_ALIAS):
+        return APPLICATIONS_PATH + path[len(APPLICATIONS_ALIAS):]
     elif path.startswith(SERVER_ALIAS):
         return SERVER_PATH + path[len(SERVER_ALIAS):]
     elif path.startswith(PYTHON_ALIAS):

@@ -8,14 +8,15 @@ import settings
 import managers
 import file_access
 
-from utils.tracing import BINARY_ALIAS, SERVER_ALIAS, format_source_point
+from utils.console import CONSOLE_WIDTH
+from utils.tracing import BINARY_ALIAS, SERVER_ALIAS, TYPES_ALIAS, APPLICATIONS_ALIAS, format_source_point
 from utils.auxiliary import fit, fill
 from ..auxiliary import section, show
 
 
-LOCATION_WIDTH = 69
-CALLS_WIDTH = 6
-TIME_WIDTH = 10
+LOCATION_WIDTH = 99
+CALLS_WIDTH = 9
+TIME_WIDTH = 11
 
 COLUMNS = (
     (-LOCATION_WIDTH, "name", "%*s"),
@@ -107,15 +108,22 @@ def run(location=None, headers=False, sort=None, order=None, limit=50, nolimit=F
     reverse = order is ORDER_BY_DESCENDING
     entries = sorted(statistics, key=key, reverse=reverse)
 
-    with section("last profile statistics"):
+    with section("statistics", width=CONSOLE_WIDTH):
         if headers:
             show(SEPARATOR.join("%*s" % (width, label) for width, label, template in COLUMNS))
             show(SEPARATOR.join(fill(FILLER, abs(width)) for width, label, template in COLUMNS))
+
         index = 0
         for entry in entries:
-            if not (all or entry[0].startswith(BINARY_ALIAS) or entry[0].startswith(SERVER_ALIAS)):
+            if not (all
+                    or entry[0].startswith(BINARY_ALIAS)
+                    or entry[0].startswith(TYPES_ALIAS)
+                    or entry[0].startswith(APPLICATIONS_ALIAS)
+                    or entry[0].startswith(SERVER_ALIAS)):
                 continue
+
             show(SEPARATOR.join(template % (width, value) for value, (width, label, template) in izip(entry, COLUMNS)))
-            index += 1
+
             if index == limit:
                 break
+            index += 1

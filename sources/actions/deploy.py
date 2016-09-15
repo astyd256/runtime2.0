@@ -1,11 +1,10 @@
 
-import os.path
-
 import settings
 import managers
 import file_access
 
-from .auxiliary import section, show
+from .auxiliary.constants import TYPE
+from .auxiliary import section, show, locate_repository
 from .install import run as install
 
 
@@ -29,4 +28,4 @@ def run():
             show("prepare %s" % caption)
             managers.file_manager.prepare_directory(*segments, cleanup=False)
 
-    install(os.path.join(settings.REPOSITORY_LOCATION, settings.REPOSITORY_TYPES_DIRECTORY))
+    install(locate_repository(TYPE))

@@ -1,6 +1,5 @@
 
-from .auxiliary import section, show
-from .detecting import search
+from .auxiliary import section, show, search
 
 
 def run(identifier):
@@ -10,9 +9,8 @@ def run(identifier):
     """
     entity, subject = search(identifier)
     if subject:
-        with section("re-save %s %s: %s" % (entity, subject.id, subject.name), instant=True):
+        with section("re-save %s %s: %s" % (entity, subject.id, subject.name), lazy=False):
             try:
                 subject.save()
             except Exception as error:
                 show("unable to save %s: %s" % (entity, error))
-                raise

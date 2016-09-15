@@ -78,3 +78,7 @@ def get_ansii_color():
 
 width, height = get_console_size()
 ansii = get_ansii_color()
+
+
+CONSOLE_WIDTH = width
+CONSOLE_HEIGHT = height

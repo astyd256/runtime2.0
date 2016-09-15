@@ -4,12 +4,7 @@ import managers
 import file_access
 from logs import console
 from utils.parsing import native, Parser
-
-
-TYPE = "type"
-APPLICATION = "application"
-
-EXTENSION = ".xml"
+from .constants import TYPE, APPLICATION
 
 
 def search(identifier):

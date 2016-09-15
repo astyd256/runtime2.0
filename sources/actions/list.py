@@ -10,9 +10,9 @@ def run():
     with section("types"):
         types = sorted(managers.memory.types.itervalues(), key=lambda item: item.name)
         for vdomtype in types:
-            show(vdomtype.id + ":%s" % vdomtype.name)
+            show("%s:%s" % (vdomtype.id, vdomtype.name.lower()))
 
     with section("applications"):
         applications = sorted(managers.memory.applications.itervalues(), key=lambda item: item.name)
         for application in applications:
-            show(application.id + ":%s" % application.name.lower())
+            show("%s:%s" % (application.id, application.name.lower()))
