@@ -48,3 +48,4 @@ from admin.e2vdom import run
 # from admin.virtualhost import run
 # from admin.vcard import run
 from admin.restapi import run
+from admin.upload import run
