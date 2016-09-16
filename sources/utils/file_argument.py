@@ -59,6 +59,8 @@ class Attachment(object):
         return getattr(self.__filearg.fileobj, "name", None)
     def _del_fileobj(self):
         self.__filearg.fileobj = None
+    def remove(self):
+        self.__filearg.remove()
 
     name = property(__get_filename)
     handler = property(__get_handler)
