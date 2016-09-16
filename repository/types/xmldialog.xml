@@ -4045,12 +4045,23 @@ class VDOM_xmldialog(VDOM_object):
     });
     
     $q("#%(id)s form.xml-dialog-form").live('submit',function(e){
+        function escapeXml(s) {
+            return s.replace(/[<>&'"]/g, function (c) {
+                switch (c) {
+                    case '<': return '&lt;';
+                    case '>': return '&gt;';
+                    case '&': return '&amp;';
+                    case "'": return '&apos;';
+                    case '"': return '&quot;';
+                }
+            });
+        }
         e.preventDefault;
         for (var i in window["xmlDialogTinyEditors"])
             window["xmlDialogTinyEditors"][i].post();
 
         var x=[], a=$q(this).serializeArray();
-        for (k in a) if(typeof a[k].name !== 'undefined' && typeof a[k].value !== 'undefined') x[a[k].name]=a[k].value;
+        for (k in a) if(typeof a[k].name !== 'undefined' && typeof a[k].value !== 'undefined') x[escapeXml(a[k].name)]=a[k].value;
         execEventBinded('%(idn)s', "submit", x);
         return false;
     });
