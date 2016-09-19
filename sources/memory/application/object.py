@@ -112,6 +112,7 @@ class MemoryObjectDuplicationSketch(MemoryObjectSketch):
         super(MemoryObjectDuplicationSketch, self).__init__(callback,
             another.type, application, parent,
             virtual=parent.virtual, attributes=another.attributes)
+        self._objects += another.objects
 
 
 class MemoryObject(MemoryObjectSketch):
