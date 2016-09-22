@@ -66,9 +66,13 @@ def builder(parser):
             if "Information" not in sections:
                 raise SectionMustPrecedeError("Information")
             sections["Objects"] = 0
+            sections["Containers"] = 0
+            levels = Structure(index=0)
             # <Object>
             def Object(ID, Name, Type):
                 sections["Objects"] += 1
+                if not levels.index:
+                    sections["Containers"] += 1
                 try:
                     type = managers.memory.types[Type]
                 except:
@@ -87,7 +91,11 @@ def builder(parser):
                 def Actions():
                     return IGNORE
                 # </Actions>
-                return Attributes, Objects, Actions
+                levels.index += 1
+                try:
+                    yield Attributes, Objects, Actions
+                finally:
+                    levels.index -= 1
             # </Object>
             return Object
         # </Object>
