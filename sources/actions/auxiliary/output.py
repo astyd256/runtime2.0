@@ -6,7 +6,7 @@ from utils.structure import Structure
 from utils.auxiliary import align
 
 
-MISSING = "MISSING"
+ABSENT = "ABSENT"
 INDENT = "    "
 
 LINE_WIDTH = 119
@@ -26,7 +26,7 @@ def escape(value):
 
 
 @contextmanager
-def section(name=None, value=MISSING, indent=None, longer=False, width=None, lazy=True):
+def section(name=None, value=ABSENT, indent=None, longer=False, width=None, lazy=True):
     global global_context
 
     if indent is None:
@@ -44,7 +44,7 @@ def section(name=None, value=MISSING, indent=None, longer=False, width=None, laz
         indent=indent + INDENT,
         width=width or LINE_WIDTH)
 
-    if not (value is MISSING and lazy):
+    if not (value is ABSENT and lazy):
         context.show_section()
 
     global_context = context
@@ -54,7 +54,7 @@ def section(name=None, value=MISSING, indent=None, longer=False, width=None, laz
         global_context = context.previous
 
 
-def show(name="", value=MISSING, indent=None, longer=False):
+def show(name="", value=ABSENT, indent=None, longer=False):
     global global_context
 
     if indent is None:
@@ -63,7 +63,7 @@ def show(name="", value=MISSING, indent=None, longer=False):
     if global_context.show_section:
         global_context.show_section()
 
-    if value is MISSING:
+    if value is ABSENT:
         caption = indent
         value = name
     else:
