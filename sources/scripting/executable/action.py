@@ -1,6 +1,7 @@
 
 import managers
 from utils.properties import lazy
+# from utils.statistics import statistics
 from memory import PYTHON_LANGUAGE
 from .constants import SOURCE_CODE
 from .storage import Storage
@@ -13,6 +14,7 @@ class ActionStorage(Storage):
         return entity is SOURCE_CODE
 
     def read(self, entity):
+        # statistics.increase("action.read")
         if entity is SOURCE_CODE:
             return self._source_code_value
         else:
@@ -41,6 +43,7 @@ class ActionExecutable(Executable):
         return "<%s action %s:%s>" % (self.scripting_language, self.id, self.name.lower())
 
     def execute(self, context=None, namespace=None):
+        # statistics.increase("action.execute")
         if self.scripting_language == PYTHON_LANGUAGE:
             return super(ActionExecutable, self).execute(context=context, namespace=namespace)
         else:

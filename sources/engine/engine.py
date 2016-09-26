@@ -5,6 +5,7 @@ import managers
 from logs import log
 from memory import COMPUTE_CONTEXT, RENDER_CONTEXT, WYSIWYG_CONTEXT
 from utils.profiling import profiler
+# from utils.statistics import statistics
 from .exceptions import RenderTermination
 
 
@@ -59,6 +60,7 @@ class Engine(object):
             return ""
         finally:
             self.select(previous)
+            # statistics.show("Render %s" % object)
 
     def wysiwyg(self, object, parent=None):
         log.write("Wysiwyg %s" % object)
@@ -92,6 +94,7 @@ class Engine(object):
             return "" if render else None
         finally:
             self.select(previous)
+            # statistics.show("Execute%s %s" % (" and render" if render else "", action))
 
     def terminate(self):
         log.write("Terminate render")

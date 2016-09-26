@@ -3,6 +3,7 @@ import managers
 import file_access
 
 from utils.properties import lazy
+# from utils.statistics import statistics
 
 from .constants import LISTING
 from .storage import FileStorage
@@ -14,6 +15,10 @@ class LibraryStorage(FileStorage):
     def locate(self, entity):
         return managers.file_manager.locate(file_access.LIBRARY,
             self.application.id, self.name) + self.subsystem.extensions[entity]
+
+    # def read(self, entity):
+    #     statistics.increase("library.read")
+    #     return super(LibraryStorage, self).read(entity)
 
 
 class LibraryExecutable(Executable):
@@ -29,3 +34,7 @@ class LibraryExecutable(Executable):
     @lazy
     def signature(self):
         return self.locate(LISTING) or "<%s library %s:%s>" % (self.scripting_language, self.name.lower())
+
+    # def execute(self, context=None, namespace=None):
+    #     statistics.increase("library.execute")
+    #     return super(LibraryExecutable, self).execute(context=context, namespace=namespace)
