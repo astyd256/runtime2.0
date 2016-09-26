@@ -9,7 +9,7 @@ from logs import console
 from utils.structure import Structure
 from utils.parsing import native, VALUE, IGNORE, Parser, ParsingException, SectionMustPrecedeError
 
-from .auxiliary import section, show
+from .auxiliary import ABSENT, section, show
 
 
 SHOW_ERRORS_ONLY = False
@@ -65,10 +65,12 @@ def builder(parser):
         def Objects():
             if "Information" not in sections:
                 raise SectionMustPrecedeError("Information")
-            sections["Objects"] = 0
+            sections["Objects"] = Structure(_value=0, _level=0, top_level=0)
             # <Object>
             def Object(ID, Name, Type):
-                sections["Objects"] += 1
+                if not sections["Objects"]._level:
+                    sections["Objects"].top_level += 1
+                sections["Objects"]._value += 1
                 try:
                     type = managers.memory.types[Type]
                 except:
@@ -87,7 +89,11 @@ def builder(parser):
                 def Actions():
                     return IGNORE
                 # </Actions>
-                return Attributes, Objects, Actions
+                sections["Objects"]._level += 1
+                try:
+                    yield Attributes, Objects, Actions
+                finally:
+                    sections["Objects"]._level -= 1
             # </Object>
             return Object
         # </Object>
@@ -225,11 +231,11 @@ def run(filename):
                                 continue
 
                             if isinstance(value, Structure):
-                                with section(name):
+                                with section(name.replace("_", " "), getattr(value, "_value", ABSENT)):
                                     for subname in dir(value):
                                         if subname[0] == "_":
                                             continue
-                                        show(subname, getattr(value, subname))
+                                        show(subname.replace("_", " "), getattr(value, subname))
                             elif value:
                                 show(name, value)
                             else:
