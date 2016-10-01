@@ -34,7 +34,6 @@ class MemoryTypes(MemoryBase, Mapping):
         return MemoryTypeSketch(on_complete)
 
     def _load(self, uuid):
-        log.write("Load type %s" % uuid)
         with self._owner._lock:
             item = self._owner.load_type(uuid, silently=True)
             self._items[uuid] = item

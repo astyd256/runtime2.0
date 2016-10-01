@@ -1,6 +1,8 @@
 
 from weakref import ref
 from collections import Mapping
+from itertools import chain
+from threading import Event
 from uuid import uuid4
 
 import settings
@@ -8,6 +10,7 @@ import managers
 import file_access
 
 from utils import verificators
+from utils.verificators import complies
 from utils.properties import lazy, weak
 from logs import log
 
@@ -16,7 +19,6 @@ from .application import MemoryApplicationSketch
 
 
 DEFAULT_APPLICATION_NAME = "Application"
-NOT_LOADED = "NOT LOADED"
 
 
 def wrap_complete(instance, restore):
@@ -25,6 +27,7 @@ def wrap_complete(instance, restore):
     def on_complete(item):
         self = instance()
         with self._owner._lock:
+            self._event.set()
             self._items[item._id] = item
             for object in item._objects.itervalues():
                 managers.dispatcher.dispatch_handler(object, "on_startup")
@@ -38,27 +41,15 @@ class MemoryApplications(MemoryBase, Mapping):
     @lazy
     def default(self):
         try:
-            return self._default
-        except AttributeError:
-            if self._lazy:
-                self._discover()
-
-            uuid = settings.DEFAULT_APPLICATION or iter(self._items).next()
-
-            try:
-                item = self._items[uuid]
-            except (StopIteration, KeyError):
-                item = None
-            else:
-                if item is NOT_LOADED:
-                    item = self._load(uuid)
-
-            return item
+            return self[settings.DEFAULT_APPLICATION or iter(self).next()]
+        except (StopIteration, KeyError):
+            return None
 
     def __init__(self, owner):
         self._owner = owner
         self._items = {}
-        self._lazy = True
+        self._queue = set()
+        self._event = Event()
 
     def new_sketch(self, restore=False):
         return MemoryApplicationSketch(wrap_complete(self, restore))
@@ -69,70 +60,82 @@ class MemoryApplications(MemoryBase, Mapping):
         item.name = name
         return ~item
 
-    def _load(self, uuid):
-        log.write("Load application %s" % uuid)
-        with self._owner._lock:
-            item = self._owner.load_application(uuid, silently=True)
-            self._items[uuid] = item
-            return item
+    def _exists(self, uuid):
+        if self._queue:
+            try:
+                self._queue.remove(uuid)
+            except KeyError:
+                return False
+            else:
+                return True
+        else:
+            if managers.file_manager.exists(file_access.APPLICATION, uuid, settings.APPLICATION_FILENAME):
+                return True
+            else:
+                self._explore()
+                return False
 
-    def _discover(self):
-        listing = managers.file_manager.list(file_access.APPLICATION)
-        with self._owner._lock:
-            for filename in listing:
-                try:
-                    verificators.uuid(filename)
-                except ValueError:
-                    continue
-                self._items.setdefault(filename, NOT_LOADED)
-            self._lazy = False
+    def _explore(self):
+        self._queue = {filename for filename
+            in managers.file_manager.list(file_access.APPLICATION)
+            if complies(filename, verificators.uuid)} - set(self._items.keys())
+        if not self._queue:
+            self._queue = None
 
     def search(self, uuid_or_name):
-        with self._owner._lock:
-            try:
-                return self[uuid_or_name]
-            except KeyError:
+        try:
+            return self[uuid_or_name]
+        except KeyError:
+            with self._owner._lock:
                 for item in self.itervalues():
-                    if item.name.lower() == uuid_or_name or \
-                            item.name.lower().startswith(uuid_or_name):
+                    if item.name.lower().startswith(uuid_or_name):
                         return item
-                raise KeyError(uuid_or_name)
+                raise
 
     def unload(self, uuid):
         with self._owner._lock:
+            self._event.set()
             application = self._items[uuid]
             application.unimport_libraries()
             del self._items[uuid]
 
     def __getitem__(self, uuid):
-        with self._owner._lock:
-            try:
-                item = self._items[uuid]
-            except KeyError:
-                if self._lazy and managers.file_manager.exists(file_access.APPLICATION, uuid, settings.APPLICATION_FILENAME):
-                    item = NOT_LOADED
-                else:
-                    raise
-
-            if item is NOT_LOADED:
-                item = self._load(uuid)
-
-            return item
+        try:
+            return self._items[uuid]
+        except KeyError:
+            if self._queue is None:
+                raise
+            else:
+                with self._owner._lock:
+                    try:
+                        return self._items[uuid]
+                    except:
+                        if self._queue is not None and self._exists(uuid):
+                            self._items[uuid] = item = self._owner.load_application(uuid, silently=True)
+                            return item
+                        else:
+                            raise
 
     def __iter__(self):
         with self._owner._lock:
-            if self._lazy:
-                self._discover()
-            for uuid, item in self._items.iteritems():
-                if item is NOT_LOADED:
-                    self._load(uuid)
-            return iter(self._items)
+            self._event.clear()
+            if self._queue is not None:
+                self._explore()
+
+            items = self._items.keys()
+            if self._queue:
+                items += self._queue
+
+        for item in items:
+            if self._event.is_set():
+                raise RuntimeError("dictionary changed size during iteration")
+            yield item
 
     def __len__(self):
         with self._owner._lock:
-            if self._lazy:
-                self._discover()
-            return len(self._items)
+            if self._queue is not None:
+                self._explore()
+            return len(self._items) + len(self._queue) if self._queue else len(self._items)
 
     def __str__(self):
         return "applications%s" % ":lazy" if self._lazy else ""

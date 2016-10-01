@@ -209,6 +209,7 @@ class Memory(object):
     # loading
 
     def load_type(self, uuid, silently=False):
+        log.write("Load type %s" % uuid)
         location = managers.file_manager.locate(file_access.TYPE, uuid, settings.TYPE_FILENAME)
         parser = Parser(builder=type_builder, notify=True)
         try:
@@ -226,6 +227,7 @@ class Memory(object):
             raise Exception("Unable to parse \"%s\", line %s: %s" % (os.path.basename(location), error.lineno, error))
 
     def load_application(self, uuid, silently=False):
+        log.write("Load application %s" % uuid)
         location = managers.file_manager.locate(file_access.APPLICATION, uuid, settings.APPLICATION_FILENAME)
         parser = Parser(builder=application_builder, notify=True)
         try:
