@@ -9,6 +9,14 @@ UUID_OR_NONE_REGEX = re.compile(r"^(?:[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4
 SIZE_REGEX = re.compile(r"^(?P<size>[0-9]+)(?P<measure>[KM])?$", re.IGNORECASE)
 
 
+def complies(value, verificator):
+    try:
+        verificator(value)
+        return True
+    except ValueError:
+        return False
+
+
 def port(value):
     try:
         value = int(value)
