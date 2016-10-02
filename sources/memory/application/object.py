@@ -201,17 +201,17 @@ class MemoryObject(MemoryObjectSketch):
             self._dependents.remove(object)
 
     def factory(self, context, dynamic=None, probe=False):
-        with self.lock:
-            try:
-                klass = self._classes[context]
-            except KeyError:
-                if probe:
-                    return None
-                else:
-                    return self._classes.setdefault(context, managers.compiler.compile(self, context, dynamic=dynamic))
+        try:
+            klass = self._classes[context]
+        except KeyError:
+            if probe:
+                return None
             else:
-                if dynamic > klass._dynamic:
-                    self._classes[context] = klass = managers.compiler.compile(self, context, dynamic=dynamic)
+                return self._classes.setdefault(context, managers.compiler.compile(self, context, dynamic=dynamic))
+        else:
+            if dynamic > klass._dynamic:
+                return self._classes.setdefault(context, managers.compiler.compile(self, context, dynamic=dynamic))
+            else:
                 return klass
 
     def __invert__(self):
