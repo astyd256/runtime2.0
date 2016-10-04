@@ -8,7 +8,7 @@ class MemoryTypeAttributeSketch(MemoryBase):
 
     @lazy
     def _regex(self):
-        return re.compile("^%s$" % self._validation_pattern)
+        return re.compile("^%s$" % self._validation_pattern, re.DOTALL)
 
     def __init__(self, callback, owner):
         self._callback = callback
