@@ -2,6 +2,7 @@
 
 import os, sys, cgi, shutil, urlparse
 from cStringIO import StringIO
+from StringIO import StringIO as uStringIO
 from cgi import FieldStorage
 
 from environment import VDOM_environment
@@ -106,7 +107,7 @@ class VDOM_request:
 		if not self.__app_id:
 			self.__app_id = vh.get_def_site()
 		self.__stdout = StringIO()
-		self.action_result = StringIO()
+		self.action_result = uStringIO()
 
 		self.application_id = self.__app_id
 				
