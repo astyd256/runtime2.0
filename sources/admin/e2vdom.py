@@ -169,7 +169,7 @@ def run(request):
 					request.write('<ERROR/>')
 			else:
 				if request.action_result:
-					request.write(request.action_result.encode("utf-8"))
+					request.write(request.action_result.getvalue().encode("utf-8"))
 
 				rr = StringIO()
 				for key in r:
