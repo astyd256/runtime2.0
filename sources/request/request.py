@@ -106,7 +106,7 @@ class VDOM_request:
 		if not self.__app_id:
 			self.__app_id = vh.get_def_site()
 		self.__stdout = StringIO()
-		self.action_result = ""
+		self.action_result = StringIO()
 
 		self.application_id = self.__app_id
 				
@@ -147,7 +147,7 @@ class VDOM_request:
 				file_attach.remove()		
 			
 	def add_client_action(self, obj_id, data):
-		self.action_result += data
+		self.action_result.write(data)
 
 	def binary(self, b = None):
 		if b is not None:
