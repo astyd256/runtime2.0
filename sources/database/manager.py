@@ -9,7 +9,7 @@ from dbobject import VDOM_database_object, VDOM_database_table
 from xml.dom.minidom import parseString
 from xml.dom import Node
 # import time
-import sqlite3
+import sqlite3,os.path
 
 
 class VDOM_database_manager(object):
@@ -261,12 +261,12 @@ class VDOM_database_manager(object):
         orig_db = self.get_database(owner_id, db_id)
         temppath = managers.file_manager.create_temporary_directory("db_")
         try:
-            tgt_connection = sqlite3.connect("%s\copydb" % temppath)
+            tgt_connection = sqlite3.connect(os.path.join(temppath,"copydb"))
             orig_db.backup_data(tgt_connection)
             tgt_connection.execute("VACUUM")
             tgt_connection.commit()
             tgt_connection.close()
-            data = managers.file_manager.read(file_access.FILE, None, "%s\copydb" % temppath)
+            data = managers.file_manager.read(file_access.FILE, None, os.path.join(temppath,"copydb"))
         finally:
             managers.file_manager.delete_temporary_directory(temppath)
         return data

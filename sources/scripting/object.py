@@ -238,8 +238,8 @@ class VDOMObject(object):
                     getattr(self, attribute_name).separate_render(chunks=chunks)
         return chunks
 
-    def write(self, data):
-        log.write(u"Write data to client: %d characters" % len(data))
+    def write(self, data, action_name=None):
+        log.write(u"[Action %s]Write data to client: %d characters" % (action_name,len(data)))
         render_type = managers.request_manager.current.render_type
         if render_type != "e2vdom":
             log.warning("Perform write when render type is \"%s\"" % render_type)
@@ -279,9 +279,9 @@ class VDOMObject(object):
 
         if arguments:
             self.write("<EXECUTE %s>\n%s\n</EXECUTE>" % (information,
-                "\n".join("  <PARAM type=\"%s\">%s</PARAM>" % (kind, value.encode("xml")) for kind, value in data)))
+                "\n".join("  <PARAM type=\"%s\">%s</PARAM>" % (kind, value.encode("xml")) for kind, value in data)),action_name)
         else:
-            self.write("<EXECUTE %s/>" % information)
+            self.write("<EXECUTE %s/>" % information,action_name)
 
     def _fetch(self):
         log.write("Fetch %s attributes" % self)

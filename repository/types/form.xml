@@ -706,6 +706,7 @@
 	<SourceCode>
 <![CDATA[
 from scripting import e2vdom
+from utils.csrf import create_csrf_token, csrf_token_arg_name
 
 
 class VDOM_form(VDOM_object):
@@ -734,6 +735,11 @@ class VDOM_form(VDOM_object):
 
 		woid = (self.id).replace('-', '_')
 		id = u"o_" + woid
+
+		if self.meth == "post":
+			csrftoken = '<input type="hidden" name="%s" value="%s">' % (csrf_token_arg_name, create_csrf_token())
+		else:
+			csrftoken = ""
 
 		if self.meth == "event":
 			submitjs = u"""<script type="text/javascript">
@@ -811,11 +817,12 @@ $j(function(){
 					name="{name}" method="{method}" action="{target}" style="overflow:visible" 
 					{enctype} {submitonce} {classname}>
 					{contents}
+					{csrftoken}
 				</form> {submitjs} 
 			""".format(
 					debug_info = debug_info, id = id, display = display, style = style, name = self.name, 
 					method = self.meth, target = target, enctype = enctype, submitonce = submitonce, 
-					contents = contents, submitjs = submitjs, classname = classname )
+					contents = contents, csrftoken=csrftoken, submitjs = submitjs, classname = classname )
 
 		return VDOM_object.render(self, contents=result)
 
