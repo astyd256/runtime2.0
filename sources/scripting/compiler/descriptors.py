@@ -61,6 +61,7 @@ def create_type_object(type):
     id = property(lambda self: self.__class__._id)
     name = property(lambda self: self.__class__._name)
     version = property(lambda self: self.__class__._version)
+    class_name = property(lambda self: "{name}")
 
 object={class_name}()""".format(
         name=type.class_name,
