@@ -26,7 +26,7 @@ class MemoryAttributesSketch(MemoryBase, MutableMapping):
 
     @lazy
     def _query(self):
-        return set()
+        return set(self._items)
 
     def __init__(self, owner, attributes=None):
         self._owner = owner
