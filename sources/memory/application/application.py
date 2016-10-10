@@ -59,6 +59,8 @@ class MemoryApplicationSketch(MemoryBase):
         self._sentences = {}
         self._bindings = MemoryBindings(self)
 
+        self._variables = {}
+
     lock = roproperty("_lock")
     application = property(lambda self: self)
     changes = roproperty("_changes")
@@ -85,6 +87,8 @@ class MemoryApplicationSketch(MemoryBase):
     libraries = roproperty("_libraries")
     sentence = roproperty("_sentences")
     bindings = roproperty("_bindings")
+
+    variables = roproperty("_variables")
 
     def __invert__(self):
         self.__class__ = MemoryApplication
