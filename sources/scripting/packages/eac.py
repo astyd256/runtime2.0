@@ -15,7 +15,9 @@ from xml.dom import getDOMImplementation
 
 class FakeLogger(object):
 	def debug(self, *args):
-		debug('[REMOTE_API CALL]', *args)
+		args = ' '.join(map(repr,args))
+		debug('[REMOTE_API CALL] '+args)
+
 
 
 logger = FakeLogger()
