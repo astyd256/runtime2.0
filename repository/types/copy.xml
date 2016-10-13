@@ -232,6 +232,30 @@ Such restriction is introduced in order to avoid the recursion problems. To avoi
 		</Language>
 	</Languages>
 	<Resources>
+		<Resource ID="4b5fe60d-f570-eddf-278c-0889362f18e3" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjAxNTcxNkE5MUZFNTExRTFCRDhDRjgwODBGRjdFQ0U3IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjAxNTcxNkFBMUZFNTExRTFCRDhDRjgwODBGRjdFQ0U3Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDE1NzE2QTcxRkU1MTFFMUJEOENG
+			ODA4MEZGN0VDRTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDE1NzE2QTgxRkU1MTFFMUJE
+			OENGODA4MEZGN0VDRTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz5E+dm9AAABL0lEQVR42rSSv0oDQRDGZ874FpImamNtYSP4
+			CGIbbfMw4gMc2EisFH0HYyBFmqBYxFJIJ2eEqKd7t+Ps7F4uCZexkAw3O7C332++/QNEBIt5125K
+			1i/uaTRJh1pFJ1iMzuWx1M3D8+HeTf8MlIi0nyzeBj1iFdA72n3+A9D6t4Nasd9lDhiyWgf4/Tme
+			vwacDj74lrauH1vLCDVeAcnogUc7QyD5gKzMm6ereH3nxEFiZ3u2YvqR0OtLH4JCOvq34SoDbAbd
+			29PxRqMxqHRAlEH+M+HFuRcHSAEAng/ig2qAzcGkb2X3wj5bFydkp4v3m+0KQG7AfCXz+5fEEqgE
+			OzDBAQIihhqVQEQdYPmQsvTdC6M1L3MASXSzOgD4DDI+RN81dBcjkRej+tbgV4ABAEJ1vyb9qSGJ
+			AAAAAElFTkSuQmCC
+		</Resource>
 		<Resource ID="4d6060c5-5acd-bd35-8f4c-0888ae0306f0" Type="png" Name="Icon">
 			iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
@@ -318,57 +342,32 @@ Such restriction is introduced in order to avoid the recursion problems. To avoi
 			ylF4DK2I5KR4rRM3QIoMss9keh/asYJ6jJVkVgkCItooKiiiHyJ5cXn6ZprFjGlVEO2osn4I8E5y
 			Xqy53arQgoQBoPBDbk93VMsZgIS/2rcAAwClyMj+lNgSvwAAAABJRU5ErkJggg==
 		</Resource>
-		<Resource ID="4b5fe60d-f570-eddf-278c-0889362f18e3" Type="png" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
-			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
-			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
-			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
-			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
-			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
-			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
-			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
-			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
-			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
-			PSJ4bXAuaWlkOjAxNTcxNkE5MUZFNTExRTFCRDhDRjgwODBGRjdFQ0U3IiB4bXBNTTpEb2N1bWVu
-			dElEPSJ4bXAuZGlkOjAxNTcxNkFBMUZFNTExRTFCRDhDRjgwODBGRjdFQ0U3Ij4gPHhtcE1NOkRl
-			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDE1NzE2QTcxRkU1MTFFMUJEOENG
-			ODA4MEZGN0VDRTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDE1NzE2QTgxRkU1MTFFMUJE
-			OENGODA4MEZGN0VDRTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
-			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz5E+dm9AAABL0lEQVR42rSSv0oDQRDGZ874FpImamNtYSP4
-			CGIbbfMw4gMc2EisFH0HYyBFmqBYxFJIJ2eEqKd7t+Ps7F4uCZexkAw3O7C332++/QNEBIt5125K
-			1i/uaTRJh1pFJ1iMzuWx1M3D8+HeTf8MlIi0nyzeBj1iFdA72n3+A9D6t4Nasd9lDhiyWgf4/Tme
-			vwacDj74lrauH1vLCDVeAcnogUc7QyD5gKzMm6ereH3nxEFiZ3u2YvqR0OtLH4JCOvq34SoDbAbd
-			29PxRqMxqHRAlEH+M+HFuRcHSAEAng/ig2qAzcGkb2X3wj5bFydkp4v3m+0KQG7AfCXz+5fEEqgE
-			OzDBAQIihhqVQEQdYPmQsvTdC6M1L3MASXSzOgD4DDI+RN81dBcjkRej+tbgV4ABAEJ1vyb9qSGJ
-			AAAAAElFTkSuQmCC
-		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[
-def on_startup(object):
-    source_object = object.application.objects.get(object.attributes["source_object"])
+<![CDATA[def on_startup(object):
+    source_object = object.application.objects.catalog.get(object.attributes["source_object"])
     if source_object:
         source_object.attach(object)
 
 
 def on_create(object):
-    source_object = object.application.objects.get(object.attributes["source_object"])
+    source_object = object.application.objects.catalog.get(object.attributes["source_object"])
     if source_object:
         source_object.attach(object)
 
 
 def on_delete(object):
-    source_object = object.application.objects.get(object.attributes["source_object"])
+    source_object = object.application.objects.catalog.get(object.attributes["source_object"])
     if source_object:
         source_object.detach(object)
 
 
 def on_update(object, attributes):
     if "source_object" in attributes:
-        source_object = object.application.objects.get(object.attributes["source_object"])
+        source_object = object.application.objects.catalog.get(object.attributes["source_object"])
         if source_object:
             source_object.detach(object)
-        source_object = object.application.objects.get(attributes["source_object"])
+        source_object = object.application.objects.catalog.get(attributes["source_object"])
         if source_object:
             source_object.attach(object)
 
@@ -500,7 +499,6 @@ class VDOM_copy(VDOM_object):
         else:
             result = self.empty_copy()
 
-        return VDOM_object.wysiwyg(self, contents=result)
-]]>
+        return VDOM_object.wysiwyg(self, contents=result)]]>
 	</SourceCode>
 </Type>

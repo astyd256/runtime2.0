@@ -52,3 +52,22 @@ def detect(filename):
             except Exception as error:
                 console.error("unable to detect %s contents: %s" % (filename, error))
                 return None
+
+
+def search_object(identifier):
+    for application in managers.memory.applications.itervalues():
+        if identifier == application.id:
+            return application
+        else:
+            subject = application.objects.catalog.get(identifier)
+            if subject is not None:
+                return subject
+    return None
+
+
+def search_action(identifier):
+    for application in managers.memory.applications.itervalues():
+        subject = application.actions.catalog.get(identifier)
+        if subject is not None:
+            return subject
+    return None

@@ -27,10 +27,11 @@ def wrap_complete(instance, restore):
     def on_complete(item):
         self = instance()
         with self._owner._lock:
-            self._event.set()
+            if item._id not in self._known:
+                self._event.set()
             self._items[item._id] = item
-            for object in item._objects.itervalues():
-                managers.dispatcher.dispatch_handler(object, "on_startup")
+            for subitem in item._objects.catalog.itervalues():
+                managers.dispatcher.dispatch_handler(subitem, "on_startup")
 
     return on_complete
 
@@ -50,6 +51,7 @@ class MemoryApplications(MemoryBase, Mapping):
         self._items = {}
         self._queue = set()
         self._event = Event()
+        self._known = set()
 
     def new_sketch(self, restore=False):
         return MemoryApplicationSketch(wrap_complete(self, restore))
@@ -111,6 +113,7 @@ class MemoryApplications(MemoryBase, Mapping):
                         return self._items[uuid]
                     except:
                         if self._queue is not None and self._exists(uuid):
+                            self._known.add(uuid)
                             self._items[uuid] = item = self._owner.load_application(uuid, silently=True)
                             return item
                         else:
