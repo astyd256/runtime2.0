@@ -1,6 +1,8 @@
 
 TYPE = "type"
 APPLICATION = "application"
+OBJECT = "object"
+ACTION = "action"
 
 TYPES = "types",
 APPLICATIONS = "applications", "apps"

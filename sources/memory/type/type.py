@@ -230,7 +230,7 @@ class MemoryType(MemoryTypeSketch):
             ids = sorted(managers.resource_manager.list_resources(self._id))
             if ids:
                 file.write(u"\t<Resources>\n")
-                for id in ids:
+                for id in sorted(ids):
                     resource = managers.resource_manager.get_resource(self._id, id)
                     if resource.label == "":
                         try:

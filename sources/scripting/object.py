@@ -178,7 +178,9 @@ class VDOMObject(object):
         # need recompilation due to new dynamic child if it is actual
         with origin.lock:
             if self.__class__ is origin.factory(context, probe=True):
-                origin.invalidate(contexts=context)
+                origin.invalidate(contexts=context, upward=True)
+            elif origin.factory(context, probe=True) is None:
+                log.write("No class for %s in %s context" % (self, context))
 
         # assign attribute
         setattr(self, make_object_name(name), instance)

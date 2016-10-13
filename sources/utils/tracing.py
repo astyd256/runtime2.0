@@ -238,8 +238,12 @@ def format_thread_trace(thread=None, limit=sys.maxint,
     if thread is None:
         stack = extract_stack(skip=skip, until=until)
     else:
-        frame = sys._current_frames()[thread.ident]
-        stack = extract_stack(frame, skip=skip, until=until)
+        try:
+            frame = sys._current_frames()[thread.ident]
+        except KeyError:
+            return "" if into is None else None
+        else:
+            stack = extract_stack(frame, skip=skip, until=until)
 
     if caption:
         lines.append(caption)

@@ -526,6 +526,36 @@
 		</Language>
 	</Languages>
 	<Resources>
+		<Resource ID="68e74f9a-6c86-3a62-9dad-171ac11f3a9e" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+			jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVh
+			ZHlxyWU8AAADIGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78i
+			IGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9i
+			ZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAy
+			MDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93
+			d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJk
+			ZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5z
+			OnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0
+			cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JU
+			b29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5p
+			aWQ6RkI3RTNEOUMxRkRGMTFFMTg3OUU5MzZEMjcyMjNCMTUiIHhtcE1NOkRvY3VtZW50SUQ9Inht
+			cC5kaWQ6RkI3RTNEOUQxRkRGMTFFMTg3OUU5MzZEMjcyMjNCMTUiPiA8eG1wTU06RGVyaXZlZEZy
+			b20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGQjdFM0Q5QTFGREYxMUUxODc5RTkzNkQyNzIy
+			M0IxNSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGQjdFM0Q5QjFGREYxMUUxODc5RTkzNkQy
+			NzIyM0IxNSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94
+			cGFja2V0IGVuZD0iciI/PpvF7eoAAAJoSURBVEhL7ZXdS1NhGMB/x+2c7Zxtztk+nFts6mxmZoV0
+			1adRWM0srW67iEgI0iL7Z4r+hW4SCa+CirbSWSKiZjYMU4Jco5m67Wy9Bt45p8HufN6b98DzPr/n
+			+0gFIZRRKspo+5/pPUDJDJc9RdJOu0jP5cjmMui6jqIoyLKppPcbCiUB6d9pnj19wuDQCxYXv2E0
+			GAk1HaC75zqdkavYbVXbgrYFLHyf52H/faLRD2iaCVVTyekF1jPraGaF7ps93Lndi88bKAopCsjk
+			1rnbe4t3b2IEQ/VYLBYkcTbEqBhIp9IkkymuXLtE370BLJptS0jRIg8PDzIzNcPR4624vS5sDgsn
+			z53lTHs7VpuV/UE/wQY/o7EosffRohEUBUxPTeLz1VDtdKKqZgYePOZyRwcdFyP09T/CYCjg9rhQ
+			VIXE10n0fG7nEWSzGSQpLzz3YJIlTp04jd8XoFKtxGrVCAbqaW1pEwWvwOGoZiWdYm3tz84BkiSx
+			z+XFJAqpKCYyq1kclU6crho81R7sAqTnRLvKMhZVxSy+pSJbZ8sUGY0y/lqv6BQNk2Lm1eth5ua+
+			IBtk4bXMxOQEI/GYuBtEpDIeV63oMuuWERTtosWlBYZePmd8fAx7lZ3ZmVnCocNkRa4Tic+Ew41i
+			LpaoCzQRiXTS3Ny6O8CG9mg8SjT2lk8TcTG5RvSMTr6Qp8IgsbKySqg+zLEjbXR13dj9HGy+iH8c
+			YS4xzehYjOUfyyD+T6qmUVcX4lBTC+cvRP5/kjdfLid/Mj//hVTyF/l8HrNJoaHxIG63t+Q+KrmL
+			SloooVD2db0HKFmiv4Ok1gDI5dYMAAAAAElFTkSuQmCC
+		</Resource>
 		<Resource ID="6e44879e-be94-26a2-3c44-171a9761d118" Type="png" Name="Icon">
 			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
@@ -618,49 +648,17 @@
 			b8PqVWv+o+jbDx08MGINZ9p3b19ymhDRtLkp6nQqp8KE7PV6yROB7ogAlmFUMi3W0ry1I7KpznjT
 			81KAAQArM1APYANv8wAAAABJRU5ErkJggg==
 		</Resource>
-		<Resource ID="68e74f9a-6c86-3a62-9dad-171ac11f3a9e" Type="jpg" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
-			jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVh
-			ZHlxyWU8AAADIGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78i
-			IGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9i
-			ZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAy
-			MDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93
-			d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJk
-			ZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5z
-			OnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0
-			cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JU
-			b29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5p
-			aWQ6RkI3RTNEOUMxRkRGMTFFMTg3OUU5MzZEMjcyMjNCMTUiIHhtcE1NOkRvY3VtZW50SUQ9Inht
-			cC5kaWQ6RkI3RTNEOUQxRkRGMTFFMTg3OUU5MzZEMjcyMjNCMTUiPiA8eG1wTU06RGVyaXZlZEZy
-			b20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGQjdFM0Q5QTFGREYxMUUxODc5RTkzNkQyNzIy
-			M0IxNSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGQjdFM0Q5QjFGREYxMUUxODc5RTkzNkQy
-			NzIyM0IxNSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94
-			cGFja2V0IGVuZD0iciI/PpvF7eoAAAJoSURBVEhL7ZXdS1NhGMB/x+2c7Zxtztk+nFts6mxmZoV0
-			1adRWM0srW67iEgI0iL7Z4r+hW4SCa+CirbSWSKiZjYMU4Jco5m67Wy9Bt45p8HufN6b98DzPr/n
-			+0gFIZRRKspo+5/pPUDJDJc9RdJOu0jP5cjmMui6jqIoyLKppPcbCiUB6d9pnj19wuDQCxYXv2E0
-			GAk1HaC75zqdkavYbVXbgrYFLHyf52H/faLRD2iaCVVTyekF1jPraGaF7ps93Lndi88bKAopCsjk
-			1rnbe4t3b2IEQ/VYLBYkcTbEqBhIp9IkkymuXLtE370BLJptS0jRIg8PDzIzNcPR4624vS5sDgsn
-			z53lTHs7VpuV/UE/wQY/o7EosffRohEUBUxPTeLz1VDtdKKqZgYePOZyRwcdFyP09T/CYCjg9rhQ
-			VIXE10n0fG7nEWSzGSQpLzz3YJIlTp04jd8XoFKtxGrVCAbqaW1pEwWvwOGoZiWdYm3tz84BkiSx
-			z+XFJAqpKCYyq1kclU6crho81R7sAqTnRLvKMhZVxSy+pSJbZ8sUGY0y/lqv6BQNk2Lm1eth5ua+
-			IBtk4bXMxOQEI/GYuBtEpDIeV63oMuuWERTtosWlBYZePmd8fAx7lZ3ZmVnCocNkRa4Tic+Ew41i
-			LpaoCzQRiXTS3Ny6O8CG9mg8SjT2lk8TcTG5RvSMTr6Qp8IgsbKySqg+zLEjbXR13dj9HGy+iH8c
-			YS4xzehYjOUfyyD+T6qmUVcX4lBTC+cvRP5/kjdfLid/Mj//hVTyF/l8HrNJoaHxIG63t+Q+KrmL
-			SloooVD2db0HKFmiv4Ok1gDI5dYMAAAAAElFTkSuQmCC
-		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[
-class VDOM_formradiobutton(VDOM_object):
+<![CDATA[class VDOM_formradiobutton(VDOM_object):
 
 	def render(self, contents=""):
 		display = u"display:none;" if self.visible == "0" else u""
 		classn = u"""class="%s" """ % self.classname if self.classname else u""
 		disable = u"disabled='disabled'" if self.disable == "1" else u""
 		
-		object = application.objects.search(self.id)
-		if object.parent and object.parent.type.class_name == "VDOM_formradiogroup":
-			name = object.parent.name
+		if self.parent and self.parent.type.class_name == "VDOM_formradiogroup":
+			name = self.parent.name
 			state = [u"", u"""checked="checked" """][int(self.attributes["state"])]
 			style = u"""z-index: {zind}; position: absolute; top: {top}px; left: {left}px;
 						width: {width}px; height: {height}px; font: 14px tahoma; overflow: hidden; {display}"""\
@@ -749,10 +747,7 @@ class VDOM_formradiobutton(VDOM_object):
 					contents = contents)
 									
 		
-		return VDOM_object.wysiwyg(self, contents=result)
-
-		
-]]>
+		return VDOM_object.wysiwyg(self, contents=result)]]>
 	</SourceCode>
 	<E2VDOM>
 		<Events>

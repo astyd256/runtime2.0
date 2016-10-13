@@ -21,7 +21,7 @@ class MemoryActionSketch(MemoryBase, ActionStorage, ActionExecutable):
         self._source_code_value = u""
 
     lock = property(lambda self: self._owner.lock)
-    owner = roproperty("_owner")
+    owner = target_object = roproperty("_owner")
     application = property(lambda self: self._owner.application)
 
     id = rwproperty("_id")

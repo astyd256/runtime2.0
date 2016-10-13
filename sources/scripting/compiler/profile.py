@@ -97,6 +97,7 @@ class CompilationProfile(CompilationProfileEntity):
             raise Exception("Dynamic can't be lowered")
         if value > 1:
             raise ValueError("Dynamic must be 0 or 1")
+        log.write("Change profile to %s for %s in %s context" % (("dynamic" if self._dynamic else "NOT dynamic"), self._origin, self._context))
         self._dynamic = value
 
     def _set_optimization_priority(self, value):

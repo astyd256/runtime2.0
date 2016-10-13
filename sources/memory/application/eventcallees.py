@@ -56,17 +56,20 @@ class MemoryEventCallees(MemoryEventCalleesSketch):
     def insert(self, index, callee):
         with self._owner.owner.lock:
             super(MemoryEventCallees, self).insert(index, callee)
-            self._owner.owner.autosave()
+            if not callee.target_object.virtual:
+                self._owner.owner.autosave()
 
     def __setitem__(self, index, callee):
         with self._owner.owner.lock:
             super(MemoryEventCallees, self).__setitem__(index, callee)
-            self._owner.owner.autosave()
+            if not callee.target_object.virtual:
+                self._owner.owner.autosave()
 
     def __delitem__(self, index):
         with self._owner.owner.lock:
-            super(MemoryEventCallees, self).__delitem__(index)
-            self._owner.owner.autosave()
+            item = self.__dict__.get("_items", EMPTY_LIST).pop(index)
+            if not item.target_object.virtual:
+                self._owner.owner.autosave()
 
     def __invert__(self):
         raise NotImplementedError

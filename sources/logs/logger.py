@@ -5,6 +5,7 @@ from collections import deque
 from threading import Lock
 import settings
 from logs import log
+from utils.tracing import format_threads_trace
 from utils.threads import SmartDaemon
 from . import actions
 from .packer import create_packer
@@ -80,6 +81,9 @@ class Logger(SmartDaemon):
         log.write("Start " + self.name)
 
     def cleanup(self):
+        log.write("Remaining threads:\n%s" % format_threads_trace())
+        self.work()
+
         log.write("Stop " + self.name)
         self._stream = None
 
