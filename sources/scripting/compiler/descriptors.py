@@ -1,4 +1,6 @@
 
+from utils.decorators import cache_by_argument
+
 
 STATE_UNMODIFIED = "UNMODIFIED"
 STATE_MODIFIED = "MODIFIED"
@@ -71,8 +73,9 @@ object={class_name}()""".format(
     return namespace["object"]
 
 
-# descriptor creators
+# attrbiute descriptor creators
 
+@cache_by_argument
 def create_attribute_descriptor(name):
     namespace = {
         "AvoidRecomputeError": AvoidRecomputeError,
@@ -114,6 +117,7 @@ descriptor={class_name}()""".format(
     return namespace["descriptor"]
 
 
+@cache_by_argument
 def create_stateful_attribute_descriptor(name):
     namespace = {
         "AvoidRecomputeError": AvoidRecomputeError,
@@ -154,6 +158,9 @@ descriptor={class_name}()""".format(
     return namespace["descriptor"]
 
 
+# object descriptor creators
+
+@cache_by_argument
 def create_object_descriptor(name):
     namespace = {}
 
@@ -176,6 +183,7 @@ descriptor={class_name}()""".format(
     return namespace["descriptor"]
 
 
+@cache_by_argument
 def create_ghost_object_descriptor(name):
     namespace = {}
 
