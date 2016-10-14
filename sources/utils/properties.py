@@ -42,11 +42,30 @@ def _weak(name):
     return WeakProperty()
 
 
-def weak(*names):
+def _weak_with_default(name, default):
+
+    class WeakWithDefaultProperty(object):
+
+        def __get__(self, instance, owner=None):
+            value = instance.__dict__.get(name, default)
+            return None if value is None else value()
+
+        def __set__(self, instance, value):
+            instance.__dict__[name] = None if value is None else ref(value)
+
+        def __delete__(self, instance):
+            del instance.__dict__[name]
+
+    return WeakWithDefaultProperty()
+
+
+def weak(*names, **names_with_values):
 
     def wrapper(cls):
         for name in names:
             setattr(cls, name, _weak(WEAK_NAME_TEMPLATE % name))
+        for name, value in names_with_values.iteritems():
+            setattr(cls, name, _weak_with_default(WEAK_NAME_TEMPLATE % name, ref(value)))
         return cls
 
     return wrapper

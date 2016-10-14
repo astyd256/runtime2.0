@@ -1,6 +1,4 @@
 
-from weakref import WeakValueDictionary
-
 import managers
 
 from logs import log
@@ -38,7 +36,7 @@ class MemoryObjectSketch(MemoryBase):
 
     @lazy
     def _classes(self):
-        return WeakValueDictionary()
+        return {}
 
     @lazy
     def _structure(self):
@@ -165,17 +163,11 @@ class MemoryObject(MemoryObjectSketch):
                 if contexts:
                     if isinstance(contexts, basestring):
                         log.write("Invalidate %s in %s context" % (self, contexts))
-                        try:
-                            del self._classes[contexts]
-                        except KeyError:
-                            log.write("Nothing to invalidate for %s in %s context" % (self, contexts))
+                        self._classes.pop(contexts, None)
                     else:
                         log.write("Invalidate %s in %s contexts" % (self, ", ".join(contexts)))
                         for context in contexts:
-                            try:
-                                del self._classes[context]
-                            except KeyError:
-                                log.write("Nothing to invalidate for %s in %s context" % (self, contexts))
+                            self._classes.pop(context, None)
                 else:
                     log.write("Invalidate %s" % self)
                     self._classes = {}

@@ -1,7 +1,10 @@
 
 import re
 import managers
+
 from logs import log
+from utils.properties import weak
+
 from .profile import CompilationProfile
 from .descriptors import make_attribute_name, make_object_name, make_descriptor_name, \
     create_attribute_descriptor, create_stateful_attribute_descriptor, \
@@ -46,7 +49,7 @@ class Compiler(object):
             "__module__": DEFAULT_MODULE_NAME,
 
             # internal attributes
-            "_origin": origin,
+            # "_origin": origin, - now weak and created later
             "_action": profile.action,
             "_context": context,
 
@@ -191,8 +194,8 @@ class Compiler(object):
                 source.extend(wysiwyg_contents)
             source.append(u")))\n")
 
-        # create class
-        klass = type(str(profile.class_name), (origin.type.klass,), class_namespace)
+        # create class with weak origin
+        klass = weak(_origin=origin)(type(str(profile.class_name), (origin.type.klass,), class_namespace))
 
         # compile methods
         if source:
