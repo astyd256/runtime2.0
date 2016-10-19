@@ -1,8 +1,25 @@
 
+import re
+from itertools import islice
+
 import startup
 from logs import console
 from utils.threads import intercept
 from utils.tracing import show_exception_trace
+
+
+ARGUMENTS_REGEX = re.compile("(\"(?:\\\\\"|[^\"\\\\])*\"|[^\"\s]+)")
+
+
+def split(value):
+    items = ARGUMENTS_REGEX.split(value)
+    for index, item in enumerate(items):
+        if index % 2:
+            continue
+        separator = item.strip()
+        if separator:
+            raise SyntaxError(separator)
+    return tuple(item[1:-1] if item[0] == "\"" else item for item in islice(items, 1, None, 2))
 
 
 def run():
@@ -16,20 +33,22 @@ def run():
     while True:
         try:
             console.stdout.write("manage > ")
-            value = raw_input().strip().lstrip("-")
+            command = raw_input().strip().lstrip("-")
         except KeyboardInterrupt:
             return
         except EOFError:
             return
 
-        keyword = value.lower()
+        keyword = command.lower()
         if keyword == "help":
             parser.print_help()
         elif keyword == "exit" or keyword == "quit":
             return
         else:
             try:
-                arguments = parser.parse_args(value.split())
+                arguments = parser.parse_args(split(command))
+            except SyntaxError as error:
+                console.write("error: unexpected symbol: %s" % error)
             except SystemExit:
                 pass
             else:

@@ -21,7 +21,9 @@ SWITCH_VALUES = {
     "false": False, "true": True,
     "disabled": False, "enabled": True
 }
-DEFAULT_ACTION_NAME = "default"
+
+DEFAULT_ACTION_NAME = "DEFAULT"
+ALIAS_NAME = "ALIAS"
 
 
 def switch(value):
@@ -160,6 +162,7 @@ class AutoArgumentParser(ArgumentParser):
 
                 description = submodule.__doc__.strip() if submodule.__doc__ else None
                 run = getattr(submodule, "run", None)
+                name = getattr(submodule, ALIAS_NAME, name)
 
                 if isinstance(run, FunctionType):
                     self._repository[name] = autoparse(name, run, subparsers)

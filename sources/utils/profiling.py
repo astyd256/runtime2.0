@@ -23,6 +23,11 @@ class Profiler(object):
         self._notch = time() - 1
         self._updates = False
 
+    def _set_status(self, value):
+        settings.PROFILING = value
+
+    status = property(lambda self: settings.PROFILING, _set_status)
+
     def __enter__(self):
         if not settings.PROFILING:
             return self
@@ -50,6 +55,11 @@ class Profiler(object):
             else:
                 self._stats.add(profile_or_stats)
             self._updates = True
+
+    def clear(self):
+        with self._lock:
+            if self._stats is not None:
+                self._stats = None
 
     def save(self, location=None, force=False):
         if not (settings.PROFILING and self._updates):
