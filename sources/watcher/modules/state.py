@@ -1,12 +1,14 @@
 
-import types
 import numbers
 import os
 import gc
 import resource
+
 from utils.threads import SmartThread, SmartDaemon
 from utils.tracing import clarify_source_path, get_threads_trace
-from ..auxiliary import search_thread, search_object, get_type_name, get_thread_traceback, OptionError
+
+from ..exceptions import OptionError
+from ..auxiliary import search_thread, search_object, get_type_name, get_thread_traceback
 
 
 def state(options):

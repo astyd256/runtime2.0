@@ -14,6 +14,7 @@ from memory import VDOM_memory
 from engine import VDOM_engine
 
 from startup.manage import arguments
+from logs import console
 
 
 managers.register("log_manager", VDOM_log_manager)
@@ -28,4 +29,8 @@ managers.register("compiler", VDOM_compiler, lazy=True)
 managers.register("memory", VDOM_memory, lazy=True)
 managers.register("engine", VDOM_engine, lazy=True)
 
-arguments.action.run(*arguments.action.arguments)
+
+try:
+    arguments.action.run(*arguments.action.arguments)
+except Exception as error:
+    console.error(error)

@@ -7,6 +7,8 @@ import ping
 import state
 import analyze
 import query
+import profiling
+import raise_
 
 
-default = ping
+DEFAULT = ping
