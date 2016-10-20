@@ -6,5 +6,5 @@ from .exceptions import ParsingException, UnableToChangeError, \
     MissingElementError, MissingAttributeError, \
     SectionMustPrecedeError, MissingSectionError
 from .parser import Parser
-from .decorators import native, anyway, uncover
+from .decorators import native, anyway, element, attribute, uncover
 from .subparsers import VALUE, WORDS, CONTENTS, NOTHING, IGNORE

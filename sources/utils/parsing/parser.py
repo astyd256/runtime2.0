@@ -146,7 +146,7 @@ class Parser(LegacyInterface):
         Choose subparser and execute
         """
         if isinstance(handlers, types.TupleType):
-            elements(self, {uncover(handler.__name__): handler for handler in handlers}.get, iterator)
+            elements(self, {uncover(getattr(handler, "name", handler.__name__)): handler for handler in handlers}.get, iterator)
         elif handlers is None:
             nothing(self, handlers, iterator)
         else:
@@ -154,7 +154,7 @@ class Parser(LegacyInterface):
             if subuparser:
                 subuparser(self, handlers, iterator)
             else:
-                elements(self, {uncover(handlers.__name__): handlers}.get, iterator)
+                elements(self, {uncover(getattr(handlers, "name", handlers.__name__)): handlers}.get, iterator)
 
     def reset(self, options=MISSING, result=None):
         """

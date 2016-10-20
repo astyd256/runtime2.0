@@ -1,7 +1,7 @@
 
 import inspect
 from itertools import chain, izip
-from ..exceptions import UnexpectedElementError, UnexpectedAttributeError, MissingAttributeError
+from ..exceptions import UnexpectedElementError, UnexpectedAttributeError, MissingAttributeError, UnexpectedAttributeValueError
 from ..auxiliary import subparser, uncover, lower
 from .nothing import nothing
 
@@ -24,7 +24,6 @@ def elements(self, selector, iterator):
                 self._unexpected_element_handler(name, attributes)
             else:
                 raise UnexpectedElementError(name, attributes)
-
             return nothing(self, selector, iterator)
         else:
             subuparser = getattr(handler, "subparser", None)
@@ -34,12 +33,22 @@ def elements(self, selector, iterator):
         names, arguments, keywords, defaults = inspect.getargspec(handler)
         index = len(names) - (len(defaults) if defaults else 0)
 
+        names = getattr(handler, "names", names)
+
         try:
             parameters = tuple(chain(
                 (attributes.pop(uncover(name)) for name in names[:index]),
                 (attributes.pop(uncover(name), default) for name, default in izip(names[index:], defaults or ()))))
         except KeyError as error:
             raise MissingAttributeError(error)
+
+        verificators = getattr(handler, "verificators", None)
+        if verificators is not None:
+            try:
+                for attribute_name, parameter, verificator in izip(names, parameters, verificators):
+                    verificator(parameter)
+            except:
+                raise UnexpectedAttributeValueError(attribute_name)
 
         if not keywords:
             for attribute_name in attributes:
