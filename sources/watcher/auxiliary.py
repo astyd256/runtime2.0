@@ -14,10 +14,6 @@ from memory.generic import MemoryBase
 DEFAULT_GRAPH_DEPTH = 10
 
 
-class OptionError(Exception):
-    pass
-
-
 def quote(string):
     return string.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n").replace("\0", "\\\\0")
 

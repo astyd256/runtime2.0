@@ -1,14 +1,16 @@
 
-import traceback
+import inspect
 import socket
 import select
 
 import settings
 
 from logs import log
+from utils.tracing import show_thread_trace
 from utils.threads import SmartThread
 from utils.parsing import Parser, ParsingException
 
+from .exceptions import WatcherError
 from .registry import modules
 from .builder import builder
 from .session import WatcherSession
@@ -78,11 +80,17 @@ class Watcher(SmartThread):
                             else:
                                 try:
                                     log.write("Invoke \"%s\" for %s" % (name, address[0]))
-                                    response = "".join(handler(options))
-                                except:
-                                    log.error("Unable to execute action")
-                                    traceback.print_exc()
-                                    response = "<reply><error>Internal error</error></reply>"
+                                    if inspect.isgeneratorfunction(handler):
+                                        response = "".join(handler(options))
+                                    else:
+                                        response = handler(options)
+                                except WatcherError as error:
+                                    response = "<reply><error>%s</error></reply>" % error
+                                    log.write(error)
+                                except Exception as error:
+                                    message = "Execution error: %s" % error
+                                    response = "<reply><error>%s</error></reply>" % message
+                                    show_thread_trace(caption=message)
                             if not response:
                                 response = "<reply><error>No reply</error></reply>"
                             try:

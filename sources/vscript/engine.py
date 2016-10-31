@@ -53,11 +53,7 @@ def check_exception(source, error, error_type=errors.generic.runtime, quiet=None
 	for path, line, function, st in history:
 		if path.startswith(".."):
 			path=os.path.normpath(os.path.join(os.path.dirname(sys.argv[0]), path))
-		if path.startswith(path_binary):
-			path="<server>%s"%path[len(path_binary):]
-		elif path.startswith(path_python):
-			path="<python>%s"%path[len(path_python):]
-		elif path==vscript_source_string:
+		if path==vscript_source_string:
 			try:
 				st=source[line-1][2]
 			except IndexError:
@@ -68,6 +64,11 @@ def check_exception(source, error, error_type=errors.generic.runtime, quiet=None
 			except IndexError:
 				debug("vbline IndexError")
 				vbline = None
+		elif path.startswith(path_binary):
+			path="<server>%s"%path[len(path_binary):]
+		elif path.startswith(path_python):
+			path="<python>%s"%path[len(path_python):]	
+			
 		if not quiet:
 			debug( (u"%s, line %s%s - %s"%(path, line, ": %s"%st if st else "", function)).encode("utf-8"))
 	if not quiet:

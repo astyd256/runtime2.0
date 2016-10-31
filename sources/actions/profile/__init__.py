@@ -7,4 +7,4 @@ import show
 import drop
 
 
-default = show
+DEFAULT = show
