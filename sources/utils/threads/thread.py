@@ -8,7 +8,12 @@ import settings
 class SmartThread(Thread):
 
     def __init__(self, name=None, quantum=None, condition=None, countdown=None, latter=False):
-        Thread.__init__(self, name=name)
+        super(SmartThread, self).__init__()
+
+        # NOTE: init's name=... keyword seems not to work properly
+        if name is not None:
+            self.name = name
+
         self._quantum = quantum
         self._condition = condition
         self._countdown = countdown

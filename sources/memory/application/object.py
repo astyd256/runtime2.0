@@ -1,6 +1,4 @@
 
-from weakref import WeakValueDictionary
-
 import managers
 
 from logs import log
@@ -38,7 +36,7 @@ class MemoryObjectSketch(MemoryBase):
 
     @lazy
     def _classes(self):
-        return WeakValueDictionary()
+        return {}
 
     @lazy
     def _structure(self):
@@ -165,11 +163,11 @@ class MemoryObject(MemoryObjectSketch):
                 if contexts:
                     if isinstance(contexts, basestring):
                         log.write("Invalidate %s in %s context" % (self, contexts))
-                        del self._classes[contexts]
+                        self._classes.pop(contexts, None)
                     else:
                         log.write("Invalidate %s in %s contexts" % (self, ", ".join(contexts)))
                         for context in contexts:
-                            del self._classes[context]
+                            self._classes.pop(context, None)
                 else:
                     log.write("Invalidate %s" % self)
                     self._classes = {}
@@ -190,6 +188,7 @@ class MemoryObject(MemoryObjectSketch):
                 if self._parent:
                     self._parent.invalidate(contexts=contexts, upward=True)
                 for dependent in self.__dict__.get("_dependents", ()):
+                    log.write("Invalidate %s dependent %s" % (self, dependent))
                     dependent.invalidate(contexts=contexts, upward=True)
 
     def attach(self, object):
@@ -201,18 +200,23 @@ class MemoryObject(MemoryObjectSketch):
             self._dependents.remove(object)
 
     def factory(self, context, dynamic=None, probe=False):
-        try:
-            klass = self._classes[context]
-        except KeyError:
-            if probe:
-                return None
+        if dynamic is None:
+            try:
+                klass = self._classes[context]
+            except KeyError:
+                if probe:
+                    return None
             else:
-                return self._classes.setdefault(context, managers.compiler.compile(self, context, dynamic=dynamic))
-        else:
-            if dynamic > klass._dynamic:
-                return self._classes.setdefault(context, managers.compiler.compile(self, context, dynamic=dynamic))
-            else:
-                return klass
+                if dynamic <= klass._dynamic:
+                    return klass
+
+        new_klass = managers.compiler.compile(self, context, dynamic=dynamic)
+
+        with self.lock:
+            klass = self._classes.get(context)
+            if klass is None or dynamic > klass._dynamic:
+                self._classes[context] = klass = new_klass
+            return klass
 
     def __invert__(self):
         raise NotImplementedError

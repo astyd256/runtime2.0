@@ -1,7 +1,10 @@
 
 import re
 import managers
+
 from logs import log
+from utils.properties import weak
+
 from .profile import CompilationProfile
 from .descriptors import make_attribute_name, make_object_name, make_descriptor_name, \
     create_attribute_descriptor, create_stateful_attribute_descriptor, \
@@ -20,7 +23,7 @@ class Compiler(object):
         # origin: type, id, name, order, stateful, hierarchy
         #         attributes, objects, actions.get(context)
         #         factory(context)
-        log.write("Compile %s in %s context" % (origin, context))
+        log.write("Compile %s in %s context%s" % (origin, context, (" as dynamic" if dynamic else "")))
 
         # prepare compilation profile and execute on_compile
         profile = CompilationProfile(origin, context, dynamic=dynamic)
@@ -46,7 +49,7 @@ class Compiler(object):
             "__module__": DEFAULT_MODULE_NAME,
 
             # internal attributes
-            "_origin": origin,
+            # "_origin": origin, - now weak and created later
             "_action": profile.action,
             "_context": context,
 
@@ -191,13 +194,13 @@ class Compiler(object):
                 source.extend(wysiwyg_contents)
             source.append(u")))\n")
 
-        # create class
-        klass = type(str(profile.class_name), (origin.type.klass,), class_namespace)
+        # create class with weak origin
+        klass = weak(_origin=origin)(type(str(profile.class_name), (origin.type.klass,), class_namespace))
 
         # compile methods
         if source:
             # log.write("Compose %s in %s context" % (origin, context))
-
+            # from utils.auxiliary import fit
             # clean_source = "\n".join(fit(line, MAXIMAL_LINE_LENGTH) for line in "".join(source).splitlines())
             # log.debug(
             #     u"- - - - - - - - - - - - - - - - - - - -\n"

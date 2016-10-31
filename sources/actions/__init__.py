@@ -6,6 +6,7 @@ import install
 import uninstall
 import export
 import show
+import inspect
 import log
 import save
 import select

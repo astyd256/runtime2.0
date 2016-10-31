@@ -4,9 +4,12 @@ import re
 
 UUID_REGEX = re.compile(r"^[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12}$", re.IGNORECASE)
 NAME_REGEX = re.compile(r"^[A-Z][A-Z\d_]*$", re.IGNORECASE)
-UUID_OR_NAME_REGEX = re.compile(r"^(?:[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})|(?:[A-Z][A-Z\d_]*)$", re.IGNORECASE)
-UUID_OR_NONE_REGEX = re.compile(r"^(?:[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})|(?:none)$", re.IGNORECASE)
-SIZE_REGEX = re.compile(r"^(?P<size>[0-9]+)(?P<measure>[KM])?$", re.IGNORECASE)
+NAME_OR_INTEGER_REGEX = re.compile(r"^(?:[A-Z][A-Z\d_]*|(-[1-9]\d*))$", re.IGNORECASE)
+UUID_OR_NAME_REGEX = re.compile(r"^(?:[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})|([A-Z][A-Z\d_]*)$", re.IGNORECASE)
+UUID_OR_NONE_REGEX = re.compile(r"^(?:[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})|(none)$", re.IGNORECASE)
+SIZE_REGEX = re.compile(r"^(?P<size>[0-9]+)(?P<measure>[KMG])?$", re.IGNORECASE)
+EXCEPTION_REGEX = NAME_REGEX
+THREAD_REGEX = re.compile(r"^(?:[A-Z][A-Z\d_-]*(?:\s[A-Z][A-Z\d_-]*)*|(-[1-9]\d*))$", re.IGNORECASE)
 
 
 def complies(value, verificator):
@@ -17,50 +20,114 @@ def complies(value, verificator):
         return False
 
 
+def none(value):
+    return value
+
+
+def integer(value):
+    try:
+        return int(value)
+    except ValueError:
+        raise ValueError("Not an integer")
+
+
+def boolean(value):
+    try:
+        return {"0": False, "1": True, "no": False, "yes": True, "false": False, "true": True}[value.lower()]
+    except KeyError:
+        raise ValueError("Not a boolean")
+
+
 def port(value):
     try:
         value = int(value)
     except ValueError:
         raise ValueError("Port must be a number")
-    if value < 0:
-        raise ValueError("Port must be greater then zero")
-    return value
+    else:
+        if 0 <= value <= 65535:
+            return value
+        else:
+            raise ValueError("Port must be greater then zero")
 
 
 def uuid(value):
-    if not UUID_REGEX.match(value):
+    if UUID_REGEX.match(value):
+        return str(value.lower())
+    else:
         raise ValueError("Not an unique identifier")
-    return value
 
 
 def name(value):
-    if not NAME_REGEX.match(value):
+    if NAME_REGEX.match(value):
+        return str(value)
+    else:
         raise ValueError("Not a name")
-    return value
+
+
+def name_or_integer(value):
+    match = NAME_OR_INTEGER_REGEX.match(value)
+    if match:
+        return int(value) if match.lastindex else str(value.lower())
+    else:
+        raise ValueError("Not a name")
 
 
 def uuid_or_name(value):
-    if not UUID_OR_NAME_REGEX.match(value):
+    match = UUID_OR_NAME_REGEX.match(value)
+    if match:
+        return str(value) if match.lastindex else str(value.lower())
+    else:
         raise ValueError("Not an unique identifier or name")
-    return value
 
 
 def uuid_or_none(value):
-    if not UUID_OR_NONE_REGEX.match(value):
+    match = UUID_OR_NONE_REGEX.match(value)
+    if match:
+        return str(value) if match.lastindex else str(value.lower())
+    else:
         raise ValueError("Not an unique identifier or none")
-    return value
 
 
 def size(value):
     match = SIZE_REGEX.match(value)
-    if not match:
+    if match:
+        size, measure = match.group("size"), match.group("measure")
+        if measure == "K":
+            return size * 1024
+        elif measure == "M":
+            return size * 1024 * 1024
+        elif measure == "G":
+            return size * 1024 * 1024 * 1024
+        else:
+            return size
+    else:
         raise ValueError("Not a size")
 
-    size = match.group("size")
-    measure = match.group("measure")
-    if measure == "K":
-        size *= 1024
-    elif measure == "M":
-        size *= 1024 * 1024
 
-    return size
+def enable_or_disable(value):
+    try:
+        return {"enable": True, "disable": False}[value.lower()]
+    except KeyError:
+        raise ValueError("Not an enable or disable")
+
+
+def exception(value):
+    if EXCEPTION_REGEX.match(value):
+        try:
+            exception = eval(value)
+        except:
+            raise ValueError("Not an exception: %s" % value)
+        if not isinstance(exception, Exception):
+            raise ValueError("Not an exception")
+        return exception
+    else:
+        raise ValueError("Not an exception")
+
+
+def thread(value):
+    print "???", value
+    match = THREAD_REGEX.match(value)
+    if match:
+        return int(value) if match.lastindex else str(value)
+    else:
+        raise ValueError("Not a name")

@@ -1,14 +1,19 @@
 
-import traceback
+import inspect
 import socket
 import select
 
 from logs import log
+from utils.tracing import show_thread_trace
 from utils.threads import SmartThread
 from utils.parsing import Parser, ParsingException
 
+from .exceptions import WatcherError
 from .builder import builder
 from .registry import modules
+
+
+NAME_TEMPLATE = "%s %04X"
 
 
 class WatcherSession(SmartThread):
@@ -16,8 +21,7 @@ class WatcherSession(SmartThread):
     name = "Watcher Session"
 
     def __init__(self, socket, address):
-        super(WatcherSession, self).__init__(name=self.name)
-        # name=" ".join((self.name_template, socket.getpeername()[0]))
+        super(WatcherSession, self).__init__(name=NAME_TEMPLATE % (WatcherSession.name, address[1]))
         self._socket = socket
         self._address = address
 
@@ -64,11 +68,17 @@ class WatcherSession(SmartThread):
                         else:
                             try:
                                 log.write("Invoke \"%s\" for %s" % (name, self._address[0]))
-                                response = "".join(handler(options))
-                            except:
-                                log.error("Unable to execute action")
-                                traceback.print_exc()
-                                response = "<reply><error>Internal error</error></reply>"
+                                if inspect.isgeneratorfunction(handler):
+                                    response = "".join(handler(options))
+                                else:
+                                    response = handler(options)
+                            except WatcherError as error:
+                                response = "<reply><error>%s</error></reply>" % error
+                                log.write(error)
+                            except Exception as error:
+                                message = "Execution error: %s" % error
+                                response = "<reply><error>%s</error></reply>" % message
+                                show_thread_trace(caption=message)
                         if not response:
                             response = "<reply><error>No reply</error></reply>"
                         try:

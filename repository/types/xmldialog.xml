@@ -2958,6 +2958,8 @@ import re
 
 from xml.dom.minidom import parseString
 
+from utils.csrf import create_csrf_token, csrf_token_arg_name
+
 
 # RegExp to remove <script> section in XML
 RE_REMOVE_SCRIPT = re.compile(r"(?si)<(script)[^<>]*>.*?</\1>")
@@ -4005,7 +4007,8 @@ class VDOM_xmldialog(VDOM_object):
 
         if not dom.getElementsByTagName("Button"):
             output += render_default_button()
-        return self.parse_dialog_title(dom), u"""<form id="{}" action="" method="post" enctype="multipart/form-data" class="xml-dialog-form">{}</form>""".format(form_id, output)
+        csrftoken = '<input type="hidden" name="%s" value="%s">' % (csrf_token_arg_name, create_csrf_token())
+        return self.parse_dialog_title(dom), u"""<form id="{}" action="" method="post" enctype="multipart/form-data" class="xml-dialog-form">{} {}</form>""".format(form_id, output, csrftoken)
 
 
     def parse_dialog_title(self, elem):

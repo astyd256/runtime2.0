@@ -13,6 +13,33 @@ def anyway(handler):
     return handler
 
 
+def handle(name):
+
+    def wrapper(handler):
+        handler.name = name
+        return handler
+
+    return wrapper
+
+
+def assume(*names):
+
+    def wrapper(handler):
+        handler.names = names
+        return handler
+
+    return wrapper
+
+
+def verify(*verificators):
+
+    def wrapper(handler):
+        handler.verificators = verificators
+        return handler
+
+    return wrapper
+
+
 def uncover(function):
     name = function.func_name
     code = function.func_code

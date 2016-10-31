@@ -1,5 +1,4 @@
 
-# import types
 import json
 
 from copy import copy
@@ -80,8 +79,10 @@ class VDOMObjectObjects(Mapping):
 
 class VDOMObject(object):
 
+    # attributes that initialized by the compiler at runtime
+
     # internal attributes
-    #   _origin                 origin memory object
+    #   _origin                 origin memory object - weak property
     #   _action                 action to execute
     #   _context                context for which object was been generated
 
@@ -178,7 +179,7 @@ class VDOMObject(object):
         # need recompilation due to new dynamic child if it is actual
         with origin.lock:
             if self.__class__ is origin.factory(context, probe=True):
-                origin.invalidate(contexts=context)
+                origin.invalidate(contexts=context, upward=True)
 
         # assign attribute
         setattr(self, make_object_name(name), instance)
@@ -239,7 +240,7 @@ class VDOMObject(object):
         return chunks
 
     def write(self, data, action_name=None):
-        log.write(u"[Action %s]Write data to client: %d characters" % (action_name,len(data)))
+        log.write(u"Write action %s data to client: %d characters" % (action_name, len(data)))
         render_type = managers.request_manager.current.render_type
         if render_type != "e2vdom":
             log.warning("Perform write when render type is \"%s\"" % render_type)
@@ -257,7 +258,6 @@ class VDOMObject(object):
 
         # self._compute_state = STATE_AVOID_RECOMPUTE
 
-        # obsolete_request.add_client_action(self._id, data)
         managers.request_manager.current.add_client_action(self._id, data)
 
     def action(self, action_name, arguments=[], source_id=None):
