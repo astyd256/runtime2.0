@@ -37,7 +37,7 @@ import logs
 
 # register libraries finder
 
-from .importers.scripting import ScriptingFinder
+from .importers.finder import ScriptingFinder
 
 sys.meta_path.append(ScriptingFinder())
 
@@ -48,6 +48,11 @@ from logs import VDOM_log_server
 
 if settings.START_LOG_SERVER:
     VDOM_log_server().start()
+
+
+# prepare manager
+
+from importers.manager import ImportManager
 
 
 # obsolete

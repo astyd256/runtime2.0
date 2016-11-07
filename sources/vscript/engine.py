@@ -82,6 +82,35 @@ def check_exception(source, error, error_type=errors.generic.runtime, quiet=None
 	#managers.log_manager.error_bug(error, "vscript")
 
 
+def advanced_check_exception(error_type=errors.generic.runtime):
+	error_class, error, traceback=sys.exc_info()
+	if not isinstance(error, errors.generic):
+		return
+
+	vtraceback=[]
+	while traceback is not None:
+		frame=traceback.tb_frame
+		information=frame.f_globals.get("__vscript__")
+		if information:
+			try:
+				lineno=information[traceback.tb_lineno-1][0]
+			except:
+				lineno=None
+			try:
+				library=frame.f_globals.get("__name__").partition(".")[2]
+			except:
+				library=None
+			vtraceback.append((library, lineno))
+		traceback=traceback.tb_next
+
+	if vtraceback:
+		error.traceback=vtraceback
+		error.library, error.line=vtraceback[-1]
+		error.source=error_type
+
+	del error_class, error, traceback, frame
+
+
 def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package=None,
 		lines=None, environment=None, use=None, anyway=1, quiet=None, listing=False, safe=None):
 	if script is None:
@@ -123,12 +152,13 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
 			weakuses[code]=use_code, use_source
 		return code, source
 	except errors.generic as error:
-		check_exception(None, error, error_type=errors.generic.compilation, quiet=quiet)
+		# check_exception(None, error, error_type=errors.generic.compilation, quiet=quiet)
+		advanced_check_exception(error_type=errors.generic.compilation)
 		if anyway: return vscript_default_code, vscript_default_source
 		else: raise
-	except errors.python as error:
-		check_exception(source, errors.system_error(unicode(error)), error_type=errors.generic.compilation, quiet=quiet)
-		raise
+	# except errors.python as error:
+	# 	check_exception(source, errors.system_error(unicode(error)), error_type=errors.generic.compilation, quiet=quiet)
+	# 	raise
 	finally:
 		if not safe:
 			del mutex
@@ -146,6 +176,7 @@ def vexecute(code, source, object=None, namespace=None, environment=None, use=No
 			if use:
 				use_code, use_source=weakuses[code]
 				vexecute(use_code, use_source, namespace=namespace, environment=environment)
+			namespace["__vscript__"] = source
 			exec code in namespace
 		except exitloop:
 			exclass, exexception, extraceback=sys.exc_info()
@@ -198,11 +229,12 @@ def vexecute(code, source, object=None, namespace=None, environment=None, use=No
 				del exclass, exexception, extraceback
 				raise
 	except errors.generic as error:
-		check_exception(source, error, quiet=quiet)
+		# check_exception(source, error, quiet=quiet)
+		advanced_check_exception()
 		raise
-	except errors.python as error:
-		check_exception(source, error, quiet=quiet)
-		raise
+	# except errors.python as error:
+	# 	check_exception(source, error, quiet=quiet)
+	# 	raise
 
 def vevaluate(code, source, object=None, namespace=None, environment=None, use=None, quiet=None, result=None):
 	if result is None:
