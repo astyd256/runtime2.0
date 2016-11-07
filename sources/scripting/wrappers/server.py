@@ -1,23 +1,85 @@
 
+from inspect import iscode
 import managers
 import version
+import vscript
 from uuid import uuid4
 from vscript.engine import vcompile, vexecute, vevaluate
 from mailing.message import Message, MailAttachment as Attachment
 from mailing.pop import VDOM_Pop3_client
 
 
+class VDOM_vscript_libraries(object):
+
+    def __init__(self, owner):
+        self._owner = owner
+
+    def register(self, name, source_or_code, data=None, environment=None, context=None):
+        if context is None:
+            raise Exception("Require context")
+        if iscode(source_or_code):
+            code = source_or_code
+        else:
+            code, data = self._owner.compile(source_or_code, environment=environment)
+
+        def initializer(context, name, namespace):
+            self._owner.execute(code, data, namespace=namespace, environment=environment)
+
+        managers.import_manager.register("plugins", "auxiliary", initializer)
+
+    def unregister(self, name=None, context=None):
+        if context is None:
+            raise Exception("Require context")
+        managers.import_manager.unregister(context, name)
+
+
 class VDOM_vscript(object):
 
-    def execute(self, source, use=None, **keywords):
-        environment = {"v_%s" % name: value for name, value in keywords.iteritems()}
-        code, vsource = vcompile(source, environment=environment, use=use)
-        vexecute(code, vsource, environment=environment, use=use)
+    def __init__(self):
+        self._libraries = VDOM_vscript_libraries(self)
 
-    def evaluate(self, let=None, set=None, use=None, result=None, **keywords):
-        environment = {"v_%s" % name: value for name, value in keywords.iteritems()}
-        code, vsource = vcompile(let=let, set=set, environment=environment, use=use)
-        return vevaluate(code, vsource, environment=environment, use=use, result=result)
+    libraries = property(lambda self: self._libraries)
+
+    error = property(lambda self: vscript.errors.generic)
+
+    variant = property(lambda self: vscript.variant)
+    integer = property(lambda self: vscript.integer)
+    string = property(lambda self: vscript.string)
+    generic = property(lambda self: vscript.generic)
+
+    vfunction = property(lambda self: vscript.vfunction)
+    vsub = property(lambda self: vscript.vsub)
+    vproperty = property(lambda self: vscript.vproperty)
+    vcollection = property(lambda self: vscript.vcollection)
+
+    def compile(self, source=None, let=None, set=None, use=None,
+            anyway=False, context=None, environment=None, **keywords):
+        if environment is None:
+            environment = {"v_%s" % name: value for name, value in keywords.iteritems()}
+        package = None if context is None else ":".join((managers.engine.application.id, context))
+        return vcompile(source, let, set, package=package, environment=environment, use=use, anyway=anyway)
+
+    def execute(self, source_or_code, data=None, use=None,
+            anyway=False, context=None, environment=None, namespace=None, **keywords):
+        if environment is None:
+            environment = {"v_%s" % name: value for name, value in keywords.iteritems()}
+        if iscode(source_or_code):
+            code = source_or_code
+        else:
+            code, data = self.compile(source_or_code, use=use,
+                anyway=anyway, context=context, environment=environment, **keywords)
+        vexecute(code, data, use=use, environment=environment, namespace=namespace)
+
+    def evaluate(self, let=None, set=None, use=None,
+            anyway=False, context=None, environment=None, namespace=None, result=None, **keywords):
+        if environment is None:
+            environment = {"v_%s" % name: value for name, value in keywords.iteritems()}
+        if iscode(let or set):
+            code = let or set
+        else:
+            code, data = self.compile(let=let, set=set, use=use,
+                anyway=anyway, context=context, environment=environment, **keywords)
+        return vevaluate(code, data, use=use, environment=environment, namespace=namespace, result=result)
 
 
 class VDOM_mailer(object):

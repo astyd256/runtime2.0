@@ -1,5 +1,6 @@
 
 from copy import copy, deepcopy
+from importlib import import_module
 from . import errors, lexemes, library, exceptions
 from register import register
 
@@ -433,8 +434,8 @@ class vuse(vstatement):
 		vstatement.__init__(self, line)
 		self.name=name[2:]
 		self.package=package
-		self.module=__import__("%s.%s"%(self.package, self.name)).__dict__[self.name] \
-			if package else __import__(self.name)
+		self.module=import_module("%s.%s"%(self.package, self.name)) \
+			if package else import_module(self.name)
 		self.names=[]
 		internal=register.names
 		for name in dir(self.module):

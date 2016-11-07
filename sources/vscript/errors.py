@@ -16,15 +16,22 @@ class generic(python):
 	def __init__(self, message=u"Unknown error", details=None, line=None):
 		self.source=generic.runtime
 		self.message=message
+		self.library=None
 		self.line=line
-
+		self.traceback=None
 
 	def __str__(self):
 		return unicode(self).encode("ascii", errors="replace")
 
 	def __unicode__(self):
-		return u"VScript %s error%s: %s"%(self.source,
-			u"" if self.line is None else u" (line %s)"%self.line,self.message)
+		details=", ".join(
+			filter(None, (
+				None if self.library is None else "library \"%s\""%self.library,
+				None if self.line is None else "line %s"%self.line)))
+		return u"VScript %s error%s: %s"%(
+			self.source,
+			u" (%s)"%details if details else u"",
+			self.message)
 
 
 class internal_error(generic):
