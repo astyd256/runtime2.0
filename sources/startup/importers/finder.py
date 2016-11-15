@@ -42,8 +42,12 @@ class ActualScriptingFinder(object):
             else:
                 application = managers.engine.application
                 if application is None:
-                    log.write("Unable to load \"%s\" library for missing application" % fullname)
-                    raise ImportError
+                    # TODO: Remove this after support engine.application in application threads
+                    application = managers.memory.applications[match.group(2)]
+                    if application is None:
+                        log.write("Unable to load \"%s\" library for missing application" % fullname)
+                        raise ImportError
+                    managers.engine.select(application=application)
                 elif application.id != match.group(2):
                     log.write("Unable to load \"%s\" library for %s application" % (fullname, application.id))
                     raise ImportError
