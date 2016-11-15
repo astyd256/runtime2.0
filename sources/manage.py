@@ -4,6 +4,7 @@ import startup.manage
 import managers
 
 from logs import VDOM_log_manager
+from startup import ImportManager
 from file_access import VDOM_file_manager
 from storage import VDOM_storage
 from resource import VDOM_resource_manager
@@ -18,6 +19,7 @@ from logs import console
 
 
 managers.register("log_manager", VDOM_log_manager)
+managers.register("import_manager", ImportManager)
 managers.register("file_manager", VDOM_file_manager, lazy=True)
 managers.register("storage", VDOM_storage, lazy=True)
 managers.register("resource_manager", VDOM_resource_manager, lazy=True)

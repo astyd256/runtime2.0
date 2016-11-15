@@ -141,13 +141,14 @@ class Memory(object):
                         into.append((lineno, message))
             type.save()
             return type
-        except IOError as error:
-            raise Exception("Unable to read from \"%s\": %s" % (os.path.basename(filename), error.strerror))
         except AlreadyExistsError as error:
             raise
         except ParsingException as error:
             cleanup(context.uuid)
             raise Exception("Unable to parse %s, line %s: %s" % (os.path.basename(filename), error.lineno, error))
+        except IOError as error:
+            cleanup(context.uuid)
+            raise Exception("Unable to read from \"%s\": %s" % (os.path.basename(filename), error.strerror))
         except:
             cleanup(context.uuid)
             raise
@@ -155,8 +156,6 @@ class Memory(object):
     def install_application(self, filename, into=None):
 
         def cleanup(uuid):
-            # TODO: check this later
-            return
             if uuid:
                 self.cleanup_application(uuid)
 
@@ -173,7 +172,6 @@ class Memory(object):
             # if application.server_version and VDOM_server_version < application.server_version:
             #     raise Exception("Server version %s is unsuitable for this application %s" % (VDOM_server_version, application.server_version))
             # TODO: License key...
-            # TODO: Check this two lines later
 
         log.write("Install application from %s" % filename)
         try:
@@ -195,13 +193,14 @@ class Memory(object):
             application.unimport_libraries()
             application.save()
             return application
-        except IOError as error:
-            raise Exception("Unable to read from \"%s\": %s" % (os.path.basename(filename), error.strerror))
         except AlreadyExistsError as error:
             raise
         except ParsingException as error:
             cleanup(context.uuid)
             raise Exception("Unable to parse \"%s\", line %s: %s" % (os.path.basename(filename), error.lineno, error))
+        except IOError as error:
+            cleanup(context.uuid)
+            raise Exception("Unable to read \"%s\": %s" % (os.path.basename(filename), error.strerror))
         except:
             cleanup(context.uuid)
             raise

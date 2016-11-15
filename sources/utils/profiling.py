@@ -1,10 +1,14 @@
 
+import errno
+import os.path
+
 from time import time
 from threading import local, RLock
 from cProfile import Profile
 from pstats import Stats
 
 import settings
+
 from logs import server_log
 
 
@@ -61,21 +65,40 @@ class Profiler(object):
             if self._stats is not None:
                 self._stats = None
 
+    def load(self, location=None):
+        if not settings.PROFILING:
+            return None
+
+        if location is None:
+            location = settings.PROFILE_LOCATION
+
+        with self._lock:
+            self.save(force=True)
+            try:
+                with open(location, "rb") as file:
+                    return file.read()
+            except Exception as error:
+                if isinstance(error, IOError) and error.errno == errno.ENOENT:
+                    return None
+                else:
+                    raise
+
     def save(self, location=None, force=False):
         if not (settings.PROFILING and self._updates):
             return
 
+        now = time()
+        if not force and now < self._notch:
+            return
+
+        if location is None:
+            location = settings.PROFILE_LOCATION
+
         with self._lock:
-            now = time()
-            if not force and now < self._notch:
-                return
-
-            if location is None:
-                location = settings.PROFILE_LOCATION
-
             if self._stats:
                 self._stats.dump_stats(location)
-                server_log.write("Save profiling statistics to \"%s\"" % location)
+                if not force:
+                    server_log.write("Save profiling statistics to \"%s\"" % location)
 
             self._notch = now + settings.PROFILING_SAVE_PERIODICITY
             self._updates = False

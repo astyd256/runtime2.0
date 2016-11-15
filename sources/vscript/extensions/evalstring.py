@@ -28,7 +28,11 @@ EMPTY_STRING = string("")
 VALUE_STRING = string("value")
 TYPE_STRING = string("type")
 
-SPLIT_REGEX = re.compile(r"\{(=?[^\{^\}]*)\}", re.MULTILINE)
+SPLIT_REGEX_TEMPLATE = "%(open)s(=?[^%(open)s^%(close)s]*)%(close)s"
+DEFAULT_DELIMITERS = "{", "}"
+DEFAULT_SPLIT_REGEX = re.compile(
+    SPLIT_REGEX_TEMPLATE % {"open": re.escape(DEFAULT_DELIMITERS[0]), "close": re.escape(DEFAULT_DELIMITERS[1])},
+    re.MULTILINE)
 SOURCE_STRING = "<evalstring expression>"
 
 
@@ -237,6 +241,7 @@ class v_evalstring(generic):
 
     def __init__(self):
         generic.__init__(self)
+        self._regex = DEFAULT_SPLIT_REGEX
         self._instances = InstancesDict()
         self._context = None
         self._functions = {}
@@ -251,14 +256,21 @@ class v_evalstring(generic):
 
     v_evaluatorcontext = v_context
 
+    def v_setdelimiters(self, open, close):
+        self._regex = re.compile(
+            SPLIT_REGEX_TEMPLATE % {"open": re.escape(open.as_string), "close": re.escape(close.as_string)},
+            re.MULTILINE)
+
     def v_addfunction(self, klass, name):
         instance = self._instances[klass]
         name = name.as_string
         function = getattr(instance, "v_%s" % name)
         if not isinstance(function, MethodType):
             raise errors.expected_function
+
         def wrapper(*arguments):
             return function(*(argument if isinstance(argument, primitive) else pack(argument) for argument in arguments)).as_is
+
         self._functions[name] = wrapper
         return v_mismatch
 
@@ -272,7 +284,7 @@ class v_evalstring(generic):
     v_addfunctionlib = v_addfunctions
 
     def v_compile(self, template):
-        parts = SPLIT_REGEX.split(template.as_string)
+        parts = self._regex.split(template.as_string)
         self._strings = parts[0::2]
         rw = IntTransformer()
         self._expressions = tuple(

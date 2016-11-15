@@ -4,7 +4,7 @@ import socket
 import select
 
 from logs import log
-from utils.tracing import show_thread_trace
+from utils.tracing import show_exception_trace
 from utils.threads import SmartThread
 from utils.parsing import Parser, ParsingException
 
@@ -78,7 +78,7 @@ class WatcherSession(SmartThread):
                             except Exception as error:
                                 message = "Execution error: %s" % error
                                 response = "<reply><error>%s</error></reply>" % message
-                                show_thread_trace(caption=message)
+                                show_exception_trace(caption=message)
                         if not response:
                             response = "<reply><error>No reply</error></reply>"
                         try:

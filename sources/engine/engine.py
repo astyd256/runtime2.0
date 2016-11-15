@@ -9,17 +9,22 @@ from utils.profiling import profiler
 from .exceptions import RenderTermination
 
 
+class EngineLocal(local):
+
+    application = None
+
+
 class Engine(object):
 
     def __init__(self):
-        self._storage = local()
+        self._storage = EngineLocal()
 
-    application = property(lambda self: getattr(self._storage, "application", None))
+    application = property(lambda self: self._storage.application)
 
     def select(self, application=None):
         if isinstance(application, basestring):
             application = managers.memory.applications[application]
-        previous = getattr(self._storage, "application", None)
+        previous = self._storage.application
         if application is not previous:
             log.write("Select %s" % (application or "no application"))
             self._storage.application = application

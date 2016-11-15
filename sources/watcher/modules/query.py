@@ -3,6 +3,7 @@ import sys
 import gc
 
 from logs import log
+from utils.profiling import profiler
 from ..auxiliary import select_types, select_objects, generate_graph
 
 
@@ -101,4 +102,16 @@ def query(options):
         yield "<graph>"
         yield "".join(generate_graph(objects, **keywords)).encode("xml")
         yield "</graph>"
+        yield "</reply>"
+
+    elif "profile" in options:
+        data = profiler.load()
+
+        yield "<reply>"
+        if data is None:
+            yield "<profile/>"
+        else:
+            yield "<profile>"
+            yield data.encode("base64").encode("cdata")
+            yield "</profile>"
         yield "</reply>"
