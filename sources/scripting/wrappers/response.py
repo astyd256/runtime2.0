@@ -50,7 +50,7 @@ class VDOM_response(object):
         self._shared_vars = VDOM_shared_variables()
 
     def _get_cookies(self):
-        return managers.request_manager.current.cookies()
+        return managers.request_manager.current.response_cookies()
 
     def _get_binary(self):
         return managers.request_manager.current.binary()
