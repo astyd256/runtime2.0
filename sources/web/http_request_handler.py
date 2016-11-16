@@ -268,7 +268,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def send_headers(self):
         """send all headers"""
         headers = self.__request.headers_out().headers()
-        cookies = self.__request.cookies().output()
+        cookies = self.__request.response_cookies().output()
         #debug("Outgoing headers---")
         # for h in headers:
         #	debug(h + ": " + headers[h])
