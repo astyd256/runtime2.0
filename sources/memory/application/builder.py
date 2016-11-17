@@ -587,10 +587,12 @@ def application_builder(parser, installation_callback=None):
                                                 raise MissingAttributeError(u"ID")
                                             try:
                                                 # application.bindings[callee_id]
+                                                # application.bindings.catalog[callee_id]
                                                 event.callees.append(bindings[callee_id])
                                             except KeyError:
                                                 try:
                                                     # application.actions.catalog[callee_id]
+                                                    # application.bindings.catalog[callee_id]
                                                     event.callees.append(actions[callee_id])
                                                 except KeyError:
                                                     unknown_bindings.append(callee_id)
@@ -671,7 +673,10 @@ def application_builder(parser, installation_callback=None):
                                         else:
                                             parser.reject_elements(name)
                                     def close_action_handler(name):
-                                        binding = application.bindings.new_sketch(target_object, binding_name, parameters=binding_parameters, restore=True)
+                                        # binding = application.bindings.new_sketch(target_object,
+                                        #     binding_name, parameters=binding_parameters, restore=True)
+                                        binding = target_object.container.bindings.new_sketch(target_object,
+                                            binding_name, parameters=binding_parameters, restore=True)
                                         binding.id = binding_id
                                         binding.top = binding_top
                                         binding.left = binding_left
@@ -689,6 +694,7 @@ def application_builder(parser, installation_callback=None):
                         for event, unknown_bindings in unknown_events.iteritems():
                             for binding_id in unknown_bindings:
                                 # binding = application.bindings.get(binding_id, None)
+                                # binding = application.bindings.catalog.get(binding_id, None)
                                 binding = bindings.get(binding_id, None)
                                 if binding:
                                     event.callees.append(binding)

@@ -11,6 +11,7 @@ from ..generic import MemoryBase
 from .attributes import MemoryAttributesSketch
 from .actions import MemoryActions
 from .events import MemoryEvents
+from .bindings import MemoryBindings
 from .structure import MemoryStructureSketch, MemoryStructure
 
 
@@ -37,6 +38,10 @@ class MemoryObjectSketch(MemoryBase):
     @lazy
     def _classes(self):
         return {}
+
+    @lazy
+    def _bindings(self):
+        return MemoryBindings(self)
 
     @lazy
     def _structure(self):
@@ -75,6 +80,7 @@ class MemoryObjectSketch(MemoryBase):
     objects = roproperty("_objects")
     events = roproperty("_events")
     actions = roproperty("_actions")
+    bindings = roproperty("_bindings")
 
     structure = roproperty("_structure")
 

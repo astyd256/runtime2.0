@@ -267,7 +267,8 @@ class MemoryApplication(MemoryApplicationSketch):
 
         if self._bindings or self._events.catalog:
             file.write(u"\t<E2VDOM>\n")
-            self._bindings.compose(ident=u"\t\t", file=file)
+            # self._bindings.compose(ident=u"\t\t", file=file)
+            self._bindings.catalog.compose(ident=u"\t\t", file=file)
             self._events.catalog.compose(ident=u"\t\t", file=file)
             file.write(u"\t</E2VDOM>\n")
 
