@@ -1215,9 +1215,7 @@ if no - nothing will be hidden.</Sentence>
 		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[# coding=utf8
-
-from scripting import server, application, log, session, request, response, VDOM_object, obsolete_request
+<![CDATA[from scripting import server, application, log, session, request, response, VDOM_object, obsolete_request
 
 from scripting import e2vdom
 
