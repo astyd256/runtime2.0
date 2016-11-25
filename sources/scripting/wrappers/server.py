@@ -25,7 +25,7 @@ class VDOM_vscript_libraries(object):
         def initializer(context, name, namespace):
             self._owner.execute(code, data, namespace=namespace, environment=environment)
 
-        managers.import_manager.register("plugins", "auxiliary", initializer)
+        managers.import_manager.register(context, name, initializer)
 
     def unregister(self, name=None, context=None):
         if context is None:
