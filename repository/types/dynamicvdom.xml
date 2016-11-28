@@ -550,28 +550,13 @@ class VDOM_DynamicObject(VDOM_object):
     def inner_render(self):
         e2vdom.process(self)
         try:
-            try:
-                root = vdomxml.loads(self.vdomxml.encode("utf8"), self._origin)  # managers.engine.application
-            except:
-                if self.vdomxml.strip():
-                    raise
-                else:
-                    return "", "", ""
-
-            if not root:
-                return "", "", ""
-
-            try:
-                vdomjson.loads(self.vdomactions, root, self._origin)
-            except:
-                if self.vdomactions.strip():
-                    raise
-
             with e2vdom.select(dynamic=True):
-                instance = root.factory(self.context)(self)
-                contents = instance.render()
-                declarations, libraries = e2vdom.generate(instance)
-                return contents, declarations, libraries
+                instance, contents = managers.engine.dynamic_render(self.vdomxml, self.vdomactions, origin=self._origin, parent=self)
+                if instance is None:
+                    return contents, "", ""
+                else:
+                    declarations, libraries = e2vdom.generate(instance)
+                    return contents, declarations, libraries
         except Exception as error:
             if self.debugmode == "1":
                 raise
@@ -612,7 +597,8 @@ class VDOM_DynamicObject(VDOM_object):
     def wysiwyg(self, contents=""):
         from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
         contents += get_empty_wysiwyg_value(self, WYSIWYG_IMAGE_UUID)
-        return super(VDOM_DynamicObject, self).wysiwyg(contents=contents)]]>
+        return super(VDOM_DynamicObject, self).wysiwyg(contents=contents)
+]]>
 	</SourceCode>
 	<E2VDOM>
 		<Events>

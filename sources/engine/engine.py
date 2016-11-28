@@ -3,7 +3,7 @@ from contextlib import contextmanager
 from threading import local, current_thread
 import managers
 from logs import log
-from memory import COMPUTE_CONTEXT, RENDER_CONTEXT, WYSIWYG_CONTEXT
+from memory import COMPUTE_CONTEXT, RENDER_CONTEXT, WYSIWYG_CONTEXT, vdomxml, vdomjson
 from utils.profiling import profiler
 # from utils.statistics import statistics
 from .exceptions import RenderTermination
@@ -67,6 +67,32 @@ class Engine(object):
             self.select(previous)
             # statistics.show("Render %s" % object)
 
+    def dynamic_render(self, xmldata, jsondata, origin=None, parent=None):
+        log.write("Dynamic render for %s" % (origin or managers.engine.application))
+        try:
+            root = vdomxml.loads(xmldata.encode("utf8"), origin or managers.engine.application)
+        except:
+            if xmldata.strip():
+                raise
+            else:
+                return None, ""
+
+        if not root:
+            return None, ""
+
+        try:
+            vdomjson.loads(jsondata, root, origin or managers.engine.application)
+        except:
+            if jsondata.strip():
+                raise
+
+        try:
+            instance = root.factory(RENDER_CONTEXT)(parent)
+            instance.execute()
+            return instance, instance.render()
+        except RenderTermination:
+            return instance, ""
+
     def wysiwyg(self, object, parent=None):
         log.write("Wysiwyg %s" % object)
         previous = self.select(object.application)
@@ -76,6 +102,31 @@ class Engine(object):
                 return instance.wysiwyg()
         finally:
             self.select(previous)
+
+    def dynamic_wysiwyg(self, xmldata, jsondata, origin=None, parent=None):
+        log.write("Dynamic wysiwyg for %s" % (origin or managers.engine.application))
+        try:
+            root = vdomxml.loads(xmldata.encode("utf8"), origin or managers.engine.application)
+        except:
+            if xmldata.strip():
+                raise
+            else:
+                return None, ""
+
+        if not root:
+            return None, ""
+
+        try:
+            vdomjson.loads(jsondata, root, origin or managers.engine.application)
+        except:
+            if jsondata.strip():
+                raise
+
+        try:
+            instance = object.factory(WYSIWYG_CONTEXT)(parent)
+            return instance, instance.wysiwyg()
+        except RenderTermination:
+            return instance, ""
 
     def execute(self, action, parent=None, context=None, render=None):
         log.write("Execute%s %s" % (" and render" if render else "", action))
