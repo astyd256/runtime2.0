@@ -3,14 +3,14 @@ import sys
 import imp
 
 from collections import defaultdict
-from threading import local
+# from threading import local
 
 import managers
 
 from logs import log
 
 
-class ImportManagerLocal(local):
+class ImportManagerLocal(object):  # local
 
     modules = defaultdict(dict)
 
