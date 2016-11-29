@@ -32,6 +32,12 @@ class VDOM_vscript_libraries(object):
             raise Exception("Require context")
         managers.import_manager.unregister(context, name)
 
+    def exists(self, name=None, context=None):
+        if context is None:
+            return False
+        else:
+            return managers.import_manager.lookup(context, name) is not None
+
 
 class VDOM_vscript(object):
 
