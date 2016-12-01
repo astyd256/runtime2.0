@@ -1,6 +1,6 @@
 
 import re
-from collections import Mapping, MutableMapping
+from collections import defaultdict, Mapping, MutableMapping
 import settings
 import managers
 from utils.properties import lazy, weak
@@ -17,10 +17,6 @@ DEREFERENCE_REGEX = re.compile(r"\#RES\(([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d
 class MemoryAttributesSketch(MemoryBase, MutableMapping):
 
     @lazy
-    def _attributes(self):
-        return self._owner.type.attributes
-
-    @lazy
     def _cdata(self):
         return set()
 
@@ -28,12 +24,11 @@ class MemoryAttributesSketch(MemoryBase, MutableMapping):
     def _query(self):
         return set(self._items)
 
-    def __init__(self, owner, attributes=None):
+    def __init__(self, owner, values=None):
         self._owner = owner
-        if attributes:
-            self._items = {name: value for name, value in attributes.iteritems() if name in owner.type.attributes}
-        else:
-            self._items = {}
+        self._attributes = owner.type.attributes
+        self._items = {name: value for name, value in values.iteritems()
+            if name in self._attributes} if values else {}
 
     def __getitem__(self, name):
         return self._items[name]
@@ -47,10 +42,10 @@ class MemoryAttributesSketch(MemoryBase, MutableMapping):
         del self._items[name]
 
     def __iter__(self):
-        return iter(self._owner.type.attributes)
+        return iter(self._attributes)
 
     def __len__(self):
-        return len(self._owner.type.attributes)
+        return len(self._attributes)
 
     def __invert__(self):
         self.__class__ = MemoryAttributes
@@ -83,9 +78,9 @@ class MemoryAttributes(MemoryAttributesSketch):
             file.write(u"%s<Attributes>\n" % ident)
             for name, value in self._items.iteritems():
                 if not settings.STORE_DEFAULT_VALUES and \
-                        value == self._owner.type.attributes[name].default_value:
+                        value == self._attributes[name].default_value:
                     continue
-                complexity = self._owner.type.attributes[name].complexity or name in self._cdata
+                complexity = self._attributes[name].complexity or name in self._cdata
                 file.write(u"%s\t<Attribute Name=\"%s\">%s</Attribute>\n" %
                     (ident, name, value.encode("cdata" if complexity else "xml")))
             file.write(u"%s</Attributes>\n" % ident)
@@ -94,22 +89,22 @@ class MemoryAttributes(MemoryAttributesSketch):
         if arguments:
             collection = arguments[0]
             if isinstance(collection, Mapping):
-                attributes = collection
+                values = collection
             elif hasattr(collection, "keys"):
-                attributes = {key: collection[key] for key in collection.keys()}
+                values = {key: collection[key] for key in collection.keys()}
             else:
-                attributes = {key: collection[key] for key, value in collection}
+                values = {key: collection[key] for key, value in collection}
         else:
-            attributes = keywords
+            values = keywords
 
         updates = {}
         with self._owner.lock:
-            for name, value in attributes.iteritems():
+            for name, value in values.iteritems():
                 try:
                     current_value = self._items[name]
                 except KeyError:
                     try:
-                        current_value = self._owner.type.attributes[name].default_value
+                        current_value = self._attributes[name].default_value
                     except KeyError:
                         raise Exception("The object has no \"%s\" attribute " % name)
 
@@ -119,7 +114,7 @@ class MemoryAttributes(MemoryAttributesSketch):
                 value = DEREFERENCE_REGEX.sub(lambda match: match.group(1), value)
 
                 if current_value != value:
-                    if self._owner.type.attributes[name].verify(value):
+                    if self._attributes[name].verify(value):
                         updates[name] = value
                     else:
                         raise ValueError(u"Unacceptable value for \"%s\" attribute: \"%s\"" % (name, value.replace('"', '\"')))
@@ -141,16 +136,13 @@ class MemoryAttributes(MemoryAttributesSketch):
                     self._owner.autosave()
 
     def __getitem__(self, name):
-        try:
-            return self._items[name]
-        except KeyError:
-            return self._owner.type.attributes[name].default_value
+        return self._items.get(name, self._attributes[name].default_value)
 
     def __setitem__(self, name, value):
         self.update({name: value})
 
     def __delitem__(self, name):
-        managers.dispatcher.dispatch_handler(self._owner, "on_update", self._owner.type.attributes[name].default_value)
+        managers.dispatcher.dispatch_handler(self._owner, "on_update", self._attributes[name].default_value)
         log.write("Reset %s attrbiute \"%s\"" % (self._owner, name))
         self._items.pop(name, None)
         self._owner.invalidate(upward=1)

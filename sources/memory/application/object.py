@@ -60,7 +60,7 @@ class MemoryObjectSketch(MemoryBase):
         self._name = None
 
         # collections
-        self._attributes = MemoryAttributesSketch(self, attributes=attributes)
+        self._attributes = MemoryAttributesSketch(self, values=attributes)
         self._objects = MemoryObjects(self)
         self._events = MemoryEvents(self)
         self._actions = MemoryActions(self)
@@ -230,7 +230,7 @@ class MemoryObject(MemoryObjectSketch):
             invalidates = self._factory_invalidates
 
         # start main loop
-        while True:
+        while 1:
             try:
                 new_klass = managers.compiler.compile(self, context, dynamic=dynamic)
             except:

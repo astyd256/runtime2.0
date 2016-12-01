@@ -6,72 +6,82 @@ from threading import RLock
 WEAK_NAME_TEMPLATE = "_weak_%s"
 
 
-def lazy(initializer):
-    name = initializer.__name__
-    lock = RLock()
+class ConstantProperty(object):
 
-    class LazyProperty(object):
+    def __init__(self, value):
+        self._value = value
 
-        def __get__(self, instance, owner=None):
-            with lock:
-                try:
-                    return instance.__dict__[name]
-                except KeyError:
-                    return instance.__dict__.setdefault(name, initializer(instance))
+    def __get__(self, instance, owner=None):
+        return self._value
 
-    return LazyProperty()
+    def __set__(self, instance, value):
+        raise AttributeError
+
+    def __delete__(self, instance):
+        raise AttributeError
 
 
-def _weak(name):
+class LazyProperty(object):
 
-    class WeakProperty(object):
+    def __init__(self, initializer):
+        self._initializer = initializer
+        self._name = initializer.__name__
+        self._lock = RLock()
 
-        def __get__(self, instance, owner=None):
+    def __get__(self, instance, owner=None):
+        with self._lock:
             try:
-                value = instance.__dict__[name]
+                return instance.__dict__[self._name]
             except KeyError:
-                raise AttributeError(name)
+                return instance.__dict__.setdefault(self._name, self._initializer(instance))
+
+
+class WeakProperty(object):
+
+    def __init__(self, name):
+        self._name = name
+
+    def __get__(self, instance, owner=None):
+        try:
+            value = instance.__dict__[self._name]
+        except KeyError:
+            raise AttributeError(self._name)
+        else:
             return None if value is None else value()
 
-        def __set__(self, instance, value):
-            instance.__dict__[name] = None if value is None else ref(value)
+    def __set__(self, instance, value):
+        instance.__dict__[self._name] = None if value is None else ref(value)
 
-        def __delete__(self, instance):
-            del instance.__dict__[name]
-
-    return WeakProperty()
+    def __delete__(self, instance):
+        del instance.__dict__[self._name]
 
 
-def _weak_with_default(name, default):
+class WeakWithDefaultProperty(object):
 
-    class WeakWithDefaultProperty(object):
+    def __init__(self, name, default):
+        self._name = name
+        self._default = default
 
-        def __get__(self, instance, owner=None):
-            value = instance.__dict__.get(name, default)
-            return None if value is None else value()
+    def __get__(self, instance, owner=None):
+        value = instance.__dict__.get(self._name, self._default)
+        return None if value is None else value()
 
-        def __set__(self, instance, value):
-            instance.__dict__[name] = None if value is None else ref(value)
+    def __set__(self, instance, value):
+        instance.__dict__[self._name] = None if value is None else ref(value)
 
-        def __delete__(self, instance):
-            del instance.__dict__[name]
-
-    return WeakWithDefaultProperty()
-
-
-def weak(*names, **names_with_values):
-
-    def wrapper(cls):
-        for name in names:
-            setattr(cls, name, _weak(WEAK_NAME_TEMPLATE % name))
-        for name, value in names_with_values.iteritems():
-            setattr(cls, name, _weak_with_default(WEAK_NAME_TEMPLATE % name, ref(value)))
-        return cls
-
-    return wrapper
+    def __delete__(self, instance):
+        del instance.__dict__[self._name]
 
 
-def constant(value):
+lazy = LazyProperty
+constant = ConstantProperty
+
+readonly_properties = {}
+readwrite_properties = {}
+weakproperties = {}
+
+
+def quicker_constant(value):
 
     class ConstantProperty(object):
 
@@ -87,9 +97,28 @@ def constant(value):
     return ConstantProperty()
 
 
+def quicker_lazy(initializer):
+    name = initializer.__name__
+    lock = RLock()
+
+    class LazyProperty(object):
+
+        def __get__(self, instance, owner=None):
+            with lock:
+                try:
+                    return instance.__dict__[name]
+                except KeyError:
+                    return instance.__dict__.setdefault(name, initializer(instance))
+
+    return LazyProperty()
+
+
 def roproperty(name):
-    namespace = {}
-    bytecode = compile("""
+    try:
+        return readonly_properties[name]()
+    except KeyError:
+        namespace = {}
+        bytecode = compile("""
 class ReadOnlyProperty(object):
 
     __module__ = "utils"
@@ -103,20 +132,24 @@ class ReadOnlyProperty(object):
 
     def __delete__(self, instance):
         raise AttributeError
-        """.format(name=name), "<roproperty>", "exec")
-    exec(bytecode, namespace)
-    return namespace["ReadOnlyProperty"]()
+            """.format(name=name), "<roproperty:%s>" % name, "exec")
+
+        exec(bytecode, namespace)
+        return readonly_properties.setdefault(name, namespace["ReadOnlyProperty"])()
 
 
 def rwproperty(name, setter=None):
-    if setter is None:
-        namespace = {}
-        assigment = "instance.%s = value" % name
-    else:
-        namespace = {"setter": setter}
-        assigment = "setter(instance, value)"
+    try:
+        return readwrite_properties[name, setter]()
+    except KeyError:
+        if setter is None:
+            namespace = {}
+            assigment = "instance.%s = value" % name
+        else:
+            namespace = {"setter": setter}
+            assigment = "setter(instance, value)"
 
-    bytecode = compile("""
+        bytecode = compile("""
 class ReadWriteProperty(object):
 
     __module__ = "utils"
@@ -129,7 +162,45 @@ class ReadWriteProperty(object):
 
     def __delete__(self, instance):
         raise AttributeError
-        """.format(name=name, assigment=assigment), "<rwproperty>", "exec")
+            """.format(name=name, assigment=assigment),
+            "<rwproperty:%s%s>" % (name, (":setter" if setter else "")), "exec")
 
-    exec(bytecode, namespace)
-    return namespace["ReadWriteProperty"]()
+        exec(bytecode, namespace)
+        return readwrite_properties.setdefault((name, setter), namespace["ReadWriteProperty"])()
+
+
+def weakproperty(name):
+    try:
+        return weakproperties[name]()
+    except KeyError:
+        namespace = {"ref": ref}
+        bytecode = compile("""
+class WeakProperty(object):
+
+    def __get__(self, instance, owner=None):
+        value = instance.{name}
+        return None if value is None else value()
+
+    def __set__(self, instance, value):
+        instance.{name} = None if value is None else ref(value)
+
+    def __delete__(self, instance):
+        del instance.{name}
+            """.format(name=name), "<weakproperty:%s>" % name, "exec")
+
+        exec(bytecode, namespace)
+        return weakproperties.setdefault(name, namespace["WeakProperty"])()
+
+
+def weak(*names, **names_with_values):
+
+    def wrapper(cls):
+        for name in names:
+            setattr(cls, name, weakproperty(WEAK_NAME_TEMPLATE % name))
+        for name, value in names_with_values.iteritems():
+            weak_name = WEAK_NAME_TEMPLATE % name
+            setattr(cls, weak_name, ref(value))
+            setattr(cls, name, weakproperty(weak_name))
+        return cls
+
+    return wrapper

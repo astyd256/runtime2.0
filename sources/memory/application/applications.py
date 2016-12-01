@@ -141,4 +141,4 @@ class MemoryApplications(MemoryBase, Mapping):
             return len(self._items) + len(self._queue) if self._queue else len(self._items)
 
     def __str__(self):
-        return "applications%s" % ":lazy" if self._lazy else ""
+        return "applications"
