@@ -1,5 +1,7 @@
 
 import sys
+import settings
+
 from threading import Lock
 from . import levels
 from .formatters import PrefixingLogFormatter
@@ -26,6 +28,9 @@ class Console(object):
                 (levels.ERROR, error) if error is not None else \
                 (levels.DEBUG, debug) if debug is not None else \
                 (levels.MESSAGE, "")
+
+        if level < settings.CONSOLE_LOG_LEVEL:
+            return
 
         if isinstance(message, unicode):
             message = message.encode((self.stderr.encoding if level is levels.ERROR

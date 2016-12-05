@@ -47,7 +47,11 @@ class SettingsImporter(object):
             SERVER=filename == "server",
             MANAGE=filename == "manage",
             PRODUCTION=environment == "production",
-            DEVELOPMENT=environment != "production")
+            DEVELOPMENT=environment != "production",
+            DEBUG=0,
+            MESSAGE=1,
+            WARNING=2,
+            ERROR=3)
 
         sys.modules[fullname] = module
         exec(code, module.__dict__)

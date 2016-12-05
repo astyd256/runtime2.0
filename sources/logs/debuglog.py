@@ -19,6 +19,9 @@ class DebugLog(BaseLog):
                 else (levels.DEBUG, debug) if debug is not None \
                 else (levels.MESSAGE, "")
 
+        if level < settings.CONSOLE_LOG_LEVEL and level < settings.LOG_LEVEL:
+            return
+
         if not isinstance(message, basestring):
             message = str(message)
 
@@ -27,7 +30,8 @@ class DebugLog(BaseLog):
 
         if settings.LOGGING:
             values = self.accomplish(module, level, message, **options)
-            self._enqueue(*values)
+            if level >= settings.LOG_LEVEL:
+                self._enqueue(*values)
             logs.console.write(self._format(*values))
         elif level == levels.WARNING:
             if settings.DISPLAY_WARININGS_ANYWAY:
