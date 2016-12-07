@@ -32,7 +32,8 @@ class DebugLog(BaseLog):
             values = self.accomplish(module, level, message, **options)
             if level >= settings.LOG_LEVEL:
                 self._enqueue(*values)
-            logs.console.write(self._format(*values))
+            if level >= settings.CONSOLE_LOG_LEVEL:
+                logs.console.write(self._format(*values))
         elif level == levels.WARNING:
             if settings.DISPLAY_WARININGS_ANYWAY:
                 logs.console.write(message, level=level)
