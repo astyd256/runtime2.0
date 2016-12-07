@@ -4,105 +4,19 @@ import types
 import numbers
 import gc
 import inspect
-import traceback
-import threading
 
-from utils.tracing import is_server_object
 from memory.generic import MemoryBase
+from .auxiliary import quote
 
 
 DEFAULT_GRAPH_DEPTH = 10
+DEFAULT_OPTIMIZE = True
+DEFAULT_MINIFY = True
+DEFAULT_SKIP_FUNCTIONS = True
 
 
-def quote(string):
-    return string.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n").replace("\0", "\\\\0")
-
-
-def get_type_name(target=None, target_type=None):
-    if target_type is None:
-        target_type = type(target)
-    return target_type.__name__ if target_type.__module__ == "__builtin__" \
-        else "%s.%s" % (target_type.__module__, target_type.__name__)
-
-
-def search_thread(string):
-    if not string:
-        return None
-    elif string[0] in "-0123456789":
-        number = int(string)
-        for thread in threading.enumerate():
-            if thread.ident == number:
-                return thread
-        return None
-    else:
-        string = string.lower()
-        for thread in threading.enumerate():
-            if thread.name.lower() == string:
-                return thread
-        return None
-
-
-def select_threads(string):
-    if not string:
-        return threading.enumerate()
-    elif string[0] in "-0123456789":
-        number = int(string)
-        return tuple(thread for thread in threading.enumerate() if thread.ident == number)
-    else:
-        return tuple(thread for thread in threading.enumerate() if thread.name == string)
-
-
-def search_object(string):
-    if not string:
-        return None
-    elif string[0].upper() in "0123456789ABCDEF":
-        number = int(string, 16)
-        for object in gc.get_objects():
-            if id(object) == number:
-                return object
-        return None
-    else:
-        for object in gc.get_objects():
-            if get_type_name(object) == string:
-                return object
-        return None
-
-
-def select_types(server=True, unknown=True):
-    types = set()
-    for object in gc.get_objects():
-        if server and not is_server_object(object, default=unknown):
-            continue
-        types.add(get_type_name(object))
-    return tuple(types)
-
-
-def select_objects(string=None, server=True, unknown=True, source=None, filter=None):
-    if source is None:
-        source = gc.get_objects()
-
-    if not string:
-        objects = (object for object in source)
-    elif string.isdigit():
-        identifier = int(string, 16)
-        objects = (object for object in source if id(object) == identifier)
-    else:
-        objects = (object for object in source if get_type_name(object) == string)
-
-    if server:
-        objects = (object for object in source if is_server_object(object, default=unknown))
-
-    if filter:
-        objects = (object for object in source if filter(object))
-
-    return tuple(objects)
-
-
-def get_thread_traceback(thread):
-    return traceback.extract_stack(sys._current_frames()[thread.ident])
-
-
-def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH, optimize=True, minify=True, skip_functions=True):
+def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH,
+        optimize=DEFAULT_OPTIMIZE, minify=DEFAULT_MINIFY, skip_functions=DEFAULT_SKIP_FUNCTIONS):
     print "Generate graph for %s" % \
         (", ".join("%08X" % id(object) for object in objects)
             if len(objects) < 10 else "%d objects" % len(objects))
@@ -380,17 +294,17 @@ def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH, optimize=True, minify=Tru
             ignore.remove(id(sources))
             del sources
 
-    # D69191 A06C6C		Light Red			Unknown References
-    # DEB887 A68A65		Light Brown			Objects, Membership
-    # CCC0A8			Light Light Brown
-    # D497E3 9F71AA		Light Magenta		Inheritance
-    # D8D8D8 A2A2A2		Light Gray			Elementary Objects, Elementary References
-    # 57A77A			Ocean Green
-    # 65B488			Light Green			Primary Objects
-    # 76A3C9			Light Blue			Callable Objects
-    # DECD87			Light Yellow		Modules
-    # CDC9A5			Light Light Yellow
-    # 87D5DE			Light Blue
+    # D69191 A06C6C     Light Red           Unknown References
+    # DEB887 A68A65     Light Brown         Objects, Membership
+    # CCC0A8            Light Light Brown
+    # D497E3 9F71AA     Light Magenta       Inheritance
+    # D8D8D8 A2A2A2     Light Gray          Elementary Objects, Elementary References
+    # 57A77A            Ocean Green
+    # 65B488            Light Green         Primary Objects
+    # 76A3C9            Light Blue          Callable Objects
+    # DECD87            Light Yellow        Modules
+    # CDC9A5            Light Light Yellow
+    # 87D5DE            Light Blue
 
     # "\tpack=true;\n" \
     yield "digraph ObjectGraph\n" \

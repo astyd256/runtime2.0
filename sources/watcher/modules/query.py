@@ -4,7 +4,8 @@ import gc
 
 from logs import log
 from utils.profiling import profiler
-from ..auxiliary import select_types, select_objects, generate_graph
+from ..auxiliary import select_types, select_objects, \
+    generate_graph, generate_call_graph_profile, generate_call_graph
 
 
 SERVER_ONLY = "server only"
@@ -114,4 +115,42 @@ def query(options):
             yield "<profile>"
             yield data.encode("base64").encode("cdata")
             yield "</profile>"
+        yield "</reply>"
+
+    elif "call-graph" in options:
+        node_threshold = options.get("node-threshold")
+        edge_threshold = options.get("edge-threshold")
+        color_nodes = options.get("color-nodes")
+
+        keywords = {}
+
+        if node_threshold:
+            try:
+                keywords["node_threshold"] = float(node_threshold)
+            except ValueError:
+                log.warning("Ignore wrond node threshold: %s" % node_threshold)
+
+        if edge_threshold:
+            try:
+                keywords["edge_threshold"] = float(edge_threshold)
+            except ValueError:
+                log.warning("Ignore wrond edge threshold: %s" % edge_threshold)
+
+        if color_nodes:
+            try:
+                keywords["color_nodes"] = bool(color_nodes)
+            except ValueError:
+                log.warning("Ignore wrond color nodes: %s" % color_nodes)
+
+        with profiler.hold() as location:
+            profile = generate_call_graph_profile(location)
+        data = generate_call_graph(profile, **keywords)
+
+        yield "<reply>"
+        if data is None:
+            yield "<call-graph/>"
+        else:
+            yield "<call-graph>"
+            yield data.encode("xml")
+            yield "</call-graph>"
         yield "</reply>"
