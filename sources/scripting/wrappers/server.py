@@ -25,12 +25,18 @@ class VDOM_vscript_libraries(object):
         def initializer(context, name, namespace):
             self._owner.execute(code, data, namespace=namespace, environment=environment)
 
-        managers.import_manager.register("plugins", "auxiliary", initializer)
+        managers.import_manager.register(context, name, initializer)
 
     def unregister(self, name=None, context=None):
         if context is None:
             raise Exception("Require context")
         managers.import_manager.unregister(context, name)
+
+    def exists(self, name=None, context=None):
+        if context is None:
+            return False
+        else:
+            return managers.import_manager.lookup(context, name) is not None
 
 
 class VDOM_vscript(object):

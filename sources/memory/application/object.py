@@ -11,6 +11,7 @@ from ..generic import MemoryBase
 from .attributes import MemoryAttributesSketch
 from .actions import MemoryActions
 from .events import MemoryEvents
+from .bindings import MemoryBindings
 from .structure import MemoryStructureSketch, MemoryStructure
 
 
@@ -39,6 +40,10 @@ class MemoryObjectSketch(MemoryBase):
         return {}
 
     @lazy
+    def _bindings(self):
+        return MemoryBindings(self)
+
+    @lazy
     def _structure(self):
         return None if self._parent or self._virtual else MemoryStructureSketch(self)
 
@@ -55,7 +60,7 @@ class MemoryObjectSketch(MemoryBase):
         self._name = None
 
         # collections
-        self._attributes = MemoryAttributesSketch(self, attributes=attributes)
+        self._attributes = MemoryAttributesSketch(self, values=attributes)
         self._objects = MemoryObjects(self)
         self._events = MemoryEvents(self)
         self._actions = MemoryActions(self)
@@ -75,6 +80,7 @@ class MemoryObjectSketch(MemoryBase):
     objects = roproperty("_objects")
     events = roproperty("_events")
     actions = roproperty("_actions")
+    bindings = roproperty("_bindings")
 
     structure = roproperty("_structure")
 
@@ -191,6 +197,10 @@ class MemoryObject(MemoryObjectSketch):
                     log.write("Invalidate %s dependent %s" % (self, dependent))
                     dependent.invalidate(contexts=contexts, upward=True)
 
+            # update factory counter to indicate a change
+            if self._factory_calls:
+                self._factory_invalidates += 1
+
     def attach(self, object):
         with self.lock:
             self._dependents.add(object)
@@ -199,7 +209,11 @@ class MemoryObject(MemoryObjectSketch):
         with self.lock:
             self._dependents.remove(object)
 
+    _factory_calls = 0
+    _factory_invalidates = 0
+
     def factory(self, context, dynamic=None, probe=False):
+        # check if already exists
         if dynamic is None:
             try:
                 klass = self._classes[context]
@@ -210,13 +224,41 @@ class MemoryObject(MemoryObjectSketch):
                 if dynamic <= klass._dynamic:
                     return klass
 
-        new_klass = managers.compiler.compile(self, context, dynamic=dynamic)
-
+        # remember invalidate count
         with self.lock:
-            klass = self._classes.get(context)
-            if klass is None or dynamic > klass._dynamic:
-                self._classes[context] = klass = new_klass
-            return klass
+            self._factory_calls += 1
+            invalidates = self._factory_invalidates
+
+        # start main loop
+        while 1:
+            try:
+                new_klass = managers.compiler.compile(self, context, dynamic=dynamic)
+            except:
+                # just decrease calls counter on error
+                with self.lock:
+                    self._factory_calls -= 1
+                raise
+            else:
+                # on successfull compilation...
+                with self.lock:
+                    if invalidates == self._factory_invalidates:
+                        # if has no changes
+                        if self._factory_calls > 1:
+                            # decrease calls counter
+                            self._factory_calls -= 1
+                        else:
+                            # or remove to free memory if no other calls
+                            del self._factory_calls
+                            self.__dict__.pop("_factory_invalidates", None)
+
+                        # update klass if needed and return
+                        klass = self._classes.get(context)
+                        if klass is None or dynamic > klass._dynamic:
+                            self._classes[context] = klass = new_klass
+                        return klass
+                    else:
+                        # or just update stored value
+                        invalidates = self._factory_invalidates
 
     def __invert__(self):
         raise NotImplementedError

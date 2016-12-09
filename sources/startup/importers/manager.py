@@ -3,14 +3,14 @@ import sys
 import imp
 
 from collections import defaultdict
-from threading import local
+# from threading import local
 
 import managers
 
 from logs import log
 
 
-class ImportManagerLocal(local):
+class ImportManagerLocal(object):  # local
 
     modules = defaultdict(dict)
 
@@ -25,9 +25,11 @@ class ImportManager(object):
         if application is None:
             raise Exception("Unable to register library outside of application")
         context = ":".join((application.id, context))
-        self._local.modules[context][name] = initializer
         imp.acquire_lock()
         try:
+            self._local.modules[context][name] = initializer
+            if context not in sys.modules:
+                __import__(context)
             del sys.modules[".".join((context, name))]
             del sys.modules[context].__dict__[name]
         except KeyError:
@@ -41,18 +43,18 @@ class ImportManager(object):
             raise Exception("Unable to unregister library outside of application")
         context = ":".join((application.id, context))
         if name is None:
-            del self._local.modules[context]
             imp.acquire_lock()
             try:
+                del self._local.modules[context]
                 del sys.modules[context]
             except KeyError:
                 pass
             finally:
                 imp.release_lock()
         else:
-            del self._local.modules[context][name]
             imp.acquire_lock()
             try:
+                del self._local.modules[context][name]
                 del sys.modules[".".join((context, name))]
                 del sys.modules[context].__dict__[name]
             except KeyError:

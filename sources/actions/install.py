@@ -40,7 +40,7 @@ def run(location):
         location = locate_repository(TYPE)
 
     if os.path.isdir(location):
-        with section("install everything from %s" % location):
+        with section("install types from %s" % location):
             for filename in managers.file_manager.list(file_access.FILE, None, location):
                 if filename.endswith(EXTENSION):
                     install(os.path.join(location, filename))

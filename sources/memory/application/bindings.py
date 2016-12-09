@@ -4,6 +4,7 @@ from collections import MutableMapping
 from uuid import uuid4
 from utils.properties import lazy, roproperty
 from ..generic import MemoryBase
+from .catalogs import MemoryBindingsCatalog, MemoryBindingsDynamicCatalog
 from .binding import MemoryBindingSketch
 
 
@@ -18,6 +19,9 @@ def wrap_complete(instance, restore):
         with self._owner.lock:
             self._items[item.id] = item
 
+            if not self._owner.virtual:
+                self._all_items[item.id] = item
+
         if not restore:
             if not item._target_object.virtual:
                 self._owner.autosave()
@@ -27,14 +31,26 @@ def wrap_complete(instance, restore):
 
 class MemoryBindings(MemoryBase, MutableMapping):
 
-    def __init__(self, owner):
-        self._owner = owner
-
     @lazy
     def _items(self):
         return {}
 
+    @lazy
+    def _all_items(self):
+        return self._owner.application.bindings.catalog._items
+
+    @lazy
+    def _catalog(self):
+        if self._owner.is_application:
+            return MemoryBindingsCatalog(self)
+        else:
+            return MemoryBindingsDynamicCatalog(self)
+
+    def __init__(self, owner):
+        self._owner = owner
+
     owner = roproperty("_owner")
+    catalog = roproperty("_catalog")
 
     def new_sketch(self, target_object, name, parameters=None, restore=False):
         return MemoryBindingSketch(wrap_complete(self, restore), target_object, name, parameters=parameters)
@@ -43,14 +59,6 @@ class MemoryBindings(MemoryBase, MutableMapping):
         item = self.new_sketch(target_object, name, parameters=parameters)
         item.id = str(uuid4())
         return ~item
-
-    # unsafe
-    def compose(self, ident=u"", file=None):
-        if self._items:
-            file.write(u"%s<Actions>\n" % ident)
-            for binding in self._items.itervalues():
-                binding.compose(ident=u"\t" + ident, file=file)
-            file.write(u"%s</Actions>\n" % ident)
 
     def clear(self):
         with self._owner.lock:
@@ -66,6 +74,7 @@ class MemoryBindings(MemoryBase, MutableMapping):
     def __delitem__(self, key):
         with self._owner.lock:
             item = self._items.pop(key)
+            del self._all_items[item.id]
             if not item.target_object.virtual:
                 self._owner.autosave()
 

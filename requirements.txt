@@ -1,5 +1,6 @@
 defusedxml==0.4.1
 docutils==0.12
+gprof2dot==2016.10.13
 Pillow==3.2.0
 ply==3.8
 pycrypto==2.6.1

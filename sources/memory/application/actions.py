@@ -82,10 +82,12 @@ class MemoryActions(MemoryBase, MutableMapping):
     def new_sketch(self, restore=False):
         return MemoryActionSketch(wrap_complete(self, restore), self._owner)
 
-    def new(self, name=None):
+    def new(self, name=None, source_code=None):
         item = self.new_sketch()
         item.id = str(uuid4())
         item.name = name
+        if source_code is not None:
+            item.source_code_value = source_code
         return ~item
 
     # unsafe

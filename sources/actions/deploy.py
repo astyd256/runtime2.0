@@ -6,6 +6,7 @@ import file_access
 from .auxiliary.constants import TYPE
 from .auxiliary import section, show, locate_repository
 from .install import run as install
+from .uninstall import run as uninstall
 
 
 LOCATIONS = (
@@ -16,16 +17,23 @@ LOCATIONS = (
     ("data", (file_access.FILE, None, settings.DATA_LOCATION)),
     ("databases", (file_access.DATABASE, None)),
     ("storage", (file_access.STORAGE, None)),
-    ("temp", (file_access.FILE, None, settings.TEMPORARY_LOCATION)))
+    ("temporary", (file_access.FILE, None, settings.TEMPORARY_LOCATION)))
 
 
-def run():
+def run(renew=False):
     """
     deploy runtime on the system
+    :param switch renew: renew current installation
     """
-    with section("initialize directories"):
+    if renew:
+        with section("uninstall applications"):
+            uninstall("applications", yes=True)
+        with section("uninstall types"):
+            uninstall("types", yes=True)
+
+    with section("%sinitialize directories" % ("re" if renew else "")):
         for caption, segments in LOCATIONS:
-            show("prepare %s" % caption)
+            show("prepare %s directory" % caption)
             managers.file_manager.prepare_directory(*segments, cleanup=False)
 
     install(locate_repository(TYPE))

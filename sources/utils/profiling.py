@@ -1,9 +1,9 @@
 
 import errno
-import os.path
 
 from time import time
 from threading import local, RLock
+from contextlib import contextmanager
 from cProfile import Profile
 from pstats import Stats
 
@@ -65,6 +65,18 @@ class Profiler(object):
             if self._stats is not None:
                 self._stats = None
 
+    @contextmanager
+    def hold(self, location=None):
+        if not settings.PROFILING:
+            yield None
+        else:
+            if location is None:
+                location = settings.PROFILE_LOCATION
+
+            with self._lock:
+                self.save(location=location, force=True)
+                yield location
+
     def load(self, location=None):
         if not settings.PROFILING:
             return None
@@ -73,7 +85,7 @@ class Profiler(object):
             location = settings.PROFILE_LOCATION
 
         with self._lock:
-            self.save(force=True)
+            self.save(location=location, force=True)
             try:
                 with open(location, "rb") as file:
                     return file.read()

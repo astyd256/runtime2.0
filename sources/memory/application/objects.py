@@ -164,7 +164,9 @@ class MemoryObjects(MemoryBase, MutableMapping):
 
             # remove events
             item.events.clear()
-            bindings = (binding for binding in self._owner.application.bindings.itervalues()
+            # bindings = (binding for binding in self._owner.application.bindings.itervalues()
+            #     if binding.target_object == item)
+            bindings = (binding for binding in self._owner.application.bindings.catalog.itervalues()
                 if binding.target_object == item)
             for event in self._owner.application.events.catalog.itervalues():
                 # event.callees -= bindings
@@ -172,7 +174,8 @@ class MemoryObjects(MemoryBase, MutableMapping):
                     while binding in event.callees:
                         event.callees.remove(binding)
             for binding in bindings:
-                del self._owner.application.bindings[binding.id]
+                # del self._owner.application.bindings[binding.id]
+                del binding.target_object.container.bindings[binding.id]
 
             # delete resources
             # NOTE: currently invalidate do this
