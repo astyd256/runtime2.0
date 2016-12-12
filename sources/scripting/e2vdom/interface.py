@@ -40,11 +40,16 @@ def generate(container):
         setattr(managers.request_manager.current, ATTRIBUTE_NAME, context)
 
     types = container._types
-    render_type = container._origin.type.render_type
-    render_container = container._origin.container.type.id
+    origin_container_type = container._origin.container.type
+
+    # NOTE: in theory there must be used render type of the container:
+    #       container._origin.type.render_type
+    #       but, for example, Object View has no render type and we
+    #       use origin's container render type instead
 
     return compile_declarations_n_libraries(types,
-        render_type, render_container, context.registrations, dynamic=context.dynamic)
+        origin_container_type.render_type, origin_container_type.id,
+        context.registrations, dynamic=context.dynamic)
 
 
 @contextmanager
