@@ -21,7 +21,10 @@ def wrap_rename(instance):
         self = instance()
         with self._owner.lock:
             del self._items_by_name[item.name]
+            if name in self._items_by_name:
+                name = generate_unique_name(name, self._items_by_name)
             self._items_by_name[name] = item
+            return name
 
     return on_rename
 

@@ -2914,8 +2914,7 @@
 		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[
-import collections
+<![CDATA[import collections
 import json
 from scripting import e2vdom
 import managers
@@ -2928,8 +2927,8 @@ class VDOM_connector(VDOM_object):
             return ""
 
         classname = self.classname or u"conn"
-        source_object = application.objects.search(self.vdomclassid)
-        parent_object = application.objects.search(self.id)
+        source_object = self.lookup(self.vdomclassid)
+        parent_object = self.lookup(self.id)
 
         if not source_object:
             return u"Invalid VDOM class"
@@ -3316,8 +3315,7 @@ console.info('connectionDragStop');
                 , tleft=int(self.width) - 130, ttop=int(self.height) - 24, hwidth=int(self.width) - 8, hheight=int(self.height) - 24, html=html
             )
 
-        return VDOM_object.wysiwyg(self, contents=result)
-]]>
+        return VDOM_object.wysiwyg(self, contents=result)]]>
 	</SourceCode>
 	<Libraries>
 		<Library Target="html"><![CDATA[<script type="text/javascript" src="/1065fca0-5647-807d-1f02-fc4a38ec388d.res"></script>

@@ -32,6 +32,16 @@ class MemoryObjectSketch(MemoryBase):
         return self._parent._container if self._parent else self
 
     @lazy
+    def _primary(self):
+        if self._virtual:
+            result = self
+            while result._parent.virtual:
+                result = result._parent
+            return result
+        else:
+            return self._application
+
+    @lazy
     def _dependents(self):
         return set()
 
@@ -71,6 +81,7 @@ class MemoryObjectSketch(MemoryBase):
     application = rwproperty("_application")
     container = roproperty("_container")
     parent = rwproperty("_parent")
+    primary = roproperty("_primary")
 
     type = rwproperty("_type")
     id = rwproperty("_id")
@@ -86,6 +97,12 @@ class MemoryObjectSketch(MemoryBase):
 
     stateful = property(lambda self: int(self._attributes.get("stateful", 0)))
     hierarchy = property(lambda self: int(self._attributes.get("hierarchy", 0)))
+
+    def select(self, name, *names):
+        if self._name == name:
+            return self._objects.select(*names)
+        else:
+            return None
 
     def __invert__(self):
         ~self._attributes
@@ -133,12 +150,11 @@ class MemoryObject(MemoryObjectSketch):
             return
 
         if not verificators.name(value):
-            raise Exception("Unacceptable value for %s name: %r" % (self, value))
+            raise Exception("Invalid name: %r" % value)
 
         with self.lock:
             managers.dispatcher.dispatch_handler(self, "on_rename", value)
-            self._callback(self, value)
-            self._name = value
+            self._name = self._callback(self, value)
             self.invalidate(upward=True)
             self.autosave()
 

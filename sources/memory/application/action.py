@@ -1,6 +1,7 @@
 
 from uuid import uuid4
 from utils.properties import lazy, constant, roproperty, rwproperty
+from utils import verificators
 from scripting.executable import ActionStorage, ActionExecutable
 from ..generic import MemoryBase
 
@@ -68,13 +69,16 @@ class MemoryAction(MemoryActionSketch):
         raise Exception(u"Use 'new' to create new action")
 
     def _set_name(self, value):
+        if self._name == value:
+            return
+
+        if not verificators.name(value):
+            raise Exception("Invalid name: %r" % value)
+
         with self._owner.lock:
-            if self._name != value:
-                contexts = self._id, self._name, value
-                self._callback(self, value)
-                self._name = value
-                self._owner.invalidate(contexts=contexts, downward=True, upward=True)
-                self._owner.autosave()
+            self._name = self._callback(self, value)
+            self._owner.invalidate(contexts=(self._id, self._name, value), downward=True, upward=True)
+            self._owner.autosave()
 
     def _set_top(self, value):
         self._top = value

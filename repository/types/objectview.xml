@@ -1367,8 +1367,8 @@ class VDOM_objectview(VDOM_object):
             return ""
 
         classname = self.classname or u"ov"
-        source_object = application.objects.search(self.vdomclassid)
-        parent_object = None if div_only else application.objects.search(self.id)
+        source_object = self.lookup(self.vdomclassid)
+        parent_object = None if div_only else self.lookup(self.id)
 
         if not source_object:
             return u"Invalid VDOM class"

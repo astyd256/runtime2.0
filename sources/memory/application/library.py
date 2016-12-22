@@ -1,5 +1,6 @@
 
 from utils.properties import roproperty, rwproperty
+from utils import verificators
 from scripting.executable import LibraryStorage, LibraryExecutable
 from ..generic import MemoryBase
 
@@ -42,14 +43,21 @@ class MemoryLibrary(MemoryLibrarySketch):
     def __init__(self):
         raise Exception(u"Use 'new' to create new library")
 
-    # NOTE: currently is read-only property
-    #       in the future must rename source and other files on rename...
-    # def _set_name(self, value):
-    #     with self._owner.lock:
-    #         if self._name != value:
-    #             self._callback(self, value)
-    #             self._name = value
-    #             self._owner.autosave()
+    def _set_name(self, value):
+        # NOTE: currently is read-only property
+        #       in the future must rename source and other files on rename...
+        #       also need to unlink and reregister in sys.modules
+        raise NotImplementedError
+
+        if self._name == value:
+            return
+
+        if not verificators.name(value):
+            raise Exception("Invalid name: %r" % value)
+
+        with self._owner.lock:
+            self._name = self._callback(self, value)
+            self._owner.autosave()
 
     def _get_source_code(self):
         with self._owner.lock:
@@ -59,7 +67,7 @@ class MemoryLibrary(MemoryLibrarySketch):
         with self._owner.lock:
             super(MemoryLibrary, self)._set_source_code(value)
 
-    name = roproperty("_name")
+    name = rwproperty("_name")
     source_code = property(_get_source_code, _set_source_code)
 
     # unsafe

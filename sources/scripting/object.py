@@ -279,9 +279,22 @@ class VDOMObject(object):
 
         if arguments:
             self.write("<EXECUTE %s>\n%s\n</EXECUTE>" % (information,
-                "\n".join("  <PARAM type=\"%s\">%s</PARAM>" % (kind, value.encode("xml")) for kind, value in data)),action_name)
+                "\n".join("  <PARAM type=\"%s\">%s</PARAM>" % (kind, value.encode("xml")) for kind, value in data)), action_name)
         else:
-            self.write("<EXECUTE %s/>" % information,action_name)
+            self.write("<EXECUTE %s/>" % information, action_name)
+
+    def lookup(self, selector):
+        origin = self._origin
+        if selector[8:9] == "-":
+            if selector == origin.id:
+                return origin
+            else:
+                result = origin.application.objects.catalog.get(selector)
+                if result is None:
+                    result = origin.primary.objects.catalog.get(selector)
+                return result
+        else:
+            return origin.primary.select(*selector.split("."))
 
     def _fetch(self):
         log.write("Fetch %s attributes" % self)
