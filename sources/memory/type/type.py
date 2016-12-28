@@ -52,6 +52,7 @@ class MemoryTypeSketch(MemoryBase, ModuleStorage, ModuleExecutable):
         self._editor_icon = u""
         self._structure_icon = u""
         self._dynamic = 0
+        self._invisible = 0
         self._moveable = 1
         self._resizable = 1
         self._optimization_priority = 1
@@ -93,6 +94,7 @@ class MemoryTypeSketch(MemoryBase, ModuleStorage, ModuleExecutable):
     editor_icon = rwproperty("_editor_icon")
     structure_icon = rwproperty("_structure_icon")
     dynamic = rwproperty("_dynamic")
+    invisible = rwproperty("_invisible")
     moveable = rwproperty("_moveable")
     resizable = rwproperty("_resizable")
     optimization_priority = rwproperty("_optimization_priority")
@@ -155,6 +157,7 @@ class MemoryType(MemoryTypeSketch):
     editor_icon = roproperty("_editor_icon")
     structure_icon = roproperty("_structure_icon")
     dynamic = roproperty("_dynamic")
+    invisible = roproperty("_invisible")
     moveable = roproperty("_moveable")
     resizable = roproperty("_resizable")
     optimization_priority = roproperty("_optimization_priority")

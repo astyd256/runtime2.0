@@ -22,9 +22,10 @@ def wrap_rename(instance):
         self = instance()
         with self._owner.lock:
             del self._items_by_name[item.name]
+            if name in self._items_by_name:
+                name = generate_unique_name(name, self._items_by_name)
             self._items_by_name[name] = item
-            self._owner.invalidate(upward=True)
-            self._owner.autosave()
+            return name
 
     return on_rename
 
@@ -87,8 +88,6 @@ class MemoryObjects(MemoryBase, MutableMapping):
     catalog = roproperty("_catalog")
 
     def new_sketch(self, type, virtual=False, attributes=None, restore=False):
-        # if self._owner.is_object and virtual != self._owner.virtual:
-        #     raise Exception("Virtual objects can only be created in application or another virtual object")
         return MemoryObjectSketch(wrap_complete(self, restore), type,
             self._owner.application, None if self._owner.is_application else self._owner,
             virtual=virtual, attributes=attributes)
@@ -98,6 +97,14 @@ class MemoryObjects(MemoryBase, MutableMapping):
         item.id = str(uuid4())
         item.name = name
         return ~item
+
+    def select(self, *names):
+        result = self._owner
+        for name in names:
+            result = result.objects._items_by_name.get(name)
+            if result is None:
+                return None
+        return result
 
     # unsafe
     def compose(self, ident=u"", file=None, shorter=False):

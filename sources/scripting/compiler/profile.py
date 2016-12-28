@@ -85,7 +85,8 @@ class CompilationProfile(CompilationProfileEntity):
 
     def __enter__(self):
         for child in self._origin.objects.itervalues():
-            self._entries.new(child)
+            if not child.type.invisible:
+                self._entries.new(child)
         return self
 
     def __exit__(self, extype, exvalue, extraceback):

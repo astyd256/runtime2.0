@@ -4,6 +4,8 @@ from logs import console
 from .auxiliary import section, show, search_object, search_action
 
 
+DEFAULT_DEPTH = 10
+
 INDENT = "    "
 SELECTION = "- "
 
@@ -42,22 +44,33 @@ def search_parents(item):
     return items
 
 
-def show_level(item, level=0, expand=False, select=False, indent=""):
+def show_level(item, level=0, expand=0, select=False, actions=False, indent=""):
     indent = indent + INDENT * level
     if select and len(indent) >= len(SELECTION):
         indent = indent[:-len(SELECTION)] + SELECTION
-    show("%s%s" % (indent, describe(item, extra=True)), longer=True)
-    if expand and hasattr(item, "is_object"):
+
+    show_underlying = hasattr(item, "is_object") and bool(item.objects or (actions and item.actions))
+    if expand:
+        details = ""
+    else:
+        details = "..." if show_underlying else ""
+        show_underlying = False
+
+    show("%s%s%s" % (indent, describe(item, extra=True), details), longer=True)
+    if show_underlying:
         for subitem in item.objects.itervalues():
-            show_level(subitem, level + 1, expand=expand)
-        for subitem in item.actions.itervalues():
-            show_level(subitem, level + 1)
+            show_level(subitem, level + 1, expand=expand - 1 if expand else 0, actions=actions)
+        if actions:
+            for subitem in item.actions.itervalues():
+                show_level(subitem, level + 1)
 
 
-def run(identifier):
+def run(identifier, depth=DEFAULT_DEPTH, actions=False):
     """
     inspect object
     :param uuid identifier: object uuid to inspect
+    :param int depth: limit the depth of showing for underlying objects
+    :param switch actions: show actions
     """
     subject = search_object(identifier)
     if subject:
@@ -79,4 +92,4 @@ def run(identifier):
     with section("structure", width=CONSOLE_WIDTH):
         for level, item in enumerate(parents):
             show_level(item, level)
-        show_level(subject, len(parents), expand=True, select=True)
+        show_level(subject, len(parents), expand=depth, select=True, actions=actions)

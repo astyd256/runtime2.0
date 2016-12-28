@@ -1,6 +1,5 @@
 
 import json
-from .auxiliary import lookup
 
 
 def loads(vdomjson, object, catch):
@@ -19,7 +18,7 @@ def loads(vdomjson, object, catch):
         except:
             raise Exception("Invalid event declaration: %s" % event_declaration)
 
-        source = lookup(object, source_name)
+        source = object.select(*source_name.split("."))
         if not source:
             raise Exception("Unable to find object: %s" % source_name)
 
@@ -34,7 +33,7 @@ def loads(vdomjson, object, catch):
                     except:
                         raise Exception("Invalid action declaration: %s" % action[0])
 
-                    target = lookup(object, target_name)
+                    target = object.select(*target_name.split("."))
                     if not target:
                         raise Exception("Can't find object by name: %s" % target_name)
 

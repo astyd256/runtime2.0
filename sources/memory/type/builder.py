@@ -91,6 +91,15 @@ def type_builder(parser, installation_callback=None):
                                     raise UnexpectedElementValueError(name)
                             parser.handle_value(name, attributes, dynamic_handler)
                             # </Dynamic>
+                        elif name == u"Invisible":
+                            # <Invisible>
+                            def invisible_handler(value):
+                                try:
+                                    type.invisible = int(value)
+                                except ValueError:
+                                    raise UnexpectedElementValueError(name)
+                            parser.handle_value(name, attributes, invisible_handler)
+                            # </Invisible>
                         elif name == u"Moveable":
                             # <Moveable>
                             def moveable_handler(value):
