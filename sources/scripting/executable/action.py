@@ -42,13 +42,12 @@ class ActionExecutable(Executable):
     def signature(self):
         return "<%s action %s:%s>" % (self.scripting_language, self.id, self.name.lower())
 
-    def execute(self, context=None, namespace=None):
+    def execute(self, context=None, namespace=None, arguments=None):
         # statistics.increase("action.execute")
         if self.scripting_language == PYTHON_LANGUAGE:
-            return super(ActionExecutable, self).execute(context=context, namespace=namespace)
+            return super(ActionExecutable, self).execute(context=context, namespace=namespace, arguments=arguments)
         else:
             if namespace is None:
                 namespace = managers.request_manager.get_request().session().context
             with self.lock:
-                return super(ActionExecutable, self).execute(context=context,
-                    namespace=namespace)
+                return super(ActionExecutable, self).execute(context=context, namespace=namespace, arguments=arguments)

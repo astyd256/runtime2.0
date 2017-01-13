@@ -9,6 +9,8 @@ from ..constants import SOURCE_CODE, LISTING, SYMBOLS, BYTECODE
 
 vengine = import_module("vscript.engine")
 vcompile, vexecute = vengine.vcompile, vengine.vexecute
+pack = import_module("vscript.conversions").pack
+
 
 extensions = {
     SOURCE_CODE: VSCRIPT_EXTENSION,
@@ -36,7 +38,14 @@ def compile(executable, package, signature, source_code):
     return python_compile(listing, signature, "exec")
 
 
-def execute(executable, bytecode, context, namespace):
+def execute(executable, bytecode, context, namespace, arguments):
+    if namespace is None:
+        namespace = {}
+
+    if arguments is not None:
+        for name, value in arguments.iteritems():
+            namespace["v_%s" % name.replace("_", "")] = pack(value)
+
     try:
         symbols = getattr(executable, SYMBOLS)
     except AttributeError:

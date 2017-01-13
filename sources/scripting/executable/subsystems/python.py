@@ -32,11 +32,16 @@ def compile(executable, package, signature, source_code):
             server_log.warning("Unsuitable encoding declaration into %s, line %s" % (executable, error.lineno))
             source_code = REMOVE_ENCODING_REGEX.sub("", source_code)
             return python_compile(source_code, signature, "exec")
+        else:
+            raise
 
 
-def execute(executable, bytecode, context, namespace):
+def execute(executable, bytecode, context, namespace, arguments):
     if namespace is None:
         namespace = {}
+
+    if arguments is not None:
+        namespace.update(arguments)
 
     if context is not None:
         namespace["self"] = context

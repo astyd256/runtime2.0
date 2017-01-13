@@ -58,7 +58,7 @@ class Executable(object):
             elif settings.STORE_BYTECODE:
                 self.write(BYTECODE, bytecode)
 
-    def execute(self, context=None, namespace=None):
+    def execute(self, context=None, namespace=None, arguments=None):
         with self.lock:
             try:
                 bytecode = getattr(self, BYTECODE)
@@ -81,7 +81,7 @@ class Executable(object):
             namespace["__package__"] = self.package
 
         try:
-            self.subsystem.execute(self, bytecode, context, namespace)
+            self.subsystem.execute(self, bytecode, context, namespace, arguments)
         except RenderTermination:
             raise
         except Exception:

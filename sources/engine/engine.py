@@ -67,7 +67,7 @@ class Engine(object):
             self.select(previous)
             # statistics.show("Render %s" % object)
 
-    def dynamic_render(self, xmldata, jsondata, origin=None, parent=None):
+    def dynamic_render(self, xmldata, jsondata, origin=None, parent=None, handler=None):
         log.write("Dynamic render for %s" % (origin or managers.engine.application))
         try:
             root = vdomxml.loads(xmldata.encode("utf8"), origin or managers.engine.application)
@@ -81,7 +81,7 @@ class Engine(object):
             return None, ""
 
         try:
-            vdomjson.loads(jsondata, root, origin or managers.engine.application)
+            vdomjson.loads(jsondata, root, origin or managers.engine.application, handler=handler)
         except:
             if jsondata.strip():
                 raise
