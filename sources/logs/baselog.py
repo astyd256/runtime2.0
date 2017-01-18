@@ -23,5 +23,11 @@ class BaseLog(object):
     def accomplish(self, *values, **options):
         raise NotImplementedError
 
+    def describe(self, *values):
+        raise NotImplementedError
+
     def write(self, *arguments, **options):
         self._enqueue(*self.accomplish(*arguments, **options))
+
+    def flush(self):
+        pass

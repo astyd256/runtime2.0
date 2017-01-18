@@ -2,7 +2,7 @@
 import settings
 import logs
 from . import levels
-from .auxiliary import get_calling_module
+from .auxiliary import discover_calling_module
 from .baselog import BaseLog
 
 
@@ -19,31 +19,21 @@ class DebugLog(BaseLog):
                 else (levels.DEBUG, debug) if debug is not None \
                 else (levels.MESSAGE, "")
 
-        if level < settings.CONSOLE_LOG_LEVEL and level < settings.LOG_LEVEL:
-            return
+        if level >= settings.LOG_LEVEL or level >= settings.CONSOLE_LOG_LEVEL:
+            if not isinstance(message, basestring):
+                message = str(message)
+            if module is None and settings.DISCOVER_LOGGING_MODULE:
+                module = discover_calling_module()
 
-        if not isinstance(message, basestring):
-            message = str(message)
-
-        if module is None and settings.LOGGING_AUTOMODULE:
-            module = get_calling_module()
-
-        if settings.LOGGING:
             values = self.accomplish(module, level, message, **options)
-            if level >= settings.LOG_LEVEL:
+
+            if settings.LOGGER and level >= settings.LOG_LEVEL:
                 self._enqueue(*values)
             if level >= settings.CONSOLE_LOG_LEVEL:
-                logs.console.write(self._format(*values))
-        elif level == levels.WARNING:
-            if settings.DISPLAY_WARININGS_ANYWAY:
-                logs.console.write(message, level=level)
-        elif level == levels.ERROR:
-            if settings.DISPLAY_ERRORS_ANYWAY:
-                logs.console.write(message, level=level)
+                logs.console.write(self._format(*values), level=level, format=False)
 
     def flush(self):
-        if settings.LOGGING and self.echo:
-            logs.console.flush()
+        logs.console.flush()
 
     def debug(self, message, module=None, **options):
         self.write(message, module=module, level=levels.DEBUG, **options)

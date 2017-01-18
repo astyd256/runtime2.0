@@ -32,3 +32,6 @@ class ApplicationLog(DebugLog):
 
     def accomplish(self, module, level, message, user=None):
         return datetime.datetime.utcnow(), current_thread().name, module or "", level, user or "", message
+
+    def describe(self, timestamp, thread, module, level, user, message):
+        return timestamp, level, message, {"thread": thread, "module": module, "user": user}

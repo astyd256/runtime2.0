@@ -20,7 +20,7 @@ class Console(object):
         self._lock = Lock()
         self._formatter = PrefixingLogFormatter(NAME)
 
-    def write(self, message=None, warning=None, error=None, debug=None, module=None, level=None):
+    def write(self, message=None, warning=None, error=None, debug=None, module=None, level=None, format=True):
         if level is None:
             level, message = \
                 (levels.MESSAGE, message) if message is not None else \
@@ -29,19 +29,18 @@ class Console(object):
                 (levels.DEBUG, debug) if debug is not None else \
                 (levels.MESSAGE, "")
 
-        if level < settings.CONSOLE_LOG_LEVEL:
-            return
+        if level >= settings.CONSOLE_LOG_LEVEL:
+            if isinstance(message, unicode):
+                message = message.encode((self.stderr.encoding if level is levels.ERROR
+                    else self.stdout.encoding) or "ascii", "backslashreplace")
+            elif not isinstance(message, basestring):
+                message = str(message)
 
-        if isinstance(message, unicode):
-            message = message.encode((self.stderr.encoding if level is levels.ERROR
-                else self.stdout.encoding) or "ascii", "backslashreplace")
-        elif not isinstance(message, basestring):
-            message = str(message)
+            if format:
+                message = self._formatter.format(module, level, message)
 
-        message = self._formatter.format(module, level, message)
-
-        with self._lock:
-            (self.stderr if level is levels.ERROR else self.stdout).write(message)
+            with self._lock:
+                (self.stderr if level is levels.ERROR else self.stdout).write(message)
 
     def flush(self):
         self.stdout.flush()

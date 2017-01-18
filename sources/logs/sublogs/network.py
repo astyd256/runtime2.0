@@ -4,6 +4,7 @@ import settings
 from ..packer import create_packer
 from ..formatters import TabbingLogFormatter
 from ..baselog import BaseLog
+from ..levels import MESSAGE
 
 
 NAME = "network"
@@ -31,3 +32,8 @@ class NetworkLog(BaseLog):
 
     def accomplish(self, module, action, source, destination, user, resource):
         return datetime.datetime.utcnow(), module, action, source, destination, user, resource
+
+    def describe(self, timestamp, module, action, source, destination, user, resource):
+        return timestamp, MESSAGE, \
+            "%s; from: %s; to: %s; %s; %s" % (action, source, destination, user, resource), \
+            {"module": module}
