@@ -92,6 +92,9 @@ LOGGING_TIMESTAMP = "%Y-%m-%d %H:%M:%S"
 DISCOVER_LOGGING_MODULE = True
 LOGGING_OUTPUT = True
 
+if MANAGE:
+    LOGGER = None
+
 # profiling
 
 PROFILING = False

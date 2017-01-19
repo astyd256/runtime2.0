@@ -19,7 +19,7 @@ class DebugLog(BaseLog):
                 else (levels.DEBUG, debug) if debug is not None \
                 else (levels.MESSAGE, "")
 
-        if level >= settings.LOG_LEVEL or level >= settings.CONSOLE_LOG_LEVEL:
+        if settings.LOGGER and (level >= settings.LOG_LEVEL or level >= settings.CONSOLE_LOG_LEVEL):
             if not isinstance(message, basestring):
                 message = str(message)
             if module is None and settings.DISCOVER_LOGGING_MODULE:
@@ -27,7 +27,7 @@ class DebugLog(BaseLog):
 
             values = self.accomplish(module, level, message, **options)
 
-            if settings.LOGGER and level >= settings.LOG_LEVEL:
+            if level >= settings.LOG_LEVEL:
                 self._enqueue(*values)
             if level >= settings.CONSOLE_LOG_LEVEL:
                 logs.console.write(self._format(*values), level=level, format=False)
