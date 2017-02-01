@@ -7,6 +7,7 @@ from .auxiliary.constants import TYPE
 from .auxiliary import section, show, locate_repository
 from .install import run as install
 from .uninstall import run as uninstall
+from .index import run as index
 
 
 LOCATIONS = (
@@ -37,3 +38,4 @@ def run(renew=False):
             managers.file_manager.prepare_directory(*segments, cleanup=False)
 
     install(locate_repository(TYPE))
+    index()

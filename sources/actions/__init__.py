@@ -14,4 +14,5 @@ import generate
 import watch
 import profile
 import offload
+import index
 import shell

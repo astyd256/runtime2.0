@@ -9,6 +9,7 @@ import settings
 CHUNK_SIZE = (settings.RESOURCE_LINE_LENGTH // 4) * 3
 READ_CHUNK_COUNT = 1000
 
+INDEX_LINE_REGEX = re.compile(r"^(?P<uuid>[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})\:(?P<name>[A-Z]\w*)$", re.IGNORECASE)
 STRANGE_REGEX = re.compile(r"^\n\t+$")
 
 
@@ -62,3 +63,11 @@ def clean_source_code(source_code):
         return source_code
     else:
         return clean_source_code
+
+
+def parse_index_line(value):
+    match = INDEX_LINE_REGEX.match(value)
+    if match:
+        return match.group("uuid"), match.group("name")
+    else:
+        raise ValueError(value)

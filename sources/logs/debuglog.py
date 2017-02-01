@@ -31,6 +31,8 @@ class DebugLog(BaseLog):
                 self._enqueue(*values)
             if level >= settings.CONSOLE_LOG_LEVEL:
                 logs.console.write(self._format(*values), level=level, format=False)
+        elif level >= settings.LOG_LEVEL:
+            logs.console.write(message, warning, error, debug, module, level)
 
     def flush(self):
         logs.console.flush()

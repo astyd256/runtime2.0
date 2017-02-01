@@ -6,14 +6,11 @@ from utils.parsing import VALUE, native, UnexpectedAttributeValueError, MissingA
 
 
 def vdomxml_builder(parser, origin):
-    # TODO: think much more about type indexing
-    catalog = {type.name: type for type in managers.memory.types.itervalues()}
     objects = []
 
     def create_object(parent_objects, name, attributes):
-        try:
-            object_type = catalog[name]
-        except KeyError:
+        object_type = managers.memory.types.search(name)
+        if object_type is None:
             raise UnexpectedAttributeValueError("Unknown type: %s" % name)
 
         try:

@@ -1,5 +1,6 @@
 
 import re
+from .decorators import verificator
 
 
 UUID_REGEX = re.compile(r"^[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12}$", re.IGNORECASE)
@@ -20,10 +21,12 @@ def complies(value, verificator):
         return False
 
 
+@verificator
 def none(value):
     return value
 
 
+@verificator
 def integer(value):
     try:
         return int(value)
@@ -31,6 +34,7 @@ def integer(value):
         raise ValueError("Not an integer")
 
 
+@verificator
 def boolean(value):
     try:
         return {"0": False, "1": True, "no": False, "yes": True, "false": False, "true": True}[value.lower()]
@@ -38,6 +42,7 @@ def boolean(value):
         raise ValueError("Not a boolean")
 
 
+@verificator
 def port(value):
     try:
         value = int(value)
@@ -50,6 +55,7 @@ def port(value):
             raise ValueError("Port must be greater then zero")
 
 
+@verificator
 def uuid(value):
     if UUID_REGEX.match(value):
         return str(value.lower())
@@ -57,6 +63,7 @@ def uuid(value):
         raise ValueError("Not an unique identifier")
 
 
+@verificator
 def name(value):
     if NAME_REGEX.match(value):
         return str(value)
@@ -64,6 +71,7 @@ def name(value):
         raise ValueError("Not a name")
 
 
+@verificator
 def name_or_integer(value):
     match = NAME_OR_INTEGER_REGEX.match(value)
     if match:
@@ -72,6 +80,7 @@ def name_or_integer(value):
         raise ValueError("Not a name")
 
 
+@verificator
 def uuid_or_name(value):
     match = UUID_OR_NAME_REGEX.match(value)
     if match:
@@ -80,6 +89,7 @@ def uuid_or_name(value):
         raise ValueError("Not an unique identifier or name")
 
 
+@verificator
 def uuid_or_none(value):
     match = UUID_OR_NONE_REGEX.match(value)
     if match:
@@ -88,6 +98,7 @@ def uuid_or_none(value):
         raise ValueError("Not an unique identifier or none")
 
 
+@verificator
 def size(value):
     match = SIZE_REGEX.match(value)
     if match:
@@ -104,6 +115,7 @@ def size(value):
         raise ValueError("Not a size")
 
 
+@verificator
 def enable_or_disable(value):
     try:
         return {"enable": True, "disable": False}[value.lower()]
@@ -111,6 +123,7 @@ def enable_or_disable(value):
         raise ValueError("Not an enable or disable")
 
 
+@verificator
 def exception(value):
     if EXCEPTION_REGEX.match(value):
         try:
@@ -124,6 +137,7 @@ def exception(value):
         raise ValueError("Not an exception")
 
 
+@verificator
 def thread(value):
     print "???", value
     match = THREAD_REGEX.match(value)

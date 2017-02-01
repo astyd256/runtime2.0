@@ -72,27 +72,27 @@ class Memory(object):
 
     def work(self):
         with self._lock:
-            items = tuple(self._queue)
+            entities = tuple(self._queue)
             self._queue.clear()
 
-        for item in items:
+        for entity in entities:
             try:
-                item.save()
+                entity.save()
             except:
                 log.error("Unable to save %s, details below\n%s" %
-                    (item, format_exception_trace(locals=True, separate=True)))
+                    (entity, format_exception_trace(locals=True, separate=True)))
 
     # scheduling
 
-    def schedule(self, application):
+    def schedule(self, entity):
         with self._lock:
-            self._queue.add(application)
+            self._queue.add(entity)
             if self._daemon is None:
                 self.start_daemon()
 
-    def unschedule(self, application):
+    def unschedule(self, entity):
         with self._lock:
-            self._queue.discard(application)
+            self._queue.discard(entity)
 
     # cleanupping
 
@@ -140,6 +140,7 @@ class Memory(object):
                     for lineno, message in parser.report:
                         into.append((lineno, message))
             type.save()
+            self._types.save()
             return type
         except AlreadyExistsError as error:
             raise
