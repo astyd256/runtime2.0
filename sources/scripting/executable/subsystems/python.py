@@ -40,11 +40,11 @@ def execute(executable, bytecode, context, namespace, arguments):
     if namespace is None:
         namespace = {}
 
-    if arguments is not None:
-        namespace.update(arguments)
-
     if context is not None:
         namespace["self"] = context
+
+    if arguments is not None:
+        namespace.update(arguments)
 
     namespace.update(
         log=log,

@@ -249,6 +249,7 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="311">Incorrect value, must be dictionary like {&apos;src_name:event_name&apos;: [subscription_name, (&apos;dst_name:action&apos;, param1, param2...)]}</Sentence>
 			<Sentence ID="312">Incorrect value</Sentence>
 			<Sentence ID="313">Incorrect value, must be 0 or 1</Sentence>
+			<Sentence ID="314">Incorrect value</Sentence>
 			<Sentence ID="401">Invisible</Sentence>
 			<Sentence ID="402">Visible</Sentence>
 			<Sentence ID="411">Auto</Sentence>
@@ -561,17 +562,13 @@ TEMPLATE = u"""{libraries}
 class VDOM_DynamicObject(VDOM_object):
 
     def inner_render(self):
-        handler = self._origin.actions.get(self.handler) if self.handler else None
-
         e2vdom.process(self)
         try:
             with e2vdom.select(dynamic=True):
-                instance, contents = managers.engine.dynamic_render(self.vdomxml, self.vdomactions,
-                    origin=self._origin, parent=self, handler=handler)
-                if instance is None:
-                    return contents, "", ""
-                else:
-                    declarations, libraries = e2vdom.generate(instance)
+                vdomobject = self.loads(self.vdomxml, self.vdomactions, handler=self.handler)
+                with managers.engine.start_render(vdomobject, parent=self) as context:
+                    contents = context.contents
+                    declarations, libraries = e2vdom.generate(context.instance)
                     return contents, declarations, libraries
         except Exception as error:
             if self.debugmode == "1":

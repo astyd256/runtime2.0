@@ -147,8 +147,28 @@ class MemoryAction(MemoryActionSketch):
 
 class MemoryHandledAction(MemoryActionSketch):
 
+    class FakeSelf(object):
+
+        def __getattribute__(self, name):
+            raise Exception("self is not available")
+
+        def __str__(self):
+            return "self is not available"
+
+        def __unicode__(self):
+            return u"self is not available"
+
+        def __repr__(self):
+            return "self is not available"
+
+    _fake_self = FakeSelf()
+
     handler = roproperty("_handler")
 
     def execute(self, context=None, namespace=None):
         self._handler.execute(context, namespace,
-            arguments={"action_name": self._name, "source_code": self._get_source_code()})
+            arguments={
+                "self": self._fake_self,
+                "source_object": context,
+                "action_name": self._name,
+                "source_code": self._get_source_code()})

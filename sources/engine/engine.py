@@ -3,10 +3,36 @@ from contextlib import contextmanager
 from threading import local, current_thread
 import managers
 from logs import log
-from memory import COMPUTE_CONTEXT, RENDER_CONTEXT, WYSIWYG_CONTEXT, vdomxml, vdomjson
+from memory import COMPUTE_CONTEXT, RENDER_CONTEXT, WYSIWYG_CONTEXT
 from utils.profiling import profiler
+from utils.properties import lazy
 # from utils.statistics import statistics
 from .exceptions import RenderTermination
+
+
+class EngineContext(object):
+
+    @property
+    def instance(self):
+        return self._instance
+
+    def __init__(self, instance):
+        self._instance = instance
+
+
+class RenderContext(EngineContext):
+
+    @lazy
+    def contents(self):
+        self._instance.execute()
+        return self._instance.render()
+
+
+class WysiwygContext(EngineContext):
+
+    @lazy
+    def contents(self):
+        return self._instance.wysiwyg()
 
 
 class EngineLocal(local):
@@ -58,7 +84,6 @@ class Engine(object):
         try:
             with profiler:
                 instance = object.factory(RENDER_CONTEXT)(parent)
-                # instance.execute(namespace=managers.request_manager.get_request().session().context)
                 instance.execute()
                 return instance.render()
         except RenderTermination:
@@ -67,31 +92,18 @@ class Engine(object):
             self.select(previous)
             # statistics.show("Render %s" % object)
 
-    def dynamic_render(self, xmldata, jsondata, origin=None, parent=None, handler=None):
-        log.write("Dynamic render for %s" % (origin or managers.engine.application))
+    @contextmanager
+    def start_render(self, object, parent=None, render_type=None):
+        log.write("Render %s" % object)
+        previous = self.select(object.application)
         try:
-            root = vdomxml.loads(xmldata.encode("utf8"), origin or managers.engine.application)
-        except:
-            if xmldata.strip():
-                raise
-            else:
-                return None, ""
-
-        if not root:
-            return None, ""
-
-        try:
-            vdomjson.loads(jsondata, root, origin or managers.engine.application, handler=handler)
-        except:
-            if jsondata.strip():
-                raise
-
-        try:
-            instance = root.factory(RENDER_CONTEXT)(parent)
-            instance.execute()
-            return instance, instance.render()
+            with profiler:
+                yield RenderContext(object.factory(RENDER_CONTEXT)(parent))
         except RenderTermination:
-            return instance, ""
+            return
+        finally:
+            self.select(previous)
+            # statistics.show("Render %s" % object)
 
     def wysiwyg(self, object, parent=None):
         log.write("Wysiwyg %s" % object)
@@ -103,30 +115,15 @@ class Engine(object):
         finally:
             self.select(previous)
 
-    def dynamic_wysiwyg(self, xmldata, jsondata, origin=None, parent=None):
-        log.write("Dynamic wysiwyg for %s" % (origin or managers.engine.application))
+    @contextmanager
+    def start_wysiwyg(self, object, parent=None):
+        log.write("Wysiwyg %s" % object)
+        previous = self.select(object.application)
         try:
-            root = vdomxml.loads(xmldata.encode("utf8"), origin or managers.engine.application)
-        except:
-            if xmldata.strip():
-                raise
-            else:
-                return None, ""
-
-        if not root:
-            return None, ""
-
-        try:
-            vdomjson.loads(jsondata, root, origin or managers.engine.application)
-        except:
-            if jsondata.strip():
-                raise
-
-        try:
-            instance = object.factory(WYSIWYG_CONTEXT)(parent)
-            return instance, instance.wysiwyg()
-        except RenderTermination:
-            return instance, ""
+            with profiler:
+                yield WysiwygContext(object.factory(WYSIWYG_CONTEXT)(parent))
+        finally:
+            self.select(previous)
 
     def execute(self, action, parent=None, context=None, render=None):
         log.write("Execute%s %s" % (" and render" if render else "", action))
