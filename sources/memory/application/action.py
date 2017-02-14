@@ -20,6 +20,7 @@ class MemoryActionSketch(MemoryBase, ActionStorage, ActionExecutable):
         self._left = 0
         self._state = False
         self._source_code_value = u""
+        self._handler = None
 
     lock = property(lambda self: self._owner.lock)
     owner = target_object = roproperty("_owner")
@@ -61,6 +62,20 @@ class MemoryActionDuplicationSketch(MemoryActionSketch):
         self._left = another._left
         self._state = another._state
         self._source_code_value = another._source_code_value
+
+
+class MemoryHandledActionSketch(MemoryActionSketch):
+
+    def __init__(self, callback, owner, handler):
+        super(MemoryHandledActionSketch, self).__init__(callback, owner)
+        self._handler = handler
+
+    handler = rwproperty("_handler")
+
+    def __invert__(self):
+        result = super(MemoryHandledActionSketch, self).__invert__()
+        self.__class__ = MemoryHandledAction
+        return result
 
 
 class MemoryAction(MemoryActionSketch):
@@ -128,3 +143,32 @@ class MemoryAction(MemoryActionSketch):
             "action",
             "%s:%s" % (self._id, self._name) if self._name else None,
             "of %s" % self._owner)))
+
+
+class MemoryHandledAction(MemoryActionSketch):
+
+    class FakeSelf(object):
+
+        def __getattribute__(self, name):
+            raise Exception("self is not available")
+
+        def __str__(self):
+            return "self is not available"
+
+        def __unicode__(self):
+            return u"self is not available"
+
+        def __repr__(self):
+            return "self is not available"
+
+    _fake_self = FakeSelf()
+
+    handler = roproperty("_handler")
+
+    def execute(self, context=None, namespace=None):
+        self._handler.execute(context, namespace,
+            arguments={
+                "self": self._fake_self,
+                "source_object": context,
+                "action_name": self._name,
+                "source_code": self._get_source_code()})

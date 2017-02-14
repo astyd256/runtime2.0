@@ -39,6 +39,7 @@ class SettingsImporter(object):
         platform = sys.platform
         filename = os.path.splitext(os.path.basename(sys.argv[0]))[0].lower()
         environment = os.environ.get("ENVIRONMENT", "development").lower()
+        instance = os.environ.get("VDOM_INSTANCE_ID")
 
         module.__dict__.update(
             WINDOWS=platform.startswith("win"),
@@ -48,10 +49,8 @@ class SettingsImporter(object):
             MANAGE=filename == "manage",
             PRODUCTION=environment == "production",
             DEVELOPMENT=environment != "production",
-            DEBUG=0,
-            MESSAGE=1,
-            WARNING=2,
-            ERROR=3)
+            ENVIRONMENT=environment,
+            INSTANCE=instance)
 
         sys.modules[fullname] = module
         exec(code, module.__dict__)

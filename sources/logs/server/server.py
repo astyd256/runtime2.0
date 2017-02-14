@@ -4,7 +4,7 @@ import select
 from utils.threads import SmartDaemon
 import settings
 from logs import log
-from ..logger import Logger
+from ..loggers import Logger
 from .session import LogServerSession
 
 

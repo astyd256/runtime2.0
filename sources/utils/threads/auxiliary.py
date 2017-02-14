@@ -2,6 +2,7 @@
 import sys
 import signal
 from threading import current_thread, enumerate as enumerate_threads
+from errno import EINTR
 
 import settings
 from utils.tracing import format_thread_trace
@@ -76,7 +77,11 @@ def shutdown(quantum=settings.QUANTUM):
                         tries = 0
             else:
                 last, tries = thread, 0
-            thread.join(quantum)
+            try:
+                thread.join(quantum)
+            except IOError as error:
+                if error.errno != EINTR:
+                    raise
             tries += 1
 
     stop(lambda thread: not thread.latter and not isinstance(thread, SmartDaemon))

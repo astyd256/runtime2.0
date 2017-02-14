@@ -9,10 +9,10 @@ from argparse import ArgumentParser
 
 from .importers.settings import SettingsImporter
 
-finder = SettingsImporter()
-sys.meta_path.append(finder)
+importer = SettingsImporter()
+sys.meta_path.append(importer)
 settings = __import__("settings")
-sys.meta_path.remove(finder)
+sys.meta_path.remove(importer)
 
 
 # override
@@ -46,7 +46,7 @@ sys.meta_path.append(ScriptingFinder())
 
 from logs import VDOM_log_server
 
-if settings.START_LOG_SERVER:
+if settings.START_LOG_SERVER and settings.LOGGER == "native":
     VDOM_log_server().start()
 
 

@@ -21,21 +21,12 @@ CACHE_LOCATION = "../cache"
 DATA_LOCATION = "../data"
 TEMPORARY_LOCATION = "../temp"
 
-# possible layout for deploying
-
-# REPOSITORY_LOCATION = "/var/vdom/repository"
-# TYPES_LOCATION = "/var/vdom/types"
-# APPLICATIONS_LOCATION = "/var/vdom/applications"
-# RESOURCES_LOCATION = "/var/vdom/resources"
-# CACHE_LOCATION = "/var/vdom/cache"
-# DATA_LOCATION = "/var/vdom/data"
-# TEMPORARY_LOCATION = "/tmp"
-
 # other locations
 
 DATABASES_LOCATION = DATA_LOCATION + "/databases"
 STORAGE_LOCATION = DATA_LOCATION + "/storage"
 LOGS_LOCATION = DATA_LOCATION
+INDEX_LOCATION = DATA_LOCATION + "/memory.index"
 
 SERVER_PIDFILE_LOCATION = TEMPORARY_LOCATION + "/server.pid"
 LOGGER_PIDFILE_LOCATION = TEMPORARY_LOCATION + "/logger.pid"
@@ -83,35 +74,35 @@ MAIN_NAME = "Main"
 
 # logging
 
-if SERVER:
-    LOGGING = True
-    if WINDOWS:
-        START_LOG_SERVER = True
-    else:
-        START_LOG_SERVER = False
-else:
-    LOGGING = False
-    START_LOG_SERVER = False
+LOGGER = "native"  # "native", "ovh"
+START_LOG_SERVER = True
 
-LOG_LEVEL = MESSAGE
-CONSOLE_LOG_LEVEL = MESSAGE
+LOG_LEVEL = 0  # 0 (DEBUG), 1 (MESSAGE), 2 (WARNING), 3 (ERROR)
+CONSOLE_LOG_LEVEL = 0
 
 LOGGING_ADDRESS = "127.0.0.1"
 LOGGING_PORT = 1010
 
-LOGGING_TIMESTAMP = "%Y-%m-%d %H:%M:%S"
+OVH_LOGGING_ADDRESS = "discover.logs.ovh.com"
+OVH_LOGGING_PORT = 12202  # 2201 (LTSV TCP), 2202 (GELF TCP), 12201 (LTSV TLS), 12202 (GELF TLS)
+OVH_LOGGING_ENGINE = "gelf"  # "gelf", "ltsv"
+OVH_LOGGING_TLS = True
+OVH_LOGGING_TOKEN = "3d01766a-bdf1-4e20-83bc-1e4cf812e3a5"
 
-LOGGING_AUTOMODULE = True
+LOGGING_TIMESTAMP = "%Y-%m-%d %H:%M:%S"
+DISCOVER_LOGGING_MODULE = True
 LOGGING_OUTPUT = True
-DISPLAY_WARININGS_ANYWAY = True
-DISPLAY_ERRORS_ANYWAY = True
+
+if MANAGE:
+    LOGGER = None
+    LOG_LEVEL = 2
 
 # profiling
 
 PROFILING = False
+PROFILING_SAVE_PERIODICITY = 5.0
 PROFILE_FILENAME = "server.prs"
 PROFILE_LOCATION = DATA_LOCATION + "/" + PROFILE_FILENAME
-PROFILING_SAVE_PERIODICITY = 5.0
 
 # scripting
 

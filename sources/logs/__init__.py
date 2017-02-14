@@ -12,12 +12,15 @@ network_log = NetworkLog()
 security_log = SecurityLog()
 
 
-from .logger import Logger
+from .loggers import Logger
 from .output import Output, ErrorOutput
 
 
-logger = Logger()
-logger.start()
+if Logger:
+    logger = Logger()
+    logger.start()
+else:
+    logger = None
 
 sys.stdout = Output(sys.stdout)
 sys.stderr = ErrorOutput(sys.stderr)

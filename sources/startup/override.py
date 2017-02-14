@@ -38,6 +38,7 @@ def override(filename):
         current_value = getattr(settings, settings_name, MISSING)
         if current_value is MISSING:
             print "Ignore unknown option: %s" % name
+            continue
 
         try:
             if isinstance(current_value, int):

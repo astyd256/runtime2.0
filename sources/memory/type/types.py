@@ -5,10 +5,11 @@ import settings
 import file_access
 import managers
 
+from utils import verificators
 from utils.properties import roproperty
-from utils.verificators import uuid
 from logs import log
 
+from ..auxiliary import parse_index_line
 from ..generic import MemoryBase
 from .type import MemoryTypeSketch
 
@@ -21,6 +22,7 @@ class MemoryTypes(MemoryBase, Mapping):
     def __init__(self, owner):
         self._owner = owner
         self._items = {}
+        self._index = {}
         self._lazy = True
 
     owner = roproperty("_owner")
@@ -30,24 +32,55 @@ class MemoryTypes(MemoryBase, Mapping):
         def on_complete(item):
             with self._owner._lock:
                 self._items[item.id] = item
+                self._index[item.name] = item.id
 
         return MemoryTypeSketch(on_complete)
+
+    def save(self):
+        if self._lazy:
+            self._discover(full=True)
+        data = "\n".join("%s:%s" % (uuid, name) for name, uuid in self._index.iteritems())
+        managers.file_manager.write(file_access.FILE, None, settings.INDEX_LOCATION, data)
 
     def _load(self, uuid):
         with self._owner._lock:
             item = self._owner.load_type(uuid, silently=True)
             self._items[uuid] = item
+            self._index[item.name] = uuid
             return item
 
-    def _discover(self):
-        listing = managers.file_manager.list(file_access.TYPE)
+    def _discover(self, full=False, load=False):
         with self._owner._lock:
-            for filename in listing:
+            if managers.file_manager.exists(file_access.FILE, None, settings.INDEX_LOCATION):
+                data = managers.file_manager.read(file_access.FILE, None, settings.INDEX_LOCATION)
+                for line in data.splitlines():
+                    try:
+                        uuid, name = parse_index_line(line)
+                    except ValueError:
+                        log.warning("Ignore erroneous index entry: %s" % line)
+                        continue
+                    self._items.setdefault(uuid, NOT_LOADED)
+                    self._index.setdefault(name, uuid)
+
+            listing = managers.file_manager.list(file_access.TYPE)
+            for uuid in listing:
                 try:
-                    uuid(filename)
+                    verificators.uuid(uuid)
                 except ValueError:
+                    log.warning("Ignore erroneous directory: %s" % uuid)
                     continue
-                self._items.setdefault(filename, NOT_LOADED)
+                self._items.setdefault(uuid, NOT_LOADED)
+
+            if full and len(self._items) > len(self._index):
+                unknown = set(self._items.keys()) - set(self._index.values())
+                for uuid in unknown:
+                    self._load(uuid)
+
+            if load:
+                for uuid, item in self._items.iteritems():
+                    if item is NOT_LOADED:
+                        self._load(uuid)
+
             self._lazy = False
 
     def search(self, uuid_or_name):
@@ -55,13 +88,19 @@ class MemoryTypes(MemoryBase, Mapping):
             try:
                 return self[uuid_or_name]
             except KeyError:
-                for item in self.itervalues():
-                    if item.name == uuid_or_name:
-                        return item
+                if self._lazy:
+                    self._discover(full=True)
+                try:
+                    uuid = self._index[uuid_or_name]
+                except KeyError:
+                    return None
+                else:
+                    return self[uuid]
 
-    def unload(self, id):
+    def unload(self, uuid):
         with self._owner._lock:
-            del self._items[id]
+            name = self._items.pop(uuid).name
+            self._index.pop(name, None)
 
     def __getitem__(self, uuid):
         with self._owner._lock:
@@ -81,10 +120,7 @@ class MemoryTypes(MemoryBase, Mapping):
     def __iter__(self):
         with self._owner._lock:
             if self._lazy:
-                self._discover()
-            for uuid, item in self._items.iteritems():
-                if item is NOT_LOADED:
-                    self._load(uuid)
+                self._discover(load=True)
             return iter(self._items)
 
     def __len__(self):

@@ -178,6 +178,30 @@
 			<ColorGroup>2</ColorGroup>
 		</Attribute>
 		<Attribute>
+			<Name>actions</Name>
+			<DisplayName>#Lang(133)</DisplayName>
+			<Description>#Lang(233)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(333)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>3</InterfaceType>
+			<CodeInterface>MultiLine(10000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>handler</Name>
+			<DisplayName>#Lang(134)</DisplayName>
+			<Description>#Lang(234)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^[A-Za-z][_0-1A-Za-z]*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(334)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(50)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
 			<Name>bindings</Name>
 			<DisplayName>#Lang(126)</DisplayName>
 			<Description>#Lang(226)</Description>
@@ -368,6 +392,8 @@ Before using the Object view type, create a new VDOM package top-level container
 			<Sentence ID="130">Dynamic Loading</Sentence>
 			<Sentence ID="131">Insert method</Sentence>
 			<Sentence ID="132">Active item</Sentence>
+			<Sentence ID="133">Actions</Sentence>
+			<Sentence ID="134">Handler</Sentence>
 			<Sentence ID="201">Order of rendering the object on the page. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
 			<Sentence ID="202">Visibility of the object.</Sentence>
 			<Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the z-index indicates the order of their displaying. The larger z-index is, the upper the object lies.</Sentence>
@@ -406,6 +432,8 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="230">Dynamic Loading</Sentence>
 			<Sentence ID="231">Insert Method</Sentence>
 			<Sentence ID="232">Active item</Sentence>
+			<Sentence ID="233">Actions</Sentence>
+			<Sentence ID="234">Custom dynamic server actions handler</Sentence>
 			<Sentence ID="301">Incorrect value, must be positive integer from 0 to 99.</Sentence>
 			<Sentence ID="302">Incorrect value, must be either 0 or 1.</Sentence>
 			<Sentence ID="303">Incorrect value, must be positive integer from 0 to 9999.</Sentence>
@@ -437,6 +465,8 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="330">Invalid value</Sentence>
 			<Sentence ID="331">Invalid value</Sentence>
 			<Sentence ID="332">Invalid value</Sentence>
+			<Sentence ID="333">Invalid value</Sentence>
+			<Sentence ID="334">Incorrect value</Sentence>
 			<Sentence ID="401">Invisible</Sentence>
 			<Sentence ID="402">Visible</Sentence>
 			<Sentence ID="403">Vertical</Sentence>
@@ -588,6 +618,7 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="130">Dynamic Loading</Sentence>
 			<Sentence ID="131">Insert method</Sentence>
 			<Sentence ID="132">Active item</Sentence>
+			<Sentence ID="133">Actions</Sentence>
 			<Sentence ID="201">Order of rendering the object on the page</Sentence>
 			<Sentence ID="202">Visibility of the object</Sentence>
 			<Sentence ID="203">Position in visual hierarchy of objects</Sentence>
@@ -619,6 +650,7 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="230">Dynamic Loading</Sentence>
 			<Sentence ID="231">Insert Method</Sentence>
 			<Sentence ID="232">Active item</Sentence>
+			<Sentence ID="233">Actions</Sentence>
 			<Sentence ID="301">Incorrect value, must be positive integer</Sentence>
 			<Sentence ID="302">Incorrect value, must be 0 or 1</Sentence>
 			<Sentence ID="303">Incorrect value, must be positive integer</Sentence>
@@ -650,6 +682,7 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="330">Invalid value</Sentence>
 			<Sentence ID="331">Invalid value</Sentence>
 			<Sentence ID="332">Invalid value</Sentence>
+			<Sentence ID="333">Invalid value</Sentence>
 			<Sentence ID="401">Invisible</Sentence>
 			<Sentence ID="402">Visible</Sentence>
 			<Sentence ID="403">Vertical</Sentence>
@@ -801,6 +834,7 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="130">Dynamic Loading</Sentence>
 			<Sentence ID="131">Insert method</Sentence>
 			<Sentence ID="132">Active item</Sentence>
+			<Sentence ID="133">Actions</Sentence>
 			<Sentence ID="201">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
 			<Sentence ID="202">Отображение объекта</Sentence>
 			<Sentence ID="203">Положение в визуальной иерархии объектов</Sentence>
@@ -832,6 +866,7 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="230">Dynamic Loading</Sentence>
 			<Sentence ID="231">Insert Method</Sentence>
 			<Sentence ID="232">Active item</Sentence>
+			<Sentence ID="233">Actions</Sentence>
 			<Sentence ID="301">Неправильное значение, должно быть указано целое положительное число</Sentence>
 			<Sentence ID="302">Неправильное значение, должен быть указан 0 или 1</Sentence>
 			<Sentence ID="303">Неправильное значение, должно быть указано целое положительное число</Sentence>
@@ -863,6 +898,7 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="330">Invalid value</Sentence>
 			<Sentence ID="331">Invalid value</Sentence>
 			<Sentence ID="332">Invalid value</Sentence>
+			<Sentence ID="333">Invalid value</Sentence>
 			<Sentence ID="401">Не отображать</Sentence>
 			<Sentence ID="402">Отображать</Sentence>
 			<Sentence ID="403">Вертикальный</Sentence>
@@ -1091,103 +1127,6 @@ Visible - the whole content will always be shown without reference to the object
 			+N5xOt3ew8v1fDx+enU3UzkHCoqLixI+iYyMjj2QkYqTPJWWmG03CQCgoaEKPp+ioqQ9pqegqTyr
 			rK4UhxQVDQC3pxA+trisuz29uaLAPMK/VUQVC6G3zgO8zKDOuNDB0r7P0c3Z1jlTERYG4+TjFgQR
 			6Orp4eXl5+zr6OLu5vLx7fUG8PITIQA7
-		</Resource>
-		<Resource ID="883d23d7-d98f-4552-b0cc-0b14122a14d1" Type="js" Name="scrollstart-scrollstop-resize-div.js">
-			Lyogc2Nyb2xsc3RhcnQgJiBzY3JvbGxzdG9wIGV2ZW50cyAqLw0KKGZ1bmN0aW9uKCl7dmFyIHNw
-			ZWNpYWw9alF1ZXJ5LmV2ZW50LnNwZWNpYWwsdWlkMT0iRCIrICtuZXcgRGF0ZSx1aWQyPSJEIiso
-			K25ldyBEYXRlKzEpO3NwZWNpYWwuc2Nyb2xsc3RhcnQ9e3NldHVwOmZ1bmN0aW9uKCl7dmFyIHRp
-			bWVyLGhhbmRsZXI9ZnVuY3Rpb24oZXZ0KXt2YXIgX3NlbGY9dGhpcyxfYXJncz1hcmd1bWVudHM7
-			aWYodGltZXIpY2xlYXJUaW1lb3V0KHRpbWVyKTtlbHNle2V2dC50eXBlPSJzY3JvbGxzdGFydCI7
-			alF1ZXJ5LmV2ZW50LmhhbmRsZS5hcHBseShfc2VsZixfYXJncyl9dGltZXI9c2V0VGltZW91dChm
-			dW5jdGlvbigpe3RpbWVyPW51bGx9LHNwZWNpYWwuc2Nyb2xsc3RvcC5sYXRlbmN5KX07alF1ZXJ5
-			KHRoaXMpLmJpbmQoInNjcm9sbCIsaGFuZGxlcikuZGF0YSh1aWQxLGhhbmRsZXIpfSx0ZWFyZG93
-			bjpmdW5jdGlvbigpe2pRdWVyeSh0aGlzKS51bmJpbmQoInNjcm9sbCIsalF1ZXJ5KHRoaXMpLmRh
-			dGEodWlkMSkpfX07c3BlY2lhbC5zY3JvbGxzdG9wPSB7bGF0ZW5jeToyMDAsc2V0dXA6ZnVuY3Rp
-			b24oKXt2YXIgdGltZXIsaGFuZGxlcj1mdW5jdGlvbihldnQpe3ZhciBfc2VsZj10aGlzLF9hcmdz
-			PWFyZ3VtZW50cztpZih0aW1lciljbGVhclRpbWVvdXQodGltZXIpO3RpbWVyPXNldFRpbWVvdXQo
-			ZnVuY3Rpb24oKXt0aW1lcj1udWxsO2V2dC50eXBlPSJzY3JvbGxzdG9wIjtqUXVlcnkuZXZlbnQu
-			aGFuZGxlLmFwcGx5KF9zZWxmLF9hcmdzKX0sc3BlY2lhbC5zY3JvbGxzdG9wLmxhdGVuY3kpfTtq
-			UXVlcnkodGhpcykuYmluZCgic2Nyb2xsIixoYW5kbGVyKS5kYXRhKHVpZDIsaGFuZGxlcil9LHRl
-			YXJkb3duOmZ1bmN0aW9uKCl7alF1ZXJ5KHRoaXMpLnVuYmluZCgic2Nyb2xsIixqUXVlcnkodGhp
-			cykuZGF0YSh1aWQyKSl9fX0pKCk7DQoNCi8qIGpRdWVyeSByZXNpemUgZXZlbnQgLSB2MS4xIC0g
-			My8xNC8yMDEwDQogKiBodHRwOi8vYmVuYWxtYW4uY29tL3Byb2plY3RzL2pxdWVyeS1yZXNpemUt
-			cGx1Z2luLw0KICogQ29weXJpZ2h0IChjKSAyMDEwICJDb3dib3kiIEJlbiBBbG1hbg0KICogRHVh
-			bCBsaWNlbnNlZCB1bmRlciB0aGUgTUlUIGFuZCBHUEwgbGljZW5zZXMuDQogKiBodHRwOi8vYmVu
-			YWxtYW4uY29tL2Fib3V0L2xpY2Vuc2UvDQogKi8NCiFmdW5jdGlvbih0LGksZSl7IiQ6bm9tdW5n
-			ZSI7ZnVuY3Rpb24gbigpe2g9aVtzXShmdW5jdGlvbigpe3IuZWFjaChmdW5jdGlvbigpe3ZhciBp
-			PXQodGhpcyksbj1pLndpZHRoKCksaD1pLmhlaWdodCgpLHI9dC5kYXRhKHRoaXMsbyk7ciE9PWUm
-			JihuIT09ci53fHxoIT09ci5oKSYmaS50cmlnZ2VyKHUsW3Iudz1uLHIuaD1oXSl9KSxuKCl9LGFb
-			ZF0pfXZhciBoLHI9dChbXSksYT10LnJlc2l6ZT10LmV4dGVuZCh0LnJlc2l6ZSx7fSkscz0ic2V0
-			VGltZW91dCIsdT0icmVzaXplIixvPXUrIi1zcGVjaWFsLWV2ZW50IixkPSJkZWxheSIsYz0idGhy
-			b3R0bGVXaW5kb3ciO2FbZF09MjUwLGFbY109ITAsdC5ldmVudC5zcGVjaWFsW3VdPXtzZXR1cDpm
-			dW5jdGlvbigpe2lmKCFhW2NdJiZ0aGlzW3NdKXJldHVybiExO3ZhciBpPXQodGhpcyk7cj1yLmFk
-			ZChpKSx0LmRhdGEodGhpcyxvLHt3Omkud2lkdGgoKSxoOmkuaGVpZ2h0KCl9KSwxPT09ci5sZW5n
-			dGgmJm4oKX0sdGVhcmRvd246ZnVuY3Rpb24oKXtpZighYVtjXSYmdGhpc1tzXSlyZXR1cm4hMTt2
-			YXIgaT10KHRoaXMpO3I9ci5ub3QoaSksaS5yZW1vdmVEYXRhKG8pLHIubGVuZ3RofHxjbGVhclRp
-			bWVvdXQoaCl9LGFkZDpmdW5jdGlvbihpKXtmdW5jdGlvbiBuKGksbixyKXt2YXIgYT10KHRoaXMp
-			LHM9dC5kYXRhKHRoaXMsbyk7cmV0dXJuIHM9PT1lP3ZvaWQgaC5hcHBseSh0aGlzLGFyZ3VtZW50
-			cyk6KHMudz1uIT09ZT9uOmEud2lkdGgoKSxzLmg9ciE9PWU/cjphLmhlaWdodCgpLHZvaWQgaC5h
-			cHBseSh0aGlzLGFyZ3VtZW50cykpfWlmKCFhW2NdJiZ0aGlzW3NdKXJldHVybiExO3ZhciBoO3Jl
-			dHVybiB0LmlzRnVuY3Rpb24oaSk/KGg9aSxuKTooaD1pLmhhbmRsZXIsdm9pZChpLmhhbmRsZXI9
-			bikpfX19KGpRdWVyeSx0aGlzKTs=
-		</Resource>
-		<Resource ID="e5b106a1-078e-4f57-ae7e-3c2c30dccd86" Type="gif" Name="ajax-loader2.gif">
-			R0lGODlhEAAQAPQAAP///0dRZPn5+m93haaqtEtVZ2Jqe+Hi5cDDyVZfcZyhq5CWoevs7rS4wNXX
-			3HqCj4SLmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05F
-			VFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAA
-			EAAQAAAFUCAgjmRpnqUwFGwhKoRgqq2YFMaRGjWA8AbZiIBbjQQ8AmmFUJEQhQGJhaKOrCksgEla
-			+KIkYvC6SJKQOISoNSYdeIk1ayA8ExTyeR3F749CACH5BAkKAAAALAAAAAAQABAAAAVoICCKR9KM
-			aCoaxeCoqEAkRX3AwMHWxQIIjJSAZWgUEgzBwCBAEQpMwIDwY1FHgwJCtOW2UDWYIDyqNVVkUbYr
-			6CK+o2eUMKgWrqKhj0FrEM8jQQALPFA3MAc8CQSAMA5ZBjgqDQmHIyEAIfkECQoAAAAsAAAAABAA
-			EAAABWAgII4j85Ao2hRIKgrEUBQJLaSHMe8zgQo6Q8sxS7RIhILhBkgumCTZsXkACBC+0cwF2GoL
-			LoFXREDcDlkAojBICRaFLDCOQtQKjmsQSubtDFU/NXcDBHwkaw1cKQ8MiyEAIfkECQoAAAAsAAAA
-			ABAAEAAABVIgII5kaZ6AIJQCMRTFQKiDQx4GrBfGa4uCnAEhQuRgPwCBtwK+kCNFgjh6QlFYgGO7
-			baJ2CxIioSDpwqNggWCGDVVGphly3BkOpXDrKfNm/4AhACH5BAkKAAAALAAAAAAQABAAAAVgICCO
-			ZGmeqEAMRTEQwskYbV0Yx7kYSIzQhtgoBxCKBDQCIOcoLBimRiFhSABYU5gIgW01pLUBYkRItAYA
-			qrlhYiwKjiWAcDMWY8QjsCf4DewiBzQ2N1AmKlgvgCiMjSQhACH5BAkKAAAALAAAAAAQABAAAAVf
-			ICCOZGmeqEgUxUAIpkA0AMKyxkEiSZEIsJqhYAg+boUFSTAkiBiNHks3sg1ILAfBiS10gyqCg0Ua
-			FBCkwy3RYKiIYMAC+RAxiQgYsJdAjw5DN2gILzEEZgVcKYuMJiEAOwAAAAAAAAAAAA==
-		</Resource>
-		<Resource ID="adda1d02-1096-41e4-961d-4625e795caf8" Type="png" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
-			jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVh
-			ZHlxyWU8AAADIGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78i
-			IGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9i
-			ZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAy
-			MDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93
-			d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJk
-			ZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5z
-			OnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0
-			cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JU
-			b29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5p
-			aWQ6RkY0MEQwNDExNDI4MTFFMTk4RjFEODAzOUEyNzIxRDQiIHhtcE1NOkRvY3VtZW50SUQ9Inht
-			cC5kaWQ6RkY0MEQwNDIxNDI4MTFFMTk4RjFEODAzOUEyNzIxRDQiPiA8eG1wTU06RGVyaXZlZEZy
-			b20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGRjQwRDAzRjE0MjgxMUUxOThGMUQ4MDM5QTI3
-			MjFENCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGRjQwRDA0MDE0MjgxMUUxOThGMUQ4MDM5
-			QTI3MjFENCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94
-			cGFja2V0IGVuZD0iciI/PqNgd48AAAS/SURBVEhLrVZpb1RlFH7uOlvn3pmutJYSgQqlra0JmohG
-			If4D+cif8YfoJz6ZmGiIkigJRlAqJVJaWig0UixbgVnudDrL3X3ObcG2UxNJPDczc9/lnOe8Z3ne
-			UWIK/gcJEUOD0mFJ2QkQxxESvCjmbwQoKjRd71ASj16Z+q1exe16Ew0X8BBhKKfhs0I3hs10oqc0
-			m804k5GBqMQIoxCKAIURAj/knArXd1Ha3MTh4eHXYJedMq5WNnDMtHHIyND4ViCohkWvhqbu4xQd
-			1c6e/fyLS5d/gu976O7uhmmk6LgGVdPx6MkjfP3NeXx5/iv0vT2KYwdHXgPMbjTQraRRilysR21o
-			igIn9LHi16HzfdDI4979Jei2bdFxBfO3FnDz+g0cOTqKuYUbuHP/FhZvL6C32IODY5PIW13/hIrO
-			+ggxondhmN43owB3vTryqoHpdAEGoxHrBp6lTai6YcK2bNiFPLoKFqplBzPXrmBl5T5GRg7i0OhR
-			DI8cIoCF8tOnWH+0hvKdJZ7UQMhQtuOQBjUM6ClYBAgJ3uB8yFzGQUgATUOaSJrCGogYGhUcZ1C0
-			C+jr6UN//wHkeAqV6z1DQzjAMPWMjUFlsMWInJ6mEsOREjPN8uG7nIJhV2XIeSismCDw0PZcJipG
-			KpNFniC57n5oZhYRk/9axAsad/nRaUjiLyWS2OEjIVI557faUA0m1Q9DhPSIPiVVJPWQSeWR630L
-			Wq6ISNVhcd9O+dgq4ImygV/dMurUSbyn4gs6ebVVwVJ7HRM5m6CUKIqw+uABlpfvolZx8N3Fb2EP
-			DuDkqU8wdWIc749NQBOv95EmjX9ffYmVTQ8ZVcGJrhw+tW2+a1u7BWCntFvt+MIPF+K1Z093zf+1
-			+nDv1l1jN2RG9pFdnZw0CsOlMfH7ydrDhxgYGGB+Mvuu7zfZcW6XiXGc6r4G+ml8dubafzYuGztO
-			UKvXYDDh2ULxjQxJLtLMk7qH8BIAqeOrGw7mNlt4j8lS2JmLxSzOsLmOZ3Z08B7IgJq/1MpYbrTJ
-			Wxr5KEAxo+IMy/tIOpfsVq7XnfjC8wpGzTwOGzm0WG5S0zpLbpnt/1xtY5REd+74+C7zPzol/Fze
-			wLhpJXpB0m4JEWOJZFfTfHzgB1Cr/DqRsuHEHma9EkphE5WwhZteBW32xTt6EfN/rnaE66UbYCJl
-			oRS7mGEvPItaeBw0MUc9qegxvYDFtTWoPnH7tBQmSbuTZgENxnIz8vFuqoApzg2SY/Ss2QEgHg9p
-			GUxTZ4IOlsmk0qJT1DtuWIlNg9cAe1RJFvyEPRT0qmbCiio5xpN7QY7t7aCJbSih5IA6omeSZno0
-			g2THy4nxldxEEmeWvGpwMUlG8siVs0VaSRNuxxWu13GCNPUS/uFeecSVkBPCf2JRLMSSA7HlMixy
-			ElHZSlSyzDnZqoG3XgeA7PASstsuTCE6jmUkRCcF69Mx9WTeQkVt4XcSVIlEJQgB+VZieqVdxnzr
-			MT4q9HYAnLaLWFeamGlVUWcopHrE91Lg4o+2g3vuC0znt8lOloTbLzkVzNcaMDWVpJXFadZz6l9I
-			7hWiT8sXq2XcZQ/luHeaN9+HVp7X5nbo9/5tIbEmZfamIneIRjbdK38DySWLitiAqEwAAAAASUVO
-			RK5CYII=
 		</Resource>
 		<Resource ID="4d2f9168-d9c9-45b4-8969-50732ba9fd80" Type="js" Name="vdom_dynobjectview.js">
 			aWYgKHR5cGVvZiB3aW5kb3cuZHJhZ2dhYmxlX29sZE1vdXNlU3RhcnQgIT09ICd1bmRlZmluZWQn
@@ -1565,28 +1504,6 @@ Visible - the whole content will always be shown without reference to the object
 			ICAkLmVycm9yKCJEeW5hbWljIG9iamVjdCB2aWV3OiB1bmtub3duIG1ldGhvZCAiICsgbWV0aG9k
 			KTsNCiAgICAgICAgfQ0KICAgIH07DQp9KGpRdWVyeSkpOw==
 		</Resource>
-		<Resource ID="d4a89a30-b06e-4ac6-ab8f-761c7cd08b71" Type="jpg" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
-			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
-			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
-			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
-			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
-			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
-			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
-			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
-			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
-			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
-			PSJ4bXAuaWlkOkM5N0YzQTE2MUZFNDExRTE5QkE0RDY0RTIyQUE4RDAxIiB4bXBNTTpEb2N1bWVu
-			dElEPSJ4bXAuZGlkOkM5N0YzQTE3MUZFNDExRTE5QkE0RDY0RTIyQUE4RDAxIj4gPHhtcE1NOkRl
-			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Qzk3RjNBMTQxRkU0MTFFMTlCQTRE
-			NjRFMjJBQThEMDEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Qzk3RjNBMTUxRkU0MTFFMTlC
-			QTRENjRFMjJBQThEMDEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
-			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz66Sks/AAAAx0lEQVR42mL8//8/AzFAftERBnUFsf83H7xq
-			BNL1MJqRFAOAoAKIOZDFWXBpeHnvGLrJjEAb20E2wwSIcgHMILMj/xixuYCJkGZxJStGJBvbYTbD
-			XfDjyxsMJ7BzCzMiawaxoS7AAIzfP734//zWHhRBReNoRgYiAcu/f78Zfn17w0AuYPn/9zfD7++v
-			yTfg378/DL++vyc2HWCGAa5oJDYQcUYjSDN6YgIlZSDVgEzTLiGBNGJxQTsan/LMxERKlGFLygAB
-			BgAnHIGhj58zKAAAAABJRU5ErkJggg==
-		</Resource>
 		<Resource ID="76bfc7be-dbe3-46e3-8d11-cc78a576b63a" Type="png" Name="Icon">
 			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
@@ -1685,10 +1602,128 @@ Visible - the whole content will always be shown without reference to the object
 			oomQZ31DY3YrdNh3HDkS+SxVEO800OQnolkerE46RRY8HgUzhizGxtQIf0pwuqpR9yQLj0XwjDuI
 			iQkEyZ2K5scGmX7S6/8EGACZm+6vXzttpgAAAABJRU5ErkJggg==
 		</Resource>
+		<Resource ID="883d23d7-d98f-4552-b0cc-0b14122a14d1" Type="js" Name="scrollstart-scrollstop-resize-div.js">
+			Lyogc2Nyb2xsc3RhcnQgJiBzY3JvbGxzdG9wIGV2ZW50cyAqLw0KKGZ1bmN0aW9uKCl7dmFyIHNw
+			ZWNpYWw9alF1ZXJ5LmV2ZW50LnNwZWNpYWwsdWlkMT0iRCIrICtuZXcgRGF0ZSx1aWQyPSJEIiso
+			K25ldyBEYXRlKzEpO3NwZWNpYWwuc2Nyb2xsc3RhcnQ9e3NldHVwOmZ1bmN0aW9uKCl7dmFyIHRp
+			bWVyLGhhbmRsZXI9ZnVuY3Rpb24oZXZ0KXt2YXIgX3NlbGY9dGhpcyxfYXJncz1hcmd1bWVudHM7
+			aWYodGltZXIpY2xlYXJUaW1lb3V0KHRpbWVyKTtlbHNle2V2dC50eXBlPSJzY3JvbGxzdGFydCI7
+			alF1ZXJ5LmV2ZW50LmhhbmRsZS5hcHBseShfc2VsZixfYXJncyl9dGltZXI9c2V0VGltZW91dChm
+			dW5jdGlvbigpe3RpbWVyPW51bGx9LHNwZWNpYWwuc2Nyb2xsc3RvcC5sYXRlbmN5KX07alF1ZXJ5
+			KHRoaXMpLmJpbmQoInNjcm9sbCIsaGFuZGxlcikuZGF0YSh1aWQxLGhhbmRsZXIpfSx0ZWFyZG93
+			bjpmdW5jdGlvbigpe2pRdWVyeSh0aGlzKS51bmJpbmQoInNjcm9sbCIsalF1ZXJ5KHRoaXMpLmRh
+			dGEodWlkMSkpfX07c3BlY2lhbC5zY3JvbGxzdG9wPSB7bGF0ZW5jeToyMDAsc2V0dXA6ZnVuY3Rp
+			b24oKXt2YXIgdGltZXIsaGFuZGxlcj1mdW5jdGlvbihldnQpe3ZhciBfc2VsZj10aGlzLF9hcmdz
+			PWFyZ3VtZW50cztpZih0aW1lciljbGVhclRpbWVvdXQodGltZXIpO3RpbWVyPXNldFRpbWVvdXQo
+			ZnVuY3Rpb24oKXt0aW1lcj1udWxsO2V2dC50eXBlPSJzY3JvbGxzdG9wIjtqUXVlcnkuZXZlbnQu
+			aGFuZGxlLmFwcGx5KF9zZWxmLF9hcmdzKX0sc3BlY2lhbC5zY3JvbGxzdG9wLmxhdGVuY3kpfTtq
+			UXVlcnkodGhpcykuYmluZCgic2Nyb2xsIixoYW5kbGVyKS5kYXRhKHVpZDIsaGFuZGxlcil9LHRl
+			YXJkb3duOmZ1bmN0aW9uKCl7alF1ZXJ5KHRoaXMpLnVuYmluZCgic2Nyb2xsIixqUXVlcnkodGhp
+			cykuZGF0YSh1aWQyKSl9fX0pKCk7DQoNCi8qIGpRdWVyeSByZXNpemUgZXZlbnQgLSB2MS4xIC0g
+			My8xNC8yMDEwDQogKiBodHRwOi8vYmVuYWxtYW4uY29tL3Byb2plY3RzL2pxdWVyeS1yZXNpemUt
+			cGx1Z2luLw0KICogQ29weXJpZ2h0IChjKSAyMDEwICJDb3dib3kiIEJlbiBBbG1hbg0KICogRHVh
+			bCBsaWNlbnNlZCB1bmRlciB0aGUgTUlUIGFuZCBHUEwgbGljZW5zZXMuDQogKiBodHRwOi8vYmVu
+			YWxtYW4uY29tL2Fib3V0L2xpY2Vuc2UvDQogKi8NCiFmdW5jdGlvbih0LGksZSl7IiQ6bm9tdW5n
+			ZSI7ZnVuY3Rpb24gbigpe2g9aVtzXShmdW5jdGlvbigpe3IuZWFjaChmdW5jdGlvbigpe3ZhciBp
+			PXQodGhpcyksbj1pLndpZHRoKCksaD1pLmhlaWdodCgpLHI9dC5kYXRhKHRoaXMsbyk7ciE9PWUm
+			JihuIT09ci53fHxoIT09ci5oKSYmaS50cmlnZ2VyKHUsW3Iudz1uLHIuaD1oXSl9KSxuKCl9LGFb
+			ZF0pfXZhciBoLHI9dChbXSksYT10LnJlc2l6ZT10LmV4dGVuZCh0LnJlc2l6ZSx7fSkscz0ic2V0
+			VGltZW91dCIsdT0icmVzaXplIixvPXUrIi1zcGVjaWFsLWV2ZW50IixkPSJkZWxheSIsYz0idGhy
+			b3R0bGVXaW5kb3ciO2FbZF09MjUwLGFbY109ITAsdC5ldmVudC5zcGVjaWFsW3VdPXtzZXR1cDpm
+			dW5jdGlvbigpe2lmKCFhW2NdJiZ0aGlzW3NdKXJldHVybiExO3ZhciBpPXQodGhpcyk7cj1yLmFk
+			ZChpKSx0LmRhdGEodGhpcyxvLHt3Omkud2lkdGgoKSxoOmkuaGVpZ2h0KCl9KSwxPT09ci5sZW5n
+			dGgmJm4oKX0sdGVhcmRvd246ZnVuY3Rpb24oKXtpZighYVtjXSYmdGhpc1tzXSlyZXR1cm4hMTt2
+			YXIgaT10KHRoaXMpO3I9ci5ub3QoaSksaS5yZW1vdmVEYXRhKG8pLHIubGVuZ3RofHxjbGVhclRp
+			bWVvdXQoaCl9LGFkZDpmdW5jdGlvbihpKXtmdW5jdGlvbiBuKGksbixyKXt2YXIgYT10KHRoaXMp
+			LHM9dC5kYXRhKHRoaXMsbyk7cmV0dXJuIHM9PT1lP3ZvaWQgaC5hcHBseSh0aGlzLGFyZ3VtZW50
+			cyk6KHMudz1uIT09ZT9uOmEud2lkdGgoKSxzLmg9ciE9PWU/cjphLmhlaWdodCgpLHZvaWQgaC5h
+			cHBseSh0aGlzLGFyZ3VtZW50cykpfWlmKCFhW2NdJiZ0aGlzW3NdKXJldHVybiExO3ZhciBoO3Jl
+			dHVybiB0LmlzRnVuY3Rpb24oaSk/KGg9aSxuKTooaD1pLmhhbmRsZXIsdm9pZChpLmhhbmRsZXI9
+			bikpfX19KGpRdWVyeSx0aGlzKTs=
+		</Resource>
+		<Resource ID="adda1d02-1096-41e4-961d-4625e795caf8" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+			jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVh
+			ZHlxyWU8AAADIGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78i
+			IGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9i
+			ZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAy
+			MDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93
+			d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJk
+			ZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5z
+			OnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0
+			cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JU
+			b29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5p
+			aWQ6RkY0MEQwNDExNDI4MTFFMTk4RjFEODAzOUEyNzIxRDQiIHhtcE1NOkRvY3VtZW50SUQ9Inht
+			cC5kaWQ6RkY0MEQwNDIxNDI4MTFFMTk4RjFEODAzOUEyNzIxRDQiPiA8eG1wTU06RGVyaXZlZEZy
+			b20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGRjQwRDAzRjE0MjgxMUUxOThGMUQ4MDM5QTI3
+			MjFENCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGRjQwRDA0MDE0MjgxMUUxOThGMUQ4MDM5
+			QTI3MjFENCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94
+			cGFja2V0IGVuZD0iciI/PqNgd48AAAS/SURBVEhLrVZpb1RlFH7uOlvn3pmutJYSgQqlra0JmohG
+			If4D+cif8YfoJz6ZmGiIkigJRlAqJVJaWig0UixbgVnudDrL3X3ObcG2UxNJPDczc9/lnOe8Z3ne
+			UWIK/gcJEUOD0mFJ2QkQxxESvCjmbwQoKjRd71ASj16Z+q1exe16Ew0X8BBhKKfhs0I3hs10oqc0
+			m804k5GBqMQIoxCKAIURAj/knArXd1Ha3MTh4eHXYJedMq5WNnDMtHHIyND4ViCohkWvhqbu4xQd
+			1c6e/fyLS5d/gu976O7uhmmk6LgGVdPx6MkjfP3NeXx5/iv0vT2KYwdHXgPMbjTQraRRilysR21o
+			igIn9LHi16HzfdDI4979Jei2bdFxBfO3FnDz+g0cOTqKuYUbuHP/FhZvL6C32IODY5PIW13/hIrO
+			+ggxondhmN43owB3vTryqoHpdAEGoxHrBp6lTai6YcK2bNiFPLoKFqplBzPXrmBl5T5GRg7i0OhR
+			DI8cIoCF8tOnWH+0hvKdJZ7UQMhQtuOQBjUM6ClYBAgJ3uB8yFzGQUgATUOaSJrCGogYGhUcZ1C0
+			C+jr6UN//wHkeAqV6z1DQzjAMPWMjUFlsMWInJ6mEsOREjPN8uG7nIJhV2XIeSismCDw0PZcJipG
+			KpNFniC57n5oZhYRk/9axAsad/nRaUjiLyWS2OEjIVI557faUA0m1Q9DhPSIPiVVJPWQSeWR630L
+			Wq6ISNVhcd9O+dgq4ImygV/dMurUSbyn4gs6ebVVwVJ7HRM5m6CUKIqw+uABlpfvolZx8N3Fb2EP
+			DuDkqU8wdWIc749NQBOv95EmjX9ffYmVTQ8ZVcGJrhw+tW2+a1u7BWCntFvt+MIPF+K1Z093zf+1
+			+nDv1l1jN2RG9pFdnZw0CsOlMfH7ydrDhxgYGGB+Mvuu7zfZcW6XiXGc6r4G+ml8dubafzYuGztO
+			UKvXYDDh2ULxjQxJLtLMk7qH8BIAqeOrGw7mNlt4j8lS2JmLxSzOsLmOZ3Z08B7IgJq/1MpYbrTJ
+			Wxr5KEAxo+IMy/tIOpfsVq7XnfjC8wpGzTwOGzm0WG5S0zpLbpnt/1xtY5REd+74+C7zPzol/Fze
+			wLhpJXpB0m4JEWOJZFfTfHzgB1Cr/DqRsuHEHma9EkphE5WwhZteBW32xTt6EfN/rnaE66UbYCJl
+			oRS7mGEvPItaeBw0MUc9qegxvYDFtTWoPnH7tBQmSbuTZgENxnIz8vFuqoApzg2SY/Ss2QEgHg9p
+			GUxTZ4IOlsmk0qJT1DtuWIlNg9cAe1RJFvyEPRT0qmbCiio5xpN7QY7t7aCJbSih5IA6omeSZno0
+			g2THy4nxldxEEmeWvGpwMUlG8siVs0VaSRNuxxWu13GCNPUS/uFeecSVkBPCf2JRLMSSA7HlMixy
+			ElHZSlSyzDnZqoG3XgeA7PASstsuTCE6jmUkRCcF69Mx9WTeQkVt4XcSVIlEJQgB+VZieqVdxnzr
+			MT4q9HYAnLaLWFeamGlVUWcopHrE91Lg4o+2g3vuC0znt8lOloTbLzkVzNcaMDWVpJXFadZz6l9I
+			7hWiT8sXq2XcZQ/luHeaN9+HVp7X5nbo9/5tIbEmZfamIneIRjbdK38DySWLitiAqEwAAAAASUVO
+			RK5CYII=
+		</Resource>
+		<Resource ID="d4a89a30-b06e-4ac6-ab8f-761c7cd08b71" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOkM5N0YzQTE2MUZFNDExRTE5QkE0RDY0RTIyQUE4RDAxIiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOkM5N0YzQTE3MUZFNDExRTE5QkE0RDY0RTIyQUE4RDAxIj4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Qzk3RjNBMTQxRkU0MTFFMTlCQTRE
+			NjRFMjJBQThEMDEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Qzk3RjNBMTUxRkU0MTFFMTlC
+			QTRENjRFMjJBQThEMDEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz66Sks/AAAAx0lEQVR42mL8//8/AzFAftERBnUFsf83H7xq
+			BNL1MJqRFAOAoAKIOZDFWXBpeHnvGLrJjEAb20E2wwSIcgHMILMj/xixuYCJkGZxJStGJBvbYTbD
+			XfDjyxsMJ7BzCzMiawaxoS7AAIzfP734//zWHhRBReNoRgYiAcu/f78Zfn17w0AuYPn/9zfD7++v
+			yTfg378/DL++vyc2HWCGAa5oJDYQcUYjSDN6YgIlZSDVgEzTLiGBNGJxQTsan/LMxERKlGFLygAB
+			BgAnHIGhj58zKAAAAABJRU5ErkJggg==
+		</Resource>
+		<Resource ID="e5b106a1-078e-4f57-ae7e-3c2c30dccd86" Type="gif" Name="ajax-loader2.gif">
+			R0lGODlhEAAQAPQAAP///0dRZPn5+m93haaqtEtVZ2Jqe+Hi5cDDyVZfcZyhq5CWoevs7rS4wNXX
+			3HqCj4SLmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05F
+			VFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAA
+			EAAQAAAFUCAgjmRpnqUwFGwhKoRgqq2YFMaRGjWA8AbZiIBbjQQ8AmmFUJEQhQGJhaKOrCksgEla
+			+KIkYvC6SJKQOISoNSYdeIk1ayA8ExTyeR3F749CACH5BAkKAAAALAAAAAAQABAAAAVoICCKR9KM
+			aCoaxeCoqEAkRX3AwMHWxQIIjJSAZWgUEgzBwCBAEQpMwIDwY1FHgwJCtOW2UDWYIDyqNVVkUbYr
+			6CK+o2eUMKgWrqKhj0FrEM8jQQALPFA3MAc8CQSAMA5ZBjgqDQmHIyEAIfkECQoAAAAsAAAAABAA
+			EAAABWAgII4j85Ao2hRIKgrEUBQJLaSHMe8zgQo6Q8sxS7RIhILhBkgumCTZsXkACBC+0cwF2GoL
+			LoFXREDcDlkAojBICRaFLDCOQtQKjmsQSubtDFU/NXcDBHwkaw1cKQ8MiyEAIfkECQoAAAAsAAAA
+			ABAAEAAABVIgII5kaZ6AIJQCMRTFQKiDQx4GrBfGa4uCnAEhQuRgPwCBtwK+kCNFgjh6QlFYgGO7
+			baJ2CxIioSDpwqNggWCGDVVGphly3BkOpXDrKfNm/4AhACH5BAkKAAAALAAAAAAQABAAAAVgICCO
+			ZGmeqEAMRTEQwskYbV0Yx7kYSIzQhtgoBxCKBDQCIOcoLBimRiFhSABYU5gIgW01pLUBYkRItAYA
+			qrlhYiwKjiWAcDMWY8QjsCf4DewiBzQ2N1AmKlgvgCiMjSQhACH5BAkKAAAALAAAAAAQABAAAAVf
+			ICCOZGmeqEgUxUAIpkA0AMKyxkEiSZEIsJqhYAg+boUFSTAkiBiNHks3sg1ILAfBiS10gyqCg0Ua
+			FBCkwy3RYKiIYMAC+RAxiQgYsJdAjw5DN2gILzEEZgVcKYuMJiEAOwAAAAAAAAAAAA==
+		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[
-import json
+<![CDATA[import json
 import re
 import sys
 
@@ -1696,7 +1731,7 @@ from collections import OrderedDict
 from uuid import uuid4
 
 import managers
-from memory import vdomxml
+# from memory import vdomxml
 
 
 # auxiliary
@@ -1736,7 +1771,6 @@ class CachedDict(dict):
     def __getitem__(self, key):
         if key not in self.computed_items:
             self.computed_items[key] = self.compute(self.initial_items[key])
-
         return self.computed_items[key]
 
 
@@ -1746,10 +1780,11 @@ class Template(object):
 
     __slots__ = ("_attributes", "_vdomxml", "_object")
 
-    def __init__(self, xml, attributes=None):
+    def __init__(self, root, xml, json, attributes=None):
         self._attributes = attributes or {}
         self._vdomxml = xml
-        self._object = vdomxml.loads(xml, managers.engine.application)
+        # self._object = vdomxml.loads(xml, managers.engine.application)
+        self._object = root.loads(xml, json, handler=root.handler)
 
     def __getitem__(self, key):
         return self._attributes.get(key.lower(), "")
@@ -1909,6 +1944,14 @@ class DynamicObjectView(VDOM_object):
                 raise Exception("Unable to parse template")
             templates = None
 
+        # parse actions
+        try:
+            actions = json.loads(self.actions)
+        except Exception:
+            if self.actions:
+                raise Exception("Unable to parse actions")
+            actions = None
+
         # parse bindings
         try:
             bindings = json.loads(self.bindings)
@@ -1935,11 +1978,16 @@ class DynamicObjectView(VDOM_object):
         templates = CachedDict(templates, lambda xml: xml.encode("utf8"))
         templates_attributes = CachedDict(templates, get_root_attributes)
 
+        # initialize actions
+        if actions is not None:
+            actions = CachedDict(actions, lambda data: json.dumps(data))
+
         for index, (uuid, item) in enumerate(data.iteritems(), 1):
             template_name = item.get("vdomclass", "default")
             template_attributes = templates_attributes[template_name]
 
-            template = Template(templates[template_name])
+            template = Template(self, templates[template_name],
+                None if actions is None else actions[template_name])
 
             binding = bindings.get(template_name, {})
             for key, value in item.iteritems():
@@ -2060,8 +2108,7 @@ $(document).ready(function(){{
         from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
         image_id = "76bfc7be-dbe3-46e3-8d11-cc78a576b63a"
         result = get_empty_wysiwyg_value(self, image_id)
-        return VDOM_object.wysiwyg(self, contents=result)
-]]>
+        return VDOM_object.wysiwyg(self, contents=result)]]>
 	</SourceCode>
 	<Libraries>
 		<Library Target="html"><![CDATA[<script type="text/javascript" src="/883d23d7-d98f-4552-b0cc-0b14122a14d1.res"></script>
@@ -2127,11 +2174,6 @@ $(document).ready(function(){{
 						<Parameter Name="idlist" Description="#Lang(912)" Order="0"/>
 					</Parameters>
 				</Event>
-				<Event Name="itemsloaded" Description="#Lang(528)">
-					<Parameters>
-						<Parameter Name="idlist" Description="#Lang(912)" Order="0"/>
-					</Parameters>
-				</Event>
 				<Event Name="itemsrequest" Description="#Lang(525)">
 					<Parameters>
 						<Parameter Name="idlist" Description="#Lang(908)" Order="0"/>
@@ -2151,12 +2193,9 @@ $(document).ready(function(){{
 						<Parameter Name="idlist" Description="#Lang(901)" Order="0"/>
 					</Parameters>
 				</Event>
-				<Event Name="itemctrlclick" Description="#Lang(508)">
+				<Event Name="itemsloaded" Description="#Lang(528)">
 					<Parameters>
-						<Parameter Name="itemid" Description="#Lang(903)" Order="0"/>
-						<Parameter Name="idlist" Description="#Lang(903)" Order="0"/>
-						<Parameter Name="X" Description="#Lang(903)" Order="0"/>
-						<Parameter Name="Y" Description="#Lang(903)" Order="0"/>
+						<Parameter Name="idlist" Description="#Lang(912)" Order="0"/>
 					</Parameters>
 				</Event>
 				<Event Name="mouseover" Description="#Lang(523)">
@@ -2177,6 +2216,14 @@ $(document).ready(function(){{
 				<Event Name="endscroll" Description="#Lang(526)">
 					<Parameters>
 						<Parameter Name="position" Description="#Lang(908)" Order="0"/>
+					</Parameters>
+				</Event>
+				<Event Name="itemctrlclick" Description="#Lang(508)">
+					<Parameters>
+						<Parameter Name="itemid" Description="#Lang(903)" Order="0"/>
+						<Parameter Name="idlist" Description="#Lang(903)" Order="0"/>
+						<Parameter Name="X" Description="#Lang(903)" Order="0"/>
+						<Parameter Name="Y" Description="#Lang(903)" Order="0"/>
 					</Parameters>
 				</Event>
 				<Event Name="itemsort" Description="#Lang(527)">
@@ -2296,7 +2343,7 @@ $("#" + this.domCont.id).dynamicObjectView("toogleSelection", idlist, start, len
 				<Action Name="selectAll" DisplayName="#Lang(612)" Description="#Lang(512)">
 					<SourceCode>
 <![CDATA[$("#" + this.domCont.id).dynamicObjectView("markAsSelected", undefined, undefined, undefined, true);]]>
- 					</SourceCode>
+					</SourceCode>
 				</Action>
 				<Action Name="unmarkAsActive" DisplayName="#Lang(609)" Description="#Lang(509)">
 					<Parameters>

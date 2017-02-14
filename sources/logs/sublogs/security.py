@@ -4,6 +4,7 @@ import settings
 from ..packer import create_packer
 from ..formatters import TabbingLogFormatter
 from ..baselog import BaseLog
+from ..levels import MESSAGE
 
 
 NAME = "security"
@@ -31,3 +32,6 @@ class SecurityLog(BaseLog):
 
     def accomplish(self, module, user, action):
         return datetime.datetime.utcnow(), module, user, action
+
+    def describe(self, timestamp, module, user, action):
+        return timestamp, MESSAGE, "%s; %s" % (action, user), {"module": module}

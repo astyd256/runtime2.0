@@ -296,6 +296,28 @@ class VDOMObject(object):
         else:
             return origin.primary.select(*selector.split("."))
 
+    def loads(self, xmldata, jsondata=None, handler=None):
+        try:
+            root = vdomxml.loads(xmldata, self._origin)
+        except:
+            if xmldata.strip():
+                raise
+            else:
+                return None
+
+        if not root:
+            return None
+
+        if jsondata is not None:
+            try:
+                vdomjson.loads(jsondata, root, self._origin,
+                    handler=self._origin.actions.get(handler) if handler else None)
+            except:
+                if jsondata.strip():
+                    raise
+
+        return root
+
     def _fetch(self):
         log.write("Fetch %s attributes" % self)
         request = managers.request_manager.current
@@ -334,3 +356,4 @@ class VDOMObject(object):
 
 
 VDOM_object = VDOMObject
+from memory import vdomxml, vdomjson

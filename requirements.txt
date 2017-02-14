@@ -1,4 +1,5 @@
 defusedxml==0.4.1
+djehouty==0.1.4
 docutils==0.12
 gprof2dot==2016.10.13
 Pillow==3.2.0

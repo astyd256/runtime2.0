@@ -8,7 +8,9 @@ from ..debuglog import DebugLog
 
 
 NAME = "applications"
-WIDTHS = 21, 22, 22
+WIDTHS = 21, 22
+
+# WIDTHS = 21, 22, 22
 
 
 class ApplicationsLogFormatter(PrefixingLogFormatter):
@@ -17,11 +19,21 @@ class ApplicationsLogFormatter(PrefixingLogFormatter):
         super(ApplicationsLogFormatter, self).__init__(NAME, WIDTHS)
 
     def format(self, timestamp, thread, module, level, user, message):
-        return super(ApplicationsLogFormatter, self).format(module, level, timestamp.strftime(settings.LOGGING_TIMESTAMP), thread, user, message)
+        if user:
+            module = "%s|%s" % (module, user)
+        return super(ApplicationsLogFormatter, self).format(module, level, timestamp.strftime(settings.LOGGING_TIMESTAMP), thread, message)
 
     def parse(self, entry):
-        module, level, timestamp, thread, user, message = super(ApplicationsLogFormatter, self).parse(entry)
+        module, level, timestamp, thread, message = super(ApplicationsLogFormatter, self).parse(entry)
+        module, separator, user = module.partition("|")
         return datetime.datetime.strptime(timestamp, settings.LOGGING_TIMESTAMP), thread, module, level, user, message
+
+    # def format(self, timestamp, thread, module, level, user, message):
+    #     return super(ApplicationsLogFormatter, self).format(module, level, timestamp.strftime(settings.LOGGING_TIMESTAMP), thread, user, message)
+
+    # def parse(self, entry):
+    #     module, level, timestamp, thread, user, message = super(ApplicationsLogFormatter, self).parse(entry)
+    #     return datetime.datetime.strptime(timestamp, settings.LOGGING_TIMESTAMP), thread, module, level, user, message
 
 
 class ApplicationLog(DebugLog):
@@ -32,3 +44,6 @@ class ApplicationLog(DebugLog):
 
     def accomplish(self, module, level, message, user=None):
         return datetime.datetime.utcnow(), current_thread().name, module or "", level, user or "", message
+
+    def describe(self, timestamp, thread, module, level, user, message):
+        return timestamp, level, message, {"thread": thread, "module": module, "user": user}

@@ -163,6 +163,18 @@
 			<ColorGroup>2</ColorGroup>
 		</Attribute>
 		<Attribute>
+			<Name>handler</Name>
+			<DisplayName>#Lang(114)</DisplayName>
+			<Description>#Lang(214)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^[A-Za-z][_0-1A-Za-z]*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(50)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
 			<Name>rendererrormsg</Name>
 			<DisplayName>#Lang(112)</DisplayName>
 			<Description>#Lang(212)</Description>
@@ -205,6 +217,7 @@
 			<Sentence ID="111">Actions</Sentence>
 			<Sentence ID="112">Render Error Message</Sentence>
 			<Sentence ID="113">Debug</Sentence>
+			<Sentence ID="114">Handler</Sentence>
 			<Sentence ID="201">Order of rendering the object on the page. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
 			<Sentence ID="202">Visibility of the object.</Sentence>
 			<Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the z-index indicates the order of their displaying. The larger z-index is, the upper the object lies.</Sentence>
@@ -222,6 +235,7 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="211">Declare events and actions</Sentence>
 			<Sentence ID="212">Render error localization message</Sentence>
 			<Sentence ID="213">Debug mode</Sentence>
+			<Sentence ID="214">Custom dynamic server actions handler</Sentence>
 			<Sentence ID="301">Incorrect value, must be positive integer from 0 to 99.</Sentence>
 			<Sentence ID="302">Incorrect value, must be either 0 or 1.</Sentence>
 			<Sentence ID="303">Incorrect value, must be positive integer from 0 to 9999</Sentence>
@@ -235,6 +249,7 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="311">Incorrect value, must be dictionary like {&apos;src_name:event_name&apos;: [subscription_name, (&apos;dst_name:action&apos;, param1, param2...)]}</Sentence>
 			<Sentence ID="312">Incorrect value</Sentence>
 			<Sentence ID="313">Incorrect value, must be 0 or 1</Sentence>
+			<Sentence ID="314">Incorrect value</Sentence>
 			<Sentence ID="401">Invisible</Sentence>
 			<Sentence ID="402">Visible</Sentence>
 			<Sentence ID="411">Auto</Sentence>
@@ -314,6 +329,7 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="311">Incorrect value, must be dictionary like {&apos;src_name:event_name&apos;: [subscription_name, (&apos;dst_name:action&apos;, param1, param2...)]}</Sentence>
 			<Sentence ID="312">Incorrect value</Sentence>
 			<Sentence ID="313">Incorrect value, must be 0 or 1</Sentence>
+			<Sentence ID="314">Incorrect value.</Sentence>
 			<Sentence ID="401">Invisible</Sentence>
 			<Sentence ID="402">Visible</Sentence>
 			<Sentence ID="411">Auto</Sentence>
@@ -549,11 +565,10 @@ class VDOM_DynamicObject(VDOM_object):
         e2vdom.process(self)
         try:
             with e2vdom.select(dynamic=True):
-                instance, contents = managers.engine.dynamic_render(self.vdomxml, self.vdomactions, origin=self._origin, parent=self)
-                if instance is None:
-                    return contents, "", ""
-                else:
-                    declarations, libraries = e2vdom.generate(instance)
+                vdomobject = self.loads(self.vdomxml, self.vdomactions, handler=self.handler)
+                with managers.engine.start_render(vdomobject, parent=self) as context:
+                    contents = context.contents
+                    declarations, libraries = e2vdom.generate(context.instance)
                     return contents, declarations, libraries
         except Exception as error:
             if self.debugmode == "1":
@@ -595,8 +610,7 @@ class VDOM_DynamicObject(VDOM_object):
     def wysiwyg(self, contents=""):
         from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
         contents += get_empty_wysiwyg_value(self, WYSIWYG_IMAGE_UUID)
-        return super(VDOM_DynamicObject, self).wysiwyg(contents=contents)
-]]>
+        return super(VDOM_DynamicObject, self).wysiwyg(contents=contents)]]>
 	</SourceCode>
 	<E2VDOM>
 		<Events>

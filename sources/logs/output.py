@@ -88,7 +88,7 @@ class SeparateOutput(object):
 class Output(SeparateOutput):
 
     def _write(self, message):
-        if settings.LOGGING_OUTPUT and settings.LOGGING:
+        if settings.LOGGING_OUTPUT and settings.LOGGER:
             log.write(message)
         else:
             console.write(message)
@@ -97,7 +97,7 @@ class Output(SeparateOutput):
 class ErrorOutput(SeparateOutput):
 
     def _write(self, message):
-        if settings.LOGGING_OUTPUT and settings.LOGGING:
+        if settings.LOGGING_OUTPUT and settings.LOGGER:
             log.error(message)
         else:
             console.error(message)

@@ -7,7 +7,7 @@ from .. import actions
 from ..packer import create_packer
 from ..sublogs import ServerLog, ApplicationLog, NetworkLog, SecurityLog
 from ..stream import LogSocketStream, NoDataException, ShutdownException
-from ..logger import Logger
+from ..loggers import Logger
 from .reader import LogReader
 from .writer import LogWriter
 

@@ -2,7 +2,7 @@
 import sys
 
 
-def get_calling_module():
+def discover_calling_module():
     frame = sys._getframe(2)
     while 1:
         namespace = frame.f_globals

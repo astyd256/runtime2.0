@@ -2,7 +2,7 @@
 import json
 
 
-def loads(vdomjson, object, catch):
+def loads(vdomjson, object, catch, handler=None):
     try:
         actions = json.loads(vdomjson)
     except Exception as error:
@@ -23,7 +23,7 @@ def loads(vdomjson, object, catch):
             raise Exception("Unable to find object: %s" % source_name)
 
         if isinstance(event_actions, basestring):
-            source.actions.new(event_name, source_code=event_actions)
+            source.actions.new(event_name, source_code=event_actions, handler=handler)
         else:
             event = source.events.new(event_name)
             for action in event_actions:
