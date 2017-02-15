@@ -565,7 +565,7 @@ class VDOM_DynamicObject(VDOM_object):
         e2vdom.process(self)
         try:
             with e2vdom.select(dynamic=True):
-                vdomobject = self.loads(self.vdomxml, self.vdomactions, handler=self.handler)
+                vdomobject = self.loads(self.vdomxml.encode("utf8"), self.vdomactions, handler=self.handler)
                 if vdomobject:
                     with managers.engine.start_render(vdomobject, parent=self) as context:
                         contents = context.contents
