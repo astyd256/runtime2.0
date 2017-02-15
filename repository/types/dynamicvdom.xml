@@ -566,10 +566,13 @@ class VDOM_DynamicObject(VDOM_object):
         try:
             with e2vdom.select(dynamic=True):
                 vdomobject = self.loads(self.vdomxml, self.vdomactions, handler=self.handler)
-                with managers.engine.start_render(vdomobject, parent=self) as context:
-                    contents = context.contents
-                    declarations, libraries = e2vdom.generate(context.instance)
-                    return contents, declarations, libraries
+                if vdomobject:
+                    with managers.engine.start_render(vdomobject, parent=self) as context:
+                        contents = context.contents
+                        declarations, libraries = e2vdom.generate(context.instance)
+                        return contents, declarations, libraries
+                else:
+                    return "", "", ""
         except Exception as error:
             if self.debugmode == "1":
                 raise
