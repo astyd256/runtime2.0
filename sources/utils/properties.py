@@ -6,6 +6,30 @@ from threading import RLock
 WEAK_NAME_TEMPLATE = "_weak_%s"
 
 
+class AbstractReadOnlyProperty(object):
+
+    def __get__(self, instance, owner=None):
+        raise NotImplementedError
+
+    def __set__(self, instance, value):
+        raise AttributeError
+
+    def __delete__(self, instance):
+        raise AttributeError
+
+
+class AbstractReadWriteProperty(object):
+
+    def __get__(self, instance, owner=None):
+        raise NotImplementedError
+
+    def __set__(self, instance, value):
+        raise NotImplementedError
+
+    def __delete__(self, instance):
+        raise AttributeError
+
+
 class ConstantProperty(object):
 
     def __init__(self, value):
@@ -72,6 +96,9 @@ class WeakWithDefaultProperty(object):
     def __delete__(self, instance):
         del instance.__dict__[self._name]
 
+
+aroproperty = AbstractReadOnlyProperty
+arwproperty = AbstractReadWriteProperty
 
 lazy = LazyProperty
 constant = ConstantProperty

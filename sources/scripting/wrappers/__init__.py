@@ -6,14 +6,26 @@ from log import VDOM_log
 from request import VDOM_request
 from response import VDOM_response
 
-from obsolete_request import VDOM_obsolete_request
+# from obsolete_request import VDOM_obsolete_request
+from .. import packages
 
 
-server=VDOM_server()
-application=VDOM_application()
-log=VDOM_log()
-session=VDOM_session()
-request=VDOM_request()
-response=VDOM_response()
+server = VDOM_server()
+application = VDOM_application()
+log = VDOM_log()
+session = VDOM_session()
+request = VDOM_request()
+response = VDOM_response()
 
-obsolete_request=VDOM_obsolete_request()
+# obsolete_request = VDOM_obsolete_request()
+
+environment = {
+    "log": log,
+    "server": server,
+    "request": request,
+    "response": response,
+    "session": session,
+    "application": application,
+    # "obsolete_request": obsolete_request,
+    "packages": packages
+}

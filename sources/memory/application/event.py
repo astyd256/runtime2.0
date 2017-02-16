@@ -6,15 +6,14 @@ from .eventcallees import MemoryEventCalleesSketch
 
 class MemoryEventSketch(MemoryBase):
 
+    _top = 0
+    _left = 0
+    _state = False
+
     def __init__(self, callback, owner, name):
         self._callback = callback
         self._owner = owner
-
         self._name = name
-        self._top = 0
-        self._left = 0
-        self._state = False
-
         self._callees = MemoryEventCalleesSketch(self)
 
     owner = roproperty("_owner")

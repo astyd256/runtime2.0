@@ -27,29 +27,30 @@ NOT_LOADED = "NOT LOADED"
 
 class MemoryApplicationSketch(MemoryBase):
 
+    is_type = constant(False)
     is_application = constant(True)
     is_object = constant(False)
 
     generic = APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
 
+    _id = None
+    _name = None
+    _description = u""
+    _version = u"1"
+    _owner = u""
+    _password = u""
+    _active = 1
+    _index = u""
+    _icon = u""
+    _server_version = u""
+    _scripting_language = u"vscript"
+    _default_language = u"en-US"
+    _current_language = u"en-US"
+
     def __init__(self, callback):
         self._callback = callback
         self._lock = managers.memory.lock
         self._save_queue = False
-
-        self._id = None
-        self._name = None
-        self._description = u""
-        self._version = u"1"
-        self._owner = u""
-        self._password = u""
-        self._active = 1
-        self._index = u""
-        self._icon = u""
-        self._server_version = u""
-        self._scripting_language = u"vscript"
-        self._default_language = u"en-US"
-        self._current_language = u"en-US"
 
         self._objects = MemoryObjects(self)
         self._events = MemoryEvents(self)
@@ -170,6 +171,14 @@ class MemoryApplication(MemoryApplicationSketch):
     scripting_language = roproperty("_scripting_language")
     default_language = rwproperty("_default_language", _set_default_language)
     current_language = rwproperty("_current_language", _set_current_language)
+
+    def cleanup(self):
+        for library in self._libraries.itervalues():
+            library.cleanup()
+
+    def compile(self):
+        for library in self._libraries.itervalues():
+            library.compile()
 
     # unsafe
     def compose(self, file=None, shorter=False):
@@ -372,7 +381,7 @@ class MemoryApplication(MemoryApplicationSketch):
             managers.memory.unschedule(self)
 
         # unload application
-        managers.memory.applications.unload(self._id)
+        managers.memory.applications.unload(self._id, remove=True)
 
         # NOTE: currently not supported
         # on_uninstall = application.global_actions[APPLICATION_SECTION][APPLICATION_SECTION + ON_UNINSTALL]

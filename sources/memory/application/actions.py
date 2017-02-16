@@ -8,7 +8,7 @@ from utils.properties import lazy, weak, roproperty
 
 from ..generic import MemoryBase
 from .catalogs import MemoryActionsCatalog, MemoryActionsDynamicCatalog
-from .action import MemoryActionSketch, MemoryActionDuplicationSketch, MemoryHandledActionSketch
+from .action import MemoryActionSketch, MemoryActionDuplicationSketch
 
 
 NAME_BASE = "action"
@@ -83,17 +83,14 @@ class MemoryActions(MemoryBase, MutableMapping):
     generic = roproperty("_generic")
 
     def new_sketch(self, restore=False, handler=None):
-        if handler is None:
-            return MemoryActionSketch(wrap_complete(self, restore), self._owner)
-        else:
-            return MemoryHandledActionSketch(wrap_complete(self, restore), self._owner, handler)
+        return MemoryActionSketch(wrap_complete(self, restore), self._owner, handler=handler)
 
     def new(self, name=None, source_code=None, handler=None):
         item = self.new_sketch(handler=handler)
         item.id = str(uuid4())
         item.name = name
         if source_code is not None:
-            item.source_code_value = source_code
+            item.source_code = source_code
         return ~item
 
     # unsafe

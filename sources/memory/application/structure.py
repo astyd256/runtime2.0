@@ -1,7 +1,5 @@
 
 from collections import Mapping
-import managers
-import security
 from utils.exception import VDOMSecurityError
 from utils.properties import lazy, roproperty, rwproperty
 from ..generic import MemoryBase
@@ -14,12 +12,13 @@ class MemoryStructureSketch(MemoryBase, Mapping):
     def _items(self):
         return {}
 
+    _resource = None
+    _top = 0
+    _left = 0
+    _state = 0
+
     def __init__(self, owner):
         self._owner = owner
-        self._resource = None
-        self._top = 0
-        self._left = 0
-        self._state = 0
 
     owner = roproperty("_owner")
     resource = rwproperty("_resource")

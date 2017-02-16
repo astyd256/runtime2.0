@@ -97,10 +97,14 @@ class MemoryTypes(MemoryBase, Mapping):
                 else:
                     return self[uuid]
 
-    def unload(self, uuid):
+    def unload(self, uuid, remove=False):
         with self._owner._lock:
-            name = self._items.pop(uuid).name
-            self._index.pop(name, None)
+            if remove:
+                name = self._items.pop(uuid).name
+                self._index.pop(name, None)
+                self.save()
+            else:
+                self._items[uuid] = NOT_LOADED
 
     def __getitem__(self, uuid):
         with self._owner._lock:

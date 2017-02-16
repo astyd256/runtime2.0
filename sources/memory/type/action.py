@@ -6,14 +6,15 @@ from .actionparameters import MemoryTypeActionParameters
 
 class MemoryTypeActionSketch(MemoryBase):
 
+    _scope = None
+    _name = None
+    _display_name = None
+    _description = u""
+    _source_code = u""
+
     def __init__(self, callback, owner):
         self._callback = callback
         self._owner = owner
-        self._scope = None
-        self._name = None
-        self._display_name = None
-        self._description = u""
-        self._source_code = u""
         self._parameters = MemoryTypeActionParameters(self)
 
     owner = roproperty("_owner")

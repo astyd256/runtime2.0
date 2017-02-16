@@ -18,6 +18,7 @@ from .structure import MemoryStructureSketch, MemoryStructure
 @weak("_parent", "_application")
 class MemoryObjectSketch(MemoryBase):
 
+    is_type = constant(False)
     is_application = constant(False)
     is_object = constant(True)
 
@@ -57,17 +58,18 @@ class MemoryObjectSketch(MemoryBase):
     def _structure(self):
         return None if self._parent or self._virtual else MemoryStructureSketch(self)
 
+    _order = None
+    _id = None
+    _name = None
+
     def __init__(self, callback, type, application, parent, virtual=False, attributes=None):
         self._callback = callback
-        self._order = None
         self._virtual = virtual
         self._application = application
         self._parent = parent
 
         # generic characteristics
         self._type = type
-        self._id = None
-        self._name = None
 
         # collections
         self._attributes = MemoryAttributesSketch(self, values=attributes)

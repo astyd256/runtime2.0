@@ -54,7 +54,7 @@ def section(name=None, value=ABSENT, indent=None, longer=False, width=None, lazy
         global_context = context.previous
 
 
-def show(name="", value=ABSENT, indent=None, longer=False):
+def show(name=None, value=ABSENT, indent=None, longer=False):
     global global_context
 
     if indent is None:
@@ -62,6 +62,9 @@ def show(name="", value=ABSENT, indent=None, longer=False):
 
     if global_context.show_section:
         global_context.show_section()
+
+    if not name:
+        return
 
     if value is ABSENT:
         caption = indent

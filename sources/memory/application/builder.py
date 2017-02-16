@@ -187,7 +187,7 @@ def application_builder(parser, installation_callback=None):
                                             action.id = str(uuid4())
                                             action.name = SCRIPT_CONTEXT
                                             def script_handler(value):
-                                                action.source_code_value = clean_source_code(value)
+                                                action.source_code = clean_source_code(value)
                                                 actions[action.id] = action
                                             parser.handle_value(name, attributes, script_handler)
                                             # </Script>
@@ -236,7 +236,7 @@ def application_builder(parser, installation_callback=None):
                                             except KeyError:
                                                 pass
                                             def action_handler(value):
-                                                action.source_code_value = clean_source_code(value)
+                                                action.source_code = clean_source_code(value)
                                                 actions[action.id] = action
                                             parser.handle_value(name, attributes, action_handler)
                                             # </Action>
@@ -299,7 +299,7 @@ def application_builder(parser, installation_callback=None):
                             except KeyError:
                                 pass
                             def action_handler(value):
-                                action.source_code_value = clean_source_code(value)
+                                action.source_code = clean_source_code(value)
                                 actions[action.id] = action
                             parser.handle_value(name, attributes, action_handler)
                             # </Action>

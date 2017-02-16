@@ -1,37 +1,51 @@
 
+import settings
+import managers
+import file_access
+
 from uuid import uuid4
-from utils.properties import lazy, constant, roproperty, rwproperty
+from utils.properties import constant, roproperty, rwproperty
 from utils import verificators
-from scripting.executable import ActionStorage, ActionExecutable
+from scripting.executable import source_code_property, SOURCE_CODE, Executable
+
+from ..constants import PYTHON_LANGUAGE
+from ..auxiliary import UNAVAILABLE_SELF
 from ..generic import MemoryBase
 
 
-class MemoryActionSketch(MemoryBase, ActionStorage, ActionExecutable):
+class MemoryActionSketch(MemoryBase, Executable):
 
     is_action = constant(True)
     is_binding = constant(False)
 
-    def __init__(self, callback, owner):
+    _id = None
+    _name = None
+    _top = 0
+    _left = 0
+    _state = False
+    _source_code = u""
+
+    def __init__(self, callback, owner, handler=None):
         self._callback = callback
         self._owner = owner
-        self._id = None
-        self._name = None
-        self._top = 0
-        self._left = 0
-        self._state = False
-        self._source_code_value = u""
-        self._handler = None
+        self._handler = handler
 
     lock = property(lambda self: self._owner.lock)
     owner = target_object = roproperty("_owner")
     application = property(lambda self: self._owner.application)
+
+    scripting_language = property(lambda self: str(self._owner.application.scripting_language))
+    package = property(lambda self: str(self._owner.application.id))
+    signature = property(lambda self: "<%s action %s:%s>" % (self.scripting_language, self.id, self.name.lower()))
 
     id = rwproperty("_id")
     name = rwproperty("_name")
     top = rwproperty("_top")
     left = rwproperty("_left")
     state = rwproperty("_state")
-    source_code_value = rwproperty("_source_code_value")
+    handler = rwproperty("_handler")
+
+    source_code = rwproperty("_source_code")
 
     def __invert__(self):
         self.__class__ = MemoryAction
@@ -61,21 +75,7 @@ class MemoryActionDuplicationSketch(MemoryActionSketch):
         self._top = another._top
         self._left = another._left
         self._state = another._state
-        self._source_code_value = another._source_code_value
-
-
-class MemoryHandledActionSketch(MemoryActionSketch):
-
-    def __init__(self, callback, owner, handler):
-        super(MemoryHandledActionSketch, self).__init__(callback, owner)
-        self._handler = handler
-
-    handler = rwproperty("_handler")
-
-    def __invert__(self):
-        result = super(MemoryHandledActionSketch, self).__invert__()
-        self.__class__ = MemoryHandledAction
-        return result
+        self._source_code = another._source_code
 
 
 class MemoryAction(MemoryActionSketch):
@@ -107,22 +107,35 @@ class MemoryAction(MemoryActionSketch):
         self._state = value
         self._owner.autosave()
 
-    def _get_source_code(self):
-        with self._owner.lock:
-            return super(MemoryAction, self)._get_source_code()
-
-    def _set_source_code(self, value):
-        with self._owner.lock:
-            super(MemoryAction, self)._set_source_code(value)
-            self._owner.invalidate(contexts=(self._id, self._name), downward=True, upward=True)
-            self._owner.autosave()
-
     id = roproperty("_id")
     name = rwproperty("_name", _set_name)
     top = rwproperty("_top", _set_top)
     left = rwproperty("_left", _set_left)
     state = rwproperty("_state", _set_state)
-    source_code = property(_get_source_code, _set_source_code)
+    handler = roproperty("_handler")
+
+    @source_code_property
+    def source_code(self, value):
+        self._owner.invalidate(contexts=(self._id, self._name), downward=True, upward=True)
+        self._owner.autosave()
+
+    def execute(self, context=None, namespace=None, arguments=None):
+        if self._handler:
+            self._handler.execute(context, namespace,
+                arguments={
+                    "self": UNAVAILABLE_SELF,
+                    "source_object": context,
+                    "action_name": self._name,
+                    "source_code": self.source_code})
+        else:
+            # statistics.increase("action.execute")
+            if self.scripting_language == PYTHON_LANGUAGE:
+                return super(MemoryAction, self).execute(context=context, namespace=namespace, arguments=arguments)
+            else:
+                if namespace is None:
+                    namespace = managers.request_manager.get_request().session().context
+                with self.lock:
+                    return super(MemoryAction, self).execute(context=context, namespace=namespace, arguments=arguments)
 
     # unsafe
     def compose(self, ident=u"", file=None):
@@ -130,7 +143,7 @@ class MemoryAction(MemoryActionSketch):
             (self._id, self._name.encode("xml"), self._top, self._left, self._state)
         if self.source_code:
             file.write(u"%s<Action %s>\n" % (ident, information))
-            file.write(u"%s\n" % self.source_code_value.encode("cdata"))
+            file.write(u"%s\n" % self.source_code.encode("cdata"))
             file.write(u"%s</Action>\n" % ident)
         else:
             file.write(u"%s<Action %s/>\n" % (ident, information))
@@ -143,32 +156,3 @@ class MemoryAction(MemoryActionSketch):
             "action",
             "%s:%s" % (self._id, self._name) if self._name else None,
             "of %s" % self._owner)))
-
-
-class MemoryHandledAction(MemoryActionSketch):
-
-    class FakeSelf(object):
-
-        def __getattribute__(self, name):
-            raise Exception("self is not available")
-
-        def __str__(self):
-            return "self is not available"
-
-        def __unicode__(self):
-            return u"self is not available"
-
-        def __repr__(self):
-            return "self is not available"
-
-    _fake_self = FakeSelf()
-
-    handler = roproperty("_handler")
-
-    def execute(self, context=None, namespace=None):
-        self._handler.execute(context, namespace,
-            arguments={
-                "self": self._fake_self,
-                "source_object": context,
-                "action_name": self._name,
-                "source_code": self._get_source_code()})

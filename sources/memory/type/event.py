@@ -6,11 +6,12 @@ from .eventparameters import MemoryTypeEventParameters
 
 class MemoryTypeEventSketch(MemoryBase):
 
+    _name = None
+    _description = u""
+
     def __init__(self, callback, owner):
         self._callback = callback
         self._owner = owner
-        self._name = None
-        self._description = u""
         self._parameters = MemoryTypeEventParameters(self)
 
     owner = roproperty("_owner")

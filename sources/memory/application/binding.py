@@ -9,14 +9,15 @@ class MemoryBindingSketch(MemoryBase):
     is_action = constant(False)
     is_binding = constant(True)
 
+    _id = None
+    _top = 0
+    _left = 0
+    _state = False
+
     def __init__(self, callback, target_object, name, parameters=None):
         self._callback = callback
-        self._id = None
         self._target_object = target_object
         self._name = name
-        self._top = 0
-        self._left = 0
-        self._state = False
         self._parameters = MemoryBindingParameters(self, parameters)
 
     id = rwproperty("_id")

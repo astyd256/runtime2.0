@@ -10,20 +10,21 @@ class MemoryTypeAttributeSketch(MemoryBase):
     def _regex(self):
         return re.compile("^%s$" % self._validation_pattern, re.DOTALL)
 
+    _name = None
+    _display_name = None
+    _description = u""
+    _default_value = u""
+    _validation_pattern = u".*"
+    _validation_error_message = u""
+    _visible = 1
+    _interface_type = 0
+    _code_interface = u"TextField(99)"
+    _color_group = 1
+    _complexity = 0
+
     def __init__(self, callback, owner):
         self._callback = callback
         self._owner = owner
-        self._name = None
-        self._display_name = None
-        self._description = u""
-        self._default_value = u""
-        self._validation_pattern = u".*"
-        self._validation_error_message = u""
-        self._visible = 1
-        self._interface_type = 0
-        self._code_interface = u"TextField(99)"
-        self._color_group = 1
-        self._complexity = 0
 
     def _set_validation_pattern(self, value):
         self._validation_pattern = value

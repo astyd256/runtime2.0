@@ -105,6 +105,7 @@ class Memory(object):
         entities = [file_access.APPLICATION, file_access.RESOURCE, file_access.LIBRARY, file_access.CACHE]
         if remove_databases:
             entities.append(file_access.DATABASE)
+            managers.database_manager.delete_database(uuid)
         if remove_storage:
             entities.append(file_access.STORAGE)
         for category in entities:

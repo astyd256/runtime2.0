@@ -10,22 +10,22 @@ class MemoryTypeActionParameterSketch(MemoryBase):
     def _regex(self):
         return re.compile("^%s$" % self._validation_pattern)
 
+    _name = None
+    _display_name = u""
+    _description = u""
+    _default_value = u""
+    _validation_pattern = u".*"
+    _interface = u""
+
     def __init__(self, callback, owner):
         self._callback = callback
         self._owner = owner
-        self._name = None
-        self._display_name = u""
-        self._description = u""
-        self._default_value = u""
-        self._validation_pattern = u".*"
-        self._interface = u""
 
     owner = roproperty("_owner")
 
     def _set_validation_pattern(self, value):
         self._validation_pattern = value
-        if "_regex" in self.__dict__:
-            del self._regex
+        self.__dict__.pop("_regex", None)
 
     name = rwproperty("_name")
     display_name = rwproperty("_display_name")

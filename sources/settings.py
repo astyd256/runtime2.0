@@ -106,7 +106,6 @@ PROFILE_LOCATION = DATA_LOCATION + "/" + PROFILE_FILENAME
 
 # scripting
 
-STORE_SYMBOLS = False
 STORE_BYTECODE = False
 
 # watcher

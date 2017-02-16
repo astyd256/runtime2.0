@@ -5,12 +5,13 @@ from ..generic import MemoryBase
 
 class MemoryTypeEventParameterSketch(MemoryBase):
 
+    _name = None
+    _description = u""
+    _order = 0
+
     def __init__(self, callback, owner):
         self._callback = callback
         self._owner = owner
-        self._name = None
-        self._description = u""
-        self._order = 0
 
     owner = roproperty("_owner")
 

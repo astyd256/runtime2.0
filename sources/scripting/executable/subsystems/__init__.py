@@ -1,18 +1,15 @@
 
 from memory import PYTHON_LANGUAGE, VSCRIPT_LANGUAGE
 
-import python
-import vscript
+from .python import PythonBytecode
+from .vscript import VScriptBytecode
 
 
-MODULES = {
-    PYTHON_LANGUAGE: python,
-    VSCRIPT_LANGUAGE: vscript
-}
+CLASSES = {PYTHON_LANGUAGE: PythonBytecode, VSCRIPT_LANGUAGE: VScriptBytecode}
 
 
 def select(language):
     try:
-        return MODULES[language]
+        return CLASSES[language]
     except KeyError:
         raise Exception("Unknown scripting language: \"%s\"" % language)

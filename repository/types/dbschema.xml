@@ -143,6 +143,37 @@
 		</Language>
 	</Languages>
 	<Resources>
+		<Resource ID="026e4744-4507-4f24-bbf9-65d83556eb72" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjYzQThFMDk4MUZENzExRTFBQTk1OUM5RDNDNDQ0Q0U3IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjYzQThFMDk5MUZENzExRTFBQTk1OUM5RDNDNDQ0Q0U3Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NjNBOEUwOTYxRkQ3MTFFMUFBOTU5
+			QzlEM0M0NDRDRTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NjNBOEUwOTcxRkQ3MTFFMUFB
+			OTU5QzlEM0M0NDRDRTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz4sXtYVAAAC60lEQVR42mSTa0hUQRTH/zP37l29u7qaqai1
+			tlhUampYCn6IPoREBBEYQVGJX8roU4VJ6KeeWAlBT+pTTyp7KWQJBT3UCD9ICD3YjF0LzWXd691d
+			dV8zzd3a2toDd+bMuef85pyZM4Rzjt9CjMGnabZAMLhTDwS26brfrum6qk/rn7WA/ioYnOnc07jr
+			h5qeHksEUfwVHpoLlYr5q0CdBUet0AuE2cYJXwVODkSi4bHOC5cakmLiAPJbtwjtlZizkh2I8ZuD
+			MDAxSpQxdrPt+MnKZECihnrhOi/uLSyEkjj6V4k8TiKSYeNSts22NyUDzlhRfKacCQs3IJIIEBwW
+			ExgKBolQsZZR4rAvTslgxOm2MiOWE0opiQnvqNicccEQS4MHgy12x0L7svkph9j3iS5zu10QIVHD
+			VaaIgcjEKB1MuBET7AVF2LJxPXrefMpLxMkJJaLazVd6H6OhxiMvL1vKJCXLlGaSYVUVLHI4kJ+V
+			jTm/jjv3e+GcLlFSAPPpRGiieB2uvXmK4v4+usheAjXNKs7BDK9Xg8fjw7Bbw8fpQrQ2LTGlANze
+			sHxw9Tfcsm7A5de1sDwfhHnOBTqrwT2lws8yUVZdhdtH6nD1wRDfvKYwAeCEHAC/11jkvNDdg611
+			HjTtL8Vj51q4xkPQPDp25EpYZc9Aoaqjq6sbY5GFk0kZGAcs2i7DOT6wYB06ep6gUn6G5RVLUZ5j
+			g5Kj4Lvbg+EX33FxdBb9nnzcOLx4NAnACD9D+aP774f2VXHcMdWzu++qqe31e6jhcdCYH5MzJkzN
+			WpBfsATXD1XAN/ahDyscvzqV85i4I8pIEyPnV557WFNTsSl3QTlefo7ANRWCTw/CIUqoLEpHnuJH
+			/8Dbr+FopLK5udmfBBBlcEaOHjtBEQ11WiyW3fZih5KRqcJMFXinNUx4JjHxw9uryNL2tvZ235+3
+			IgDkn7cjvpaWVguLhjeKpnSInswgEhshVB7sOHX6C/6TnwIMAGarMf/aqyMBAAAAAElFTkSuQmCC
+		</Resource>
 		<Resource ID="102e782e-aa0b-4564-b5fd-e121cd6f7bf7" Type="png" Name="Icon">
 			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
@@ -301,40 +332,11 @@
 			Mwk0sWNeXkj6TceRwPPJ7FAkxtfdegtlpRei/eL62aFvGIYkqSnZnhFmaY4cOcqhQ/XYpikM/ZSU
 			LWaZdHFl5QpuWLaMsMyEq61r/qu46olfuPk/ZeygPELstXgAAAAASUVORK5CYII=
 		</Resource>
-		<Resource ID="026e4744-4507-4f24-bbf9-65d83556eb72" Type="png" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
-			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
-			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
-			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
-			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
-			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
-			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
-			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
-			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
-			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
-			PSJ4bXAuaWlkOjYzQThFMDk4MUZENzExRTFBQTk1OUM5RDNDNDQ0Q0U3IiB4bXBNTTpEb2N1bWVu
-			dElEPSJ4bXAuZGlkOjYzQThFMDk5MUZENzExRTFBQTk1OUM5RDNDNDQ0Q0U3Ij4gPHhtcE1NOkRl
-			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NjNBOEUwOTYxRkQ3MTFFMUFBOTU5
-			QzlEM0M0NDRDRTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NjNBOEUwOTcxRkQ3MTFFMUFB
-			OTU5QzlEM0M0NDRDRTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
-			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz4sXtYVAAAC60lEQVR42mSTa0hUQRTH/zP37l29u7qaqai1
-			tlhUampYCn6IPoREBBEYQVGJX8roU4VJ6KeeWAlBT+pTTyp7KWQJBT3UCD9ICD3YjF0LzWXd691d
-			dV8zzd3a2toDd+bMuef85pyZM4Rzjt9CjMGnabZAMLhTDwS26brfrum6qk/rn7WA/ioYnOnc07jr
-			h5qeHksEUfwVHpoLlYr5q0CdBUet0AuE2cYJXwVODkSi4bHOC5cakmLiAPJbtwjtlZizkh2I8ZuD
-			MDAxSpQxdrPt+MnKZECihnrhOi/uLSyEkjj6V4k8TiKSYeNSts22NyUDzlhRfKacCQs3IJIIEBwW
-			ExgKBolQsZZR4rAvTslgxOm2MiOWE0opiQnvqNicccEQS4MHgy12x0L7svkph9j3iS5zu10QIVHD
-			VaaIgcjEKB1MuBET7AVF2LJxPXrefMpLxMkJJaLazVd6H6OhxiMvL1vKJCXLlGaSYVUVLHI4kJ+V
-			jTm/jjv3e+GcLlFSAPPpRGiieB2uvXmK4v4+usheAjXNKs7BDK9Xg8fjw7Bbw8fpQrQ2LTGlANze
-			sHxw9Tfcsm7A5de1sDwfhHnOBTqrwT2lws8yUVZdhdtH6nD1wRDfvKYwAeCEHAC/11jkvNDdg611
-			HjTtL8Vj51q4xkPQPDp25EpYZc9Aoaqjq6sbY5GFk0kZGAcs2i7DOT6wYB06ep6gUn6G5RVLUZ5j
-			g5Kj4Lvbg+EX33FxdBb9nnzcOLx4NAnACD9D+aP774f2VXHcMdWzu++qqe31e6jhcdCYH5MzJkzN
-			WpBfsATXD1XAN/ahDyscvzqV85i4I8pIEyPnV557WFNTsSl3QTlefo7ANRWCTw/CIUqoLEpHnuJH
-			/8Dbr+FopLK5udmfBBBlcEaOHjtBEQ11WiyW3fZih5KRqcJMFXinNUx4JjHxw9uryNL2tvZ235+3
-			IgDkn7cjvpaWVguLhjeKpnSInswgEhshVB7sOHX6C/6TnwIMAGarMf/aqyMBAAAAAElFTkSuQmCC
-		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[
+<![CDATA[import managers
+
+
 class VDOM_dbschema(VDOM_object):
 	
 	def render(self, parent, contents=""):
@@ -346,7 +348,8 @@ class VDOM_dbschema(VDOM_object):
 
 # def set_name(application_id, object_id, param):
 def on_rename(object, name):
-	database_manager = obsolete_request.database_manager
+	# database_manager = obsolete_request.database_manager
+	database_manager = managers.database_manager
 	# if not database_manager.check_database(application.id, object_id):
 	if not database_manager.check_database(application.id, object.id):
 		# database_manager.create_database(application_id, object_id, param["name"])
@@ -358,7 +361,7 @@ def on_rename(object, name):
 # def on_delete(application_id, object_id, param):
 def on_delete(object):
 	# obsolete_request.database_manager.delete_database(application_id, object_id)
-	obsolete_request.database_manager.delete_database(object.application.id, object.id)
+	managers.database_manager.delete_database(object.application.id, object.id)
 	return ""
 
 # def execute_query(application_id, object_id, param):
@@ -387,9 +390,6 @@ def execute_query_xml(application_id, object_id, xml_param):
 			return (query_xml) 
 	else:
 		# return "<Error>Query failed: %s</Error>"%str(e)
-		return "NO XML PARAM"
-		
-		
-]]>
+		return "NO XML PARAM"]]>
 	</SourceCode>
 </Type>

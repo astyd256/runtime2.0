@@ -43,7 +43,7 @@ class MemoryApplications(MemoryBase, Mapping):
     def default(self):
         try:
             return self[settings.DEFAULT_APPLICATION or iter(self).next()]
-        except (StopIteration, KeyError):
+        except (KeyError, StopIteration):
             return None
 
     def __init__(self, owner):
@@ -94,7 +94,7 @@ class MemoryApplications(MemoryBase, Mapping):
                         return item
                 raise
 
-    def unload(self, uuid):
+    def unload(self, uuid, remove=False):
         with self._owner._lock:
             self._event.set()
             application = self._items[uuid]
