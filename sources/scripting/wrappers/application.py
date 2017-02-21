@@ -419,9 +419,6 @@ class VDOM_application(object):
     variables = property(_get_variables)
 
     def start_task(self, function):
-        print "ST"
         task = Task(target=function)
-        print "TASK", task
         task.start()
-        print "START"
         return task
