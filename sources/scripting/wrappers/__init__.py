@@ -5,6 +5,7 @@ from session import VDOM_session
 from log import VDOM_log
 from request import VDOM_request
 from response import VDOM_response
+from tasks import Task
 
 # from obsolete_request import VDOM_obsolete_request
 from .. import packages
@@ -26,6 +27,7 @@ environment = {
     "response": response,
     "session": session,
     "application": application,
+    "Task": Task,
     # "obsolete_request": obsolete_request,
     "packages": packages
 }
