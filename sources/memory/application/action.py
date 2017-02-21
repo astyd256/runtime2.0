@@ -114,6 +114,13 @@ class MemoryAction(MemoryActionSketch):
     state = rwproperty("_state", _set_state)
     handler = roproperty("_handler")
 
+    def locate(self, entity):
+        if entity is not SOURCE_CODE and not self._owner.virtual \
+                and settings.STORE_BYTECODE and settings.STORE_ACTIONS_BYTECODE:
+            return managers.file_manager.locate(file_access.CACHE, self._owner.application.id, self._id)
+        else:
+            return None
+
     @source_code_property
     def source_code(self, value):
         self._owner.invalidate(contexts=(self._id, self._name), downward=True, upward=True)

@@ -175,10 +175,16 @@ class MemoryApplication(MemoryApplicationSketch):
     def cleanup(self):
         for library in self._libraries.itervalues():
             library.cleanup()
+        if settings.STORE_ACTIONS_BYTECODE:
+            for action in self._actions.catalog.itervalues():
+                action.cleanup()
 
     def compile(self):
         for library in self._libraries.itervalues():
             library.compile()
+        if settings.STORE_ACTIONS_BYTECODE:
+            for action in self._actions.catalog.itervalues():
+                action.compile()
 
     # unsafe
     def compose(self, file=None, shorter=False):
