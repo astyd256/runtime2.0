@@ -135,14 +135,16 @@ class VDOM_resource_manager(object):
         # storage.clear_resources_index()
         managers.storage.clear_resources_index()  # ?????
 
-    def invalidate_resources(self, object_id):
+    def invalidate_resources(self, object_id, cleanup=True):
         """Invalidate and clear all resources by object_id"""
         for (obj_id, label) in self.__label_index.keys():
             if obj_id == object_id:
                 del self.__label_index[(obj_id, label)]
 
-        # managers.file_manager.clear(file_access.resource, None, object_id)
-        managers.file_manager.cleanup_directory(file_access.resource, object_id)
+        if cleanup:
+            # managers.file_manager.clear(file_access.resource, None, object_id)
+            managers.file_manager.cleanup_directory(file_access.resource, object_id)
+
         for res_id in self.__main_index.keys():
             if self.__main_index[res_id].application_id == object_id:
                 del self.__main_index[res_id]

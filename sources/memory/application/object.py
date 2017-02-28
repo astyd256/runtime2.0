@@ -197,10 +197,13 @@ class MemoryObject(MemoryObjectSketch):
                     self._classes = {}
 
             # cleanup resources
-            # TODO: (!) this can delete compiled e2vdom scripts
+            # TODO: this can delete compiled e2vdom scripts
+
             #       check necessity of resource invalidation
             #       possible this must be done on object delete
-            managers.resource_manager.invalidate_resources(self._id)
+
+            #       cleanup=False to avoid excessive file operations
+            managers.resource_manager.invalidate_resources(self._id, cleanup=False)
 
             # perform downward invalidation
             if downward:
