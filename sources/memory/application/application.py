@@ -10,7 +10,7 @@ import file_access
 
 from logs import log
 from database.dbobject import VDOM_sql_query
-from utils.properties import constant, roproperty, rwproperty
+from utils.properties import weak, constant, roproperty, rwproperty
 
 from .. import APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
 from ..generic import MemoryBase
@@ -25,6 +25,7 @@ from .libraries import MemoryLibraries
 NOT_LOADED = "NOT LOADED"
 
 
+@weak("_collection")
 class MemoryApplicationSketch(MemoryBase):
 
     is_type = constant(False)
@@ -32,6 +33,8 @@ class MemoryApplicationSketch(MemoryBase):
     is_object = constant(False)
 
     generic = APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
+
+    _restore = False
 
     _id = None
     _name = None
@@ -47,8 +50,8 @@ class MemoryApplicationSketch(MemoryBase):
     _default_language = u"en-US"
     _current_language = u"en-US"
 
-    def __init__(self, callback):
-        self._callback = callback
+    def __init__(self, collection):
+        self._collection = collection
         self._lock = managers.memory.lock
         self._save_queue = False
 
@@ -92,8 +95,9 @@ class MemoryApplicationSketch(MemoryBase):
     variables = roproperty("_variables")
 
     def __invert__(self):
+        restore = self._restore
         self.__class__ = MemoryApplication
-        self._callback = self._callback(self)
+        self._collection.on_complete(self, restore)
 
         if self._id is None:
             raise Exception(u"Application require identifier")
@@ -107,6 +111,11 @@ class MemoryApplicationSketch(MemoryBase):
             "application",
             ":".join(filter(None, (getattr(self, "_id", None), getattr(self, "_name", "").lower()))),
             "sketch")))
+
+
+class MemoryApplicationRestorationSketch(MemoryApplicationSketch):
+
+    _restore = True
 
 
 class MemoryApplication(MemoryApplicationSketch):

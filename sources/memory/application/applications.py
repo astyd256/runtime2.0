@@ -15,25 +15,10 @@ from utils.properties import lazy, weak
 from logs import log
 
 from ..generic import MemoryBase
-from .application import MemoryApplicationSketch
+from .application import MemoryApplicationSketch, MemoryApplicationRestorationSketch
 
 
 DEFAULT_APPLICATION_NAME = "Application"
-
-
-def wrap_complete(instance, restore):
-    instance = ref(instance)
-
-    def on_complete(item):
-        self = instance()
-        with self._owner._lock:
-            if item._id not in self._known:
-                self._event.set()
-            self._items[item._id] = item
-            for subitem in item._objects.catalog.itervalues():
-                managers.dispatcher.dispatch_handler(subitem, "on_startup")
-
-    return on_complete
 
 
 @weak("_owner")
@@ -53,8 +38,17 @@ class MemoryApplications(MemoryBase, Mapping):
         self._event = Event()
         self._known = set()
 
+    def on_complete(self, item, restore):
+        with self._owner._lock:
+            if item._id not in self._known:
+                self._event.set()
+            self._items[item._id] = item
+            for subitem in item._objects.catalog.itervalues():
+                managers.dispatcher.dispatch_handler(subitem, "on_startup")
+
     def new_sketch(self, restore=False):
-        return MemoryApplicationSketch(wrap_complete(self, restore))
+        return (MemoryApplicationRestorationSketch if restore
+            else MemoryApplicationSketch)(self)
 
     def new(self, name=DEFAULT_APPLICATION_NAME):
         item = self.new_sketch()

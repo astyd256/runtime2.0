@@ -9,7 +9,7 @@ import scripting
 import managers
 
 from utils.id import guid2mod
-from utils.properties import lazy, constant, roproperty, rwproperty
+from utils.properties import lazy, weak, constant, roproperty, rwproperty
 from scripting.executable import SOURCE_CODE, Executable
 from scripting.object import VDOMObject
 
@@ -24,6 +24,7 @@ from .actions import MemoryTypeActions
 NOT_LOADED = "NOT LOADED"
 
 
+@weak("_collection")
 class MemoryTypeSketch(MemoryBase, Executable):
 
     is_type = constant(True)
@@ -62,8 +63,8 @@ class MemoryTypeSketch(MemoryBase, Executable):
     _http_content_type = u""
     _version = u"1"
 
-    def __init__(self, callback):
-        self._callback = callback
+    def __init__(self, collection):
+        self._collection = collection
         self._lock = RLock()
 
         self._containers = []
@@ -148,7 +149,7 @@ class MemoryTypeSketch(MemoryBase, Executable):
             self._class_name = u"_".join("VDOM", self._name)
 
         self.__class__ = MemoryType
-        self._callback = self._callback(self)
+        self._collection.on_complete(self)
         return self
 
     def __str__(self):

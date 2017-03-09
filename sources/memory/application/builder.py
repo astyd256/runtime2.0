@@ -404,7 +404,7 @@ def application_builder(parser, installation_callback=None):
                     def libraries_handler(name, attributes):
                         if name == u"Library":
                             # <Library>
-                            library = application.libraries.new_sketch()
+                            library = application.libraries.new_sketch(restore=True)
                             try:
                                 library.name = attributes.pop(u"Name")
                             except KeyError:

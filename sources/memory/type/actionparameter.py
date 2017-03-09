@@ -1,9 +1,10 @@
 
 import re
-from utils.properties import lazy, roproperty, rwproperty
+from utils.properties import lazy, weak, roproperty, rwproperty
 from ..generic import MemoryBase
 
 
+@weak("_collection")
 class MemoryTypeActionParameterSketch(MemoryBase):
 
     @lazy
@@ -17,15 +18,14 @@ class MemoryTypeActionParameterSketch(MemoryBase):
     _validation_pattern = u".*"
     _interface = u""
 
-    def __init__(self, callback, owner):
-        self._callback = callback
-        self._owner = owner
-
-    owner = roproperty("_owner")
+    def __init__(self, collection):
+        self._collection = collection
 
     def _set_validation_pattern(self, value):
         self._validation_pattern = value
         self.__dict__.pop("_regex", None)
+
+    owner = property(lambda self: self._collection.owner)
 
     name = rwproperty("_name")
     display_name = rwproperty("_display_name")
@@ -39,11 +39,12 @@ class MemoryTypeActionParameterSketch(MemoryBase):
             raise Exception(u"Parameter require name")
 
         self.__class__ = MemoryTypeActionParameter
-        self._callback = self._callback(self)
+        self._collection.on_complete(self)
         return self
 
     def __str__(self):
-        return " ".join(filter(None, ("parameter", "\"%s\"" % self._name, "sketch of %s" % self._owner)))
+        return " ".join(filter(None, ("parameter", "\"%s\"" % self._name,
+            "sketch of %s" % self._collection.owner if self._collection else None)))
 
 
 class MemoryTypeActionParameter(MemoryTypeActionParameterSketch):
@@ -72,4 +73,5 @@ class MemoryTypeActionParameter(MemoryTypeActionParameterSketch):
         raise NotImplementedError
 
     def __str__(self):
-        return " ".join(filter(None, ("parameter", "\"%s\"" % self._name, "of %s" % self._owner)))
+        return " ".join(filter(None, ("parameter", "\"%s\"" % self._name,
+            "of %s" % self._collection.owner if self._collection else None)))

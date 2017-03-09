@@ -1,11 +1,12 @@
 
 from collections import Mapping
 from utils.exception import VDOMSecurityError
-from utils.properties import lazy, roproperty, rwproperty
+from utils.properties import lazy, weak, roproperty, rwproperty
 from ..generic import MemoryBase
 from .structurelevel import MemoryStructureLevel, MemoryStructureLevelSketch
 
 
+@weak("_owner")
 class MemoryStructureSketch(MemoryBase, Mapping):
 
     @lazy

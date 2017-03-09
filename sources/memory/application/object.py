@@ -15,7 +15,7 @@ from .bindings import MemoryBindings
 from .structure import MemoryStructureSketch, MemoryStructure
 
 
-@weak("_parent", "_application")
+@weak("_collection", "_parent", "_application")
 class MemoryObjectSketch(MemoryBase):
 
     is_type = constant(False)
@@ -25,6 +25,8 @@ class MemoryObjectSketch(MemoryBase):
     is_non_container = property(lambda self: self._type.container == NON_CONTAINER)
     is_container = property(lambda self: CONTAINER <= self._type.container <= TOP_CONTAINER)
     is_top_container = property(lambda self: self._type.container == TOP_CONTAINER)
+
+    _restore = False
 
     generic = RENDER_CONTEXT,
 
@@ -62,8 +64,8 @@ class MemoryObjectSketch(MemoryBase):
     _id = None
     _name = None
 
-    def __init__(self, callback, type, application, parent, virtual=False, attributes=None):
-        self._callback = callback
+    def __init__(self, collection, type, application, parent, virtual=False, attributes=None):
+        self._collection = collection
         self._virtual = virtual
         self._application = application
         self._parent = parent
@@ -111,8 +113,9 @@ class MemoryObjectSketch(MemoryBase):
         if self.__dict__.get("_structure") is not None:
             ~self._structure
 
+        restore = self._restore
         self.__class__ = MemoryObject
-        self._callback = self._callback(self)
+        self._collection.on_complete(self, restore)
 
         if self.id is None:
             raise Exception(u"Object require identifier")
@@ -129,10 +132,15 @@ class MemoryObjectSketch(MemoryBase):
             "sketch")))
 
 
+class MemoryObjectRestorationSketch(MemoryObjectSketch):
+
+    _restore = True
+
+
 class MemoryObjectDuplicationSketch(MemoryObjectSketch):
 
-    def __init__(self, callback, application, parent, another):
-        super(MemoryObjectDuplicationSketch, self).__init__(callback,
+    def __init__(self, collection, application, parent, another):
+        super(MemoryObjectDuplicationSketch, self).__init__(collection,
             another.type, application, parent,
             virtual=parent.virtual, attributes=another.attributes)
         self._objects += another.objects
@@ -156,7 +164,7 @@ class MemoryObject(MemoryObjectSketch):
 
         with self.lock:
             managers.dispatcher.dispatch_handler(self, "on_rename", value)
-            self._name = self._callback(self, value)
+            self._name = self._collection.on_rename(self, value)
             self.invalidate(upward=True)
             self.autosave()
 

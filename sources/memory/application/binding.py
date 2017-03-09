@@ -1,21 +1,24 @@
 
-from utils.properties import constant, roproperty, rwproperty
+from utils.properties import weak, constant, roproperty, rwproperty
 from ..generic import MemoryBase
 from .bindingparameters import MemoryBindingParameters
 
 
+@weak("_collection")
 class MemoryBindingSketch(MemoryBase):
 
     is_action = constant(False)
     is_binding = constant(True)
+
+    _restore = False
 
     _id = None
     _top = 0
     _left = 0
     _state = False
 
-    def __init__(self, callback, target_object, name, parameters=None):
-        self._callback = callback
+    def __init__(self, collection, target_object, name, parameters=None):
+        self._collection = collection
         self._target_object = target_object
         self._name = name
         self._parameters = MemoryBindingParameters(self, parameters)
@@ -29,8 +32,9 @@ class MemoryBindingSketch(MemoryBase):
     parameters = roproperty("_parameters")
 
     def __invert__(self):
+        restore = self._restore
         self.__class__ = MemoryBinding
-        self._callback = self._callback(self)
+        self._collection.on_complete(self, restore)
         return self
 
     def __str__(self):
@@ -38,6 +42,11 @@ class MemoryBindingSketch(MemoryBase):
             "binding",
             "\"%s\"" % self._name if self._name else None,
             "sketch of %s" % self._target_object)))
+
+
+class MemoryBindingRestorationSketch(MemoryBindingSketch):
+
+    _restore = True
 
 
 class MemoryBinding(MemoryBindingSketch):

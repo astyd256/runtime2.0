@@ -3,30 +3,32 @@ import settings
 import managers
 import file_access
 
-from utils.properties import roproperty, rwproperty
+from utils.properties import weak, roproperty, rwproperty
 from utils import verificators
 from scripting.executable import SOURCE_CODE, Executable
 
 from ..generic import MemoryBase
 
 
+@weak("_collection")
 class MemoryLibrarySketch(MemoryBase, Executable):
+
+    _restore = False
 
     _name = None
     _top = 0
     _left = 0
     _state = False
 
-    def __init__(self, callback, owner):
-        self._callback = callback
-        self._owner = owner
+    def __init__(self, collection):
+        self._collection = collection
 
-    lock = property(lambda self: self._owner.lock)
+    lock = property(lambda self: self._collection.owner.lock)
     owner = roproperty("_owner")
-    application = property(lambda self: self._owner.application)
+    application = property(lambda self: self._collection.owner.application)
 
-    scripting_language = property(lambda self: str(self._owner.application.scripting_language))
-    package = property(lambda self: str(self._owner.application.id))
+    scripting_language = property(lambda self: str(self._collection.owner.application.scripting_language))
+    package = property(lambda self: str(self._collection.owner.application.id))
     signature = property(lambda self: "<%s library %s>" % (self.scripting_language, self.name.lower()))
 
     name = rwproperty("_name")
@@ -38,8 +40,9 @@ class MemoryLibrarySketch(MemoryBase, Executable):
             return None
 
     def __invert__(self):
+        restore = self._restore
         self.__class__ = MemoryLibrary
-        self._callback = self._callback(self)
+        self._collection.on_complete(self, restore)
 
         if self._name is None:
             raise Exception(u"Library require name")
@@ -50,7 +53,12 @@ class MemoryLibrarySketch(MemoryBase, Executable):
         return " ".join(filter(None, (
             "library",
             "\"%s\"" % self._name if self._name else None,
-            "sketch of %s" % self._owner)))
+            "sketch of %s" % self._collection.owner if self._collection else None)))
+
+
+class MemoryLibraryRestorationSketch(MemoryLibrarySketch):
+
+    _restore = True
 
 
 class MemoryLibrary(MemoryLibrarySketch):
@@ -65,12 +73,12 @@ class MemoryLibrary(MemoryLibrarySketch):
         if not verificators.name(value):
             raise Exception("Invalid name: %r" % value)
 
-        with self._owner.lock:
+        with self._collection.owner.lock:
             source_code = self.source_code
             self.cleanup(remove=True)
-            self._name = self._callback(self, value)
+            self._name = self._collection.on_rename(self, value)
             self.source_code = source_code
-            self._owner.autosave()
+            self._collection.owner.autosave()
 
     name = rwproperty("_name")
 
@@ -91,4 +99,4 @@ class MemoryLibrary(MemoryLibrarySketch):
         return " ".join(filter(None, (
             "library",
             "\"%s\"" % self._name if self._name else None,
-            "of %s" % self._owner)))
+            "of %s" % self._collection.owner if self._collection else None)))

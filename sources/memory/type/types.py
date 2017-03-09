@@ -6,7 +6,7 @@ import file_access
 import managers
 
 from utils import verificators
-from utils.properties import roproperty
+from utils.properties import weak, roproperty
 from logs import log
 
 from ..auxiliary import parse_index_line
@@ -17,6 +17,7 @@ from .type import MemoryTypeSketch
 NOT_LOADED = "NOT LOADED"
 
 
+@weak("_owner")
 class MemoryTypes(MemoryBase, Mapping):
 
     def __init__(self, owner):
@@ -27,14 +28,13 @@ class MemoryTypes(MemoryBase, Mapping):
 
     owner = roproperty("_owner")
 
+    def on_complete(self, item):
+        with self._owner._lock:
+            self._items[item.id] = item
+            self._index[item.name] = item.id
+
     def new_sketch(self, restore=False):
-
-        def on_complete(item):
-            with self._owner._lock:
-                self._items[item.id] = item
-                self._index[item.name] = item.id
-
-        return MemoryTypeSketch(on_complete)
+        return MemoryTypeSketch(self)
 
     def save(self):
         if self._lazy:

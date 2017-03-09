@@ -4,7 +4,7 @@ import managers
 import file_access
 
 from uuid import uuid4
-from utils.properties import constant, roproperty, rwproperty
+from utils.properties import weak, constant, roproperty, rwproperty
 from utils import verificators
 from scripting.executable import source_code_property, SOURCE_CODE, Executable
 
@@ -13,10 +13,13 @@ from ..auxiliary import UNAVAILABLE_SELF
 from ..generic import MemoryBase
 
 
+@weak("_collection", "_owner")
 class MemoryActionSketch(MemoryBase, Executable):
 
     is_action = constant(True)
     is_binding = constant(False)
+
+    _restore = False
 
     _id = None
     _name = None
@@ -25,9 +28,9 @@ class MemoryActionSketch(MemoryBase, Executable):
     _state = False
     _source_code = u""
 
-    def __init__(self, callback, owner, handler=None):
-        self._callback = callback
-        self._owner = owner
+    def __init__(self, collection, handler=None):
+        self._collection = collection
+        self._owner = collection.owner
         self._handler = handler
 
     lock = property(lambda self: self._owner.lock)
@@ -48,8 +51,9 @@ class MemoryActionSketch(MemoryBase, Executable):
     source_code = rwproperty("_source_code")
 
     def __invert__(self):
+        restore = self._restore
         self.__class__ = MemoryAction
-        self._callback = self._callback(self)
+        self._collection.on_complete(self, restore)
 
         if self._id is None:
             raise Exception(u"Action require identifier")
@@ -65,11 +69,17 @@ class MemoryActionSketch(MemoryBase, Executable):
             "sketch of %s" % self._owner)))
 
 
+class MemoryActionRestorationSketch(MemoryActionSketch):
+
+    _restore = True
+
+
 class MemoryActionDuplicationSketch(MemoryActionSketch):
 
-    def __init__(self, callback, owner, another):
-        self._callback = callback
-        self._owner = owner
+    def __init__(self, collection, another, handler=None):
+        self._collection = collection
+        self._owner = collection.owner
+        self._handler = handler
         self._id = str(uuid4())
         self._name = another._name
         self._top = another._top
@@ -91,7 +101,7 @@ class MemoryAction(MemoryActionSketch):
             raise Exception("Invalid name: %r" % value)
 
         with self._owner.lock:
-            self._name = self._callback(self, value)
+            self._name, value = self._collection.on_rename(self, value), self._name
             self._owner.invalidate(contexts=(self._id, self._name, value), downward=True, upward=True)
             self._owner.autosave()
 

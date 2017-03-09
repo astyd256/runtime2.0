@@ -1,10 +1,11 @@
 
 from collections import Sequence
-from utils.properties import roproperty
+from utils.properties import weak, roproperty
 from ..generic import MemoryBase
 from .actionparameter import MemoryTypeActionParameterSketch
 
 
+@weak("_owner")
 class MemoryTypeActionParameters(MemoryBase, Sequence):
 
     def __init__(self, owner):
@@ -13,8 +14,11 @@ class MemoryTypeActionParameters(MemoryBase, Sequence):
 
     owner = roproperty("_owner")
 
+    def on_complete(self, item):
+        self._items.append(item)
+
     def new_sketch(self, restore=False):
-        return MemoryTypeActionParameterSketch(self._items.append, self._owner)
+        return MemoryTypeActionParameterSketch(self)
 
     # unsafe
     def compose(self, ident=u"", file=None):

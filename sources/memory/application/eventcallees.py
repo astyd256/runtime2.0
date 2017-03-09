@@ -1,14 +1,15 @@
 
 from collections import MutableSequence
 from uuid import uuid4
-from utils.properties import lazy, roproperty
+from utils.properties import lazy, weak, roproperty
 from ..generic import MemoryBase
-from .binding import MemoryBindingSketch
+from .binding import MemoryBindingSketch, MemoryBindingRestorationSketch
 
 
 EMPTY_LIST = []
 
 
+@weak("_owner")
 class MemoryEventCalleesSketch(MemoryBase, MutableSequence):
 
     @lazy
@@ -21,7 +22,8 @@ class MemoryEventCalleesSketch(MemoryBase, MutableSequence):
     owner = roproperty("_owner")
 
     def new_sketch(self, target_object, name, parameters=None, restore=False):
-        return MemoryBindingSketch(self.append, target_object, name, parameters=parameters)
+        return (MemoryBindingRestorationSketch if restore
+            else MemoryBindingSketch)(self.append, target_object, name, parameters=parameters)
 
     def insert(self, index, callee):
         self._items.insert(index, callee)

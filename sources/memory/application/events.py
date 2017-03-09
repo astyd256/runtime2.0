@@ -1,27 +1,9 @@
 
-from weakref import ref
 from collections import MutableMapping
 from utils.properties import lazy, weak, roproperty
 from ..generic import MemoryBase
 from .catalogs import MemoryEventsCatalog, MemoryEventsDynamicCatalog
-from .event import MemoryEventSketch
-
-
-def wrap_complete(instance, restore):
-    instance = ref(instance)
-
-    def on_complete(item):
-        self = instance()
-        with self._owner.lock:
-            self._items[item.source_object.id, item._name] = item
-
-            if not self._owner._virtual:
-                self._all_items[item.source_object.id, item._name] = item
-
-            if not restore:
-                self._owner.autosave()
-
-    return on_complete
+from .event import MemoryEventSketch, MemoryEventRestorationSketch
 
 
 @weak("_owner")
@@ -48,8 +30,19 @@ class MemoryEvents(MemoryBase, MutableMapping):
     owner = roproperty("_owner")
     catalog = roproperty("_catalog")
 
+    def on_complete(self, item, restore):
+        with self._owner.lock:
+            self._items[item.source_object.id, item._name] = item
+
+            if not self._owner._virtual:
+                self._all_items[item.source_object.id, item._name] = item
+
+            if not restore:
+                self._owner.autosave()
+
     def new_sketch(self, name, restore=False):
-        return MemoryEventSketch(wrap_complete(self, restore), self._owner, name)
+        return (MemoryEventRestorationSketch if restore
+            else MemoryEventSketch)(self, self._owner, name)
 
     def new(self, name):
         item = self.new_sketch(name)

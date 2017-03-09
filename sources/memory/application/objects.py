@@ -15,50 +15,6 @@ from ..generic import MemoryBase
 from .catalogs import MemoryObjectsCatalog, MemoryObjectsDynamicCatalog
 
 
-def wrap_rename(instance):
-    instance = ref(instance)
-
-    def on_rename(item, name):
-        self = instance()
-        with self._owner.lock:
-            del self._items_by_name[item.name]
-            if name in self._items_by_name:
-                name = generate_unique_name(name, self._items_by_name)
-            self._items_by_name[name] = item
-            return name
-
-    return on_rename
-
-
-def wrap_complete(instance, restore):
-    instance = ref(instance)
-
-    def on_complete(item):
-        self = instance()
-        with self._owner.lock:
-            if item._name is None or item._name in self._items_by_name:
-                item._name = generate_unique_name(item._name or item._type.name, self._items_by_name)
-            item._order = len(self._items)
-
-            if item._virtual == self._owner.virtual:
-                self._items[item.id] = item
-                self._items_by_name[item.name] = item
-
-            if not item._virtual:
-                self._all_items[item.id] = item
-
-            if not restore:
-                managers.dispatcher.dispatch_handler(item, "on_create")
-                if self._owner.is_object and item._virtual == self._owner.virtual:
-                    managers.dispatcher.dispatch_handler(self._owner, "on_insert", item)
-                    self._owner.invalidate(upward=True)
-                item.autosave()
-
-            return wrap_rename(self)
-
-    return on_complete
-
-
 @weak("_owner")
 class MemoryObjects(MemoryBase, MutableMapping):
 
@@ -87,8 +43,37 @@ class MemoryObjects(MemoryBase, MutableMapping):
     owner = roproperty("_owner")
     catalog = roproperty("_catalog")
 
+    def on_rename(self, item, name):
+        with self._owner.lock:
+            del self._items_by_name[item.name]
+            if name in self._items_by_name:
+                name = generate_unique_name(name, self._items_by_name)
+            self._items_by_name[name] = item
+            return name
+
+    def on_complete(self, item, restore):
+        with self._owner.lock:
+            if item._name is None or item._name in self._items_by_name:
+                item._name = generate_unique_name(item._name or item._type.name, self._items_by_name)
+            item._order = len(self._items)
+
+            if item._virtual == self._owner.virtual:
+                self._items[item.id] = item
+                self._items_by_name[item.name] = item
+
+            if not item._virtual:
+                self._all_items[item.id] = item
+
+            if not restore:
+                managers.dispatcher.dispatch_handler(item, "on_create")
+                if self._owner.is_object and item._virtual == self._owner.virtual:
+                    managers.dispatcher.dispatch_handler(self._owner, "on_insert", item)
+                    self._owner.invalidate(upward=True)
+                item.autosave()
+
     def new_sketch(self, type, virtual=False, attributes=None, restore=False):
-        return MemoryObjectSketch(wrap_complete(self, restore), type,
+        return (MemoryObjectRestorationSketch if restore
+                else MemoryObjectSketch)(self, type,
             self._owner.application, None if self._owner.is_application else self._owner,
             virtual=virtual, attributes=attributes)
 
@@ -124,7 +109,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
                 copy = None
 
                 for item in another._items.itervalues():
-                    copy = MemoryObjectDuplicationSketch(wrap_complete(self, False),
+                    copy = MemoryObjectDuplicationSketch(self,
                         self._owner.application, None if self._owner.is_application else self._owner,
                         item)
                     copy.id = str(uuid4())
@@ -213,4 +198,4 @@ class MemoryObjects(MemoryBase, MutableMapping):
         return "objects of %s" % self._owner
 
 
-from .object import MemoryObjectSketch, MemoryObjectDuplicationSketch
+from .object import MemoryObjectSketch, MemoryObjectRestorationSketch, MemoryObjectDuplicationSketch

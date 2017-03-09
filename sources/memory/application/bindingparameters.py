@@ -1,8 +1,10 @@
 
 from collections import OrderedDict, Mapping
+from utils.properties import weak
 from ..generic import MemoryBase
 
 
+@weak("_owner")
 class MemoryBindingParameters(MemoryBase, Mapping):
 
     def __init__(self, owner, items):
