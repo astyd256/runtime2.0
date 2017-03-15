@@ -37,8 +37,8 @@ class MemoryEvents(MemoryBase, MutableMapping):
             if not self._owner._virtual:
                 self._all_items[item.source_object.id, item._name] = item
 
-            if not restore:
-                self._owner.autosave()
+                if not restore:
+                    self._owner.autosave()
 
     def new_sketch(self, name, restore=False):
         return (MemoryEventRestorationSketch if restore
