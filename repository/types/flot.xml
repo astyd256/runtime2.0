@@ -3300,10 +3300,7 @@ class VDOM_flot(VDOM_object):
 
 		id = 'o_' + (self.id).replace('-', '_')
 
-		result = u"""
-			<script type="text/javascript" src="/62b01c3a-180f-ebec-59bf-45dc283b0a29.js"></script>
-			<script type="text/javascript" src="/7090fa87-0201-add7-fe8b-aa9145a4931a.js"></script>
-			"""
+		result = u""""""
 
 		if self.visible == "1":
 			show = ""
@@ -3362,6 +3359,10 @@ $j(function(){
 		result = get_empty_wysiwyg_value(self, WYSIWYG_IMAGE_UUID)
 		return VDOM_object.wysiwyg(self, contents=result)]]>
 	</SourceCode>
+	<Libraries>
+		<Library Target="html"><![CDATA[<script type="text/javascript" src="/62b01c3a-180f-ebec-59bf-45dc283b0a29.js"></script>
+		<script type="text/javascript" src="/7090fa87-0201-add7-fe8b-aa9145a4931a.js"></script>]]></Library>
+	</Libraries>
 	<E2VDOM>
 		<Events>
 			<UserInterfaceEvents>
@@ -3453,4 +3454,5 @@ $j(function(){
 			</Container>
 		</Actions>
 	</E2VDOM>
+
 </Type>

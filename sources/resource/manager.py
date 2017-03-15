@@ -25,7 +25,7 @@ class VDOM_resource_manager(object):
                 self.__main_index[resource] = VDOM_resource_descriptor.convert(self.__old_index[resource])
         else:
             self.__main_index = {res_id: VDOM_resource_descriptor(owner_id, res_id)
-                for (owner_id, res_id) in managers.storage.list_resource_index()}
+                                 for (owner_id, res_id) in managers.storage.list_resource_index()}
         del self.__old_index
         # TODO: check for not existing or temporary resources
         if not self.__main_index:
@@ -88,7 +88,7 @@ class VDOM_resource_manager(object):
             # managers.file_manager.write(file_access.resource,
             #     res_descriptor.application_id, object_id, res_descriptor.filename, bin_data, None, write_async)
             managers.file_manager.write(file_access.resource,
-                res_descriptor.application_id, res_descriptor.filename, bin_data, async=write_async)
+                                        res_descriptor.application_id, res_descriptor.filename, bin_data, async=write_async)
 
             if "label" not in attributes:
                 res_descriptor.save_record()
@@ -137,17 +137,18 @@ class VDOM_resource_manager(object):
 
     def invalidate_resources(self, object_id, cleanup=True):
         """Invalidate and clear all resources by object_id"""
+        need_clean = False
         for (obj_id, label) in self.__label_index.keys():
             if obj_id == object_id:
-                del self.__label_index[(obj_id, label)]
+                need_clean = True
+                res_descriptor = self.__label_index.pop((obj_id, label))
+                #f self.__main_index[res_descriptor.id].application_id == object_id:
+                del self.__main_index[res_descriptor.id]
 
-        if cleanup:
+        if cleanup and need_clean:
             # managers.file_manager.clear(file_access.resource, None, object_id)
             managers.file_manager.cleanup_directory(file_access.resource, object_id)
 
-        for res_id in self.__main_index.keys():
-            if self.__main_index[res_id].application_id == object_id:
-                del self.__main_index[res_id]
 
     def save_index_off(self):
         """Turning flag of index saving OFF"""
