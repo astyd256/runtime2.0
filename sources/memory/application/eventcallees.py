@@ -21,9 +21,12 @@ class MemoryEventCalleesSketch(MemoryBase, MutableSequence):
 
     owner = roproperty("_owner")
 
+    def on_complete(self, item, restore):
+        self._items.append(item)
+
     def new_sketch(self, target_object, name, parameters=None, restore=False):
         return (MemoryBindingRestorationSketch if restore
-            else MemoryBindingSketch)(self.append, target_object, name, parameters=parameters)
+            else MemoryBindingSketch)(self, target_object, name, parameters=parameters)
 
     def insert(self, index, callee):
         self._items.insert(index, callee)

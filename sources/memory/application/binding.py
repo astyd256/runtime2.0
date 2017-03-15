@@ -18,7 +18,7 @@ class MemoryBindingSketch(MemoryBase):
     _state = False
 
     def __init__(self, collection, target_object, name, parameters=None):
-        self._collection = collection
+        self._collection = collection  # MemoryBindings or MemoryEventCallees
         self._target_object = target_object
         self._name = name
         self._parameters = MemoryBindingParameters(self, parameters)
