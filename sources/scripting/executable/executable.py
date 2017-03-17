@@ -14,6 +14,13 @@ from .bytecode import ErrorBytecode
 
 class Executable(object):
 
+    class SubsystemLazyProperty(object):
+
+        def __get__(self, instance, owner=None):
+            with instance.lock:
+                instance.subsystem = value = select(instance.scripting_language)
+                return value
+
     class SourceCodeProperty(object):
 
         __slots__ = "_handler"
@@ -52,13 +59,6 @@ class Executable(object):
                 location = instance.location + instance.subsystem.source_extension
                 if location:
                     managers.file_manager.delete(file_access.FILE, None, location)
-
-    class SubsystemLazyProperty(object):
-
-        def __get__(self, instance, owner=None):
-            with instance.lock:
-                instance.subsystem = value = select(instance.scripting_language)
-                return value
 
     class BytecodeLazyProperty(object):
 

@@ -3,7 +3,7 @@ import os.path
 from logs import console
 from utils.structure import Structure
 from utils.parsing import VALUE, Parser, ParsingException
-from ...auxiliary import section, show, confirm
+from ...auxiliary import section, show
 from ..auxiliary import query
 
 
