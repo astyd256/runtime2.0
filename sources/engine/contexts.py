@@ -1,6 +1,5 @@
 
 from utils.properties import roproperty
-from .properties import render_context_contents_lazy_property, wysiwyg_context_contents_lazy_property
 
 
 class EngineContext(object):
@@ -13,9 +12,22 @@ class EngineContext(object):
 
 class RenderContext(EngineContext):
 
-    contents = render_context_contents_lazy_property()
+    class RenderContextContentsLazyProperty(object):
+
+        def __get__(self, instance, owner=None):
+            instance._instance.execute()
+            instance.contents = value = instance._instance.render()
+            return value
+
+    contents = RenderContextContentsLazyProperty()
 
 
 class WysiwygContext(EngineContext):
 
-    contents = wysiwyg_context_contents_lazy_property()
+    class WysiwygContextContentsLazyProperty(object):
+
+        def __get__(self, instance, owner=None):
+            instance.contents = value = instance._instance.wysiwyg()
+            return value
+
+    contents = WysiwygContextContentsLazyProperty()

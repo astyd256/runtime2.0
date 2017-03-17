@@ -144,7 +144,7 @@ def query(options):
 
         with profiler.hold() as location:
             profile = generate_call_graph_profile(location)
-        data = generate_call_graph(profile, **keywords)
+        data = generate_call_graph(profile, **keywords) if profile else None
 
         yield "<reply>"
         if data is None:

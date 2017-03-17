@@ -9,7 +9,10 @@ DEFAULT_COLOR_NODES = True
 
 
 def generate_call_graph_profile(location):
-    return gprof2dot.PstatsParser(location).parse()
+    try:
+        return gprof2dot.PstatsParser(location).parse()
+    except IOError:
+        return None
 
 
 def generate_call_graph(profile, node_threshold=DEFAULT_NODE_THRESHOLD,
