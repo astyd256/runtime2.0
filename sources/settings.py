@@ -97,6 +97,9 @@ if MANAGE:
     LOGGER = None
     LOG_LEVEL = 2
 
+LOGGER = None
+LOG_LEVEL = 2
+
 # profiling
 
 PROFILING = False
@@ -114,6 +117,7 @@ STORE_ACTIONS_BYTECODE = False
 WATCHER = True
 WATCHER_ADDRESS = "127.0.0.1"
 WATCHER_PORT = 1011
+MONITOR = 60
 
 # vscript
 
