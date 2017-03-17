@@ -60,7 +60,7 @@ class BytecodeLazyProperty(object):
     def __get__(self, instance, owner=None):
         with instance.lock:
             instance.bytecode = value = \
-                (instance.subsystem.restore(self) if settings.STORE_BYTECODE else None) or instance._compile()
+                (instance.subsystem.restore(instance) if settings.STORE_BYTECODE else None) or instance._compile()
             return value
 
 
