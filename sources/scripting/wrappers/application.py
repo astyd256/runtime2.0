@@ -1,12 +1,15 @@
 
 import re
-import managers
 import threading
 import os
+
+import managers
 
 from utils.exception import VDOM_exception_file_access
 from file_access import storage as app_storage
 # from file_access import application_storage
+
+from .tasks import Task
 
 
 DBSCHEMA_ID = '753ea72c-475d-4a29-96be-71c522ca2097'
@@ -368,7 +371,13 @@ class VDOM_application(object):
         if getattr(VDOM_application.__app, "app_id", None):
             return VDOM_application.__app.app_id
         else:
-            return managers.request_manager.current.app_id()
+            try:
+                return managers.request_manager.current.app_id()
+            except:
+                try:
+                    return managers.engine.application.id
+                except:
+                    return None
 
     def _get_name(self):
         # return managers.request_manager.current.application().name
@@ -387,6 +396,7 @@ class VDOM_application(object):
         raise NotImplementedError
 
     def set_app_id(self, app_id):
+        managers.engine.select(app_id)
         VDOM_application.__app.app_id = app_id
 
     def _get_version(self):
@@ -407,3 +417,8 @@ class VDOM_application(object):
     storage = property(lambda self: self._storage)
     itself = property(lambda self: managers.request_manager.current.application()) # temporary, for objectview
     variables = property(_get_variables)
+
+    def start_task(self, function):
+        task = Task(target=function)
+        task.start()
+        return task

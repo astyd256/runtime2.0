@@ -2,7 +2,7 @@
 from weakref import ref
 from collections import Mapping
 from itertools import chain
-from threading import Event
+from threading import RLock, Event
 from uuid import uuid4
 
 import settings
@@ -11,29 +11,14 @@ import file_access
 
 from utils import verificators
 from utils.verificators import complies
-from utils.properties import lazy, weak
+from utils.properties import lazy, weak, roproperty
 from logs import log
 
 from ..generic import MemoryBase
-from .application import MemoryApplicationSketch
+from .application import MemoryApplicationSketch, MemoryApplicationRestorationSketch
 
 
 DEFAULT_APPLICATION_NAME = "Application"
-
-
-def wrap_complete(instance, restore):
-    instance = ref(instance)
-
-    def on_complete(item):
-        self = instance()
-        with self._owner._lock:
-            if item._id not in self._known:
-                self._event.set()
-            self._items[item._id] = item
-            for subitem in item._objects.catalog.itervalues():
-                managers.dispatcher.dispatch_handler(subitem, "on_startup")
-
-    return on_complete
 
 
 @weak("_owner")
@@ -43,18 +28,31 @@ class MemoryApplications(MemoryBase, Mapping):
     def default(self):
         try:
             return self[settings.DEFAULT_APPLICATION or iter(self).next()]
-        except (StopIteration, KeyError):
+        except (KeyError, StopIteration):
             return None
 
     def __init__(self, owner):
         self._owner = owner
+        self._lock = owner._lock
         self._items = {}
         self._queue = set()
         self._event = Event()
         self._known = set()
 
+    owner = roproperty("_owner")
+    lock = roproperty("_lock")
+
+    def on_complete(self, item, restore):
+        with self._lock:
+            if item._id not in self._known:
+                self._event.set()
+            self._items[item._id] = item
+            for subitem in item._objects.catalog.itervalues():
+                managers.dispatcher.dispatch_handler(subitem, "on_startup")
+
     def new_sketch(self, restore=False):
-        return MemoryApplicationSketch(wrap_complete(self, restore))
+        return (MemoryApplicationRestorationSketch if restore
+            else MemoryApplicationSketch)(self)
 
     def new(self, name=DEFAULT_APPLICATION_NAME):
         item = self.new_sketch()
@@ -88,14 +86,14 @@ class MemoryApplications(MemoryBase, Mapping):
         try:
             return self[uuid_or_name]
         except KeyError:
-            with self._owner._lock:
+            with self._lock:
                 for item in self.itervalues():
                     if item.name.lower().startswith(uuid_or_name):
                         return item
                 raise
 
-    def unload(self, uuid):
-        with self._owner._lock:
+    def unload(self, uuid, remove=False):
+        with self._lock:
             self._event.set()
             application = self._items[uuid]
             application.unimport_libraries()
@@ -108,7 +106,7 @@ class MemoryApplications(MemoryBase, Mapping):
             if self._queue is None:
                 raise
             else:
-                with self._owner._lock:
+                with self._lock:
                     try:
                         return self._items[uuid]
                     except:
@@ -120,7 +118,7 @@ class MemoryApplications(MemoryBase, Mapping):
                             raise
 
     def __iter__(self):
-        with self._owner._lock:
+        with self._lock:
             self._event.clear()
             if self._queue is not None:
                 self._explore()
@@ -135,7 +133,7 @@ class MemoryApplications(MemoryBase, Mapping):
             yield item
 
     def __len__(self):
-        with self._owner._lock:
+        with self._lock:
             if self._queue is not None:
                 self._explore()
             return len(self._items) + len(self._queue) if self._queue else len(self._items)

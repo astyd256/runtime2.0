@@ -21,6 +21,7 @@ from .daemon import FileWriter
 
 
 TEMPORARY_DIRECTORY_SUFFIX = "-temporary"
+NO_DEFAULT = "NO DEFAULT"
 
 
 class FileManager(object):
@@ -124,6 +125,11 @@ class FileManager(object):
         location = self.locate(category, owner, name)
         return os.path.exists(location)
 
+    def rename(self, category, owner, name, new_name):
+        location = self.locate(category, owner, name)
+        new_location = self.locate(category, owner, new_name)
+        os.rename(location, new_location)
+
     def open(self, category, owner, name, mode="r", buffering=-1, encoding=None, errors=None, newline=""):
         location = self.locate(category, owner, name)
         # self.ensure(category, owner, mode)
@@ -143,11 +149,17 @@ class FileManager(object):
         except os.error:
             return None
 
-    def read(self, category, owner, name, encoding=None):
+    def read(self, category, owner, name, encoding=None, default=NO_DEFAULT):
         location = self.locate(category, owner, name)
         mode = "r" if encoding else "rb"
-        with io.open(location, mode, encoding=encoding, newline=None if "b" in mode else "") as file:
-            return file.read()
+        try:
+            with io.open(location, mode, encoding=encoding, newline=None if "b" in mode else "") as file:
+                return file.read()
+        except Exception as error:
+            if error.errno == errno.ENOENT and default is not NO_DEFAULT:
+                return default
+            else:
+                raise
 
     # There are some code pieces from write
 

@@ -1,16 +1,9 @@
 
-import managers
-
-from .auxiliary.constants import APPLICATION, TYPE, APPLICATIONS, TYPES
-from .auxiliary import section, show, confirm, search
+from .auxiliary.constants import TYPES, APPLICATIONS
+from .auxiliary import section, show, select
 
 
-def uninstall(entity, subject):
-    with section("uninstall %s" % subject, lazy=False):
-        try:
-            subject.uninstall()
-        except Exception as error:
-            show("unable to uninstall %s: %s" % (entity, error))
+ENTITIES = TYPES, APPLICATIONS
 
 
 def run(identifier, yes=False):
@@ -19,17 +12,10 @@ def run(identifier, yes=False):
     :param uuid_or_name identifier: application or type uuid or name or types to uninstall all types
     :param switch yes: assume positive answer to confirmation request
     """
-    if identifier in APPLICATIONS:
-        if yes or confirm("uninstall all applications"):
-            for subject in tuple(managers.memory.applications.itervalues()):
-                uninstall(APPLICATION, subject)
-    elif identifier in TYPES:
-        if yes or confirm("uninstall all types"):
-            for subject in tuple(managers.memory.types.itervalues()):
-                uninstall(TYPE, subject)
-    else:
-        entity, subject = search(identifier)
-        if entity:
-            uninstall(entity, subject)
-        else:
-            show("unable to find: %s" % identifier)
+    for entity, subject in select(identifier, "uninstall", ENTITIES, confirm=not yes):
+        with section("uninstall %s" % subject, lazy=False):
+            try:
+                subject.uninstall()
+            except Exception as error:
+                show("unable to uninstall %s: %s" % (entity, error))
+                raise

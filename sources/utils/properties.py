@@ -3,7 +3,32 @@ from weakref import ref
 from threading import RLock
 
 
+MISSING = "MISSING"
 WEAK_NAME_TEMPLATE = "_weak_%s"
+
+
+class AbstractReadOnlyProperty(object):
+
+    def __get__(self, instance, owner=None):
+        raise NotImplementedError
+
+    def __set__(self, instance, value):
+        raise AttributeError
+
+    def __delete__(self, instance):
+        raise AttributeError
+
+
+class AbstractReadWriteProperty(object):
+
+    def __get__(self, instance, owner=None):
+        raise NotImplementedError
+
+    def __set__(self, instance, value):
+        raise NotImplementedError
+
+    def __delete__(self, instance):
+        raise AttributeError
 
 
 class ConstantProperty(object):
@@ -30,10 +55,10 @@ class LazyProperty(object):
 
     def __get__(self, instance, owner=None):
         with self._lock:
-            try:
-                return instance.__dict__[self._name]
-            except KeyError:
-                return instance.__dict__.setdefault(self._name, self._initializer(instance))
+            value = instance.__dict__.get(self._name, MISSING)
+            if value is MISSING:
+                instance.__dict__[self._name] = value = self._initializer(instance)
+            return value
 
 
 class WeakProperty(object):
@@ -73,12 +98,16 @@ class WeakWithDefaultProperty(object):
         del instance.__dict__[self._name]
 
 
-lazy = LazyProperty
+aroproperty = AbstractReadOnlyProperty
+arwproperty = AbstractReadWriteProperty
+
+# lazy = LazyProperty
 constant = ConstantProperty
 
+lazyproperties = {}
+weakproperties = {}
 readonly_properties = {}
 readwrite_properties = {}
-weakproperties = {}
 
 
 def quicker_constant(value):
@@ -111,6 +140,88 @@ def quicker_lazy(initializer):
                     return instance.__dict__.setdefault(name, initializer(instance))
 
     return LazyProperty()
+
+
+def weakproperty(name):
+    try:
+        return weakproperties[name]()
+    except KeyError:
+        namespace = {"ref": ref}
+        bytecode = compile("""
+class WeakProperty(object):
+
+    def __get__(self, instance, owner=None):
+        value = instance.{name}
+        return None if value is None else value()
+
+    def __set__(self, instance, value):
+        instance.{name} = None if value is None else ref(value)
+
+    def __delete__(self, instance):
+        del instance.{name}
+            """.format(name=name), "<weakproperty:%s>" % name, "exec")
+
+        exec(bytecode, namespace)
+        return weakproperties.setdefault(name, namespace["WeakProperty"])()
+
+
+def weak(*names, **names_with_values):
+
+    def wrapper(cls):
+        for name in names:
+            setattr(cls, name, weakproperty(WEAK_NAME_TEMPLATE % name))
+        for name, value in names_with_values.iteritems():
+            weak_name = WEAK_NAME_TEMPLATE % name
+            setattr(cls, weak_name, ref(value))
+            setattr(cls, name, weakproperty(weak_name))
+        return cls
+
+    return wrapper
+
+
+def lazyproperty(name, initializer, lock=None, exclusive=True):
+    try:
+        return lazyproperties[name]()
+    except KeyError:
+        namespace = {"MISSING": MISSING, "initializer": initializer}
+        if lock:
+            lock = "instance." + lock
+        else:
+            namespace["lock"] = RLock()
+            lock = "lock"
+        if exclusive:
+            bytecode = compile("""
+    class LazyProperty(object):
+
+    def __get__(self, instance, owner=None):
+        with {lock}:
+            value = instance.__dict__.get("{name}", MISSING)
+            if value is MISSING:
+                instance.__dict__["{name}"] = value = initializer(instance)
+            return value
+                """.format(name=name, lock=lock), "<lazyproperty:%s>" % name, "exec")
+        else:
+            bytecode = compile("""
+    class LazyProperty(object):
+
+    def __get__(self, instance, owner=None):
+        with {lock}:
+            instance.__dict__.get("{name}", initializer(instance))
+                """.format(name=name, lock=lock), "<lazyproperty:%s>" % name, "exec")
+
+        exec(bytecode, namespace)
+        return lazyproperties.setdefault(name, namespace["LazyProperty"])()
+
+
+def lazy(initializer=None, lock=None):
+    if lock:
+
+        def wrapper(initializer):
+            return lazyproperty(initializer.__name__, initializer, lock)
+
+        return wrapper
+    else:
+        return LazyProperty(initializer)
 
 
 def roproperty(name):
@@ -167,40 +278,3 @@ class ReadWriteProperty(object):
 
         exec(bytecode, namespace)
         return readwrite_properties.setdefault((name, setter), namespace["ReadWriteProperty"])()
-
-
-def weakproperty(name):
-    try:
-        return weakproperties[name]()
-    except KeyError:
-        namespace = {"ref": ref}
-        bytecode = compile("""
-class WeakProperty(object):
-
-    def __get__(self, instance, owner=None):
-        value = instance.{name}
-        return None if value is None else value()
-
-    def __set__(self, instance, value):
-        instance.{name} = None if value is None else ref(value)
-
-    def __delete__(self, instance):
-        del instance.{name}
-            """.format(name=name), "<weakproperty:%s>" % name, "exec")
-
-        exec(bytecode, namespace)
-        return weakproperties.setdefault(name, namespace["WeakProperty"])()
-
-
-def weak(*names, **names_with_values):
-
-    def wrapper(cls):
-        for name in names:
-            setattr(cls, name, weakproperty(WEAK_NAME_TEMPLATE % name))
-        for name, value in names_with_values.iteritems():
-            weak_name = WEAK_NAME_TEMPLATE % name
-            setattr(cls, weak_name, ref(value))
-            setattr(cls, name, weakproperty(weak_name))
-        return cls
-
-    return wrapper

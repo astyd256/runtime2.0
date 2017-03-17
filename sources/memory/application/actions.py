@@ -8,61 +8,31 @@ from utils.properties import lazy, weak, roproperty
 
 from ..generic import MemoryBase
 from .catalogs import MemoryActionsCatalog, MemoryActionsDynamicCatalog
-from .action import MemoryActionSketch, MemoryActionDuplicationSketch, MemoryHandledActionSketch
+from .action import MemoryActionSketch, MemoryActionRestorationSketch, MemoryActionDuplicationSketch
 
 
 NAME_BASE = "action"
 
 
-def wrap_rename(instance):
-    instance = ref(instance)
-
-    def on_rename(item, name):
-        self = instance()
-        with self._owner.lock:
-            del self._items_by_name[item.name]
-            if name in self._items_by_name:
-                name = generate_unique_name(name, self._items_by_name)
-            self._items_by_name[name] = item
-            return name
-
-    return on_rename
-
-
-def wrap_complete(instance, restore):
-    instance = ref(instance)
-
-    def on_complete(item):
-        self = instance()
-        with self._owner.lock:
-            if item._name is None or item._name in self._items_by_name:
-                item._name = generate_unique_name(item._name or NAME_BASE, self._items_by_name)
-
-            self._items[item.id] = item
-            self._items_by_name[item.name] = item
-
-            if not self._owner.virtual:
-                self._all_items[item.id] = item
-
-            if not restore:
-                self._owner.invalidate(contexts=(item._id, item._name), downward=True, upward=True)
-                self._owner.autosave()
-
-            return wrap_rename(self)
-
-    return on_complete
-
-
 @weak("_owner")
 class MemoryActions(MemoryBase, MutableMapping):
 
-    @lazy
-    def _items(self):
-        return {}
+    class MemoryActionsItemsProperty(object):
 
-    @lazy
-    def _items_by_name(self):
-        return {}
+        def __get__(self, instance, owner=None):
+            with instance._owner.lock:
+                instance.__dict__["_items_by_name"] = {}
+                return instance.__dict__.setdefault("_items", {})
+
+    class MemoryActionsItemsByNameProperty(object):
+
+        def __get__(self, instance, owner=None):
+            with instance._owner.lock:
+                instance.__dict__["_items"] = {}
+                return instance.__dict__.setdefault("_items_by_name", {})
+
+    _items = MemoryActionsItemsProperty()
+    _items_by_name = MemoryActionsItemsByNameProperty()
 
     @lazy
     def _all_items(self):
@@ -82,18 +52,39 @@ class MemoryActions(MemoryBase, MutableMapping):
     catalog = roproperty("_catalog")
     generic = roproperty("_generic")
 
+    def on_rename(self, item, name):
+        with self._owner.lock:
+            del self._items_by_name[item.name]
+            if name in self._items_by_name:
+                name = generate_unique_name(name, self._items_by_name)
+            self._items_by_name[name] = item
+            return name
+
+    def on_complete(self, item, restore):
+        with self._owner.lock:
+            if item._name is None or item._name in self._items_by_name:
+                item._name = generate_unique_name(item._name or NAME_BASE, self._items_by_name)
+
+            self._items[item.id] = item
+            self._items_by_name[item.name] = item
+
+            if not self._owner.virtual:
+                self._all_items[item.id] = item
+
+            if not restore:
+                self._owner.invalidate(contexts=(item._id, item._name), downward=True, upward=True)
+                self._owner.autosave()
+
     def new_sketch(self, restore=False, handler=None):
-        if handler is None:
-            return MemoryActionSketch(wrap_complete(self, restore), self._owner)
-        else:
-            return MemoryHandledActionSketch(wrap_complete(self, restore), self._owner, handler)
+        return (MemoryActionRestorationSketch if restore
+            else MemoryActionSketch)(self, handler=handler)
 
     def new(self, name=None, source_code=None, handler=None):
         item = self.new_sketch(handler=handler)
         item.id = str(uuid4())
         item.name = name
         if source_code is not None:
-            item.source_code_value = source_code
+            item.source_code = source_code
         return ~item
 
     # unsafe
@@ -112,8 +103,9 @@ class MemoryActions(MemoryBase, MutableMapping):
                 contexts = set(self._items)
                 contexts.update(self._items_by_name)
 
-                for name in self._items:
-                    del self._all_items[name]
+                if not self._owner.virtual:
+                    for uuid in self._items:
+                        del self._all_items[uuid]
                 del self._items
                 del self._items_by_name
 
@@ -125,7 +117,7 @@ class MemoryActions(MemoryBase, MutableMapping):
             with self._owner.lock:
                 contexts = set()
                 for item in actions._items.itervalues():
-                    copy = MemoryActionDuplicationSketch(wrap_complete(self, False), self._owner, item)
+                    copy = MemoryActionDuplicationSketch(self, item)
                     copy.id = str(uuid4())
                     ~copy
                     contexts.update({item.id, item.name})
@@ -141,9 +133,12 @@ class MemoryActions(MemoryBase, MutableMapping):
     def __delitem__(self, key):
         with self._owner.lock:
             item = self._items.get(key) or self._items_by_name[key]
+
             del self._items[item.id]
             del self._items_by_name[item.name]
-            del self._all_items[item.id]
+            if not self._owner.virtual:
+                del self._all_items[item.id]
+
             self._owner.invalidate(contexts=(item.id, item.name), downward=True, upward=True)
             self._owner.autosave()
 

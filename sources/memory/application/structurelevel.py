@@ -1,12 +1,13 @@
 
 from collections import MutableSequence
-from utils.properties import lazy, roproperty, rwproperty
+from utils.properties import lazy, weak, roproperty, rwproperty
 from ..generic import MemoryBase
 
 
 EMPTY_LIST = []
 
 
+@weak("_owner")
 class MemoryStructureLevelSketch(MemoryBase, MutableSequence):
 
     @lazy

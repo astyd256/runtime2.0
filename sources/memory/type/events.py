@@ -1,10 +1,11 @@
 
 from collections import Mapping
-from utils.properties import roproperty
+from utils.properties import weak, roproperty
 from ..generic import MemoryBase
 from .event import MemoryTypeEventSketch
 
 
+@weak("_owner")
 class MemoryTypeEvents(MemoryBase, Mapping):
 
     def __init__(self, owner):
@@ -13,12 +14,11 @@ class MemoryTypeEvents(MemoryBase, Mapping):
 
     owner = roproperty("_owner")
 
+    def on_complete(self, item):
+        self._items[item.name] = item
+
     def new_sketch(self, restore=False):
-
-        def on_comlete(item):
-            self._items[item.name] = item
-
-        return MemoryTypeEventSketch(on_comlete, self._owner)
+        return MemoryTypeEventSketch(self)
 
     def __getitem__(self, key):
         return self._items[key]

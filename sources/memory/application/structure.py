@@ -1,25 +1,25 @@
 
 from collections import Mapping
-import managers
-import security
 from utils.exception import VDOMSecurityError
-from utils.properties import lazy, roproperty, rwproperty
+from utils.properties import lazy, weak, roproperty, rwproperty
 from ..generic import MemoryBase
 from .structurelevel import MemoryStructureLevel, MemoryStructureLevelSketch
 
 
+@weak("_owner")
 class MemoryStructureSketch(MemoryBase, Mapping):
 
     @lazy
     def _items(self):
         return {}
 
+    _resource = None
+    _top = 0
+    _left = 0
+    _state = 0
+
     def __init__(self, owner):
         self._owner = owner
-        self._resource = None
-        self._top = 0
-        self._left = 0
-        self._state = 0
 
     owner = roproperty("_owner")
     resource = rwproperty("_resource")

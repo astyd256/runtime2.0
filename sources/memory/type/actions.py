@@ -1,10 +1,11 @@
 
 from collections import Mapping
-from utils.properties import roproperty
+from utils.properties import weak, roproperty
 from ..generic import MemoryBase
 from .action import MemoryTypeActionSketch
 
 
+@weak("_owner")
 class MemoryTypeActions(MemoryBase, Mapping):
 
     def __init__(self, owner):
@@ -14,17 +15,16 @@ class MemoryTypeActions(MemoryBase, Mapping):
 
     owner = roproperty("_owner")
 
+    def on_complete(self, item):
+        self._items[item.scope, item.name] = item
+        try:
+            items = self._items_by_scope[item.scope]
+        except KeyError:
+            self._items_by_scope[item.scope] = items = {}
+        items[item.scope, item.name] = item
+
     def new_sketch(self, restore=False):
-
-        def on_complete(item):
-            self._items[item.scope, item.name] = item
-            try:
-                items = self._items_by_scope[item.scope]
-            except KeyError:
-                self._items_by_scope[item.scope] = items = {}
-            items[item.scope, item.name] = item
-
-        return MemoryTypeActionSketch(on_complete, self._owner)
+        return MemoryTypeActionSketch(self)
 
     # unsafe
     def compose(self, ident=u"", file=None):

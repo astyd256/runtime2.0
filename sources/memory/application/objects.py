@@ -15,11 +15,44 @@ from ..generic import MemoryBase
 from .catalogs import MemoryObjectsCatalog, MemoryObjectsDynamicCatalog
 
 
-def wrap_rename(instance):
-    instance = ref(instance)
+@weak("_owner")
+class MemoryObjects(MemoryBase, MutableMapping):
 
-    def on_rename(item, name):
-        self = instance()
+    class MemoryObjectsItemsProperty(object):
+
+        def __get__(self, instance, owner=None):
+            with instance._owner.lock:
+                instance.__dict__["_items_by_name"] = {}
+                return instance.__dict__.setdefault("_items", OrderedDict())
+
+    class MemoryObjectsItemsByNameProperty(object):
+
+        def __get__(self, instance, owner=None):
+            with instance._owner.lock:
+                instance.__dict__["_items"] = OrderedDict()
+                return instance.__dict__.setdefault("_items_by_name", {})
+
+    _items = MemoryObjectsItemsProperty()
+    _items_by_name = MemoryObjectsItemsByNameProperty()
+
+    @lazy
+    def _all_items(self):
+        return self._owner.application.objects.catalog._items
+
+    @lazy
+    def _catalog(self):
+        if self._owner.is_application:
+            return MemoryObjectsCatalog(self)
+        else:
+            return MemoryObjectsDynamicCatalog(self)
+
+    def __init__(self, owner):
+        self._owner = owner
+
+    owner = roproperty("_owner")
+    catalog = roproperty("_catalog")
+
+    def on_rename(self, item, name):
         with self._owner.lock:
             del self._items_by_name[item.name]
             if name in self._items_by_name:
@@ -27,14 +60,7 @@ def wrap_rename(instance):
             self._items_by_name[name] = item
             return name
 
-    return on_rename
-
-
-def wrap_complete(instance, restore):
-    instance = ref(instance)
-
-    def on_complete(item):
-        self = instance()
+    def on_complete(self, item, restore):
         with self._owner.lock:
             if item._name is None or item._name in self._items_by_name:
                 item._name = generate_unique_name(item._name or item._type.name, self._items_by_name)
@@ -54,41 +80,9 @@ def wrap_complete(instance, restore):
                     self._owner.invalidate(upward=True)
                 item.autosave()
 
-            return wrap_rename(self)
-
-    return on_complete
-
-
-@weak("_owner")
-class MemoryObjects(MemoryBase, MutableMapping):
-
-    @lazy
-    def _items(self):
-        return OrderedDict()
-
-    @lazy
-    def _items_by_name(self):
-        return {}
-
-    @lazy
-    def _all_items(self):
-        return self._owner.application.objects.catalog._items
-
-    @lazy
-    def _catalog(self):
-        if self._owner.is_application:
-            return MemoryObjectsCatalog(self)
-        else:
-            return MemoryObjectsDynamicCatalog(self)
-
-    def __init__(self, owner):
-        self._owner = owner
-
-    owner = roproperty("_owner")
-    catalog = roproperty("_catalog")
-
     def new_sketch(self, type, virtual=False, attributes=None, restore=False):
-        return MemoryObjectSketch(wrap_complete(self, restore), type,
+        return (MemoryObjectRestorationSketch if restore
+                else MemoryObjectSketch)(self, type,
             self._owner.application, None if self._owner.is_application else self._owner,
             virtual=virtual, attributes=attributes)
 
@@ -124,7 +118,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
                 copy = None
 
                 for item in another._items.itervalues():
-                    copy = MemoryObjectDuplicationSketch(wrap_complete(self, False),
+                    copy = MemoryObjectDuplicationSketch(self,
                         self._owner.application, None if self._owner.is_application else self._owner,
                         item)
                     copy.id = str(uuid4())
@@ -213,4 +207,4 @@ class MemoryObjects(MemoryBase, MutableMapping):
         return "objects of %s" % self._owner
 
 
-from .object import MemoryObjectSketch, MemoryObjectDuplicationSketch
+from .object import MemoryObjectSketch, MemoryObjectRestorationSketch, MemoryObjectDuplicationSketch

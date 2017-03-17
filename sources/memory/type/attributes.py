@@ -1,10 +1,11 @@
 
 from collections import OrderedDict, Mapping
-from utils.properties import roproperty
+from utils.properties import weak, roproperty
 from ..generic import MemoryBase
 from .attribute import MemoryTypeAttributeSketch
 
 
+@weak("_owner")
 class MemoryTypeAttributes(MemoryBase, Mapping):
 
     def __init__(self, owner):
@@ -14,12 +15,11 @@ class MemoryTypeAttributes(MemoryBase, Mapping):
 
     owner = roproperty("_owner")
 
+    def on_complete(self, item):
+        self._items[item.name] = item
+
     def new_sketch(self, restore=False):
-
-        def on_comlete(item):
-            self._items[item.name] = item
-
-        return MemoryTypeAttributeSketch(on_comlete, self._owner)
+        return MemoryTypeAttributeSketch(self)
 
     # unsafe
     def compose(self, ident=u"", file=None):

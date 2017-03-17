@@ -1,20 +1,22 @@
 
-from utils.properties import roproperty, rwproperty
+from utils.properties import weak, roproperty, rwproperty
 from ..generic import MemoryBase
 from .eventcallees import MemoryEventCalleesSketch
 
 
+@weak("_collection")
 class MemoryEventSketch(MemoryBase):
 
-    def __init__(self, callback, owner, name):
-        self._callback = callback
+    _restore = False
+
+    _top = 0
+    _left = 0
+    _state = False
+
+    def __init__(self, collection, owner, name):
+        self._collection = collection
         self._owner = owner
-
         self._name = name
-        self._top = 0
-        self._left = 0
-        self._state = False
-
         self._callees = MemoryEventCalleesSketch(self)
 
     owner = roproperty("_owner")
@@ -29,8 +31,9 @@ class MemoryEventSketch(MemoryBase):
 
     def __invert__(self):
         ~self._callees
+        restore = self._restore
         self.__class__ = MemoryEvent
-        self._callback = self._callback(self)
+        self._collection.on_complete(self, restore)
         return self
 
     def __str__(self):
@@ -38,6 +41,11 @@ class MemoryEventSketch(MemoryBase):
             "event",
             "\"%s\"" % self._name if self._name else None,
             "sketch of %s" % self._owner)))
+
+
+class MemoryEventRestorationSketch(MemoryEventSketch):
+
+    _restore = True
 
 
 class MemoryEvent(MemoryEventSketch):

@@ -1,36 +1,37 @@
 
 import re
-from utils.properties import lazy, roproperty, rwproperty
+from utils.properties import lazy, weak, roproperty, rwproperty
 from ..generic import MemoryBase
 
 
+@weak("_collection")
 class MemoryTypeAttributeSketch(MemoryBase):
 
     @lazy
     def _regex(self):
         return re.compile("^%s$" % self._validation_pattern, re.DOTALL)
 
-    def __init__(self, callback, owner):
-        self._callback = callback
-        self._owner = owner
-        self._name = None
-        self._display_name = None
-        self._description = u""
-        self._default_value = u""
-        self._validation_pattern = u".*"
-        self._validation_error_message = u""
-        self._visible = 1
-        self._interface_type = 0
-        self._code_interface = u"TextField(99)"
-        self._color_group = 1
-        self._complexity = 0
+    _name = None
+    _display_name = None
+    _description = u""
+    _default_value = u""
+    _validation_pattern = u".*"
+    _validation_error_message = u""
+    _visible = 1
+    _interface_type = 0
+    _code_interface = u"TextField(99)"
+    _color_group = 1
+    _complexity = 0
+
+    def __init__(self, collection):
+        self._collection = collection
 
     def _set_validation_pattern(self, value):
         self._validation_pattern = value
         if "_regex" in self.__dict__:
             del self._regex
 
-    owner = roproperty("_owner")
+    owner = property(lambda self: self._collection.owner)
 
     name = rwproperty("_name")
     display_name = rwproperty("_display_name")
@@ -51,11 +52,12 @@ class MemoryTypeAttributeSketch(MemoryBase):
             self._display_name = self._name
 
         self.__class__ = MemoryTypeAttribute
-        self._callback = self._callback(self)
+        self._collection.on_complete(self)
         return self
 
     def __str__(self):
-        return " ".join(filter(None, ("attribute", "\"%s\"" % self._name, "sketch of %s" % self._owner)))
+        return " ".join(filter(None, ("attribute", "\"%s\"" % self._name,
+            "sketch of %s" % self._collection.owner if self._collection else None)))
 
 
 class MemoryTypeAttribute(MemoryTypeAttributeSketch):
@@ -100,4 +102,5 @@ class MemoryTypeAttribute(MemoryTypeAttributeSketch):
         raise NotImplementedError
 
     def __str__(self):
-        return " ".join(filter(None, ("attribute", "\"%s\"" % self._name, "of %s" % self._owner)))
+        return " ".join(filter(None, ("attribute", "\"%s\"" % self._name,
+            "of %s" % self._collection.owner if self._collection else None)))

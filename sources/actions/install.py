@@ -1,5 +1,6 @@
 
 import os.path
+import settings
 import managers
 import file_access
 
@@ -20,10 +21,18 @@ def install(filename):
         try:
             if entity is TYPE:
                 subject = managers.memory.install_type(filename, into=notifications)
+                if settings.STORE_BYTECODE:
+                    subject.compile()
             elif entity is APPLICATION:
                 subject = managers.memory.install_application(filename, into=notifications)
+                if settings.STORE_BYTECODE:
+                    for library in subject.libraries.itervalues():
+                        # show("precompile library %s" % library.name)
+                        library.compile()
+
         except Exception as error:
             show("unable to install %s: %s" % (entity, error))
+            raise
         else:
             show("contains %s" % subject)
             with section("notifications"):

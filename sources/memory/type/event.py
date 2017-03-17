@@ -1,19 +1,20 @@
 
-from utils.properties import roproperty, rwproperty
+from utils.properties import weak, roproperty, rwproperty
 from ..generic import MemoryBase
 from .eventparameters import MemoryTypeEventParameters
 
 
+@weak("_collection")
 class MemoryTypeEventSketch(MemoryBase):
 
-    def __init__(self, callback, owner):
-        self._callback = callback
-        self._owner = owner
-        self._name = None
-        self._description = u""
+    _name = None
+    _description = u""
+
+    def __init__(self, collection):
+        self._collection = collection
         self._parameters = MemoryTypeEventParameters(self)
 
-    owner = roproperty("_owner")
+    owner = property(lambda self: self._collection.owner)
 
     name = rwproperty("_name")
     description = rwproperty("_description")
@@ -24,11 +25,12 @@ class MemoryTypeEventSketch(MemoryBase):
             raise Exception(u"Event require name")
 
         self.__class__ = MemoryTypeEvent
-        self._callback = self._callback(self)
+        self._collection.on_complete(self)
         return self
 
     def __str__(self):
-        return " ".join(filter(None, ("event", self._name, "sketch of %s" % self._owner)))
+        return " ".join(filter(None, ("event", self._name,
+            "sketch of %s" % self._collection.owner if self._collection else None)))
 
 
 class MemoryTypeEvent(MemoryTypeEventSketch):
@@ -54,4 +56,5 @@ class MemoryTypeEvent(MemoryTypeEventSketch):
         raise NotImplementedError
 
     def __str__(self):
-        return " ".join(filter(None, ("event", self._name, "of %s" % self._owner)))
+        return " ".join(filter(None, ("event", self._name,
+            "of %s" % self._collection.owner if self._collection else None)))

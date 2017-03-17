@@ -1,22 +1,23 @@
 
-from utils.properties import roproperty, rwproperty
+from utils.properties import weak, roproperty, rwproperty
 from ..generic import MemoryBase
 from .actionparameters import MemoryTypeActionParameters
 
 
+@weak("_collection")
 class MemoryTypeActionSketch(MemoryBase):
 
-    def __init__(self, callback, owner):
-        self._callback = callback
-        self._owner = owner
-        self._scope = None
-        self._name = None
-        self._display_name = None
-        self._description = u""
-        self._source_code = u""
+    _scope = None
+    _name = None
+    _display_name = None
+    _description = u""
+    _source_code = u""
+
+    def __init__(self, collection):
+        self._collection = collection
         self._parameters = MemoryTypeActionParameters(self)
 
-    owner = roproperty("_owner")
+    owner = property(lambda self: self._collection.owner)
 
     scope = rwproperty("_scope")
     name = rwproperty("_name")
@@ -35,11 +36,12 @@ class MemoryTypeActionSketch(MemoryBase):
             self._display_name = self._name
 
         self.__class__ = MemoryTypeAction
-        self._callback = self._callback(self)
+        self._collection.on_complete(self)
         return self
 
     def __str__(self):
-        return " ".join(filter(None, ("action", "\"%s\"" % self._name, "sketch of %s" % self._owner)))
+        return " ".join(filter(None, ("action", "\"%s\"" % self._name,
+            "sketch of %s" % self._collection.owner if self._collection else None)))
 
 
 class MemoryTypeAction(MemoryTypeActionSketch):
@@ -68,4 +70,5 @@ class MemoryTypeAction(MemoryTypeActionSketch):
         raise NotImplementedError
 
     def __str__(self):
-        return " ".join(filter(None, ("action", "\"%s\"" % self._name, "of %s" % self._owner)))
+        return " ".join(filter(None, ("action", "\"%s\"" % self._name,
+            "of %s" % self._collection.owner if self._collection else None)))

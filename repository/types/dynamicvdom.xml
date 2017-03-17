@@ -13,7 +13,7 @@
         <Moveable>1</Moveable>
         <Resizable>3</Resizable>
         <OptimizationPriority>1</OptimizationPriority>
-        <Container>1</Container>
+        <Container>2</Container>
         <Containers>htmlcontainer, dialog, dialog_2, container</Containers>
         <Languages>en_US, fr_FR, ru_RU</Languages>
     </Information>

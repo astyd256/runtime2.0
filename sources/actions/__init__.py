@@ -15,4 +15,6 @@ import watch
 import profile
 import offload
 import index
+import compile
+import cleanup
 import shell

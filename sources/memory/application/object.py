@@ -1,4 +1,6 @@
 
+from threading import RLock
+
 import managers
 
 from logs import log
@@ -15,9 +17,10 @@ from .bindings import MemoryBindings
 from .structure import MemoryStructureSketch, MemoryStructure
 
 
-@weak("_parent", "_application")
+@weak("_collection", "_parent", "_application")
 class MemoryObjectSketch(MemoryBase):
 
+    is_type = constant(False)
     is_application = constant(False)
     is_object = constant(True)
 
@@ -25,11 +28,9 @@ class MemoryObjectSketch(MemoryBase):
     is_container = property(lambda self: CONTAINER <= self._type.container <= TOP_CONTAINER)
     is_top_container = property(lambda self: self._type.container == TOP_CONTAINER)
 
-    generic = RENDER_CONTEXT,
+    _restore = False
 
-    @lazy
-    def _container(self):
-        return self._parent._container if self._parent else self
+    generic = RENDER_CONTEXT,
 
     @lazy
     def _primary(self):
@@ -42,14 +43,6 @@ class MemoryObjectSketch(MemoryBase):
             return self._application
 
     @lazy
-    def _dependents(self):
-        return set()
-
-    @lazy
-    def _classes(self):
-        return {}
-
-    @lazy
     def _bindings(self):
         return MemoryBindings(self)
 
@@ -57,17 +50,28 @@ class MemoryObjectSketch(MemoryBase):
     def _structure(self):
         return None if self._parent or self._virtual else MemoryStructureSketch(self)
 
-    def __init__(self, callback, type, application, parent, virtual=False, attributes=None):
-        self._callback = callback
-        self._order = None
+    _order = None
+    _id = None
+    _name = None
+
+    def __init__(self, collection, type, application, parent, virtual=False, attributes=None):
+        self._collection = collection
         self._virtual = virtual
         self._application = application
         self._parent = parent
+        self._container = self._parent._container if self._parent else self
+
+        # initialize lock
+        if parent:
+            if virtual == parent.virtual:
+                self._lock = parent.lock
+            else:
+                self._lock = RLock()
+        else:
+            self._lock = application.lock
 
         # generic characteristics
         self._type = type
-        self._id = None
-        self._name = None
 
         # collections
         self._attributes = MemoryAttributesSketch(self, values=attributes)
@@ -75,7 +79,12 @@ class MemoryObjectSketch(MemoryBase):
         self._events = MemoryEvents(self)
         self._actions = MemoryActions(self)
 
-    lock = property(lambda self: self._application.lock)
+        # internal
+        self._dependents = set()
+        self._classes = {}
+
+    # lock = property(lambda self: self._application.lock)
+    lock = roproperty("_lock")
     order = rwproperty("_order")
     is_virtual = virtual = roproperty("_virtual")
     application = rwproperty("_application")
@@ -109,8 +118,9 @@ class MemoryObjectSketch(MemoryBase):
         if self.__dict__.get("_structure") is not None:
             ~self._structure
 
+        restore = self._restore
         self.__class__ = MemoryObject
-        self._callback = self._callback(self)
+        self._collection.on_complete(self, restore)
 
         if self.id is None:
             raise Exception(u"Object require identifier")
@@ -127,10 +137,15 @@ class MemoryObjectSketch(MemoryBase):
             "sketch")))
 
 
+class MemoryObjectRestorationSketch(MemoryObjectSketch):
+
+    _restore = True
+
+
 class MemoryObjectDuplicationSketch(MemoryObjectSketch):
 
-    def __init__(self, callback, application, parent, another):
-        super(MemoryObjectDuplicationSketch, self).__init__(callback,
+    def __init__(self, collection, application, parent, another):
+        super(MemoryObjectDuplicationSketch, self).__init__(collection,
             another.type, application, parent,
             virtual=parent.virtual, attributes=another.attributes)
         self._objects += another.objects
@@ -154,7 +169,7 @@ class MemoryObject(MemoryObjectSketch):
 
         with self.lock:
             managers.dispatcher.dispatch_handler(self, "on_rename", value)
-            self._name = self._callback(self, value)
+            self._name = self._collection.on_rename(self, value)
             self.invalidate(upward=True)
             self.autosave()
 
@@ -195,10 +210,13 @@ class MemoryObject(MemoryObjectSketch):
                     self._classes = {}
 
             # cleanup resources
-            # TODO: (!) this can delete compiled e2vdom scripts
+            # TODO: this can delete compiled e2vdom scripts
+
             #       check necessity of resource invalidation
             #       possible this must be done on object delete
-            managers.resource_manager.invalidate_resources(self._id)
+
+            #       cleanup=False to avoid excessive file operations
+            managers.resource_manager.invalidate_resources(self._id, cleanup=False)
 
             # perform downward invalidation
             if downward:
@@ -207,7 +225,8 @@ class MemoryObject(MemoryObjectSketch):
 
             # perform upward invalidation
             if upward:
-                if self._parent:
+                # validate only same (non-)virtual objects in chain
+                if self._parent and self._virtual == self._parent.virtual:
                     self._parent.invalidate(contexts=contexts, upward=True)
                 for dependent in self.__dict__.get("_dependents", ()):
                     log.write("Invalidate %s dependent %s" % (self, dependent))

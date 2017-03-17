@@ -9,10 +9,11 @@ import scripting
 import managers
 
 from utils.id import guid2mod
-from utils.properties import lazy, roproperty, rwproperty
-from scripting.executable import ModuleStorage, ModuleExecutable
+from utils.properties import lazy, weak, constant, roproperty, rwproperty
+from scripting.executable import SOURCE_CODE, Executable
+from scripting.object import VDOMObject
 
-from ..constants import NON_CONTAINER, PYTHON_EXTENSION  # PYTHON_LANGUAGE
+from ..constants import NON_CONTAINER, PYTHON_LANGUAGE
 from ..generic import MemoryBase
 from ..auxiliary import copy_as_base64
 from .attributes import MemoryTypeAttributes
@@ -23,7 +24,12 @@ from .actions import MemoryTypeActions
 NOT_LOADED = "NOT LOADED"
 
 
-class MemoryTypeSketch(MemoryBase, ModuleStorage, ModuleExecutable):
+@weak("_collection")
+class MemoryTypeSketch(MemoryBase, Executable):
+
+    is_type = constant(True)
+    is_application = constant(False)
+    is_object = constant(False)
 
     @lazy
     def _module_name(self):
@@ -37,33 +43,34 @@ class MemoryTypeSketch(MemoryBase, ModuleStorage, ModuleExecutable):
     def _klass(self):
         return self._module.__dict__[self._class_name]
 
-    def __init__(self, callback):
-        self._callback = callback
+    _id = None
+    _name = None
+    _display_name = None
+    _class_name = None
+    _description = u""
+    _category = u"Standard"
+    _interface_type = 1
+    _icon = u""
+    _editor_icon = u""
+    _structure_icon = u""
+    _dynamic = 0
+    _invisible = 0
+    _moveable = 1
+    _resizable = 1
+    _optimization_priority = 1
+    _container = NON_CONTAINER
+    _render_type = u""
+    _http_content_type = u""
+    _version = u"1"
+
+    def __init__(self, collection):
+        self._collection = collection
         self._lock = RLock()
 
-        self._id = None
-        self._name = None
-        self._display_name = None
-        self._class_name = None
-        self._description = u""
-        self._category = u"Standard"
-        self._interface_type = 1
-        self._icon = u""
-        self._editor_icon = u""
-        self._structure_icon = u""
-        self._dynamic = 0
-        self._invisible = 0
-        self._moveable = 1
-        self._resizable = 1
-        self._optimization_priority = 1
-        self._container = NON_CONTAINER
         self._containers = []
-        self._render_type = u""
-        self._http_content_type = u""
         self._remote_methods = []
         self._handlers = []
         self._languages = []
-        self._version = u"1"
 
         self._attributes = MemoryTypeAttributes(self)
         self._sentences = defaultdict(dict)
@@ -82,6 +89,10 @@ class MemoryTypeSketch(MemoryBase, ModuleStorage, ModuleExecutable):
             del self._module_name
 
     lock = roproperty("_lock")
+
+    scripting_language = constant(PYTHON_LANGUAGE)
+    package = constant(None)
+    signature = property(lambda self: "<%s module %s:%s>" % (self.scripting_language, self.id, self.name.lower()))
 
     id = rwproperty("_id", _set_id)
     name = rwproperty("_name")
@@ -121,6 +132,12 @@ class MemoryTypeSketch(MemoryBase, ModuleStorage, ModuleExecutable):
     module = roproperty("_module")
     klass = roproperty("_klass")
 
+    def locate(self, entity):
+        if entity is SOURCE_CODE or settings.STORE_BYTECODE:
+            return managers.file_manager.locate(file_access.MODULE, self.id, self.name)
+        else:
+            return None
+
     def __invert__(self):
         if self._id is None:
             raise Exception(u"Type require identifier")
@@ -132,7 +149,7 @@ class MemoryTypeSketch(MemoryBase, ModuleStorage, ModuleExecutable):
             self._class_name = u"_".join("VDOM", self._name)
 
         self.__class__ = MemoryType
-        self._callback = self._callback(self)
+        self._collection.on_complete(self)
         return self
 
     def __str__(self):
@@ -168,6 +185,14 @@ class MemoryType(MemoryTypeSketch):
     remote_methods = roproperty("_remote_methods")
     handlers = roproperty("_handlers")
     languages = roproperty("_languages")
+
+    def execute(self, context=None, namespace=None, arguments=None):
+        # statistics.increase("module.execute")
+        if self.scripting_language == PYTHON_LANGUAGE:
+            if namespace is None:
+                namespace = {}
+            namespace.update(VDOMObject=VDOMObject, VDOM_object=VDOMObject)
+        return super(MemoryType, self).execute(context=context, namespace=namespace, arguments=arguments)
 
     # unsafe
     def compose(self, file=None, shorter=False):
@@ -286,7 +311,7 @@ class MemoryType(MemoryTypeSketch):
             self.compose(file=file)
 
     def uninstall(self):
-        managers.memory.types.unload(self._id)
+        managers.memory.types.unload(self._id, remove=True)
         managers.resource_manager.invalidate_resources(self._id)
         managers.memory.cleanup_type(self._id)
 

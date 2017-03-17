@@ -1,10 +1,11 @@
 
 from collections import Sequence
-from utils.properties import roproperty
+from utils.properties import weak, roproperty
 from ..generic import MemoryBase
 from .eventparameter import MemoryTypeEventParameterSketch
 
 
+@weak("_owner")
 class MemoryTypeEventParameters(MemoryBase, Sequence):
 
     def __init__(self, owner):
@@ -13,12 +14,11 @@ class MemoryTypeEventParameters(MemoryBase, Sequence):
 
     owner = roproperty("_owner")
 
+    def on_complete(self, item):
+        self._items.append(item)
+
     def new_sketch(self, restore=False):
-
-        def on_comlete(item):
-            self._items.append(item)
-
-        return MemoryTypeEventParameterSketch(on_comlete, self._owner)
+        return MemoryTypeEventParameterSketch(self)
 
     def compose(self, ident=u"", file=None):
         if self.__dict__.get("_items"):

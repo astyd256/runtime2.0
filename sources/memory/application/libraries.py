@@ -6,39 +6,10 @@ from utils.generators import generate_unique_name
 from utils.properties import lazy, weak, roproperty
 
 from ..generic import MemoryBase
-from .library import MemoryLibrarySketch
+from .library import MemoryLibrarySketch, MemoryLibraryRestorationSketch
 
 
 NAME_BASE = "library"
-
-
-def wrap_rename(instance):
-    instance = ref(instance)
-
-    def on_rename(item, name):
-        self = instance()
-        with self._owner.lock:
-            del self._items[item.name]
-            if name in self._items:
-                name = generate_unique_name(name, self._items)
-            self._items[name] = item
-            return name
-
-    return on_rename
-
-
-def wrap_complete(instance):
-    instance = ref(instance)
-
-    def on_complete(item):
-        self = instance()
-        with self._owner.lock:
-            if item._name is None or item._name in self._items:
-                item._name = generate_unique_name(item._name or NAME_BASE, self._items)
-            self._items[item._name] = item
-            return wrap_rename(self)
-
-    return on_complete
 
 
 @weak("_owner")
@@ -53,8 +24,23 @@ class MemoryLibraries(MemoryBase, MutableMapping):
 
     owner = roproperty("_owner")
 
-    def new_sketch(self):
-        return MemoryLibrarySketch(wrap_complete(self), self._owner)
+    def on_rename(self, item, name):
+        with self._owner.lock:
+            del self._items[item.name]
+            if name in self._items:
+                name = generate_unique_name(name, self._items)
+            self._items[name] = item
+            return name
+
+    def on_complete(self, item, restore):
+        with self._owner.lock:
+            if item._name is None or item._name in self._items:
+                item._name = generate_unique_name(item._name or NAME_BASE, self._items)
+            self._items[item._name] = item
+
+    def new_sketch(self, restore=False):
+        return (MemoryLibraryRestorationSketch if restore
+            else MemoryLibrarySketch)(self)
 
     def new(self, name=None):
         item = self.new_sketch()

@@ -14,6 +14,7 @@ from .exceptions import WatcherError
 from .registry import modules
 from .builder import builder
 from .session import WatcherSession
+from .monitor import Monitor
 
 
 class Watcher(SmartThread):
@@ -34,6 +35,10 @@ class Watcher(SmartThread):
         self._session_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._session_socket.bind((self._address, self._port))
         self._session_socket.listen(3)
+
+        if settings.MONITOR:
+            self._monitor = Monitor()
+            self._monitor.start()
 
     def prepare(self):
         log.write("Start " + self.name)

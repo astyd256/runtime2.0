@@ -27,10 +27,7 @@ def run(renew=False):
     :param switch renew: renew current installation
     """
     if renew:
-        with section("uninstall applications"):
-            uninstall("applications", yes=True)
-        with section("uninstall types"):
-            uninstall("types", yes=True)
+        uninstall("all", yes=True)
 
     with section("%sinitialize directories" % ("re" if renew else "")):
         for caption, segments in LOCATIONS:

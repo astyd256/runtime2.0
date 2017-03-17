@@ -7,7 +7,7 @@ from .scripting import ScriptingPackageLoader, ScriptingModuleLoader
 from .manager import ImportManagerPackageLoader, ImportManagerModuleLoader
 
 
-SCRIPTING_MODULES = ("server", "application", "log", "session", "request", "response", "VDOM_object", "obsolete_request")
+SCRIPTING_MODULES = ("server", "application", "log", "session", "request", "response", "VDOM_object")  # "obsolete_request"
 FULLNAME_REGEX = re.compile(
     r"^"
     r"(?:module_)([A-F\d]{8}_[A-F\d]{4}_[A-F\d]{4}_[A-F\d]{4}_[A-F\d]{12})" r"|"
