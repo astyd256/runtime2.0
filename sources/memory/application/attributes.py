@@ -1,9 +1,9 @@
 
 import re
-from collections import defaultdict, Mapping, MutableMapping
+from collections import Mapping, MutableMapping
 import settings
 import managers
-from utils.properties import lazy, weak
+from utils.properties import weak
 from logs import log
 from ..generic import MemoryBase
 
@@ -16,13 +16,19 @@ DEREFERENCE_REGEX = re.compile(r"\#RES\(([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d
 @weak("_owner")
 class MemoryAttributesSketch(MemoryBase, MutableMapping):
 
-    @lazy
-    def _cdata(self):
-        return set()
+    class CDataLazyProperty(object):
 
-    @lazy
-    def _query(self):
-        return set(self._items)
+        def __get__(self, instance, owner=None):
+            return instance.__dict__.setdefault("_cdata", set())
+
+    class QueryLazyProperty(object):
+
+        def __get__(self, instance, owner=None):
+            with instance._owner.lock:
+                return instance.__dict__.setdefault("_query", set(instance._items))
+
+    _cdata = CDataLazyProperty()
+    _query = QueryLazyProperty()
 
     def __init__(self, owner, values=None):
         self._owner = owner

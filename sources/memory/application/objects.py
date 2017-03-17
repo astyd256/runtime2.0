@@ -13,22 +13,27 @@ from utils.properties import lazy, weak, roproperty
 
 from ..generic import MemoryBase
 from .catalogs import MemoryObjectsCatalog, MemoryObjectsDynamicCatalog
-from .properties import memory_objects_items_property, memory_objects_items_by_name_property
 
 
 @weak("_owner")
 class MemoryObjects(MemoryBase, MutableMapping):
 
-    # @lazy
-    # def _items(self):
-    #     return OrderedDict()
+    class MemoryObjectsItemsProperty(object):
 
-    # @lazy
-    # def _items_by_name(self):
-    #     return {}
+        def __get__(self, instance, owner=None):
+            with instance._owner.lock:
+                instance.__dict__["_items_by_name"] = {}
+                return instance.__dict__.setdefault("_items", OrderedDict())
 
-    _items = memory_objects_items_property()
-    _items_by_name = memory_objects_items_by_name_property()
+    class MemoryObjectsItemsByNameProperty(object):
+
+        def __get__(self, instance, owner=None):
+            with instance._owner.lock:
+                instance.__dict__["_items"] = OrderedDict()
+                return instance.__dict__.setdefault("_items_by_name", {})
+
+    _items = MemoryObjectsItemsProperty()
+    _items_by_name = MemoryObjectsItemsByNameProperty()
 
     @lazy
     def _all_items(self):

@@ -179,34 +179,35 @@ def weak(*names, **names_with_values):
     return wrapper
 
 
-def lazyproperty(name, initializer, lock_name=None):
+def lazyproperty(name, initializer, lock=None, exclusive=True):
     try:
         return lazyproperties[name]()
     except KeyError:
         namespace = {"MISSING": MISSING, "initializer": initializer}
-        if lock_name:
-            bytecode = compile("""
-class LazyProperty(object):
-
-    def __get__(self, instance, owner=None):
-        with instance.{lock_name}:
-            value = instance.__dict__.get("{name}", MISSING)
-            if value is MISSING:
-                instance.__dict__["{name}"] = value = initializer(instance)
-            return value
-                """.format(name=name, lock_name=lock_name), "<lazyproperty:%s>" % name, "exec")
+        if lock:
+            lock = "instance." + lock
         else:
             namespace["lock"] = RLock()
+            lock = "lock"
+        if exclusive:
             bytecode = compile("""
-class LazyProperty(object):
+    class LazyProperty(object):
 
     def __get__(self, instance, owner=None):
-        with lock:
+        with {lock}:
             value = instance.__dict__.get("{name}", MISSING)
             if value is MISSING:
                 instance.__dict__["{name}"] = value = initializer(instance)
             return value
-                """.format(name=name, lock_name=lock_name), "<lazyproperty:%s>" % name, "exec")
+                """.format(name=name, lock=lock), "<lazyproperty:%s>" % name, "exec")
+        else:
+            bytecode = compile("""
+    class LazyProperty(object):
+
+    def __get__(self, instance, owner=None):
+        with {lock}:
+            instance.__dict__.get("{name}", initializer(instance))
+                """.format(name=name, lock=lock), "<lazyproperty:%s>" % name, "exec")
 
         exec(bytecode, namespace)
         return lazyproperties.setdefault(name, namespace["LazyProperty"])()

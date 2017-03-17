@@ -9,7 +9,6 @@ from utils.properties import lazy, weak, roproperty
 from ..generic import MemoryBase
 from .catalogs import MemoryActionsCatalog, MemoryActionsDynamicCatalog
 from .action import MemoryActionSketch, MemoryActionRestorationSketch, MemoryActionDuplicationSketch
-from .properties import memory_actions_items_property, memory_actions_items_by_name_property
 
 
 NAME_BASE = "action"
@@ -18,16 +17,22 @@ NAME_BASE = "action"
 @weak("_owner")
 class MemoryActions(MemoryBase, MutableMapping):
 
-    # @lazy
-    # def _items(self):
-    #     return {}
+    class MemoryActionsItemsProperty(object):
 
-    # @lazy
-    # def _items_by_name(self):
-    #     return {}
+        def __get__(self, instance, owner=None):
+            with instance._owner.lock:
+                instance.__dict__["_items_by_name"] = {}
+                return instance.__dict__.setdefault("_items", {})
 
-    _items = memory_actions_items_property()
-    _items_by_name = memory_actions_items_by_name_property()
+    class MemoryActionsItemsByNameProperty(object):
+
+        def __get__(self, instance, owner=None):
+            with instance._owner.lock:
+                instance.__dict__["_items"] = {}
+                return instance.__dict__.setdefault("_items_by_name", {})
+
+    _items = MemoryActionsItemsProperty()
+    _items_by_name = MemoryActionsItemsByNameProperty()
 
     @lazy
     def _all_items(self):
