@@ -1,5 +1,6 @@
 
 from collections import Mapping
+from threading import RLock
 
 import settings
 import file_access
@@ -22,14 +23,17 @@ class MemoryTypes(MemoryBase, Mapping):
 
     def __init__(self, owner):
         self._owner = owner
+        self._lock = RLock()  # owner._lock
+
         self._items = {}
         self._index = {}
         self._lazy = True
 
     owner = roproperty("_owner")
+    lock = roproperty("_lock")
 
     def on_complete(self, item):
-        with self._owner._lock:
+        with self._lock:
             self._items[item.id] = item
             self._index[item.name] = item.id
 
@@ -37,68 +41,84 @@ class MemoryTypes(MemoryBase, Mapping):
         return MemoryTypeSketch(self)
 
     def save(self):
-        if self._lazy:
-            self._discover(full=True)
-        data = "\n".join("%s:%s" % (uuid, name) for name, uuid in self._index.iteritems())
+        with self._lock:
+            if self._lazy:
+                self._discover(full=True)
+            data = "\n".join("%s:%s" % (uuid, name) for name, uuid in self._index.iteritems())
         managers.file_manager.write(file_access.FILE, None, settings.INDEX_LOCATION, data)
 
+    # unsafe
     def _load(self, uuid):
-        with self._owner._lock:
+        try:
             item = self._owner.load_type(uuid, silently=True)
+        except IOError:
+            log.warning("Unable to load type: %s" % uuid)
+            return None
+        else:
             self._items[uuid] = item
             self._index[item.name] = uuid
             return item
 
+    # unsafe
     def _discover(self, full=False, load=False):
-        with self._owner._lock:
-            if managers.file_manager.exists(file_access.FILE, None, settings.INDEX_LOCATION):
-                data = managers.file_manager.read(file_access.FILE, None, settings.INDEX_LOCATION)
-                for line in data.splitlines():
-                    try:
-                        uuid, name = parse_index_line(line)
-                    except ValueError:
-                        log.warning("Ignore erroneous index entry: %s" % line)
-                        continue
-                    self._items.setdefault(uuid, NOT_LOADED)
-                    self._index.setdefault(name, uuid)
-
-            listing = managers.file_manager.list(file_access.TYPE)
-            for uuid in listing:
+        if managers.file_manager.exists(file_access.FILE, None, settings.INDEX_LOCATION):
+            data = managers.file_manager.read(file_access.FILE, None, settings.INDEX_LOCATION)
+            for line in data.splitlines():
                 try:
-                    verificators.uuid(uuid)
+                    uuid, name = parse_index_line(line)
                 except ValueError:
-                    log.warning("Ignore erroneous directory: %s" % uuid)
+                    log.warning("Ignore erroneous index entry: %s" % line)
                     continue
                 self._items.setdefault(uuid, NOT_LOADED)
+                self._index.setdefault(name, uuid)
 
-            if full and len(self._items) > len(self._index):
-                unknown = set(self._items.keys()) - set(self._index.values())
-                for uuid in unknown:
+        # additionally check directories
+        listing = managers.file_manager.list(file_access.TYPE)
+        for uuid in listing:
+            try:
+                verificators.uuid(uuid)
+            except ValueError:
+                log.warning("Ignore non-type directory: %s" % uuid)
+                continue
+            self._items.setdefault(uuid, NOT_LOADED)
+
+        # load ONLY types that has no record in index
+        if full and len(self._items) > len(self._index):
+            unknown = set(self._items.keys()) - set(self._index.values())
+            for uuid in unknown:
+                self._load(uuid)
+
+        # load all types that's not loaded yet
+        if load:
+            for uuid, item in self._items.iteritems():
+                if item is NOT_LOADED:
                     self._load(uuid)
 
-            if load:
-                for uuid, item in self._items.iteritems():
-                    if item is NOT_LOADED:
-                        self._load(uuid)
-
-            self._lazy = False
+        self._lazy = False
 
     def search(self, uuid_or_name):
-        with self._owner._lock:
+        if uuid_or_name[8:9] == "-":
+            return self.get(uuid_or_name)
+        else:
             try:
-                return self[uuid_or_name]
+                uuid = self._index[uuid_or_name]
             except KeyError:
                 if self._lazy:
-                    self._discover(full=True)
-                try:
-                    uuid = self._index[uuid_or_name]
-                except KeyError:
-                    return None
-                else:
-                    return self[uuid]
+                    with self._lock:
+                        if self._lazy:
+                            self._discover(full=True)
+                            try:
+                                uuid = self._index[uuid_or_name]
+                            except KeyError:
+                                return None
+                            else:
+                                return self.get(uuid)
+                return None
+            else:
+                return self.get(uuid)
 
     def unload(self, uuid, remove=False):
-        with self._owner._lock:
+        with self._lock:
             if remove:
                 name = self._items.pop(uuid).name
                 self._index.pop(name, None)
@@ -107,28 +127,38 @@ class MemoryTypes(MemoryBase, Mapping):
                 self._items[uuid] = NOT_LOADED
 
     def __getitem__(self, uuid):
-        with self._owner._lock:
-            try:
-                item = self._items[uuid]
-            except KeyError:
-                if self._lazy and managers.file_manager.exists(file_access.TYPE, uuid, settings.TYPE_FILENAME):
-                    item = NOT_LOADED
-                else:
-                    raise
-
+        try:
+            item = self._items[uuid]
+        except KeyError:
+            # TODO: check to perform full discovery here
+            if self._lazy and managers.file_manager.exists(file_access.TYPE, uuid, settings.TYPE_FILENAME):
+                with self._lock:
+                    item = self._items.get(uuid, KeyError)
+                    if item in (KeyError, NOT_LOADED):
+                        return self._load(uuid)
+                    else:
+                        return item
+            else:
+                raise
+        else:
             if item is NOT_LOADED:
-                item = self._load(uuid)
-
-            return item
+                with self._lock:
+                    item = self._items[uuid]
+                    if item is NOT_LOADED:
+                        return self._load(uuid)
+                    else:
+                        return item
+            else:
+                return item
 
     def __iter__(self):
-        with self._owner._lock:
+        with self._lock:
             if self._lazy:
                 self._discover(load=True)
             return iter(self._items)
 
     def __len__(self):
-        with self._owner._lock:
+        with self._lock:
             if self._lazy:
                 self._discover()
             return len(self._items)

@@ -1,4 +1,6 @@
 
+from threading import RLock
+
 import managers
 
 from logs import log
@@ -31,10 +33,6 @@ class MemoryObjectSketch(MemoryBase):
     generic = RENDER_CONTEXT,
 
     @lazy
-    def _container(self):
-        return self._parent._container if self._parent else self
-
-    @lazy
     def _primary(self):
         if self._virtual:
             result = self
@@ -43,14 +41,6 @@ class MemoryObjectSketch(MemoryBase):
             return result
         else:
             return self._application
-
-    @lazy
-    def _dependents(self):
-        return set()
-
-    @lazy
-    def _classes(self):
-        return {}
 
     @lazy
     def _bindings(self):
@@ -69,6 +59,16 @@ class MemoryObjectSketch(MemoryBase):
         self._virtual = virtual
         self._application = application
         self._parent = parent
+        self._container = self._parent._container if self._parent else self
+
+        # initialize lock
+        if parent:
+            if virtual == parent.virtual:
+                self._lock = parent.lock
+            else:
+                self._lock = RLock()
+        else:
+            self._lock = application.lock
 
         # generic characteristics
         self._type = type
@@ -79,7 +79,12 @@ class MemoryObjectSketch(MemoryBase):
         self._events = MemoryEvents(self)
         self._actions = MemoryActions(self)
 
-    lock = property(lambda self: self._application.lock)
+        # internal
+        self._dependents = set()
+        self._classes = {}
+
+    # lock = property(lambda self: self._application.lock)
+    lock = roproperty("_lock")
     order = rwproperty("_order")
     is_virtual = virtual = roproperty("_virtual")
     application = rwproperty("_application")
@@ -220,7 +225,8 @@ class MemoryObject(MemoryObjectSketch):
 
             # perform upward invalidation
             if upward:
-                if self._parent:
+                # validate only same (non-)virtual objects in chain
+                if self._parent and self._virtual == self._parent.virtual:
                     self._parent.invalidate(contexts=contexts, upward=True)
                 for dependent in self.__dict__.get("_dependents", ()):
                     log.write("Invalidate %s dependent %s" % (self, dependent))

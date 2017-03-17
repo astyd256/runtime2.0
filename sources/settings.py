@@ -97,6 +97,9 @@ if MANAGE:
     LOGGER = None
     LOG_LEVEL = 2
 
+LOGGER = None
+LOG_LEVEL = 2
+
 # profiling
 
 PROFILING = False

@@ -9,6 +9,7 @@ from utils.properties import lazy, weak, roproperty
 from ..generic import MemoryBase
 from .catalogs import MemoryActionsCatalog, MemoryActionsDynamicCatalog
 from .action import MemoryActionSketch, MemoryActionRestorationSketch, MemoryActionDuplicationSketch
+from .properties import memory_actions_items_property, memory_actions_items_by_name_property
 
 
 NAME_BASE = "action"
@@ -17,13 +18,16 @@ NAME_BASE = "action"
 @weak("_owner")
 class MemoryActions(MemoryBase, MutableMapping):
 
-    @lazy
-    def _items(self):
-        return {}
+    # @lazy
+    # def _items(self):
+    #     return {}
 
-    @lazy
-    def _items_by_name(self):
-        return {}
+    # @lazy
+    # def _items_by_name(self):
+    #     return {}
+
+    _items = memory_actions_items_property()
+    _items_by_name = memory_actions_items_by_name_property()
 
     @lazy
     def _all_items(self):
@@ -94,8 +98,9 @@ class MemoryActions(MemoryBase, MutableMapping):
                 contexts = set(self._items)
                 contexts.update(self._items_by_name)
 
-                for name in self._items:
-                    del self._all_items[name]
+                if not self._owner.virtual:
+                    for uuid in self._items:
+                        del self._all_items[uuid]
                 del self._items
                 del self._items_by_name
 
@@ -123,9 +128,12 @@ class MemoryActions(MemoryBase, MutableMapping):
     def __delitem__(self, key):
         with self._owner.lock:
             item = self._items.get(key) or self._items_by_name[key]
+
             del self._items[item.id]
             del self._items_by_name[item.name]
-            del self._all_items[item.id]
+            if not self._owner.virtual:
+                del self._all_items[item.id]
+
             self._owner.invalidate(contexts=(item.id, item.name), downward=True, upward=True)
             self._owner.autosave()
 

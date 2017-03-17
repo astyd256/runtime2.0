@@ -6,6 +6,7 @@ import settings
 import managers
 import file_access
 
+from logs import server_log
 from utils.properties import aroproperty, roproperty
 from .constants import LISTING, SYMBOLS, BYTECODE
 
@@ -86,3 +87,17 @@ class Bytecode(object):
 
     def execute(self, context, namespace, arguments):
         raise NotImplementedError
+
+
+class ErrorBytecode(Bytecode):
+
+    __slots__ = ()
+
+    source_extension = ()
+    extensions = {}
+
+    def __init__(self, traceback):
+        self._traceback = traceback
+
+    def execute(self, context, namespace, arguments):
+        server_log.error(self._traceback)

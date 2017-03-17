@@ -49,6 +49,7 @@ class Profiler(object):
 
         self._local.counter -= 1
         if not self._local.counter:
+            self._local.profile.disable()
             self.aggregate(self._local.profile)
             self._local.profile = None
 

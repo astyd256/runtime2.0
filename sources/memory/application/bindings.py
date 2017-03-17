@@ -68,7 +68,8 @@ class MemoryBindings(MemoryBase, MutableMapping):
     def __delitem__(self, key):
         with self._owner.lock:
             item = self._items.pop(key)
-            del self._all_items[item.id]
+            if not self._owner.virtual:
+                del self._all_items[item.id]
             if not item.target_object.virtual:
                 self._owner.autosave()
 

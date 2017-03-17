@@ -5,34 +5,9 @@ import managers
 from logs import log
 from memory import COMPUTE_CONTEXT, RENDER_CONTEXT, WYSIWYG_CONTEXT
 from utils.profiling import profiler
-from utils.properties import lazy
 # from utils.statistics import statistics
 from .exceptions import RenderTermination
-
-
-class EngineContext(object):
-
-    @property
-    def instance(self):
-        return self._instance
-
-    def __init__(self, instance):
-        self._instance = instance
-
-
-class RenderContext(EngineContext):
-
-    @lazy
-    def contents(self):
-        self._instance.execute()
-        return self._instance.render()
-
-
-class WysiwygContext(EngineContext):
-
-    @lazy
-    def contents(self):
-        return self._instance.wysiwyg()
+from .contexts import RenderContext, WysiwygContext
 
 
 class EngineLocal(local):

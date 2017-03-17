@@ -1,8 +1,10 @@
 
+import settings
 import managers
 import file_access
 
 from .constants import SOURCE_CODE
+from .subsystems import select
 
 
 class SourceCodeProperty(object):
@@ -20,7 +22,7 @@ class SourceCodeProperty(object):
                 location = instance.locate(SOURCE_CODE)
                 if location:
                     value = managers.file_manager.read(file_access.FILE, None,
-                        location + instance._subsystem.source_extension, encoding="utf8", default=u"")
+                        location + instance.subsystem.source_extension, encoding="utf8", default=u"")
                 else:
                     value = u""
                 instance._source_code = value
@@ -32,7 +34,7 @@ class SourceCodeProperty(object):
             location = instance.locate(SOURCE_CODE)
             if location:
                 managers.file_manager.write(file_access.FILE, None,
-                    location + instance._subsystem.source_extension, value, encoding="utf8")
+                    location + instance.subsystem.source_extension, value, encoding="utf8")
             instance.cleanup()
             if self._handler:
                 self._handler(instance, value)
@@ -40,9 +42,28 @@ class SourceCodeProperty(object):
     def __delete__(self, instance):
         with instance.lock:
             instance._source_code = u""
-            location = instance.location + instance._subsystem.source_extension
+            location = instance.location + instance.subsystem.source_extension
             if location:
                 managers.file_manager.delete(file_access.FILE, None, location)
 
 
+class SubsystemLazyProperty(object):
+
+    def __get__(self, instance, owner=None):
+        with instance.lock:
+            instance.subsystem = value = select(instance.scripting_language)
+            return value
+
+
+class BytecodeLazyProperty(object):
+
+    def __get__(self, instance, owner=None):
+        with instance.lock:
+            instance.bytecode = value = \
+                (instance.subsystem.restore(self) if settings.STORE_BYTECODE else None) or instance._compile()
+            return value
+
+
 source_code_property = SourceCodeProperty
+subsystem_lazy_property = SubsystemLazyProperty
+bytecode_lazy_property = BytecodeLazyProperty
