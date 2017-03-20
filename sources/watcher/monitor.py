@@ -18,5 +18,5 @@ class Monitor(SmartThread):
 
     def main(self):
         while self.running:
-            sys.stdout.write("Running threads:\n%s" % format_threads_trace(indent="    "))
             self.wait(settings.MONITOR)
+            sys.stdout.write("Running threads:\n%s" % format_threads_trace(indent="    "))

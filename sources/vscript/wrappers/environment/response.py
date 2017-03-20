@@ -39,11 +39,11 @@ class v_response(generic):
 
 	def v_result(self, **keywords):
 		if "let" in keywords:
-			managers.request_manager.current.session().value("response", value=keywords["let"].as_string)
+			managers.request_manager.current.wholeAnswer = keywords["let"].as_string
 		elif "set" in keywords:
 			raise errors.object_has_no_property("result")
 		else:
-			return string(managers.request_manager.current.session().value("response"))
+			return string(managers.request_manager.current.wholeAnswer)
 
 
 	def v_addheader(self, name, value):

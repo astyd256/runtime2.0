@@ -109,7 +109,7 @@ class VDOM_request:
 			self.__app_id = vh.get_def_site()
 		self.__stdout = StringIO()
 		self.action_result = uStringIO()
-
+		self.wholeAnswer = None
 		self.application_id = self.__app_id
 				
 		self.sid = sid

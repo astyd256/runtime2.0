@@ -13,9 +13,9 @@ class VDOM_vhosting:
 		if ret:
 			self.__vhosting_data = ret
 
-	def __del__(self):
-		"""destructor"""
-		self.sync()
+	#def __del__(self): #Not needed anymore - we sync immediately after making changes
+	#	"""destructor"""
+	#	self.sync()
 
 	def sync(self):
 		"""save the object into storage"""

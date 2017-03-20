@@ -107,12 +107,12 @@ class MemoryTypes(MemoryBase, Mapping):
                     with self._lock:
                         if self._lazy:
                             self._discover(full=True)
-                            try:
-                                uuid = self._index[uuid_or_name]
-                            except KeyError:
-                                return None
-                            else:
-                                return self.get(uuid)
+                        try:
+                            uuid = self._index[uuid_or_name]
+                        except KeyError:
+                            return None
+                        else:
+                            return self.get(uuid)
                 return None
             else:
                 return self.get(uuid)
