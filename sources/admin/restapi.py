@@ -3,7 +3,10 @@ import json
 import base64
 import hashlib  
 import time
+from traceback import print_exc
 from utils.semaphore import VDOM_semaphore
+class InvalidParamsException(Exception):
+	pass
 def run(request):
 	args = request.arguments().arguments()
 	request.render_type = "e2vdom"
@@ -25,8 +28,8 @@ def run(request):
 					#return
 			#finally:
 				#sem.unlock()			
-	appid = args.get("appid")[0] if args.get("appid") else ""
-	container = args.get("objid")[0] if args.get("objid") else ""
+	appid = args.get("appid")[0] if args.get("appid") else request.app_id()
+	container = args.get("objid")[0] if args.get("objid") else "API"
 	action =args.get("action_name")[0] if args.get("action_name") else ""
 	xml_param = args.get("xml_param")[0] if args.get("xml_param") else ""
 	xml_data = args.get("xml_data")[0] if args.get("xml_data") else ""
@@ -35,24 +38,30 @@ def run(request):
 		request.write("<ERROR>Invalid params</ERROR>")
 	else:
 		try:
+			if appid not in managers.memory.applications:
+				raise InvalidParamsException("Invalid params")
 			request.set_application_id(appid)
 			app = request.application()
-			if not app:
-				raise Exception("Invalid params")
-			obj = app.objects.catalog.get(container)
+			if container.lower() == 'api':
+				obj = app.objects.select('api')
+			else:
+				obj = app.objects.catalog.get(container)			
 			if not obj or obj.name.lower() != "api":
-				raise Exception("Invalid params")
+				raise InvalidParamsException("Invalid params")
 			else:
 				if action not in obj.actions:
-					raise Exception("Invalid params")	
+					raise InvalidParamsException("Invalid params")	
 				request.arguments().arguments({"xml_param": [xml_param], "xml_data": [xml_data]})
-				request.container_id = container
+				request.container_id = obj.id
 				result=managers.engine.execute(obj.actions[action])				
 				ret = request.session().value("response")
 				request.session().remove("response")
 				if isinstance(ret, unicode):
 					ret = ret.encode("utf8","ignore")
+		except InvalidParamsException:
+			request.write("<ERROR>Invalid params</ERROR>")
 		except Exception as e:
+			print_exc()
 			request.write("<ERROR>%s</ERROR>"%e)
 		else:
 			request.write("/**/ %s(%s);" % (callback,ret) if callback else ret)

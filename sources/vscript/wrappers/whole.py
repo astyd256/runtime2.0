@@ -1,7 +1,7 @@
 
 import sys, hashlib, xml.dom.minidom
 import managers
-# from utils.remote_api import VDOM_service
+from utils.remote_api import VDOMServiceSingleThread as VDOM_service
 from .. import errors
 from ..subtypes import array, boolean, generic, string, true, false, error, v_empty
 
