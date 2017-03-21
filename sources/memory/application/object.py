@@ -209,13 +209,11 @@ class MemoryObject(MemoryObjectSketch):
                     log.write("Invalidate %s" % self)
                     self._classes = {}
 
-            # cleanup resources
-            # TODO: this can delete compiled e2vdom scripts
-
-            #       check necessity of resource invalidation
+            # NOTE: this can delete compiled e2vdom scripts
+            # TODO: check necessity of resource invalidation
             #       possible this must be done on object delete
-
-            #       cleanup=False to avoid excessive file operations
+            # NOTE: cleanup=False to avoid excessive file operations
+            # cleanup resources
             managers.resource_manager.invalidate_resources(self._id, cleanup=False)
 
             # perform downward invalidation
@@ -225,6 +223,10 @@ class MemoryObject(MemoryObjectSketch):
 
             # perform upward invalidation
             if upward:
+                # NOTE: this can cause issues in case when
+                #       virtual objects will be stored between render
+                #       it may be worth adding a special attribute
+                #       that break invalidate chain for dynamic objects
                 # validate only same (non-)virtual objects in chain
                 if self._parent and self._virtual == self._parent.virtual:
                     self._parent.invalidate(contexts=contexts, upward=True)
