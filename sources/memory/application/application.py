@@ -194,7 +194,13 @@ class MemoryApplication(MemoryApplicationSketch):
         if settings.STORE_ACTIONS_BYTECODE:
             for action in self._actions.catalog.itervalues():
                 action.compile()
-
+                
+    def onstart(self):
+        if settings.SERVER:
+            action = self.actions.get(APPLICATION_START_CONTEXT)
+            if action and action.source_code:
+                managers.engine.execute(action)        
+                
     # unsafe
     def compose(self, file=None, shorter=False):
         if not file:

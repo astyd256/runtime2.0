@@ -9,6 +9,8 @@ from resource import VDOM_module_resource
 from .python import VDOM_module_python
 from post_processing import VDOM_post_processing
 
+class PathNotFound(Exception):
+    pass
 
 class VDOM_module_manager(object):
     """Module Manager class"""
@@ -116,7 +118,17 @@ class VDOM_module_manager(object):
             # CHECK:            break
 
             if not obj:
-                return (404, None) #_("Container not found")
+                #check for onerror handler
+                action = _a.actions.get("requestonerror")
+                if action and action.source_code:
+                    ee = PathNotFound(container_id)
+                    request = managers.request_manager.get_request()
+                    request.arguments().arguments()["error"] = [ee]                    
+                    managers.engine.execute(action)
+                    if request_object.wholeAnswer:
+                        return (None, request_object.wholeAnswer.encode("utf-8"))
+                return (404, None) #_("Container not found")                
+
 
             if obj.parent != None:
                 return (404, None)# _("This is not a top level container")
@@ -150,6 +162,14 @@ class VDOM_module_manager(object):
             except VDOM_exception, e:
                 debug("Render exception: " + str(e))
                 return (None, str(e))
+            except Exception as ee:
+                action = _a.actions.get("requestonerror")
+                if action and action.source_code:
+                    request = managers.request_manager.get_request()
+                    request.arguments().arguments()["error"] = [ee]                    
+                    managers.engine.execute(action)
+                    if request_object.wholeAnswer:
+                        return (None, request_object.wholeAnswer.encode("utf-8"))            
             # finally:
             #     for key in request_object.files:
             #         if getattr(request_object.files[key][0],"name", None):

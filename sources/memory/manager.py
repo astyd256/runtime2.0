@@ -238,10 +238,6 @@ class Memory(object):
                 for lineno, message in parser.report:
                     log.warning("    %s at line %s" % (message, lineno))
 
-            if settings.SERVER:
-                action = application.actions.get(APPLICATION_START_CONTEXT)
-                if action and action.source_code:
-                    managers.engine.execute(action)
 
             return application
         except IOError as error:
