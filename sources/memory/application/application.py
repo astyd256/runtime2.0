@@ -181,6 +181,12 @@ class MemoryApplication(MemoryApplicationSketch):
     default_language = rwproperty("_default_language", _set_default_language)
     current_language = rwproperty("_current_language", _set_current_language)
 
+    def on_start(self):
+        if settings.SERVER:
+            action = self.actions.get(APPLICATION_START_CONTEXT)
+            if action and action.source_code:
+                managers.engine.execute(action)
+
     def cleanup(self):
         for library in self._libraries.itervalues():
             library.cleanup()
@@ -194,13 +200,7 @@ class MemoryApplication(MemoryApplicationSketch):
         if settings.STORE_ACTIONS_BYTECODE:
             for action in self._actions.catalog.itervalues():
                 action.compile()
-                
-    def onstart(self):
-        if settings.SERVER:
-            action = self.actions.get(APPLICATION_START_CONTEXT)
-            if action and action.source_code:
-                managers.engine.execute(action)        
-                
+
     # unsafe
     def compose(self, file=None, shorter=False):
         if not file:

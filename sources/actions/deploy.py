@@ -9,8 +9,12 @@ from .install import run as install
 from .uninstall import run as uninstall
 from .index import run as index
 
-
-LOCATIONS = (
+def run(renew=False):
+    """
+    deploy runtime on the system
+    :param switch renew: renew current installation
+    """
+    LOCATIONS = (
     ("applications", (file_access.APPLICATION, None)),
     ("types", (file_access.TYPE, None)),
     ("cache", (file_access.CACHE, None)),
@@ -21,11 +25,7 @@ LOCATIONS = (
     ("temporary", (file_access.FILE, None, settings.TEMPORARY_LOCATION)))
 
 
-def run(renew=False):
-    """
-    deploy runtime on the system
-    :param switch renew: renew current installation
-    """
+
     if renew:
         uninstall("all", yes=True)
 

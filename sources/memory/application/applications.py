@@ -113,7 +113,7 @@ class MemoryApplications(MemoryBase, Mapping):
                         if self._queue is not None and self._exists(uuid):
                             self._known.add(uuid)
                             self._items[uuid] = item = self._owner.load_application(uuid, silently=True)
-                            item.onstart()
+                            item.on_start()
                             return item
                         else:
                             raise
