@@ -46,10 +46,12 @@ class SmartServer(Singleton):
         while self.running:
             self.wait(self.work())
 
-    def start(self):
+    def start(self, on_ready= None):
         try:
             try:
                 self.prepare()
+                if on_ready:
+                    on_ready()
                 self.main()
             except:
                 sys.excepthook(*sys.exc_info())
