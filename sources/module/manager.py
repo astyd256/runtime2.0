@@ -154,7 +154,7 @@ class VDOM_module_manager(object):
             # CHECK:    managers.engine.special(_a, _a.global_actions["session"]["sessiononstart"])
             # CHECK:    request_object.session().on_start_executed = True
 
-            result = None
+            result = ""
             try:
                 result = managers.engine.render(obj, render_type=obj.type.render_type.lower())
                 # result = managers.engine.render(obj, None, obj.type.render_type.lower())
