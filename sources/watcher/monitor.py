@@ -16,7 +16,6 @@ class Monitor(SmartThread):
     def cleanup(self):
         log.write("Stop " + self.name)
 
-    def main(self):
-        while self.running:
-            self.wait(settings.MONITOR)
-            sys.stdout.write("Running threads:\n%s" % format_threads_trace(indent="    "))
+    def work(self):
+        sys.stdout.write("Running threads:\n%s" % format_threads_trace(indent="    "))
+        return settings.MONITOR
