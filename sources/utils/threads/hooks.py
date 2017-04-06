@@ -20,7 +20,10 @@ def initiate(cause=None):
         else:
             initiate.flag = True
 
-    log.write("Initiate shutdown%s...\n" % (" due to " + cause))
+    if cause:
+        log.write("Initiate shutdown due to %s...\n" % cause)
+    else:
+        log.write("Initiate shutdown...\n")
     timestamp = time()
 
     while True:

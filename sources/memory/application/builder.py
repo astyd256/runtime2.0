@@ -880,8 +880,7 @@ def application_builder(parser, installation_callback=None):
                     raise MissingSectionError("Information")
 
                 # HACK: vscript libraries require precompile
-                if application.scripting_language == VSCRIPT_LANGUAGE \
-                        and not (settings.STORE_BYTECODE or settings.STORE_SYMBOLS):
+                if application.scripting_language == VSCRIPT_LANGUAGE and not settings.STORE_BYTECODE:
                     server_log.write("Precompile libraries")
                     for library in libraries:
                         server_log.write("    %s" % library.name)
