@@ -5,10 +5,11 @@ import settings
 from memory import VSCRIPT_EXTENSION, PYTHON_EXTENSION, SYMBOLS_EXTENSION, BYTECODE_EXTENSION
 from ..constants import LISTING, SYMBOLS, BYTECODE
 from ..bytecode import Bytecode
+from ..exceptions import SourceSyntaxError
 
 
 vengine = import_module("vscript.engine")
-vcompile, vexecute = vengine.vcompile, vengine.vexecute
+vcompile, vexecute, verrors = vengine.vcompile, vengine.vexecute, vengine.errors
 pack = import_module("vscript.conversions").pack
 
 
@@ -21,8 +22,11 @@ class VScriptBytecode(Bytecode):
 
     @classmethod
     def compile(cls, executable, signature=None):
-        listing, symbols = vcompile(executable.source_code,
-            package=executable.package, bytecode=False, listing=settings.SHOW_VSCRIPT_LISTING)
+        try:
+            listing, symbols = vcompile(executable.source_code,
+                package=executable.package, bytecode=False, listing=settings.SHOW_VSCRIPT_LISTING, anyway=False)
+        except (verrors.invalid_character, verrors.syntax_error) as error:
+            raise SourceSyntaxError(error.message, lineno=error.line)
         bytecode = python_compile(listing, signature or executable.signature, "exec")
         return cls(executable, bytecode, listing=listing, symbols=symbols)
 

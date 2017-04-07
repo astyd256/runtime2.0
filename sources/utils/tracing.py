@@ -9,7 +9,7 @@ import threading
 import os
 from itertools import islice
 import settings
-from utils.auxiliary import fit, align, lfill
+from utils.auxiliary import headline, fit, align, lfill
 from utils.console import width
 
 
@@ -172,7 +172,7 @@ def describe_exception(extype, exvalue):
                 value = unicode(exvalue).encode("ascii", "backslashreplace")
     except Exception:
         value = ""
-    return "%s: %s" % (extype.__name__, value) if value else extype.__name__
+    return "%s: %s" % (extype.__name__, headline(value)) if value else extype.__name__
 
 
 def describe_thread(thread):
@@ -210,7 +210,7 @@ def format_trace(stack, limit=sys.maxint,
             width += CAPTION_WIDTH
         else:
             lines.append(indent + caption)
-            indent = indent + "    "
+            indent += settings.LOGGING_INDENT
 
     indents, fillers = iterlast(indent), iterlast(filler)
     for path, line, function, statement in entries:
@@ -294,11 +294,15 @@ def format_threads_trace(limit=sys.maxint,
         return "\n".join(lines)
 
 
-def format_exception_locals(information=None, ignore_builtins=True,
+def format_exception_locals(information=None, ignore_builtins=True, caption=None,
         indent="", filler=DEFAULT_FILLER, into=None):
     lines = [] if into is None else into
     extype, exvalue, extraceback = information or sys.exc_info()
     frame = inspect.getinnerframes(extraceback)[-1][0]
+
+    if caption:
+        lines.append(indent + caption)
+        indent += settings.LOGGING_INDENT
 
     for name, value in frame.f_locals.iteritems():
         caption = align(name, NAME_WIDTH - len(indent), " ", filler=filler)
@@ -320,7 +324,6 @@ def format_exception_trace(information=None, limit=sys.maxint,
     lines = [] if into is None else into
     extype, exvalue, extraceback = information = information or sys.exc_info()
     stack = traceback.extract_tb(extraceback)
-    thread = threading.current_thread()
 
     if separate:
         separator = lfill("- ", LOCATION_WIDTH + STATEMENT_WIDTH + (CAPTION_WIDTH if compact else 0))
@@ -335,13 +338,13 @@ def format_exception_trace(information=None, limit=sys.maxint,
     lines.append("%s%s" % (indent, description))
 
     if locals:
-        format_exception_locals(information, indent="    ", into=lines)
+        format_exception_locals(information, indent=indent + settings.LOGGING_INDENT, into=lines)
 
     format_trace(stack,
         limit=limit,
         statements=statements,
-        caption=describe_thread(thread),
         compact=compact,
+        caption=describe_thread(threading.current_thread()),
         indent=indent,
         filler=filler,
         into=lines)
@@ -412,10 +415,10 @@ def show_threads_trace(limit=sys.maxint,
         limit, statements, compact, current, indent, filler))
 
 
-def show_exception_locals(information=None,
+def show_exception_locals(information=None, ignore_builtins=True, caption=None,
         indent="", filler=DEFAULT_FILLER, output=None):
     (output or sys.stderr).write(format_exception_locals(
-        information, indent, filler))
+        information, ignore_builtins, caption, indent, filler))
 
 
 def show_exception_trace(information=None, limit=sys.maxint,
@@ -424,4 +427,4 @@ def show_exception_trace(information=None, limit=sys.maxint,
         indent="", filler=DEFAULT_FILLER, output=None):
     (output or sys.stderr).write(format_exception_trace(
         information, limit, statements, caption, label, compact,
-            locals, threads, separate, indent, filler))
+        locals, threads, separate, indent, filler))

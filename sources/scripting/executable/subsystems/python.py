@@ -6,6 +6,7 @@ from memory import PYTHON_EXTENSION, BYTECODE_EXTENSION
 from ...wrappers import environment
 from ..constants import BYTECODE
 from ..bytecode import Bytecode
+from ..exceptions import SourceSyntaxError
 
 
 REMOVE_ENCODING_REGEX = re.compile(r"^[ \t\v]*#.*?coding[:=][ \t]*([-_.a-zA-Z0-9]+).*$", re.MULTILINE)
@@ -29,7 +30,7 @@ class PythonBytecode(Bytecode):
                 source_code = REMOVE_ENCODING_REGEX.sub("", executable.source_code)
                 bytecode = python_compile(source_code, signature or executable.signature, "exec")
             else:
-                raise
+                raise SourceSyntaxError(error.msg.capitalize(), lineno=error.lineno)
         return cls(executable, bytecode)
 
     def execute(self, context, namespace, arguments):

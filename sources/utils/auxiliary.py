@@ -1,5 +1,9 @@
 
 
+def headline(value):
+    return value[:1].upper() + value[1:]
+
+
 def forfeit(value):
     return value[:1].lower() + value[1:]
 

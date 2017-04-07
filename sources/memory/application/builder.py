@@ -879,13 +879,6 @@ def application_builder(parser, installation_callback=None):
                 if not sections.get("Information", False):
                     raise MissingSectionError("Information")
 
-                # HACK: vscript libraries require precompile
-                if application.scripting_language == VSCRIPT_LANGUAGE and not settings.STORE_BYTECODE:
-                    server_log.write("Precompile libraries")
-                    for library in libraries:
-                        server_log.write("    %s" % library.name)
-                        library.compile()
-
                 for object in objects.itervalues():
                     ~object
                 for binding in bindings.itervalues():
@@ -897,6 +890,12 @@ def application_builder(parser, installation_callback=None):
                 for library in libraries:
                     ~library
                 ~application
+
+                # HACK: vscript libraries require precompile
+                if application.scripting_language == VSCRIPT_LANGUAGE and not settings.STORE_BYTECODE:
+                    for library in application.libraries.itervalues():
+                        server_log.write("Precompile %s" % library)
+                        library.compile()
 
                 # def handle_on_create(container):
                 #     for object in container.objects.itervalues():

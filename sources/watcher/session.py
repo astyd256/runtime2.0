@@ -78,7 +78,7 @@ class WatcherSession(SmartThread):
                             except Exception as error:
                                 message = "Execution error: %s" % error
                                 response = "<reply><error>%s</error></reply>" % message
-                                show_exception_trace(caption=message)
+                                show_exception_trace(caption=message, locals=True)
                         if not response:
                             response = "<reply><error>No reply</error></reply>"
                         try:

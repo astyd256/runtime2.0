@@ -85,19 +85,30 @@ class Bytecode(object):
     bytecode = roproperty("_bytecode")
     symbols = roproperty("_symbols")
 
+    def explain(self):
+        pass
+
     def execute(self, context, namespace, arguments):
         raise NotImplementedError
 
 
 class ErrorBytecode(Bytecode):
 
-    __slots__ = ()
+    __slots__ = ("_message", "_details")
 
     source_extension = ()
     extensions = {}
 
-    def __init__(self, traceback):
-        self._traceback = traceback
+    message = roproperty("_message")
+    details = roproperty("_details")
+
+    def __init__(self, message, details):
+        self._message = message
+        self._details = details
+
+    def explain(self):
+        server_log.error(self._details)
 
     def execute(self, context, namespace, arguments):
-        server_log.error(self._traceback)
+        server_log.error(self._details)
+        raise Exception(self._message)

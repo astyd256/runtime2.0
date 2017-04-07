@@ -18,6 +18,7 @@ vscript_source_string=u"<vscript>"
 vscript_wrappers_name="wrappers"
 
 vscript_default_code=compile(u"", vscript_source_string, u"exec")
+vscript_default_listing=""
 vscript_default_source=[]
 
 vscript_default_action_namespace={
@@ -154,7 +155,9 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
 	except errors.generic as error:
 		# check_exception(None, error, error_type=errors.generic.compilation, quiet=quiet)
 		advanced_check_exception(error_type=errors.generic.compilation)
-		if anyway: return vscript_default_code, vscript_default_source
+		if anyway:
+			if bytecode: return vscript_default_code, vscript_default_source
+			else: return vscript_default_listing, vscript_default_source
 		else: raise
 	# except errors.python as error:
 	# 	check_exception(source, errors.system_error(unicode(error)), error_type=errors.generic.compilation, quiet=quiet)

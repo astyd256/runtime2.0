@@ -53,7 +53,8 @@ class MemoryLibrarySketch(MemoryBase, Executable):
         return " ".join(filter(None, (
             "library",
             "\"%s\"" % self._name if self._name else None,
-            "sketch of %s" % self._collection.owner if self._collection else None)))
+            "sketch",
+            " of %s" % self._collection.owner if self._collection else None)))
 
 
 class MemoryLibraryRestorationSketch(MemoryLibrarySketch):
