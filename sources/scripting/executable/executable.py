@@ -10,6 +10,7 @@ from engine.exceptions import RenderTermination
 from .constants import SOURCE_CODE, LISTING
 from .subsystems import select
 from .bytecode import ErrorBytecode
+from .exceptions import SourceSyntaxError
 
 
 class Executable(object):
@@ -107,15 +108,18 @@ class Executable(object):
 
             return self.subsystem.compile(self, signature)
         except Exception as error:
-            if isinstance(error, SyntaxError):
-                server_log.error("Unable to compile %s, line %s: %s" % (self, error.lineno, error.msg))
+            message = "Unable to compile %s" % self
+            if isinstance(error, SourceSyntaxError):
+                details = "%s\nError on line %s: %s" % (message, error.lineno, error)
             else:
-                server_log.error("Unable to compile %s: %s" % (self, error))
-            return ErrorBytecode(format_exception_trace())
+                details = format_exception_trace(caption=message, locals=True)
+            return ErrorBytecode(message, details)
 
     def compile(self):
         self.__dict__.pop("bytecode", None)
-        return self.bytecode
+        bytecode = self.bytecode
+        bytecode.explain()
+        return bytecode
 
     def execute(self, context=None, namespace=None, arguments=None):
         if namespace is None:
@@ -131,5 +135,5 @@ class Executable(object):
         except RenderTermination:
             raise
         except Exception:
-            show_exception_trace(caption="Unhandled exception in %s" % self)
+            show_exception_trace(caption="Unhandled exception in %s" % self, locals=True)
             raise

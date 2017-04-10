@@ -51,5 +51,13 @@ def override(filename):
                 setattr(settings, settings_name, str(value))
             elif isinstance(current_value, dict):
                 setattr(settings, settings_name, json.loads(value))
+            else:
+                for caster in (int, float, json.loads):
+                    try:
+                        value = caster(value)
+                        break
+                    except Exception:
+                        continue
+                setattr(settings, settings_name, value)
         except Exception as error:
             print "Unable to parse option %s: %s" % (name, error)
