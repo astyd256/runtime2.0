@@ -4,6 +4,8 @@ from importlib import import_module
 from . import errors, lexemes, library, exceptions
 from register import register
 
+import settings
+
 
 __all__=[u"vname", u"vmybase", u"vme", u"vmyclass", u"vnames",
 	u"vexpression", u"vexpressions",
@@ -465,8 +467,11 @@ class vpython(vstatement):
 		vstatement.scope_names(self, mysource, myclass, myprocedure)
 
 	def compose(self, ident):
-		string=self.source
-		return ((self.line, ident, string),)
+		if settings.ENABLE_PYTHON_INLINES:
+			string=self.source
+			return ((self.line, ident, string),)
+		else:
+			return ()
 
 class vconstant(vstatement):
 

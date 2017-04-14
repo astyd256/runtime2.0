@@ -19,18 +19,31 @@ class generic(python):
 		self.library=None
 		self.line=line
 		self.traceback=None
+		self.near=None
 
 	def __str__(self):
 		return unicode(self).encode("ascii", errors="replace")
 
 	def __unicode__(self):
+		if self.near:
+			if isinstance(self.near, tuple):
+				character = "near \"%s\"" % self.near[1]
+				column = "column %d" % self.near[0]
+			else:
+				character = None
+				column = "near column %d" % self.near
+		else:
+				character = None
+				column = None
 		details=", ".join(
 			filter(None, (
 				None if self.library is None else "library \"%s\""%self.library,
-				None if self.line is None else "line %s"%self.line)))
+				None if self.line is None else "line %s"%self.line,
+				character,
+				column)))
 		return u"VScript %s error%s: %s"%(
 			self.source,
-			u" (%s)"%details if details else u"",
+			(u" (%s)"%details if details else u""),
 			self.message)
 
 
@@ -78,6 +91,13 @@ class syntax_error(generic):
 	def __init__(self, token, line=None):
 		generic.__init__(self,
 			message=u"Syntax error: '%s'"%token,
+			line=line)
+
+class unknown_syntax_error(generic):
+
+	def __init__(self, line=None):
+		generic.__init__(self,
+			message=u"Syntax error: Unexpected character",
 			line=line)
 
 class expected_statement(generic):

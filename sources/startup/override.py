@@ -43,6 +43,8 @@ def override(filename):
         try:
             if value == "None":
                 setattr(settings, settings_name, None)
+            elif isinstance(current_value, bool):
+                setattr(settings, settings_name, bool(value))
             elif isinstance(current_value, int):
                 setattr(settings, settings_name, int(value))
             elif isinstance(current_value, float):

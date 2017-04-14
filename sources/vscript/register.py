@@ -1,5 +1,7 @@
 
-from . import lexemes
+from logs import server_log
+from utils.tracing import show_exception_trace
+from . import lexemes, errors
 
 
 class vregister(object):
@@ -21,7 +23,14 @@ class vinitialregister(vregister):
 	def import_names(self, module_name, alias=super):
 		if alias is super:
 			alias=module_name
-		module=__import__("vscript.%s"%module_name).__dict__[module_name]
+
+		try:
+			module=__import__("vscript.%s"%module_name).__dict__[module_name]
+		except:
+			caption="Unable to import %s module"%module_name
+			show_exception_trace(caption=caption)
+			raise errors.internal_error(caption)
+
 		for name in dir(module):
 			if name.startswith(lexemes.prefix):
 				self._names.setdefault(name, alias)
