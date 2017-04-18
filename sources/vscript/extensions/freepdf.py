@@ -1,4 +1,6 @@
 
+import re
+
 from types import MethodType
 from fpdf import FPDF
 
@@ -6,8 +8,12 @@ import managers
 import file_access
 
 from .. import errors
-from ..subtypes import generic, integer, double, string, boolean
+from ..subtypes import generic, integer, double, string, boolean, binary
 from ..decorators import ignore, vsub, vfunction, vproperty
+
+
+FONT_SIGNATURES = "(?P<TTF>\x00\x01\x00\x00\x00)"
+IMAGE_SIGNATURES = "(?P<PNG>\x89PNG)|(?P<JPG>\xFF\xD8\xFF\xE0..JFIF)|(?P<GIF>GIF8[79]a)"
 
 
 class FPDFWrapper(FPDF):
@@ -37,6 +43,9 @@ class PDFProperty(object):
 
 
 class v_fpdf(generic):
+
+    _fonts_regex = re.compile(FONT_SIGNATURES)
+    _images_regex = re.compile(IMAGE_SIGNATURES)
 
     def __init__(self):
         generic.__init__(self)
@@ -87,11 +96,22 @@ class v_fpdf(generic):
                     raise errors.expected_function
                 self._footer = footer
 
-    @vsub(string, string, string)
+    @vsub(string, string, (string, binary))
     def v_addfont(self, family, style, filename):
-        application = managers.engine.application
-        location = managers.file_manager.locate(file_access.storage, application.id, filename)
-        self._pdf.add_font(family, style, location, True)
+        match = self._fonts_regex.match(filename)
+        if match:
+            file = managers.file_manager.open_temporary(None, None, delete=False)
+            location = file.name
+            try:
+                file.write(filename)
+                file.close()
+                self._pdf.add_font(family, style, location, True)
+            finally:
+                managers.file_manager.delete(file_access.TEMPORARY, None, location)
+        else:
+            application = managers.engine.application
+            location = managers.file_manager.locate(file_access.storage, application.id, filename)
+            self._pdf.add_font(family, style, location, True)
 
     @vfunction(result=string)
     def v_addlink(self):
@@ -117,11 +137,23 @@ class v_fpdf(generic):
     def v_multicell(self, w, h, txt="", border=0, align="J", fill=0, split_only=False):
         self._pdf.multi_cell(w, h, txt, border, align, fill, split_only)
 
-    @vsub(string, double, double, double, double, string, string)
+    @vsub((string, binary), double, double, double, double, string, string)
     def v_image(self, filename, x=None, y=None, w=0, h=0, type="", link=""):
-        application = managers.engine.application
-        location = managers.file_manager.locate(file_access.storage, application.id, filename)
-        self._pdf.image(location, x, y, w, h, type, link)
+        match = self._images_regex.match(filename)
+        if match:
+            type = match.lastgroup
+            file = managers.file_manager.open_temporary(None, None, delete=False)
+            location = file.name
+            try:
+                file.write(filename)
+                file.close()
+                self._pdf.image(location, x, y, w, h, type, link)
+            finally:
+                managers.file_manager.delete(file_access.TEMPORARY, None, location)
+        else:
+            application = managers.engine.application
+            location = managers.file_manager.locate(file_access.storage, application.id, filename)
+            self._pdf.image(location, x, y, w, h, type, link)
 
     @vsub(double, double, double, double)
     def v_line(self, x1, y1, x2, y2):

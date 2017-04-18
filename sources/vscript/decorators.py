@@ -1,5 +1,5 @@
 
-import sys, types
+import types
 from . import errors
 from .subtypes import array, binary, boolean, date, double, empty, \
 	error, generic, integer, mismatch, nothing, null, string, v_mismatch
@@ -7,7 +7,7 @@ from .variables import variant
 from .conversions import pack, unpack
 
 
-__all__=["auto", "native", "vclass", "vfunction", "vsub", "vproperty", "vcollection"]
+__all__=["auto", "native", "ignore", "vclass", "vfunction", "vsub", "vproperty", "vcollection"]
 
 
 class auto(object): pass
@@ -17,6 +17,7 @@ class ignore(object): pass
 
 wrappers={
 	auto: pack,
+	ignore: lambda value: value,
 	native: lambda value: value,
 	generic: lambda value: value,
 	integer: lambda value: integer(int(value)),
@@ -39,14 +40,12 @@ unwrappers={
 
 def unwrap(*arguments):
 	handlers=tuple((argument, unwrappers[argument]) for argument in arguments)
-
 	def unwrapper(value):
 		for subtype, handler in handlers:
-			if isinstance(value, subtype):
+			if isinstance(value.subtype, subtype):
 				return handler(value)
 		else:
 			raise errors.type_mismatch
-
 	return unwrapper
 
 
@@ -55,7 +54,6 @@ def get_function_wrapper(arguments, result, function):
 		raise errors.python("Require function to decorate")
 	maximal=function.__code__.co_argcount
 	varnames=function.__code__.co_varnames
-	# leading=1 if isinstance(function, types.MethodType) else 0
 	leading=1 if varnames and varnames[0]=="self" else 0
 	if len(arguments)+leading-maximal:
 		raise errors.python("Incorrect number of arguments")
@@ -87,7 +85,7 @@ def get_property_wrapper(arguments, result, getter, letter, setter):
 	if letter and setter and result is not native:
 		raise errors.python("Value must be native when letter and setter")
 	if setter and result is not generic:
-		raise errprs.python("Value must be generic when setter")
+		raise errors.python("Value must be generic when setter")
 	getter=get_function_wrapper(arguments, result, getter) if getter else None
 	letter=get_function_wrapper(arguments+(result,), None, letter) if letter else None
 	setter=get_function_wrapper(arguments+(result,), None, setter) if setter else None
@@ -109,7 +107,7 @@ def get_collection_wrapper(arguments, result, master, getter, letter, setter):
 	if letter and setter and result is not native:
 		raise errors.python("Value must be native when letter and setter")
 	if setter and result is not generic:
-		raise errprs.python("Value must be generic when setter")
+		raise errors.python("Value must be generic when setter")
 	varnames=master.__code__.co_varnames
 	leading=1 if varnames and varnames[0]=="self" else 0
 	if len(varnames)>leading:
