@@ -8,7 +8,7 @@ import managers
 import file_access
 
 from .. import errors
-from ..subtypes import generic, integer, double, string, boolean, binary
+from ..subtypes import generic, integer, double, string, binary, boolean
 from ..decorators import ignore, vsub, vfunction, vproperty
 
 
@@ -103,8 +103,10 @@ class v_fpdf(generic):
             file = managers.file_manager.open_temporary(None, None, delete=False)
             location = file.name
             try:
-                file.write(filename)
-                file.close()
+                try:
+                    file.write(filename)
+                finally:
+                    file.close()
                 self._pdf.add_font(family, style, location, True)
             finally:
                 managers.file_manager.delete(file_access.TEMPORARY, None, location)
