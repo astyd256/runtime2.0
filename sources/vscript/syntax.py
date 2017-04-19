@@ -1211,4 +1211,4 @@ def p_error(p):
 			raise errors.syntax_error(p.value, p.lineno)
 		raise errors.syntax_error(p.value, p.lineno)
 	else:
-		raise errors.syntax_error("Unknown")
+		raise errors.unknown_syntax_error

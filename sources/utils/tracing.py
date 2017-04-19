@@ -326,7 +326,8 @@ def format_exception_trace(information=None, limit=sys.maxint,
     stack = traceback.extract_tb(extraceback)
 
     if separate:
-        separator = lfill("- ", LOCATION_WIDTH + STATEMENT_WIDTH + (CAPTION_WIDTH if compact else 0))
+        separator = indent + \
+            lfill("- ", LOCATION_WIDTH + STATEMENT_WIDTH + (CAPTION_WIDTH if compact else 0) - len(indent))
         lines.append(separator)
 
     if caption:

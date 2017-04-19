@@ -13,3 +13,4 @@ from .xmls import v_xmlnode, v_xmlattribute, v_xmlelement, v_xmldocument, \
     v_xmlwrongdocumenterror
 from .constraint import v_problem
 from .evalstring import v_evalstring, v_evalcontext, v_evalvariable, v_evalglobalcontext
+from .freepdf import v_fpdf

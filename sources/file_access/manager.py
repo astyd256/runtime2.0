@@ -135,13 +135,13 @@ class FileManager(object):
         # self.ensure(category, owner, mode)
         return io.open(location, mode, buffering, encoding, errors, None if "b" in mode else newline)
 
-    def open_temporary(self, category, owner, mode="w+b", buffering=-1, encoding=None, suffix="", prefix=""):
+    def open_temporary(self, category, owner, mode="w+b", buffering=-1, encoding=None, suffix="", prefix="", delete=True):
         if category is not None:
             raise Exception("Unable to create temporary non-file resource")
         if encoding is not None:
             raise Exception("Unable to create temporary file with encoding")
-        return NamedTemporaryFile(mode=mode, buffering=buffering, suffix=suffix, prefix=prefix,
-            dir=os.path.abspath(settings.TEMPORARY_LOCATION))
+        return NamedTemporaryFile(mode=mode, bufsize=buffering, suffix=suffix, prefix=prefix,
+            dir=os.path.abspath(settings.TEMPORARY_LOCATION), delete=delete)
 
     def size(self, category, owner, name):
         try:

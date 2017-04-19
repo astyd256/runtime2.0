@@ -14,6 +14,7 @@ from .wrappers.scripting import v_vdomobject
 from . import wrappers
 
 
+vscript_source_signature=u"<vscript"
 vscript_source_string=u"<vscript>"
 vscript_wrappers_name="wrappers"
 
@@ -54,7 +55,8 @@ def check_exception(source, error, error_type=errors.generic.runtime, quiet=None
 	for path, line, function, st in history:
 		if path.startswith(".."):
 			path=os.path.normpath(os.path.join(os.path.dirname(sys.argv[0]), path))
-		if path==vscript_source_string:
+		# if path==vscript_source_string:
+		if path.startswith(vscript_source_signature):
 			try:
 				st=source[line-1][2]
 			except IndexError:
@@ -155,6 +157,17 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
 	except errors.generic as error:
 		# check_exception(None, error, error_type=errors.generic.compilation, quiet=quiet)
 		advanced_check_exception(error_type=errors.generic.compilation)
+		if error.line is None:
+			error.line=lexer.lineno
+			if isinstance(error, errors.unknown_syntax_error):
+				position = getattr(parser.symstack[-1], "lexpos", None)
+				if position is not None:
+					try:
+						newline_position=script.rindex("\n", 0, position)
+					except ValueError:
+						newline_position=0
+					character, column=script[position], (position-newline_position) or 1
+					error.near=(column, character) if ' '<=character<='~' else column
 		if anyway:
 			if bytecode: return vscript_default_code, vscript_default_source
 			else: return vscript_default_listing, vscript_default_source
@@ -188,7 +201,8 @@ def vexecute(code, source, object=None, namespace=None, environment=None, use=No
 		except AttributeError, error:
 			exclass, exexception, extraceback=sys.exc_info()
 			path, line, function, text=traceback.extract_tb(extraceback)[-1]
-			if path==vscript_source_string:
+			# if path==vscript_source_string:
+			if path.startswith(vscript_source_signature):
 				if not quiet:
 					debug( "- - - - - - - - - - - - - - - - - - - -")
 					debug( (u"Python (AttributeError): %s"%error.message).encode("utf-8"))
@@ -205,7 +219,8 @@ def vexecute(code, source, object=None, namespace=None, environment=None, use=No
 		except ValueError as error:
 			exclass, exexception, extraceback=sys.exc_info()
 			path, line, function, text=traceback.extract_tb(extraceback)[-1]
-			if path==vscript_source_string:
+			# if path==vscript_source_string:
+			if path.startswith(vscript_source_signature):
 				if not quiet:
 					debug( "- - - - - - - - - - - - - - - - - - - -")
 					debug((u"Python (ValueError): %s"%error).encode("utf-8"))
@@ -217,7 +232,8 @@ def vexecute(code, source, object=None, namespace=None, environment=None, use=No
 		except TypeError as error:
 			exclass, exexception, extraceback=sys.exc_info()
 			path, line, function, text=traceback.extract_tb(extraceback)[-1]
-			if path==vscript_source_string:
+			# if path==vscript_source_string:
+			if path.startswith(vscript_source_signature):
 				if not quiet:
 					debug("- - - - - - - - - - - - - - - - - - - -")
 					debug ((u"Python (TypeError): %s"%error).encode("utf-8"))
@@ -225,6 +241,9 @@ def vexecute(code, source, object=None, namespace=None, environment=None, use=No
 				if result:
 					del exclass, exexception
 					raise errors.wrong_number_of_arguments(name=result.group(1)), None, extraceback
+				elif re.match("__init__\(\) got an unexpected keyword argument 'set'", unicode(error)):
+					del exclass, exexception
+					raise errors.illegal_assigment
 				else:
 					del exclass, exexception
 					raise errors.type_mismatch, None, extraceback
