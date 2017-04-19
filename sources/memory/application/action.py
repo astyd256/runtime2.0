@@ -142,7 +142,7 @@ class MemoryAction(MemoryActionSketch):
                     "source_object": context,
                     "action_name": self._name,
                     "source_code": self.source_code,
-                    "source_arguments": arguments})
+                    "source_namespace": arguments})
         else:
             # statistics.increase("action.execute")
             if self.scripting_language == PYTHON_LANGUAGE:
