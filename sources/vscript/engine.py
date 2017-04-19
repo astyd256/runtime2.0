@@ -162,9 +162,8 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
 			if isinstance(error, errors.unknown_syntax_error):
 				position = getattr(parser.symstack[-1], "lexpos", None)
 				if position is not None:
-					try:
-						newline_position=script.rindex("\n", 0, position)
-					except ValueError:
+					newline_position=script.rfind("\n", 0, position)
+					if newline_position<0:
 						newline_position=0
 					character, column=script[position], (position-newline_position) or 1
 					error.near=(column, character) if ' '<=character<='~' else column

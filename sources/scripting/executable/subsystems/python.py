@@ -13,9 +13,26 @@ REMOVE_ENCODING_REGEX = re.compile(r"^[ \t\v]*#.*?coding[:=][ \t]*([-_.a-zA-Z0-9
 ENCODING_ERROR_MESSAGE = "encoding declaration in Unicode string"
 
 
+class Unavailable(object):
+
+    def __getattribute__(self, name):
+        raise Exception("self is not available")
+
+    def __str__(self):
+        return "self is not available"
+
+    def __unicode__(self):
+        return u"self is not available"
+
+    def __repr__(self):
+        return "self is not available"
+
+
 class PythonBytecode(Bytecode):
 
     __slots__ = ()
+
+    _unavailable = Unavailable()
 
     source_extension = PYTHON_EXTENSION
     extensions = {BYTECODE: BYTECODE_EXTENSION}
@@ -34,9 +51,10 @@ class PythonBytecode(Bytecode):
         return cls(executable, bytecode)
 
     def execute(self, context, namespace, arguments):
-        if context:
-            namespace["self"] = context
         if arguments:
+            namespace["self"] = self._unavailable
             namespace.update(arguments)
+        elif context:
+            namespace["self"] = context
         namespace.update(environment)
         exec(self._bytecode, namespace)
