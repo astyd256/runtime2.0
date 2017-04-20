@@ -13,24 +13,6 @@ INDEX_LINE_REGEX = re.compile(r"^(?P<uuid>[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\
 STRANGE_REGEX = re.compile(r"^\n\t+$")
 
 
-class UnavailableSelf(object):
-
-    def __getattribute__(self, name):
-        raise Exception("self is not available")
-
-    def __str__(self):
-        return "self is not available"
-
-    def __unicode__(self):
-        return u"self is not available"
-
-    def __repr__(self):
-        return "self is not available"
-
-
-UNAVAILABLE_SELF = UnavailableSelf()
-
-
 def wrapfilelike(function):
     def wrapper(*arguments, **keywords):
         filelike = keywords.get("filelike")

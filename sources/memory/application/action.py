@@ -9,7 +9,6 @@ from utils import verificators
 from scripting.executable import source_code_property, SOURCE_CODE, Executable
 
 from ..constants import PYTHON_LANGUAGE
-from ..auxiliary import UNAVAILABLE_SELF
 from ..generic import MemoryBase
 
 
@@ -140,10 +139,10 @@ class MemoryAction(MemoryActionSketch):
         if self._handler:
             self._handler.execute(context, namespace,
                 arguments={
-                    "self": UNAVAILABLE_SELF,
                     "source_object": context,
                     "action_name": self._name,
-                    "source_code": self.source_code})
+                    "source_code": self.source_code,
+                    "source_namespace": arguments})
         else:
             # statistics.increase("action.execute")
             if self.scripting_language == PYTHON_LANGUAGE:
