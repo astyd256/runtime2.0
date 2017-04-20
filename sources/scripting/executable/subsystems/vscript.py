@@ -10,7 +10,6 @@ from ..exceptions import SourceSyntaxError
 
 vengine = import_module("vscript.engine")
 vcompile, vexecute, verrors = vengine.vcompile, vengine.vexecute, vengine.errors
-pack = import_module("vscript.conversions").pack
 
 
 class VScriptBytecode(Bytecode):
@@ -32,6 +31,5 @@ class VScriptBytecode(Bytecode):
 
     def execute(self, context, namespace, arguments):
         if arguments:
-            for name, value in arguments.iteritems():
-                namespace["v_%s" % name.replace("_", "")] = pack(value)
+            raise verrors.internal_error("Dynamic handlers is not implemented")
         vexecute(self._bytecode, self._symbols, context, namespace)
