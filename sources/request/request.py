@@ -82,7 +82,7 @@ class VDOM_request:
 		sid = ""
 		if "sid" in args:
 			#debug("Got session from arguments "+str(args["sid"]))
-			sid = args["sid"]
+			sid = args["sid"][0]
 		elif "sid" in self.__cookies:
 			#debug("Got session from cookies "+cookies["sid"].value)
 			sid = self.__cookies["sid"].value
@@ -96,7 +96,9 @@ class VDOM_request:
 				sid = managers.session_manager.create_session()
 		#debug("Session ID "+str(sid))
 		self.__cookies["sid"] = sid
-		self.__response_cookies["sid"] = sid
+
+		if sid not in args.get('sid', []):
+			self.__response_cookies["sid"] = sid
 		args["sid"] = sid
 		self.__session = managers.session_manager[sid]
 		self.__arguments = VDOM_request_arguments(args)
