@@ -45,7 +45,5 @@ managers.register("module_manager", VDOM_module_manager)
 managers.register("server", VDOM_server)
 
 
-on_prepare = (lambda: managers.memory.applications.default ) if settings.PRELOAD_DEFAULT_APPLICATION else None
-
-
+on_prepare = (lambda: managers.memory.applications.default) if settings.PRELOAD_DEFAULT_APPLICATION else None
 managers.server.start(on_prepare)

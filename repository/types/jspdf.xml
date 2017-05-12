@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>0</Dynamic>
-    <Version>1.138.8388</Version>
+    <Version>1.143.8388</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer,dialog,container,tablecell,form,password,dialog_2, vdomclass</Containers>
@@ -110,7 +110,7 @@
       <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>container_id</Name>
+      <Name>container_class</Name>
       <DisplayName>#Lang(108)</DisplayName>
       <DefaultValue/>
       <Visible>1</Visible>
@@ -148,7 +148,7 @@
     <Attribute>
       <Name>format</Name>
       <DisplayName>#Lang(112)</DisplayName>
-      <DefaultValue>parent</DefaultValue>
+      <DefaultValue>a4</DefaultValue>
       <Visible>1</Visible>
       <Help>#Lang(212)</Help>
       <InterfaceType>0</InterfaceType>
@@ -159,38 +159,50 @@
     </Attribute>
     <Attribute>
       <Name>hide_parent</Name>
-      <DisplayName>#Lang(115)</DisplayName>
-      <DefaultValue>1</DefaultValue>
-      <Visible>1</Visible>
-      <Help>#Lang(315)</Help>
-      <InterfaceType>0</InterfaceType>
-      <CodeInterface>DropDown((#Lang(414)|1)|(#Lang(415)|0))</CodeInterface>
-      <Colorgroup>2</Colorgroup>
-      <ErrorValidationMessage>#Lang(215)</ErrorValidationMessage>
-      <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
-    </Attribute>
-    <Attribute>
-      <Name>overflow</Name>
       <DisplayName>#Lang(113)</DisplayName>
-      <DefaultValue>0</DefaultValue>
+      <DefaultValue>1</DefaultValue>
       <Visible>1</Visible>
       <Help>#Lang(213)</Help>
       <InterfaceType>0</InterfaceType>
-      <CodeInterface>DropDown((#Lang(409)|0)|(#Lang(411)|1)|(#Lang(412)|2)|(#Lang(413)|3))</CodeInterface>
-      <Colorgroup>3</Colorgroup>
+      <CodeInterface>DropDown((#Lang(409)|1)|(#Lang(411)|0))</CodeInterface>
+      <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
-      <RegularExpressionValidation>^[0123]$</RegularExpressionValidation>
+      <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>classname</Name>
+      <Name>htmlcode</Name>
       <DisplayName>#Lang(114)</DisplayName>
       <DefaultValue/>
       <Visible>1</Visible>
       <Help>#Lang(214)</Help>
+      <InterfaceType>3</InterfaceType>
+      <CodeInterface>MultiLine(10000)</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>overflow</Name>
+      <DisplayName>#Lang(115)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(215)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(412)|0)|(#Lang(413)|1)|(#Lang(414)|2)|(#Lang(415)|3))</CodeInterface>
+      <Colorgroup>3</Colorgroup>
+      <ErrorValidationMessage>#Lang(315)</ErrorValidationMessage>
+      <RegularExpressionValidation>^[0123]$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>classname</Name>
+      <DisplayName>#Lang(116)</DisplayName>
+      <DefaultValue/>
+      <Visible>1</Visible>
+      <Help>#Lang(216)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>TextField(500)</CodeInterface>
       <Colorgroup>4</Colorgroup>
-      <ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
+      <ErrorValidationMessage>#Lang(316)</ErrorValidationMessage>
       <RegularExpressionValidation>^.*$</RegularExpressionValidation>
     </Attribute>
   </Attributes>
@@ -206,13 +218,14 @@
       <Sentence ID="105">Left</Sentence>
       <Sentence ID="106">Width</Sentence>
       <Sentence ID="107">Height</Sentence>
-      <Sentence ID="108">VDOM container ID</Sentence>
+      <Sentence ID="108">VDOM container class</Sentence>
       <Sentence ID="109">Orientation</Sentence>
       <Sentence ID="111">Units</Sentence>
       <Sentence ID="112">Page Format</Sentence>
-      <Sentence ID="113">Overflow</Sentence>
-      <Sentence ID="114">CSS Class</Sentence>
-      <Sentence ID="115">Hide parent</Sentence>
+      <Sentence ID="113">Hide parent</Sentence>
+      <Sentence ID="114">HTML code</Sentence>
+      <Sentence ID="115">Overflow</Sentence>
+      <Sentence ID="116">CSS Class</Sentence>
       <Sentence ID="201">Order of rendering the object on the page</Sentence>
       <Sentence ID="202">Visibility of the object</Sentence>
       <Sentence ID="203">Position in visual hierarchy of objects</Sentence>
@@ -220,15 +233,14 @@
       <Sentence ID="205">Spacing between the left edge of the container and the object in pixels</Sentence>
       <Sentence ID="206">Width of the object in pixels</Sentence>
       <Sentence ID="207">Height of the object in pixels, no more than 2880</Sentence>
-      <Sentence ID="208">Container id which will be copied into pdf</Sentence>
+      <Sentence ID="208">Container css class name which will be copied into pdf</Sentence>
       <Sentence ID="209">One of "portrait" or "landscape" (or shortcuts "p" (Default), "l")</Sentence>
       <Sentence ID="211">Measurement unit to be used when coordinates are specified. One of "pt" (points), "mm" (Default), "cm", "in"</Sentence>
-      <Sentence ID="212">One of 'pageFormats' in pt. Use Parent to have sizes of copied container. Below as available formats in pt:
-pageFormats list = [ // Size in pt of various paper formats
-    'a0', 'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'b0', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'b9', 'b10', 'c0', 'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10', 'dl', 'letter', 'government-letter', 'legal', 'junior-legal', 'ledger', 'tabloid',  'credit-card']</Sentence>
-      <Sentence ID="213">Overflow control mode</Sentence>
-      <Sentence ID="214">The name of the CSS class.</Sentence>
-      <Sentence ID="215">Incorrect value.</Sentence>
+      <Sentence ID="212">One of 'pageFormats' in pt. Below as available formats = [ 'a0', 'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'b0', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'b9', 'b10', 'c0', 'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10', 'dl', 'letter', 'government-letter', 'legal', 'junior-legal', 'ledger', 'tabloid',  'credit-card']</Sentence>
+      <Sentence ID="213">Will hide parent (source) container after rendering it to pdf</Sentence>
+      <Sentence ID="214">Multiline attribute with HTML code</Sentence>
+      <Sentence ID="215">Overflow control mode</Sentence>
+      <Sentence ID="216">The name of the CSS class.</Sentence>
       <Sentence ID="301">Incorrect value, must be even integer from 0 to 99</Sentence>
       <Sentence ID="302">Incorrect value</Sentence>
       <Sentence ID="303">Incorrect value, must be even integer from 0 to 99</Sentence>
@@ -240,9 +252,10 @@ pageFormats list = [ // Size in pt of various paper formats
       <Sentence ID="309">Incorrect value.</Sentence>
       <Sentence ID="311">Incorrect value.</Sentence>
       <Sentence ID="312">Incorrect value.</Sentence>
-      <Sentence ID="313">Incorrect value</Sentence>
-      <Sentence ID="314">Incorrect value</Sentence>
-      <Sentence ID="315">Will hide parent (source) container after rendering it to pdf</Sentence>
+      <Sentence ID="313">Incorrect value.</Sentence>
+      <Sentence ID="314">Incorrect value.</Sentence>
+      <Sentence ID="315">Incorrect value</Sentence>
+      <Sentence ID="316">Incorrect value</Sentence>
       <Sentence ID="401">Invisible</Sentence>
       <Sentence ID="402">Visible</Sentence>
       <Sentence ID="403">portrait</Sentence>
@@ -251,17 +264,19 @@ pageFormats list = [ // Size in pt of various paper formats
       <Sentence ID="406">mm</Sentence>
       <Sentence ID="407">cm</Sentence>
       <Sentence ID="408">in</Sentence>
-      <Sentence ID="409">Auto</Sentence>
-      <Sentence ID="411">Hidden</Sentence>
-      <Sentence ID="412">Scroll</Sentence>
-      <Sentence ID="413">Visible</Sentence>
-      <Sentence ID="414">Hide</Sentence>
-      <Sentence ID="415">Show</Sentence>
-      <Sentence ID="502">Hide the object</Sentence>
-      <Sentence ID="503">Move the object to a new position</Sentence>
-      <Sentence ID="504"></Sentence>
+      <Sentence ID="409">Hide</Sentence>
+      <Sentence ID="411">Show</Sentence>
+      <Sentence ID="412">Auto</Sentence>
+      <Sentence ID="413">Hidden</Sentence>
+      <Sentence ID="414">Scroll</Sentence>
+      <Sentence ID="415">Visible</Sentence>
+      <Sentence ID="501">Hide the object</Sentence>
+      <Sentence ID="502">Move the object to a new position</Sentence>
+      <Sentence ID="503"></Sentence>
+      <Sentence ID="504">Render pdf</Sentence>
       <Sentence ID="505"></Sentence>
-      <Sentence ID="507">Show the object</Sentence>
+      <Sentence ID="506">Show the object</Sentence>
+      <Sentence ID="507"></Sentence>
       <Sentence ID="508"></Sentence>
       <Sentence ID="509"></Sentence>
       <Sentence ID="511"></Sentence>
@@ -270,30 +285,28 @@ pageFormats list = [ // Size in pt of various paper formats
       <Sentence ID="514"></Sentence>
       <Sentence ID="515"></Sentence>
       <Sentence ID="516"></Sentence>
-      <Sentence ID="517"></Sentence>
-      <Sentence ID="518">Render pdf</Sentence>
+      <Sentence ID="601">Visibility</Sentence>
       <Sentence ID="602">Visibility</Sentence>
-      <Sentence ID="603">Visibility</Sentence>
-      <Sentence ID="604"></Sentence>
+      <Sentence ID="603"></Sentence>
+      <Sentence ID="604">Render PDF</Sentence>
       <Sentence ID="605"></Sentence>
-      <Sentence ID="607">Visibility</Sentence>
-      <Sentence ID="608">Render PDF</Sentence>
+      <Sentence ID="606">Visibility</Sentence>
+      <Sentence ID="701">Incorrect value</Sentence>
       <Sentence ID="702">Incorrect value</Sentence>
       <Sentence ID="703">Incorrect value</Sentence>
       <Sentence ID="704">Incorrect value</Sentence>
       <Sentence ID="705">Incorrect value</Sentence>
-      <Sentence ID="706">Incorrect value</Sentence>
+      <Sentence ID="706"></Sentence>
       <Sentence ID="707"></Sentence>
-      <Sentence ID="708"></Sentence>
-      <Sentence ID="711">Incorrect value</Sentence>
-      <Sentence ID="802">Fade effect, time is indicated in milliseconds</Sentence>
-      <Sentence ID="803">X-coordinate of the new position relative to the left upper corner of the container</Sentence>
-      <Sentence ID="804">Y-coordinate of the new position relative to the left upper corner of the container</Sentence>
-      <Sentence ID="805">Visual effect of moving, time is indicated in milliseconds</Sentence>
-      <Sentence ID="806">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="708">Incorrect value</Sentence>
+      <Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="802">X-coordinate of the new position relative to the left upper corner of the container</Sentence>
+      <Sentence ID="803">Y-coordinate of the new position relative to the left upper corner of the container</Sentence>
+      <Sentence ID="804">Visual effect of moving, time is indicated in milliseconds</Sentence>
+      <Sentence ID="805">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="806"></Sentence>
       <Sentence ID="807"></Sentence>
-      <Sentence ID="808"></Sentence>
-      <Sentence ID="811">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="808">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="901">Left</Sentence>
       <Sentence ID="902">Top</Sentence>
       <Sentence ID="903">Left</Sentence>
@@ -327,9 +340,10 @@ pageFormats list = [ // Size in pt of various paper formats
       <Sentence ID="109"></Sentence>
       <Sentence ID="111"></Sentence>
       <Sentence ID="112"></Sentence>
-      <Sentence ID="113">Переполнение</Sentence>
+      <Sentence ID="113"></Sentence>
       <Sentence ID="114"></Sentence>
-      <Sentence ID="115"></Sentence>
+      <Sentence ID="115">Переполнение</Sentence>
+      <Sentence ID="116"></Sentence>
       <Sentence ID="201">Приоритет в потоке гипертекста</Sentence>
       <Sentence ID="202">Режим отображения объекта</Sentence>
       <Sentence ID="203">Положение в визуальной иерархии объектов</Sentence>
@@ -341,9 +355,10 @@ pageFormats list = [ // Size in pt of various paper formats
       <Sentence ID="209"></Sentence>
       <Sentence ID="211"></Sentence>
       <Sentence ID="212"></Sentence>
-      <Sentence ID="213">Режим переполнения</Sentence>
+      <Sentence ID="213"></Sentence>
       <Sentence ID="214"></Sentence>
-      <Sentence ID="215"></Sentence>
+      <Sentence ID="215">Режим переполнения</Sentence>
+      <Sentence ID="216"></Sentence>
       <Sentence ID="301">Неправильное значение, должно быть целое положительное число</Sentence>
       <Sentence ID="302">Неправильное значение</Sentence>
       <Sentence ID="303">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
@@ -355,9 +370,10 @@ pageFormats list = [ // Size in pt of various paper formats
       <Sentence ID="309"></Sentence>
       <Sentence ID="311"></Sentence>
       <Sentence ID="312"></Sentence>
-      <Sentence ID="313">Неправильное значение</Sentence>
+      <Sentence ID="313"></Sentence>
       <Sentence ID="314"></Sentence>
-      <Sentence ID="315"></Sentence>
+      <Sentence ID="315">Неправильное значение</Sentence>
+      <Sentence ID="316"></Sentence>
       <Sentence ID="401">Не отображается</Sentence>
       <Sentence ID="402">Отображать</Sentence>
       <Sentence ID="403"></Sentence>
@@ -366,17 +382,19 @@ pageFormats list = [ // Size in pt of various paper formats
       <Sentence ID="406"></Sentence>
       <Sentence ID="407"></Sentence>
       <Sentence ID="408"></Sentence>
-      <Sentence ID="409">Авто</Sentence>
-      <Sentence ID="411">Скрытый</Sentence>
-      <Sentence ID="412">Прокрутка</Sentence>
-      <Sentence ID="413">Отображать</Sentence>
-      <Sentence ID="414"></Sentence>
-      <Sentence ID="415"></Sentence>
-      <Sentence ID="502">Скрыть объект</Sentence>
-      <Sentence ID="503">Переместить объект</Sentence>
+      <Sentence ID="409"></Sentence>
+      <Sentence ID="411"></Sentence>
+      <Sentence ID="412">Авто</Sentence>
+      <Sentence ID="413">Скрытый</Sentence>
+      <Sentence ID="414">Прокрутка</Sentence>
+      <Sentence ID="415">Отображать</Sentence>
+      <Sentence ID="501">Скрыть объект</Sentence>
+      <Sentence ID="502">Переместить объект</Sentence>
+      <Sentence ID="503"></Sentence>
       <Sentence ID="504"></Sentence>
       <Sentence ID="505"></Sentence>
-      <Sentence ID="507">Показать объект</Sentence>
+      <Sentence ID="506">Показать объект</Sentence>
+      <Sentence ID="507"></Sentence>
       <Sentence ID="508"></Sentence>
       <Sentence ID="509"></Sentence>
       <Sentence ID="511"></Sentence>
@@ -385,30 +403,28 @@ pageFormats list = [ // Size in pt of various paper formats
       <Sentence ID="514"></Sentence>
       <Sentence ID="515"></Sentence>
       <Sentence ID="516"></Sentence>
-      <Sentence ID="517"></Sentence>
-      <Sentence ID="518"></Sentence>
+      <Sentence ID="601">Отображение</Sentence>
       <Sentence ID="602">Отображение</Sentence>
-      <Sentence ID="603">Отображение</Sentence>
+      <Sentence ID="603"></Sentence>
       <Sentence ID="604"></Sentence>
       <Sentence ID="605"></Sentence>
-      <Sentence ID="607">Отображение</Sentence>
-      <Sentence ID="608"></Sentence>
+      <Sentence ID="606">Отображение</Sentence>
+      <Sentence ID="701">Неправильное значение</Sentence>
       <Sentence ID="702">Неправильное значение</Sentence>
       <Sentence ID="703">Неправильное значение</Sentence>
       <Sentence ID="704">Неправильное значение</Sentence>
       <Sentence ID="705">Неправильное значение</Sentence>
-      <Sentence ID="706">Неправильное значение</Sentence>
+      <Sentence ID="706"></Sentence>
       <Sentence ID="707"></Sentence>
-      <Sentence ID="708"></Sentence>
-      <Sentence ID="711">Неправильное значение</Sentence>
-      <Sentence ID="802">Время исчезновения в миллисекундах</Sentence>
-      <Sentence ID="803">Координата новой точки по оси X</Sentence>
-      <Sentence ID="804">Координата новой точки по оси Y</Sentence>
-      <Sentence ID="805">Визуальный эффект при перетаскивании</Sentence>
-      <Sentence ID="806">Время исчезновения в миллисекундах</Sentence>
+      <Sentence ID="708">Неправильное значение</Sentence>
+      <Sentence ID="801">Время исчезновения в миллисекундах</Sentence>
+      <Sentence ID="802">Координата новой точки по оси X</Sentence>
+      <Sentence ID="803">Координата новой точки по оси Y</Sentence>
+      <Sentence ID="804">Визуальный эффект при перетаскивании</Sentence>
+      <Sentence ID="805">Время исчезновения в миллисекундах</Sentence>
+      <Sentence ID="806"></Sentence>
       <Sentence ID="807"></Sentence>
-      <Sentence ID="808"></Sentence>
-      <Sentence ID="811">Время исчезновения в миллисекундах</Sentence>
+      <Sentence ID="808">Время исчезновения в миллисекундах</Sentence>
       <Sentence ID="901">Слева</Sentence>
       <Sentence ID="902">Сверху</Sentence>
       <Sentence ID="903">Слева</Sentence>
@@ -442,9 +458,10 @@ pageFormats list = [ // Size in pt of various paper formats
       <Sentence ID="109"></Sentence>
       <Sentence ID="111"></Sentence>
       <Sentence ID="112"></Sentence>
-      <Sentence ID="113">Overflow</Sentence>
+      <Sentence ID="113"></Sentence>
       <Sentence ID="114"></Sentence>
-      <Sentence ID="115"></Sentence>
+      <Sentence ID="115">Overflow</Sentence>
+      <Sentence ID="116"></Sentence>
       <Sentence ID="201">Order of rendering the object on the page</Sentence>
       <Sentence ID="202">Afficher ou cacher l'objet</Sentence>
       <Sentence ID="203">Niveau de superposition de l'objet par rapport aux autres</Sentence>
@@ -456,9 +473,10 @@ pageFormats list = [ // Size in pt of various paper formats
       <Sentence ID="209"></Sentence>
       <Sentence ID="211"></Sentence>
       <Sentence ID="212"></Sentence>
-      <Sentence ID="213">Overflow mode</Sentence>
+      <Sentence ID="213"></Sentence>
       <Sentence ID="214"></Sentence>
-      <Sentence ID="215"></Sentence>
+      <Sentence ID="215">Overflow mode</Sentence>
+      <Sentence ID="216"></Sentence>
       <Sentence ID="301">Valeur Incorrecte, doit être positive</Sentence>
       <Sentence ID="302">Valeur Incorrecte</Sentence>
       <Sentence ID="303">Valeur Incorrecte, doit être compris entre 0 et 99</Sentence>
@@ -470,9 +488,10 @@ pageFormats list = [ // Size in pt of various paper formats
       <Sentence ID="309"></Sentence>
       <Sentence ID="311"></Sentence>
       <Sentence ID="312"></Sentence>
-      <Sentence ID="313">Valeur Incorrecte</Sentence>
+      <Sentence ID="313"></Sentence>
       <Sentence ID="314"></Sentence>
-      <Sentence ID="315"></Sentence>
+      <Sentence ID="315">Valeur Incorrecte</Sentence>
+      <Sentence ID="316"></Sentence>
       <Sentence ID="401">Invisible</Sentence>
       <Sentence ID="402">Visible</Sentence>
       <Sentence ID="403"></Sentence>
@@ -481,17 +500,19 @@ pageFormats list = [ // Size in pt of various paper formats
       <Sentence ID="406"></Sentence>
       <Sentence ID="407"></Sentence>
       <Sentence ID="408"></Sentence>
-      <Sentence ID="409">Auto</Sentence>
-      <Sentence ID="411">Hidden</Sentence>
-      <Sentence ID="412">Scroll</Sentence>
-      <Sentence ID="413">Visible</Sentence>
-      <Sentence ID="414"></Sentence>
-      <Sentence ID="415"></Sentence>
-      <Sentence ID="502">Visibilité</Sentence>
-      <Sentence ID="503">Move the object to a new position</Sentence>
+      <Sentence ID="409"></Sentence>
+      <Sentence ID="411"></Sentence>
+      <Sentence ID="412">Auto</Sentence>
+      <Sentence ID="413">Hidden</Sentence>
+      <Sentence ID="414">Scroll</Sentence>
+      <Sentence ID="415">Visible</Sentence>
+      <Sentence ID="501">Visibilité</Sentence>
+      <Sentence ID="502">Move the object to a new position</Sentence>
+      <Sentence ID="503"></Sentence>
       <Sentence ID="504"></Sentence>
       <Sentence ID="505"></Sentence>
-      <Sentence ID="507">Show the object</Sentence>
+      <Sentence ID="506">Show the object</Sentence>
+      <Sentence ID="507"></Sentence>
       <Sentence ID="508"></Sentence>
       <Sentence ID="509"></Sentence>
       <Sentence ID="511"></Sentence>
@@ -500,30 +521,28 @@ pageFormats list = [ // Size in pt of various paper formats
       <Sentence ID="514"></Sentence>
       <Sentence ID="515"></Sentence>
       <Sentence ID="516"></Sentence>
-      <Sentence ID="517"></Sentence>
-      <Sentence ID="518"></Sentence>
+      <Sentence ID="601">Visibilité</Sentence>
       <Sentence ID="602">Visibilité</Sentence>
-      <Sentence ID="603">Visibilité</Sentence>
+      <Sentence ID="603"></Sentence>
       <Sentence ID="604"></Sentence>
       <Sentence ID="605"></Sentence>
-      <Sentence ID="607">Visibilité</Sentence>
-      <Sentence ID="608"></Sentence>
+      <Sentence ID="606">Visibilité</Sentence>
+      <Sentence ID="701">Valeur Incorrecte</Sentence>
       <Sentence ID="702">Valeur Incorrecte</Sentence>
       <Sentence ID="703">Valeur Incorrecte</Sentence>
       <Sentence ID="704">Valeur Incorrecte</Sentence>
       <Sentence ID="705">Valeur Incorrecte</Sentence>
-      <Sentence ID="706">Valeur Incorrecte</Sentence>
+      <Sentence ID="706"></Sentence>
       <Sentence ID="707"></Sentence>
-      <Sentence ID="708"></Sentence>
-      <Sentence ID="711">Valeur Incorrecte</Sentence>
-      <Sentence ID="802">Fade effect, time is indicated in milliseconds</Sentence>
-      <Sentence ID="803">X-coordinate of the new position relative to the left upper corner of the container</Sentence>
-      <Sentence ID="804">Y-coordinate of the new position relative to the left upper corner of the container</Sentence>
-      <Sentence ID="805">Visual effect of moving, time is indicated in milliseconds</Sentence>
-      <Sentence ID="806">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="708">Valeur Incorrecte</Sentence>
+      <Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="802">X-coordinate of the new position relative to the left upper corner of the container</Sentence>
+      <Sentence ID="803">Y-coordinate of the new position relative to the left upper corner of the container</Sentence>
+      <Sentence ID="804">Visual effect of moving, time is indicated in milliseconds</Sentence>
+      <Sentence ID="805">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="806"></Sentence>
       <Sentence ID="807"></Sentence>
-      <Sentence ID="808"></Sentence>
-      <Sentence ID="811">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="808">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="901">Gauche</Sentence>
       <Sentence ID="902">Haut</Sentence>
       <Sentence ID="903">Gauche</Sentence>
@@ -579,9 +598,6 @@ class VDOM_jspdf(VDOM_object):
 			debug_info = u"objtype='jspdf' objname='%s' ver='%s'" % (self.name, self.type.version)
 		else:
 			debug_info = u""
-			
-		page_format = "'%s'" % self.format if self.format != "parent" else "[html_data.offsetWidth, html_data.offsetHeight]"
-		
 		
 		js_code = """
 <script>
@@ -592,35 +608,58 @@ class VDOM_jspdf(VDOM_object):
 			units = '%(units)s',
 			hide_container = %(hide_container)s,
 			pdf_type = '%(object_id)s',
-			html_data = document.getElementById("%(container_id)s");
-
-		var pdf = new jsPDF(orientation, units, %(page_format)s);
+			page_format = '%(page_format)s',
+			html_data = %(html_data)s,
+			has_class = %(has_class)s;
+					
+		var pdf = new jsPDF(orientation, units, page_format);
 
 		var fake_body = document.createElement('body');
 
-		var coord_left = html_data.style.left,
-			coord_top = html_data.style.top,
-			zind = html_data.style.zIndex;
-		html_data.style.left = "0px";
-		html_data.style.top = "0px";
-		html_data.style.zIndex = "1000";
+		if (!has_class) {
 		
-		fake_body.appendChild(html_data);
-		document.body.appendChild(fake_body);
+			fake_body.innerHTML = html_data;
+			document.body.appendChild(fake_body);
+			
+			html2canvas(fake_body, {
+				canvas:pdf.canvas,
+				onrendered: function(canvas) {
+					if (hide_container) { fake_body.remove() };
+					
+					var iframe = document.getElementById(pdf_type);
+					iframe.src = pdf.output('datauristring');
+					
+				}
+			});
+			
+		} else {
+		
+			var coord_left = html_data.style.left,
+				coord_top = html_data.style.top,
+				zind = html_data.style.zIndex;
+			html_data.style.left = "0px";
+			html_data.style.top = "0px";
+			html_data.style.zIndex = "1000";
+		
+			fake_body.appendChild(html_data);
+			document.body.appendChild(fake_body);
 
-		html2canvas(fake_body, {
-			canvas:pdf.canvas,
-			onrendered: function(canvas) {
-				if (hide_container) { fake_body.remove() };
-				
-				var iframe = document.getElementById(pdf_type);
-				iframe.src = pdf.output('datauristring');
-				
-				html_data.style.left = coord_left;
-				html_data.style.top = coord_top;
-				html_data.style.zIndex = zind;
-			}
-		});
+			html2canvas(fake_body, {
+				canvas:pdf.canvas,
+				onrendered: function(canvas) {
+					if (hide_container) { fake_body.remove() };
+					
+					var iframe = document.getElementById(pdf_type);
+					iframe.src = pdf.output('datauristring');
+					
+					html_data.style.left = coord_left;
+					html_data.style.top = coord_top;
+					html_data.style.zIndex = zind;
+				}
+			});
+		}
+		
+		
     }
 </script>
 
@@ -629,12 +668,14 @@ class VDOM_jspdf(VDOM_object):
 		""" % {
 			"orientation": self.orientation,
 			"units": self.units,
-			"page_format": page_format,
+			"page_format": self.format,
 			"object_name": self.name,
 			"object_id": "i"+id,
-			"container_id": "o_"+self.container_id.replace('-', '_'),
+			"has_class": 'true' if self.container_class else 'false',
 			"hide_container": 'true' if self.hide_parent == "1" else 'false',
 			"id": id,
+			"html_data": "document.getElementByClassName('%s')" % self.container_class if self.container_class != '' else "`%s`" % self.htmlcode,
+			
 		}
 
 		return "<div %s id=\"%s\" %s style=\"%s%s\">%s</div>" % (debug_info, id, classname, style, display, js_code)
@@ -657,54 +698,54 @@ class VDOM_jspdf(VDOM_object):
   <E2vdom>
     <Events>
       <Userinterfaceevents>
-        <Event Name="click" Help="#Lang(508)">
+        <Event Name="click" Help="#Lang(507)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(901)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(902)"/>
           </Parameters>
         </Event>
-        <Event Name="ctrlclick" Help="#Lang(509)">
+        <Event Name="ctrlclick" Help="#Lang(508)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(903)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(904)"/>
           </Parameters>
         </Event>
-        <Event Name="custom" Help="#Lang(511)">
+        <Event Name="custom" Help="#Lang(509)">
           <Parameters>
             <Parameter Name="Parameters" Order="" VbType="" Help="#Lang(905)"/>
           </Parameters>
         </Event>
-        <Event Name="dblclick" Help="#Lang(512)">
+        <Event Name="dblclick" Help="#Lang(511)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(906)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(907)"/>
           </Parameters>
         </Event>
-        <Event Name="mousedown" Help="#Lang(513)">
+        <Event Name="mousedown" Help="#Lang(512)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(908)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(909)"/>
           </Parameters>
         </Event>
-        <Event Name="mousemove" Help="#Lang(514)">
+        <Event Name="mousemove" Help="#Lang(513)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(911)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(912)"/>
           </Parameters>
         </Event>
-        <Event Name="mouseout" Help="#Lang(515)">
+        <Event Name="mouseout" Help="#Lang(514)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(913)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(914)"/>
           </Parameters>
         </Event>
-        <Event Name="mouseover" Help="#Lang(516)">
+        <Event Name="mouseover" Help="#Lang(515)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(915)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(916)"/>
           </Parameters>
         </Event>
-        <Event Name="mouseup" Help="#Lang(517)">
+        <Event Name="mouseup" Help="#Lang(516)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(917)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(918)"/>
@@ -714,48 +755,48 @@ class VDOM_jspdf(VDOM_object):
     </Events>
     <Actions>
       <Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
-        <Action Help="#Lang(502)" InterfaceName="#Lang(602)" MethodName="hide">
+        <Action Help="#Lang(501)" InterfaceName="#Lang(601)" MethodName="hide">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(702)" ScriptName="fade" Help="#Lang(802)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(701)" ScriptName="fade" Help="#Lang(801)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[
 vdom_ui_hide(this.domCont, fade);
 					]]></SourceCode>
         </Action>
-        <Action Help="#Lang(503)" InterfaceName="#Lang(603)" MethodName="moveTo">
+        <Action Help="#Lang(502)" InterfaceName="#Lang(602)" MethodName="moveTo">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(703)" ScriptName="newX" Help="#Lang(803)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(704)" ScriptName="newY" Help="#Lang(804)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(705)" ScriptName="Effect" Help="#Lang(805)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(702)" ScriptName="newX" Help="#Lang(802)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(703)" ScriptName="newY" Help="#Lang(803)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(704)" ScriptName="Effect" Help="#Lang(804)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[
 vdom_ui_moveTo(this.domCont, newX, newY, Effect);
 					]]></SourceCode>
         </Action>
-        <Action Help="#Lang(504)" InterfaceName="#Lang(604)" MethodName="moveZindexTo">
+        <Action Help="#Lang(503)" InterfaceName="#Lang(603)" MethodName="moveZindexTo">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(706)" ScriptName="newZindex" Help="#Lang(806)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(705)" ScriptName="newZindex" Help="#Lang(805)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[
 this.domCont.style.zindex = parseInt(newZindex,10);
                     ]]></SourceCode>
         </Action>
-        <Action Help="#Lang(518)" InterfaceName="#Lang(608)" MethodName="render_pdf">
+        <Action Help="#Lang(504)" InterfaceName="#Lang(604)" MethodName="render_pdf">
           <Parameters/>
           <SourceCode><![CDATA[eval("pdfFromContainer_"+this.domCont.id+"()");]]></SourceCode>
         </Action>
         <Action Help="#Lang(505)" InterfaceName="#Lang(605)" MethodName="resizeTo">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(707)" ScriptName="width" Help="#Lang(807)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(708)" ScriptName="height" Help="#Lang(808)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(706)" ScriptName="width" Help="#Lang(806)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(707)" ScriptName="height" Help="#Lang(807)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[
 $q(this.domCont).width(parseInt(width,10)).height(parseInt(height,10));
                     ]]></SourceCode>
         </Action>
-        <Action Help="#Lang(507)" InterfaceName="#Lang(607)" MethodName="show">
+        <Action Help="#Lang(506)" InterfaceName="#Lang(606)" MethodName="show">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(711)" ScriptName="fade" Help="#Lang(811)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(708)" ScriptName="fade" Help="#Lang(808)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[
 vdom_ui_show(this.domCont, fade);
