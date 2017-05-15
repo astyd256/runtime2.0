@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.211.8477</Version>
+    <Version>1.217.8477</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer,dialog,container,tablecell</Containers>
@@ -121,6 +121,18 @@
       <ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
+    <Attribute>
+      <Name>locked</Name>
+      <DisplayName>#Lang(109)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(309)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(403)|1)|(#Lang(404)|0))</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(209)</ErrorValidationMessage>
+      <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+    </Attribute>
   </Attributes>
   <Languages>
     <Language Code="en_US">
@@ -135,6 +147,7 @@
       <Sentence ID="106">Width</Sentence>
       <Sentence ID="107">Height</Sentence>
       <Sentence ID="108">Content</Sentence>
+      <Sentence ID="109">Locked</Sentence>
       <Sentence ID="201">The order of rendering the object on the page. The objects with identical values of the Hierarchy attribute are rendered in the order they are written in the XML-file of the VDOM application.</Sentence>
       <Sentence ID="202">The visibility of the object. In any case the object will exist on the web page, this attribute only makes it invisible.</Sentence>
       <Sentence ID="203">The position in visual hierarchy of objects. If you have several objects in one container situated on each other, the value of 'Z-Index' attribute indicates the order of their displaying. The larger the value is, the upper the object is situated.</Sentence>
@@ -143,6 +156,7 @@
       <Sentence ID="206">The width of the object in pixels.</Sentence>
       <Sentence ID="207">The height of the object in pixels.</Sentence>
       <Sentence ID="208">The base-64 encoded file content (string)</Sentence>
+      <Sentence ID="209">Locked attribute validation error.</Sentence>
       <Sentence ID="301">Incorrect value, must be even positive integer</Sentence>
       <Sentence ID="302">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="303">Incorrect value, must be even positive integer</Sentence>
@@ -151,8 +165,11 @@
       <Sentence ID="306">Incorrect value, must be even positive integer</Sentence>
       <Sentence ID="307">Incorrect value, must be even positive integer</Sentence>
       <Sentence ID="308">Content atribute validation error. This attribute expects base-64 encoded string.</Sentence>
+      <Sentence ID="309">If locked editing is disabled.</Sentence>
       <Sentence ID="401">Yes</Sentence>
       <Sentence ID="402">No</Sentence>
+      <Sentence ID="403">Yes</Sentence>
+      <Sentence ID="404">No</Sentence>
       <Sentence ID="501">Hide the object.</Sentence>
       <Sentence ID="502">Load the data.</Sentence>
       <Sentence ID="503">Resize the object's width and height.</Sentence>
@@ -208,6 +225,7 @@
       <Sentence ID="106">Ширина</Sentence>
       <Sentence ID="107">Высота</Sentence>
       <Sentence ID="108">Content</Sentence>
+      <Sentence ID="109"></Sentence>
       <Sentence ID="201">Приоритет в потоке гипертекста</Sentence>
       <Sentence ID="202">Режим отображения объекта</Sentence>
       <Sentence ID="203">Положение в визуальной иерархии объектов</Sentence>
@@ -216,6 +234,7 @@
       <Sentence ID="206">Ширина объекта в пикселях</Sentence>
       <Sentence ID="207">Высота объекта в пикселях</Sentence>
       <Sentence ID="208">The base-64 encoded file content (string)</Sentence>
+      <Sentence ID="209"></Sentence>
       <Sentence ID="301">Неправильное значение, должно быть указано целое положительное число</Sentence>
       <Sentence ID="302">Неправильное значение, должен быть указан 0 или 1</Sentence>
       <Sentence ID="303">Неправильное значение, должно быть указано целое положительное число</Sentence>
@@ -224,8 +243,11 @@
       <Sentence ID="306">Неправильное значение, должно быть указано целое положительное число</Sentence>
       <Sentence ID="307">Неправильное значение, должно быть указано целое положительное число</Sentence>
       <Sentence ID="308">Content atribute validation error. This attribute expects base-64 encoded string.</Sentence>
+      <Sentence ID="309"></Sentence>
       <Sentence ID="401">Да</Sentence>
       <Sentence ID="402">Нет</Sentence>
+      <Sentence ID="403"></Sentence>
+      <Sentence ID="404"></Sentence>
       <Sentence ID="501">Отображение</Sentence>
       <Sentence ID="502">Загрузка данных</Sentence>
       <Sentence ID="503">Изменить размеры объекта</Sentence>
@@ -281,6 +303,7 @@
       <Sentence ID="106">Largeur</Sentence>
       <Sentence ID="107">Hauteur</Sentence>
       <Sentence ID="108">Content</Sentence>
+      <Sentence ID="109"></Sentence>
       <Sentence ID="201">Hiérarchie de l'objet, ordre de chargement de l'objet par rapport aux autres</Sentence>
       <Sentence ID="202">Show or not object</Sentence>
       <Sentence ID="203">Niveau de superposition de l'objet par rapport aux autres</Sentence>
@@ -289,6 +312,7 @@
       <Sentence ID="206">Largeur de l'objet en pixels</Sentence>
       <Sentence ID="207">Hauteur de l'objet en pixels</Sentence>
       <Sentence ID="208">The base-64 encoded file content (string)</Sentence>
+      <Sentence ID="209"></Sentence>
       <Sentence ID="301">Valeur Incorrecte, doit être positive</Sentence>
       <Sentence ID="302">Valeur Incorrecte, doit être 0 ou 1</Sentence>
       <Sentence ID="303">Valeur Incorrecte, doit être positive</Sentence>
@@ -297,8 +321,11 @@
       <Sentence ID="306">Valeur Incorrecte, doit être positive</Sentence>
       <Sentence ID="307">Valeur Incorrecte, doit être positive</Sentence>
       <Sentence ID="308">Content atribute validation error. This attribute expects base-64 encoded string.</Sentence>
+      <Sentence ID="309"></Sentence>
       <Sentence ID="401">Oui</Sentence>
       <Sentence ID="402">Non</Sentence>
+      <Sentence ID="403"></Sentence>
+      <Sentence ID="404"></Sentence>
       <Sentence ID="501">Visibilité</Sentence>
       <Sentence ID="502">Load Data</Sentence>
       <Sentence ID="503">Change size of the object</Sentence>
@@ -402,6 +429,7 @@
                     excelIo.open(createBlobFromBase64(b64data), function (json) {
                             var workbookObj = json;
                             spread.fromJSON(workbookObj);
+                            spread.sheets.forEach(function(sht, i, arr){ sht.options.isProtected = %(locked)s; })
                         }, function (e) {
                             console.log(e);
                     });
@@ -413,7 +441,8 @@
             </script>
         """ % dict(
             id=id,
-            spreadsheet_content=self.content
+            spreadsheet_content=self.content,
+            locked='true' if self.locked == "1" else 'false'
         )
         
         return result
