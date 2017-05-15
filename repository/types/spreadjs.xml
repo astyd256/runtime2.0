@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.210.8477</Version>
+    <Version>1.211.8477</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer,dialog,container,tablecell</Containers>
@@ -377,6 +377,7 @@
       
         result += """
         <script>
+        	GC.Spread.Sheets.LicenseKey = "E756258162462741#A03V2csFmZ0IiczRmI1pjIs9WQisnOiQkIsISP3cGU7VWaytGazEDRnl4M0FlVqdjeBFnVwMDZihEcFd4MYRkdlRHRkFDMxgla4QTUy2GNjVTU4ZGbkhjQwBjZS9EdBpFZZFkeupkb0p5ZGJ5VTdkZB5mWiojITJCLzMDM4MDM6ITN0IicfJye35XX3JSMHBTQiojIDJCLiATMuYHITpEIkFWZyB7UiojIOJyebpjIkJHUiwiIzIjMxgDMgITM5AzNxAjMiojI4J7QiwiIxEjNwcTMwIjI0ICc8VkIsICevJWbvRmdiojIh94QiwSZ5JHd0ICb6VkIsISM4cjM6QjM6EDO5IjN5cjI0ICZcJjL";
             $(document).ready(function () {
                 var link = document.createElement('link');
                 link.type = "text/css";
@@ -394,7 +395,7 @@
                         return new Blob([byteArray], {type: 'application/octet-stream'});
                     }
 
-                    var b64data = "%(spreadsheet_content)s";
+                    var b64data = "%(spreadsheet_content)s";                    
                     
                     var spread = new GC.Spread.Sheets.Workbook(document.getElementById("%(id)s"));
                     var excelIo = new GC.Spread.Excel.IO();
