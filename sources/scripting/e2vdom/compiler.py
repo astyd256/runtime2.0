@@ -103,7 +103,7 @@ def compile_registations(container, parent, dynamic):
                     target="\"server\"" if callee.is_action else "\"{object_name}:{name}({parameters})\"".format(
                         object_name=OBJECT_NAME % callee.target_object.id.replace("-", "_"),
                         name=callee.name,
-                        parameters=", ".join((value.replace('"', r'\"') for value in callee.parameters.itervalues())))))
+                        parameters=", ".join((value.replace('"', r'\"') for value in map(lambda x:x.encode("utf8"), callee.parameters.itervalues()))))))
         object_id4code = object.id.replace("-", "_")
         lines.append(DEFINE_OBJECT.format(
             object_name=OBJECT_NAME % object_id4code,
