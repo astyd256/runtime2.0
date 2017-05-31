@@ -28,7 +28,7 @@ EMPTY_STRING = string("")
 VALUE_STRING = string("value")
 TYPE_STRING = string("type")
 
-SPLIT_REGEX_TEMPLATE = "%(open)s(=?[^%(open)s^%(close)s]*)%(close)s"
+SPLIT_REGEX_TEMPLATE = "%(open)s(\=?.*?)%(close)s"
 DEFAULT_DELIMITERS = "{", "}"
 DEFAULT_SPLIT_REGEX = re.compile(
     SPLIT_REGEX_TEMPLATE % {"open": re.escape(DEFAULT_DELIMITERS[0]), "close": re.escape(DEFAULT_DELIMITERS[1])},
