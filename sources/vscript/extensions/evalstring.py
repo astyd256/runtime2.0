@@ -56,7 +56,7 @@ class IntTransformer(ast.NodeTransformer):
             keywords=[],
             starargs=None,
             kwargs=None,
-            args=[ast.Str(node.s, lineno=0, col_offset=0)]),
+            args=[ast.Str(node.s.decode("utf8"), lineno=0, col_offset=0)]),
             node)
 
     def visit_Name(self, node):
