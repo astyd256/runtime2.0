@@ -731,7 +731,7 @@
 					state_circle = state_circle)
 					
 		result = \
-			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
+			u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
 							top="{top}" left="{left}" width="{width}" height="{height}">
 					{circle}
 					{label}
@@ -740,7 +740,7 @@
 			""".format(
 					id = self.id, vis = self.visible, zind = self.zindex, 
 					hierarchy = self.hierarchy, order = self.order, 
-					top = self.top, left = self.left, 
+					top = self.top, left = self.left, name = self.name,
 					width = self.width, height = self.height,
 					label = label, 
 					circle = circle, 

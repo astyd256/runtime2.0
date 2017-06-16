@@ -1334,7 +1334,7 @@ class VDOM_button(VDOM_object):
             outer_height = int(self.height)
             
             result = \
-                u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+                u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
                         top="{top}" left="{left}" width="{out_wid}" height="{out_hei}">
                         <svg>
                             <image href="#Res({img_id})" x="0" y="0" width="{out_wid}" height="{out_hei}"/>
@@ -1345,8 +1345,7 @@ class VDOM_button(VDOM_object):
                         id = self.id, vis = self.visible, zind = self.zindex,
                         hierarchy = self.hierarchy, order = self.order,
                         top = self.top, left = self.left, out_wid = outer_width, out_hei = outer_height,
-                        img_id = image_id, 
-                        contents = contents)
+                        img_id = image_id, name = self.name, contents = contents)
                         
             return VDOM_object.wysiwyg(self, contents=result)
         
@@ -1355,7 +1354,7 @@ class VDOM_button(VDOM_object):
         
         if self.image: 
             result = \
-                u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+                u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
                             top="{top}" left="{left}" width="{width}" height="{height}">
                         <svg>
                             <image href="#Res({image})" x="0" y="0" width="{width}" height="{height}"/>
@@ -1369,13 +1368,14 @@ class VDOM_button(VDOM_object):
                         hierarchy = self.hierarchy, order = self.order,
                         top = self.top, left = self.left, width = width, height = height,
                         image = self.finalimage, contents = contents,
-                        rleft = bw/2, rtop = bw/2, rwid = int(self.width)-bw, rhei = int(self.height)-bw, bord = border_string)
+                        rleft = bw/2, rtop = bw/2, rwid = int(self.width)-bw, rhei = int(self.height)-bw, bord = border_string,
+                        name = self.name)
         else:
             fontsize = u"""fontsize="%s" """ % self.fontsize if self.fontsize else u""
             label = u"<![CDATA[%s%s]>" % (self.text, "]")
                     
             result = \
-                u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
+                u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
                             top="{top}" left="{left}" width="{width}" height="{height}">
                         <svg>
                             <rect x="{rec_left}" y="{rec_top}" width="{rec_wid}" height="{rec_hei}" fill="#FFFFFF" {bord}/>
@@ -1396,7 +1396,7 @@ class VDOM_button(VDOM_object):
                         align = self.align, color = self.color, fstyle = self.fontstyle, 
                         txt_decor = self.textdecoration,
                         fweight = self.fontweight, ffamily = self.fontfamily.replace('"', '').replace("'", ''),
-                        fsize = fontsize, label = label, contents = contents)
+                        fsize = fontsize, label = label, contents = contents, name = self.name)
         return VDOM_object.wysiwyg(self, contents=result)
 
 # def set_attr(app_id, object_id, param):

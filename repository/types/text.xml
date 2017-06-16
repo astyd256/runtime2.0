@@ -936,7 +936,7 @@ class VDOM_text(VDOM_object):
         editable="value,color,fontfamily,fontsize,fontstyle,fontweight,align,textdecoration"
 
         result=\
-            u"""<container id="{id}" visible="{visible}" zindex="{zindex}" hierarchy="{hierarchy}" order="{order}" top="{top}" left="{left}" width="{width}">
+            u"""<container name="{name}" id="{id}" visible="{visible}" zindex="{zindex}" hierarchy="{hierarchy}" order="{order}" top="{top}" left="{left}" width="{width}">
                 {empty_value}
                 <text top="{textTop}" left="{textLeft}" width="{width}" color="#{color}" fontstyle="{fontstyle}" fontweight="{fontweight}" fontfamily="{fontfamily}"
                 {fontsize} textalign="{align}" textdecoration="{textdecoration}" editable="{editable}">{value}</text>
@@ -962,7 +962,8 @@ class VDOM_text(VDOM_object):
                 editable = editable,
                 value = value,
                 contents = contents,
-                empty_value = empty_value
+                empty_value = empty_value,
+                name = self.name
             )
 
         #print result

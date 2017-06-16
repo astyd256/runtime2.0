@@ -4136,7 +4136,7 @@ class VDOM_xmldialog(VDOM_object):
         title = title.replace('"','&quot;')
 
         result= \
-            u"""<container id="{id}" hierarchy="{hierarchy}" order="{order}" 
+            u"""<container name="{name}" id="{id}" hierarchy="{hierarchy}" order="{order}" 
                             top="{top}" left="{left}" width="{width}" height="{height}" overflow="visible">
                     <svg>
                         <rect x="0" y="0" rx="7" ry="5" width="{width}" height="{height}" fill="#eeeeee"/>
@@ -4165,7 +4165,8 @@ class VDOM_xmldialog(VDOM_object):
                 content_height=dialog_height-40,
                 content_width=dialog_width-20,
                 xmldata=html,
-                dlg_title=title
+                dlg_title=title,
+                name=self.name
             )
 
         return VDOM_object.wysiwyg(self, contents=result)

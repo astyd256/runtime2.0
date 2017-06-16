@@ -525,7 +525,7 @@ class VDOM_uploader(VDOM_object):
 	def wysiwyg(self, contents=""):
 
 		result = \
-			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+			u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
 						top="{top}" left="{left}" width="{width}" height="{height}">
 					<svg>
 						<rect x="{r1_left}" y="{r1_top}" width="{r1_wid}" height="{r1_hei}" fill="#FFFFFF" stroke="#000000"/>
@@ -536,7 +536,7 @@ class VDOM_uploader(VDOM_object):
 				</container>
 			""".format(
 					id = self.id, vis = self.visible, zind = self.zindex,
-					hierarchy = self.hierarchy, order = self.order,
+					hierarchy = self.hierarchy, order = self.order, name = self.name,
 					top = self.top, left = self.left, width = self.width, height = self.height,
 					r1_left = 0, r1_top = 0, r1_wid = int(self.width) - 87, r1_hei = int(self.height) - 1,
 					r2_left = int(self.width) - 80 , r2_top = 0, r2_wid = 79, r2_hei = int(self.height) - 1,

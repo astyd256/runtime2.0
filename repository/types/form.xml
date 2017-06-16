@@ -840,13 +840,13 @@ $j(function(){
 		overflow_num = self.overflow if self.overflow else "0"
 		overflow = overflow_dict[overflow_num]
 			
-		result = u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
+		result = u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
 							top="{top}" left="{left}" width="{width}" height="{height}" overflow="{overflow}">
 						<svg>
 							<rect x="0" y="0" width="{width}" height="{height}" fill="#EEEEEE" fill-opacity=".4" />
 						</svg>{contents}
 					</container>
-				""".format(id = self.id, vis = self.visible, zind = self.zindex, 
+				""".format(id = self.id, vis = self.visible, zind = self.zindex, name = self.name,
 				hierarchy = self.hierarchy, order = self.order, 
 				top = self.top, left = self.left, width = self.width, height = self.height, 
 				contents = contents,

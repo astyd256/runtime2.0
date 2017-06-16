@@ -914,7 +914,7 @@ $j(function(){
 					res_buffer.write(li)
 
 		result = \
-			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}"
+			u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}"
 					top="{top}" left="{left}" width="{width}" height="{height}">
 					<table zindex="{zind}" top="0" left="0" width="{width}" height="{height}" backgroundcolor="#f0f0f0" bordercolor="#000000" borderwidth="0" >
 						{res_buffer}
@@ -922,7 +922,7 @@ $j(function(){
 				</container>
 			""".format(
 				id = self.id, vis = self.visible, zind = self.zindex,
-				hierarchy = self.hierarchy,
+				hierarchy = self.hierarchy, name = self.name,
 				top = self.top, left = self.left, 
 				width = self.width, height = self.height,
 				res_buffer = res_buffer.getvalue())
