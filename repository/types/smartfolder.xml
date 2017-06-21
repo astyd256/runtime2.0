@@ -2039,10 +2039,10 @@ $j(function(){
 
 
 	def wysiwyg(self, contents=""):
-		from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
+		import utils.wysiwyg
 		
 		image_id = "24e377d1-e9e2-f6ff-bb5a-16e4230f3b50"
-		result = get_empty_wysiwyg_value(self, image_id)
+		result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
 		
 		return VDOM_object.wysiwyg(self, contents=result)
 
@@ -2078,7 +2078,7 @@ def on_update(object, attributes):
 		# if param["skin"]["value"] == "1":
 		if attributes["skin"] == "1":
 			# o.set_attributes({"style": css})
-			o.attributes.update(style=css)
+			attributes.update(style=css)
 		# # elif param["skin"]["value"] == "2":
 		# elif attributes["skin"] == "2":
 		# #	o.set_attributes({"style": eof_style})
@@ -2086,7 +2086,7 @@ def on_update(object, attributes):
 	# if "style" in param and param["style"]["value"] and o.attributes.style != css:
 	if "style" in attributes and attributes["style"] and o.attributes["style"] != css:
 		# o.set_attributes({"skin": 0})
-		o.attributes.update(skin=0)
+		attributes.update(skin="0")
 
 	return ""]]>
 	</SourceCode>

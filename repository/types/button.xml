@@ -957,33 +957,6 @@ There are the following ways of displaying the Button object: if the &apos;Text&
 		</Language>
 	</Languages>
 	<Resources>
-		<Resource ID="6daf7b4e-dd06-09f5-77b2-086810f23c2d" Type="png" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
-			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
-			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
-			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
-			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
-			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
-			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
-			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
-			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
-			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
-			PSJ4bXAuaWlkOjlGODJDNzY0MUZFNDExRTFBQkYxRTFCMEM2OTZEQThGIiB4bXBNTTpEb2N1bWVu
-			dElEPSJ4bXAuZGlkOjlGODJDNzY1MUZFNDExRTFBQkYxRTFCMEM2OTZEQThGIj4gPHhtcE1NOkRl
-			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OUY4MkM3NjIxRkU0MTFFMUFCRjFF
-			MUIwQzY5NkRBOEYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OUY4MkM3NjMxRkU0MTFFMUFC
-			RjFFMUIwQzY5NkRBOEYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
-			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz4PmyjaAAAB9ElEQVR42pxSz0tUURT+7n33vSfz3kBOG4dg
-			wk0uFLNNU6ugHyC4yJUISoHO3+AmAjFo4S5ykYKLghBcRZtgIFoERUI7w52DhMzT1yKauY5O6nTP
-			ufNmXm1CD3zcc88953zfPfeKX7WftwAsGlzH2Wyj2WzOCdOgajZ9OIfF8X6kqLjR0Ih/RDg8bJyp
-			Qbn8ro8aoFr9juOTYw5WKjt4/OjJX4n9/ZcxU3rAKyA68b39PUhybLFgCGETgiCD12urmDWF1PT5
-			sxd8lgaVcINuMM1rYzdu2tlqfQAppYHowuQowYmyLcwEU12kdLDx5Sv798fHeJ8Q8uqYBkTrON0D
-			2fa11piceMj+8PAQRq5dhVLKKrNchswhQsEHBMexIAvDAG/ermN5ZQnb2xUszD/F0dFvuK5r4MFV
-			HhNzA9p4rm9AB25nBp7no1AoIJ/Po17X+La5Bd/r4bjn93ADJc39KZBMlbrb64DjURQxstkQxWKR
-			C4EWE7Bymqzv+/ZSpMa1Cmq1Ou7eHmV/YOAKpqenkMvlbFp75KyAr8CsVsHg4BA+ff7YmXQST14p
-			Uad1HaRenbZaRoqbevtuYpotbfT1338o8/OrOI52X75auZT6P/+1RFyYze7K3gsXS0EYRO2fzIcW
-			4h8//VsFMpkwundntPRHgAEAG9V3sqCZqpIAAAAASUVORK5CYII=
-		</Resource>
 		<Resource ID="26d5aa07-90ad-c85e-dfd9-0868741ba029" Type="jpg" Name="Icon">
 			/9j/4AAQSkZJRgABAgEASABIAAD/7QUaUGhvdG9zaG9wIDMuMAA4QklNA+0AAAAAABAASAAAAAEA
 			AQBIAAAAAQABOEJJTQQNAAAAAAAEAAAAeDhCSU0D8wAAAAAACAAAAAAAAAAAOEJJTQQKAAAAAAAB
@@ -1046,6 +1019,33 @@ There are the following ways of displaying the Button object: if the &apos;Text&
 			ISbgnCrmAn0AdtRWB2wdgo3cJprJnIElkEVxt1FD1malnEpNvo/mXY2tilUXjZFq7h3soSrARaJd
 			JtkwVAEgXUSJ6DKi3EyJuf8AXNdwDYMYyTGNhzbY9T1PY81uWXZ9Ss9y65Qt2ts3OW67Q0LBt1G8
 			JCrA1agsZ0+dGTbt01FlCEH/2Q==
+		</Resource>
+		<Resource ID="6daf7b4e-dd06-09f5-77b2-086810f23c2d" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjlGODJDNzY0MUZFNDExRTFBQkYxRTFCMEM2OTZEQThGIiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjlGODJDNzY1MUZFNDExRTFBQkYxRTFCMEM2OTZEQThGIj4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OUY4MkM3NjIxRkU0MTFFMUFCRjFF
+			MUIwQzY5NkRBOEYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OUY4MkM3NjMxRkU0MTFFMUFC
+			RjFFMUIwQzY5NkRBOEYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz4PmyjaAAAB9ElEQVR42pxSz0tUURT+7n33vSfz3kBOG4dg
+			wk0uFLNNU6ugHyC4yJUISoHO3+AmAjFo4S5ykYKLghBcRZtgIFoERUI7w52DhMzT1yKauY5O6nTP
+			ufNmXm1CD3zcc88953zfPfeKX7WftwAsGlzH2Wyj2WzOCdOgajZ9OIfF8X6kqLjR0Ih/RDg8bJyp
+			Qbn8ro8aoFr9juOTYw5WKjt4/OjJX4n9/ZcxU3rAKyA68b39PUhybLFgCGETgiCD12urmDWF1PT5
+			sxd8lgaVcINuMM1rYzdu2tlqfQAppYHowuQowYmyLcwEU12kdLDx5Sv798fHeJ8Q8uqYBkTrON0D
+			2fa11piceMj+8PAQRq5dhVLKKrNchswhQsEHBMexIAvDAG/ermN5ZQnb2xUszD/F0dFvuK5r4MFV
+			HhNzA9p4rm9AB25nBp7no1AoIJ/Po17X+La5Bd/r4bjn93ADJc39KZBMlbrb64DjURQxstkQxWKR
+			C4EWE7Bymqzv+/ZSpMa1Cmq1Ou7eHmV/YOAKpqenkMvlbFp75KyAr8CsVsHg4BA+ff7YmXQST14p
+			Uad1HaRenbZaRoqbevtuYpotbfT1338o8/OrOI52X75auZT6P/+1RFyYze7K3gsXS0EYRO2fzIcW
+			4h8//VsFMpkwundntPRHgAEAG9V3sqCZqpIAAAAASUVORK5CYII=
 		</Resource>
 		<Resource ID="c016ef5e-c636-586d-9841-f3ff499831aa" Type="png" Name="button_v2_bg">
 			iVBORw0KGgoAAAANSUhEUgAAAAIAAAAaCAIAAAASURqFAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
@@ -1112,8 +1112,7 @@ There are the following ways of displaying the Button object: if the &apos;Text&
 		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[
-from scripting.legacy.id import id2link1
+<![CDATA[from scripting.legacy.id import id2link1
 import StringIO
 
 
@@ -1334,7 +1333,7 @@ class VDOM_button(VDOM_object):
             outer_height = int(self.height)
             
             result = \
-                u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+                u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
                         top="{top}" left="{left}" width="{out_wid}" height="{out_hei}">
                         <svg>
                             <image href="#Res({img_id})" x="0" y="0" width="{out_wid}" height="{out_hei}"/>
@@ -1345,7 +1344,8 @@ class VDOM_button(VDOM_object):
                         id = self.id, vis = self.visible, zind = self.zindex,
                         hierarchy = self.hierarchy, order = self.order,
                         top = self.top, left = self.left, out_wid = outer_width, out_hei = outer_height,
-                        img_id = image_id, name = self.name, contents = contents)
+                        img_id = image_id, 
+                        contents = contents)
                         
             return VDOM_object.wysiwyg(self, contents=result)
         
@@ -1354,7 +1354,7 @@ class VDOM_button(VDOM_object):
         
         if self.image: 
             result = \
-                u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+                u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
                             top="{top}" left="{left}" width="{width}" height="{height}">
                         <svg>
                             <image href="#Res({image})" x="0" y="0" width="{width}" height="{height}"/>
@@ -1368,14 +1368,13 @@ class VDOM_button(VDOM_object):
                         hierarchy = self.hierarchy, order = self.order,
                         top = self.top, left = self.left, width = width, height = height,
                         image = self.finalimage, contents = contents,
-                        rleft = bw/2, rtop = bw/2, rwid = int(self.width)-bw, rhei = int(self.height)-bw, bord = border_string,
-                        name = self.name)
+                        rleft = bw/2, rtop = bw/2, rwid = int(self.width)-bw, rhei = int(self.height)-bw, bord = border_string)
         else:
             fontsize = u"""fontsize="%s" """ % self.fontsize if self.fontsize else u""
             label = u"<![CDATA[%s%s]>" % (self.text, "]")
                     
             result = \
-                u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
+                u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
                             top="{top}" left="{left}" width="{width}" height="{height}">
                         <svg>
                             <rect x="{rec_left}" y="{rec_top}" width="{rec_wid}" height="{rec_hei}" fill="#FFFFFF" {bord}/>
@@ -1396,8 +1395,9 @@ class VDOM_button(VDOM_object):
                         align = self.align, color = self.color, fstyle = self.fontstyle, 
                         txt_decor = self.textdecoration,
                         fweight = self.fontweight, ffamily = self.fontfamily.replace('"', '').replace("'", ''),
-                        fsize = fontsize, label = label, contents = contents, name = self.name)
+                        fsize = fontsize, label = label, contents = contents)
         return VDOM_object.wysiwyg(self, contents=result)
+
 
 # def set_attr(app_id, object_id, param):
 def on_update(object, attributes):
@@ -1410,7 +1410,7 @@ def on_update(object, attributes):
         ro = application.resources.get(res_id)
         if not ro:
             return "Resource not found"
-        
+
         # get image resource, obtain width and height and set width and height of the object
         from PIL import Image
         import cStringIO
@@ -1420,10 +1420,11 @@ def on_update(object, attributes):
         im = Image.open(s)
         width, height = im.size
         # set attributes
-        if o.attributes.width != width or o.attributes.height != height:
-            # o.set_attributes({"width": width, "height": height})
-            o.attributes.update(width=width, height=height)
-    
+        # if o.attributes.width != width or o.attributes.height != height:
+        #     o.set_attributes({"width": width, "height": height})
+        if o.attributes["width"] != width or o.attributes["height"] != height:
+            attributes.update(width=str(width), height=str(height))
+
     pro_suite = """#%(id)s {height: 33px !important}
 #%(id)s a {
  text-align:center !important;
@@ -1481,10 +1482,7 @@ color: #999 !important;
     #     o.set_attributes({"skin": 0})
     if "style" in attributes and attributes["style"] and o.attributes.style != pro_suite:        
         o.attributes.update(skin=0)
-    return ""
-
-    
-]]>
+    return ""]]>
 	</SourceCode>
 	<E2VDOM>
 		<Events>

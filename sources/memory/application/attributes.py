@@ -120,10 +120,7 @@ class MemoryAttributes(MemoryAttributesSketch):
                 value = DEREFERENCE_REGEX.sub(lambda match: match.group(1), value)
 
                 if current_value != value:
-                    if self._attributes[name].verify(value):
-                        updates[name] = value
-                    else:
-                        raise ValueError(u"Unacceptable value for \"%s\" attribute: \"%s\"" % (name, value.replace('"', '\"')))
+                    updates[name] = value
 
             if updates:
                 managers.dispatcher.dispatch_handler(self._owner, "on_update", updates)
@@ -132,6 +129,9 @@ class MemoryAttributes(MemoryAttributesSketch):
                     for name, value in updates.iteritems():
                         if not isinstance(value, basestring):
                             value = str(value)
+
+                        if not self._attributes[name].verify(value):
+                            raise ValueError(u"Unacceptable value for \"%s\" attribute: \"%s\"" % (name, value.replace('"', '\"')))
 
                         self._query.add(name)
 
