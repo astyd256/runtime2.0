@@ -2039,10 +2039,10 @@ $j(function(){
 
 
 	def wysiwyg(self, contents=""):
-		import utils.wysiwyg
+		from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
 		
 		image_id = "24e377d1-e9e2-f6ff-bb5a-16e4230f3b50"
-		result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
+		result = get_empty_wysiwyg_value(self, image_id)
 		
 		return VDOM_object.wysiwyg(self, contents=result)
 

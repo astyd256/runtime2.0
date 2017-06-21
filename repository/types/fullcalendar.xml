@@ -4496,10 +4496,10 @@ class VDOM_fullcalendar(VDOM_object):
 
 
 	def wysiwyg(self, contents=""):
-		import utils.wysiwyg
+		from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
 		
 		image_id = "70817b3b-d42d-4273-2b06-16afdd3a785d"
-		result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
+		result = get_empty_wysiwyg_value(self, image_id)
 		
 		return VDOM_object.wysiwyg(self, contents=result)]]>
 	</SourceCode>

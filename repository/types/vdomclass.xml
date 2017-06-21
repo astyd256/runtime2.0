@@ -548,13 +548,13 @@
 
             return VDOM_object.wysiwyg(self, contents=result)
 
-        result = u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order} top="{top}" left="{left}" width="{width}" height="{height}">
+        result = u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order} top="{top}" left="{left}" width="{width}" height="{height}">
 <svg>
     <rect x="0" y="0" width="{width}" height="{height}" fill="#EEEEEE" />
 </svg>
 {contents}
 </container>""".format(
-                id=self.id, vis=self.visible,
+                id=self.id, vis=self.visible, name = self.name,
                 zind=self.zindex, hierarchy=self.hierarchy, order=self.order,
                 top=self.top, left=self.left,
                 width=self.width, height=self.height,

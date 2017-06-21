@@ -830,7 +830,7 @@ $j(document).ready(function(){
 				style = style)
 			
 		result = \
-			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
+			u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
 						top="{top}" left="{left}" width="{width}" height="{height}" >
 					<htmltext top="0" left="0" width="{width}" height="{height}" overflow="hidden" blendMode="normal">
 						{text}
@@ -839,7 +839,7 @@ $j(document).ready(function(){
 			""".format(
 					id = self.id, vis = self.visible, zind = self.zindex, 
 					hierarchy = self.hierarchy, order = self.order, 
-					top = self.top, left = self.left, 
+					top = self.top, left = self.left, name = self.name,
 					width = self.width, height = self.height,
 					text = text)
 				

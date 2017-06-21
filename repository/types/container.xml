@@ -1132,7 +1132,7 @@ class VDOM_container(VDOM_object):
         overflow = overflow_dict[overflow_num]
         
         result = \
-            u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+            u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
                     top="{top}" left="{left}" width="{width}" height="{height}" overflow="{overflow}">
                     <svg>
                         <rect x="0" y="0" width="{width}" height="{height}" fill="{colorValue}"/>
@@ -1141,7 +1141,7 @@ class VDOM_container(VDOM_object):
                         {title_text}
                     </svg>{contents}
                 </container>""".format(
-                    id = self.id, vis = self.visible, zind = self.zindex,
+                    id = self.id, vis = self.visible, zind = self.zindex, name = self.name,
                     hierarchy = self.hierarchy, order = self.order, colorValue = colorValue,
                     top = self.top, left = self.left, width = self.width, height = self.height,
                     contents = contents,
