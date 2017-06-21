@@ -83,7 +83,7 @@ class Dispatcher(object):
             try:
                 return handler(_object_, *arguments, **keywords)
             except:
-                show_exception_trace("Unhandled exception in %s %s handler" % (_object_.type, _name_))
+                show_exception_trace(caption="Unhandled exception in %s %s handler" % (_object_.type, _name_))
 
     # Underscores are used to avoid name conflicts with keywords
     def dispatch_remote_method(self, _object_, _name_, *arguments, **keywords):

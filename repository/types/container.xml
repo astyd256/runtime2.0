@@ -815,6 +815,37 @@
 		</Language>
 	</Languages>
 	<Resources>
+		<Resource ID="64fbbc3b-bd0a-1a81-b46c-0877bd36ba83" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjBBOEUxMzBCMUZEOTExRTE5NDIwREM0NzcwMjhCQzM3IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjBBOEUxMzBDMUZEOTExRTE5NDIwREM0NzcwMjhCQzM3Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MEE4RTEzMDkxRkQ5MTFFMTk0MjBE
+			QzQ3NzAyOEJDMzciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MEE4RTEzMEExRkQ5MTFFMTk0
+			MjBEQzQ3NzAyOEJDMzciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz4I+dp6AAACwUlEQVR42lRTTWtTQRQ9M2/SJI00tCAlKEhA
+			7FLcu3Yn4kbERXGnqKD4A/wDLkSk4M6FCF2460YodFE0C4UupFatLbWYxib1xb68l7yP+fLOxCq9
+			YTIzb+6ce+65d1j52YqFtYAJYGhmhrYMgKY/RmsoMMbAeADrfwYsCMA5g9UFBHlhtl5yV7wtXxYQ
+			fMKvtdWoinxuoPqntvs7K1uH7xFmHaRqgNffn2I/zqywVpKrOLqPwuTExPi1i2xt1hoWvWpU9GqF
+			yayxyvNwZhkHhxkH352/6EemYmQ6gSSgEyK+HsqDmU66Ve3Jd7dSOpOmgANxvsAE+N9g/yyWfTjH
+			XCesl/981U4+oR2vIyy6C7kesTGDsVluCIDrYwCD/ABDGaGwnYXt+AvfTD6gnX5DWvR5ZD++UJSy
+			PYrKhEueHwPI9BCSDcq7w73bO6MNYtRGbPtUEOv0ngf2Hgg0Dr2zyiCYovyvBhS6RZw0UR9ilMd5
+			mHa5lhwlM4u6maHimf+RyVYbDdhHL134MjwLFvgxKEL0Rjs4zLteC0Viasr77tIldv/5hdIRAJug
+			UtsqhCuFi4wSdY20uNe8qWGzgEJj7cpjVmk2cabSuMZP1hfTXoSHd3gWyqyeBoF0OXGfm8kAmdBM
+			Q/0KQJXAaJ9wNbg2PDg9vViaazJUapSxrYr2jzUY6kgKLMZtG9FlApQFgY5on9PHBCohwOXWuegg
+			YsHXTYw+byDvdVFofdZI8qfYwnUbZEibAc35mA1oCAUVRYhmpzaDt6vGTJa5Gg6QZRmoHZesIvUZ
+			MeCOgQrHA8TAtbYiIK2giQE5mnj4+3wQ2xad1kitN0Vt8oYD8Ck4IUCPw6k4foakrqjCvVCT5w4A
+			yfTMOh1M+Q4kXZw2XgNXvMqTFSejv8ucnq7W9KQRwIN4L+fIyrDCdS3zftSEBC7xR4ABAMHAsG4f
+			U+pGAAAAAElFTkSuQmCC
+		</Resource>
 		<Resource ID="8c8c753c-f1e4-07bb-e5bf-08771d63f502" Type="png" Name="Icon">
 			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
@@ -971,41 +1002,9 @@
 			jM1j5beSkAfHAPHoQulEc840TKEYogH6TnzGh5fMCURftDf6vUk67XX+L8AAlyWLC7FWnnsAAAAA
 			SUVORK5CYII=
 		</Resource>
-		<Resource ID="64fbbc3b-bd0a-1a81-b46c-0877bd36ba83" Type="png" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
-			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
-			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
-			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
-			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
-			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
-			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
-			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
-			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
-			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
-			PSJ4bXAuaWlkOjBBOEUxMzBCMUZEOTExRTE5NDIwREM0NzcwMjhCQzM3IiB4bXBNTTpEb2N1bWVu
-			dElEPSJ4bXAuZGlkOjBBOEUxMzBDMUZEOTExRTE5NDIwREM0NzcwMjhCQzM3Ij4gPHhtcE1NOkRl
-			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MEE4RTEzMDkxRkQ5MTFFMTk0MjBE
-			QzQ3NzAyOEJDMzciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MEE4RTEzMEExRkQ5MTFFMTk0
-			MjBEQzQ3NzAyOEJDMzciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
-			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz4I+dp6AAACwUlEQVR42lRTTWtTQRQ9M2/SJI00tCAlKEhA
-			7FLcu3Yn4kbERXGnqKD4A/wDLkSk4M6FCF2460YodFE0C4UupFatLbWYxib1xb68l7yP+fLOxCq9
-			YTIzb+6ce+65d1j52YqFtYAJYGhmhrYMgKY/RmsoMMbAeADrfwYsCMA5g9UFBHlhtl5yV7wtXxYQ
-			fMKvtdWoinxuoPqntvs7K1uH7xFmHaRqgNffn2I/zqywVpKrOLqPwuTExPi1i2xt1hoWvWpU9GqF
-			yayxyvNwZhkHhxkH352/6EemYmQ6gSSgEyK+HsqDmU66Ve3Jd7dSOpOmgANxvsAE+N9g/yyWfTjH
-			XCesl/981U4+oR2vIyy6C7kesTGDsVluCIDrYwCD/ABDGaGwnYXt+AvfTD6gnX5DWvR5ZD++UJSy
-			PYrKhEueHwPI9BCSDcq7w73bO6MNYtRGbPtUEOv0ngf2Hgg0Dr2zyiCYovyvBhS6RZw0UR9ilMd5
-			mHa5lhwlM4u6maHimf+RyVYbDdhHL134MjwLFvgxKEL0Rjs4zLteC0Viasr77tIldv/5hdIRAJug
-			UtsqhCuFi4wSdY20uNe8qWGzgEJj7cpjVmk2cabSuMZP1hfTXoSHd3gWyqyeBoF0OXGfm8kAmdBM
-			Q/0KQJXAaJ9wNbg2PDg9vViaazJUapSxrYr2jzUY6kgKLMZtG9FlApQFgY5on9PHBCohwOXWuegg
-			YsHXTYw+byDvdVFofdZI8qfYwnUbZEibAc35mA1oCAUVRYhmpzaDt6vGTJa5Gg6QZRmoHZesIvUZ
-			MeCOgQrHA8TAtbYiIK2giQE5mnj4+3wQ2xad1kitN0Vt8oYD8Ck4IUCPw6k4foakrqjCvVCT5w4A
-			yfTMOh1M+Q4kXZw2XgNXvMqTFSejv8ucnq7W9KQRwIN4L+fIyrDCdS3zftSEBC7xR4ABAMHAsG4f
-			U+pGAAAAAElFTkSuQmCC
-		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[
-from scripting import e2vdom
+<![CDATA[from scripting import e2vdom
 from scripting.legacy.id import id2link1
 
 
@@ -1133,7 +1132,7 @@ class VDOM_container(VDOM_object):
         overflow = overflow_dict[overflow_num]
         
         result = \
-            u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+            u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
                     top="{top}" left="{left}" width="{width}" height="{height}" overflow="{overflow}">
                     <svg>
                         <rect x="0" y="0" width="{width}" height="{height}" fill="{colorValue}"/>
@@ -1142,7 +1141,7 @@ class VDOM_container(VDOM_object):
                         {title_text}
                     </svg>{contents}
                 </container>""".format(
-                    id = self.id, vis = self.visible, zind = self.zindex, name = self.name,
+                    id = self.id, vis = self.visible, zind = self.zindex,
                     hierarchy = self.hierarchy, order = self.order, colorValue = colorValue,
                     top = self.top, left = self.left, width = self.width, height = self.height,
                     contents = contents,
@@ -1160,13 +1159,12 @@ def on_update(object, attributes):
     # object = application.objects.search(object_id)
 
     if object.parent and object.parent.type.class_name == "VDOM_tabview" and object.attributes.lockposition == "1" and int(object.attributes.top) != 20 and int(object.attributes.left) != 1:
-        top_container = 20
-        left_container = 1
+        # top_container = 20
+        # left_container = 1
         # object.set_attributes({"left": left_container, "top": top_container})
-        object.attributes.update(left=left_container, top=top_container)
+        attributes.update(left="1", top="20")
 
-    return ""
-]]>
+    return ""]]>
 	</SourceCode>
 	<E2VDOM>
 		<Events>
@@ -1300,6 +1298,11 @@ $j(this.domCont).css('opacity', nn);]]>
 <![CDATA[this.domCont.style.zindex = parseInt(newZindex,10);]]>
 					</SourceCode>
 				</Action>
+				<Action Name="startResizeX" DisplayName="#Lang(613)" Description="#Lang(513)">
+					<SourceCode>
+<![CDATA[vdom_ui_startResizeX(this.domCont);]]>
+					</SourceCode>
+				</Action>
 				<Action Name="moveTo" DisplayName="#Lang(606)" Description="#Lang(506)">
 					<Parameters>
 						<Parameter Name="newX" DisplayName="#Lang(705)" Description="#Lang(805)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
@@ -1313,14 +1316,6 @@ $j(this.domCont).css('opacity', nn);]]>
 				<Action Name="dragStart" DisplayName="#Lang(603)" Description="#Lang(503)">
 					<SourceCode>
 <![CDATA[vdom_ui_dragStart(this.domCont);]]>
-					</SourceCode>
-				</Action>
-				<Action Name="goTo" DisplayName="#Lang(616)" Description="#Lang(516)">
-					<Parameters>
-						<Parameter Name="url" DisplayName="#Lang(715)" Description="#Lang(815)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
-					</Parameters>
-					<SourceCode>
-<![CDATA[document.location.href=url; return false;]]>
 					</SourceCode>
 				</Action>
 				<Action Name="dragStop" DisplayName="#Lang(604)" Description="#Lang(504)">
@@ -1347,17 +1342,20 @@ $j(this.domCont).css('opacity', nn);]]>
 <![CDATA[vdom_ui_startResizeY(this.domCont);]]>
 					</SourceCode>
 				</Action>
-				<Action Name="startResizeX" DisplayName="#Lang(613)" Description="#Lang(513)">
-					<SourceCode>
-<![CDATA[vdom_ui_startResizeX(this.domCont);]]>
-					</SourceCode>
-				</Action>
 				<Action Name="setClass" DisplayName="#Lang(609)" Description="#Lang(509)">
 					<Parameters>
 						<Parameter Name="cssClass" DisplayName="#Lang(712)" Description="#Lang(812)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
 					<SourceCode>
 <![CDATA[$j(this.domCont).attr('class', cssClass);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="goTo" DisplayName="#Lang(616)" Description="#Lang(516)">
+					<Parameters>
+						<Parameter Name="url" DisplayName="#Lang(715)" Description="#Lang(815)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[document.location.href=url; return false;]]>
 					</SourceCode>
 				</Action>
 			</Container>

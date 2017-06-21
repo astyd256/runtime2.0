@@ -1382,7 +1382,7 @@ $j('#%(id)s tr').draggable({
 
 		# collect result
 		result = \
-			u"""<container name="{name}" id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" top="{top}" left="{left}" width="{width}" height="{height}">
+			u"""<container id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" top="{top}" left="{left}" width="{width}" height="{height}">
 					<table zindex="{zindex}" top="0" left="0" width="{width}" height="{height}" backgroundcolor="#f0f0f0" bordercolor="#000000" borderwidth="1" >
 						<row backgroundcolor="#f0f0f0" bordercolor="#000000" borderwidth="1">
 							{theader}
@@ -1399,8 +1399,7 @@ $j('#%(id)s tr').draggable({
 					width = self.width, height = self.height,
 					theader = theader,
 					tdata = tdata,
-					contents = contents,
-					name = self.name)
+					contents = contents)
 
 		return VDOM_object.wysiwyg(self, contents=result)
 
@@ -1587,13 +1586,13 @@ def on_update(object, attributes):
 	# 	o.set_attributes({"skin": 0})
 	if "skin" in attributes:
 		if attributes["skin"] == "1":
-			o.attributes.update(skin=css)
+			attributes.update(skin=css)
 		elif attributes["skin"] == "2":
-			o.attributes.update(skin=eof_style)
+			attributes.update(skin=eof_style)
 		elif attributes["skin"] == "3":
-			o.attributes.update(skin=pro_suite)
+			attributes.update(skin=pro_suite)
 	if "style" in attributes and attributes["style"] and o.attributes.style != css and o.attributes.style != eof_style and o.attributes.style != pro_suite:
-		o.attributes.update(skin=0)
+		attributes.update(skin="0")
 
 	return ""]]>
 	</SourceCode>
