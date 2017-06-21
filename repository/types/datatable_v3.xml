@@ -1382,7 +1382,7 @@ $j('#%(id)s tr').draggable({
 
 		# collect result
 		result = \
-			u"""<container id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" top="{top}" left="{left}" width="{width}" height="{height}">
+			u"""<container name="{name}" id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" top="{top}" left="{left}" width="{width}" height="{height}">
 					<table zindex="{zindex}" top="0" left="0" width="{width}" height="{height}" backgroundcolor="#f0f0f0" bordercolor="#000000" borderwidth="1" >
 						<row backgroundcolor="#f0f0f0" bordercolor="#000000" borderwidth="1">
 							{theader}
@@ -1399,7 +1399,8 @@ $j('#%(id)s tr').draggable({
 					width = self.width, height = self.height,
 					theader = theader,
 					tdata = tdata,
-					contents = contents)
+					contents = contents,
+					name = self.name)
 
 		return VDOM_object.wysiwyg(self, contents=result)
 

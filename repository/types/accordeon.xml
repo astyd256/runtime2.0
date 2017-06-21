@@ -636,7 +636,7 @@ $q(function(){
 		else:	
 			
 			result = \
-				u"""<container id="{id}" visible="{visible}" zindex="{zindex}" hierarchy="{hierarchy}" 
+				u"""<container name="{name}" id="{id}" visible="{visible}" zindex="{zindex}" hierarchy="{hierarchy}" 
 						order="{order}" top="{top}" left="{left}" width="{width}" height="{height}">
 						<svg>
 							<rect x="0" y="0" width="{width}" height="{height}" fill="#EEEEEE"/>
@@ -649,7 +649,7 @@ $q(function(){
 						order = self.order, 
 						top = self.top, left = self.left, 
 						width = self.width, height = self.height,
-						contents = contents)
+						contents = contents, name = self.name)
 
 		return VDOM_object.wysiwyg(self, contents=result)
 

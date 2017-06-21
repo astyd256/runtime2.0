@@ -676,7 +676,7 @@ class VDOM_hypertext(VDOM_object):
         html_wys = re.sub("</script>", "</pre>" ,self.htmlcode)
 
         result = \
-            u"""<container id="{id}" visible="{visible}" zindex="{zindex}" hierarchy="{hierarchy}"
+            u"""<container name="{name}" id="{id}" visible="{visible}" zindex="{zindex}" hierarchy="{hierarchy}"
                         order="{order}" top="{top}" left="{left}" width="{width}" height="{height}">
                     <htmltext top="0" left="0" width="{width}" height="{height}" locked="true" overflow="{overflow}">
                         {html_data}
@@ -692,7 +692,8 @@ class VDOM_hypertext(VDOM_object):
                         width = self.width,
                         height = self.height,
                         html_data = "<![CDATA"+"["+ html_wys +"]"+"]>",
-                        overflow = overflow)
+                        overflow = overflow,
+                        name = self.name)
 
         return VDOM_object.wysiwyg(self, contents=result)
 

@@ -1,4 +1,4 @@
-    #!/usr/bin/python
+#!/usr/bin/python
 
 import startup.server
 import settings

@@ -65,13 +65,16 @@ class MIME_VDOM(MIMENonMultipart):
 		_encoder(self)
 		
 class MailAttachment(object):
-	def __init__(self, data=None, filename="", content_type="application", content_subtype="octet-stream", _encoder=encoders.encode_base64, **_params):
+	def __init__(self, data=None, filename="", content_type="application", content_subtype="octet-stream", _encoder=encoders.encode_base64, contentid=None,inline_disposition=False, **_params):
 		self.data = data
 		self.filename = filename
 		self.content_type = content_type
 		self.content_subtype = content_subtype
+		self.inline_disposition = inline_disposition
 		self.encoder = _encoder
 		self.__params = _params
+		self.content_id = contentid
+		
 		
 	@classmethod
 	def fromtuple(self, t):
@@ -86,8 +89,13 @@ class MailAttachment(object):
 	def as_mime(self):
 		attach = MIME_VDOM(self.data, self.content_type,self.content_subtype,self.encoder,**self.__params)
 		if self.filename:
-			attach.add_header('content-disposition', 'attachment', filename=self.filename)
+			if self.inline_disposition:
+				attach.add_header('content-disposition', 'inline', filename=self.filename)
+			else:
+				attach.add_header('content-disposition', 'attachment', filename=self.filename)
 			attach.add_header('content-location', self.filename)
+		if self.content_id:
+			attach.add_header('Content-ID', self.content_id)
 		return attach
 
 conn = threading.local()
@@ -150,9 +158,10 @@ class Message(object):
 		self.content_type = "text/html"
 		self.content_charset = "utf-8"
 		self.content_params = {}
+		self.multipart_subtype = 'mixed'
 		self.ttl = 50
 		self.priority = "normal"
-		convertmap = {"id":"id","sender":"sender","from":"from_email", "to":"to_email", "subj":"subject", "msg":"body", "attach": "attach","ttl":"ttl","reply":"reply_to", "headers":"headers", "no_multipart": "nomultipart", "content_type":"content_type", "content_charset":"content_charset", "content_params":"content_params"}
+		convertmap = {"id":"id","sender":"sender","from":"from_email", "to":"to_email", "subj":"subject", "msg":"body", "attach": "attach","ttl":"ttl","reply":"reply_to", "headers":"headers", "no_multipart": "nomultipart", "content_type":"content_type", "content_charset":"content_charset", "content_params":"content_params","multipart_subtype":"multipart_subtype"}
 		for key,value in kw.iteritems():
 			if key in convertmap:
 				if key=="attach":
@@ -196,7 +205,7 @@ class Message(object):
 			#	msg.set_type("text/html")
 			#	msg.set_charset("utf-8")
 		else:
-			msg = MIMEMultipart()
+			msg = MIMEMultipart(_subtype=self.multipart_subtype)
 			msgbody = self.body
 			if  msgbody:
 				if isinstance(msgbody, unicode):

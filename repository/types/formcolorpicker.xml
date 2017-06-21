@@ -944,7 +944,7 @@ class VDOM_formcolorpicker(VDOM_object):
 			stroke = input_stroke)
 
 		result = \
-			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+			u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
 						top="{top}" left="{left}" width="{width}" height="{height}" >
 					<svg>
 						{rect_input}
@@ -957,7 +957,7 @@ class VDOM_formcolorpicker(VDOM_object):
 					hierarchy = self.hierarchy, order = self.order,
 					top = self.top, left = self.left,
 					width = self.width, height = self.height,
-					color = self.value,
+					color = self.value, name = self.name,
 					btn_x = btn_x, btn_y = btn_y,
 					btn_width = btn_width,
 					btn_height = btn_height,

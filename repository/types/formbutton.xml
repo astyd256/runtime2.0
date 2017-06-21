@@ -739,7 +739,7 @@ class VDOM_formbutton(VDOM_object):
 	def wysiwyg(self, contents=""):
 		label = u"<![CDATA[%s%s]>" % (self.label, "]")
 		result = \
-			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+			u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
 					top="{top}" left="{left}" width="{width}" height="{height}">
 					<svg>
 						<rect x="0" y="0" width="{rec_wid}" height="{rec_hei}" fill="#CCCCCC" stroke="#000000"/>
@@ -747,7 +747,7 @@ class VDOM_formbutton(VDOM_object):
 					<text top="{txt_top}" width="{txt_wid}" color="#000000" textalign="center">{label}</text>{contents}
 				</container>
 			""".format(
-					id = self.id, vis = self.visible, zind = self.zindex, 
+					id = self.id, vis = self.visible, zind = self.zindex, name = self.name, 
 					hierarchy = self.hierarchy, order = self.order, 
 					top = self.top, left = self.left, width = self.width, height = self.height,
 					rec_wid = int(self.width)-1, rec_hei = int(self.height)-1,

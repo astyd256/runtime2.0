@@ -581,7 +581,7 @@ class VDOM_Sensitive(VDOM_object):
 
 
 		result=\
-			u"""<container id="{id}" visible="{visible}" zindex="{zindex}" hierarchy="{hierarchy}" order="{order}"
+			u"""<container name="{name}" id="{id}" visible="{visible}" zindex="{zindex}" hierarchy="{hierarchy}" order="{order}"
 						top="{top}" left="{left}" width="{width}" height="{height}">
 					<svg>
 						<rect x="{x}" y="{y}" width="{rect_width}" height="{rect_height}" fill="#EEEEEE" fill-opacity=".4" {stroke}/>
@@ -603,7 +603,8 @@ class VDOM_Sensitive(VDOM_object):
 					rect_width = int(self.width) - bw,
 					rect_height = int(self.height) - bw,
 					stroke = s,
-					contents = contents)
+					contents = contents,
+					name = self.name)
 
 		return VDOM_object.wysiwyg(self, contents=result)
 

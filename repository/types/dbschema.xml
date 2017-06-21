@@ -343,7 +343,7 @@ class VDOM_dbschema(VDOM_object):
 		return VDOM_object.render(self, contents=contents)
 
 	def wysiwyg(self, contents=""):
-		result="<container id=\"%s\" visible=\"%s\" hierarchy=\"%s\" >%s</container>"%(self.id, self.visible, self.hierarchy, contents)
+		result="<container name=\"%s\" id=\"%s\" visible=\"%s\" hierarchy=\"%s\" >%s</container>"%(self.name, self.id, self.visible, self.hierarchy, contents)
 		return VDOM_object.wysiwyg(self, contents=result)
 
 

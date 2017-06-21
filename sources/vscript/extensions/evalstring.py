@@ -28,7 +28,7 @@ EMPTY_STRING = string("")
 VALUE_STRING = string("value")
 TYPE_STRING = string("type")
 
-SPLIT_REGEX_TEMPLATE = "%(open)s(=?[^%(open)s^%(close)s]*)%(close)s"
+SPLIT_REGEX_TEMPLATE = "%(open)s(\=?.*?)%(close)s"
 DEFAULT_DELIMITERS = "{", "}"
 DEFAULT_SPLIT_REGEX = re.compile(
     SPLIT_REGEX_TEMPLATE % {"open": re.escape(DEFAULT_DELIMITERS[0]), "close": re.escape(DEFAULT_DELIMITERS[1])},
@@ -56,7 +56,7 @@ class IntTransformer(ast.NodeTransformer):
             keywords=[],
             starargs=None,
             kwargs=None,
-            args=[ast.Str(node.s, lineno=0, col_offset=0)]),
+            args=[ast.Str(node.s.decode("utf8"), lineno=0, col_offset=0)]),
             node)
 
     def visit_Name(self, node):

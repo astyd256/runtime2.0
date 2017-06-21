@@ -17,7 +17,7 @@ DEFAULT_RENDER_CONTAINER = "2330fe83-8cd6-4ed5-907d-11874e7ebcf4"
 
 
 DEFINE_ENGINE_AND_DISPATCHER = \
-    "if(typeof {engine_name}!=='undefined'){{" \
+    u"if(typeof {engine_name}!=='undefined'){{" \
         "{engine_name}.stop();" \
         "delete {engine_name};" \
     "}}\n" \
@@ -27,44 +27,44 @@ DEFINE_ENGINE_AND_DISPATCHER = \
     "{dispatcher_name}=new VDOM_EventDispatcher();\n" \
     "{engine_name}=new VDOM_EventEngine({dispatcher_name}, EventQueue);"\
     "\n"
-ADD_DISPATCH_EVENT = "{dispatcher_name}.addDispatchEvent({source}, {target});"
+ADD_DISPATCH_EVENT = u"{dispatcher_name}.addDispatchEvent({source}, {target});"
 
 DEFINE_CLASS = \
-    "function {class_name}(id, eventEngine){{\n" \
+    u"function {class_name}(id, eventEngine){{\n" \
         "this.Base=VDOM_Object;\n" \
         "this.Base(id, eventEngine);\n" \
         "{extra}" \
     "}};" \
     "{class_name}.prototype=new VDOM_Object;"
 
-DEFINE_CLASS_REGISTERATION = "this.registerEvents([{events}]);"
+DEFINE_CLASS_REGISTERATION = u"this.registerEvents([{events}]);"
 DEFINE_CLASS_ACTION = \
-    "{class_name}.prototype.{name}=function({parameters}){{" \
+    u"{class_name}.prototype.{name}=function({parameters}){{" \
         "{source}" \
     "}}"
 DEFINE_BUBBLE_EVENT = \
-    "{object_name}.bubbleEvent=function(e){{" \
+    u"{object_name}.bubbleEvent=function(e){{" \
         "{object_name}.riseEvent('tfrEvent', e.parameters, {parent_engine_name});" \
     "}};"
 
-DEFINE_OBJECT = "{object_name}=new {prefix}{class_name}(\"{element_name}\", {engine_name});"
+DEFINE_OBJECT = u"{object_name}=new {prefix}{class_name}(\"{element_name}\", {engine_name});"
 
-DEFINE_EVENT_QUEUE = "if(typeof EventQueue === 'undefined')EventQueue=new VDOM_EventQueue;"
-DEFINE_WINDOW_EVENT_QUEUE = "if(typeof window.EventQueue === 'undefined')window.EventQueue=new VDOM_EventQueue;"
+DEFINE_EVENT_QUEUE = u"if(typeof EventQueue === 'undefined')EventQueue=new VDOM_EventQueue;"
+DEFINE_WINDOW_EVENT_QUEUE = u"if(typeof window.EventQueue === 'undefined')window.EventQueue=new VDOM_EventQueue;"
 
-START_ENGINE = "{engine_name}.start();"
+START_ENGINE = u"{engine_name}.start();"
 
-INIT_OPEN = "function initE2VDOM(){\n"
-INIT_CLOSE = "};\ninitE2VDOM();"
+INIT_OPEN = u"function initE2VDOM(){\n"
+INIT_CLOSE = u"};\ninitE2VDOM();"
 
-WINDOW_OPEN = "(function(window, $){"
-WINDOW_CLOSE = "})(window, jQuery);"
+WINDOW_OPEN = u"(function(window, $){"
+WINDOW_CLOSE = u"})(window, jQuery);"
 
-DYNAMIC_OPEN = "if (!('{class_name}' in window)){{"
-DYNAMIC_CLOSE = "window.{class_name} = {class_name};}}"
+DYNAMIC_OPEN = u"if (!('{class_name}' in window)){{"
+DYNAMIC_CLOSE = u"window.{class_name} = {class_name};}}"
 
-ON_READY_OPEN = ";jQuery(document).ready(function($){"
-ON_READY_CLOSE = "});"
+ON_READY_OPEN = u";jQuery(document).ready(function($){"
+ON_READY_CLOSE = u"});"
 
 
 def compile_registations(container, parent, dynamic):
@@ -97,10 +97,10 @@ def compile_registations(container, parent, dynamic):
             for callee in event.callees:
                 lines.append(ADD_DISPATCH_EVENT.format(
                     dispatcher_name=dispatcher_name,
-                    source="\"{element_name}:{name}\"".format(
+                    source=u"\"{element_name}:{name}\"".format(
                         element_name=ELEMENT_NAME % event.source_object.id.replace("-", "_"),
                         name=event.name),
-                    target="\"server\"" if callee.is_action else "\"{object_name}:{name}({parameters})\"".format(
+                    target="\"server\"" if callee.is_action else u"\"{object_name}:{name}({parameters})\"".format(
                         object_name=OBJECT_NAME % callee.target_object.id.replace("-", "_"),
                         name=callee.name,
                         parameters=", ".join((value.replace('"', r'\"') for value in callee.parameters.itervalues())))))

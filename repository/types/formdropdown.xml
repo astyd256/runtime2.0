@@ -793,7 +793,7 @@ class VDOM_formdropdown(VDOM_object):
 	def wysiwyg(self, contents=""):
 
 		result = \
-			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
+			u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
 						top="{top}" left="{left}" width="{width}" height="{height}">
 					<svg>
 						<rect y="{out_top}" x="{out_left}" width="{out_wid}" height="{out_hei}" fill="#FFFFFF" stroke="#000000"/>
@@ -803,7 +803,7 @@ class VDOM_formdropdown(VDOM_object):
 						<polygon fill="black" stroke="#000000" points="{xa},{ya} {xb},{yb} {xc},{yc}"/>
 					</svg>
 				</container>
-			""".format(id = self.id, vis = self.visible, zind = self.zindex, 
+			""".format(id = self.id, vis = self.visible, zind = self.zindex, name = self.name,
 					hierarchy = self.hierarchy, order = self.order, 
 					top = self.top, left = self.left, width = self.width, height = self.height,
 					out_top = 0, out_left = 0, out_wid = int(self.width)-1, out_hei = int(self.height)-1, 

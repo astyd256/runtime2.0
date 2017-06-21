@@ -2574,7 +2574,7 @@ jQuery(document).ready(function($){
           top = int(self.height)-20, width=self.width)
       
       result = \
-        u"""<container id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" top="{top}" left="{left}"
+        u"""<container name="{name}" id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" top="{top}" left="{left}"
             width="{width}" height="{height}" backgroundcolor="#f0f0f0">
             <svg>
               <image x="{image_x}" y="{image_y}" href="#Res({image_id})" width="{image_width}" height="{image_height}"/>
@@ -2582,7 +2582,7 @@ jQuery(document).ready(function($){
             {text_tag}
           </container>
         """.format(
-            id = self.id, zindex = self.zindex, hierarchy = self.hierarchy,
+            id = self.id, zindex = self.zindex, hierarchy = self.hierarchy, name = self.name,
             top = self.top, left = self.left, width = self.width, height = self.height,
             image_x = image_x, image_y = image_y,
             image_id = image_id,
@@ -2599,14 +2599,14 @@ jQuery(document).ready(function($){
     html_data = self.__parse_tree_data()
 
     result = \
-      u"""<container id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" 
+      u"""<container name="{name}" id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" 
             order="{order}" top="{top}" left="{left}" width="{width}" height="{height}">
           <htmltext left="2" top="2" width="{html_width}" height="{html_height}">
             {html_data}
           </htmltext>
         </container>
       """.format(
-          id = self.id, zindex = self.zindex, 
+          id = self.id, zindex = self.zindex, name = self.name,
           hierarchy = self.hierarchy, order = self.order, 
           top = self.top, left = self.left, 
           width = self.width, height = self.height,

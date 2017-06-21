@@ -5295,7 +5295,7 @@
 		text_height = int(self.height) - 2
 
 		result = \
-			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+			u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
 					top="{top}" left="{left}" width="{width}" height="{height}" 
 					backgroundcolor="#ffffff" bordercolor="#cccccc">
 					<svg>
@@ -5312,7 +5312,7 @@
 					width = self.width, height = self.height,
 					text_width = text_width, text_height = text_height,
 					line_y_end = 1+int(self.height)-2,
-					value = self.value,
+					value = self.value, name = self.name,
 					lines = self.get_lines_text(self.value, text_height))
 
 		return VDOM_object.wysiwyg(self, contents=result)]]>

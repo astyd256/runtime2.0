@@ -47,10 +47,9 @@ class VDOM_request:
 		#parse request data depenging on the request method
 		if arguments["method"] == "post":
 			try:
-
 				# TODO: check situation with SOAP and SOAP-POST-URL
-				if self.environment().environment()["REQUEST_URI"] != VDOM_CONFIG["SOAP-POST-URL"]:
-				# if True:
+				# if self.environment().environment()["REQUEST_URI"] != VDOM_CONFIG["SOAP-POST-URL"]:
+				if True:
 					storage = MFSt(handler.rfile, headers, "", self.__environment.environment(), True)
 					for key in storage.keys():
 						#Access to file name after uploading
@@ -62,8 +61,8 @@ class VDOM_request:
 							args[key] = storage.getlist(key)
 						if filename:
 							args[key+"_filename"] = [filename]
-				else:
-					self.postdata = handler.rfile.read(int(self.__headers.header("Content-length")))
+				# else:
+				# 	self.postdata = handler.rfile.read(int(self.__headers.header("Content-length")))
 			except Exception as e: 
 				debug("Error while reading socket: %s"%e)
 				
@@ -83,7 +82,7 @@ class VDOM_request:
 		sid = ""
 		if "sid" in args:
 			#debug("Got session from arguments "+str(args["sid"]))
-			sid = args["sid"]
+			sid = args["sid"][0]
 		elif "sid" in self.__cookies:
 			#debug("Got session from cookies "+cookies["sid"].value)
 			sid = self.__cookies["sid"].value
@@ -97,7 +96,9 @@ class VDOM_request:
 				sid = managers.session_manager.create_session()
 		#debug("Session ID "+str(sid))
 		self.__cookies["sid"] = sid
-		self.__response_cookies["sid"] = sid
+
+		if sid not in args.get('sid', []):
+			self.__response_cookies["sid"] = sid
 		args["sid"] = sid
 		self.__session = managers.session_manager[sid]
 		self.__arguments = VDOM_request_arguments(args)

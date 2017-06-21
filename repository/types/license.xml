@@ -413,7 +413,7 @@ class VDOM_license(VDOM_object):
 		return self.licensetext or ""
 
 	def wysiwyg(self, contents=""):
-		result="<container id=\"%s\" visible=\"%s\" zindex=\"%s\" hierarchy=\"%s\" order=\"%s\"><svg>%s</svg></container>"%(self.id, self.visible, self.zindex, self.hierarchy, self.order,contents)
+		result="<container name=\"%s\" id=\"%s\" visible=\"%s\" zindex=\"%s\" hierarchy=\"%s\" order=\"%s\"><svg>%s</svg></container>"%(self.name, self.id, self.visible, self.zindex, self.hierarchy, self.order,contents)
 		return VDOM_object.wysiwyg(self, contents=result)
 
 	def check_license(self,license_type=None):

@@ -9560,8 +9560,8 @@ class VDOM_htmlcontainer(VDOM_object):
         return VDOM_object.render(self, contents=result)
 
     def wysiwyg(self, contents=""):
-        result = "<container id=\"%s\" visible=\"%s\" zindex=\"%s\" hierarchy=\"%s\" order=\"%s\" backgroundcolor=\"#%s\" backgroundimage=\"%s\" backgroundrepeat=\"%s\" >%s</container>" % (
-            self.id, self.visible, self.zindex, self.hierarchy, self.order, self.bgcolor, self.image, self.bgrepeat, contents)
+        result = "<container name=\"%s\" id=\"%s\" visible=\"%s\" zindex=\"%s\" hierarchy=\"%s\" order=\"%s\" backgroundcolor=\"#%s\" backgroundimage=\"%s\" backgroundrepeat=\"%s\" >%s</container>" % (
+            self.name, self.id, self.visible, self.zindex, self.hierarchy, self.order, self.bgcolor, self.image, self.bgrepeat, contents)
         return VDOM_object.wysiwyg(self, contents=result)]]>
 	</SourceCode>
 	<E2VDOM>

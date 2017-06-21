@@ -28,7 +28,7 @@ def get_empty_wysiwyg_value(type, image_id, alpha=1):
     image_x, image_y, image_width, image_height = get_centered_image_metrics(image_width, image_height, int(type.width), int(type.height))
 
     result = \
-        u"""<container id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" top="{top}" left="{left}" width="{width}" height="{height}" backgroundcolor="#f0f0f0" bordercolor="#000000" alpha="{alpha}">
+        u"""<container name="{name}" id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" top="{top}" left="{left}" width="{width}" height="{height}" backgroundcolor="#f0f0f0" bordercolor="#000000" alpha="{alpha}">
   <svg>
     <image x="{image_x}" y="{image_y}" href="#Res({image_id})" width="{image_width}" height="{image_height}"/>
   </svg>
@@ -45,6 +45,7 @@ def get_empty_wysiwyg_value(type, image_id, alpha=1):
       image_id=image_id,
       image_width=image_width,
       image_height=image_height,
-      alpha=alpha)
+      alpha=alpha,
+      name=type.name)
 
     return result

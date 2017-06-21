@@ -384,7 +384,7 @@ class VDOM_formradiogroup(VDOM_object):
 			
 			return VDOM_object.wysiwyg(self, contents=result)
 			
-		result = u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
+		result = u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
 							top="{top}" left="{left}" width="{width}" height="{height}">
 						<svg>
 							<rect top="0" left="0" width="{rec_wid}" height="{rec_hei}" fill="#EEEEEE" stroke="#000000"/>
@@ -392,7 +392,7 @@ class VDOM_formradiogroup(VDOM_object):
 						{contents}
 					</container>""".format(id = self.id, vis = self.visible, zind = self.zindex, 
 									hierarchy = self.hierarchy, order = self.order, 
-									top = self.top, left = self.left, 
+									top = self.top, left = self.left, name = self.name,
 									width = self.width, height = self.height, 
 									rec_wid = int(self.width) - 1, rec_hei = int(self.height) - 1,
 									contents = contents)
