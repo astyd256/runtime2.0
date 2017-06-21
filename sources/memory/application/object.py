@@ -121,12 +121,11 @@ class MemoryObjectSketch(MemoryBase):
         restore = self._restore
         self.__class__ = MemoryObject
         self._collection.on_complete(self, restore)
-
-        if self.id is None:
-            raise Exception(u"Object require identifier")
-        if self.name is None:
-            raise Exception(u"Object require name")
-
+        if not restore:
+            managers.dispatcher.dispatch_handler(self, "on_create")
+            if self._parent and self._virtual == self._parent.virtual:
+                self._parent.invalidate(upward=True)
+            self.autosave()
         return self
 
     def __str__(self):
@@ -148,7 +147,6 @@ class MemoryObjectDuplicationSketch(MemoryObjectSketch):
         super(MemoryObjectDuplicationSketch, self).__init__(collection,
             another.type, application, parent,
             virtual=parent.virtual, attributes=another.attributes)
-        self._objects += another.objects
 
 
 class MemoryObject(MemoryObjectSketch):
@@ -168,8 +166,9 @@ class MemoryObject(MemoryObjectSketch):
             raise Exception("Invalid name: %r" % value)
 
         with self.lock:
+            self._collection.on_rename(self, value)
             managers.dispatcher.dispatch_handler(self, "on_rename", value)
-            self._name = self._collection.on_rename(self, value)
+            self._name = value
             self.invalidate(upward=True)
             self.autosave()
 

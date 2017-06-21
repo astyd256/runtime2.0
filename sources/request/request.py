@@ -47,9 +47,10 @@ class VDOM_request:
 		#parse request data depenging on the request method
 		if arguments["method"] == "post":
 			try:
+
 				# TODO: check situation with SOAP and SOAP-POST-URL
-				# if self.environment().environment()["REQUEST_URI"] != VDOM_CONFIG["SOAP-POST-URL"]:
-				if True:
+				if self.environment().environment()["REQUEST_URI"] != VDOM_CONFIG["SOAP-POST-URL"]:
+				# if True:
 					storage = MFSt(handler.rfile, headers, "", self.__environment.environment(), True)
 					for key in storage.keys():
 						#Access to file name after uploading
@@ -61,8 +62,8 @@ class VDOM_request:
 							args[key] = storage.getlist(key)
 						if filename:
 							args[key+"_filename"] = [filename]
-				# else:
-				# 	self.postdata = handler.rfile.read(int(self.__headers.header("Content-length")))
+				else:
+					self.postdata = handler.rfile.read(int(self.__headers.header("Content-length")))
 			except Exception as e: 
 				debug("Error while reading socket: %s"%e)
 				

@@ -27,10 +27,10 @@ VDOM_CONFIG = {
     "AUTO-REMOVE-INCORRECT-APPLICATIONS": 0,
 
     # special URLs
-    # "SOAP-POST-URL": "/SOAP",
     "MANAGEMENT-URL": "/system",
-    # "WSDL-FILE-URL": "/vdom.wsdl",
-    # "WSDL-FILE-LOCATION": "../app/vdom.wsdl",
+    "SOAP-POST-URL": "/SOAP",
+    "WSDL-FILE-URL": "/vdom.wsdl",
+    "WSDL-FILE-LOCATION": settings.TEMPORARY_LOCATION + "/vdom.wsdl",  # "../app/vdom.wsdl"
 
     # "SOURCE-TYPES-LOCATION": "../types",
     "TYPES-LOCATION": settings.TYPES_LOCATION, # "../app/types"

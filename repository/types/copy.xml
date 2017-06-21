@@ -458,19 +458,26 @@ class VDOM_copy(VDOM_object):
             object = application.objects.search(self.source_object)
 
             if object:
-                top = self.top if self.top else object.get_attributes()["top"].value
-                left = self.left if self.left else object.get_attributes()["left"].value
-                width = object.get_attributes()["width"].value
+                # top = self.top if self.top else object.get_attributes()["top"].value
+                top = self.top if self.top else object.attributes["top"]
+                # left = self.left if self.left else object.get_attributes()["left"].value
+                left = self.left if self.left else object.attributes["left"]
+                # width = object.get_attributes()["width"].value
+                width = object.attributes["width"]
 
                 height1 = height2 = u""
-                if "height" in object.get_attributes():
-                    height = object.get_attributes()["height"].value
+                # if "height" in object.get_attributes():
+                if "height" in object.attributes:
+                    # height = object.get_attributes()["height"].value
+                    height = object.attributes["height"]
                     height1 = u"""height="%s" """ % height
                     height2 = u"""height="%s" """ % str(int(height) + 2)
 
                 zindex = self.zindex
-                if "zindex" in object.get_attributes():
-                    zindex = object.get_attributes()["zindex"].value
+                # if "zindex" in object.get_attributes():
+                if "zindex" in object.attributes:
+                    # zindex = object.get_attributes()["zindex"].value
+                    zindex = object.attributes["zindex"]
 
                 result = \
                     u"""<container id="{id}" visible="{vis}" zindex="{zind}"

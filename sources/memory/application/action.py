@@ -29,15 +29,14 @@ class MemoryActionSketch(MemoryBase, Executable):
 
     def __init__(self, collection, handler=None):
         self._collection = collection
-        self._owner = collection.owner
         self._handler = handler
 
-    lock = property(lambda self: self._owner.lock)
-    owner = target_object = roproperty("_owner")
-    application = property(lambda self: self._owner.application)
+    lock = property(lambda self: self._collection.owner.lock)
+    owner = target_object = property(lambda self: self._collection.owner)
+    application = property(lambda self: self._collection.owner.application)
 
-    scripting_language = property(lambda self: str(self._owner.application.scripting_language))
-    package = property(lambda self: str(self._owner.application.id))
+    scripting_language = property(lambda self: str(self._collection.owner.application.scripting_language))
+    package = property(lambda self: str(self._collection.owner.application.id))
     signature = property(lambda self: "<%s action %s:%s>" % (self.scripting_language, self.id, self.name.lower()))
 
     id = rwproperty("_id")
@@ -53,19 +52,16 @@ class MemoryActionSketch(MemoryBase, Executable):
         restore = self._restore
         self.__class__ = MemoryAction
         self._collection.on_complete(self, restore)
-
-        if self._id is None:
-            raise Exception(u"Action require identifier")
-        if self._name is None:
-            raise Exception(u"Action require name")
-
+        if not restore:
+            self._collection.owner.invalidate(contexts=(self._id, self._name), downward=True, upward=True)
+            self._collection.owner.autosave()
         return self
 
     def __str__(self):
         return " ".join(filter(None, (
             "action",
             "\"%s\"" % self._name if self._name else None,
-            "sketch of %s" % self._owner)))
+            "sketch of %s" % self._collection.owner)))
 
 
 class MemoryActionRestorationSketch(MemoryActionSketch):
@@ -77,7 +73,6 @@ class MemoryActionDuplicationSketch(MemoryActionSketch):
 
     def __init__(self, collection, another, handler=None):
         self._collection = collection
-        self._owner = collection.owner
         self._handler = handler
         self._id = str(uuid4())
         self._name = another._name
@@ -99,22 +94,23 @@ class MemoryAction(MemoryActionSketch):
         if not verificators.name(value):
             raise Exception("Invalid name: %r" % value)
 
-        with self._owner.lock:
-            self._name, value = self._collection.on_rename(self, value), self._name
-            self._owner.invalidate(contexts=(self._id, self._name, value), downward=True, upward=True)
-            self._owner.autosave()
+        with self._collection.owner.lock:
+            self._collection.on_rename(self, value)
+            self._name, name = value, self._name
+            self._collection.owner.invalidate(contexts=(self._id, self._name, name), downward=True, upward=True)
+            self._collection.owner.autosave()
 
     def _set_top(self, value):
         self._top = value
-        self._owner.autosave()
+        self._collection.owner.autosave()
 
     def _set_left(self, value):
         self._left = value
-        self._owner.autosave()
+        self._collection.owner.autosave()
 
     def _set_state(self, value):
         self._state = value
-        self._owner.autosave()
+        self._collection.owner.autosave()
 
     id = roproperty("_id")
     name = rwproperty("_name", _set_name)
@@ -124,16 +120,16 @@ class MemoryAction(MemoryActionSketch):
     handler = roproperty("_handler")
 
     def locate(self, entity):
-        if entity is not SOURCE_CODE and not self._owner.virtual \
+        if entity is not SOURCE_CODE and not self._collection.owner.virtual \
                 and settings.STORE_BYTECODE and settings.STORE_ACTIONS_BYTECODE:
-            return managers.file_manager.locate(file_access.CACHE, self._owner.application.id, self._id)
+            return managers.file_manager.locate(file_access.CACHE, self._collection.owner.application.id, self._id)
         else:
             return None
 
     @source_code_property
     def source_code(self, value):
-        self._owner.invalidate(contexts=(self._id, self._name), downward=True, upward=True)
-        self._owner.autosave()
+        self._collection.owner.invalidate(contexts=(self._id, self._name), downward=True, upward=True)
+        self._collection.owner.autosave()
 
     def execute(self, context=None, namespace=None, arguments=None):
         if self._handler:
@@ -171,4 +167,4 @@ class MemoryAction(MemoryActionSketch):
         return " ".join(filter(None, (
             "action",
             "%s:%s" % (self._id, self._name) if self._name else None,
-            "of %s" % self._owner)))
+            "of %s" % self._collection.owner)))

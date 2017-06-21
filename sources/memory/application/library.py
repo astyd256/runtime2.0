@@ -24,7 +24,7 @@ class MemoryLibrarySketch(MemoryBase, Executable):
         self._collection = collection
 
     lock = property(lambda self: self._collection.owner.lock)
-    owner = roproperty("_owner")
+    owner = property(lambda self: self._collection.owner)
     application = property(lambda self: self._collection.owner.application)
 
     scripting_language = property(lambda self: str(self._collection.owner.application.scripting_language))
@@ -43,10 +43,8 @@ class MemoryLibrarySketch(MemoryBase, Executable):
         restore = self._restore
         self.__class__ = MemoryLibrary
         self._collection.on_complete(self, restore)
-
-        if self._name is None:
-            raise Exception(u"Library require name")
-
+        if not restore:
+            self._collection.owner.autosave()
         return self
 
     def __str__(self):
@@ -75,9 +73,10 @@ class MemoryLibrary(MemoryLibrarySketch):
             raise Exception("Invalid name: %r" % value)
 
         with self._collection.owner.lock:
+            self._collection.on_rename(self, value)
             source_code = self.source_code
             self.cleanup(remove=True)
-            self._name = self._collection.on_rename(self, value)
+            self._name = value
             self.source_code = source_code
             self._collection.owner.autosave()
 

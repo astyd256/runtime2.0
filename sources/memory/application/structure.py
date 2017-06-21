@@ -53,18 +53,30 @@ class MemoryStructureSketch(MemoryBase, Mapping):
 class MemoryStructure(MemoryStructureSketch):
 
     def _set_resource(self, value):
+        if self._resource == value:
+            return
+
         self._resource = value
         self._owner.autosave()
 
     def _set_top(self, value):
+        if self._top == value:
+            return
+
         self._top = value
         self._owner.autosave()
 
     def _set_left(self, value):
+        if self._left == value:
+            return
+
         self._left = value
         self._owner.autosave()
 
     def _set_state(self, value):
+        if self._state == value:
+            return
+
         self._state = value
         self._owner.autosave()
 

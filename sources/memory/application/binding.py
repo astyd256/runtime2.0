@@ -23,6 +23,8 @@ class MemoryBindingSketch(MemoryBase):
         self._name = name
         self._parameters = MemoryBindingParameters(self, parameters)
 
+    owner = property(lambda self: self._collection.owner)
+
     id = rwproperty("_id")
     target_object = roproperty("_target_object")
     name = roproperty("_name")
@@ -35,6 +37,10 @@ class MemoryBindingSketch(MemoryBase):
         restore = self._restore
         self.__class__ = MemoryBinding
         self._collection.on_complete(self, restore)
+        if not restore:
+            self._collection.owner.invalidate(upward=True)
+            if not self._target_object.virtual:
+                self._collection.owner.autosave()
         return self
 
     def __str__(self):

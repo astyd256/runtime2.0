@@ -14,11 +14,9 @@ from utils.verificators import complies
 from utils.properties import lazy, weak, roproperty
 from logs import log
 
+from ..constants import DEFAULT_APPLICATION_NAME
 from ..generic import MemoryBase
 from .application import MemoryApplicationSketch, MemoryApplicationRestorationSketch
-
-
-DEFAULT_APPLICATION_NAME = "Application"
 
 
 @weak("_owner")
@@ -44,17 +42,20 @@ class MemoryApplications(MemoryBase, Mapping):
 
     def on_complete(self, item, restore):
         with self._lock:
+            if item._id is None:
+                item._id = str(uuid4())
+            if item._name is None:
+                item._name = DEFAULT_APPLICATION_NAME
+
             if item._id not in self._known:
                 self._event.set()
             self._items[item._id] = item
-            for subitem in item._objects.catalog.itervalues():
-                managers.dispatcher.dispatch_handler(subitem, "on_startup")
 
     def new_sketch(self, restore=False):
         return (MemoryApplicationRestorationSketch if restore
             else MemoryApplicationSketch)(self)
 
-    def new(self, name=DEFAULT_APPLICATION_NAME):
+    def new(self, name=None):
         item = self.new_sketch()
         item.id = str(uuid4())
         item.name = name
@@ -109,7 +110,7 @@ class MemoryApplications(MemoryBase, Mapping):
                 with self._lock:
                     try:
                         return self._items[uuid]
-                    except:
+                    except KeyError:
                         if self._queue is not None and self._exists(uuid):
                             self._known.add(uuid)
                             self._items[uuid] = item = self._owner.load_application(uuid, silently=True)

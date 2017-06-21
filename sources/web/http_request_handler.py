@@ -13,7 +13,8 @@ import socket
 import threading
 import time
 import traceback
-import select  # SOAPpy,
+import select
+import SOAPpy
 
 if sys.platform.startswith("freebsd"):
     import vdomlib
@@ -28,8 +29,8 @@ import managers
 from request.request import VDOM_request
 from storage.storage import VDOM_config
 from version import SERVER_NAME, SERVER_VERSION
-# import soap.SOAPBuilder
-# from soap.wsdl import methods as soap_methods
+import soap.SOAPBuilder
+from soap.wsdl import methods as soap_methods
 from utils.exception import VDOM_exception
 
 # A class to describe how header messages are handled
@@ -122,11 +123,10 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         #debug("DO POST %s"%self)
         self.create_request("post")
         # if POST to SOAP-POST-URL call do_SOAP
-        # TODO: check this situation with SOAP and SOAP-POST-URL
-        # if self.__request.environment().environment()["REQUEST_URI"] == VDOM_CONFIG["SOAP-POST-URL"]:
-        #     if self.__card:
-        #         self.do_SOAP()
-        #     return
+        if self.__request.environment().environment()["REQUEST_URI"] == VDOM_CONFIG["SOAP-POST-URL"]:
+            if self.__card:
+                self.do_SOAP()
+            return
         f = self.on_request("post")
         if f:
             sys.setcheckinterval(0)
@@ -179,13 +179,13 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.end_headers()
             return StringIO(data)
         # check if requested for wsdl file - then return it
-        # if self.__request.environment().environment()["REQUEST_URI"] == VDOM_CONFIG["WSDL-FILE-URL"]:
-        # 	wsdl = self.server.get_wsdl()
-        # 	self.send_response(200)
-        # 	self.send_header("Content-type", "text/xml")
-        # 	self.send_header("Content-Length", str(len(wsdl)))
-        # 	self.end_headers()
-        # 	return StringIO(wsdl)
+        if self.__request.environment().environment()["REQUEST_URI"] == VDOM_CONFIG["WSDL-FILE-URL"]:
+            wsdl = self.server.get_wsdl()
+            self.send_response(200)
+            self.send_header("Content-type", "text/xml")
+            self.send_header("Content-Length", str(len(wsdl)))
+            self.end_headers()
+            return StringIO(wsdl)
         if self.__request.environment().environment()["REQUEST_URI"] == "/crossdomain.xml":
             data = """<?xml version="1.0"?>
 <cross-domain-policy>
@@ -236,8 +236,8 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 self.__request.add_header("Connection", "Keep-Alive")
             # cookies
             # if len(self.__request.cookies())>0:
-            #	for key in self.__request.cookies():
-            #		self.__request.add_header("Set-cookie",self.__request.cookies()[key].output())
+            #   for key in self.__request.cookies():
+            #       self.__request.add_header("Set-cookie",self.__request.cookies()[key].output())
                 # self.__request.add_header("Set-cookie",self.__request.cookies().output())
             # if len(self.__request.cookies().cookies()) > 0:
                 #self.__request.add_header("Set-cookie", self.__request.cookies().get_string())
@@ -271,7 +271,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         cookies = self.__request.response_cookies().output()
         #debug("Outgoing headers---")
         # for h in headers:
-        #	debug(h + ": " + headers[h])
+        #   debug(h + ": " + headers[h])
         # debug('-'*40)
         for hh in headers:
             #debug(hh + " : " + headers[hh])
@@ -297,11 +297,11 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def redirect(self, to):
         self.send_response(302)
         # if len(self.__request.cookies)>0:
-        #	for key in self.__request.cookies():
-        #			self.__request.add_header("Set-cookie",self.__request.cookies()[key].output())
-            # self.__request.add_header(self.__request.cookies.output())
+        #   for key in self.__request.cookies():
+        #           self.__request.add_header("Set-cookie",self.__request.cookies()[key].output())
+        # self.__request.add_header(self.__request.cookies.output())
         # if len(self.__request.cookies().cookies()) > 0:
-        #	self.__request.add_header("Set-cookie", self.__request.cookies().get_string())
+        #   self.__request.add_header("Set-cookie", self.__request.cookies().get_string())
         self.__request.add_header("Location", to)
         self.send_headers()
         self.end_headers()
@@ -392,11 +392,11 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         cf = VDOM_config()
         # No more alot of debug while soap
         # if "1" == cf.get_opt("DEBUG"):
-        #	VDOM_debug = 1
-        #	dumpSOAPIn = 1
-        #	dumpSOAPOut = 1
-        #	dumpHeadersIn = 1
-        #	dumpHeadersOut = 1
+        #   VDOM_debug = 1
+        #   dumpSOAPIn = 1
+        #   dumpSOAPOut = 1
+        #   dumpHeadersIn = 1
+        #   dumpHeadersOut = 1
 
         try:
             if dumpHeadersIn:
@@ -478,9 +478,9 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             tmp = map(lambda x: ordered_args[x], keylist)
             ordered_args = tmp
 
-#			print '<-> Argument Matching Yielded:'
-#			print '<-> Ordered Arguments:' + str(ordered_args)
-#			print '<-> Named Arguments  :' + str(named_args)
+#           print '<-> Argument Matching Yielded:'
+#           print '<-> Ordered Arguments:' + str(ordered_args)
+#           print '<-> Named Arguments  :' + str(named_args)
 
             arg_names = soap_methods[method]
             if "sid" in arg_names:
@@ -793,18 +793,18 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         # filename=VDOM_CONFIG["HTTP-ERROR-PAGES-DIRECTORY"]+"/"+str(code)+".htm"
 
         # if os.path.exists(filename):
-        # 	file=open(filename, "rb")
-        # 	content=file.read()
-        # 	file.close()
+        #   file=open(filename, "rb")
+        #   content=file.read()
+        #   file.close()
 
-        # 	self.send_response(code, message)
-        # 	self.send_header("Content-Type", "text/html")
-        # 	self.send_header('Connection', 'close')
-        # 	self.end_headers()
-        # 	if self.command!='HEAD' and code>=200 and code not in (204, 304):
-        # 		self.wfile.write(content)
-        # 	else:
-        # 		pass
+        #   self.send_response(code, message)
+        #   self.send_header("Content-Type", "text/html")
+        #   self.send_header('Connection', 'close')
+        #   self.end_headers()
+        #   if self.command!='HEAD' and code>=200 and code not in (204, 304):
+        #       self.wfile.write(content)
+        #   else:
+        #       pass
         # else:
         self.requestline = ""
         SimpleHTTPServer.SimpleHTTPRequestHandler.send_error(self, code, message)

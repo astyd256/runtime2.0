@@ -1,4 +1,4 @@
-#!/usr/bin/python
+    #!/usr/bin/python
 
 import startup.server
 import settings
@@ -7,7 +7,7 @@ import managers
 from logs import VDOM_log_manager
 from startup import ImportManager
 from storage import VDOM_storage
-from file_access import VDOM_file_manager # VDOM_share
+from file_access import VDOM_file_manager  # VDOM_share
 from request import VDOM_request_manager
 from resource import VDOM_resource_manager, VDOM_resource_editor
 from database import VDOM_database_manager
@@ -20,6 +20,7 @@ from server import VDOM_server
 # from mailing import VDOM_email_manager
 from session import VDOM_session_manager
 from module import VDOM_module_manager
+from soap import VDOM_soap_server
 
 
 managers.register("log_manager", VDOM_log_manager)
@@ -42,10 +43,9 @@ managers.register("resource_editor", VDOM_resource_editor, lazy=True)
 # managers.register("scheduler_manager", VDOM_scheduler_manager, lazy=True)
 # managers.register("email_manager", VDOM_email_manager, lazy=True)
 managers.register("module_manager", VDOM_module_manager)
+managers.register("soap_server", VDOM_soap_server)
 managers.register("server", VDOM_server)
 
 
-on_prepare = (lambda: managers.memory.applications.default ) if settings.PRELOAD_DEFAULT_APPLICATION else None
-
-
+on_prepare = (lambda: managers.memory.applications.default) if settings.PRELOAD_DEFAULT_APPLICATION else None
 managers.server.start(on_prepare)

@@ -2,13 +2,13 @@
 import sqlite3
 import re
 from xml.dom import Node
-# from xml.dom.minidom import parse, parseString
+from xml.dom.minidom import parseString  # parse,
 from StringIO import StringIO
 import managers
 import file_access
 from utils.exception import VDOM_exception, VDOMDatabaseAccessError
 from utils.semaphore import VDOM_semaphore
-import uuid
+# import uuid
 
 import sqlitebck
 

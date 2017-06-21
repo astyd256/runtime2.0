@@ -12,7 +12,7 @@ from .descriptors import make_attribute_name, make_object_name, make_descriptor_
 
 
 DEFAULT_MODULE_NAME = "scripting"
-MAXIMAL_LINE_LENGTH = 99
+MAXIMAL_LINE_LENGTH = 139
 UUID_REGEX = re.compile(r"^([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})$", re.IGNORECASE)
 # RENDER_TYPE = "html"
 

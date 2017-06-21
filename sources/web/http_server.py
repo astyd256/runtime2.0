@@ -16,9 +16,9 @@ from utils.exception import VDOM_exception
 from utils.semaphore import VDOM_semaphore
 from utils.tracing import format_exception_trace
 from vhosting import VDOM_vhosting
-# from soap.functions import *
-# from soap.wsdl import gen_wsdl
-# from soap.wsdl import methods as wsdl_methods
+from soap.functions import *
+from soap.wsdl import gen_wsdl
+from soap.wsdl import methods as wsdl_methods
 
 
 class VDOM_http_server(SocketServer.ThreadingTCPServer):
@@ -82,14 +82,15 @@ class VDOM_http_server(SocketServer.ThreadingTCPServer):
         self.__sem = VDOM_semaphore()
 
         # register soap methods
-        # for method in wsdl_methods.keys():
-        # 	exec("""self.registerFunction(SOAPpy.MethodSig(%s, keywords = 0, context = 1), namespace = "http://services.vdom.net/VDOMServices")""" % method)
+        for method in wsdl_methods.keys():
+            exec("""self.registerFunction(SOAPpy.MethodSig(%s, keywords = 0, context = 1), namespace = "http://services.vdom.net/VDOMServices")""" % method)
+
 #		self.registerFunction(SOAPpy.MethodSig(login, keywords = 0, context = 1), namespace = "http://services.vdom.net/VDOMServices")
 #		self.registerFunction(SOAPpy.MethodSig(create_application, keywords = 0, context = 1), namespace = "http://services.vdom.net/VDOMServices")
 #		self.registerFunction(SOAPpy.MethodSig(set_application_info, keywords = 0, context = 1), namespace = "http://services.vdom.net/VDOMServices")
 
         # generate wsdl file
-        # gen_wsdl()
+        gen_wsdl()
         # send_to_card("online")
 
         self.active = True

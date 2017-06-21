@@ -148,7 +148,7 @@ class MemoryAttributes(MemoryAttributesSketch):
         self.update({name: value})
 
     def __delitem__(self, name):
-        managers.dispatcher.dispatch_handler(self._owner, "on_update", self._attributes[name].default_value)
+        managers.dispatcher.dispatch_handler(self._owner, "on_update", {name: self._attributes[name].default_value})
         log.write("Reset %s attrbiute \"%s\"" % (self._owner, name))
         self._items.pop(name, None)
         self._owner.invalidate(upward=1)
