@@ -498,10 +498,8 @@ class MemoryApplication(MemoryApplicationSketch):
 
     def unimport_libraries(self):
         with self.lock:
-            for name in self._libraries:
-                module_name = "%s.%s" % (self.id, name)
-                if module_name in sys.modules:
-                    sys.modules.pop(module_name)
+            for library in self._libraries.itervalues():
+                library.unimport()
 
     def __invert__(self):
         raise NotImplementedError

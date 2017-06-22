@@ -5,7 +5,7 @@ import settings
 import managers
 import file_access
 
-from utils.properties import weak, roproperty, rwproperty
+from utils.properties import weak, rwproperty
 from utils import verificators
 from scripting.executable import SOURCE_CODE, Executable
 
@@ -87,7 +87,10 @@ class MemoryLibrary(MemoryLibrarySketch):
     def cleanup(self, remove=False):
         with self.lock:
             super(MemoryLibrary, self).cleanup(remove=remove)
-            sys.modules.pop("%s.%s" % (self.application.id, self._name), None)
+            self.unimport()
+
+    def unimport(self):
+        sys.modules.pop("%s.%s" % (self.application.id, self._name), None)
 
     # unsafe
     def compose(self, ident=u"", file=None, shorter=False):
