@@ -1,4 +1,6 @@
 
+import sys
+
 import settings
 import managers
 import file_access
@@ -81,6 +83,11 @@ class MemoryLibrary(MemoryLibrarySketch):
             self._collection.owner.autosave()
 
     name = rwproperty("_name")
+
+    def cleanup(self, remove=False):
+        with self.lock:
+            super(MemoryLibrary, self).cleanup(remove=remove)
+            sys.modules.pop("%s.%s" % (self.application.id, self._name), None)
 
     # unsafe
     def compose(self, ident=u"", file=None, shorter=False):
