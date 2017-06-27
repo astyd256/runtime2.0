@@ -18,7 +18,7 @@
 		<OptimizationPriority>1</OptimizationPriority>
 		<Container>1</Container>
 		<Containers>form</Containers>
-		<Handlers>set_attr</Handlers>
+		<Handlers>on_update</Handlers>
 		<Languages>en_US, ru_RU, fr_FR</Languages>
 	</Information>
 	<Attributes>
@@ -421,7 +421,7 @@
 			9t/+rHFXufjeaNNipPm9VtiZvq3pIGLXgARid4DsudaeIq1SJNpTpMtAIrHnWl2myB5Il7lW3BkQ
 			sVv+8ew/AQYAQdumZPs2qGYAAAAASUVORK5CYII=
 		</Resource>
-		<Resource ID="d35e2a96-4ac8-55bf-e550-1724b2b0466d" Type="jpg" Name="Icon">
+		<Resource ID="b7f22c99-60de-d12b-6185-1724dacf7c79" Type="png" Name="Icon">
 			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
 			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
@@ -446,7 +446,7 @@
 			XSMqU4MEUg6tzK5Pbp8nXNr0CD0T67htLAGgSUtB2nMYn24hl+AmylMAGeufAAMAtncq+iJ9d1QA
 			AAAASUVORK5CYII=
 		</Resource>
-		<Resource ID="b7f22c99-60de-d12b-6185-1724dacf7c79" Type="png" Name="Icon">
+		<Resource ID="d35e2a96-4ac8-55bf-e550-1724b2b0466d" Type="jpg" Name="Icon">
 			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
 			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
@@ -473,8 +473,7 @@
 		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[
-import sys
+<![CDATA[import sys
 
 
 class VDOM_uploader(VDOM_object):
@@ -546,8 +545,9 @@ class VDOM_uploader(VDOM_object):
 		return VDOM_object.wysiwyg(self, contents=result)
 
 
-def set_attr(app_id, object_id, param):
-	o = application.objects.search(object_id)
+# def set_attr(app_id, object_id, param):
+def on_update(object, attributes):
+	# o = application.objects.search(object_id)
 
 	pro_suite = """
 #%(id)s {
@@ -602,15 +602,16 @@ def set_attr(app_id, object_id, param):
 	height: 100px;
 }
 """
-	if "skin" in param:
-		if param["skin"]["value"] == "1":
-			o.set_attributes({"style": pro_suite})
-	if "style" in param and param["style"]["value"] and o.attributes.style != pro_suite:
-		o.set_attributes({"skin": 0})
-	return ""
-
-
-]]>
+	# if "skin" in param:
+	# 	if param["skin"]["value"] == "1":
+	# 		o.set_attributes({"style": pro_suite})
+	# if "style" in param and param["style"]["value"] and o.attributes.style != pro_suite:
+	# 	o.set_attributes({"skin": 0})
+	if "skin" in attributes and attributes["skin"] == "1":
+		attributes.update(style=pro_suite)
+	if "style" in attributes and attributes["style"] != pro_suite:
+		attributes.update(style="0")
+	return ""]]>
 	</SourceCode>
 	<E2VDOM>
 		<Events>

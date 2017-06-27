@@ -18,7 +18,7 @@
 		<OptimizationPriority>1</OptimizationPriority>
 		<Container>1</Container>
 		<Containers>form, password, container</Containers>
-		<Handlers>set_attr</Handlers>
+		<Handlers>on_update</Handlers>
 		<Languages>en_US, ru_RU, fr_FR</Languages>
 	</Information>
 	<Attributes>
@@ -1566,18 +1566,27 @@ $j('#%(id)s').datepicker('destroy').datepicker({
 
 		return VDOM_object.wysiwyg(self, contents=result)
 
-def set_attr(app_id, object_id, param):
-	o = application.objects.search(object_id)
 
-	if "width" in param:
-		width = param["width"]["value"]
-		if int(width) < 10:
-			o.set_attributes({"width": "10"})
+# def set_attr(app_id, object_id, param):
+def on_update(object, attributes):
+	# o = application.objects.search(object_id)
 
-	if "height" in param:
-		height = param["height"]["value"]
-		if int(height) < 4:
-			o.set_attributes({"height": "4"})]]>
+	# if "width" in param:
+	# 	width = param["width"]["value"]
+	# 	if int(width) < 10:
+	# 		o.set_attributes({"width": "10"})
+	if "width" in attributes:
+		if int(attributes["width"]) < 10:
+			attributes.update(width="10")
+
+	# if "height" in param:
+	# 	height = param["height"]["value"]
+	# 	if int(height) < 4:
+	# 		o.set_attributes({"height": "4"})
+	if "height" in attributes:
+		if int(attributes["height"]) < 4:
+			attributes.update(height="4")
+]]>
 	</SourceCode>
 	<Libraries>
 		<Library Target="html"><![CDATA[<script type='text/javascript' src='/aaae709d-2dab-ce1a-35bf-182f195b9336.res'></script>]]></Library>
