@@ -150,8 +150,11 @@ class Logger(BaseLogger):
             except IndexError:
                 return
 
+        name, _, subname = sublog.name.partition("/")
+
         try:
             timestamp, level, message, extra = sublog.describe(*values)
+            extra.update(log=name, sublog=subname)
             self._logger.log(LOG_LEVELS[level], message,
                 extra={"timestamp": timestamp, "instance": self._instance, "extra": extra})
         except:

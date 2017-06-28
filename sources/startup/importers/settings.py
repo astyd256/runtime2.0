@@ -39,7 +39,7 @@ class SettingsImporter(object):
         platform = sys.platform
         filename = os.path.splitext(os.path.basename(sys.argv[0]))[0].lower()
         environment = os.environ.get("ENVIRONMENT", "development").lower()
-        instance = os.environ.get("VDOM_INSTANCE_ID")
+        instance = os.environ.get("VDOM_INSTANCE_ID", "unknown")
 
         module.__dict__.update(
             WINDOWS=platform.startswith("win"),
