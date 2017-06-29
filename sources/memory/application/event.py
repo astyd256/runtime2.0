@@ -1,11 +1,13 @@
 
-from utils.properties import weak, roproperty, rwproperty
+from utils.properties import weak, constant, roproperty, rwproperty
 from ..generic import MemoryBase
 from .eventcallees import MemoryEventCalleesSketch
 
 
 @weak("_collection")
 class MemoryEventSketch(MemoryBase):
+
+    is_event = constant(True)
 
     _restore = False
 

@@ -4,6 +4,7 @@ import sys, traceback, shutil, os
 
 import managers
 from utils.exception import VDOM_exception
+from utils.tracing import show_exception_trace
 
 from resource import VDOM_module_resource
 from .python import VDOM_module_python
@@ -124,11 +125,11 @@ class VDOM_module_manager(object):
                 if action and action.source_code:
                     ee = PathNotFound(container_id)
                     request = managers.request_manager.get_request()
-                    request.arguments().arguments()["error"] = [ee]                    
+                    request.arguments().arguments()["error"] = [ee]
                     managers.engine.execute(action)
                     if request_object.wholeAnswer:
                         return (None, request_object.wholeAnswer.encode("utf-8"))
-                return (404, None) #_("Container not found")                
+                return (404, None) #_("Container not found")
 
 
             if obj.parent != None:
@@ -161,16 +162,19 @@ class VDOM_module_manager(object):
                 # result = managers.engine.render(obj, None, obj.type.render_type.lower())
                 # CHECK: result = managers.engine.render(_a, obj, None, obj.type.render_type.lower())
             except VDOM_exception, e:
-                debug("Render exception: " + str(e))
+                # debug("Render exception: " + str(e))
+                show_exception_trace(caption="Module Manager: Render exception", locals=True)
                 return (None, str(e))
             except Exception as ee:
                 action = _a.actions.get("requestonerror")
                 if action and action.source_code:
                     request = managers.request_manager.get_request()
-                    request.arguments().arguments()["error"] = [ee]                    
+                    request.arguments().arguments()["error"] = [ee]
                     managers.engine.execute(action)
                     if request_object.wholeAnswer:
-                        return (None, request_object.wholeAnswer.encode("utf-8"))            
+                        return (None, request_object.wholeAnswer.encode("utf-8"))
+                else:
+                    show_exception_trace(caption="Module Manager: Render exception", locals=True)
             # finally:
             #     for key in request_object.files:
             #         if getattr(request_object.files[key][0],"name", None):

@@ -1,6 +1,4 @@
 
-import sys
-
 from collections import defaultdict
 from cStringIO import StringIO
 
@@ -29,9 +27,7 @@ NOT_LOADED = "NOT LOADED"
 @weak("_collection")
 class MemoryApplicationSketch(MemoryBase):
 
-    is_type = constant(False)
     is_application = constant(True)
-    is_object = constant(False)
 
     generic = APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
 

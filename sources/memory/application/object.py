@@ -20,8 +20,6 @@ from .structure import MemoryStructureSketch, MemoryStructure
 @weak("_collection", "_parent", "_application")
 class MemoryObjectSketch(MemoryBase):
 
-    is_type = constant(False)
-    is_application = constant(False)
     is_object = constant(True)
 
     is_non_container = property(lambda self: self._type.container == NON_CONTAINER)

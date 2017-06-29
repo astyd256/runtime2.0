@@ -16,7 +16,6 @@ from ..generic import MemoryBase
 class MemoryActionSketch(MemoryBase, Executable):
 
     is_action = constant(True)
-    is_binding = constant(False)
 
     _restore = False
 
