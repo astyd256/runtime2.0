@@ -102,12 +102,12 @@ class MemoryObjects(MemoryBase, MutableMapping):
         return result
 
     # unsafe
-    def compose(self, ident=u"", file=None, shorter=False):
+    def compose(self, ident=u"", file=None, shorter=False, excess=False):
         with self._owner.lock:
             if self.__dict__.get("_items"):
                 file.write(u"%s<Objects>\n" % ident)
                 for object in self._items.itervalues():
-                    object.compose(ident=ident + u"\t", file=file, shorter=shorter)
+                    object.compose(ident=ident + u"\t", file=file, shorter=shorter, excess=excess)
                 file.write(u"%s</Objects>\n" % ident)
 
     def replicate(self, another):
