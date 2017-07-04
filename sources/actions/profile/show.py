@@ -73,9 +73,10 @@ def make_name(path, line, function):
         return format_source_point(path, line, function, width=LOCATION_WIDTH)
 
 
-def run(location=None, headers=False, sort=None, order=None, limit=50, nolimit=False, all=False):
+def run(name=None, location=None, headers=False, sort=None, order=None, limit=50, nolimit=False, all=False):
     """
     show server last profile statistics: name, calls, total and cumulative times
+    :param name: specifies profile name
     :param location: input file location with stored profile statistics
     :param switch headers: show columns headers
     :param sort: sort entries by "name", by "calls", by "total" or by "cumulative"
@@ -86,7 +87,10 @@ def run(location=None, headers=False, sort=None, order=None, limit=50, nolimit=F
     """
 
     if location is None:
-        location = settings.PROFILE_LOCATION
+        location = settings.PROFILE_FILENAME_TEMPLATE % (name or settings.PROFILE_DEFAULT_NAME)
+    elif name is not None:
+        show("name and location mutually exclusive options")
+        return
 
     if not managers.file_manager.exists(file_access.FILE, None, location):
         show("no profile")
