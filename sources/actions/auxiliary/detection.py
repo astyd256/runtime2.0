@@ -4,20 +4,60 @@ import managers
 import file_access
 from logs import console
 from utils.parsing import native, Parser
-from .constants import TYPE, APPLICATION
+from .constants import TYPE, APPLICATION, USER, GROUP
 
 
-def search(identifier):
-    subject = managers.memory.types.search(identifier)
-    if subject:
-        return TYPE, subject
-    else:
-        subject = managers.memory.applications.search(identifier)
-        if subject:
-            return APPLICATION, subject
+def search(identifier=None, user=None, group=None):
+    if user or group:
+        if user:
+            user = user.lower()
+        if group:
+            group = group.lower()
+            if user and user != group:
+                raise ValueError
+
+        user_or_group = managers.user_manager.get_user_by_name(user or group)
+        if user_or_group:
+            entity = USER if managers.user_manager.user_exists(user_or_group.login) else GROUP
+            if entity is USER and user or entity is GROUP and group:
+                return entity, user_or_group
+
+        user_or_group = managers.user_manager.get_user_by_id(user or group)
+        if user_or_group:
+            entity = USER if managers.user_manager.user_exists(user_or_group.login) else GROUP
+            if entity is USER and user or entity is GROUP and group:
+                return entity, user_or_group
+
+        if user:
+            for item in managers.user_manager.get_all_users():
+                if item.login.lower().startswith(user):
+                    return USER, item
+
+        if group:
+            for item in managers.user_manager.get_all_groups():
+                if item.login.lower().startswith(group):
+                    return GROUP, item
+
+        if user:
+            entity = "%s or %s" % (USER, GROUP) if group else USER
+            identifier = user
         else:
-            console.error("unable to find application or type with such uuid or name")
-            return None, None
+            entity = GROUP
+            identifier = group
+
+        console.error("unable to find %s with such uuid or name: %s" % (entity, identifier))
+        return None, None
+    else:
+        subject = managers.memory.types.search(identifier)
+        if subject:
+            return TYPE, subject
+        else:
+            subject = managers.memory.applications.search(identifier)
+            if subject:
+                return APPLICATION, subject
+            else:
+                console.error("unable to find application or type with such uuid or name")
+                return None, None
 
 
 def detect(filename):
