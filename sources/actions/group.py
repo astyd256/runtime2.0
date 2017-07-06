@@ -23,7 +23,7 @@ def recognize(query):
     return objects
 
 
-def run(group=None, create=False, system=False, delete=False, description=None, include=None, exclude=None):
+def run(group=None, create=False, system=False, delete=False, description=None, add=None, remove=None):
     """
     show group information
     :param group: specifies group
@@ -31,8 +31,8 @@ def run(group=None, create=False, system=False, delete=False, description=None, 
     :param switch system: force creation of system group
     :param switch delete: delete group
     :param description: group description to set
-    :param include: add member(s) to group
-    :param exclude: remove member(s) from group
+    :param add: add member(s) to group
+    :param remove: remove member(s) from group
     """
     if group is None:
         with section("available groups"):
@@ -53,7 +53,7 @@ def run(group=None, create=False, system=False, delete=False, description=None, 
             show("no group with such identifier")
             return
 
-    if not (create or delete) and description is None and include is None and exclude is None:
+    if not (create or delete) and description is None and add is None and remove is None:
         with section("group %s" % group.login):
             for name in ("id", "login", "description", "members", ("membership", "member_of"), "system"):
                 if isinstance(name, tuple):
@@ -68,26 +68,26 @@ def run(group=None, create=False, system=False, delete=False, description=None, 
         group.description = description.strip()
         managers.user_manager.sync()
 
-    if include:
-        objects = recognize(include)
+    if add:
+        objects = recognize(add)
         if not objects:
-            show("no user(s) or group(s) to include")
+            show("no user(s) or group(s) to add")
             return
 
-        with section("include into group %s" % group.login):
+        with section("add into group %s" % group.login):
             for entity, user_or_group in objects:
                 show("%s %s" % (entity, user_or_group.login))
                 group.members.append(user_or_group.login)
         managers.user_manager.sync()
 
-    if exclude:
-        objects = [(entity, user_or_group) for entity, user_or_group in recognize(exclude)
+    if remove:
+        objects = [(entity, user_or_group) for entity, user_or_group in recognize(remove)
             if user_or_group.login in group.members]
         if not objects:
-            show("no user(s) or group(s) to include")
+            show("no user(s) or group(s) to add")
             return
 
-        with section("exclude from group %s" % group.login):
+        with section("remove from group %s" % group.login):
             for entity, user_or_group in objects:
                 show("%s %s" % (entity, user_or_group.login))
                 group.members.remove(user_or_group.login)
