@@ -20,8 +20,6 @@ from .structure import MemoryStructureSketch, MemoryStructure
 @weak("_collection", "_parent", "_application")
 class MemoryObjectSketch(MemoryBase):
 
-    is_type = constant(False)
-    is_application = constant(False)
     is_object = constant(True)
 
     is_non_container = property(lambda self: self._type.container == NON_CONTAINER)
@@ -177,12 +175,12 @@ class MemoryObject(MemoryObjectSketch):
     name = rwproperty("_name", _set_name)
 
     # unsafe
-    def compose(self, ident=u"", file=None, shorter=False):
+    def compose(self, ident=u"", file=None, shorter=False, excess=False):
         information = u"ID=\"%s\" Name=\"%s\" Type=\"%s\"" % (self._id, self._name.encode("xml"), self._type.id)
         if self._attributes or self._objects or self._actions:
             file.write(u"%s<Object %s>\n" % (ident, information))
-            self._attributes.compose(ident=ident + u"\t", file=file, shorter=shorter)
-            self._objects.compose(ident=ident + u"\t", file=file, shorter=shorter)
+            self._attributes.compose(ident=ident + u"\t", file=file, shorter=shorter, excess=excess)
+            self._objects.compose(ident=ident + u"\t", file=file, shorter=shorter, excess=excess)
             self._actions.compose(ident=ident + u"\t", file=file)
             file.write(u"%s</Object>\n" % ident)
         else:

@@ -2,6 +2,8 @@
 import sys
 import gc
 
+import settings
+
 from logs import log
 from utils.profiling import profiler
 from ..auxiliary import select_types, select_objects, \
@@ -106,7 +108,10 @@ def query(options):
         yield "</reply>"
 
     elif "profile" in options:
-        data = profiler.load()
+        name = options["profile"]
+
+        specific_profiler = profiler(name) if name else profiler
+        data = specific_profiler.load()
 
         yield "<reply>"
         if data is None:
@@ -118,10 +123,12 @@ def query(options):
         yield "</reply>"
 
     elif "call-graph" in options:
+        name = options["call-graph"]
         node_threshold = options.get("node-threshold")
         edge_threshold = options.get("edge-threshold")
         color_nodes = options.get("color-nodes")
 
+        specific_profiler = profiler(name) if name else profiler
         keywords = {}
 
         if node_threshold:
@@ -142,7 +149,7 @@ def query(options):
             except ValueError:
                 log.warning("Ignore wrond color nodes: %s" % color_nodes)
 
-        with profiler.hold() as location:
+        with specific_profiler.hold() as location:
             profile = generate_call_graph_profile(location)
         data = generate_call_graph(profile, **keywords) if profile else None
 

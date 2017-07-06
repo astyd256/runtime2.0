@@ -971,10 +971,6 @@ class VDOM_web_services_server(object):
                                     parameter.attrib["InterfaceName"] = parameter.attrib.pop("DisplayName")
                                     parameter.attrib["Help"] = parameter.attrib.pop("Description")
 
-            data = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + ElementTree.tostring(root)
-            with open("X:\\Temp\\00\\%s.xml" % type.name, "wb") as f:
-                f.write(data)
-
             result.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + ElementTree.tostring(root))
         result.append("</Types>")
         return "".join(result)

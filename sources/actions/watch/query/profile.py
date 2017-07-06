@@ -8,7 +8,10 @@ from ...auxiliary import section, show
 from ..auxiliary import query
 
 
+ENDING = "." + settings.PROFILE_EXTENSION
+
 REQUEST = "<action name=\"query\"><option name=\"profile\"/></action>"
+REQUEST_SPECIFIC = "<action name=\"query\"><option name=\"profile\">%s</option></action>"
 
 
 def builder(parser):
@@ -25,23 +28,24 @@ def builder(parser):
     return reply
 
 
-def run(location=None, address=None, port=None, timeout=None):
+def run(location, name=None, address=None, port=None, timeout=None):
     """
     query profile statistics
     :param location: specifies location to store graph
+    :param name: specifies profile name
     :param address: specifies server address
     :param int port: specifies server port
     :param float timeout: specifies timeout to wait for reply
     """
     try:
-        if location is None:
-            location = settings.PROFILE_FILENAME
-        elif os.path.isdir(location):
-            location = os.path.join(location, settings.PROFILE_FILENAME)
-        elif not location.endswith(".prs"):
-            location += ".prs"
+        if os.path.isdir(location):
+            location = os.path.join(location, (name or settings.PROFILE_DEFAULT_NAME) + ENDING)
+        elif not location.endswith(ENDING):
+            location += ENDING
 
-        message = query("query profile statistics", address, port, REQUEST, timeout=timeout)
+        request = REQUEST_SPECIFIC % name if name else REQUEST
+
+        message = query("query profile statistics", address, port, request, timeout=timeout)
         parser = Parser(builder=builder, notify=True, supress=True)
         result = parser.parse(message)
     except ParsingException as error:

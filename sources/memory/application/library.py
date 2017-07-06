@@ -5,7 +5,7 @@ import settings
 import managers
 import file_access
 
-from utils.properties import weak, rwproperty
+from utils.properties import weak, constant, rwproperty
 from utils import verificators
 from scripting.executable import SOURCE_CODE, Executable
 
@@ -14,6 +14,8 @@ from ..generic import MemoryBase
 
 @weak("_collection")
 class MemoryLibrarySketch(MemoryBase, Executable):
+
+    is_library = constant(True)
 
     _restore = False
 

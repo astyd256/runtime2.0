@@ -195,7 +195,7 @@ class MemoryType(MemoryTypeSketch):
         return super(MemoryType, self).execute(context=context, namespace=namespace, arguments=arguments)
 
     # unsafe
-    def compose(self, file=None, shorter=False):
+    def compose(self, file=None, shorter=False, excess=False):
         if not file:
             file = StringIO()
             self.compose(file=file, shorter=True)

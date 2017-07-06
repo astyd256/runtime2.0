@@ -7,6 +7,7 @@ import shutil
 from collections import deque
 from threading import RLock
 from tempfile import mkdtemp, NamedTemporaryFile # _TemporaryFileWrapper
+from glob import glob
 
 import settings
 import file_access
@@ -114,12 +115,18 @@ class FileManager(object):
 
     # elementary
 
-    def list(self, category=None, owner=None, name=None):
+    def list(self, category=None, owner=None, name=None, pattern=None):
         location = self.locate(category, owner, name)
-        try:
-            return os.listdir(location)
-        except Exception as error:
-            print "List storage %s directory error: %s" % (location, error)
+        if pattern:
+            try:
+                return glob(location + "/" + pattern)
+            except Exception as error:
+                print "List storage %s and pattern %s directory error: %s" % (location, pattern, error)
+        else:
+            try:
+                return os.listdir(location)
+            except Exception as error:
+                print "List storage %s directory error: %s" % (location, error)
 
     def exists(self, category, owner=None, name=None):
         location = self.locate(category, owner, name)

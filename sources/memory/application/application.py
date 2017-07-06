@@ -1,6 +1,4 @@
 
-import sys
-
 from collections import defaultdict
 from cStringIO import StringIO
 
@@ -29,9 +27,7 @@ NOT_LOADED = "NOT LOADED"
 @weak("_collection")
 class MemoryApplicationSketch(MemoryBase):
 
-    is_type = constant(False)
     is_application = constant(True)
-    is_object = constant(False)
 
     generic = APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
 
@@ -247,7 +243,7 @@ class MemoryApplication(MemoryApplicationSketch):
                 action.compile()
 
     # unsafe
-    def compose(self, file=None, shorter=False):
+    def compose(self, file=None, shorter=False, excess=False):
         if not file:
             file = StringIO()
             self.compose(file=file, shorter=True)
@@ -281,7 +277,7 @@ class MemoryApplication(MemoryApplicationSketch):
             file.write(u"\t\t<CurrentLanguage>%s</CurrentLanguage>\n" % self._current_language)
         file.write(u"\t</Information>\n")
 
-        self._objects.compose(ident=u"\t", file=file, shorter=shorter)
+        self._objects.compose(ident=u"\t", file=file, shorter=shorter, excess=excess)
         self._actions.compose(ident=u"\t", file=file)
 
         file.write(u"\t<Structure>\n")
@@ -430,11 +426,11 @@ class MemoryApplication(MemoryApplicationSketch):
                     self.compose(file=file, shorter=True)
                 self._changes = False
 
-    def export(self, filename):
+    def export(self, filename, excess=False):
         with self.lock:
             with managers.file_manager.open(file_access.FILE, None, filename,
                     mode="w", encoding="utf8") as file:
-                self.compose(file=file)
+                self.compose(file=file, excess=excess)
 
     # unsafe
     def uninstall(self, remove_zero_resources=True, remove_databases=True, remove_storage=True):

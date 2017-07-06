@@ -67,8 +67,10 @@ class MemoryAttributes(MemoryAttributesSketch):
         raise Exception(u"Use 'new' to create new attribute")
 
     # unsafe
-    def compose(self, ident=u"", file=None, shorter=False):
+    def compose(self, ident=u"", file=None, shorter=False, excess=False):
         if self._items:
+            skip_defaults = not (settings.STORE_DEFAULT_VALUES or excess)
+
             for name in self._query:
                 value = self._items[name]
                 cdata = len(value) > FORCE_CDATA_LENGTH or FORCE_CDATA_REGEX.search(value)
@@ -82,9 +84,9 @@ class MemoryAttributes(MemoryAttributesSketch):
             self._query.clear()
 
             file.write(u"%s<Attributes>\n" % ident)
-            for name, value in self._items.iteritems():
-                if not settings.STORE_DEFAULT_VALUES and \
-                        value == self._attributes[name].default_value:
+            for name, value in self._items.iteritems() if skip_defaults \
+                    else ((name, self._items.get(name, attribute.default_value)) for name, attribute in self._attributes.iteritems()):
+                if skip_defaults and value == self._attributes[name].default_value:
                     continue
                 complexity = self._attributes[name].complexity or name in self._cdata
                 file.write(u"%s\t<Attribute Name=\"%s\">%s</Attribute>\n" %

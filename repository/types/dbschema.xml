@@ -17,7 +17,7 @@
 		<Resizable>1</Resizable>
 		<OptimizationPriority>1</OptimizationPriority>
 		<Container>3</Container>
-		<Handlers>on_rename, on_delete, execute_query</Handlers>
+		<Handlers>on_rename, on_delete</Handlers>
 		<RemoteMethods>execute_query_xml</RemoteMethods>
 		<Languages>en_US, ru_RU, fr_FR</Languages>
 	</Information>
@@ -366,16 +366,16 @@ def on_delete(object):
 	return ""
 
 
-def execute_query(object, param):
-	if param:
-		from database.dbobject import VDOM_sql_query
-		q = VDOM_sql_query(object.application.id, object.id, param)
-		q.commit()
-		query = q.fetchall()
-		return (query)
-	else:
-		# return "Error, query filed: %s"%str(e)
-		return "NO PARAM"
+# def execute_query(object, param):
+# 	if param:
+# 		from database.dbobject import VDOM_sql_query
+# 		q = VDOM_sql_query(object.application.id, object.id, param)
+# 		q.commit()
+# 		query = q.fetchall()
+# 		return (query)
+# 	else:
+# 		# return "Error, query filed: %s"%str(e)
+# 		return "NO PARAM"
 
 
 def execute_query_xml(object, xml_param):
