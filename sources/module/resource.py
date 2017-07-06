@@ -67,9 +67,9 @@ class VDOM_module_resource(VDOM_module):
 		if not self.ctype:
 			return None
 
-		if ro and ro.label is not "":
+		if ro and getattr(ro, "label","") is not "":
 			request_object.add_header("Cache-Control", "no-cache")
-		elif ro and ro.label is "" and self.ctype in VDOM_module_resource.images + ["css","js"]:
+		elif ro and getattr(ro, "label","") is "" and self.ctype in VDOM_module_resource.images + ["css","js"]:
 			request_object.add_header("Cache-Control", "max-age=86400")
 
 		request_object.add_header("Content-Type", VDOM_module_resource.content_type[self.ctype])

@@ -1,14 +1,17 @@
 import re, md5
 import threading
-import socket
 
 import SOAPpy
+
+try:
+	from soap.soaputils import VDOM_session_protector
+except ImportError:
+	from scripting.soap.soaputils import VDOM_session_protector
+
 from utils.exception import VDOMServiceCallError
 
-from scripting.soap.soaputils import VDOM_session_protector
 
-
-__version__ = '0.1.4'
+__version__ = '0.1.6'
 
 
 session_id_re = re.compile("\<SessionId\>\<\!\[CDATA\[(\S+)\]\]\>\<\/SessionId\>")
@@ -34,52 +37,17 @@ class VDOMServiceSingleThread(object):
 		self._protector = None
 
 
-	def __try_connect(self, url, exception=False):
-		try:
-			# need to update socket.defaulttimeout because SOAPpy is ignoring "timeout" "parameter for HTTPS connections
-			socket_timeout = socket.getdefaulttimeout()
-			socket.setdefaulttimeout(1)
-
-			service = SOAPpy.SOAPProxy(url.rstrip('/') + '/SOAP', namespace='http://services.vdom.net/VDOMServices')
-			service.keep_alive('', '')
-
-			self._url = url
-			return service
-
-		except:
-			if exception: raise
-
-		finally:
-			socket.setdefaulttimeout(socket_timeout)
-
-		return None
-
-
 	def __create_soap_proxy(self, url):
-		def define_best_ssl_context(url, exception=False):
-			service = self.__try_connect(url)
-			if service is not None: return service
-
-			try:
-				import ssl
-				ssl._create_default_https_context = ssl._create_unverified_context
-				return self.__try_connect(url, exception=True)
-
-			except:
-				if exception: raise
-
-			return None
+		if not '://' in url:
+			url = 'http://' + url
 
 		if url.lower().startswith('https://'):
-			return define_best_ssl_context(url, exception=True)
+			import ssl
+			ssl._create_default_https_context = ssl._create_unverified_context
 
-		if '://' in url:
-			return self.__try_connect(url, exception=True)
+		self._url = url
+		return SOAPpy.SOAPProxy(url.rstrip('/') + '/SOAP', namespace='http://services.vdom.net/VDOMServices')
 
-		service = define_best_ssl_context('https://' + url)
-		if service is not None: return service
-
-		return self.__try_connect('http://' + url, exception=True)
 
 
 	def __request_skey(self):
@@ -113,6 +81,9 @@ class VDOMServiceSingleThread(object):
 				raise VDOMServiceCallError( str(ret) )
 			else:
 				raise VDOMServiceCallError( ex.message  )
+
+		if ret == 'None':
+			raise VDOMServiceCallError('Session is closed')
 
 		self._skey = self._protector.next_session_key(self._skey)
 		self._request_num += 1
