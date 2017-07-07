@@ -15,6 +15,9 @@ from ..generic import MemoryBase
 from .catalogs import MemoryObjectsCatalog, MemoryObjectsDynamicCatalog
 
 
+EMPTY_DICTIONARY = {}
+
+
 @weak("_owner")
 class MemoryObjects(MemoryBase, MutableMapping):
 
@@ -22,14 +25,14 @@ class MemoryObjects(MemoryBase, MutableMapping):
 
         def __get__(self, instance, owner=None):
             with instance._owner.lock:
-                instance.__dict__["_items_by_name"] = {}
+                instance.__dict__.setdefault("_items_by_name", {})
                 return instance.__dict__.setdefault("_items", OrderedDict())
 
     class MemoryObjectsItemsByNameProperty(object):
 
         def __get__(self, instance, owner=None):
             with instance._owner.lock:
-                instance.__dict__["_items"] = OrderedDict()
+                instance.__dict__.setdefault("_items", OrderedDict())
                 return instance.__dict__.setdefault("_items_by_name", {})
 
     _items = MemoryObjectsItemsProperty()
@@ -51,34 +54,32 @@ class MemoryObjects(MemoryBase, MutableMapping):
 
     owner = roproperty("_owner")
     catalog = roproperty("_catalog")
+    names = property(lambda self: self.__dict__.get("_items_by_name", EMPTY_DICTIONARY).keys())
 
     def on_rename(self, item, name):
         with self._owner.lock:
-            del self._items_by_name[item.name]
             if name in self._items_by_name:
-                name = generate_unique_name(name, self._items_by_name)
+                raise KeyError
             self._items_by_name[name] = item
-            return name
+            del self._items_by_name[item._name]
 
     def on_complete(self, item, restore):
         with self._owner.lock:
+            if item._id is None:
+                item._id = str(uuid4())
             if item._name is None or item._name in self._items_by_name:
                 item._name = generate_unique_name(item._name or item._type.name, self._items_by_name)
             item._order = len(self._items)
 
             if item._virtual == self._owner.virtual:
-                self._items[item.id] = item
-                self._items_by_name[item.name] = item
-
+                self._items[item._id] = item
+                self._items_by_name[item._name] = item
             if not item._virtual:
-                self._all_items[item.id] = item
+                self._all_items[item._id] = item
 
             if not restore:
-                managers.dispatcher.dispatch_handler(item, "on_create")
                 if self._owner.is_object and item._virtual == self._owner.virtual:
                     managers.dispatcher.dispatch_handler(self._owner, "on_insert", item)
-                    self._owner.invalidate(upward=True)
-                item.autosave()
 
     def new_sketch(self, type, virtual=False, attributes=None, restore=False):
         return (MemoryObjectRestorationSketch if restore
@@ -101,40 +102,52 @@ class MemoryObjects(MemoryBase, MutableMapping):
         return result
 
     # unsafe
-    def compose(self, ident=u"", file=None, shorter=False):
+    def compose(self, ident=u"", file=None, shorter=False, excess=False):
         with self._owner.lock:
             if self.__dict__.get("_items"):
                 file.write(u"%s<Objects>\n" % ident)
                 for object in self._items.itervalues():
-                    object.compose(ident=ident + u"\t", file=file, shorter=shorter)
+                    object.compose(ident=ident + u"\t", file=file, shorter=shorter, excess=excess)
                 file.write(u"%s</Objects>\n" % ident)
 
-    def __iadd__(self, another):
+    def replicate(self, another):
         if self._owner.is_application:
             raise Exception(u"Use 'new' to create new top-level container")
 
-        if "_items" in another.__dict__:
-            with self._owner.lock:
-                copy = None
+        with self._owner.lock:
+            copy = None
 
-                for item in another._items.itervalues():
-                    copy = MemoryObjectDuplicationSketch(self,
-                        self._owner.application, None if self._owner.is_application else self._owner,
-                        item)
-                    copy.id = str(uuid4())
-                    copy.name = item.name
-                    ~copy
+            if isinstance(another, MemoryObjectSketch):
+                enumeration = another,
+            elif isinstance(another, MemoryObjects):
+                if "_items" in another.__dict__:
+                    enumeration = another._items.itervalues()
+                else:
+                    enumeration = ()
+            else:
+                raise ValueError("Object or objects collection required")
 
-                    managers.dispatcher.dispatch_handler(copy, "on_create")
-                    if self._owner.is_object and copy.virtual == self._owner.virtual:
-                        managers.dispatcher.dispatch_handler(self._owner, "on_insert", copy)
+            for item in enumeration:
+                copy = MemoryObjectDuplicationSketch(self,
+                    self._owner.application, None if self._owner.is_application else self._owner,
+                    item)
+                copy.id = str(uuid4())
+                copy.name = item.name
+                ~copy
 
-                if copy:
-                    if self._owner.is_object and self._owner.virtual == copy.virtual:
-                        self._owner.invalidate(upward=True)
-                    copy.autosave()
+                copy.objects.replicate(item.objects)
+                copy.actions.replicate(item.actions)
 
-        return self
+                managers.dispatcher.dispatch_handler(copy, "on_create")
+                if self._owner.is_object and copy.virtual == self._owner.virtual:
+                    managers.dispatcher.dispatch_handler(self._owner, "on_insert", copy)
+
+            if copy:
+                if self._owner.is_object and self._owner.virtual == copy.virtual:
+                    self._owner.invalidate(upward=True)
+                copy.autosave()
+
+        return copy
 
     def __getitem__(self, key):
         return self._items.get(key) or self._items_by_name[key]
@@ -165,17 +178,16 @@ class MemoryObjects(MemoryBase, MutableMapping):
 
             # remove events
             item.events.clear()
-            # bindings = (binding for binding in self._owner.application.bindings.itervalues()
+            # bindings = tuple(binding for binding in self._owner.application.bindings.catalog.itervalues()
             #     if binding.target_object == item)
-            bindings = (binding for binding in self._owner.application.bindings.catalog.itervalues()
+            bindings = tuple(binding for binding in item.container.bindings.catalog.itervalues()
                 if binding.target_object == item)
-            for event in self._owner.application.events.catalog.itervalues():
-                # event.callees -= bindings
+            # for event in self._owner.application.events.catalog.itervalues():
+            for event in item.container.events.catalog.itervalues():
                 for binding in bindings:
                     while binding in event.callees:
                         event.callees.remove(binding)
             for binding in bindings:
-                # del self._owner.application.bindings[binding.id]
                 del binding.target_object.container.bindings[binding.id]
 
             # delete resources
@@ -187,7 +199,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
             item.autosave()
 
             # recalculate order for following objects
-            index = self._items.keys().index(key)
+            index = self._items.keys().index(item.id)
             for another in islice(self._items.itervalues(), index + 1, None):
                 another._order -= 1
 

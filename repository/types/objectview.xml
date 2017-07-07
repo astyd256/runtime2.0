@@ -1382,8 +1382,8 @@ class VDOM_objectview(VDOM_object):
         for index, (key, data) in enumerate(items.iteritems()):
             copy = managers.engine.application.objects.new(source_object.type,
                 name="vdomclass%d" % index, virtual=True, attributes=source_object.attributes)
-            copy.objects += source_object.objects
-            copy.actions += source_object.actions
+            copy.objects.replicate(source_object.objects)
+            copy.actions.replicate(source_object.actions)
 
             classes = " ".join(filter(None, (
                 u"%s-item" % classname,

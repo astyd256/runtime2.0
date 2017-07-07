@@ -68,8 +68,8 @@ class MemoryTypeSketch(MemoryBase, Executable):
         self._lock = RLock()
 
         self._containers = []
-        self._remote_methods = []
         self._handlers = []
+        self._remote_methods = []
         self._languages = []
 
         self._attributes = MemoryTypeAttributes(self)
@@ -113,8 +113,8 @@ class MemoryTypeSketch(MemoryBase, Executable):
     containers = rwproperty("_containers")
     render_type = rwproperty("_render_type")
     http_content_type = rwproperty("_http_content_type")
-    remote_methods = rwproperty("_remote_methods")
     handlers = rwproperty("_handlers")
+    remote_methods = rwproperty("_remote_methods")
     languages = rwproperty("_languages")
     version = rwproperty("_version")
 
@@ -182,8 +182,8 @@ class MemoryType(MemoryTypeSketch):
     containers = roproperty("_containers")
     render_type = roproperty("_render_type")
     http_content_type = roproperty("_http_content_type")
-    remote_methods = roproperty("_remote_methods")
     handlers = roproperty("_handlers")
+    remote_methods = roproperty("_remote_methods")
     languages = roproperty("_languages")
 
     def execute(self, context=None, namespace=None, arguments=None):
@@ -195,7 +195,7 @@ class MemoryType(MemoryTypeSketch):
         return super(MemoryType, self).execute(context=context, namespace=namespace, arguments=arguments)
 
     # unsafe
-    def compose(self, file=None, shorter=False):
+    def compose(self, file=None, shorter=False, excess=False):
         if not file:
             file = StringIO()
             self.compose(file=file, shorter=True)
@@ -232,10 +232,10 @@ class MemoryType(MemoryTypeSketch):
             file.write(u"\t\t<RenderType>%s</RenderType>\n" % self._render_type)
         if self._http_content_type:
             file.write(u"\t\t<HTTPContentType>%s</HTTPContentType>\n" % self._http_content_type.encode("xml"))
-        if self._remote_methods:
-            file.write(u"\t\t<RemoteMethods>%s</RemoteMethods>\n" % self._remote_methods.encode("xml"))
         if self._handlers:
             file.write(u"\t\t<Handlers>%s</Handlers>\n" % u", ".join(self._handlers))
+        if self._remote_methods:
+            file.write(u"\t\t<RemoteMethods>%s</RemoteMethods>\n" % u", ".join(self._remote_methods))
         if self._languages:
             file.write(u"\t\t<Languages>%s</Languages>\n" % u", ".join(self._languages))
         file.write(u"\t</Information>\n")
@@ -313,7 +313,7 @@ class MemoryType(MemoryTypeSketch):
     def uninstall(self):
         managers.memory.types.unload(self._id, remove=True)
         managers.resource_manager.invalidate_resources(self._id)
-        managers.memory.cleanup_type(self._id)
+        managers.memory.cleanup_type_infrastructure(self._id)
 
     def factory(self, context, probe=False):
         with self._lock:

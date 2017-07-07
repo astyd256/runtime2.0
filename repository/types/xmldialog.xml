@@ -18,7 +18,7 @@
 		<OptimizationPriority>1</OptimizationPriority>
 		<Container>1</Container>
 		<Containers>htmlcontainer, container</Containers>
-		<Handlers>set_attr</Handlers>
+		<Handlers>on_update</Handlers>
 		<Languages>en_US</Languages>
 	</Information>
 	<Attributes>
@@ -3029,7 +3029,7 @@ def on_update(object, attributes):
 
         # attr = (param["xmldata"]["value"]).replace('<![CDATA[', '<!--[CDATA[')
         # obj.attributes.xmldata = attr.replace(']'+']>', ']]-->')
-        attributes[xmldata] = xmldata.replace("<![CDATA[", "<!--[CDATA[").replace("]]]]><![CDATA[>", "]]-->")
+        attributes["xmldata"] = xmldata.replace("<![CDATA[", "<!--[CDATA[").replace("]]]]><![CDATA[>", "]]-->")
 
     # return ""
 
@@ -4136,7 +4136,7 @@ class VDOM_xmldialog(VDOM_object):
         title = title.replace('"','&quot;')
 
         result= \
-            u"""<container id="{id}" hierarchy="{hierarchy}" order="{order}" 
+            u"""<container name="{name}" id="{id}" hierarchy="{hierarchy}" order="{order}" 
                             top="{top}" left="{left}" width="{width}" height="{height}" overflow="visible">
                     <svg>
                         <rect x="0" y="0" rx="7" ry="5" width="{width}" height="{height}" fill="#eeeeee"/>
@@ -4165,7 +4165,8 @@ class VDOM_xmldialog(VDOM_object):
                 content_height=dialog_height-40,
                 content_width=dialog_width-20,
                 xmldata=html,
-                dlg_title=title
+                dlg_title=title,
+                name=self.name
             )
 
         return VDOM_object.wysiwyg(self, contents=result)
@@ -4336,6 +4337,14 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 <![CDATA[$q("#"+this.domCont.id).dialog('close');]]>
 					</SourceCode>
 				</Action>
+				<Action Name="show" DisplayName="#Lang(602)" Description="#Lang(502)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$q("#"+this.domCont.id).dialog('open');]]>
+					</SourceCode>
+				</Action>
 				<Action Name="executeCallback" DisplayName="#Lang(605)" Description="#Lang(505)">
 					<Parameters>
 						<Parameter Name="callbackName" DisplayName="#Lang(706)" Description="#Lang(806)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
@@ -4343,14 +4352,6 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 					</Parameters>
 					<SourceCode>
 <![CDATA[$q("#"+this.domCont.id).dialog('executeCallback', callbackName, params);]]>
-					</SourceCode>
-				</Action>
-				<Action Name="show" DisplayName="#Lang(602)" Description="#Lang(502)">
-					<Parameters>
-						<Parameter Name="fade" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-					</Parameters>
-					<SourceCode>
-<![CDATA[$q("#"+this.domCont.id).dialog('open');]]>
 					</SourceCode>
 				</Action>
 				<Action Name="loadData" DisplayName="#Lang(604)" Description="#Lang(504)">

@@ -11,14 +11,20 @@ NON_CONTAINER = 1
 CONTAINER = 2
 TOP_CONTAINER = 3
 
+DEFAULT_APPLICATION_NAME = "Application"
+DEFAULT_SCRIPTING_LANGUAGE = VSCRIPT_LANGUAGE
+DEFAULT_LANGUAGE = u"en-US"
+
 COMPUTE_CONTEXT = RENDER_CONTEXT = SCRIPT_CONTEXT = "onload" # "onrender"
 WYSIWYG_CONTEXT = "onwysiwyg"
 
 APPLICATION_START_CONTEXT = "applicationonstart"
-SESSION_START_CONTEXT = "sessiononstart" # "onsessionstart"
-REQUEST_START_CONTEXT = "requestonstart" # "onrequeststart"
-SESSION_FINISH_CONTEXT = "sessiononfinish" #sessiononfinish
-# ON_START="onstart"
-# ON_FINISH="onfinish"
-# ON_UNINSTALL="onuninstall"
-# ON_TIMEOUT="ontimeout"
+APPLICATION_FINISH_CONTEXT = "applicationonfinish"  # not available
+APPLICATION_UNINSTALL_CONTEXT = "applicationonuninstall"  # not available
+
+SESSION_START_CONTEXT = "sessiononstart"  # "onsessionstart"
+SESSION_FINISH_CONTEXT = "sessiononfinish"  # "sessiononfinish"
+
+REQUEST_START_CONTEXT = "requestonstart"  # "onrequeststart"
+REQUEST_TIMEOUT_CONTEXT = "requestontimeout"
+REQUEST_ERROR_CONTEXT = "requestonerror"

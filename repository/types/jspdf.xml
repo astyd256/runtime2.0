@@ -682,11 +682,11 @@ class VDOM_jspdf(VDOM_object):
 
 
 	def wysiwyg(self, contents=""):
-		import utils.wysiwyg
+		from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
 
 		# emtpy container right now, will update later
 		image_id = "3026ac49-9910-f0a9-5fc5-8ebcd9698b8d"
-		result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
+		result = get_empty_wysiwyg_value(self, image_id)
 		return VDOM_object.wysiwyg(self, contents=result)
 
 		

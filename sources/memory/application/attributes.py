@@ -67,8 +67,10 @@ class MemoryAttributes(MemoryAttributesSketch):
         raise Exception(u"Use 'new' to create new attribute")
 
     # unsafe
-    def compose(self, ident=u"", file=None, shorter=False):
+    def compose(self, ident=u"", file=None, shorter=False, excess=False):
         if self._items:
+            skip_defaults = not (settings.STORE_DEFAULT_VALUES or excess)
+
             for name in self._query:
                 value = self._items[name]
                 cdata = len(value) > FORCE_CDATA_LENGTH or FORCE_CDATA_REGEX.search(value)
@@ -82,9 +84,9 @@ class MemoryAttributes(MemoryAttributesSketch):
             self._query.clear()
 
             file.write(u"%s<Attributes>\n" % ident)
-            for name, value in self._items.iteritems():
-                if not settings.STORE_DEFAULT_VALUES and \
-                        value == self._attributes[name].default_value:
+            for name, value in self._items.iteritems() if skip_defaults \
+                    else ((name, self._items.get(name, attribute.default_value)) for name, attribute in self._attributes.iteritems()):
+                if skip_defaults and value == self._attributes[name].default_value:
                     continue
                 complexity = self._attributes[name].complexity or name in self._cdata
                 file.write(u"%s\t<Attribute Name=\"%s\">%s</Attribute>\n" %
@@ -120,10 +122,7 @@ class MemoryAttributes(MemoryAttributesSketch):
                 value = DEREFERENCE_REGEX.sub(lambda match: match.group(1), value)
 
                 if current_value != value:
-                    if self._attributes[name].verify(value):
-                        updates[name] = value
-                    else:
-                        raise ValueError(u"Unacceptable value for \"%s\" attribute: \"%s\"" % (name, value.replace('"', '\"')))
+                    updates[name] = value
 
             if updates:
                 managers.dispatcher.dispatch_handler(self._owner, "on_update", updates)
@@ -132,6 +131,9 @@ class MemoryAttributes(MemoryAttributesSketch):
                     for name, value in updates.iteritems():
                         if not isinstance(value, basestring):
                             value = str(value)
+
+                        if not self._attributes[name].verify(value):
+                            raise ValueError(u"Unacceptable value for \"%s\" attribute: \"%s\"" % (name, value.replace('"', '\"')))
 
                         self._query.add(name)
 
@@ -148,7 +150,7 @@ class MemoryAttributes(MemoryAttributesSketch):
         self.update({name: value})
 
     def __delitem__(self, name):
-        managers.dispatcher.dispatch_handler(self._owner, "on_update", self._attributes[name].default_value)
+        managers.dispatcher.dispatch_handler(self._owner, "on_update", {name: self._attributes[name].default_value})
         log.write("Reset %s attrbiute \"%s\"" % (self._owner, name))
         self._items.pop(name, None)
         self._owner.invalidate(upward=1)

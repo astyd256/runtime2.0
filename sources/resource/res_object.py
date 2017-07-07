@@ -7,11 +7,14 @@ import uuid
 
 
 class VDOM_resource_descriptor(object):
-    def __init__(self, owner_id, res_id=None):
+    def __init__(self, owner_id, res_id=None, res_format="", res_name=""):
         """constructor"""
         self.application_id = owner_id
         self.id = res_id or str(uuid.uuid4())
-        self.__loaded = False
+        self.res_format = res_format
+        self.res_type = "permanent"
+        self.name = res_name
+        self.__loaded = True
 
     @classmethod
     def convert(self, resource_object):
@@ -27,10 +30,10 @@ class VDOM_resource_descriptor(object):
         new_res.save_record()
         return res
 
-    def __load_data(self):
+    def __load_data(self):#not used anymore
         """Database request to load resource info"""
         # Cleaning fields
-        if getattr(self, "object_id", None):
+        if getattr(self, "object_id", None): #temporary in-memory resorces 
             self.__loaded = True
         
         if not self.__loaded:
@@ -44,14 +47,16 @@ class VDOM_resource_descriptor(object):
             self.showtimes = None
             # Loading from DB
             self.__loaded = True
-            # storage.get_resource_record(self)
-            managers.storage.get_resource_record(self)  # ?????
+            managers.storage.get_resource_record(self)
 
     def load_copy(self):
         """Making copy and load it from DB"""
-        new_res = copy.copy(self)
-        new_res.__load_data()
-        return new_res
+        if self.__loaded:
+            return self
+        else:
+            new_res = copy.copy(self)
+            new_res.__load_data()
+            return new_res
 
     def save_record(self):
         """Writing resource record to DB"""
@@ -59,7 +64,6 @@ class VDOM_resource_descriptor(object):
             self.res_type = "permanent"
             self.label = ""
         self.__loaded = True
-        # storage.save_resource_record(self)
         managers.storage.save_resource_record(self)  # ?????
 
     def __get_filename(self):
@@ -83,30 +87,16 @@ class VDOM_resource_descriptor(object):
     dependences = property(__get_dependences, __set_dependences)
 
     def get_data(self):
-        if self.__loaded:
-            # TODO: Check this...
-            # return managers.file_manager.read(file_access.resource,self.application_id,self.object_id,self.filename)
-            return managers.file_manager.read(file_access.resource, self.application_id, self.filename)
-        else:
-            new_res = self.load_copy()
-            # return managers.file_manager.read(file_access.resource,new_res.application_id,None,new_res.filename)
-            return managers.file_manager.read(file_access.resource, new_res.application_id, new_res.filename)
+        return managers.file_manager.read(file_access.resource, self.application_id, self.filename)
 
     def get_fd(self):
         """Reading resource data from HDD"""
-        if self.__loaded:
-            # TODO: Check this...
-            # return managers.file_manager.get_fd(file_access.resource,self.application_id,self.object_id,self.filename)
-            return managers.file_manager.open(file_access.resource, self.application_id, self.filename, mode="rb")
-        else:
-            new_res = self.load_copy()
-            # return managers.file_manager.get_fd(file_access.resource,new_res.application_id,None,new_res.filename)
-            return managers.file_manager.open(file_access.resource, new_res.application_id, new_res.filename, mode="rb")
-
+        
+        return managers.file_manager.open(file_access.resource, self.application_id, self.filename, mode="rb")
+    
     def decrease(self, object_id, remove=False):
         if remove:
-            self.__load_data()
-            # managers.file_manager.delete(file_access.resource,self.application_id,None,self.filename)
+            #self.__load_data()
             managers.file_manager.delete(file_access.resource, self.application_id, self.filename)
             managers.storage.delete_resources_index(self)
             return 0

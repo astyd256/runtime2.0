@@ -14,7 +14,8 @@ _save_sql = "INSERT OR REPLACE INTO Resource_index (res_id, app_id, filename, na
 #__update_sql = "UPDATE Resource_index filename=?, name =? , res_type = ?, res_format = ? WHERE res_id=? "
 _clear_sql = "DELETE FROM Resource_index"
 _create_sql = "CREATE TABLE IF NOT EXISTS Resource_index (res_id NOT NULL UNIQUE, app_id NOT NULL, filename NOT NULL, name NOT NULL, res_type,res_format)"
-_list_sql = "SELECT app_id, res_id FROM Resource_index"
+_list_sql = "SELECT app_id, res_id, res_format, name FROM Resource_index"
+_list_res = "SELECT filename, name, res_type, res_format from Resource_index WHERE res_id = ?"
 _delete_sql = "DELETE FROM Resource_index WHERE res_id = ?"
 
 
@@ -211,7 +212,7 @@ class VDOM_storage(object):
 
     def get_resource_record(self, res_descriptor):
         """Interface for access to DB records of resources"""
-        rows = self.__execute_sql_read("SELECT filename, name, res_type, res_format from Resource_index WHERE res_id = ?", (res_descriptor.id,))
+        rows = self.__execute_sql_read(list_all_res, (res_descriptor.id,))
         if len(rows) == 1:
             row = rows[0]
         else:

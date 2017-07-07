@@ -17,7 +17,7 @@
 		<Resizable>0</Resizable>
 		<OptimizationPriority>1</OptimizationPriority>
 		<Container>3</Container>
-		<Handlers>set_name, on_delete</Handlers>
+		<Handlers>on_rename, on_delete</Handlers>
 		<Languages>en_US</Languages>
 	</Information>
 	<Attributes>
@@ -211,12 +211,12 @@
 class VDOM_webdavcontainer(VDOM_object):
 
     def wysiwyg(self, contents=""):
-        result = "<container id=\"%s\" visible=\"%s\" hierarchy=\"%s\" >%s</container>" % (self.id, self.visible, self.hierarchy, contents)
+        result = "<container name=\"%s\" id=\"%s\" visible=\"%s\" hierarchy=\"%s\" >%s</container>" % (self.name, self.id, self.visible, self.hierarchy, contents)
         return VDOM_object.wysiwyg(self, contents=result)
 
 
 #def set_name(application_id, object_id, param):
-def on_rename(object, name):
+def on_rename(object):
     actions = {"authentication": ["path", "user", "password"],
                "getResourseProperties": ["path"],
                "isCollection": ["path"],
@@ -244,7 +244,6 @@ def on_delete(object):
     object_id = object.id
     SharePath = managers.webdav_manager.get_webdav_share_path(application_id, object_id)
     if SharePath:
-        managers.webdav_manager.del_webdav(application_id, object_id, SharePath)
-]]>
+        managers.webdav_manager.del_webdav(application_id, object_id, SharePath)]]>
 	</SourceCode>
 </Type>

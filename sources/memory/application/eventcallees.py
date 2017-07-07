@@ -1,7 +1,7 @@
 
 from collections import MutableSequence
 from uuid import uuid4
-from utils.properties import lazy, weak, roproperty
+from utils.properties import lazy, weak, constant, roproperty
 from ..generic import MemoryBase
 from .binding import MemoryBindingSketch, MemoryBindingRestorationSketch
 
@@ -11,6 +11,8 @@ EMPTY_LIST = []
 
 @weak("_owner")
 class MemoryEventCalleesSketch(MemoryBase, MutableSequence):
+
+    is_callees = constant(True)
 
     @lazy
     def _items(self):

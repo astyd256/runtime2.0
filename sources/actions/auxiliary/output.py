@@ -90,8 +90,12 @@ def show(name=None, value=ABSENT, indent=None, longer=False):
     console.write(message)
 
 
-def confirm(message):
-    console.write(message)
-    console.stdout.write("are you sure? ")
+def confirm(message=None, question=None):
+    if message:
+        console.write(message)
+    console.stdout.write("are you sure%s? ___\b\b\b" % (" to %s" % question if question else ""))
     answer = raw_input()
-    return answer.lower() == "yes"
+    result = answer.lower() == "yes"
+    if not result:
+        console.write("unconfirmed")
+    return result

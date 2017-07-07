@@ -1,6 +1,4 @@
 
-import sys
-
 from collections import defaultdict
 from cStringIO import StringIO
 
@@ -12,7 +10,8 @@ from logs import log
 from database.dbobject import VDOM_sql_query
 from utils.properties import weak, constant, roproperty, rwproperty
 
-from .. import APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
+from ..constants import DEFAULT_SCRIPTING_LANGUAGE, DEFAULT_LANGUAGE, \
+    APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
 from ..generic import MemoryBase
 from ..auxiliary import write_as_base64, copy_as_base64
 from .objects import MemoryObjects
@@ -28,9 +27,7 @@ NOT_LOADED = "NOT LOADED"
 @weak("_collection")
 class MemoryApplicationSketch(MemoryBase):
 
-    is_type = constant(False)
     is_application = constant(True)
-    is_object = constant(False)
 
     generic = APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
 
@@ -46,9 +43,12 @@ class MemoryApplicationSketch(MemoryBase):
     _index = u""
     _icon = u""
     _server_version = u""
-    _scripting_language = u"vscript"
-    _default_language = u"en-US"
-    _current_language = u"en-US"
+    _scripting_language = DEFAULT_SCRIPTING_LANGUAGE
+    _default_language = DEFAULT_LANGUAGE
+    _current_language = DEFAULT_LANGUAGE
+
+    # TODO: CHECK ATTRIBUTE FOR SOAP UPDATE
+    protected = False
 
     def __init__(self, collection):
         self._collection = collection
@@ -98,12 +98,10 @@ class MemoryApplicationSketch(MemoryBase):
         restore = self._restore
         self.__class__ = MemoryApplication
         self._collection.on_complete(self, restore)
-
-        if self._id is None:
-            raise Exception(u"Application require identifier")
-        if self._name is None:
-            raise Exception(u"Application require name")
-
+        for item in self._objects.catalog.itervalues():
+            managers.dispatcher.dispatch_handler(item, "on_startup")
+        if not restore:
+            self.autosave()
         return self
 
     def __str__(self):
@@ -124,46 +122,89 @@ class MemoryApplication(MemoryApplicationSketch):
         raise Exception(u"Use 'new' to create new application")
 
     def _set_name(self, value):
+        if self._name == value:
+            return
+
         self._name = value
         self.autosave()
 
     def _set_description(self, value):
+        if self._description == value:
+            return
+
         self._description = value
         self.autosave()
 
     def _set_version(self, value):
+        if self._version == value:
+            return
+
         self._version = value
         self.autosave()
 
     def _set_owner(self, value):
+        if self._owner == value:
+            return
+
         self._owner = value
         self.autosave()
 
     def _set_password(self, value):
+        if self._password == value:
+            return
+
         self._password = value
         self.autosave()
 
     def _set_active(self, value):
+        if self._actions == value:
+            return
+
         self._active = value
         self.autosave()
 
     def _set_index(self, value):
+        if self._index == value:
+            return
+
         self._index = value
         self.autosave()
 
     def _set_icon(self, value):
+        if self._icon == value:
+            return
+
         self._icon = value
         self.autosave()
 
     def _set_server_version(self, value):
+        if self._server_version == value:
+            return
+
         self._server_version = value
         self.autosave()
 
+    def _set_scripting_language(self, value):
+        if self._scripting_language == value:
+            return
+
+        if self.actions.catalog:
+            raise Exception("Unable to change scripting language due to actions exists")
+
+        self._scripting_language = value
+        self.autosave()
+
     def _set_default_language(self, value):
+        if self._default_language == value:
+            return
+
         self._default_language = value
         self.autosave()
 
     def _set_current_language(self, value):
+        if self._current_language == value:
+            return
+
         self._current_language = value
         self.autosave()
 
@@ -177,7 +218,7 @@ class MemoryApplication(MemoryApplicationSketch):
     index = rwproperty("_index", _set_index)
     icon = rwproperty("_icon", _set_icon)
     server_version = rwproperty("_server_version", _set_server_version)
-    scripting_language = roproperty("_scripting_language")
+    scripting_language = rwproperty("_scripting_language", _set_scripting_language)
     default_language = rwproperty("_default_language", _set_default_language)
     current_language = rwproperty("_current_language", _set_current_language)
 
@@ -202,7 +243,7 @@ class MemoryApplication(MemoryApplicationSketch):
                 action.compile()
 
     # unsafe
-    def compose(self, file=None, shorter=False):
+    def compose(self, file=None, shorter=False, excess=False):
         if not file:
             file = StringIO()
             self.compose(file=file, shorter=True)
@@ -236,7 +277,7 @@ class MemoryApplication(MemoryApplicationSketch):
             file.write(u"\t\t<CurrentLanguage>%s</CurrentLanguage>\n" % self._current_language)
         file.write(u"\t</Information>\n")
 
-        self._objects.compose(ident=u"\t", file=file, shorter=shorter)
+        self._objects.compose(ident=u"\t", file=file, shorter=shorter, excess=excess)
         self._actions.compose(ident=u"\t", file=file)
 
         file.write(u"\t<Structure>\n")
@@ -295,9 +336,8 @@ class MemoryApplication(MemoryApplicationSketch):
                             file.write(u"\t\t</Database>\n")
                 file.write(u"\t</Databases>\n")
 
-        if self._bindings or self._events.catalog:
+        if self._bindings.catalog or self._events.catalog:
             file.write(u"\t<E2VDOM>\n")
-            # self._bindings.compose(ident=u"\t\t", file=file)
             self._bindings.catalog.compose(ident=u"\t\t", file=file)
             self._events.catalog.compose(ident=u"\t\t", file=file)
             file.write(u"\t</E2VDOM>\n")
@@ -386,11 +426,11 @@ class MemoryApplication(MemoryApplicationSketch):
                     self.compose(file=file, shorter=True)
                 self._changes = False
 
-    def export(self, filename):
+    def export(self, filename, excess=False):
         with self.lock:
             with managers.file_manager.open(file_access.FILE, None, filename,
                     mode="w", encoding="utf8") as file:
-                self.compose(file=file)
+                self.compose(file=file, excess=excess)
 
     # unsafe
     def uninstall(self, remove_zero_resources=True, remove_databases=True, remove_storage=True):
@@ -442,15 +482,20 @@ class MemoryApplication(MemoryApplicationSketch):
             managers.database_manager.delete_database(self._id)
 
         # remove files
-        managers.memory.cleanup_application(self._id,
+        managers.memory.cleanup_application_infrastructure(self._id,
             remove_databases=remove_databases, remove_storage=remove_storage)
+
+    def invalidate(self, contexts=None, downward=False, upward=False):
+        with self.lock:
+            # perform downward invalidation
+            if downward:
+                for child in self._objects.itervalues():
+                    child.invalidate(contexts=contexts, downward=True)
 
     def unimport_libraries(self):
         with self.lock:
-            for name in self._libraries:
-                module_name = "%s.%s" % (self.id, name)
-                if module_name in sys.modules:
-                    sys.modules.pop(module_name)
+            for library in self._libraries.itervalues():
+                library.unimport()
 
     def __invert__(self):
         raise NotImplementedError

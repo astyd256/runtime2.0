@@ -48,7 +48,9 @@ class VDOM_acl_manager:
 				return True
 			
 	def __deny_protected(self,appid, access_type):
-		if (access_type == security.access_to_application) and managers.xml_manager.get_application(appid).protected == "1":
+		# if (access_type == security.access_to_application) and managers.xml_manager.get_application(appid).protected == "1":
+		# 	return True	
+		if (access_type == security.access_to_application) and managers.memory.applications[appid].protected == "1":
 			return True	
 		
 ### PUBLIC INTERFACE ###

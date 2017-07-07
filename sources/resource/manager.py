@@ -11,7 +11,8 @@ class VDOM_resource_manager(object):
         """constructor"""
         self.__label_index = {}
         self.save_index = True
-        self.__main_index = {}
+        self.__name_index = {}
+        self.__name_index = {}
 
     def restore(self):
         """Restoring resources from last session.(After reboot or power off)"""
@@ -23,9 +24,11 @@ class VDOM_resource_manager(object):
             # Transfering index to new format
             for resource in self.__old_index:
                 self.__main_index[resource] = VDOM_resource_descriptor.convert(self.__old_index[resource])
+                self.__name_index[self.__old_index[resource].name.lower()] = resource
         else:
-            self.__main_index = {res_id: VDOM_resource_descriptor(owner_id, res_id)
-                                 for (owner_id, res_id) in managers.storage.list_resource_index()}
+            res_list = managers.storage.list_resource_index()
+            self.__main_index = {res_id: VDOM_resource_descriptor(owner_id, res_id,res_format, name) for (owner_id, res_id, res_format, name) in res_list}
+            self.__name_index = {name.lower(): res_id for (owner_id, res_id, res_format, name) in res_list}            
         del self.__old_index
         # TODO: check for not existing or temporary resources
         if not self.__main_index:
@@ -40,11 +43,11 @@ class VDOM_resource_manager(object):
             return False
         if not attributes["id"] in self.__main_index:
             return False
-        resource = self.__main_index[attributes["id"]].load_copy()
+        resource = self.__main_index[attributes["id"]]
         if resource.application_id != owner_id:  # and owner_id not in resource.dependences:
             return False
-        if not resource.filename:
-            return False
+        #if not resource.filename:
+        #    return False
 
         # if resource.application_id != owner_id and owner_id not in resource.dependences:
             # return False
@@ -65,7 +68,7 @@ class VDOM_resource_manager(object):
             # object_owner = None
             if "label" in attributes and (object_id, attributes["label"]) in self.__label_index:
                 return self.__label_index[(object_id, attributes["label"])].id
-            res_descriptor = VDOM_resource_descriptor(owner_id, attributes.get("id"))
+            res_descriptor = VDOM_resource_descriptor(owner_id, attributes.get("id"),attributes.get("res_format"))
 
             self.__main_index[res_descriptor.id] = res_descriptor
             if "label" in attributes:
@@ -76,6 +79,7 @@ class VDOM_resource_manager(object):
             for key in attributes:
                 if key == "name":
                     setattr(res_descriptor, "name", unicode(attributes["name"]).encode('ascii', 'ignore'))
+                    self.__name_index[res_descriptor.name.lower()] = res_descriptor.id
                 elif key == "save_async":
                     write_async = True
                 elif key != "id":
@@ -96,8 +100,8 @@ class VDOM_resource_manager(object):
 
     def get_resource(self, owner_id, res_id):
         """Getting resource object"""
-        res = self.__main_index.get(res_id)
-        return res.load_copy() if res else None
+        return self.__main_index.get(res_id) or self.__main_index.get(self.__name_index.get(res_id.lower()))
+        #return res.load_copy() if res else None
 
     def get_resource_by_label(self, object_id, label):
         """Getting resource object"""
@@ -110,7 +114,7 @@ class VDOM_resource_manager(object):
     def update_resource(self, owner_id, resource_id, bin_data):
         """Adding a new resource"""
         if resource_id in self.__main_index and self.__main_index[resource_id].application_id == owner_id:
-            res = self.__main_index[resource_id].load_copy()
+            res = self.__main_index[resource_id]
             # managers.file_manager.write(file_access.resource, owner_id, None, res.filename, bin_data)
             managers.file_manager.write(file_access.resource, owner_id, res.filename, bin_data)
 
@@ -124,6 +128,8 @@ class VDOM_resource_manager(object):
                 if getattr(resource, "object_id", None):
                     self.__label_index.pop((resource.object_id, resource.label), None)  # TODO: fix labels resources
                 self.__main_index.pop(res_id)
+                if resource.name in self.__name_index:
+                    self.__name_index.pop(resource.name.lower())                
 
     def remove_resources(self):
         """Clearing resource cache on startup"""

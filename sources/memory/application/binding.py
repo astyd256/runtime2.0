@@ -7,7 +7,6 @@ from .bindingparameters import MemoryBindingParameters
 @weak("_collection")
 class MemoryBindingSketch(MemoryBase):
 
-    is_action = constant(False)
     is_binding = constant(True)
 
     _restore = False
@@ -23,6 +22,8 @@ class MemoryBindingSketch(MemoryBase):
         self._name = name
         self._parameters = MemoryBindingParameters(self, parameters)
 
+    owner = property(lambda self: self._collection.owner)
+
     id = rwproperty("_id")
     target_object = roproperty("_target_object")
     name = roproperty("_name")
@@ -35,6 +36,13 @@ class MemoryBindingSketch(MemoryBase):
         restore = self._restore
         self.__class__ = MemoryBinding
         self._collection.on_complete(self, restore)
+        if not restore:
+            owner = self._collection.owner
+            if owner.is_event:
+                owner = owner.owner
+            owner.invalidate(upward=True)
+            if not self._target_object.virtual:
+                owner.autosave()
         return self
 
     def __str__(self):

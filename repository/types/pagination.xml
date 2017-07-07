@@ -772,7 +772,7 @@ class VDOM_pagination(VDOM_object):
 
 		result = \
 			u"""
-				<container id="{id}" visible="{visible}" zindex="{zindex}" hierarchy="{hierarchy}" order="{order}"
+				<container name="{name}" id="{id}" visible="{visible}" zindex="{zindex}" hierarchy="{hierarchy}" order="{order}"
 					top="{top}" left="{left}" width="{width}" height="{height}">
 
 					<svg>
@@ -788,7 +788,7 @@ class VDOM_pagination(VDOM_object):
 
 				</container>
 			""".format(
-				id = self.id,
+				id = self.id, name = self.name,
 				visible =  self.visible, zindex = self.zindex,
 				hierarchy = self.hierarchy, order = self.order,
 				top = self.top, left = self.left,

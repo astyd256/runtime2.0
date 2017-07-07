@@ -155,11 +155,6 @@ def type_builder(parser, installation_callback=None):
                             def httpcontenttype_handler(value): type.http_content_type = value
                             parser.handle_value(name, attributes, httpcontenttype_handler)
                             # </HTTPContentType>
-                        elif name == u"RemoteMethods":
-                            # <RemoteMethods>
-                            def remotemethods_handler(value): type.remote_methods = value
-                            parser.handle_value(name, attributes, remotemethods_handler)
-                            # </RemoteMethods>
                         elif name == u"Handlers":
                             # <Handlers>
                             def handlers_handler(value):
@@ -171,6 +166,18 @@ def type_builder(parser, installation_callback=None):
                                     managers.dispatcher.add_handler(type, handler_name)
                             parser.handle_value(name, attributes, handlers_handler)
                             # </Handlers>
+                        elif name == u"RemoteMethods":
+                            # <RemoteMethods>
+                            def remotemethods_handler(value):
+                                # type.remote_methods = value
+                                try:
+                                    type.remote_methods = filter(None, map(string.strip, value.split(u",")))
+                                except ValueError:
+                                    raise UnexpectedElementValueError(name)
+                                for handler_name in type.remote_methods:
+                                    managers.dispatcher.add_remote_method(type, handler_name)
+                            parser.handle_value(name, attributes, remotemethods_handler)
+                            # </RemoteMethods>
                         elif name == u"Languages" or name == u"SupportedLanguage":
                             # <Languages>
                             def languages_handler(value):

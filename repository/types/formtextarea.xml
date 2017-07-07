@@ -550,7 +550,7 @@ class VDOM_formtextarea(VDOM_object):
 	def wysiwyg(self, contents=""):
 		
 		result = \
-			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
+			u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
 						top="{top}" left="{left}" width="{width}" height="{height}" >
 					<htmltext top="0" left="0" width="{width}" height="{height}" overflow="hidden" blendMode="normal">
 						<textarea style="width: {width}px; height: {height}px; background-color:#ffffff; font: 14px tahoma; padding: 2px 5px;">
@@ -561,7 +561,7 @@ class VDOM_formtextarea(VDOM_object):
 			""".format(
 					id = self.id, vis = self.visible, zind = self.zindex, 
 					hierarchy = self.hierarchy, order = self.order, 
-					top = self.top, left = self.left, 
+					top = self.top, left = self.left, name = self.name,
 					width = self.width, height = self.height,
 					value = self.value)
 		

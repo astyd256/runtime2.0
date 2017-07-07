@@ -1,9 +1,11 @@
 
+import sys
+
 import settings
 import managers
 import file_access
 
-from utils.properties import weak, roproperty, rwproperty
+from utils.properties import weak, constant, rwproperty
 from utils import verificators
 from scripting.executable import SOURCE_CODE, Executable
 
@@ -12,6 +14,8 @@ from ..generic import MemoryBase
 
 @weak("_collection")
 class MemoryLibrarySketch(MemoryBase, Executable):
+
+    is_library = constant(True)
 
     _restore = False
 
@@ -24,7 +28,7 @@ class MemoryLibrarySketch(MemoryBase, Executable):
         self._collection = collection
 
     lock = property(lambda self: self._collection.owner.lock)
-    owner = roproperty("_owner")
+    owner = property(lambda self: self._collection.owner)
     application = property(lambda self: self._collection.owner.application)
 
     scripting_language = property(lambda self: str(self._collection.owner.application.scripting_language))
@@ -43,10 +47,8 @@ class MemoryLibrarySketch(MemoryBase, Executable):
         restore = self._restore
         self.__class__ = MemoryLibrary
         self._collection.on_complete(self, restore)
-
-        if self._name is None:
-            raise Exception(u"Library require name")
-
+        if not restore:
+            self._collection.owner.autosave()
         return self
 
     def __str__(self):
@@ -75,13 +77,22 @@ class MemoryLibrary(MemoryLibrarySketch):
             raise Exception("Invalid name: %r" % value)
 
         with self._collection.owner.lock:
+            self._collection.on_rename(self, value)
             source_code = self.source_code
             self.cleanup(remove=True)
-            self._name = self._collection.on_rename(self, value)
+            self._name = value
             self.source_code = source_code
             self._collection.owner.autosave()
 
     name = rwproperty("_name")
+
+    def cleanup(self, remove=False):
+        with self.lock:
+            super(MemoryLibrary, self).cleanup(remove=remove)
+            self.unimport()
+
+    def unimport(self):
+        sys.modules.pop("%s.%s" % (self.application.id, self._name), None)
 
     # unsafe
     def compose(self, ident=u"", file=None, shorter=False):

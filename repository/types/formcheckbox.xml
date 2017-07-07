@@ -704,7 +704,7 @@ $('#inp_%(id)s').click(function(){
     disable = u""" disabled="disabled" """ if self.disable == "1" else u""
     
     result = \
-      u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
+      u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
             top="{top}" left="{left}" width="{width}" height="{height}" >
           <htmltext top="0" left="0" width="{width}" height="{height}" locked="true" overflow="hidden">
             <input type="checkbox" {state} {disable}
@@ -714,7 +714,7 @@ $('#inp_%(id)s').click(function(){
           </htmltext>
         </container>
       """.format(
-        id = self.id, vis = self.visible, zind = self.zindex, 
+        id = self.id, vis = self.visible, zind = self.zindex, name = self.name, 
         hierarchy = self.hierarchy, order = self.order, 
         top = self.top, left = self.left, width = self.width, height = self.height,
         label=self.label,

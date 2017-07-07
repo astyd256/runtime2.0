@@ -4,6 +4,9 @@ APPLICATION = "application"
 OBJECT = "object"
 ACTION = "action"
 
+USER = "user"
+GROUP = "group"
+
 ALL = "all",
 TYPES = "types",
 APPLICATIONS = "applications", "apps"

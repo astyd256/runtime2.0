@@ -2942,8 +2942,8 @@ class VDOM_connector(VDOM_object):
         for index, (key, data) in enumerate(items.iteritems()):
             copy = managers.engine.application.objects.new(source_object.type,
                 name="vdomclass%d" % index, virtual=True, attributes=source_object.attributes)
-            copy.objects += source_object.objects
-            copy.actions += source_object.actions
+            copy.objects.replicate(source_object.objects)
+            copy.actions.replicate(source_object.actions)
 
             classes = " ".join(filter(None, (
                 u"%s-item" % classname,
@@ -3298,7 +3298,7 @@ console.info('connectionDragStop');
         html = "<![CDATA[" + html + "]]" + ">"
 
         result = \
-            u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+            u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
 						top="{top}" left="{left}" width="{width}" height="{height}">
 					<svg>
 						<rect x="0" y="0" width="{width}" height="{height}" fill="#EEEEEE"/>
@@ -3307,7 +3307,7 @@ console.info('connectionDragStop');
 					<htmltext top="2" left="2" width="{hwidth}" height="{hheight}">{html}</htmltext>
 				</container>
 			""".format(
-                id=self.id, vis=self.visible,
+                id=self.id, vis=self.visible, name=self.name,
                 zind=self.zindex, hierarchy=self.hierarchy, order=self.order,
                 top=self.top, left=self.left,
                 width=self.width, height=self.height,

@@ -18,7 +18,7 @@
 		<OptimizationPriority>1</OptimizationPriority>
 		<Container>1</Container>
 		<Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
-		<Handlers>set_attr</Handlers>
+		<Handlers>on_update</Handlers>
 		<Languages>en_US, en_US, en_US, ru_RU, fr_FR</Languages>
 	</Information>
 	<Attributes>
@@ -707,6 +707,35 @@
 		</Language>
 	</Languages>
 	<Resources>
+		<Resource ID="0d869c7d-68a9-382b-a622-089cbf6cde2b" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOkMyQTcxNjY4MUZFNTExRTFBMzA4RTk3RDc3RjgzRUU0IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOkMyQTcxNjY5MUZFNTExRTFBMzA4RTk3RDc3RjgzRUU0Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QzJBNzE2NjYxRkU1MTFFMUEzMDhF
+			OTdENzdGODNFRTQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QzJBNzE2NjcxRkU1MTFFMUEz
+			MDhFOTdENzdGODNFRTQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz4zLJT9AAACVElEQVR42pRTQWsTQRT+ZjaJqTW2NanWQpNK
+			kAoBsYqKUBC16kXE/oCCF7EigicPXgQvHjxXhOLNg5ccRBDRIOhBFAVvrRXFSK2CJcSmSbPZ3Znx
+			zczuJtcuye7O7Lzvfd9732O1lY9gnGP64YbCFq6XV9IsO3YcHFDmt+VL2aCEUoIeDJW5DBhziI2D
+			0/M1vL6eQ4SslMSZB3VUrmagz+u1kiIEEAE0D3q1T4k4KHyLD9tgYdbR94QUHuVX+LwqsNpg+Faz
+			YRcW6nB9ZTgwZvfmym0cGAYmcgpniyEDEXTACXFyJIXDe62EF1+Ap5fTIQNNV+L8Ix/zFxWkJMa0
+			lpq5AfA3oZwUUQooOGkAtBYZuJa+Lpah60D4bleCjAC8FqTjodrYjpqrsFRL0nYKM48VSdAQDJw5
+			5vDtVw5KOYHCzgBHR1oWIPCa4MQg3+9hPJPAkd0c5cVRPLn0NyqhyThTHsWdE79jBsIXEUCLAKiQ
+			PGH/zLQEfqfR03Nb8cDbCDsgTF1CCU1I0v6jNYh/XhJf1zPmw+zzfXADx3SBM+uHu+/HMDGwjkJ/
+			E5PZtaiIbcrso5DuYLyP49Agx7PqHixMvQuNxEzPZ9+cxK3SJ5NdMxJ+xEB0wIRvqdNMRBJ0bXo0
+			mLvumLawNVFoZd0uqjOq7WE0gxR+bu4yxrr2YRquSMYStJfuLx7D/h1ryPfVcXDgV9fKirLmt/0B
+			S3OUMiv43hzCjeLbnuwK95bP4WaxEg4RGUrEwyRtlRmL/X0qu0Rbfjxx+j41tAxFUrvDaM/+F2AA
+			3tc//lMhXzcAAAAASUVORK5CYII=
+		</Resource>
 		<Resource ID="168eab1b-d9e1-9d79-01ce-0211fc938fbf" Type="png" Name="picture">
 			iVBORw0KGgoAAAANSUhEUgAAAAcAAAAbCAIAAAA/JAJkAAAAXklEQVR42o3KtxHAIADAQHv/Uck5
 			gwewClT+6T3nPL9e1r33ta61QOecoGOMa+29g7bWQGutoKUU0JwzaEoJNMYIGkIA9d6DOudArbWg
@@ -757,35 +786,6 @@
 			IoJYPIIo1x3qNiUhqUQbkvFWxDmS8TakUq1IJdv4TyOOMm+0WCSHFNfjIhft4LwdmTgvmcBi+Uq9
 			L0cqJjpa9DNNPRmueQyT4fs+wydMuBTd+qUtIbBsB9euXmYsN8IlO5pCI1qsfjEVSgUsLsyjs7Nb
 			N5b8IZB7XAeSsrbj4F/Ogv5DfozoYQAAAABJRU5ErkJggg==
-		</Resource>
-		<Resource ID="0d869c7d-68a9-382b-a622-089cbf6cde2b" Type="jpg" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
-			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
-			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
-			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
-			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
-			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
-			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
-			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
-			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
-			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
-			PSJ4bXAuaWlkOkMyQTcxNjY4MUZFNTExRTFBMzA4RTk3RDc3RjgzRUU0IiB4bXBNTTpEb2N1bWVu
-			dElEPSJ4bXAuZGlkOkMyQTcxNjY5MUZFNTExRTFBMzA4RTk3RDc3RjgzRUU0Ij4gPHhtcE1NOkRl
-			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QzJBNzE2NjYxRkU1MTFFMUEzMDhF
-			OTdENzdGODNFRTQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QzJBNzE2NjcxRkU1MTFFMUEz
-			MDhFOTdENzdGODNFRTQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
-			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz4zLJT9AAACVElEQVR42pRTQWsTQRT+ZjaJqTW2NanWQpNK
-			kAoBsYqKUBC16kXE/oCCF7EigicPXgQvHjxXhOLNg5ccRBDRIOhBFAVvrRXFSK2CJcSmSbPZ3Znx
-			zczuJtcuye7O7Lzvfd9732O1lY9gnGP64YbCFq6XV9IsO3YcHFDmt+VL2aCEUoIeDJW5DBhziI2D
-			0/M1vL6eQ4SslMSZB3VUrmagz+u1kiIEEAE0D3q1T4k4KHyLD9tgYdbR94QUHuVX+LwqsNpg+Faz
-			YRcW6nB9ZTgwZvfmym0cGAYmcgpniyEDEXTACXFyJIXDe62EF1+Ap5fTIQNNV+L8Ix/zFxWkJMa0
-			lpq5AfA3oZwUUQooOGkAtBYZuJa+Lpah60D4bleCjAC8FqTjodrYjpqrsFRL0nYKM48VSdAQDJw5
-			5vDtVw5KOYHCzgBHR1oWIPCa4MQg3+9hPJPAkd0c5cVRPLn0NyqhyThTHsWdE79jBsIXEUCLAKiQ
-			PGH/zLQEfqfR03Nb8cDbCDsgTF1CCU1I0v6jNYh/XhJf1zPmw+zzfXADx3SBM+uHu+/HMDGwjkJ/
-			E5PZtaiIbcrso5DuYLyP49Agx7PqHixMvQuNxEzPZ9+cxK3SJ5NdMxJ+xEB0wIRvqdNMRBJ0bXo0
-			mLvumLawNVFoZd0uqjOq7WE0gxR+bu4yxrr2YRquSMYStJfuLx7D/h1ryPfVcXDgV9fKirLmt/0B
-			S3OUMiv43hzCjeLbnuwK95bP4WaxEg4RGUrEwyRtlRmL/X0qu0Rbfjxx+j41tAxFUrvDaM/+F2AA
-			3tc//lMhXzcAAAAASUVORK5CYII=
 		</Resource>
 		<Resource ID="f7e008b4-3eef-3269-b004-089c613a538b" Type="png" Name="Icon">
 			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
@@ -891,8 +891,7 @@
 		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[
-import json
+<![CDATA[import json
 
 
 class VDOM_datatable_v3(VDOM_object):
@@ -1383,7 +1382,7 @@ $j('#%(id)s tr').draggable({
 
 		# collect result
 		result = \
-			u"""<container id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" top="{top}" left="{left}" width="{width}" height="{height}">
+			u"""<container name="{name}" id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" top="{top}" left="{left}" width="{width}" height="{height}">
 					<table zindex="{zindex}" top="0" left="0" width="{width}" height="{height}" backgroundcolor="#f0f0f0" bordercolor="#000000" borderwidth="1" >
 						<row backgroundcolor="#f0f0f0" bordercolor="#000000" borderwidth="1">
 							{theader}
@@ -1400,11 +1399,13 @@ $j('#%(id)s tr').draggable({
 					width = self.width, height = self.height,
 					theader = theader,
 					tdata = tdata,
-					contents = contents)
+					contents = contents,
+					name = self.name)
 
 		return VDOM_object.wysiwyg(self, contents=result)
 
 
+# def set_attr(app_id, object_id, param):
 def on_update(object, attributes):
 
 	eof_style = """
@@ -1569,7 +1570,6 @@ def on_update(object, attributes):
 	border-bottom: 1px dotted #bfbfbf;
 	line-height: 27px;
 }"""
-# def set_attr(app_id, object_id, param):
 
 	# o = application.objects.search(object_id)
 	o = object
@@ -1587,18 +1587,15 @@ def on_update(object, attributes):
 	# 	o.set_attributes({"skin": 0})
 	if "skin" in attributes:
 		if attributes["skin"] == "1":
-			o.attributes.update(skin=css)
+			attributes.update(skin=css)
 		elif attributes["skin"] == "2":
-			o.attributes.update(skin=eof_style)
+			attributes.update(skin=eof_style)
 		elif attributes["skin"] == "3":
-			o.attributes.update(skin=pro_suite)
+			attributes.update(skin=pro_suite)
 	if "style" in attributes and attributes["style"] and o.attributes.style != css and o.attributes.style != eof_style and o.attributes.style != pro_suite:
-		o.attributes.update(skin=0)
+		attributes.update(skin="0")
 
-	return ""
-
- 
-]]>
+	return ""]]>
 	</SourceCode>
 	<Libraries>
 		<Library Target="html"><![CDATA[<script type='text/javascript'>

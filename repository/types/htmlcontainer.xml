@@ -203,7 +203,7 @@
 			<ColorGroup>2</ColorGroup>
 		</Attribute>
 		<Attribute>
-			<Name>testFunc</Name>
+			<Name>testfunctions</Name>
 			<DisplayName>#Lang(116)</DisplayName>
 			<Description>#Lang(216)</Description>
 			<DefaultValue></DefaultValue>
@@ -215,7 +215,7 @@
 			<ColorGroup>3</ColorGroup>
 		</Attribute>
 		<Attribute>
-			<Name>testClasses</Name>
+			<Name>testclasses</Name>
 			<DisplayName>#Lang(117)</DisplayName>
 			<Description>#Lang(217)</Description>
 			<DefaultValue></DefaultValue>
@@ -337,26 +337,26 @@
 		<Attribute>
 			<Name>cookiewarning</Name>
 			<DisplayName>#Lang(128)</DisplayName>
+			<Description>#Lang(228)</Description>
 			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(328)</ErrorValidationMessage>
 			<Visible>1</Visible>
-			<Help>#Lang(228)</Help>
 			<InterfaceType>0</InterfaceType>
 			<CodeInterface>DropDown((#Lang(413)|0)|(#Lang(414)|1))</CodeInterface>
-			<Colorgroup>2</Colorgroup>
-			<ErrorValidationMessage>#Lang(328)</ErrorValidationMessage>
-			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ColorGroup>2</ColorGroup>
 		</Attribute>
 		<Attribute>
 			<Name>cookiewarningtext</Name>
 			<DisplayName>#Lang(129)</DisplayName>
+			<Description>#Lang(229)</Description>
 			<DefaultValue>En poursuivant votre navigation, vous acceptez le dépôt de cookies tiers destinés à vous proposer des vidéos, des boutons de partage, des remontées de contenus de plateformes sociales</DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(329)</ErrorValidationMessage>
 			<Visible>1</Visible>
-			<Help>#Lang(229)</Help>
 			<InterfaceType>0</InterfaceType>
 			<CodeInterface>MultiLine(1000)</CodeInterface>
-			<Colorgroup>2</Colorgroup>
-			<ErrorValidationMessage>#Lang(329)</ErrorValidationMessage>
-			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ColorGroup>2</ColorGroup>
 		</Attribute>
 	</Attributes>
 	<Languages>
@@ -378,8 +378,8 @@
 			<Sentence ID="113">Denied link</Sentence>
 			<Sentence ID="114">jQuery.UI</Sentence>
 			<Sentence ID="115">Custom headers</Sentence>
-			<Sentence ID="116">testFunc</Sentence>
-			<Sentence ID="117">testClasses</Sentence>
+			<Sentence ID="116">testfunctions</Sentence>
+			<Sentence ID="117">testclasses</Sentence>
 			<Sentence ID="118">Positioning</Sentence>
 			<Sentence ID="119">Style</Sentence>
 			<Sentence ID="121">Text color</Sentence>
@@ -405,8 +405,8 @@
 			<Sentence ID="213">The page, to which the user is redirected when a security check fails. If it is not specified a blank page is displayed.</Sentence>
 			<Sentence ID="214">Use jQuery.UI</Sentence>
 			<Sentence ID="215">Custom tags (meta, style, script) to place in  HEAD tag of document</Sentence>
-			<Sentence ID="216">testFunc</Sentence>
-			<Sentence ID="217">testClasses</Sentence>
+			<Sentence ID="216">testfunctions</Sentence>
+			<Sentence ID="217">testclasses</Sentence>
 			<Sentence ID="218">Positioning</Sentence>
 			<Sentence ID="219">Style</Sentence>
 			<Sentence ID="221">The color of the text.</Sentence>
@@ -583,8 +583,8 @@
 			<Sentence ID="113">Lien refusé</Sentence>
 			<Sentence ID="114">jQuery.UI</Sentence>
 			<Sentence ID="115"></Sentence>
-			<Sentence ID="116">testFunc</Sentence>
-			<Sentence ID="117">testClasses</Sentence>
+			<Sentence ID="116">testfunctions</Sentence>
+			<Sentence ID="117">testclasses</Sentence>
 			<Sentence ID="118">Position</Sentence>
 			<Sentence ID="119">Style</Sentence>
 			<Sentence ID="121">Couleur Texte</Sentence>
@@ -608,8 +608,8 @@
 			<Sentence ID="213">Lien refusé</Sentence>
 			<Sentence ID="214">Use jQuery.UI</Sentence>
 			<Sentence ID="215"></Sentence>
-			<Sentence ID="216">testFunc</Sentence>
-			<Sentence ID="217">testClasses</Sentence>
+			<Sentence ID="216">testfunctions</Sentence>
+			<Sentence ID="217">testclasses</Sentence>
 			<Sentence ID="218">Position du container à l&apos;intèrieur de la fenetre du navigateur</Sentence>
 			<Sentence ID="219">Style</Sentence>
 			<Sentence ID="221">Couleur par défaut du texte de la page</Sentence>
@@ -780,8 +780,8 @@
 			<Sentence ID="113">Ссылка при отказе</Sentence>
 			<Sentence ID="114">jQuery.UI</Sentence>
 			<Sentence ID="115"></Sentence>
-			<Sentence ID="116">testFunc</Sentence>
-			<Sentence ID="117">testClasses</Sentence>
+			<Sentence ID="116">testfunctions</Sentence>
+			<Sentence ID="117">testclasses</Sentence>
 			<Sentence ID="118">Позиционирование</Sentence>
 			<Sentence ID="119">Стиль</Sentence>
 			<Sentence ID="121">Цвет текста</Sentence>
@@ -805,8 +805,8 @@
 			<Sentence ID="213">Ссылка при отказе</Sentence>
 			<Sentence ID="214">Use jQuery.UI</Sentence>
 			<Sentence ID="215"></Sentence>
-			<Sentence ID="216">testFunc</Sentence>
-			<Sentence ID="217">testClasses</Sentence>
+			<Sentence ID="216">testfunctions</Sentence>
+			<Sentence ID="217">testclasses</Sentence>
 			<Sentence ID="218">Позиционирование</Sentence>
 			<Sentence ID="219">Стиль</Sentence>
 			<Sentence ID="221">Цвет текста</Sentence>
@@ -5446,32 +5446,30 @@
 			ZW50RW5naW5lKSB7DQogICAgICAgIHRhcmdldC5ldmVudEVuZ2luZS5wcm9jZXNzRXZlbnQobmV2
 			KTsNCiAgICB9DQp9DQoNCi8qKg0KICogY2FsbCBiaW5kZWQgZXZlbnQNCiAqLw0KZnVuY3Rpb24g
 			ZXhlY0V2ZW50QmluZGVkKHNyY0lELCBldnROYW1lLCBwYXJhbXMsIHF1ZSkNCnsNCiAgICB2YXIg
-			YWN0X3N0ciwgYWN0TGlzdCwgaSwgaWk7DQogICAgdHJ5IHsNCiAgICAgICAgbyA9IGV2YWwoIk9i
-			al8iK3NyY0lEKyIgfHwgdW5kZWZpbmVkOyIpOw0KICAgIH0gY2F0Y2ggKGV4KSB7DQogICAgICAg
-			IG8gPSBldmFsKCJ3aW5kb3cuT2JqXyIrc3JjSUQrIiB8fCB1bmRlZmluZWQ7Iik7DQogICAgfQ0K
-			DQogICAgaWYgKHR5cGVvZiBvID09PSAndW5kZWZpbmVkJykgew0KICAgICAgICBnZW5lcmF0ZUVy
-			cm9yRXZlbnQoIkVSUk9SIGV4ZWNFdmVudEJpbmRlZDogT2JqXyIrc3JjSUQrIiBpcyB1bmRlZmlu
-			ZWQiKTsNCiAgICAgICAgcmV0dXJuOw0KICAgIH0NCg0KICAgIHZhciBldiA9IG5ldyBWRE9NX0V2
-			ZW50KCk7DQogICAgZXYuc3JjT2JqID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoIm9fIitzcmNJ
-			RCk7DQogICAgZXYubmFtZSA9IGV2dE5hbWU7DQogICAgDQogICAgaWYgKHBhcmFtcyAhPT0gJ3Vu
-			ZGVmaW5lZCcpIHsNCiAgICAgICAgZm9yICh2YXIgayBpbiBwYXJhbXMpIHsNCiAgICAgICAgICAg
-			IGlmIChwYXJhbXMuaGFzT3duUHJvcGVydHkoaykpIHsNCiAgICAgICAgICAgICAgICBldi5hZGRQ
-			YXJhbWV0ZXIoaywgcGFyYW1zW2tdKTsNCiAgICAgICAgICAgIH0NCiAgICAgICAgfQ0KICAgIH0N
-			Cg0KICAgIG8uZXhlY0V2ZW50KGV2LCBxdWUgfHwgZmFsc2UpOw0KfQ0KDQoNCi8qKg0KICogZXhl
-			Y3V0ZSBzaW5nbGUgYWN0aW9uIGRpcmVjdGx5DQogKi8NCmZ1bmN0aW9uIGV4ZWNBY3Rpb25EaXJl
-			Y3QoYWN0TmFtZSwgcGFyYW1zLCB0YXJnZXQpDQp7DQovKg0KICAgIHZhciBzID0gJycsIGYgPSAi
-			T2JqXyIrdGFyZ2V0KyIuIithY3ROYW1lOw0KICAgIGZvciAoeCBpbiBwYXJhbXMpIHsNCiAgICAg
-			ICAgcyArPSAocyA9PT0gJycgPyAnJyA6ICcsJykgKyBKU09OLnN0cmluZ2lmeShwYXJhbXNbeF0p
-			Ow0KICAgIH0NCiAgICBzID0gcy5yZXBsYWNlKC9cbi9nLCAnXFxuJyk7DQogICAgdHJ5IHsNCiAg
-			ICAgICAgZXZhbChmKyIoIitzKyIpOyIpOw0KKi8NCiAgICB0cnkgew0KICAgICAgICBldmFsKCJ2
-			YXIgdCA9IE9ial8iK3RhcmdldCk7DQogICAgICAgIGV2YWwoInZhciBmID0gT2JqXyIrdGFyZ2V0
-			KyIuIithY3ROYW1lKTsNCiAgICAgICAgZi5hcHBseSh0LCBwYXJhbXMpOw0KDQogICAgfSBjYXRj
-			aChleCkgew0KICAgICAgICAvL2dlbmVyYXRlRXJyb3JFdmVudCgnRVJST1IgZXhlY0FjdGlvbkRp
-			cmVjdCBvbiBldmFsIFtFcnJvciBjb2RlOiAnK2V4KyddOiAnK2YrJygiJytzKyciKTsnKTsNCiAg
-			ICAgICAgZ2VuZXJhdGVFcnJvckV2ZW50KCdFUlJPUiBleGVjQWN0aW9uRGlyZWN0IG9uIGV2YWw6
-			ICcrZXgpOw0KICAgICAgICAvL2dlbmVyYXRlRXJyb3JFdmVudCgnRVJST1IgZXhlY0FjdGlvbkRp
-			cmVjdCBvbiBldmFsOiAnK2YpOw0KICAgICAgICAvL2NvbnNvbGUuaW5mbyhzKTsNCiAgICB9DQp9
-			DQo=
+			YWN0X3N0ciwgYWN0TGlzdCwgaSwgaWksIG8gPSBldmFsKCJPYmpfIitzcmNJRCsiIHx8IG51bGw7
+			Iik7DQogICAgaWYgKHR5cGVvZiBvID09PSAndW5kZWZpbmVkJykgew0KICAgICAgICBnZW5lcmF0
+			ZUVycm9yRXZlbnQoIkVSUk9SIGV4ZWNFdmVudEJpbmRlZDogT2JqXyIrc3JjSUQrIiBpcyB1bmRl
+			ZmluZWQiKTsNCiAgICAgICAgcmV0dXJuOw0KICAgIH0NCg0KICAgIHZhciBldiA9IG5ldyBWRE9N
+			X0V2ZW50KCk7DQogICAgZXYuc3JjT2JqID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoIm9fIitz
+			cmNJRCk7DQogICAgZXYubmFtZSA9IGV2dE5hbWU7DQogICAgDQogICAgaWYgKHBhcmFtcyAhPT0g
+			J3VuZGVmaW5lZCcpIHsNCiAgICAgICAgZm9yICh2YXIgayBpbiBwYXJhbXMpIHsNCiAgICAgICAg
+			ICAgIGlmIChwYXJhbXMuaGFzT3duUHJvcGVydHkoaykpIHsNCiAgICAgICAgICAgICAgICBldi5h
+			ZGRQYXJhbWV0ZXIoaywgcGFyYW1zW2tdKTsNCiAgICAgICAgICAgIH0NCiAgICAgICAgfQ0KICAg
+			IH0NCg0KICAgIG8uZXhlY0V2ZW50KGV2LCBxdWUgfHwgZmFsc2UpOw0KfQ0KDQoNCi8qKg0KICog
+			ZXhlY3V0ZSBzaW5nbGUgYWN0aW9uIGRpcmVjdGx5DQogKi8NCmZ1bmN0aW9uIGV4ZWNBY3Rpb25E
+			aXJlY3QoYWN0TmFtZSwgcGFyYW1zLCB0YXJnZXQpDQp7DQovKg0KICAgIHZhciBzID0gJycsIGYg
+			PSAiT2JqXyIrdGFyZ2V0KyIuIithY3ROYW1lOw0KICAgIGZvciAoeCBpbiBwYXJhbXMpIHsNCiAg
+			ICAgICAgcyArPSAocyA9PT0gJycgPyAnJyA6ICcsJykgKyBKU09OLnN0cmluZ2lmeShwYXJhbXNb
+			eF0pOw0KICAgIH0NCiAgICBzID0gcy5yZXBsYWNlKC9cbi9nLCAnXFxuJyk7DQogICAgdHJ5IHsN
+			CiAgICAgICAgZXZhbChmKyIoIitzKyIpOyIpOw0KKi8NCiAgICB0cnkgew0KICAgICAgICBldmFs
+			KCJ2YXIgdCA9IE9ial8iK3RhcmdldCk7DQogICAgICAgIGV2YWwoInZhciBmID0gT2JqXyIrdGFy
+			Z2V0KyIuIithY3ROYW1lKTsNCiAgICAgICAgZi5hcHBseSh0LCBwYXJhbXMpOw0KDQogICAgfSBj
+			YXRjaChleCkgew0KICAgICAgICAvL2dlbmVyYXRlRXJyb3JFdmVudCgnRVJST1IgZXhlY0FjdGlv
+			bkRpcmVjdCBvbiBldmFsIFtFcnJvciBjb2RlOiAnK2V4KyddOiAnK2YrJygiJytzKyciKTsnKTsN
+			CiAgICAgICAgZ2VuZXJhdGVFcnJvckV2ZW50KCdFUlJPUiBleGVjQWN0aW9uRGlyZWN0IG9uIGV2
+			YWw6ICcrZXgpOw0KICAgICAgICAvL2dlbmVyYXRlRXJyb3JFdmVudCgnRVJST1IgZXhlY0FjdGlv
+			bkRpcmVjdCBvbiBldmFsOiAnK2YpOw0KICAgICAgICAvL2NvbnNvbGUuaW5mbyhzKTsNCiAgICB9
+			DQp9DQo=
 		</Resource>
 		<Resource ID="b67cfe82-a508-63ba-37ca-6c27d82c5112" Type="js" Name="jquery_UI.js">
 			LyogalF1ZXJ5IFVJIGNvcmUgMS44LjIwICovDQooZnVuY3Rpb24oYSxiKXtmdW5jdGlvbiBjKGIs
@@ -9542,8 +9540,8 @@ class VDOM_htmlcontainer(VDOM_object):
             e2vstate="0",
             e2vsv=json.dumps(response.shared_variables.copy()),
             jquery_ui=JQUERY_UI,
-            test_functions=self.testFunc or DEFAULT_TEST_FUNCTIONS,
-            test_classes=self.testClasses or DEFAULT_TEST_CLASSES,
+            test_functions=self.testfunctions or DEFAULT_TEST_FUNCTIONS,
+            test_classes=self.testclasses or DEFAULT_TEST_CLASSES,
             css="\n".join((self.css, centering_css)),
             static_libraries=static_libraries,
             dynamic_libraries=dynamic_libraries,
@@ -9562,8 +9560,8 @@ class VDOM_htmlcontainer(VDOM_object):
         return VDOM_object.render(self, contents=result)
 
     def wysiwyg(self, contents=""):
-        result = "<container id=\"%s\" visible=\"%s\" zindex=\"%s\" hierarchy=\"%s\" order=\"%s\" backgroundcolor=\"#%s\" backgroundimage=\"%s\" backgroundrepeat=\"%s\" >%s</container>" % (
-            self.id, self.visible, self.zindex, self.hierarchy, self.order, self.bgcolor, self.image, self.bgrepeat, contents)
+        result = "<container name=\"%s\" id=\"%s\" visible=\"%s\" zindex=\"%s\" hierarchy=\"%s\" order=\"%s\" backgroundcolor=\"#%s\" backgroundimage=\"%s\" backgroundrepeat=\"%s\" >%s</container>" % (
+            self.name, self.id, self.visible, self.zindex, self.hierarchy, self.order, self.bgcolor, self.image, self.bgrepeat, contents)
         return VDOM_object.wysiwyg(self, contents=result)]]>
 	</SourceCode>
 	<E2VDOM>

@@ -26,11 +26,10 @@ class MemoryLibraries(MemoryBase, MutableMapping):
 
     def on_rename(self, item, name):
         with self._owner.lock:
-            del self._items[item.name]
             if name in self._items:
-                name = generate_unique_name(name, self._items)
+                raise KeyError
             self._items[name] = item
-            return name
+            del self._items[item._name]
 
     def on_complete(self, item, restore):
         with self._owner.lock:
@@ -70,6 +69,7 @@ class MemoryLibraries(MemoryBase, MutableMapping):
     def __delitem__(self, key):
         with self._owner.lock:
             item = self._items[key]
+            item.cleanup(remove=True)
             del self._items[item.name]
 
     def __iter__(self):

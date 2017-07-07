@@ -12,6 +12,7 @@ from .action import MemoryActionSketch, MemoryActionRestorationSketch, MemoryAct
 
 
 NAME_BASE = "action"
+EMPTY_DICTIONARY = {}
 
 
 @weak("_owner")
@@ -51,29 +52,26 @@ class MemoryActions(MemoryBase, MutableMapping):
     owner = roproperty("_owner")
     catalog = roproperty("_catalog")
     generic = roproperty("_generic")
+    names = property(lambda self: self.__dict__.get("_items_by_name", EMPTY_DICTIONARY).key())
 
     def on_rename(self, item, name):
         with self._owner.lock:
-            del self._items_by_name[item.name]
             if name in self._items_by_name:
-                name = generate_unique_name(name, self._items_by_name)
+                raise KeyError
             self._items_by_name[name] = item
-            return name
+            del self._items_by_name[item._name]
 
     def on_complete(self, item, restore):
         with self._owner.lock:
+            if item._id is None:
+                item._id = str(uuid4())
             if item._name is None or item._name in self._items_by_name:
                 item._name = generate_unique_name(item._name or NAME_BASE, self._items_by_name)
 
-            self._items[item.id] = item
-            self._items_by_name[item.name] = item
-
+            self._items[item._id] = item
+            self._items_by_name[item._name] = item
             if not self._owner.virtual:
-                self._all_items[item.id] = item
-
-            if not restore:
-                self._owner.invalidate(contexts=(item._id, item._name), downward=True, upward=True)
-                self._owner.autosave()
+                self._all_items[item._id] = item
 
     def new_sketch(self, restore=False, handler=None):
         return (MemoryActionRestorationSketch if restore
@@ -112,17 +110,29 @@ class MemoryActions(MemoryBase, MutableMapping):
                 self._owner.invalidate(contexts=contexts, downward=True, upward=True)
                 self._owner.autosave()
 
-    def __iadd__(self, actions):
-        if "_items" in actions.__dict__:
-            with self._owner.lock:
-                contexts = set()
-                for item in actions._items.itervalues():
-                    copy = MemoryActionDuplicationSketch(self, item)
-                    copy.id = str(uuid4())
-                    ~copy
-                    contexts.update({item.id, item.name})
-                self._owner.invalidate(contexts=contexts, downward=True, upward=True)
-        return self
+    def replicate(self, another):
+        if isinstance(another, MemoryActionSketch):
+            enumeration = another,
+        elif isinstance(another, MemoryActions):
+            if "_items" in another.__dict__:
+                enumeration = another._items.itervalues()
+            else:
+                enumeration = ()
+        else:
+            raise ValueError("Action or actions collection required")
+
+        with self._owner.lock:
+            copy = None
+
+            contexts = set()
+            for item in enumeration:
+                copy = MemoryActionDuplicationSketch(self, item)
+                copy.id = str(uuid4())
+                ~copy
+                contexts.update({item.id, item.name})
+            self._owner.invalidate(contexts=contexts, downward=True, upward=True)
+
+        return copy
 
     def __getitem__(self, key):
         return self._items.get(key) or self._items_by_name[key]

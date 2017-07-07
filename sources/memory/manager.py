@@ -14,7 +14,7 @@ from utils.properties import roproperty  # rwproperty
 from utils.tracing import format_exception_trace
 from utils.parsing import Parser, ParsingException
 
-from .constants import APPLICATION_START_CONTEXT
+from .constants import DEFAULT_APPLICATION_NAME, APPLICATION_START_CONTEXT
 from .type import type_builder, MemoryTypes
 from .application import application_builder, MemoryApplications
 from .daemon import MemoryWriter
@@ -94,14 +94,28 @@ class Memory(object):
         with self._lock:
             self._queue.discard(entity)
 
+    # preparing
+
+    def prepare_type_infrastructure(self, uuid):
+        managers.resource_manager.invalidate_resources(uuid)
+        for category in (file_access.TYPE, file_access.RESOURCE):
+            managers.file_manager.prepare_directory(category, uuid, cleanup=True)
+
+    def prepare_application_infrastructure(self, uuid):
+        managers.resource_manager.invalidate_resources(uuid)
+        managers.database_manager.delete_database(uuid)
+        for category in (file_access.APPLICATION, file_access.RESOURCE, file_access.DATABASE,
+                file_access.LIBRARY, file_access.CACHE, file_access.STORAGE):
+            managers.file_manager.prepare_directory(category, uuid, cleanup=True)
+
     # cleanupping
 
-    def cleanup_type(self, uuid):
+    def cleanup_type_infrastructure(self, uuid):
         entities = (file_access.TYPE, file_access.RESOURCE)
         for category in entities:
             managers.file_manager.cleanup_directory(category, uuid, remove=True)
 
-    def cleanup_application(self, uuid, remove_databases=True, remove_storage=True):
+    def cleanup_application_infrastructure(self, uuid, remove_databases=True, remove_storage=True):
         entities = [file_access.APPLICATION, file_access.RESOURCE, file_access.LIBRARY, file_access.CACHE]
         if remove_databases:
             entities.append(file_access.DATABASE)
@@ -111,21 +125,39 @@ class Memory(object):
         for category in entities:
             managers.file_manager.cleanup_directory(category, uuid, remove=True)
 
+    # creation
+
+    def create_application(self, name=DEFAULT_APPLICATION_NAME):
+
+        def cleanup(uuid):
+            self.cleanup_application_infrastructure(uuid)
+            if uuid in self._applications:
+                del self._applications[uuid]
+
+        application = self._applications.new(name=name)
+        log.write("create new application %s" % application)
+        try:
+            self.prepare_application_infrastructure(application.id)
+            return application
+        except:
+            cleanup(application.id)
+            raise
+
     # installation
 
     def install_type(self, filename, into=None):
 
         def cleanup(uuid):
             if uuid:
-                self.cleanup_type(uuid)
+                self.cleanup_type_infrastructure(uuid)
+                if uuid in self._types:
+                    del self._types[uuid]
 
         def on_information(type):
             if managers.file_manager.exists(file_access.TYPE, type.id):
                 raise AlreadyExistsError("Type already installed")
             context.uuid = type.id
-            managers.resource_manager.invalidate_resources(type.id)
-            for category in (file_access.TYPE, file_access.RESOURCE):
-                managers.file_manager.prepare_directory(category, type.id, cleanup=True)
+            self.prepare_type_infrastructure(type.id)
 
         log.write("Install type from %s" % filename)
         parser = Parser(builder=type_builder, notify=True, options=on_information)
@@ -159,17 +191,15 @@ class Memory(object):
 
         def cleanup(uuid):
             if uuid:
-                self.cleanup_application(uuid)
+                self.cleanup_application_infrastructure(uuid)
+                if uuid in self._applications:
+                    del self._applications[uuid]
 
         def on_information(application):
             if managers.file_manager.exists(file_access.APPLICATION, application.id):
                 raise AlreadyExistsError("Application already installed")
             context.uuid = application.id
-            managers.resource_manager.invalidate_resources(application.id)
-            managers.database_manager.delete_database(application.id)
-            for category in (file_access.APPLICATION, file_access.RESOURCE, file_access.DATABASE,
-                    file_access.LIBRARY, file_access.CACHE, file_access.STORAGE):
-                managers.file_manager.prepare_directory(category, application.id, cleanup=True)
+            self.prepare_application_infrastructure(application.id)
             # TODO: ENABLE THIS LATER
             # if application.server_version and VDOM_server_version < application.server_version:
             #     raise Exception("Server version %s is unsuitable for this application %s" % (VDOM_server_version, application.server_version))
@@ -237,8 +267,6 @@ class Memory(object):
                 log.write("Load %s" % application)
                 for lineno, message in parser.report:
                     log.warning("    %s at line %s" % (message, lineno))
-
-
             return application
         except IOError as error:
             raise Exception("Unable to read from \"%s\": %s" % (os.path.basename(location), error.strerror))

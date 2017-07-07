@@ -16,7 +16,7 @@ class Server(SmartServer):
         self._web_server.start()
 
     def work(self):
-        profiler.save()
+        profiler.autosave()
 
 
 VDOM_server = Server

@@ -423,7 +423,7 @@ class VDOM_copy(VDOM_object):
         designcolorvalue = u"#" + self.designcolor if self.designcolor != "" else "none"
 
         result = \
-            u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
+            u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}"
                     top="{top}" left="{left}" width="{width}" height="{height}"
                     backgroundcolor="#EEEEEE" contents="static">
                     <svg>
@@ -446,7 +446,8 @@ class VDOM_copy(VDOM_object):
                 image_width=image_width,
                 image_height=image_height,
                 image_x=image_x,
-                image_y=image_y)
+                image_y=image_y,
+                name=self.name)
         return result
 
     def wysiwyg(self, contents=""):
@@ -458,22 +459,29 @@ class VDOM_copy(VDOM_object):
             object = application.objects.search(self.source_object)
 
             if object:
-                top = self.top if self.top else object.get_attributes()["top"].value
-                left = self.left if self.left else object.get_attributes()["left"].value
-                width = object.get_attributes()["width"].value
+                # top = self.top if self.top else object.get_attributes()["top"].value
+                top = self.top if self.top else object.attributes["top"]
+                # left = self.left if self.left else object.get_attributes()["left"].value
+                left = self.left if self.left else object.attributes["left"]
+                # width = object.get_attributes()["width"].value
+                width = object.attributes["width"]
 
                 height1 = height2 = u""
-                if "height" in object.get_attributes():
-                    height = object.get_attributes()["height"].value
+                # if "height" in object.get_attributes():
+                if "height" in object.attributes:
+                    # height = object.get_attributes()["height"].value
+                    height = object.attributes["height"]
                     height1 = u"""height="%s" """ % height
                     height2 = u"""height="%s" """ % str(int(height) + 2)
 
                 zindex = self.zindex
-                if "zindex" in object.get_attributes():
-                    zindex = object.get_attributes()["zindex"].value
+                # if "zindex" in object.get_attributes():
+                if "zindex" in object.attributes:
+                    # zindex = object.get_attributes()["zindex"].value
+                    zindex = object.attributes["zindex"]
 
                 result = \
-                    u"""<container id="{id}" visible="{vis}" zindex="{zind}"
+                    u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}"
                             top="{top}" left="{left}" width="{width2}" {height2} contents="static">
                             <svg>
                                 <rect x="0" y="0" width="{width2}" {height2} fill="{designcolorvalue}"/>
@@ -493,7 +501,8 @@ class VDOM_copy(VDOM_object):
                         left=left,
                         width=width,
                         height1=height1,
-                        contents=contents)
+                        contents=contents,
+                        name=self.name)
             else:
                 result = self.empty_copy()
         else:

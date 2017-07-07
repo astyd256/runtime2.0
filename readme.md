@@ -159,3 +159,31 @@ This command require enabled profiler.
 Action:
 
     profile show
+    profile show tasks
+
+### Drop profiling statistics
+
+This command require enabled profiler.
+
+Action:
+
+    profile drop
+    profile drop tasks
+
+### Query profiling statistics
+
+This command require enabled profiler.
+
+Action:
+
+    watch query profile c:\temp
+    watch query profile c:\temp tasks
+
+### Query profiling callgraph
+
+This command require enabled profiler.
+
+Action:
+
+    watch query callgraph c:\temp
+    watch query callgraph c:\temp tasks

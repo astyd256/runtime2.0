@@ -548,6 +548,68 @@
 		</Language>
 	</Languages>
 	<Resources>
+		<Resource ID="ab7417f9-08b8-21c5-9669-08a3e1032958" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjNBN0ZCQjFCMUZFNTExRTE4Q0NGQzVGNjcyMTYyNTI2IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjNBN0ZCQjFDMUZFNTExRTE4Q0NGQzVGNjcyMTYyNTI2Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M0E3RkJCMTkxRkU1MTFFMThDQ0ZD
+			NUY2NzIxNjI1MjYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6M0E3RkJCMUExRkU1MTFFMThD
+			Q0ZDNUY2NzIxNjI1MjYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz6M95QTAAACyElEQVR42mxTTU8TURQ989HplNbS0lqDSAOa
+			2PIREqxEQnRh4s6VO3Yu3OrSlQt/gok7FyasTZTEhTHGnTtFEoHwGcRA5bsUSlunw7w3njdT4sbX
+			nL6Z++49995z32i+74OrkzhGuJRhgZgnZolvxBqxg/8srU0wVq7h69NpwDaBnhSQT4foJfXQ5cD3
+			gPhJzLSxTKycEzyseZh6u0LrFmDSJGlstgDHBS7EgZF+GgygLwkMZmiLAFGNvu1KblQdYLQXuMbD
+			vSPA9YByJdxB5zr3OL136Zfj85dd4EH+H8HNBv+ifOtl+TELOKWjHWXjVMZlpiiz59lOgmQnTeBK
+			R6jXOUHBUVn+hBmdMwQ9ZKlBJ0tu0HZC23YdGM4Cv0kQM4K4BUVwkchUWydIppiChxr79kkgie54
+			mFWROMQ+dekmaSYSEMwrguK7pSl82HyNpN2NR3fewGJ5p15IYOusiqK6zOjy3WRElWe5aEDwXVf9
+			Lx3O0NlDpbaBF59uY3nzM66rcVqhcJpSnAEpEmdYUWeMCCuYVRWUDp1tRCImDF2HEB6mF55h43gG
+			XeIJkpyhReeuLmanmKlEKFp7W1IEwzLqwOLPEwIRYeJMCvzYfo+I8RHafhId5lU+x9nKAaRWRyqW
+			wPNbr6oatD1FMGIYBq+kBV0XnIuEweFIISE8Cc+voOowUKmq5kY9vGY/GLyq3k1XOlq9lkQifUqj
+			yQ+BJPRSRCb7lp7AGeGzKilDkpSeRvs6w7R0G48HX6J8VMV6ZR077hpc6xekXYZuNeAbPqwoCRks
+			pR9UUErdDyYQEMzNzV3K5XJD+f5s8W6xZ9Sy7o3qut6naVp2sbyPxYM1bDVXUfXX0Yps8H41MNYz
+			oWIXg6+xVCp1OE7L9oVvM4dlGLophNAnJydz4+MTfQMDheF0Ol2MxWIF0zQLKkYF1uv1TCKROPor
+			wACLBhsn+wNC3gAAAABJRU5ErkJggg==
+		</Resource>
+		<Resource ID="bed9889a-bb07-c48a-6cd2-08a39dd2f026" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjNBN0ZCQjFCMUZFNTExRTE4Q0NGQzVGNjcyMTYyNTI2IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjNBN0ZCQjFDMUZFNTExRTE4Q0NGQzVGNjcyMTYyNTI2Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M0E3RkJCMTkxRkU1MTFFMThDQ0ZD
+			NUY2NzIxNjI1MjYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6M0E3RkJCMUExRkU1MTFFMThD
+			Q0ZDNUY2NzIxNjI1MjYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz6M95QTAAACyElEQVR42mxTTU8TURQ989HplNbS0lqDSAOa
+			2PIREqxEQnRh4s6VO3Yu3OrSlQt/gok7FyasTZTEhTHGnTtFEoHwGcRA5bsUSlunw7w3njdT4sbX
+			nL6Z++49995z32i+74OrkzhGuJRhgZgnZolvxBqxg/8srU0wVq7h69NpwDaBnhSQT4foJfXQ5cD3
+			gPhJzLSxTKycEzyseZh6u0LrFmDSJGlstgDHBS7EgZF+GgygLwkMZmiLAFGNvu1KblQdYLQXuMbD
+			vSPA9YByJdxB5zr3OL136Zfj85dd4EH+H8HNBv+ifOtl+TELOKWjHWXjVMZlpiiz59lOgmQnTeBK
+			R6jXOUHBUVn+hBmdMwQ9ZKlBJ0tu0HZC23YdGM4Cv0kQM4K4BUVwkchUWydIppiChxr79kkgie54
+			mFWROMQ+dekmaSYSEMwrguK7pSl82HyNpN2NR3fewGJ5p15IYOusiqK6zOjy3WRElWe5aEDwXVf9
+			Lx3O0NlDpbaBF59uY3nzM66rcVqhcJpSnAEpEmdYUWeMCCuYVRWUDp1tRCImDF2HEB6mF55h43gG
+			XeIJkpyhReeuLmanmKlEKFp7W1IEwzLqwOLPEwIRYeJMCvzYfo+I8RHafhId5lU+x9nKAaRWRyqW
+			wPNbr6oatD1FMGIYBq+kBV0XnIuEweFIISE8Cc+voOowUKmq5kY9vGY/GLyq3k1XOlq9lkQifUqj
+			yQ+BJPRSRCb7lp7AGeGzKilDkpSeRvs6w7R0G48HX6J8VMV6ZR077hpc6xekXYZuNeAbPqwoCRks
+			pR9UUErdDyYQEMzNzV3K5XJD+f5s8W6xZ9Sy7o3qut6naVp2sbyPxYM1bDVXUfXX0Yps8H41MNYz
+			oWIXg6+xVCp1OE7L9oVvM4dlGLophNAnJydz4+MTfQMDheF0Ol2MxWIF0zQLKkYF1uv1TCKROPor
+			wACLBhsn+wNC3gAAAABJRU5ErkJggg==
+		</Resource>
 		<Resource ID="e8115c4a-903a-a4c6-c0bc-08a336586d51" Type="png" Name="Icon">
 			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
@@ -639,72 +701,9 @@
 			C8LJ0ocEMmEzF6xpnJY6xqcPPhBFOU95YbWPnmCwM1EB8wBwQViPpATJVSkDBfzgTz+pmuzD/eGY
 			Pf0uF4TRJO7XPtm6tW+7yemnk/Wvdu505xkV638JMAB+aVbxMc0jFgAAAABJRU5ErkJggg==
 		</Resource>
-		<Resource ID="ab7417f9-08b8-21c5-9669-08a3e1032958" Type="png" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
-			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
-			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
-			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
-			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
-			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
-			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
-			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
-			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
-			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
-			PSJ4bXAuaWlkOjNBN0ZCQjFCMUZFNTExRTE4Q0NGQzVGNjcyMTYyNTI2IiB4bXBNTTpEb2N1bWVu
-			dElEPSJ4bXAuZGlkOjNBN0ZCQjFDMUZFNTExRTE4Q0NGQzVGNjcyMTYyNTI2Ij4gPHhtcE1NOkRl
-			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M0E3RkJCMTkxRkU1MTFFMThDQ0ZD
-			NUY2NzIxNjI1MjYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6M0E3RkJCMUExRkU1MTFFMThD
-			Q0ZDNUY2NzIxNjI1MjYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
-			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz6M95QTAAACyElEQVR42mxTTU8TURQ989HplNbS0lqDSAOa
-			2PIREqxEQnRh4s6VO3Yu3OrSlQt/gok7FyasTZTEhTHGnTtFEoHwGcRA5bsUSlunw7w3njdT4sbX
-			nL6Z++49995z32i+74OrkzhGuJRhgZgnZolvxBqxg/8srU0wVq7h69NpwDaBnhSQT4foJfXQ5cD3
-			gPhJzLSxTKycEzyseZh6u0LrFmDSJGlstgDHBS7EgZF+GgygLwkMZmiLAFGNvu1KblQdYLQXuMbD
-			vSPA9YByJdxB5zr3OL136Zfj85dd4EH+H8HNBv+ifOtl+TELOKWjHWXjVMZlpiiz59lOgmQnTeBK
-			R6jXOUHBUVn+hBmdMwQ9ZKlBJ0tu0HZC23YdGM4Cv0kQM4K4BUVwkchUWydIppiChxr79kkgie54
-			mFWROMQ+dekmaSYSEMwrguK7pSl82HyNpN2NR3fewGJ5p15IYOusiqK6zOjy3WRElWe5aEDwXVf9
-			Lx3O0NlDpbaBF59uY3nzM66rcVqhcJpSnAEpEmdYUWeMCCuYVRWUDp1tRCImDF2HEB6mF55h43gG
-			XeIJkpyhReeuLmanmKlEKFp7W1IEwzLqwOLPEwIRYeJMCvzYfo+I8RHafhId5lU+x9nKAaRWRyqW
-			wPNbr6oatD1FMGIYBq+kBV0XnIuEweFIISE8Cc+voOowUKmq5kY9vGY/GLyq3k1XOlq9lkQifUqj
-			yQ+BJPRSRCb7lp7AGeGzKilDkpSeRvs6w7R0G48HX6J8VMV6ZR077hpc6xekXYZuNeAbPqwoCRks
-			pR9UUErdDyYQEMzNzV3K5XJD+f5s8W6xZ9Sy7o3qut6naVp2sbyPxYM1bDVXUfXX0Yps8H41MNYz
-			oWIXg6+xVCp1OE7L9oVvM4dlGLophNAnJydz4+MTfQMDheF0Ol2MxWIF0zQLKkYF1uv1TCKROPor
-			wACLBhsn+wNC3gAAAABJRU5ErkJggg==
-		</Resource>
-		<Resource ID="bed9889a-bb07-c48a-6cd2-08a39dd2f026" Type="jpg" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
-			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
-			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
-			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
-			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
-			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
-			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
-			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
-			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
-			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
-			PSJ4bXAuaWlkOjNBN0ZCQjFCMUZFNTExRTE4Q0NGQzVGNjcyMTYyNTI2IiB4bXBNTTpEb2N1bWVu
-			dElEPSJ4bXAuZGlkOjNBN0ZCQjFDMUZFNTExRTE4Q0NGQzVGNjcyMTYyNTI2Ij4gPHhtcE1NOkRl
-			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M0E3RkJCMTkxRkU1MTFFMThDQ0ZD
-			NUY2NzIxNjI1MjYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6M0E3RkJCMUExRkU1MTFFMThD
-			Q0ZDNUY2NzIxNjI1MjYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
-			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz6M95QTAAACyElEQVR42mxTTU8TURQ989HplNbS0lqDSAOa
-			2PIREqxEQnRh4s6VO3Yu3OrSlQt/gok7FyasTZTEhTHGnTtFEoHwGcRA5bsUSlunw7w3njdT4sbX
-			nL6Z++49995z32i+74OrkzhGuJRhgZgnZolvxBqxg/8srU0wVq7h69NpwDaBnhSQT4foJfXQ5cD3
-			gPhJzLSxTKycEzyseZh6u0LrFmDSJGlstgDHBS7EgZF+GgygLwkMZmiLAFGNvu1KblQdYLQXuMbD
-			vSPA9YByJdxB5zr3OL136Zfj85dd4EH+H8HNBv+ifOtl+TELOKWjHWXjVMZlpiiz59lOgmQnTeBK
-			R6jXOUHBUVn+hBmdMwQ9ZKlBJ0tu0HZC23YdGM4Cv0kQM4K4BUVwkchUWydIppiChxr79kkgie54
-			mFWROMQ+dekmaSYSEMwrguK7pSl82HyNpN2NR3fewGJ5p15IYOusiqK6zOjy3WRElWe5aEDwXVf9
-			Lx3O0NlDpbaBF59uY3nzM66rcVqhcJpSnAEpEmdYUWeMCCuYVRWUDp1tRCImDF2HEB6mF55h43gG
-			XeIJkpyhReeuLmanmKlEKFp7W1IEwzLqwOLPEwIRYeJMCvzYfo+I8RHafhId5lU+x9nKAaRWRyqW
-			wPNbr6oatD1FMGIYBq+kBV0XnIuEweFIISE8Cc+voOowUKmq5kY9vGY/GLyq3k1XOlq9lkQifUqj
-			yQ+BJPRSRCb7lp7AGeGzKilDkpSeRvs6w7R0G48HX6J8VMV6ZR077hpc6xekXYZuNeAbPqwoCRks
-			pR9UUErdDyYQEMzNzV3K5XJD+f5s8W6xZ9Sy7o3qut6naVp2sbyPxYM1bDVXUfXX0Yps8H41MNYz
-			oWIXg6+xVCp1OE7L9oVvM4dlGLophNAnJydz4+MTfQMDheF0Ol2MxWIF0zQLKkYF1uv1TCKROPor
-			wACLBhsn+wNC3gAAAABJRU5ErkJggg==
-		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[
-from scripting.legacy.id import id2link1
+<![CDATA[from scripting.legacy.id import id2link1
 
 
 class VDOM_image(VDOM_object):
@@ -771,7 +770,7 @@ class VDOM_image(VDOM_object):
             editable = u' editable="value" '
 
             result = \
-                u"""<container id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" top="{top}" left="{left}"
+                u"""<container name="{name}" id="{id}" zindex="{zindex}" hierarchy="{hierarchy}" top="{top}" left="{left}"
                         width="{width}" height="{height}" backgroundcolor="#f0f0f0" bordercolor="#000000">
                         <svg>
                             <image x="{image_x}" y="{image_y}" href="#Res({image_id})"
@@ -789,7 +788,8 @@ class VDOM_image(VDOM_object):
                         image_x = 0,
                         image_y = 0,
                         image_id = self.value,
-                        editable = editable)
+                        editable = editable,
+                        name = self.name)
 
         elif self.externalurl:
             url = self.externalurl
@@ -797,7 +797,7 @@ class VDOM_image(VDOM_object):
                 url = u"http://empty.png"
 
             result = \
-                u"""<container id="{id}" visible="{visible}" zindex="{zindex}" hierarchy="{hierarchy}"
+                u"""<container name="{name}" id="{id}" visible="{visible}" zindex="{zindex}" hierarchy="{hierarchy}"
                         order="{order}" top="{top}" left="{left}" width="{width}" height="{height}">
                         <htmltext top="0" left="0" width="{width}" height="{height}" locked="true">
                             <img width="{width}" height="{height}" src="{image_url}"/>
@@ -813,7 +813,8 @@ class VDOM_image(VDOM_object):
                         left = self.left,
                         width = self.width or 50,
                         height = self.height or 50,
-                        image_url = url)
+                        image_url = url,
+                        name = self.name)
 
         else:
             image_id = "e8115c4a-903a-a4c6-c0bc-08a336586d51"
@@ -846,22 +847,20 @@ def on_update(object, attributes):
         im = Image.open(s)
         width, height = im.size
         # set attributes
-        if o.attributes.width != width or o.attributes.height != height:
-            # o.set_attributes({"width": width, "height": height})
-            o.attributes.update(width=width, height=height)
+        # if o.attributes.width != width or o.attributes.height != height:
+        #     o.set_attributes({"width": width, "height": height})
+        if o.attributes["width"] != width or o.attributes["height"] != height:
+            attributes.update(width=str(width), height=str(height))
     else:
         # if "width" in param and param["width"]["value"] != '' and int(param["width"]["value"]) > 2500:
         #     o.set_attributes({"width": 2500})
         if "width" in attributes and attributes["width"] != '' and int(attributes["width"]) > 2500:
-            o.attributes.update(width=2500)
+            attributes["width"] = "2500"
         # if "height" in param and param["height"]["value"] != '' and int(param["height"]["value"]) > 2500:
         #     o.set_attributes({"height": 2500})
         if "height" in attributes and attributes["height"] != '' and int(attributes["height"]) > 2500:
-            o.attributes.update(height=2500)
-    return ""
-
-        
-]]>
+            attributes["width"] = "2500"
+    return ""]]>
 	</SourceCode>
 	<E2VDOM>
 		<Events>

@@ -44,6 +44,7 @@ class Executable(object):
                     return value
 
         def __set__(self, instance, value):
+            value = unicode(value)
             with instance.lock:
                 instance._source_code = value
                 location = instance.locate(SOURCE_CODE)
@@ -57,9 +58,10 @@ class Executable(object):
         def __delete__(self, instance):
             with instance.lock:
                 instance._source_code = u""
-                location = instance.location + instance.subsystem.source_extension
+                location = instance.locate(SOURCE_CODE)
                 if location:
-                    managers.file_manager.delete(file_access.FILE, None, location)
+                    managers.file_manager.delete(file_access.FILE, None,
+                        location + instance.subsystem.source_extension)
 
     class BytecodeLazyProperty(object):
 

@@ -46,7 +46,7 @@ class Managers(object):
                     setattr(self, name, instance)
                     return instance
                 else:
-                    raise AttributeError
+                    raise AttributeError(name)
 
 
 sys.modules[__name__] = Managers()

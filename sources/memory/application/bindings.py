@@ -37,13 +37,8 @@ class MemoryBindings(MemoryBase, MutableMapping):
 
         with self._owner.lock:
             self._items[item.id] = item
-
             if not self._owner.virtual:
                 self._all_items[item.id] = item
-
-        if not restore:
-            if not item._target_object.virtual:
-                self._owner.autosave()
 
     def new_sketch(self, target_object, name, parameters=None, restore=False):
         return (MemoryBindingRestorationSketch if restore
@@ -56,6 +51,9 @@ class MemoryBindings(MemoryBase, MutableMapping):
 
     def clear(self):
         with self._owner.lock:
+            if not self._owner._virtual:
+                for key in self._items:
+                    del self._all_items[key]
             self._items.clear()
             self._owner.autosave()
 

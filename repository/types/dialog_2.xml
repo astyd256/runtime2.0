@@ -18,7 +18,7 @@
 		<OptimizationPriority>1</OptimizationPriority>
 		<Container>2</Container>
 		<Containers>htmlcontainer, container, tablecell</Containers>
-		<Handlers>set_attr</Handlers>
+		<Handlers>on_update</Handlers>
 		<Languages>en_US, ru_RU, fr_FR</Languages>
 	</Information>
 	<Attributes>
@@ -1347,15 +1347,15 @@ def on_update(object, attributes):
 	# 	elif param["skin"]["value"] == "3":
 	# 		o.set_attributes({"style": PRO_SUITE})
 	if skin == "1":
-		object.attributes.update(style=CSS_SQUARE)
+		attributes.update(style=CSS_SQUARE)
 	elif skin == "2":
-		object.attributes.update(style=CSS_ROUNDED)
+		attributes.update(style=CSS_ROUNDED)
 	elif skin == "3":
-		object.attributes.update(style=PRO_SUITE)
+		attributes.update(style=PRO_SUITE)
 # 	if "style" in param and param["style"]["value"] != CSS_SQUARE and param["style"]["value"] != CSS_ROUNDED and param["style"]["value"] != PRO_SUITE:
 # 		o.set_attributes({"skin": "0"})
 	if style not in (CSS_SQUARE, CSS_ROUNDED, PRO_SUITE):
-		object.attributes.update(skin=0)
+		attributes.update(skin="0")
 
 	return ""
 
@@ -1448,7 +1448,7 @@ $j(document).ready(function(){
 	def wysiwyg(self, contents=""):
 
 		result= \
-			u"""<container id="{id}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" top="{top}" left="{left}" width="{container_width}" height="{container_height}">
+			u"""<container name="{name}" id="{id}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" top="{top}" left="{left}" width="{container_width}" height="{container_height}">height="{container_height}">
 				<svg>
 					<rect x="0" y="0" width="{width}" height="{height}" stroke="#cccccc" stroke-width="3" fill="#ffffff">
 						<rect x="0" y="0" width="{width}" height="40" fill="#e9e9e9"/>
@@ -1472,7 +1472,8 @@ $j(document).ready(function(){
 				title            = self.title,
 				contents         = contents,
 				line_x1          = int(self.width) - 20,
-				line_x2          = int(self.width) - 12
+				line_x2          = int(self.width) - 12,
+				name             = self.name
 			)
 
 		return VDOM_object.wysiwyg(self, contents=result)]]>

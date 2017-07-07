@@ -372,9 +372,9 @@ class VDOM_vdompackage(VDOM_object):
         return VDOM_object.render(self, contents=result)
 
     def wysiwyg(self, contents=""):
-        result = u"""<container id="{id}" zindex="{zind}" hierarchy="{hierarchy}" top="0" left="0" width="100%" height="100%">
+        result = u"""<container name="{name}" id="{id}" zindex="{zind}" hierarchy="{hierarchy}" top="0" left="0" width="100%" height="100%">
     {contents}
-</container>""".format(	id=self.id, zind=self.zindex, hierarchy=self.hierarchy,
+</container>""".format(	id=self.id, zind=self.zindex, hierarchy=self.hierarchy, name=self.name,
                 # order = self.order,  # ???
                 contents=contents)
 

@@ -43,7 +43,7 @@ def run(request):
 			request.set_application_id(appid)
 			app = request.application()
 			if container.lower() == 'api':
-				obj = app.objects.select('api')
+				obj = app.objects.select(container)
 			else:
 				obj = app.objects.catalog.get(container)			
 			if not obj or obj.name.lower() != "api":

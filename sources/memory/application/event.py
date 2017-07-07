@@ -1,5 +1,5 @@
 
-from utils.properties import weak, roproperty, rwproperty
+from utils.properties import weak, constant, roproperty, rwproperty
 from ..generic import MemoryBase
 from .eventcallees import MemoryEventCalleesSketch
 
@@ -7,22 +7,22 @@ from .eventcallees import MemoryEventCalleesSketch
 @weak("_collection")
 class MemoryEventSketch(MemoryBase):
 
+    is_event = constant(True)
+
     _restore = False
 
     _top = 0
     _left = 0
     _state = False
 
-    def __init__(self, collection, owner, name):
+    def __init__(self, collection, name):
         self._collection = collection
-        self._owner = owner
         self._name = name
         self._callees = MemoryEventCalleesSketch(self)
 
-    owner = roproperty("_owner")
-    container = property(lambda self: self._owner.container)
+    owner = source_object = property(lambda self: self._collection.owner)
+    container = property(lambda self: self._collection.owner.container)
 
-    source_object = roproperty("_owner")
     name = rwproperty("_name")
     top = rwproperty("_top")
     left = rwproperty("_left")
@@ -34,13 +34,15 @@ class MemoryEventSketch(MemoryBase):
         restore = self._restore
         self.__class__ = MemoryEvent
         self._collection.on_complete(self, restore)
+        if not restore:
+            self._collection.owner.autosave()
         return self
 
     def __str__(self):
         return " ".join(filter(None, (
             "event",
             "\"%s\"" % self._name if self._name else None,
-            "sketch of %s" % self._owner)))
+            "sketch of %s" % self._collection.owner)))
 
 
 class MemoryEventRestorationSketch(MemoryEventSketch):
@@ -55,19 +57,19 @@ class MemoryEvent(MemoryEventSketch):
 
     def _set_name(self, value):
         self._name = value
-        self._owner.autosave()
+        self._collection.owner.autosave()
 
     def _set_top(self, value):
         self._top = value
-        self._owner.autosave()
+        self._collection.owner.autosave()
 
     def _set_left(self, value):
         self._left = value
-        self._owner.autosave()
+        self._collection.owner.autosave()
 
     def _set_state(self, value):
         self._state = value
-        self._owner.autosave()
+        self._collection.owner.autosave()
 
     name = rwproperty("_name", _set_name)
     top = rwproperty("_top", _set_top)
@@ -77,7 +79,7 @@ class MemoryEvent(MemoryEventSketch):
     # unsafe
     def compose(self, ident=u"", file=None):
         information = u"ContainerID=\"%s\" ObjSrcID=\"%s\" Name=\"%s\" Top=\"%s\" Left=\"%s\" State=\"%s\"" % \
-            (self._owner.container.id, self._owner.id, self._name, self._top, self._left, self._state)
+            (self._collection.owner.container.id, self._collection.owner.id, self._name, self._top, self._left, self._state)
         if self._callees:
             file.write(u"%s<Event %s>\n" % (ident, information))
             for callee in self._callees:
@@ -93,4 +95,4 @@ class MemoryEvent(MemoryEventSketch):
         return " ".join(filter(None, (
             "event",
             "\"%s\"" % self._name if self._name else None,
-            "of %s" % self._owner)))
+            "of %s" % self._collection.owner)))

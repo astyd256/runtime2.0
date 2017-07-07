@@ -1,5 +1,6 @@
 
 import errno
+import os.path
 
 from time import time
 from threading import local, RLock
@@ -20,8 +21,10 @@ class ProfilerLocal(local):
 
 class Profiler(object):
 
-    def __init__(self):
+    def __init__(self, name=None):
         self._lock = RLock()
+        self._name = name or settings.PROFILE_DEFAULT_NAME
+        self._location = settings.PROFILE_FILENAME_TEMPLATE % self._name
         self._stats = None
         self._local = ProfilerLocal()
         self._notch = time() - 1
@@ -72,7 +75,7 @@ class Profiler(object):
             yield None
         else:
             if location is None:
-                location = settings.PROFILE_LOCATION
+                location = self._location
 
             with self._lock:
                 self.save(location=location, force=True)
@@ -83,7 +86,7 @@ class Profiler(object):
             return None
 
         if location is None:
-            location = settings.PROFILE_LOCATION
+            location = self._location
 
         with self._lock:
             self.save(location=location, force=True)
@@ -105,16 +108,36 @@ class Profiler(object):
             return
 
         if location is None:
-            location = settings.PROFILE_LOCATION
+            location = self._location
 
         with self._lock:
             if self._stats:
                 self._stats.dump_stats(location)
                 if not force:
-                    server_log.write("Save profiling statistics to \"%s\"" % location)
+                    server_log.write("Save profiling statistics to \"%s\"" % os.path.basename(location))
 
             self._notch = now + settings.PROFILING_SAVE_PERIODICITY
             self._updates = False
 
+    def autosave(self):
+        self.save()
+        for profiler in self._profilers.itervalues():
+            profiler.save()
 
-profiler = Profiler()
+
+class MainProfiler(Profiler):
+
+    def __init__(self):
+        super(MainProfiler, self).__init__()
+        self._profilers = {settings.PROFILE_DEFAULT_NAME: self}
+
+    def __call__(self, name):
+        with self._lock:
+            try:
+                profiler = self._profilers[name]
+            except KeyError:
+                self._profilers[name] = profiler = Profiler(name)
+            return profiler
+
+
+profiler = MainProfiler()

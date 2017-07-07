@@ -517,28 +517,29 @@
 		</Language>
 	</Languages>
 	<Resources>
-		<Resource ID="c0f9065a-cd07-eb98-7e88-08a9d0f57d30" Type="jpg" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
-			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
-			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
-			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
-			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
-			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
-			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
-			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
-			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
-			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
-			PSJ4bXAuaWlkOjlBNkY2NEM4MUZFNTExRTFCRjgxQTU0MEY4MDkxRjI3IiB4bXBNTTpEb2N1bWVu
-			dElEPSJ4bXAuZGlkOjlBNkY2NEM5MUZFNTExRTFCRjgxQTU0MEY4MDkxRjI3Ij4gPHhtcE1NOkRl
-			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OUE2RjY0QzYxRkU1MTFFMUJGODFB
-			NTQwRjgwOTFGMjciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OUE2RjY0QzcxRkU1MTFFMUJG
-			ODFBNTQwRjgwOTFGMjciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
-			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz6vGdkMAAABBUlEQVR42pRTS25CMQz02OFzGvZIPdlbAOri
-			7TlI9110iVi3vUCFhDgGqZ3kuSli4WcpyihxxpmJg6/Dlmog19kmkAcaznd6CGz2Z0qerImb3Yki
-			8f364piJmcoAUzSunz+en4D/h4dhoHEcHT+G7YGhQxoBp6YTntAnPwugIyAF4Pj1C4HmQ1Il4LSc
-			VmdI0KKyaBIM6GEgLsFMRyucDBQjZ8hgER2NgBcrJRAniEgwAui5RrBWCeKuhiSIts/kASdlUkcn
-			gpAEK2iFiwcK0BGEXkH6ZzQPjABxCdYHfxKMwLpxhoT6alMrp1W9vi7e3o90+XjzxGxfONucG84F
-			U/cXfgUYAHsVRok/RxdeAAAAAElFTkSuQmCC
+		<Resource ID="37845d76-d0ee-a176-9aee-08a99a34577f" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAEpklEQVR42q2Wy09bRxTGx/YBY2xj
+			jCAtsCEkETZSbdJswkNKaCskRBcwt6CGSoBZVbQ4qdoGhxBaMIYkLRQ5NE1Ioy6SdlHluryyIPuu
+			aHcg/gCqqsEvwMbPsd2ZATu01y4sOtLVtX3nzm/O+c75xjJ0OKwfW0GlUpFYLCY2v9WMU6kUoT+D
+			skCJlPlKlEgkUK4hk8tINBKFF6svXHl5eUI0GgXnnJPwZ0cBhYWFJBKJiGP2MVxUVMQB6GSD+Hw+
+			mBifcNFNCsFgUAoY/MgKBkMNmyg2NDXg0dFRDujt7UX9/f3I7/cjACmPRory8/N5BI4JBwcEAgEp
+			4OrgNTj/5nnidrvFqtNVuLPzPQ4YGRlBbW1tqL6+Puf2GxsbydLCEkxOTrr0er2wvb0tBXz6yWdg
+			MpmIx+sRz56rxl1YoBNSMHzrFhq0XkWrq6uSCGQyGUomk6iiooIYDUYegVqtFnZ3d6WAoc9tUKRW
+			k1A4LF6zXceqYh1J0Qjy6DPlCTTw+rzgGHfk1uDmjRHQVVaRUGBXHHj3ElasPCGJZArUl1pQYWMb
+			IkcnH9WAXgoK8B8n8pejY1BsrCNhn0fsOVeMdy0CiUcRVIwPo+2qC0h28wMEGhlT9dXiMjlSRJMo
+			UFNHtF88hUfz37vUxSWC588/pIAJuwP0BjMJ+b3ildNa7O/HJB5HUDliQ8nm91Fq6QekUMHhnjMq
+			IFk8hWKvV5LU5S5wzjpdhdoiwe9xSwF3bt8BlVZHyy0sfthzBWsSYULXAqTRIaTRZ9KRLUVyliK/
+			H+xjdpeqoEAI7u9LATNfz8Brp06R/f198fI7b+Nff/ud0BoHU20tumB+43iRvV6YnJh0FTBANg3u
+			Oed4mdKJIq0+3IE7eB/YhoZQb18fslgsSKFQ8MZKD7lczsuU9ggZvjHMy1Sn0wkMJgF8d/8BmM1m
+			DiCJOO7oOAAMUUDf/wF4NP8ISktLSTgUFi82XMRra2s8RUajEdHIjk3RsV7049OfQKNRE+qE3E3p
+			JB4BNT1UUlJyIg0c9v9otNmZWTCZTcTn9YmQD7i9vf1AA5sNDQwMoOnpaW4V6RQxm0inqLa2llDR
+			wD5ud9ENCSwaqVVct2VELtbrcE9PTwbQ1dXFzY4tygDszs4H9pkBmpqayNTUFDz7+ZlLq9UKOzs7
+			UgCtYWCmFQgGRXOdGS8uLjBnZcIjjDHfLbvSu6epRLSkMynyuD2wsrziotad/cC5e/suzQDQ7o2J
+			fRYLLi0rJRsbGxCn7Uxf4oseHekUsSjY6ffyr5ewuLCYGzD91TTUGAyEhifKFTLc3d1N6CJA76il
+			pQVtbW39w67TqWIpKisrI9XV1bC8uMwbLRQKZRF51glnz5whe3t7osfrxlarlWvAFt/c3OSAXINp
+			N/PNDDxfeu7SaDTZz4Nv5+5DeXk5oXQxEglj5z0+AVpbW1FnZyei4vNG+/dgkSiVShKPxWF5aZmn
+			iJ7rUsDDBw9BIVfQMyDBRaa1T2ilQJzEEX05I3A2AH1Gdvw7sPDLQm7A4/nHwP5+0BeoBnLq1YRH
+			wHatgAOLoOZM3fOVVfDvhwAm7Pr6uovOFwghGcDfTBa9Nz1vVyYAAAAASUVORK5CYII=
 		</Resource>
 		<Resource ID="4a582b3d-09ee-8ac1-1451-08a964bbb510" Type="png" Name="Icon">
 			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
@@ -643,34 +644,32 @@
 			U/o1kHqs1Z/NVGrqcW6nZxpmMlizDCe3ecMwZrG08nUJEkNjHR/SAjq/b8H2VnqG5MxaPj6oVEjg
 			MvcNhv/18z8CDAAJmfCaKsJmmwAAAABJRU5ErkJggg==
 		</Resource>
-		<Resource ID="37845d76-d0ee-a176-9aee-08a99a34577f" Type="png" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAEpklEQVR42q2Wy09bRxTGx/YBY2xj
-			jCAtsCEkETZSbdJswkNKaCskRBcwt6CGSoBZVbQ4qdoGhxBaMIYkLRQ5NE1Ioy6SdlHluryyIPuu
-			aHcg/gCqqsEvwMbPsd2ZATu01y4sOtLVtX3nzm/O+c75xjJ0OKwfW0GlUpFYLCY2v9WMU6kUoT+D
-			skCJlPlKlEgkUK4hk8tINBKFF6svXHl5eUI0GgXnnJPwZ0cBhYWFJBKJiGP2MVxUVMQB6GSD+Hw+
-			mBifcNFNCsFgUAoY/MgKBkMNmyg2NDXg0dFRDujt7UX9/f3I7/cjACmPRory8/N5BI4JBwcEAgEp
-			4OrgNTj/5nnidrvFqtNVuLPzPQ4YGRlBbW1tqL6+Puf2GxsbydLCEkxOTrr0er2wvb0tBXz6yWdg
-			MpmIx+sRz56rxl1YoBNSMHzrFhq0XkWrq6uSCGQyGUomk6iiooIYDUYegVqtFnZ3d6WAoc9tUKRW
-			k1A4LF6zXceqYh1J0Qjy6DPlCTTw+rzgGHfk1uDmjRHQVVaRUGBXHHj3ElasPCGJZArUl1pQYWMb
-			IkcnH9WAXgoK8B8n8pejY1BsrCNhn0fsOVeMdy0CiUcRVIwPo+2qC0h28wMEGhlT9dXiMjlSRJMo
-			UFNHtF88hUfz37vUxSWC588/pIAJuwP0BjMJ+b3ildNa7O/HJB5HUDliQ8nm91Fq6QekUMHhnjMq
-			IFk8hWKvV5LU5S5wzjpdhdoiwe9xSwF3bt8BlVZHyy0sfthzBWsSYULXAqTRIaTRZ9KRLUVyliK/
-			H+xjdpeqoEAI7u9LATNfz8Brp06R/f198fI7b+Nff/ud0BoHU20tumB+43iRvV6YnJh0FTBANg3u
-			Oed4mdKJIq0+3IE7eB/YhoZQb18fslgsSKFQ8MZKD7lczsuU9ggZvjHMy1Sn0wkMJgF8d/8BmM1m
-			DiCJOO7oOAAMUUDf/wF4NP8ISktLSTgUFi82XMRra2s8RUajEdHIjk3RsV7049OfQKNRE+qE3E3p
-			JB4BNT1UUlJyIg0c9v9otNmZWTCZTcTn9YmQD7i9vf1AA5sNDQwMoOnpaW4V6RQxm0inqLa2llDR
-			wD5ud9ENCSwaqVVct2VELtbrcE9PTwbQ1dXFzY4tygDszs4H9pkBmpqayNTUFDz7+ZlLq9UKOzs7
-			UgCtYWCmFQgGRXOdGS8uLjBnZcIjjDHfLbvSu6epRLSkMynyuD2wsrziotad/cC5e/suzQDQ7o2J
-			fRYLLi0rJRsbGxCn7Uxf4oseHekUsSjY6ffyr5ewuLCYGzD91TTUGAyEhifKFTLc3d1N6CJA76il
-			pQVtbW39w67TqWIpKisrI9XV1bC8uMwbLRQKZRF51glnz5whe3t7osfrxlarlWvAFt/c3OSAXINp
-			N/PNDDxfeu7SaDTZz4Nv5+5DeXk5oXQxEglj5z0+AVpbW1FnZyei4vNG+/dgkSiVShKPxWF5aZmn
-			iJ7rUsDDBw9BIVfQMyDBRaa1T2ilQJzEEX05I3A2AH1Gdvw7sPDLQm7A4/nHwP5+0BeoBnLq1YRH
-			wHatgAOLoOZM3fOVVfDvhwAm7Pr6uovOFwghGcDfTBa9Nz1vVyYAAAAASUVORK5CYII=
+		<Resource ID="c0f9065a-cd07-eb98-7e88-08a9d0f57d30" Type="jpg" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOjlBNkY2NEM4MUZFNTExRTFCRjgxQTU0MEY4MDkxRjI3IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOjlBNkY2NEM5MUZFNTExRTFCRjgxQTU0MEY4MDkxRjI3Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OUE2RjY0QzYxRkU1MTFFMUJGODFB
+			NTQwRjgwOTFGMjciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OUE2RjY0QzcxRkU1MTFFMUJG
+			ODFBNTQwRjgwOTFGMjciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz6vGdkMAAABBUlEQVR42pRTS25CMQz02OFzGvZIPdlbAOri
+			7TlI9110iVi3vUCFhDgGqZ3kuSli4WcpyihxxpmJg6/Dlmog19kmkAcaznd6CGz2Z0qerImb3Yki
+			8f364piJmcoAUzSunz+en4D/h4dhoHEcHT+G7YGhQxoBp6YTntAnPwugIyAF4Pj1C4HmQ1Il4LSc
+			VmdI0KKyaBIM6GEgLsFMRyucDBQjZ8hgER2NgBcrJRAniEgwAui5RrBWCeKuhiSIts/kASdlUkcn
+			gpAEK2iFiwcK0BGEXkH6ZzQPjABxCdYHfxKMwLpxhoT6alMrp1W9vi7e3o90+XjzxGxfONucG84F
+			U/cXfgUYAHsVRok/RxdeAAAAAElFTkSuQmCC
 		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[
-import collections, json, StringIO
+<![CDATA[import collections, json, StringIO
 
 
 
@@ -680,11 +679,11 @@ def on_update(object, attributes):
 	# 	if param["skin"]["value"] == "1":
 	# 		o.set_attributes({"style": css})
 	if attributes.get("skin") == "1":
-		object.attributes.update(style=css)
+		attributes.update(style=css)
 	# if "style" in param and param["style"]["value"] and o.attributes.style != css:
 	# 	o.set_attributes({"skin": 0})
 	if attributes.get("style") and object.attributes["style"] != css:
-		object.attributes.update(skin=0)
+		attributes.update(skin="0")
 
 
 class VDOM_list(VDOM_object):
@@ -914,7 +913,7 @@ $j(function(){
 					res_buffer.write(li)
 
 		result = \
-			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}"
+			u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}"
 					top="{top}" left="{left}" width="{width}" height="{height}">
 					<table zindex="{zind}" top="0" left="0" width="{width}" height="{height}" backgroundcolor="#f0f0f0" bordercolor="#000000" borderwidth="0" >
 						{res_buffer}
@@ -922,14 +921,13 @@ $j(function(){
 				</container>
 			""".format(
 				id = self.id, vis = self.visible, zind = self.zindex,
-				hierarchy = self.hierarchy,
+				hierarchy = self.hierarchy, name = self.name,
 				top = self.top, left = self.left, 
 				width = self.width, height = self.height,
 				res_buffer = res_buffer.getvalue())
 
 		res_buffer.close()
-		return VDOM_object.wysiwyg(self, contents=result)
-]]>
+		return VDOM_object.wysiwyg(self, contents=result)]]>
 	</SourceCode>
 	<E2VDOM>
 		<Events>

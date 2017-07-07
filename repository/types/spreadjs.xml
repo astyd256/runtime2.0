@@ -456,10 +456,10 @@
 
     
     def _wysiwyg(self): #generic
-        import utils.wysiwyg
+        from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
 
         image_id = "18e2b159-f1f6-529c-e4e8-7af4c3033b41"
-        result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
+        result = get_empty_wysiwyg_value(self, image_id)
 
         return result
 

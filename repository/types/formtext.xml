@@ -18,7 +18,7 @@
 		<OptimizationPriority>1</OptimizationPriority>
 		<Container>1</Container>
 		<Containers>form, password, container</Containers>
-		<Handlers>set_attr</Handlers>
+		<Handlers>on_update</Handlers>
 		<Languages>en_US, ru_RU, fr_FR</Languages>
 	</Information>
 	<Attributes>
@@ -617,8 +617,8 @@
 		</Language>
 	</Languages>
 	<Resources>
-		<Resource ID="dc3697f6-3d20-e2d1-1630-f615db1dbd65" Type="png" Name="FormText-.png">
-			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+		<Resource ID="19074d42-47dd-934c-a67a-fb403f54f122" Type="png" Name="FormText_16x16.png">
+			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
 			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
 			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
@@ -628,29 +628,18 @@
 			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
 			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
 			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNl
-			SUQ9InhtcC5paWQ6NTZBOUJEREY3QjFFMTFFMjg0RTlCQzk1MzcxREM2ODUiIHhtcE1NOkRvY3Vt
-			ZW50SUQ9InhtcC5kaWQ6NTZBOUJERTA3QjFFMTFFMjg0RTlCQzk1MzcxREM2ODUiPiA8eG1wTU06
-			RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1NkE5QkRERDdCMUUxMUUyODRF
-			OUJDOTUzNzFEQzY4NSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1NkE5QkRERTdCMUUxMUUy
-			ODRFOUJDOTUzNzFEQzY4NSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1w
-			bWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjvAJ2YAAAMpSURBVHja7FkxS1tRFD5JnkRDrEVMIsVJ
-			iGlQF0Vog7hYGhGCk0Mnp4yOYnERQaSQLQ5u/gBd4tBASkMgIJZAMiVD0s1JTYZaMyhi7P0O3seL
-			iimtTfLS+8HJfffdvHC++5177nk3ltvbW+oEWKlDoIgoIoqIIqKIKCJ/Aw0f29vbXtF8EvZO2AuT
-			+P5T2FdhH5eXl79botGoT3S+CXtpUjF+CHsDRbZAolgs0v7+Pl1cXJDFYmlrz1Ef9vb20uLiIvl8
-			Pgiwpd2FE8ViMbq+viaHw2EKIvAVPq+uruLWe02uiVqtxiytVisTaVcyIAGDvyBzB6cmr6BEV1cX
-			2Ww2Uyhyc3NjJEI6ke7ubiYCRYB2VkRGECb9wT4CEjBN09jwpWbZ5ubmk32jSf+kvw8UkWujFVhf
-			X6eNjY26fiPAVxk9bbWzS+d/h8STJUqz1AiHw2zPAaPPnVVrNUIwGKTJyUmy2+3cx+6fyWQonU7T
-			4OAghUIhGhoa4rFKpUKpVIry+bz+bCAQ0MfwG+fn582vfsfGxtiRbDbL8buzs8P3p6enuZ2ZmaG+
-			vj6KRCJ6fM/NzXE7NTXFzyaTSR47PT3lTbclimBm5ewCJycndHx8TKOjo9wHCSNEJa1f+/1+VgHK
-			AXt7e7S2tta60HI6nTQ/P8/XHo+HBgYG9LGjoyMu3lZWVthpkDw4OOAxt9vNfSPK5XJriAwPD9PS
-			0hI7idAolUrcSkWkYlgLIDkxMcFju7u77bXYx8fH6erqqi5kHkufiUSijvjIyAidnZ0xOSNcLtc/
-			UaXhYr+8vORMAweBhYUFPUMB4u2MDeEHeL1ebqFcLpfjMIRaMoPJzNd0RQ4PD3l2McsyhRYKBQ4f
-			kMPLmFwjANRDlkJSgPX399Ps7CxnLzyL1N0SItVqtS6sHsNT48hYMmv9F6cosmg0Fo/Pnn6bQcJY
-			LN7vm0aR+07/SQWsThrbkQhO7Kinp8d0zht8roIIjh05z5uJDE595OuBwBccmb5G7UfmPjJ9a4vH
-			4xXxkhQTnVfCUHvYTUIAJcJnYR9EiVS0qP/ZFRFFRBFRRBQRRaSDiPwSYADhkDD4eb9xIQAAAABJ
-			RU5ErkJggg==
+			SUQ9InhtcC5paWQ6NjA2NkI2NzA3QjFFMTFFMjhDQUE4RENFOEQyQkJBNkEiIHhtcE1NOkRvY3Vt
+			ZW50SUQ9InhtcC5kaWQ6NjA2NkI2NzE3QjFFMTFFMjhDQUE4RENFOEQyQkJBNkEiPiA8eG1wTU06
+			RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2MDY2QjY2RTdCMUUxMUUyOENB
+			QThEQ0U4RDJCQkE2QSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2MDY2QjY2RjdCMUUxMUUy
+			OENBQThEQ0U4RDJCQkE2QSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1w
+			bWV0YT4gPD94cGFja2V0IGVuZD0iciI/PoxJqqoAAADcSURBVHjazJNBCoMwEEUnMSp6Ac3G+xS8
+			RUMX3sC1excuXOnlBLGXUOsPRKIU2rQU+uE7ZJj3YYJhTdNciKjfLMlN0+arANx1nRyGwYnOskwq
+			pXoEyHEcSQhBjLG34HVdCQxYBFAQBMQ51wGvQgDDy7LoM8cnDEOKoojiONauqupQz8YsGEiYAKzg
+			eZ5u1nVNZVnqagZtzfO8z+oAwL7v700j9J4J6xrpAIDGts5nW4c7+EZ/GlAUBbVtq+tHAYDt+vMV
+			pjRNncEkSVDu+A9Unud4zq4peE23hwADAM4lOmQB6glmAAAAAElFTkSuQmCC
 		</Resource>
-		<Resource ID="19074d42-47dd-934c-a67a-fb403f54f122" Type="png" Name="FormText_16x16.png">
+		<Resource ID="a9036d5d-e92b-714b-9c56-f616124f6cae" Type="png" Name="FormText.png">
 			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
 			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
@@ -707,8 +696,8 @@
 			dmFsdWU9PSIiKXt2YXIgYT10aGlzLmNyZWF0ZVRleHRSYW5nZSgpO2EuY29sbGFwc2UoITApO2Eu
 			bW92ZVN0YXJ0KCJjaGFyYWN0ZXIiLDApO2Euc2VsZWN0KCl9fSkpfSl9fSkoalF1ZXJ5KTsK
 		</Resource>
-		<Resource ID="a9036d5d-e92b-714b-9c56-f616124f6cae" Type="png" Name="FormText.png">
-			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+		<Resource ID="dc3697f6-3d20-e2d1-1630-f615db1dbd65" Type="png" Name="FormText-.png">
+			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
 			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
 			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
@@ -718,21 +707,31 @@
 			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
 			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
 			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNl
-			SUQ9InhtcC5paWQ6NjA2NkI2NzA3QjFFMTFFMjhDQUE4RENFOEQyQkJBNkEiIHhtcE1NOkRvY3Vt
-			ZW50SUQ9InhtcC5kaWQ6NjA2NkI2NzE3QjFFMTFFMjhDQUE4RENFOEQyQkJBNkEiPiA8eG1wTU06
-			RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2MDY2QjY2RTdCMUUxMUUyOENB
-			QThEQ0U4RDJCQkE2QSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2MDY2QjY2RjdCMUUxMUUy
-			OENBQThEQ0U4RDJCQkE2QSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1w
-			bWV0YT4gPD94cGFja2V0IGVuZD0iciI/PoxJqqoAAADcSURBVHjazJNBCoMwEEUnMSp6Ac3G+xS8
-			RUMX3sC1excuXOnlBLGXUOsPRKIU2rQU+uE7ZJj3YYJhTdNciKjfLMlN0+arANx1nRyGwYnOskwq
-			pXoEyHEcSQhBjLG34HVdCQxYBFAQBMQ51wGvQgDDy7LoM8cnDEOKoojiONauqupQz8YsGEiYAKzg
-			eZ5u1nVNZVnqagZtzfO8z+oAwL7v700j9J4J6xrpAIDGts5nW4c7+EZ/GlAUBbVtq+tHAYDt+vMV
-			pjRNncEkSVDu+A9Unud4zq4peE23hwADAM4lOmQB6glmAAAAAElFTkSuQmCC
+			SUQ9InhtcC5paWQ6NTZBOUJEREY3QjFFMTFFMjg0RTlCQzk1MzcxREM2ODUiIHhtcE1NOkRvY3Vt
+			ZW50SUQ9InhtcC5kaWQ6NTZBOUJERTA3QjFFMTFFMjg0RTlCQzk1MzcxREM2ODUiPiA8eG1wTU06
+			RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1NkE5QkRERDdCMUUxMUUyODRF
+			OUJDOTUzNzFEQzY4NSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1NkE5QkRERTdCMUUxMUUy
+			ODRFOUJDOTUzNzFEQzY4NSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1w
+			bWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjvAJ2YAAAMpSURBVHja7FkxS1tRFD5JnkRDrEVMIsVJ
+			iGlQF0Vog7hYGhGCk0Mnp4yOYnERQaSQLQ5u/gBd4tBASkMgIJZAMiVD0s1JTYZaMyhi7P0O3seL
+			iimtTfLS+8HJfffdvHC++5177nk3ltvbW+oEWKlDoIgoIoqIIqKIKCJ/Aw0f29vbXtF8EvZO2AuT
+			+P5T2FdhH5eXl79botGoT3S+CXtpUjF+CHsDRbZAolgs0v7+Pl1cXJDFYmlrz1Ef9vb20uLiIvl8
+			Pgiwpd2FE8ViMbq+viaHw2EKIvAVPq+uruLWe02uiVqtxiytVisTaVcyIAGDvyBzB6cmr6BEV1cX
+			2Ww2Uyhyc3NjJEI6ke7ubiYCRYB2VkRGECb9wT4CEjBN09jwpWbZ5ubmk32jSf+kvw8UkWujFVhf
+			X6eNjY26fiPAVxk9bbWzS+d/h8STJUqz1AiHw2zPAaPPnVVrNUIwGKTJyUmy2+3cx+6fyWQonU7T
+			4OAghUIhGhoa4rFKpUKpVIry+bz+bCAQ0MfwG+fn582vfsfGxtiRbDbL8buzs8P3p6enuZ2ZmaG+
+			vj6KRCJ6fM/NzXE7NTXFzyaTSR47PT3lTbclimBm5ewCJycndHx8TKOjo9wHCSNEJa1f+/1+VgHK
+			AXt7e7S2tta60HI6nTQ/P8/XHo+HBgYG9LGjoyMu3lZWVthpkDw4OOAxt9vNfSPK5XJriAwPD9PS
+			0hI7idAolUrcSkWkYlgLIDkxMcFju7u77bXYx8fH6erqqi5kHkufiUSijvjIyAidnZ0xOSNcLtc/
+			UaXhYr+8vORMAweBhYUFPUMB4u2MDeEHeL1ebqFcLpfjMIRaMoPJzNd0RQ4PD3l2McsyhRYKBQ4f
+			kMPLmFwjANRDlkJSgPX399Ps7CxnLzyL1N0SItVqtS6sHsNT48hYMmv9F6cosmg0Fo/Pnn6bQcJY
+			LN7vm0aR+07/SQWsThrbkQhO7Kinp8d0zht8roIIjh05z5uJDE595OuBwBccmb5G7UfmPjJ9a4vH
+			4xXxkhQTnVfCUHvYTUIAJcJnYR9EiVS0qP/ZFRFFRBFRRBQRRaSDiPwSYADhkDD4eb9xIQAAAABJ
+			RU5ErkJggg==
 		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[
-class VDOM_formtext(VDOM_object):
+<![CDATA[class VDOM_formtext(VDOM_object):
 
 	def render(self, contents=""):
 		display = u"display: none;" if self.visible == "0" else u""
@@ -831,7 +830,7 @@ $j(document).ready(function(){
 				style = style)
 			
 		result = \
-			u"""<container id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
+			u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" 
 						top="{top}" left="{left}" width="{width}" height="{height}" >
 					<htmltext top="0" left="0" width="{width}" height="{height}" overflow="hidden" blendMode="normal">
 						{text}
@@ -840,27 +839,32 @@ $j(document).ready(function(){
 			""".format(
 					id = self.id, vis = self.visible, zind = self.zindex, 
 					hierarchy = self.hierarchy, order = self.order, 
-					top = self.top, left = self.left, 
+					top = self.top, left = self.left, name = self.name,
 					width = self.width, height = self.height,
 					text = text)
 				
 		return VDOM_object.wysiwyg(self, contents=result)
 
-def set_attr(app_id, object_id, param):
-	o = application.objects.search(object_id)
 
-	if "width" in param:
-		width = param["width"]["value"]
+# def set_attr(app_id, object_id, param):
+def on_update(object, attributes):
+	# o = application.objects.search(object_id)
+
+	# if "width" in param:
+	if "width" in attributes:
+		# width = param["width"]["value"]
+		width = attributes["width"]
 		if int(width) < 10:
-			o.set_attributes({"width": "10"})
+			# o.set_attributes({"width": "10"})
+			attributes["width"] = "10"
 
-	if "height" in param:
-		height = param["height"]["value"]
+	# if "height" in param:
+	if "height" in attributes:
+		# height = param["height"]["value"]
+		height = attributes["height"]
 		if int(height) < 4:
-			o.set_attributes({"height": "4"})
-
-
-]]>
+			# o.set_attributes({"height": "4"})
+			attributes["height"] = "4"]]>
 	</SourceCode>
 	<Libraries>
 		<Library Target="html"><![CDATA[<script type="text/javascript" src="/cb185b0a-942e-5ea6-6410-51a426b39fcc.res"></script>
