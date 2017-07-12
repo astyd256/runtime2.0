@@ -344,12 +344,6 @@ def format_exception_trace(information=None, limit=sys.maxint,
     if cause is not None and isinstance(cause, BaseException):
         lines.append("Caused by: %s" % describe_exception(type(cause), cause))
 
-    report = getattr(exvalue, "report", None)
-    if report:
-        lines.append("!!!")
-        lines.append(report)
-        lines.append("!!!")
-
     if locals:
         format_exception_locals(information, indent=indent + settings.LOGGING_INDENT, into=lines)
 
