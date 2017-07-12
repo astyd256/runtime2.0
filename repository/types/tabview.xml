@@ -846,7 +846,7 @@ def on_insert(parent, object):
 	# childs = object.parent.objects
 	container_hierarchy = []
 	# for key in childs:
-	for child in parent.objects:
+	for child in parent.objects.itervalues():
 		# child = application.objects.search(key)
 		# container_hierarchy.append(child.attributes.hierarchy)
 		container_hierarchy.append(child.attributes["hierarchy"])
