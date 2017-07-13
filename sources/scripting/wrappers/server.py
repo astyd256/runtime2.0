@@ -1,8 +1,10 @@
 
-from inspect import iscode
+from inspect import iscode, isroutine
+
 import managers
 import version
 import vscript
+
 from uuid import uuid4
 from vscript.engine import vcompile, vexecute, vevaluate
 from mailing.message import Message, MailAttachment as Attachment
@@ -14,16 +16,26 @@ class VDOM_vscript_libraries(object):
     def __init__(self, owner):
         self._owner = owner
 
-    def register(self, name, source_or_code, data=None, environment=None, context=None):
+    def register(self, name, source, data=None, environment=None, context=None):
         if context is None:
             raise Exception("Require context")
-        if iscode(source_or_code):
-            code = source_or_code
-        else:
-            code, data = self._owner.compile(source_or_code, environment=environment)
 
-        def initializer(context, name, namespace):
-            self._owner.execute(code, data, namespace=namespace, environment=environment)
+        if isroutine(source):
+
+            def initializer(context, name, namespace):
+                code = source(context, name)
+                if isinstance(code, tuple):
+                    code, data = code
+                self._owner.execute(code, data, namespace=namespace, environment=environment)
+
+        else:
+            if iscode(source):
+                code = source
+            else:
+                code, data = self._owner.compile(source, environment=environment)
+
+            def initializer(context, name, namespace):
+                self._owner.execute(code, data, namespace=namespace, environment=environment)
 
         managers.import_manager.register(context, name, initializer)
 
