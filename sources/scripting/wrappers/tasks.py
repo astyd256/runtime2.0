@@ -19,11 +19,14 @@ class Task(SmartThread):
 
     def main(self):
         if self._target:
-            self._target()
+            with profiler("tasks"):
+                self._target()
         else:
-            super(Task, self).main()
+            while self.running:
+                with profiler("tasks"):
+                    self.wait(self.work())            
+
 
     def run(self):
         managers.engine.select(self._application)
-        with profiler("tasks"):
-            super(Task, self).run()
+        super(Task, self).run()
