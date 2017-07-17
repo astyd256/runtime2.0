@@ -906,6 +906,8 @@ class VDOM_web_services_server(object):
 
     def set_type(self, sid, skey, typexml):
         """add/update type"""
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         ret = managers.server_manager.set_type(typexml)
@@ -2483,6 +2485,8 @@ class VDOM_web_services_server(object):
 # management ========================================================================================================
 
     def install_application(self, sid, skey, vhname, appxml):
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         request = managers.request_manager.get_request()
@@ -2515,6 +2519,8 @@ class VDOM_web_services_server(object):
             #raise SOAPpy.faultType(app_install_error, _("Install application error"), msg)
 
     def uninstall_application(self, sid, skey, appid):
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         ret = self.__find_application(appid)  # returns (app, error_message)
@@ -2535,27 +2541,42 @@ class VDOM_web_services_server(object):
     def export_application(self, sid, skey, appid):
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
-        ret = self.__find_application(appid)  # returns (app, error_message)
-        if not ret[0]:
-            return ret[1]
-        if ret[0].protected == "1":
+
+        # ret = self.__find_application(appid)  # returns (app, error_message)
+        # if not ret[0]:
+        #     return ret[1]
+        # if ret[0].protected == "1":
+        #     return "<Error>This application could not be exported</Error>"
+        app, error_message = self.__find_application(appid)
+        if not app:
+            return error_message
+        if app.protected:
             return "<Error>This application could not be exported</Error>"
 
-        path = tempfile.mkdtemp("", "", VDOM_CONFIG["TEMP-DIRECTORY"])
+        # path = tempfile.mkdtemp("", "", VDOM_CONFIG["TEMP-DIRECTORY"])
 
-        managers.xml_manager.export_application(appid, "xml", path)
-        toread = os.path.join(path, appid) + ".xml"
-        f = open(toread, "rb")
-        data = f.read()
-        f.close()
+        # managers.xml_manager.export_application(appid, "xml", path)
+        # toread = os.path.join(path, appid) + ".xml"
+        # f = open(toread, "rb")
+        # data = f.read()
+        # f.close()
 
+        # try:
+        #     shutil.rmtree(path)
+        # except:
+        #     pass
+        file = StringIO()
         try:
-            shutil.rmtree(path)
-        except:
-            pass
+            app.export(file)
+            data = file.getvalue()
+        finally:
+            file.close()
+
         return data.decode("utf-8")
 
     def update_application(self, sid, skey, appxml):
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         tmpfilename = ""
@@ -2593,6 +2614,8 @@ class VDOM_web_services_server(object):
         return """<Result>\n <ApplicationExists>\n  %s\n </ApplicationExists>\n</Result>""" % result
 
     def backup_application(self, sid, skey, appid, driverid):
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         backupid = skey
@@ -2603,6 +2626,8 @@ class VDOM_web_services_server(object):
         return """<Result> <Revision>%s</Revision></Result>""" % str(result[1])
 
     def get_task_status(self, sid, skey, taskid):
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         status = managers.task_manager.get_status(taskid)
@@ -2613,6 +2638,8 @@ class VDOM_web_services_server(object):
             return self.__format_error(_("Proccess with tid %s does not exists" % taskid))
 
     def restore_application(self, sid, skey, appid, driverid, revision):
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         taskid = skey
@@ -2622,6 +2649,8 @@ class VDOM_web_services_server(object):
         return """<Result><Revision>%s</Revision></Result>""" % str(revision)
 
     def list_backup_drivers(self, sid, skey):
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         backup_drivers = managers.backup_manager.get_storages()
