@@ -14,6 +14,7 @@ class VDOM_resource_descriptor(object):
         self.res_format = res_format
         self.res_type = "permanent"
         self.name = res_name
+        self.label = ""
         self.__loaded = True
 
     @classmethod
