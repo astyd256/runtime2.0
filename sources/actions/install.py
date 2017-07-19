@@ -7,13 +7,13 @@ import file_access
 from utils.auxiliary import forfeit
 
 from .auxiliary.constants import TYPE, APPLICATION, EXTENSION, TYPES
-from .auxiliary import section, show, detect, locate_repository
+from .auxiliary import section, show, warn, detect, locate_repository
 
 
 def install(filename):
     entity = detect(filename)
     if not entity:
-        show("not an application or type: %s" % filename)
+        warn("not an application or type: %s" % filename)
         return
 
     with section("install %s from %s" % (entity, filename), lazy=False):
@@ -31,7 +31,7 @@ def install(filename):
                         library.compile()
 
         except Exception as error:
-            show("unable to install %s: %s" % (entity, error))
+            warn("unable to install %s: %s" % (entity, error))
             raise
         else:
             show("contains %s" % subject)

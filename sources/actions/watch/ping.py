@@ -1,5 +1,4 @@
 
-from logs import console
 from .auxiliary import query
 
 
@@ -15,10 +14,6 @@ def run(address=None, port=None, timeout=None, udp=False):
     :param float timeout: specifies timeout to wait for reply
     :param switch udp: use UDP as transport protocol
     """
-
-    try:
-        message = query("ping", address, port, REQUEST, timeout=timeout, datagrams=udp)
-        if message != RESPONSE:
-            raise Exception("Incorrect response")
-    except Exception as error:
-        console.error(error)
+    message = query("ping", address, port, REQUEST, timeout=timeout, datagrams=udp)
+    if message != RESPONSE:
+        raise Exception("Incorrect response")

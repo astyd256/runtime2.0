@@ -1,7 +1,6 @@
 
 from utils.console import CONSOLE_WIDTH
-from logs import console
-from .auxiliary import section, show, search_object, search_action
+from .auxiliary import section, show, warn, search_object, search_action
 
 
 DEFAULT_DEPTH = 10
@@ -80,7 +79,7 @@ def run(identifier, depth=DEFAULT_DEPTH, actions=False):
         if subject:
             entity = "action"
         else:
-            console.error("unable to find: %s" % identifier)
+            warn("unable to find: %s" % identifier)
             return
 
     with section("summary"):

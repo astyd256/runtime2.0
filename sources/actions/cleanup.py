@@ -1,7 +1,7 @@
 
 import settings
 from .auxiliary.constants import TYPES, APPLICATIONS
-from .auxiliary import section, show, select
+from .auxiliary import section, warn, select
 
 
 ENTITIES = TYPES, APPLICATIONS
@@ -13,7 +13,7 @@ def run(identifier="all"):
     :param uuid_or_name identifier: application or type uuid or name
     """
     if not settings.STORE_BYTECODE:
-        show("storing is disabled")
+        warn("storing is disabled")
         return
 
     for entity, subject in select(identifier, "cleanup", ENTITIES):
@@ -21,5 +21,5 @@ def run(identifier="all"):
             try:
                 subject.cleanup()
             except Exception as error:
-                show("unable to recompile %s: %s" % (entity, error))
+                warn("unable to recompile %s: %s" % (entity, error))
                 raise

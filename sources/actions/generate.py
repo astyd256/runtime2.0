@@ -1,10 +1,10 @@
 
 from uuid import uuid4
-from logs import console
+from .auxiliary import show
 
 
 def run():
     """
     generate unique identifier
     """
-    console.write(str(uuid4()))
+    show(uuid4())

@@ -91,7 +91,7 @@ class MemoryApplications(MemoryBase, Mapping):
                 for item in self.itervalues():
                     if item.name.lower().startswith(uuid_or_name):
                         return item
-                raise
+                return None
 
     def unload(self, uuid, remove=False):
         with self._lock:

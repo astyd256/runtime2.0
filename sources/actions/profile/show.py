@@ -11,7 +11,7 @@ import file_access
 from utils.console import CONSOLE_WIDTH
 from utils.tracing import BINARY_ALIAS, SERVER_ALIAS, TYPES_ALIAS, APPLICATIONS_ALIAS, format_source_point
 from utils.auxiliary import fit, fill
-from ..auxiliary import section, show
+from ..auxiliary import section, show, warn
 
 
 LOCATION_WIDTH = 99
@@ -89,11 +89,11 @@ def run(name=None, location=None, headers=False, sort=None, order=None, limit=50
     if location is None:
         location = settings.PROFILE_FILENAME_TEMPLATE % (name or settings.PROFILE_DEFAULT_NAME)
     elif name is not None:
-        show("name and location mutually exclusive options")
+        warn("name and location are mutually exclusive options")
         return
 
     if not managers.file_manager.exists(file_access.FILE, None, location):
-        show("no profile")
+        warn("no profile")
         return
 
     sort = SORT_VALUES.get((sort or "").lower(), SORT_BY_TOTAL)
