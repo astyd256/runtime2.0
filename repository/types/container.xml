@@ -1158,7 +1158,7 @@ class VDOM_container(VDOM_object):
 def on_update(object, attributes):
     # object = application.objects.search(object_id)
 
-    if object.parent and object.parent.type.class_name == "VDOM_tabview" and object.attributes.lockposition == "1" and int(object.attributes.top) != 20 and int(object.attributes.left) != 1:
+    if object.parent and object.parent.type.class_name == "VDOM_tabview" and object.attributes["lockposition"] == "1" and int(object.attributes["top"]) != 20 and int(object.attributes["left"]) != 1:
         # top_container = 20
         # left_container = 1
         # object.set_attributes({"left": left_container, "top": top_container})
@@ -1298,11 +1298,6 @@ $j(this.domCont).css('opacity', nn);]]>
 <![CDATA[this.domCont.style.zindex = parseInt(newZindex,10);]]>
 					</SourceCode>
 				</Action>
-				<Action Name="startResizeX" DisplayName="#Lang(613)" Description="#Lang(513)">
-					<SourceCode>
-<![CDATA[vdom_ui_startResizeX(this.domCont);]]>
-					</SourceCode>
-				</Action>
 				<Action Name="moveTo" DisplayName="#Lang(606)" Description="#Lang(506)">
 					<Parameters>
 						<Parameter Name="newX" DisplayName="#Lang(705)" Description="#Lang(805)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
@@ -1316,6 +1311,14 @@ $j(this.domCont).css('opacity', nn);]]>
 				<Action Name="dragStart" DisplayName="#Lang(603)" Description="#Lang(503)">
 					<SourceCode>
 <![CDATA[vdom_ui_dragStart(this.domCont);]]>
+					</SourceCode>
+				</Action>
+				<Action Name="setClass" DisplayName="#Lang(609)" Description="#Lang(509)">
+					<Parameters>
+						<Parameter Name="cssClass" DisplayName="#Lang(712)" Description="#Lang(812)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
+<![CDATA[$j(this.domCont).attr('class', cssClass);]]>
 					</SourceCode>
 				</Action>
 				<Action Name="dragStop" DisplayName="#Lang(604)" Description="#Lang(504)">
@@ -1342,12 +1345,9 @@ $j(this.domCont).css('opacity', nn);]]>
 <![CDATA[vdom_ui_startResizeY(this.domCont);]]>
 					</SourceCode>
 				</Action>
-				<Action Name="setClass" DisplayName="#Lang(609)" Description="#Lang(509)">
-					<Parameters>
-						<Parameter Name="cssClass" DisplayName="#Lang(712)" Description="#Lang(812)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
-					</Parameters>
+				<Action Name="startResizeX" DisplayName="#Lang(613)" Description="#Lang(513)">
 					<SourceCode>
-<![CDATA[$j(this.domCont).attr('class', cssClass);]]>
+<![CDATA[vdom_ui_startResizeX(this.domCont);]]>
 					</SourceCode>
 				</Action>
 				<Action Name="goTo" DisplayName="#Lang(616)" Description="#Lang(516)">

@@ -426,11 +426,14 @@ class MemoryApplication(MemoryApplicationSketch):
                     self.compose(file=file, shorter=True)
                 self._changes = False
 
-    def export(self, filename, excess=False):
+    def export(self, file_or_filename, excess=False):
         with self.lock:
-            with managers.file_manager.open(file_access.FILE, None, filename,
-                    mode="w", encoding="utf8") as file:
-                self.compose(file=file, excess=excess)
+            if isinstance(file_or_filename, basestring):
+                with managers.file_manager.open(file_access.FILE, None, file_or_filename,
+                        mode="w", encoding="utf8") as file:
+                    self.compose(file=file, excess=excess)
+            else:
+                self.compose(file=file_or_filename, excess=excess)
 
     # unsafe
     def uninstall(self, remove_zero_resources=True, remove_databases=True, remove_storage=True):

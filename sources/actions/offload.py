@@ -4,7 +4,7 @@ import managers
 import file_access
 
 from .auxiliary.constants import TYPE, APPLICATION, REPOSITORY, TYPES, APPLICATIONS
-from .auxiliary import section, show, confirm, search, autocomplete, locate_repository
+from .auxiliary import section, show, warn, confirm, search, autocomplete, locate_repository
 
 
 def run(identifier, location):
@@ -15,11 +15,11 @@ def run(identifier, location):
     """
     application = managers.memory.applications.search(identifier)
     if application is None:
-        show("not found: %s" % identifier)
+        warn("not found: %s" % identifier)
         return
 
     if not os.path.isdir(location):
-        show("not a directory: %s" % location)
+        warn("not a directory: %s" % location)
         return
 
     uuids = managers.resource_manager.list_resources(application.id)

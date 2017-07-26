@@ -56,6 +56,6 @@ def run():
                     try:
                         arguments.action.run(*arguments.action.arguments)
                     except Exception:
-                        show_exception_trace()
+                        show_exception_trace(locals=True)
                 else:
                     parser.print_usage()

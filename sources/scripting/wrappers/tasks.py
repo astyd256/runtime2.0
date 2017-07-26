@@ -19,9 +19,13 @@ class Task(SmartThread):
 
     def main(self):
         if self._target:
-            self._target()
+            with profiler("tasks"):
+                self._target()
         else:
-            super(Task, self).main()
+            while self.running:
+                with profiler("tasks"):
+                    delay = self.work()
+                self.wait(delay)
 
     def run(self):
         managers.engine.select(self._application)

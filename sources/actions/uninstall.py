@@ -1,6 +1,6 @@
 
 from .auxiliary.constants import TYPES, APPLICATIONS
-from .auxiliary import section, show, select
+from .auxiliary import section, warn, select
 
 
 ENTITIES = TYPES, APPLICATIONS
@@ -17,5 +17,5 @@ def run(identifier, yes=False):
             try:
                 subject.uninstall()
             except Exception as error:
-                show("unable to uninstall %s: %s" % (entity, error))
+                warn("unable to uninstall %s: %s" % (entity, error))
                 raise

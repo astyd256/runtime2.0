@@ -846,7 +846,7 @@ def on_insert(parent, object):
 	# childs = object.parent.objects
 	container_hierarchy = []
 	# for key in childs:
-	for child in parent.objects:
+	for child in parent.objects.itervalues():
 		# child = application.objects.search(key)
 		# container_hierarchy.append(child.attributes.hierarchy)
 		container_hierarchy.append(child.attributes["hierarchy"])
@@ -868,9 +868,9 @@ def on_insert(parent, object):
 	# 		object.set_attributes({"zindex": "0"})
 	if len(container_hierarchy) > 1 and int(object.attributes["hierarchy"]) == 0:
 		object.attributes.update(hierarchy=str(int(max(container_hierarchy)) + 1))
-		if parent.attributes.currenttab == child.attributes.hierarchy and object.attributes["zindex"] != "1":
+		if parent.attributes["currenttab"] == child.attributes["hierarchy"] and object.attributes["zindex"] != "1":
 			object.attributes.update(zindex="1")
-		elif parent.attributes.currenttab != child.attributes.hierarchy and object.attributes["zindex"] != "0":
+		elif parent.attributes["currenttab"] != child.attributes["hierarchy"] and object.attributes["zindex"] != "0":
 			object.attributes.update(zindex="0")
 
 	# return ""]]>

@@ -5,11 +5,10 @@ from contextlib import closing
 import managers
 import file_access
 
-from logs import console
 from utils.structure import Structure
 from utils.parsing import native, VALUE, IGNORE, Parser, ParsingException, SectionMustPrecedeError
 
-from .auxiliary import ABSENT, section, show
+from .auxiliary import ABSENT, section, show, warn
 
 
 SHOW_ERRORS_ONLY = False
@@ -181,25 +180,24 @@ def run(filename):
     try:
         file = managers.file_manager.open(file_access.FILE, None, filename, mode="rb")
     except Exception as error:
-        console.error("unable to open file: %s" % error)
-        raise
+        warn("unable to open file: %s" % error)
     else:
-        console.write("analyze application from %s" % filename)
+        show("analyze application from %s" % filename)
         with closing(file):
             parser = Parser(builder=builder, notify=True, supress=True)
             try:
                 parser.parse(file=file)
             except ParsingException as error:
-                console.error("unable to parse, line %s: %s" % (error.lineno, error))
+                warn("unable to parse, line %s: %s" % (error.lineno, error))
             else:
                 if not parser.result:
-                    console.error("no application")
+                    warn("no application")
                     return
 
                 sections, types = parser.result
                 information = sections.get("Information")
                 if not information:
-                    console.error("no information")
+                    warn("no information")
                     return
 
                 show("contains %s:%s" % (information.id, information.name.lower()))

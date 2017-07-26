@@ -2,10 +2,8 @@
 import re
 from itertools import izip_longest
 
-from logs import console
-
 from .auxiliary.constants import TYPE, APPLICATION
-from .auxiliary import escape, section, show, search
+from .auxiliary import escape, section, show, warn, search
 
 
 COLORS = {
@@ -148,7 +146,7 @@ def run(identifier, description=False, details=False):
         names = ("id", "name", "owner", "password", "active", "index",
             "server_version", "scripting_language", "default_language")
     else:
-        console.error("unable to find: %s" % identifier)
+        warn("unable to find: %s" % identifier)
         return
 
     if description:
@@ -199,4 +197,5 @@ def run(identifier, description=False, details=False):
                             show(name, interface(subject, attribute))
 
     except Exception as error:
-        console.error("unable to show %s: %s" % (entity, error))
+        warn("unable to show %s: %s" % (entity, error))
+        raise

@@ -338,6 +338,12 @@ def format_exception_trace(information=None, limit=sys.maxint,
         description = "%s: %s" % (label, description)
     lines.append("%s%s" % (indent, description))
 
+    # NOTE: currently used in vscript to show original errors
+    #       in Python 3 we can user native __cause__ mechanism
+    cause = getattr(exvalue, "cause", None)
+    if cause is not None and isinstance(cause, BaseException):
+        lines.append("Caused by: %s" % describe_exception(type(cause), cause))
+
     if locals:
         format_exception_locals(information, indent=indent + settings.LOGGING_INDENT, into=lines)
 

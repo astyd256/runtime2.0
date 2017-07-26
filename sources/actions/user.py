@@ -1,6 +1,6 @@
 
 import managers
-from .auxiliary import section, show, confirm, search
+from .auxiliary import section, show, warn, confirm, search
 from .auxiliary.constants import USER
 
 
@@ -32,10 +32,10 @@ def run(user=None, create=False, system=False, delete=False, password=None, emai
 
     if create:
         if managers.user_manager.name_exists(user):
-            show("user or group with such identifier already exists")
+            warn("user or group with such identifier already exists")
             return
         if not password:
-            show("create require user password")
+            warn("create require user password")
             return
         show("create user %s" % user)
         user = managers.user_manager.create_user(user, password, system=system, email=email or "", slv=level or "")
@@ -43,7 +43,7 @@ def run(user=None, create=False, system=False, delete=False, password=None, emai
     else:
         entity, user = search(user=user)
         if entity is not USER:
-            show("no user with such identifier")
+            warn("no user with such identifier")
             return
 
     if not (create or delete) and password is None and email is None and level is None:
