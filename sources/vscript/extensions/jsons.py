@@ -64,7 +64,7 @@ class VScriptJSONEncoder(JSONEncoder):
 			integer: lambda value: value.value,
 			mismatch: lambda value: unicode(value),
 			nothing: lambda value: value.name,
-			null: lambda value: v_null,
+			null: lambda value: None,
 			string: lambda value: value.value} \
 				.get(type(value), unknown)(value)
 
