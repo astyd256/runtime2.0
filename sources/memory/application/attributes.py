@@ -11,6 +11,7 @@ from ..generic import MemoryBase
 FORCE_CDATA_LENGTH = 1024
 FORCE_CDATA_REGEX = re.compile(u"[\u0000-\u0019\"<=>]", re.MULTILINE)
 DEREFERENCE_REGEX = re.compile(r"\#RES\(([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})\)", re.IGNORECASE)
+LAYOUT_ATTRIBUTES = {"top", "left", "width", "height", "hierarchy"}
 
 
 @weak("_owner")
@@ -127,6 +128,7 @@ class MemoryAttributes(MemoryAttributesSketch):
             if updates:
                 managers.dispatcher.dispatch_handler(self._owner, "on_update", updates)
 
+                layout = False
                 if updates:
                     for name, value in updates.iteritems():
                         if not isinstance(value, basestring):
@@ -140,7 +142,14 @@ class MemoryAttributes(MemoryAttributesSketch):
                         log.write("Update %s attrbiute \"%s\" to \"%s\"" % (self._owner, name, value.replace('"', '\"')))
                         self._items[name] = value
 
+                        if name in LAYOUT_ATTRIBUTES:
+                            layout = True
+
                     self._owner.invalidate(upward=1)
+                    if layout:
+                        parent = self._owner.parent
+                        if parent and parent.virtual == self._owner.virtual:
+                            managers.dispatcher.dispatch_handler(parent, "on_layout", self._owner)
                     self._owner.autosave()
 
     def __getitem__(self, name):
