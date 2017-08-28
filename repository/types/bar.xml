@@ -771,9 +771,6 @@
 	</Resources>
 	<SourceCode>
 <![CDATA[
-import sys
-
-
 class VDOM_bar(VDOM_object):
 
     def render(self, contents=""):

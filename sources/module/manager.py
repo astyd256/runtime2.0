@@ -48,6 +48,8 @@ class VDOM_module_manager(object):
                 return (404, None)
 
         parts1 = script_name.split("/")
+        url_parts= filter(lambda x: "" != x, script_name.split("/"))
+        
         parts = parts1[-1]
         parts = parts.split(".")
         if len(parts) == 1 and parts[0] != "":
@@ -109,9 +111,9 @@ class VDOM_module_manager(object):
 
             # get container object and check if it can be a top level container
             _a = managers.memory.applications[request_object.app_id()] 
-            # CHECK: _a = managers.xml_manager.get_application(request_object.app_id())
+            
             obj = _a.objects.get(container_id)
-            # CHECK: obj = _a.search_object(container_id)
+            
             if not obj: obj=_a.objects.catalog.get(container_id)
             # CHECK: if not obj:
             # CHECK:    for _i in _a.objects:
@@ -166,6 +168,7 @@ class VDOM_module_manager(object):
                 show_exception_trace(caption="Module Manager: Render exception", locals=True)
                 return (None, str(e))
             except Exception as ee:
+                show_exception_trace(caption="Module Manager: Render exception", locals=True)
                 action = _a.actions.get("requestonerror")
                 if action and action.source_code:
                     request = managers.request_manager.get_request()
@@ -173,8 +176,7 @@ class VDOM_module_manager(object):
                     managers.engine.execute(action)
                     if request_object.wholeAnswer:
                         return (None, request_object.wholeAnswer.encode("utf-8"))
-                else:
-                    show_exception_trace(caption="Module Manager: Render exception", locals=True)
+                
             # finally:
             #     for key in request_object.files:
             #         if getattr(request_object.files[key][0],"name", None):
