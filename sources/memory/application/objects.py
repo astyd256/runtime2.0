@@ -80,6 +80,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
             if not restore:
                 if self._owner.is_object and item._virtual == self._owner.virtual:
                     managers.dispatcher.dispatch_handler(self._owner, "on_insert", item)
+                    managers.dispatcher.dispatch_handler(self._owner, "on_layout", item)
 
     def new_sketch(self, type, virtual=False, attributes=None, restore=False):
         return (MemoryObjectRestorationSketch if restore
@@ -141,6 +142,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
                 managers.dispatcher.dispatch_handler(copy, "on_create")
                 if self._owner.is_object and copy.virtual == self._owner.virtual:
                     managers.dispatcher.dispatch_handler(self._owner, "on_insert", copy)
+                    managers.dispatcher.dispatch_handler(self._owner, "on_layout", copy)
 
             if copy:
                 if self._owner.is_object and self._owner.virtual == copy.virtual:
