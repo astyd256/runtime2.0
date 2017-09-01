@@ -739,7 +739,7 @@ class VDOM_web_services_server(object):
             if obj:
                 # for o in obj.objects:
                 #     if o == parentid:
-                if parentid in obj.objects.catalog:
+                if parentid in obj.objects:
                     raise SOAPpy.faultType(parent_object_error, _("Create object error"), _("Parent object is the child of copying object"))
 
             # TODO: copy between different applications, may be...
