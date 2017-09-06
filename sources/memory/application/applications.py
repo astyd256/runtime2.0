@@ -83,15 +83,16 @@ class MemoryApplications(MemoryBase, Mapping):
         if not self._queue:
             self._queue = None
 
-    def search(self, uuid_or_name):
+    def search(self, uuid_or_name, autocomplete=False):
         try:
             return self[uuid_or_name]
         except KeyError:
-            with self._lock:
-                for item in self.itervalues():
-                    if item.name.lower().startswith(uuid_or_name):
-                        return item
-                return None
+            if autocomplete:
+                with self._lock:
+                    for item in self.itervalues():
+                        if item.name.lower().startswith(uuid_or_name):
+                            return item
+            return None
 
     def unload(self, uuid, remove=False):
         with self._lock:

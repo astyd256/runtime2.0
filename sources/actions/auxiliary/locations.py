@@ -11,8 +11,11 @@ def autocomplete(subject, location):
         return location + EXTENSION
 
 
-def locate_repository(entity):
-    if entity is TYPE:
-        return os.path.normpath(os.path.join(settings.REPOSITORY_LOCATION, settings.REPOSITORY_TYPES_DIRECTORY))
+def locate_repository(entity=None, typename=None):
+    if typename:
+        return os.path.normpath(os.path.join(settings.REPOSITORY_LOCATION, settings.REPOSITORY_TYPES_DIRECTORY, typename)) + EXTENSION
     else:
-        raise NotImplementedError
+        if entity is TYPE:
+            return os.path.normpath(os.path.join(settings.REPOSITORY_LOCATION, settings.REPOSITORY_TYPES_DIRECTORY))
+        else:
+            raise NotImplementedError

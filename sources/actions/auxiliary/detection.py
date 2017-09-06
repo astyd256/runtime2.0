@@ -1,10 +1,18 @@
 
+import re
 from contextlib import closing
 import managers
 import file_access
 from utils.parsing import native, Parser
 from .constants import TYPE, APPLICATION, USER, GROUP
 from .output import warn
+
+
+ENTITY_NAME_REGEX = re.compile("[a-z][_0-9a-z]*$", re.IGNORECASE)
+
+
+def is_entity_name(value):
+    return bool(ENTITY_NAME_REGEX.match(value))
 
 
 def search(identifier=None, user=None, group=None):
@@ -48,13 +56,13 @@ def search(identifier=None, user=None, group=None):
         warn("unable to find %s with such uuid or name: %s" % (entity, identifier))
         return None, None
     else:
-        subject = managers.memory.types.search(identifier)
+        subject = managers.memory.applications.search(identifier, autocomplete=True)
         if subject:
-            return TYPE, subject
+            return APPLICATION, subject
         else:
-            subject = managers.memory.applications.search(identifier)
+            subject = managers.memory.types.search(identifier, autocomplete=True)
             if subject:
-                return APPLICATION, subject
+                return TYPE, subject
             else:
                 warn("unable to find application or type with such uuid or name")
                 return None, None

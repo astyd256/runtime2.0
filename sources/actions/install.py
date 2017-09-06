@@ -7,7 +7,7 @@ import file_access
 from utils.auxiliary import forfeit
 
 from .auxiliary.constants import TYPE, APPLICATION, EXTENSION, TYPES
-from .auxiliary import section, show, warn, detect, locate_repository
+from .auxiliary import section, show, warn, detect, locate_repository, is_entity_name
 
 
 def install(filename):
@@ -47,6 +47,21 @@ def run(location):
     """
     if location in TYPES:
         location = locate_repository(TYPE)
+
+    if is_entity_name(location):
+        names = {filename[:-len(EXTENSION)]
+            for filename in managers.file_manager.list(file_access.FILE, None, locate_repository(TYPE))
+                if filename.endswith(EXTENSION)}
+        location, query = None, location
+        if query in names:
+            name = locate_repository(typename=query)
+        else:
+            for name in names:
+                if name.startswith(query):
+                    location = locate_repository(typename=name)
+        if not location:
+            warn("no such type in the repository: %s" % query)
+            return
 
     if os.path.isdir(location):
         with section("install types from %s" % location):
