@@ -1,6 +1,6 @@
 
 import managers
-from .auxiliary import section, show, warn
+from .auxiliary import section, show, warn, search
 
 
 def update(data, identifier):
@@ -51,7 +51,7 @@ def run(identifier=None):
         identifier = retrieve()
         show("default application is %s" % identifier)
     else:
-        application = managers.memory.applications.search(identifier)
+        entity, application = search(application=identifier)
         if application is None:
             warn("unable to find: %s" % identifier)
         else:

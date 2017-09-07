@@ -15,7 +15,7 @@ def is_entity_name(value):
     return bool(ENTITY_NAME_REGEX.match(value))
 
 
-def search(identifier=None, user=None, group=None):
+def search(identifier=None, application=None, type=None, user=None, group=None):
     if user or group:
         if user:
             user = user.lower()
@@ -56,16 +56,21 @@ def search(identifier=None, user=None, group=None):
         warn("unable to find %s with such uuid or name: %s" % (entity, identifier))
         return None, None
     else:
-        subject = managers.memory.applications.search(identifier, autocomplete=True)
-        if subject:
-            return APPLICATION, subject
-        else:
-            subject = managers.memory.types.search(identifier, autocomplete=True)
+        if identifier:
+            application = type = identifier
+
+        if application:
+            subject = managers.memory.applications.search(application, autocomplete=True)
+            if subject:
+                return APPLICATION, subject
+
+        if type:
+            subject = managers.memory.types.search(type, autocomplete=True)
             if subject:
                 return TYPE, subject
-            else:
-                warn("unable to find application or type with such uuid or name")
-                return None, None
+
+        warn("unable to find application or type with such uuid or name")
+        return None, None
 
 
 def detect(filename):
