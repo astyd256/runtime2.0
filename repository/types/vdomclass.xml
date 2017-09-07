@@ -548,7 +548,7 @@
 
             return VDOM_object.wysiwyg(self, contents=result)
 
-        result = u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order} top="{top}" left="{left}" width="{width}" height="{height}">
+        result = u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" top="{top}" left="{left}" width="{width}" height="{height}">
 <svg>
     <rect x="0" y="0" width="{width}" height="{height}" fill="#EEEEEE" />
 </svg>
