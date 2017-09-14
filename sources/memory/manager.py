@@ -222,6 +222,7 @@ class Memory(object):
                 else:
                     for lineno, message in parser.report:
                         into.append((lineno, message))
+            # TODO: check this later - why?
             application.unimport_libraries()
             application.save()
             return application

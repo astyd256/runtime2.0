@@ -1,10 +1,11 @@
 
 from contextlib import contextmanager
-from threading import local, current_thread
+from threading import local, current_thread, enumerate as enumerate_threads
 import managers
 from logs import log
 from memory import COMPUTE_CONTEXT, RENDER_CONTEXT, WYSIWYG_CONTEXT
 from utils.profiling import profiler
+from utils.threads import stop as stop_threads
 # from utils.statistics import statistics
 from .exceptions import RenderTermination
 from .contexts import RenderContext, WysiwygContext
@@ -15,12 +16,23 @@ class EngineLocal(local):
     application = None
 
 
+class EngineThreads(set):
+
+    def filter(self, uuid):
+        return {thread for thread in self if thread.application == uuid}
+
+    def stop(self, uuid=None):
+        stop_threads(lambda thread: getattr(thread, "application", None) == uuid if uuid else getattr(thread, "application", None) is not None)
+
+
 class Engine(object):
 
     def __init__(self):
         self._storage = EngineLocal()
 
     application = property(lambda self: self._storage.application)
+    threads = property(lambda self: EngineThreads(thread for thread in enumerate_threads()
+            if getattr(thread, "application", None) is not None))
 
     def select(self, application=None):
         if isinstance(application, basestring):
