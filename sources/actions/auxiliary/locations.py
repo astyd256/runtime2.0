@@ -9,6 +9,8 @@ def autocomplete(subject, location):
         return os.path.join(location, subject.name + EXTENSION)
     elif not location.endswith(EXTENSION):
         return location + EXTENSION
+    else:
+        return location
 
 
 def locate_repository(entity=None, typename=None):
