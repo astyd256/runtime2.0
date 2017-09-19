@@ -5,6 +5,11 @@ import sys
 from argparse import ArgumentParser
 
 
+# python: http://bugs.python.org/issue7980
+
+import datetime
+datetime.datetime.strptime("2012-01-01", "%Y-%m-%d")
+
 # settings
 
 from .importers.settings import SettingsImporter
