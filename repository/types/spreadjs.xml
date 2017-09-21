@@ -404,7 +404,7 @@
       
         result += """
         <script>
-        	GC.Spread.Sheets.LicenseKey = "E756258162462741#A03V2csFmZ0IiczRmI1pjIs9WQisnOiQkIsISP3cGU7VWaytGazEDRnl4M0FlVqdjeBFnVwMDZihEcFd4MYRkdlRHRkFDMxgla4QTUy2GNjVTU4ZGbkhjQwBjZS9EdBpFZZFkeupkb0p5ZGJ5VTdkZB5mWiojITJCLzMDM4MDM6ITN0IicfJye35XX3JSMHBTQiojIDJCLiATMuYHITpEIkFWZyB7UiojIOJyebpjIkJHUiwiIzIjMxgDMgITM5AzNxAjMiojI4J7QiwiIxEjNwcTMwIjI0ICc8VkIsICevJWbvRmdiojIh94QiwSZ5JHd0ICb6VkIsISM4cjM6QjM6EDO5IjN5cjI0ICZcJjL";
+        	GC.Spread.Sheets.LicenseKey = "684379132868866#A07ZMIiczRmI1pjIs9WQisnOiQkIsISP3EkVwsyVkRFUHN4R7ZzR7lmavZDaxp4MvVzc8ZXaoFDVygndMBzMTRkNz4WQWtibPhGbldWeaRFbRF4NjJTalJTaZdTZ6JXeEpHWyc7dLVHaXRjNrhFaiojITJCL8MjNwcjM7MjM0IicfJye35XX3JSMHBTQiojIDJCLiATMuYHITpEIkFWZyB7UiojIOJyebpjIkJHUiwiI7ETMyMDMgAjM9AzNxAjMiojI4J7QiwiI9EjMxcTMwIjI0ICc8VkIsICbpFWbulGcwFkI0ISYONkIsIiN6gDO6gjMzETO7MDN8YjI0ICZJJCL3VSc5F";
             $(document).ready(function () {
                 var link = document.createElement('link');
                 link.type = "text/css";
