@@ -65,7 +65,7 @@ def query(caption, address, port, request, timeout=None, datagrams=False):
 
         duration = time() - start
         Parser(builder=builder, notify=True, supress=True).parse(message)
-        show("done in %.1f ms" % duration)
+        show("done in %.3f s" % duration)
         newline()
         return message
     except socket.timeout:

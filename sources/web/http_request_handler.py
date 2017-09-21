@@ -1,6 +1,5 @@
 """server request handler module"""
 
-import gc
 import sys
 import io
 # import os

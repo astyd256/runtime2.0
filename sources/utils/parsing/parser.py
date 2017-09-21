@@ -175,15 +175,18 @@ class Parser(LegacyInterface):
         self._result = result
         self._report = []
 
-    def parse(self, chunk=None, file=None, filename=None):
+    def parse(self, value=None, chunk=None, file=None, filename=None):
         """
         Parse value, file or data chunk
-        :param chunk: Parse string (entirely or in consecutive calls as chunks)
+        :param value: Parse string entirely
+        :param chunk: Parse string in consecutive calls as chunks, last call must use "value" argument
         :param file: File-like object to read data from
         :param filename: File name of the file to read data from
         """
         try:
-            if chunk is not None:
+            if value is not None:
+                self._parser.Parse(value, True)
+            elif chunk is not None:
                 self._parser.Parse(chunk)
             elif filename is not None:
                 with open(filename, "rb") as file:

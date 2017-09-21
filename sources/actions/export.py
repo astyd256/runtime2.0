@@ -1,7 +1,7 @@
 
 import os.path
 from .auxiliary.constants import REPOSITORY, TYPES, APPLICATIONS
-from .auxiliary import section, show, warn, satisfy, select, autocomplete, locate_repository
+from .auxiliary import section, warn, satisfy, select, autocomplete, locate_repository
 
 
 ENTITIES = TYPES, APPLICATIONS
@@ -26,7 +26,7 @@ def run(identifier, location=None, excess=False, yes=False):
         entity_location = location or locate_repository(entity)
         with section("export %s to %s" % (subject, entity_location), lazy=False):
             try:
-                subject.export(autocomplete(subject, entity_location), excess=excess)
+                subject.export(filename=autocomplete(subject, entity_location), excess=excess)
             except Exception as error:
                 warn("unable to export %s: %s" % (entity, error))
                 raise

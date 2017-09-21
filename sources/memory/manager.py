@@ -145,7 +145,7 @@ class Memory(object):
 
     # installation
 
-    def install_type(self, filename, into=None):
+    def install_type(self, value=None, file=None, filename=None, into=None):
 
         def cleanup(uuid):
             if uuid:
@@ -159,11 +159,27 @@ class Memory(object):
             context.uuid = type.id
             self.prepare_type_infrastructure(type.id)
 
-        log.write("Install type from %s" % filename)
+        if value:
+            description = "string"
+        elif filename:
+            description = os.path.basename(filename)
+        else:
+            try:
+                description = file.name
+            except AttributeError:
+                description = "file"
+
+        log.write("Install type from %s" % description)
         parser = Parser(builder=type_builder, notify=True, options=on_information)
         context = Structure(uuid=None)
         try:
-            type = parser.parse(filename=filename)
+            if value:
+                type = parser.parse(value.encode("utf8") if isinstance(value, unicode) else value)
+            elif filename:
+                type = parser.parse(filename=filename)
+            else:
+                type = parser.parse(file=file)
+
             if parser.report:
                 if into is None:
                     log.warning("Install type notifications")
@@ -172,6 +188,7 @@ class Memory(object):
                 else:
                     for lineno, message in parser.report:
                         into.append((lineno, message))
+
             type.save()
             self._types.save()
             return type
@@ -179,15 +196,15 @@ class Memory(object):
             raise
         except ParsingException as error:
             cleanup(context.uuid)
-            raise Exception("Unable to parse %s, line %s: %s" % (os.path.basename(filename), error.lineno, error))
+            raise Exception("Unable to parse %s, line %s: %s" % (description, error.lineno, error))
         except IOError as error:
             cleanup(context.uuid)
-            raise Exception("Unable to read from \"%s\": %s" % (os.path.basename(filename), error.strerror))
+            raise Exception("Unable to read from %s: %s" % (description, error.strerror))
         except:
             cleanup(context.uuid)
             raise
 
-    def install_application(self, filename, into=None):
+    def install_application(self, value=None, file=None, filename=None, into=None):
 
         def cleanup(uuid):
             if uuid:
@@ -205,15 +222,27 @@ class Memory(object):
             #     raise Exception("Server version %s is unsuitable for this application %s" % (VDOM_server_version, application.server_version))
             # TODO: License key...
 
-        log.write("Install application from %s" % filename)
-        try:
-            file = managers.file_manager.open(file_access.FILE, None, filename, mode="rb")
-        except IOError as error:
-            log.error("Unable to open file: %s" % error)
+        if value:
+            description = "string"
+        elif filename:
+            description = os.path.basename(filename)
+        else:
+            try:
+                description = file.name
+            except AttributeError:
+                description = "file"
+
+        log.write("Install application from %s" % description)
         parser = Parser(builder=application_builder, notify=True, options=on_information)
         context = Structure(uuid=None)
         try:
-            application = parser.parse(file=file)
+            if value:
+                application = parser.parse(value.encode("utf8") if isinstance(value, unicode) else value)
+            elif filename:
+                application = parser.parse(filename=filename)
+            else:
+                application = parser.parse(file=file)
+
             if parser.report:
                 if into is None:
                     log.warning("Install application notifications")
@@ -222,6 +251,7 @@ class Memory(object):
                 else:
                     for lineno, message in parser.report:
                         into.append((lineno, message))
+
             # TODO: check this later - why?
             application.unimport_libraries()
             application.save()
@@ -230,10 +260,10 @@ class Memory(object):
             raise
         except ParsingException as error:
             cleanup(context.uuid)
-            raise Exception("Unable to parse \"%s\", line %s: %s" % (os.path.basename(filename), error.lineno, error))
+            raise Exception("Unable to parse %s, line %s: %s" % (description, error.lineno, error))
         except IOError as error:
             cleanup(context.uuid)
-            raise Exception("Unable to read \"%s\": %s" % (os.path.basename(filename), error.strerror))
+            raise Exception("Unable to read %s: %s" % (description, error.strerror))
         except:
             cleanup(context.uuid)
             raise

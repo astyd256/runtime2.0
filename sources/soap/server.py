@@ -2,6 +2,7 @@
 
 import string
 import sys
+import gc
 import os
 import time
 import re
@@ -20,6 +21,9 @@ from collections import OrderedDict
 import settings
 import managers
 import security
+import file_access
+
+from logs import log
 from errors import *
 from memory import COMPUTE_CONTEXT, \
     APPLICATION_START_CONTEXT, APPLICATION_FINISH_CONTEXT, APPLICATION_UNINSTALL_CONTEXT, \
@@ -39,9 +43,15 @@ from database.dbobject import VDOM_sql_query
 from version import SERVER_VERSION as VDOM_server_version
 
 
+# NOTE: this dirty hack is needed because soap utils override server ones
 from importlib import import_module
+
 show_exception_trace = import_module("utils.tracing").show_exception_trace
 verificators = import_module("utils.verificators")
+parsing = import_module("utils.parsing")
+
+native, VALUE, IGNORE = parsing.native, parsing.VALUE, parsing.IGNORE
+Parser, ParsingException = parsing.Parser, parsing.ParsingException
 
 
 if_re = re.compile(r"^([^\(]+)\((.*?)\)$", re.IGNORECASE)
@@ -906,15 +916,94 @@ class VDOM_web_services_server(object):
 
     def set_type(self, sid, skey, typexml):
         """add/update type"""
-        raise NotImplementedError
 
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
-        ret = managers.server_manager.set_type(typexml)
-        if ret[0]:
-            return self.__success()
+
+        # ret = managers.server_manager.set_type(typexml)
+        # if ret[0]:
+        #     return self.__success()
+        # else:
+        #     return self.__format_error(ret[1])
+
+        def create_empty_file():
+            try:
+                file = managers.file_manager.open_temporary(file_access.FILE, None, delete=False)
+                return file.name
+            finally:
+                file.close()
+
+        def builder(parser):
+
+            def Type():
+
+                @native
+                def section(name, attributes):
+                    if name == "Information":
+
+                        @native
+                        def entry(name, attributes):
+                            if name == "ID":
+                                value = yield VALUE
+                                parser.accept(value)
+                            else:
+                                yield IGNORE
+
+                        return entry
+                    else:
+                        return IGNORE
+
+                return section
+
+            return Type
+
+        source = typexml.encode("utf8")
+
+        # seach uuid and type
+        parser = Parser(builder=builder)
+        try:
+            parser.parse(source)
+        except ParsingException as error:
+            raise Exception(u"Unable to parse: %s" % error)
         else:
-            return self.__format_error(ret[1])
+            if parser.result is None:
+                return self.__format_error("Missing ID attribute")
+            subject = managers.memory.types.get(parser.result)
+            if subject is None:
+                return self.__format_error("There is no such type")
+
+        # suspend web server
+        log.write("Suspend web server")
+        managers.server.web_server.suspend()
+        for uuid in managers.memory.applications:
+            managers.memory.applications.unload(uuid)
+
+        # release all types as possible
+        gc.collect()
+
+        try:
+            # backup current version
+            backup = subject.export()
+
+            # delete current version
+            log.write("Update %s" % subject)
+            if subject:
+                subject.uninstall()
+            del subject
+
+            # install new one and restore if error
+            try:
+                managers.memory.install_type(source)
+            except Exception as error:
+                show_exception_trace(caption="SOAP Set Type: Unable to install: %s" % error)
+                managers.memory.install_type(backup)
+                return self.__format_error("Unable to install: %s" % error)
+        finally:
+            # resume web server
+            log.write("Resume web server")
+            managers.server.web_server.resume()
+
+        return self.__success()
 
     def get_all_types(self, sid, skey):
         """get all types description"""
@@ -2565,14 +2654,8 @@ class VDOM_web_services_server(object):
         #     shutil.rmtree(path)
         # except:
         #     pass
-        file = StringIO()
-        try:
-            app.export(file)
-            data = file.getvalue()
-        finally:
-            file.close()
 
-        return data.decode("utf-8")
+        return app.export()
 
     def update_application(self, sid, skey, appxml):
         raise NotImplementedError

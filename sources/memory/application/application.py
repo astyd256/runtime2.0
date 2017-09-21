@@ -246,7 +246,7 @@ class MemoryApplication(MemoryApplicationSketch):
     def compose(self, file=None, shorter=False, excess=False):
         if not file:
             file = StringIO()
-            self.compose(file=file, shorter=True)
+            self.compose(file=file, shorter=shorter)
             return file.getvalue()
 
         file.write(u"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n")
@@ -426,14 +426,16 @@ class MemoryApplication(MemoryApplicationSketch):
                     self.compose(file=file, shorter=True)
                 self._changes = False
 
-    def export(self, file_or_filename, excess=False):
+    def export(self, file=None, filename=None, excess=False):
         with self.lock:
-            if isinstance(file_or_filename, basestring):
-                with managers.file_manager.open(file_access.FILE, None, file_or_filename,
+            if file is not None:
+                self.compose(file=file, excess=excess)
+            elif filename is not None:
+                with managers.file_manager.open(file_access.FILE, None, filename,
                         mode="w", encoding="utf8") as file:
                     self.compose(file=file, excess=excess)
             else:
-                self.compose(file=file_or_filename, excess=excess)
+                return self.compose(excess=excess)
 
     # unsafe
     def uninstall(self, remove_zero_resources=True, remove_databases=True, remove_storage=True):

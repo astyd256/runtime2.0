@@ -3,11 +3,6 @@ import threading
 
 import SOAPpy
 
-try:
-	from soap.soaputils import VDOM_session_protector
-except ImportError:
-	from scripting.soap.soaputils import VDOM_session_protector
-
 from utils.exception import VDOMServiceCallError
 
 
@@ -106,7 +101,7 @@ class VDOMServiceSingleThread(object):
 			if ret:
 				raise VDOMServiceCallError( str(ret) )
 			else:
-				raise VDOMServiceCallError( ex.message  )
+				raise VDOMServiceCallError( getattr(ex, "message", None) or getattr(ex, "faultstring", None) or str(ex) )
 
 		self._skey = self._protector.next_session_key(self._skey)
 		self._request_num+=1
@@ -155,3 +150,9 @@ class VDOMServiceMultiThread(VDOMServiceSingleThread):
 
 VDOMService = VDOMServiceMultiThread
 VDOM_service = VDOMServiceMultiThread
+
+
+try:
+	from soap.soaputils import VDOM_session_protector
+except ImportError:
+	from scripting.soap.soaputils import VDOM_session_protector

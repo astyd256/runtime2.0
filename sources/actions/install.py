@@ -20,11 +20,11 @@ def install(filename):
         notifications = []
         try:
             if entity is TYPE:
-                subject = managers.memory.install_type(filename, into=notifications)
+                subject = managers.memory.install_type(filename=filename, into=notifications)
                 if settings.STORE_BYTECODE:
                     subject.compile()
             elif entity is APPLICATION:
-                subject = managers.memory.install_application(filename, into=notifications)
+                subject = managers.memory.install_application(filename=filename, into=notifications)
                 if settings.STORE_BYTECODE:
                     for library in subject.libraries.itervalues():
                         # show("precompile library %s" % library.name)
@@ -54,11 +54,11 @@ def run(location):
                 if filename.endswith(EXTENSION)}
         location, query = None, location
         if query in names:
-            name = locate_repository(typename=query)
+            location = locate_repository(type=query)
         else:
             for name in names:
                 if name.startswith(query):
-                    location = locate_repository(typename=name)
+                    location = locate_repository(type=name)
         if not location:
             warn("no such type in the repository: %s" % query)
             return

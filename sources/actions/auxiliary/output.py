@@ -9,6 +9,7 @@ from utils.console import CONSOLE_WIDTH
 
 ABSENT = "ABSENT"
 INDENT = "    "
+WARN_INDENT = ""
 
 LINE_WIDTH = 119
 NAME_WIDTH = 36
@@ -77,7 +78,8 @@ def show(name=None, value=ABSENT, indent=None, longer=False, noclip=False):
         global_context.show_section()
 
     if not name:
-        console.write()
+        if name is not None:
+            console.write()
         return
 
     if value is ABSENT:
@@ -100,7 +102,7 @@ def warn(message, indent=None, noclip=False):
     global global_context
 
     if indent is None:
-        indent = global_context.indent
+        indent = WARN_INDENT
 
     if global_context.show_section:
         global_context.show_section()
