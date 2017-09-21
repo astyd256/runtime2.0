@@ -44,13 +44,19 @@ class MemoryEvents(MemoryBase, MutableMapping):
         item = self.new_sketch(name)
         return ~item
 
-    def clear(self):
-        with self._owner.lock:
-            if not self._owner._virtual:
-                for key in self._items:
-                    del self._all_items[key]
-            self._items.clear()
-            self._owner.autosave()
+    def clear(self, inner=False):
+        if inner:
+            for event in tuple(event
+                    for event in self._owner.application.events.catalog.itervalues()
+                    if event.container is self._owner):
+                del event.source_object.events[event.source_object.id, event.name]
+        else:
+            with self._owner.lock:
+                if not self._owner._virtual:
+                    for key in self._items:
+                        del self._all_items[key]
+                self._items.clear()
+                self._owner.autosave()
 
     def __getitem__(self, key):
         return self._items[key]

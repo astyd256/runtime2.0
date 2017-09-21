@@ -1992,7 +1992,7 @@ class VDOM_web_services_server(object):
                 raise VDOM_exception_sec(_("Modifying application is not allowed"))
 
             obj.bindings.clear()
-            obj.events.clear()
+            obj.events.clear(inner=True)
 
             for uuid, name, target, top, left, state, parameters in bindings:
                 binding = obj.bindings.new_sketch(target, name, parameters=parameters)
