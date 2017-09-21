@@ -6,8 +6,6 @@ from .auxiliary import soap_query, SOAPError
 DEFAULT_ADDRESS = "localhost"
 DEFAULT_USER = "root"
 
-SOAP_EXPORT_METHOD = "export_application"
-
 
 def run(identifier, location, address=None, user=None, password=None):
     """
@@ -25,9 +23,9 @@ def run(identifier, location, address=None, user=None, password=None):
     if password is None:
         password = user
 
-    with section("export application to %s" % location, lazy=False):
+    with section("export remote application to %s" % location, lazy=False):
         try:
-            data = soap_query("retrieve application from", address, user, password, identifier, SOAP_EXPORT_METHOD)
+            data = soap_query("query", address, user, password, "export_application", application=identifier)
         except SOAPError as error:
             warn("unable to export: %s" % error)
             return
