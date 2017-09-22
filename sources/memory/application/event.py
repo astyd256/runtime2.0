@@ -22,7 +22,7 @@ class MemoryEventSketch(MemoryBase):
 
     owner = source_object = property(lambda self: self._collection.owner)
     container = property(lambda self: self._collection.owner.container)
-    key = property(lambda self: (self._collection.owner, self._name))
+    key = property(lambda self: (self._collection.owner.id, self._name))
 
     name = rwproperty("_name")
     top = rwproperty("_top")
