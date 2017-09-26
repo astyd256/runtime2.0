@@ -4,9 +4,9 @@ import types
 import linecache
 import traceback
 import inspect
-import pprint
 import threading
 import os
+from pprint import PrettyPrinter
 from itertools import islice
 import settings
 from utils.auxiliary import headline, fit, align, lfill
@@ -41,6 +41,19 @@ APPLICATIONS_PATH = os.path.abspath(os.path.join(BINARY_PATH, settings.APPLICATI
 PYTHON_PATH = sys.prefix
 
 WELL_KNOWN_MODULES = "_json", "_ast", "thread", "operator", "itertools", "exceptions"
+
+
+class SafePrettyPrinter(PrettyPrinter):
+
+    def pformat(self, value):
+        try:
+            return PrettyPrinter.pformat(self, value)
+        except Exception as error:
+            try:
+                description = str(error)
+            except Exception:
+                description = type(error).__name__
+            return "Unable to represent: %s" % description
 
 
 # auxiliary
@@ -150,7 +163,7 @@ def is_server_object(object, default=True):
             module_location = sys.modules[module_name].__file__
             if os.path.isabs(module_location):
                 return module_location.startswith(BINARY_PATH)
-        except:
+        except Exception:
             pass
 
         if module_name in WELL_KNOWN_MODULES:
@@ -168,7 +181,7 @@ def describe_exception(extype, exvalue):
         else:
             try:
                 value = str(exvalue)
-            except:
+            except Exception:
                 value = unicode(exvalue).encode("ascii", "backslashreplace")
     except Exception:
         value = ""
@@ -304,13 +317,14 @@ def format_exception_locals(information=None, ignore_builtins=True, caption=None
         lines.append(indent + caption)
         indent += settings.LOGGING_INDENT
 
+    printer = SafePrettyPrinter(width=VALUE_WIDTH)
     for name, value in frame.f_locals.iteritems():
         caption = align(name, NAME_WIDTH - len(indent), " ", filler=filler)
         if ignore_builtins and name == "__builtins__":
             lines.append("%s%s%s" % (indent, caption, "{...}"))
         else:
             lines.append("%s%s%s" % (indent, caption,
-                pprint.pformat(value, width=VALUE_WIDTH).replace("\n", "\n%s%s" % ("", NAME_WIDTH * " "))))
+                printer.pformat(value).replace("\n", "\n%s%s" % ("", NAME_WIDTH * " "))))
 
     if into is None:
         lines.append("")
