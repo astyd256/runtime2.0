@@ -86,7 +86,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
         return (MemoryObjectRestorationSketch if restore
                 else MemoryObjectSketch)(self, type,
             self._owner.application, None if self._owner.is_application else self._owner,
-            virtual=virtual, attributes=attributes)
+            virtual=virtual or self._owner.virtual, attributes=attributes)
 
     def new(self, type, name=None, virtual=False, attributes=None):
         item = self.new_sketch(type, virtual=virtual, attributes=attributes)
