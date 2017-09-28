@@ -23,7 +23,7 @@
 	</Information>
 	<Attributes>
 		<Attribute>
-		<Name>stateful</Name>
+			<Name>stateful</Name>
 			<DisplayName>#Lang(199)</DisplayName>
 			<Description>#Lang(299)</Description>
 			<DefaultValue>0</DefaultValue>
@@ -326,8 +326,7 @@
 		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[
-from scripting import e2vdom
+<![CDATA[from scripting import e2vdom
 
 
 def on_compile(application_object, object, action_name, context, objects):
@@ -344,8 +343,9 @@ class VDOM_vdompackage(VDOM_object):
         # return VDOM_object.render(self, parent, contents = result)
 
         e2vdom.process(self)
-        libraries, declarations, registrations = e2vdom.generate(self)
-        javascript = "%s\n%s\n" % (declarations, registrations)
+        # libraries, declarations, registrations = e2vdom.generate(self)
+        # javascript = "%s\n%s\n" % (declarations, registrations)
+        javascript, libraries = e2vdom.generate(self)
 
         clean_id = (application.id).replace('-', '_')
 
@@ -378,7 +378,6 @@ class VDOM_vdompackage(VDOM_object):
                 # order = self.order,  # ???
                 contents=contents)
 
-        return VDOM_object.wysiwyg(self, contents=result)
-]]>
+        return VDOM_object.wysiwyg(self, contents=result)]]>
 	</SourceCode>
 </Type>
