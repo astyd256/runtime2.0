@@ -81,7 +81,10 @@ class string(subtype):
 		return hash(self._value)
 
 	def __repr__(self):
-		return "STRING@%08X:%r"%(id(self), self._value)
+		if hasattr(self, "_value"):
+			return "STRING@%08X:%r"%(id(self), self._value)
+		else:
+			return "STRING@%08X:<UNINITIALIZED>"%(id(self))
 
 
 from .boolean import boolean, true, false
