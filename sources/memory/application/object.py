@@ -294,6 +294,9 @@ class MemoryObject(MemoryObjectSketch):
                         # or just update stored value
                         invalidates = self._factory_invalidates
 
+    def delete(self):
+        self._collection.on_delete(self)
+
     def __invert__(self):
         raise NotImplementedError
 

@@ -20,7 +20,8 @@ class VDOM_session(dict):
 		self.__user = ""
 		self.update()
 		self.files = {}
-		self.states=[{"#": 0}]
+		self.states = [{"#": 0}]
+		self.primaries = set()
 
 	def id(self):
 		"""access id property"""
