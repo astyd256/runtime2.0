@@ -57,7 +57,6 @@ class MemoryObjectSketch(MemoryBase):
         self._virtual = virtual
         self._application = application
         self._parent = parent
-        self._container = self._parent._container if self._parent else self
 
         # initialize lock
         if parent:
@@ -86,7 +85,7 @@ class MemoryObjectSketch(MemoryBase):
     order = rwproperty("_order")
     is_virtual = virtual = roproperty("_virtual")
     application = rwproperty("_application")
-    container = roproperty("_container")
+    container = property(lambda self: self._parent.container if self._parent else self)
     parent = rwproperty("_parent")
     primary = roproperty("_primary")
 
@@ -293,9 +292,6 @@ class MemoryObject(MemoryObjectSketch):
                     else:
                         # or just update stored value
                         invalidates = self._factory_invalidates
-
-    def delete(self):
-        self._collection.on_delete(self)
 
     def __invert__(self):
         raise NotImplementedError

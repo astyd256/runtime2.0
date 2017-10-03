@@ -1,13 +1,14 @@
 
-from weakref import ref
 from collections import MutableMapping
 from uuid import uuid4
-from utils.properties import lazy, roproperty
+from utils.properties import lazy, weak, roproperty
+
 from ..generic import MemoryBase
 from .catalogs import MemoryBindingsCatalog, MemoryBindingsDynamicCatalog
 from .binding import MemoryBindingSketch, MemoryBindingRestorationSketch
 
 
+@weak("_owner")
 class MemoryBindings(MemoryBase, MutableMapping):
 
     @lazy

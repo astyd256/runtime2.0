@@ -304,6 +304,12 @@ class Memory(object):
         except ParsingException as error:
             raise Exception("Unable to parse \"%s\", line %s: %s" % (os.path.basename(location), error.lineno, error))
 
+    # cleaning
+
+    def release(self, objects):
+        for item in objects:
+            item._collection.on_delete(item)
+
     # auxiliary
 
     def __repr__(self):

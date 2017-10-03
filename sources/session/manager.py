@@ -67,9 +67,8 @@ class VDOM_session_manager(dict):
 							application = managers.memory.applications[s.context["application_id"]]
 							action = application.actions.get("sessiononfinish")
 							if action and action.source_code:
-								managers.engine.execute(action)							
-						for primary in s.primaries:
-							primary.delete()
+								managers.engine.execute(action)
+						managers.memory.release(s.primaries)
 					finally:
 						s.context = {}
 						s.clean_files()

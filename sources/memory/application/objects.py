@@ -79,7 +79,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
             else:
                 try:
                     session = managers.session_manager.current
-                except Exception as error:
+                except Exception:
                     raise Exception("Unable to create virtual object outside of session")
                 else:
                     session.primaries.add(item)
