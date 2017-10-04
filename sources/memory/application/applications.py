@@ -16,7 +16,7 @@ from logs import log
 
 from ..constants import DEFAULT_APPLICATION_NAME
 from ..generic import MemoryBase
-from .application import MemoryApplicationSketch, MemoryApplicationRestorationSketch
+from .application import MemoryApplicationSketch, MemoryApplicationRestorationSketch, MemoryApplicationGhost
 
 
 @weak("_owner")
@@ -103,6 +103,7 @@ class MemoryApplications(MemoryBase, Mapping):
                 managers.engine.threads.stop(uuid)
                 application.unimport_libraries()
                 del self._items[uuid]
+                application.__class__ = MemoryApplicationGhost
 
                 if remove:
                     self._event.set()

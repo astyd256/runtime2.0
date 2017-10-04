@@ -64,7 +64,7 @@ def iterlast(subject):
             yield last
     else:
         last = subject
-    while True:
+    while 1:
         yield last
 
 

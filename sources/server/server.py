@@ -12,7 +12,6 @@ class Server(SmartServer):
     web_server = roproperty("_web_server")
 
     def prepare(self):
-
         self._watcher = Watcher()
         self._watcher.start()
 

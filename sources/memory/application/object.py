@@ -146,6 +146,16 @@ class MemoryObjectDuplicationSketch(MemoryObjectSketch):
             virtual=parent.virtual, attributes=another.attributes)
 
 
+class MemoryObjectGhost(MemoryBase):
+
+    def __str__(self):
+        return " ".join(filter(None, (
+            "obsolete",
+            "virtual" if self._virtual else None,
+            "object",
+            ":".join(filter(None, (self._id, self._name))))))
+
+
 class MemoryObject(MemoryObjectSketch):
 
     @lazy
@@ -246,6 +256,9 @@ class MemoryObject(MemoryObjectSketch):
     _factory_invalidates = 0
 
     def factory(self, context, dynamic=None, probe=False):
+        # we are busy
+        managers.memory._operations += 1
+
         # check if already exists
         if dynamic is None:
             try:

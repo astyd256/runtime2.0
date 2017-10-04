@@ -2,10 +2,11 @@
 from utils.threads import SmartDaemon
 from logs import log
 from file_access import FileWriter
+import settings
 import managers
 
 
-QUANTUM = 0.5  # 30.1
+QUANTUM = settings.QUANTUM
 
 
 class MemoryWriter(SmartDaemon):
@@ -22,8 +23,8 @@ class MemoryWriter(SmartDaemon):
         log.write("Start %s\n" % self.name)
 
     def cleanup(self):
-        log.write("Stop %s\n" % self.name)
         self._manager.work()
+        log.write("Stop %s\n" % self.name)
 
     def work(self):
         return self._manager.work()
@@ -32,4 +33,25 @@ class MemoryWriter(SmartDaemon):
         return "<memory writer at 0x%08X>" % id(self)
 
 
-VDOM_memory_writer = MemoryWriter
+class MemoryCleaner(SmartDaemon):
+
+    name = "Memory Cleaner"
+
+    def __init__(self, manager):
+        managers.file_manager.start_daemon()
+        super(MemoryCleaner, self).__init__(name=MemoryCleaner.name,
+            quantum=QUANTUM, dependencies=FileWriter.name)
+        self._manager = manager
+
+    def prepare(self):
+        log.write("Start %s\n" % self.name)
+
+    def cleanup(self):
+        self._manager.clean(everything=True)
+        log.write("Stop %s\n" % self.name)
+
+    def work(self):
+        return self._manager.clean()
+
+    def __repr__(self):
+        return "<memory writer at 0x%08X>" % id(self)

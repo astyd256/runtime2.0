@@ -25,7 +25,7 @@ def run(name="server", uuid=None):
     try:
         view = log.view()
         update = PREVIOUS_LOG_LINES_TO_SHOW
-        while True:
+        while 1:
             entries = view.read(0, update, format=True)
             for entry in reversed(entries):
                 show(entry, noclip=True)

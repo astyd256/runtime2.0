@@ -29,7 +29,7 @@ class WebServer(SmartThread):
         self.__server.unavailable = True
 
         allowable = {current_thread()}
-        while True:
+        while 1:
             threads = {thread for thread in enumerate_threads()
                 if getattr(thread, THREAD_ATTRIBUTE_NAME, None) is not None}
             if not threads or threads == allowable:

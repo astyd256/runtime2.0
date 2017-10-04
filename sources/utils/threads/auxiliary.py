@@ -41,7 +41,7 @@ def wait(seconds=None):
 
 def stop(condition, quantum=settings.QUANTUM):
     last, tries = None, 0
-    while True:
+    while 1:
         threads = tuple(thread for thread in enumerate_threads()
             if isinstance(thread, SmartThread) and condition(thread))
         if not threads:

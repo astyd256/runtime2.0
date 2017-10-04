@@ -42,7 +42,7 @@ def write_as_base64(file, data, indent=""):
 def copy_as_base64(target, source, indent=""):
     # target.write(base64.b64encode(source))
     with source:
-        while True:
+        while 1:
             chunk = source.read(CHUNK_SIZE * READ_CHUNK_COUNT)
             if chunk:
                 write_as_base64(target, chunk, indent=indent)

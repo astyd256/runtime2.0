@@ -85,7 +85,7 @@ class LogFile(object):
                 tell = 0
 
             index, entries = deque(), deque()
-            while True:
+            while 1:
                 try:
                     position = iterator.next()
                 except StopIteration:

@@ -26,7 +26,7 @@ def initiate(cause=None):
         log.write("Initiate shutdown...\n")
     timestamp = time()
 
-    while True:
+    while 1:
         try:
             shutdown()
             log.write("Shutdown complete\n")

@@ -78,11 +78,10 @@ class MemoryObjects(MemoryBase, MutableMapping):
                     self._all_items[item._id] = item
             else:
                 try:
-                    session = managers.session_manager.current
+                    option = managers.session_manager.current
                 except Exception:
-                    raise Exception("Unable to create virtual object outside of session")
-                else:
-                    session.primaries.add(item)
+                    option = None
+                managers.memory.track(item, sync=option)
 
             if not restore:
                 if self._owner.is_object and item._virtual == self._owner.virtual:
@@ -139,6 +138,9 @@ class MemoryObjects(MemoryBase, MutableMapping):
             # delete source code and autosave
             item.invalidate(upward=True)
             item.autosave()
+
+            # mark as obsolete to avoid further usage
+            item.__class__ = MemoryObjectGhost
 
     def new_sketch(self, type, virtual=False, attributes=None, restore=False):
         return (MemoryObjectRestorationSketch if restore
@@ -228,4 +230,4 @@ class MemoryObjects(MemoryBase, MutableMapping):
         return "objects of %s" % self._owner
 
 
-from .object import MemoryObjectSketch, MemoryObjectRestorationSketch, MemoryObjectDuplicationSketch
+from .object import MemoryObjectSketch, MemoryObjectRestorationSketch, MemoryObjectDuplicationSketch, MemoryObjectGhost

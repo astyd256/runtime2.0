@@ -2,6 +2,7 @@
 import os
 import os.path
 
+from weakref import ref
 from threading import RLock
 
 import settings
@@ -11,13 +12,13 @@ import file_access
 from logs import log
 from utils.structure import Structure
 from utils.properties import roproperty  # rwproperty
-from utils.tracing import format_exception_trace
+from utils.tracing import format_exception_trace, show_exception_trace
 from utils.parsing import Parser, ParsingException
 
 from .constants import DEFAULT_APPLICATION_NAME, APPLICATION_START_CONTEXT
 from .type import type_builder, MemoryTypes
 from .application import application_builder, MemoryApplications
-from .daemon import MemoryWriter
+from .daemon import MemoryWriter, MemoryCleaner
 
 
 class AlreadyExistsError(Exception):
@@ -29,10 +30,15 @@ class Memory(object):
     def __init__(self):
         self._lock = RLock()
         self._queue = set()
+        self._release_queue = set()
         self._daemon = None
+        self._cleaner = None
 
         self._types = MemoryTypes(self)
         self._applications = MemoryApplications(self)
+
+        self._operations = 0
+        self._primaries = {}
 
         # obsolete
         # managers.resource_manager.save_index_off()
@@ -70,6 +76,12 @@ class Memory(object):
             self._daemon.start()
         return self._daemon
 
+    def start_cleaner(self):
+        if self._cleaner is None:
+            self._cleaner = MemoryCleaner(self)
+            self._cleaner.start()
+        return self._cleaner
+
     def work(self):
         with self._lock:
             entities = tuple(self._queue)
@@ -81,6 +93,36 @@ class Memory(object):
             except:
                 log.error("Unable to save %s, details below\n%s" %
                     (entity, format_exception_trace(locals=True, separate=True)))
+
+    def clean(self, everything=False):
+        if everything:
+            log.write("Release objects")
+            while 1:
+                try:
+                    object, reference = self._primaries.popitem()
+                except KeyError:
+                    break
+                else:
+                    object._collection.on_delete(object)
+        else:
+            if self._operations:
+                self._operations = 0
+                return
+            self._operations = 0
+
+            while 1:
+                try:
+                    object = self._release_queue.pop()
+                except KeyError:
+                    break
+                else:
+                    log.write("Release %s" % object)
+                    try:
+                        self._primaries.pop(object)
+                    except KeyError:
+                        pass
+                    else:
+                        object._collection.on_delete(object)
 
     # scheduling
 
@@ -306,9 +348,17 @@ class Memory(object):
 
     # cleaning
 
-    def release(self, objects):
-        for item in objects:
-            item._collection.on_delete(item)
+    def track(self, object, sync=None):
+        if sync is not None:
+            sync = ref(sync, lambda reference: self._release_queue.add(object))
+        managers.memory._primaries[object] = sync
+        if self._cleaner is None:
+            self.start_cleaner()
+
+    def release(self, object):
+        self._release_queue.add(object)
+        if self._cleaner is None:
+            self.start_cleaner()
 
     # auxiliary
 

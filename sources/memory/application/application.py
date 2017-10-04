@@ -116,6 +116,14 @@ class MemoryApplicationRestorationSketch(MemoryApplicationSketch):
     _restore = True
 
 
+class MemoryApplicationGhost(MemoryBase):
+
+    def __str__(self):
+        return " ".join(filter(None, (
+            "obsolete application",
+            ":".join(filter(None, (self._id, self._name.lower()))))))
+
+
 class MemoryApplication(MemoryApplicationSketch):
 
     def __init__(self):

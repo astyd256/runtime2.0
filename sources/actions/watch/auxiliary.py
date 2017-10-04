@@ -55,7 +55,7 @@ def query(caption, address, port, request, timeout=None, datagrams=False):
             message, address = sock.recvfrom(FRAME)
         else:
             message = ""
-            while True:
+            while 1:
                 reading, writing, erratic = select.select((sock,), (), (), timeout)
                 if reading:
                     chunk = sock.recv(FRAME)

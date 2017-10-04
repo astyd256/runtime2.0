@@ -117,7 +117,7 @@ class Logger(BaseLogger):
             if self._stream is None:
 
                 # (re)connect to the server
-                while True:
+                while 1:
                     log.write("Connect to %s:%d" % (self._address, self._port))
                     stream_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     stream_socket.settimeout(RECONNECT_TIMEOUT) # self.quantum
