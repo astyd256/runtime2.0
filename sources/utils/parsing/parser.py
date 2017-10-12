@@ -3,6 +3,7 @@ import types
 from weakref import proxy
 from xml.parsers.expat import ParserCreate, ExpatError
 from utils.properties import roproperty, rwproperty
+from utils.decorators import weaker
 from .exceptions import AbortingError, ParsingException, \
     UnableToChangeError, OutOfMemoryError, JunkAfterDocumentError
 from .subparsers import elements, nothing
@@ -92,8 +93,8 @@ class Parser(LegacyInterface):
         self._report = []
 
         if notify:
-            self._unexpected_attribute_handler = proxy(self._unexpected_attribute_handler)
-            self._unexpected_element_handler = proxy(self._unexpected_element_handler)
+            self._unexpected_attribute_handler = weaker(self._unexpected_attribute_handler)
+            self._unexpected_element_handler = weaker(self._unexpected_element_handler)
         else:
             self._unexpected_attribute_handler = None
             self._unexpected_element_handler = None

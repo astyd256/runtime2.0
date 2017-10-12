@@ -1,4 +1,5 @@
 
+from weakref import ref
 from functools import wraps
 
 
@@ -35,5 +36,15 @@ def attributes(**keywords):
         for name, value in keywords.iteritems():
             setattr(function, name, value)
         return function
+
+    return wrapper
+
+
+def weaker(bound):
+    instance, function = ref(bound.im_self), bound.im_func
+
+    @wraps(function)
+    def wrapper(*attributes, **keywords):
+        return function(instance(), *attributes, **keywords)
 
     return wrapper
