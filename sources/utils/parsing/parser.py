@@ -1,5 +1,6 @@
 
 import types
+from weakref import proxy
 from xml.parsers.expat import ParserCreate, ExpatError
 from utils.properties import roproperty, rwproperty
 from .exceptions import AbortingError, ParsingException, \
@@ -69,13 +70,13 @@ class Parser(LegacyInterface):
             builder = empty_builder
 
         if options is MISSING:
-            self._handler = builder(self)
+            self._handler = builder(proxy(self))
         elif isinstance(options, tuple):
-            self._handler = builder(self, *options)
+            self._handler = builder(proxy(self), *options)
         elif isinstance(options, dict):
-            self._handler = builder(self, **options)
+            self._handler = builder(proxy(self), **options)
         else:
-            self._handler = builder(self, options)
+            self._handler = builder(proxy(self), options)
 
         self._parser = ParserCreate()
         self._parser.buffer_text = DEFAULT_BUFFER_TEXT
@@ -85,12 +86,14 @@ class Parser(LegacyInterface):
         else:
             self._handle(self._handler)
 
+        del self._handler
+
         self._result = result
         self._report = []
 
         if notify:
-            self._unexpected_attribute_handler = self._unexpected_attribute_handler
-            self._unexpected_element_handler = self._unexpected_element_handler
+            self._unexpected_attribute_handler = proxy(self._unexpected_attribute_handler)
+            self._unexpected_element_handler = proxy(self._unexpected_element_handler)
         else:
             self._unexpected_attribute_handler = None
             self._unexpected_element_handler = None

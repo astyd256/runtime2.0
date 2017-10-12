@@ -14,8 +14,9 @@ from threading import RLock
 #             return False
 #     return True
 
-
 class Managers(object):
+
+    __name__ = __name__
 
     def __init__(self):
         self._lock = RLock()

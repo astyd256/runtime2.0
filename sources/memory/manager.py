@@ -12,10 +12,11 @@ import file_access
 from logs import log
 from utils.structure import Structure
 from utils.properties import roproperty  # rwproperty
-from utils.tracing import format_exception_trace, show_exception_trace
+from utils.tracing import format_exception_trace, show_exception_trace, describe_object, format_referrers
 from utils.parsing import Parser, ParsingException
 
 from .constants import DEFAULT_APPLICATION_NAME, APPLICATION_START_CONTEXT
+from .generic import MemoryBase
 from .type import type_builder, MemoryTypes
 from .application import application_builder, MemoryApplications
 from .daemon import MemoryWriter, MemoryCleaner
@@ -39,6 +40,7 @@ class Memory(object):
 
         self._operations = 0
         self._primaries = {}
+        self._primaries_cache = {}
 
         # obsolete
         # managers.resource_manager.save_index_off()
@@ -123,6 +125,27 @@ class Memory(object):
                         pass
                     else:
                         object._collection.on_delete(object)
+
+            if settings.SHOW_TRACKED_PRIMARIES:
+                primaries = self._primaries.copy()
+                if primaries != self._primaries_cache:
+                    if primaries:
+                        lines = []
+                        lines.append("Tracked primary objects:")
+                        for primary, reference in primaries.iteritems():
+                            lines.append("    %s" % primary)
+                            referent = reference()
+                            if referent is None:
+                                lines.append("        sync: weakreaf no more available")
+                            else:
+                                format_referrers(referent, limit=4,
+                                    caption="sync: %s, references:" % describe_object(referent),
+                                    indent="        ", into=lines)
+                            break
+                        log.write("\n".join(lines))
+                    else:
+                        log.write("No primary objects to track")
+                    self._primaries_cache = primaries
 
     # scheduling
 

@@ -1785,6 +1785,7 @@ class Template(object):
         self._vdomxml = xml
         # self._object = vdomxml.loads(xml, managers.engine.application)
         self._object = root.loads(xml, json, handler=root.handler)
+        managers.memory.track(self._object, sync=root)
 
     def __getitem__(self, key):
         return self._attributes.get(key.lower(), "")
@@ -1987,7 +1988,7 @@ class DynamicObjectView(VDOM_object):
             template_attributes = templates_attributes[template_name]
 
             template = Template(self, templates[template_name],
-                None if actions is None else actions[template_name])
+                (None if actions is None else actions[template_name]))
 
             binding = bindings.get(template_name, {})
             for key, value in item.iteritems():

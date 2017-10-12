@@ -19,3 +19,6 @@ class MemoryBase(object):
 
     def __repr__(self):
         return "<memory %s at 0x%08X>" % (self, id(self))
+
+    def __describe__(self):
+        return "memory " + str(self)

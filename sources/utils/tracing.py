@@ -1,6 +1,8 @@
 
 import sys
+import gc
 import types
+import numbers
 import linecache
 import traceback
 import inspect
@@ -9,7 +11,7 @@ import os
 from pprint import PrettyPrinter
 from itertools import islice
 import settings
-from utils.auxiliary import headline, fit, align, lfill
+from utils.auxiliary import enquote, headline, fit, align, lfill
 from utils.console import width
 
 
@@ -42,6 +44,8 @@ PYTHON_PATH = sys.prefix
 
 WELL_KNOWN_MODULES = "_json", "_ast", "thread", "operator", "itertools", "exceptions"
 
+REPRESENTATION_VALUE_LIMIT = 40
+
 
 class SafePrettyPrinter(PrettyPrinter):
 
@@ -54,6 +58,18 @@ class SafePrettyPrinter(PrettyPrinter):
             except Exception:
                 description = type(error).__name__
             return "Unable to represent: %s" % description
+
+
+# cell
+
+def get_cell_type(x):
+    def inner():
+        global CellType
+        CellType = type(inner.__closure__[0])
+    inner()
+
+
+get_cell_type("x")
 
 
 # auxiliary
@@ -148,6 +164,217 @@ def extract_stack(frame=None, skip_tracing=True, skip=None, until=None):
     return lines
 
 
+def collect_referrers(referent, limit=16, depth=32, rank=9):
+
+    ACCEPT = "ACCPET"
+    REJECT = "REJECT"
+
+    class Chain(tuple):
+
+        class Part(str):
+            pass
+
+        class KeyValue(Part):
+            key = None
+            module = None
+
+        class Cell(Part):
+            uid = None
+
+        parts = ()
+        rank = 0.50
+        depth = 1
+        known = set()
+        action = None
+
+        description = property(lambda self: " < ".join(self.parts))
+
+        referent = property(lambda self: self[0])
+        referrer = property(lambda self: self[1])
+
+        def combine(self, value):
+            chain = Chain(self + (value,))
+            chain.parts = self.parts
+            chain.rank = self.rank
+            chain.depth = self.depth + 1
+            chain.known = self.known
+            chain.action = self.action
+            return chain
+
+        def reduce(self, part, rank=1.00, action=None):
+            chain = Chain(self[1:])
+            chain.parts = self.parts + (part,)
+            chain.rank = self.rank * rank
+            chain.depth = self.depth
+            chain.known = self.known.copy()
+            chain.known.add(id(self[0]))
+            chain.action = self.action if action is None else action
+            return chain
+
+        def modify(self, part=None, rank=1.00, action=False):
+            if part is not None:
+                self.parts += (part,)
+            self.rank *= rank
+            if action is not None:
+                self.action = action
+            return self
+
+        def drop(self, count):
+            self.parts = self.parts[:-count]
+            return self
+
+        def __repr__(self):
+            return "<chain%s: %s>" % ({None: "", ACCEPT: "+A", REJECT: "+R"}[self.action],
+                ", ".join(map(lambda item: describe_object(item), self)))
+
+        __str__ = __repr__
+
+    def represent(value):
+        if isinstance(value, basestring):
+            result = enquote(value)
+            if len(result) > REPRESENTATION_VALUE_LIMIT:
+                return "%s...%s" % (result[:REPRESENTATION_VALUE_LIMIT - 4], result[-1])
+            else:
+                return result
+        elif isinstance(value, numbers.Number):
+            return str(value)
+        else:
+            return describe_object(value)
+
+    def describe(chain):
+
+        def is_or_equal(value, referent):
+            return value is referent or \
+                (isinstance(value, types.DictProxyType) and value == referent)
+
+        if len(chain) < 2:
+            return chain.modify(rank=0.10, action=ACCEPT)
+        elif isinstance(chain.referrer, (tuple, list, set)):
+            return chain.reduce(describe_object(chain.referrer), rank=0.80)
+        elif isinstance(chain.referrer, dict):
+            for key, value in chain.referrer.copy().iteritems():
+                if value is chain.referent:
+                    part = "key %s in %s" % (represent(key), describe_object(chain.referrer))
+                    if isinstance(key, basestring):
+                        part = Chain.KeyValue(part)
+                        part.key = key
+                        if id(chain.referrer) in modules:
+                            part.module = inspect.getmodule(chain.referent)
+                    return chain.reduce(part, rank=0.80)
+            return chain.reduce(describe_object(chain.referrer), rank=0.80)
+        elif getattr(chain.referrer, "func_globals", None) is chain.referent:
+            return chain.modify(action=REJECT)
+        else:
+            cycle = id(chain.referrer) in chain.known
+
+            if getattr(chain.referrer, "__self__", None) is chain.referent:
+                rank, part = 0.50, "instance of " + describe_object(chain.referrer)
+            elif getattr(chain.referrer, "__closure__", None) is chain.referent:
+                rank, part = 1.00, "closure of " + describe_object(chain.referrer)
+                if len(chain.parts) > 1:
+                    for name, value in zip(chain.referrer.__code__.co_freevars, chain.referrer.__closure__):
+                        if id(value) == chain.parts[-2].uid:
+                            rank, part = 1.25, "variable \"%s\" in %s" % (name, part)
+                chain.drop(2)
+            elif getattr(chain.referrer, "func_defaults", None) is chain.referent:
+                rank, part = 1.25, "defaults of " + describe_object(chain.referrer)
+            elif is_or_equal(getattr(chain.referrer, "__dict__", None), chain.referent):
+                if chain.parts and isinstance(chain.parts[-1], Chain.KeyValue):
+                    rank, part = 1.25, "attribute \"%s\" of %s" % (chain.parts[-1].key, describe_object(chain.referrer))
+                    if isinstance(chain.referrer, types.ModuleType):
+                        module = chain.parts[-1].module
+                        if module is not None:
+                            module_name = getattr(module, "__name__", "<module without name>")
+                            name = getattr(chain.referrer, "__name__", "<referrer without name>")
+                            if module_name == name:
+                                rank = 4.00
+                            elif module_name.startswith(name + "."):
+                                rank = 2.00
+                    chain.drop(1)
+                else:
+                    rank, part = 1.00, "namespace of %s" % describe_object(chain.referrer)
+            elif getattr(chain.referrer, "__bases__", None) is chain.referent:
+                rank, part = 0.75, "ancestors of " + describe_object(chain.referrer)
+            elif getattr(chain.referrer, "__mro__", None) is chain.referent:
+                rank, part = 0.50, "method resolution order of " + describe_object(chain.referrer)
+            elif isinstance(chain.referrer, CellType):
+                rank, part = 1.00, Chain.Cell(describe_object(chain.referrer))
+                part.uid = id(chain.referrer)
+                cycle = False
+            else:
+                rank, part = 1.0, describe_object(chain.referrer)
+
+            if isinstance(chain.referrer, types.ModuleType):
+                chain = chain.reduce(part, rank=2.00 * rank, action=ACCEPT)
+            elif hasattr(chain.referrer, "__describe__"):
+                chain = chain.reduce(part, rank=2.00 * rank, action=ACCEPT)
+            elif isinstance(chain.referrer, types.TypeType):
+                chain = chain.reduce(part, rank=0.10 * rank, action=ACCEPT)
+            else:
+                chain = chain.reduce(part, rank=0.80 * rank)
+
+            return chain.modify("...", action=ACCEPT) if cycle else chain
+
+    def elongate(chain):
+        if len(chain) > 2:
+            yield chain
+        else:
+            referrers = gc.get_referrers(chain[-1])
+            local_exclude = {id(referrers), id(sys._getframe())}
+            exclude.update(local_exclude)
+            try:
+                counter = 0
+                for referrer in referrers:
+                    if (isinstance(referrer, Chain)
+                            or id(referrer) in exclude
+                            or (chain.depth > 1
+                                and id(referrer) in modules
+                                and not isinstance(chain[-1], (tuple, list, set, dict)))):
+                        continue
+                    yield chain.combine(referrer)
+                    counter += 1
+                if counter == 0:
+                    yield chain
+            finally:
+                exclude.difference_update(local_exclude)
+
+    def complete(chains):
+        for chain in chains:
+            for subchain in elongate(chain):
+                yield subchain
+
+    def iterate(chains):
+        for chain in chains:
+            chain = describe(chain)
+            if chain.action is REJECT:
+                continue
+            elif chain.action is ACCEPT or chain.rank >= rank or chain.depth >= depth:
+                if chain.parts:
+                    ready.append((chain.rank, chain.depth, chain.parts))
+                    if len(ready) == limit:
+                        return
+            else:
+                yield chain
+
+    exclude, frame = {id(sys.modules)}, sys._getframe()
+    while frame:
+        exclude.add(id(frame))
+        frame = frame.f_back
+
+    modules = set()
+    for module in sys.modules.values():
+        if module is not None:
+            modules.add(id(module.__dict__))
+
+    ready, chains = [], tuple(complete((Chain((referent,)),)))
+    while chains:
+        chains = tuple(complete(iterate(chains)))
+        if len(ready) == limit:
+            break
+
+    return ready
+
+
 # detectors
 
 def is_builtin_object(object):
@@ -194,10 +421,72 @@ def describe_thread(thread):
         "Stopping" if getattr(thread, "_stopping", None) else None)))
     if extra:
         return "%s (%d: %s)" % (thread.name, thread.ident, ", ".join(extra))
-        # return "%s (%s)"%(thread.name, ", ".join(extra))
     else:
         return "%s (%d)" % (thread.name, thread.ident)
-        # return thread.name
+
+
+def describe_object(value):
+    describe = getattr(value, "__describe__", None)
+    if describe:
+        try:
+            return describe()
+        except Exception:
+            pass
+
+    kind, details = type(value).__name__, "%08X" % id(value)
+    if isinstance(value, type):
+        name = value.__name__
+        module = value.__module__
+    elif isinstance(value, types.ModuleType):
+        name = getattr(value, "__name__", "")
+        module = ""
+    elif isinstance(value, (types.BuiltinMethodType, types.BuiltinFunctionType)):
+        name = value.__name__
+        module = ""
+    elif isinstance(value, types.FunctionType):
+        name = value.__name__
+        module = getattr(inspect.getmodule(value), "__name__", "")
+        details = ""
+    elif isinstance(value, types.CodeType):
+        name = value.co_name
+        module = getattr(inspect.getmodule(value), "__name__", "")
+    elif isinstance(value, types.MethodType):
+        name = value.__func__.__name__
+        if value.__self__ is None:
+            module = getattr(inspect.getmodule(value), "__name__", "")
+        else:
+            details = "bound to " + describe_object(value.__self__)
+            module = ""
+    elif isinstance(value, types.FrameType):
+        name = value.f_code.co_name
+        module = getattr(inspect.getmodule(value), "__name__", "")
+    elif isinstance(value, types.InstanceType):
+        name = value.__class__.__name__
+        module = value.__module__
+    elif type(value).__module__ == "__builtin__":
+        name = ""
+        module = ""
+    else:
+        kind = "object"
+        name = type(value).__name__
+        module = type(value).__module__
+
+    if module:
+        module = "from " + module
+
+    return " ".join(filter(None, (kind, name, details, module)))
+
+
+def describe_reference(value):
+    if value is None:
+        return "None"
+    else:
+        references = collect_referrers(value)
+        if references:
+            _, _, parts = sorted(references, cmp=lambda x, y: cmp(-x[0], -y[0]))[0]
+            return " < ".join(part for part in parts)
+        else:
+            return "no references"
 
 
 # formatting
@@ -388,7 +677,34 @@ def format_exception_trace(information=None, limit=sys.maxint,
         return "\n".join(lines)
 
 
-# auxiliary
+# references
+
+def format_referrers(referent, limit=16,
+        caption=None, explain=True,
+        indent="", into=None):
+    lines = [] if into is None else into
+
+    if caption:
+        lines.append(indent + caption)
+        indent += settings.LOGGING_INDENT
+
+    if referent is not None:
+        references = collect_referrers(referent, limit=limit, rank=9)
+        if references:
+            references.sort(cmp=lambda x, y: cmp(-x[0], -y[0]))
+            for rank, depth, parts in references:
+                lines.append(indent + parts[0])
+                for part in parts[1:]:
+                    lines.append("%s%s%s" % (indent, settings.LOGGING_INDENT, part))
+        else:
+            lines.append(indent + "no significant referrers")
+
+    if into is None:
+        lines.append("")
+        return "\n".join(lines)
+
+
+# miscellaneous
 
 def enumerate_thread_trace(thread=None):
     if thread is None:
@@ -449,3 +765,10 @@ def show_exception_trace(information=None, limit=sys.maxint,
     (output or sys.stderr).write(format_exception_trace(
         information, limit, statements, caption, label, compact,
         locals, threads, separate, indent, filler))
+
+
+def show_referrers(referent, limit=16,
+        caption=None, explain=True,
+        indent="", output=None):
+    (output or sys.stdout).write(format_referrers(
+        referent, limit, caption, explain, indent))
