@@ -561,10 +561,10 @@ def exception_trace():
 WYSIWYG_IMAGE_UUID = "76bfc87a-dbe3-46e3-8d11-cc78a576b63a"
 
 TEMPLATE = u"""{libraries}
-<div name="{name}" id="{id}" style="{style}" class="{classes}">{contents}
 <script type='text/javascript'>
 {declarations}
 </script>
+<div name="{name}" id="{id}" style="{style}" class="{classes}">{contents}
 </div>"""
 
 

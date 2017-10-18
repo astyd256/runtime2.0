@@ -4201,6 +4201,7 @@ class VDOM_fullcalendar(VDOM_object):
 	RENDER_DIV = """<div id="%s" style="%s"></div>"""
 
 	RENDER_SCRIPT = """<script type="text/javascript">
+	$.curCSS = function (element, attrib, val) {$(element).css(attrib, val);};
 	/*Fullcalendar. VDOM Type Version %(version)s. Last modified - %(date_mod)s*/
 	$j(function(){
 
