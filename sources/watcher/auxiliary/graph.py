@@ -166,7 +166,7 @@ def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH,
             module = target.__module__
             storage = inheritance_nodes
         elif isinstance(target, types.ModuleType):
-            name = target.__name__
+            name = getattr(target, "__name__", "<no name>")
             details = " "
             module = " "  # target.__package__
             storage = module_nodes
