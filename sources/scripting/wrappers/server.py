@@ -1,5 +1,8 @@
 
 from inspect import iscode, isroutine
+from threading import Lock
+
+import js2py
 
 import managers
 import version
@@ -100,6 +103,52 @@ class VDOM_vscript(object):
         return vevaluate(code, data, use=use, environment=environment, namespace=namespace, result=result)
 
 
+class VDOM_javascript(object):
+
+    SIGNATURE = "<javascript>"
+    EMPTY = compile(js2py.translators.DEFAULT_HEADER, "<javascript:header>", "exec")
+
+    def __init__(self):
+        js2py.disable_pyimport()
+        self._lock = Lock()
+
+    def compile(self, source, environment=None, **keywords):
+        with self._lock:
+            source_in_python = js2py.translate_js(source, "")
+        return compile(source_in_python, self.SIGNATURE, "exec")
+
+    def execute(self, source_or_code, environment=None, **keywords):
+        if iscode(source_or_code):
+            code = source_or_code
+        else:
+            with self._lock:
+                code = self._compile(source_or_code, environment=environment, **keywords)
+
+        if environment is None:
+            environment = keywords
+
+        namespace = {}
+        exec(self.EMPTY, namespace)
+
+        if environment:
+            var = namespace["var"].to_python()
+            for key, value in environment.iteritems():
+                if hasattr(var, key):
+                    raise Exception("Unable to redefine: \"%s\"" % var)
+                setattr(var, key, value)
+
+        # NOTE: lock here?
+        #       there are possible problems in:
+        #       - ArrayPrototype.join
+        #       - TypedArrayPrototype.join
+        #       - PyJs.own??? - used in all objects
+        exec(code, namespace)
+
+    def evaluate(self, source_or_code, environment=None, **keywords):
+        # TODO: implement later on demand...
+        raise NotImplementedError
+
+
 class VDOM_mailer(object):
 
     def send(self, *args, **kw):
@@ -140,6 +189,7 @@ class VDOM_server(object):
 
     def __init__(self):
         self._vscript = VDOM_vscript()
+        self._javascript = VDOM_javascript()
         self._mailer = VDOM_mailer()
 
     def _get_version(self):
@@ -155,3 +205,4 @@ class VDOM_server(object):
     mailer = property(lambda self: self._mailer)
     guid = property(_get_guid)
     vscript = property(lambda self: self._vscript)
+    javascript = property(lambda self: self._javascript)
