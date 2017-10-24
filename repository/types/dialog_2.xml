@@ -1448,7 +1448,7 @@ $j(document).ready(function(){
 	def wysiwyg(self, contents=""):
 
 		result= \
-			u"""<container name="{name}" id="{id}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" top="{top}" left="{left}" width="{container_width}" height="{container_height}">height="{container_height}">
+			u"""<container name="{name}" id="{id}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" top="{top}" left="{left}" width="{container_width}" height="{container_height}">
 				<svg>
 					<rect x="0" y="0" width="{width}" height="{height}" stroke="#cccccc" stroke-width="3" fill="#ffffff">
 						<rect x="0" y="0" width="{width}" height="40" fill="#e9e9e9"/>
