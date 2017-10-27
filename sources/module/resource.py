@@ -14,6 +14,7 @@ class VDOM_module_resource(VDOM_module):
 		"jpeg"	:	"image/jpeg",
 		"png"	:	"image/png",
 		"gif"	:	"image/gif",
+		"svg"	:	"image/svg+xml",
 		"css"	:	"text/css",
 		"htm"	:	"text/html",
 		"html"	:	"text/html",
@@ -31,7 +32,7 @@ class VDOM_module_resource(VDOM_module):
 		"unknown"	:	"application/octet-stream"
 	}
 
-	images = ["bmp", "jpg", "jpeg", "png", "gif"]
+	images = ["bmp", "jpg", "jpeg", "png", "gif", "svg"]
 
 	def getfile(self, application_id, file):
 		""" read file """
@@ -63,6 +64,7 @@ class VDOM_module_resource(VDOM_module):
 		"""process request"""
 		request_uri = request_object.environment().environment()["REQUEST_URI"]
 		application_id = request_object.app_id()
+		request_object._VDOM_request__response_cookies.pop('sid',None)
 		ro = self.getfile(application_id, request_uri)
 		if not self.ctype:
 			return None
