@@ -97,8 +97,8 @@ class VDOM_request:
 		#debug("Session ID "+str(sid))
 		self.__cookies["sid"] = sid
 
-		if sid not in args.get('sid', []):
-			self.__response_cookies["sid"] = sid
+		#if sid not in args.get('sid', []):
+		self.__response_cookies["sid"] = sid
 		args["sid"] = sid
 		self.__session = managers.session_manager[sid]
 		self.__arguments = VDOM_request_arguments(args)
