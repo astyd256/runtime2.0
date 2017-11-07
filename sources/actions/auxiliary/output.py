@@ -35,9 +35,9 @@ def section(name=None, value=ABSENT, indent=None, longer=False, width=None, lazy
         indent = global_context.indent
 
     def show_section():
+        context.show_section = None
         if context.previous and context.previous.show_section:
             context.previous.show_section()
-        context.show_section = None
         show(name, value, indent, longer)
 
     context = Structure(
@@ -128,9 +128,9 @@ def newline(lazy=True):
     global global_context
 
     def show_section():
+        context.show_section = None
         if context.previous and context.previous.show_section:
             context.previous.show_section()
-        context.show_section = None
         show()
 
     context = Structure(

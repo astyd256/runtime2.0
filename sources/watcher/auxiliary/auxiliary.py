@@ -10,8 +10,8 @@ def quote(string):
 def get_type_name(target=None, target_type=None):
     if target_type is None:
         target_type = type(target)
-    return target_type.__name__ if target_type.__module__ == "__builtin__" \
-        else "%s.%s" % (target_type.__module__, target_type.__name__)
+    name, module = target_type.__name__, getattr(target_type, "__module__", "__builtin__")
+    return name if module == "__builtin__" else "%s.%s" % (module, name)
 
 
 def get_thread_traceback(thread):

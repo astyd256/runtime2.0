@@ -14,4 +14,4 @@ def run(address=None, port=None, timeout=None, all=False, nogroup=False, sort=No
     :param order: sort entries "asc"ending or "desc"ending
     :param int limit: limit output
     """
-    analyze("garbage", address, port, timeout, all, nogroup, sort, order, limit)
+    analyze("changes", address, port, timeout, all, nogroup, sort, order, limit)

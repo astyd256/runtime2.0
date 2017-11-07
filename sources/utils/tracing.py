@@ -426,12 +426,16 @@ def describe_thread(thread):
 
 
 def describe_object(value):
-    describe = getattr(value, "__describe__", None)
-    if describe:
-        try:
-            return describe()
-        except Exception:
-            pass
+    try:
+        describe = getattr(value, "__describe__", None)
+    except Exception:
+        pass
+    else:
+        if describe:
+            try:
+                return describe()
+            except Exception:
+                pass
 
     kind, details = type(value).__name__, "%08X" % id(value)
     if isinstance(value, type):
@@ -477,11 +481,11 @@ def describe_object(value):
     return " ".join(filter(None, (kind, name, details, module)))
 
 
-def describe_reference(value):
+def describe_reference(value, limit=16, depth=32, rank=9):
     if value is None:
         return "None"
     else:
-        references = collect_referrers(value)
+        references = collect_referrers(value, limit=limit, depth=depth, rank=rank)
         if references:
             _, _, parts = sorted(references, cmp=lambda x, y: cmp(-x[0], -y[0]))[0]
             return " < ".join(part for part in parts)

@@ -2,8 +2,6 @@
 import sys
 import gc
 
-import settings
-
 from logs import log
 from utils.profiling import profiler
 from ..auxiliary import select_types, select_objects, \
@@ -15,6 +13,8 @@ MISSING = "MISSING"
 
 
 def query(options):
+    gc.collect()
+
     if "types" in options:
         types = select_types(server=options["types"] == SERVER_ONLY)
         yield "<reply>"
