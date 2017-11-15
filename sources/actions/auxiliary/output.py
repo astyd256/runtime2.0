@@ -56,12 +56,12 @@ def section(name=None, value=ABSENT, indent=None, longer=False, width=None, lazy
         global_context = context.previous
 
 
-def reformat(value, caption, noclip=False):
+def reformat(value, caption, continuation="", noclip=False):
     global global_context
     return "\n".join(("\n".join(wrap(
         part,
         initial_indent=caption,
-        subsequent_indent=" " * len(caption),
+        subsequent_indent=" " * len(caption) + continuation,
         width=CONSOLE_WIDTH if noclip else global_context.width,
         replace_whitespace=False,
         break_long_words=False))

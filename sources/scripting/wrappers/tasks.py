@@ -1,5 +1,7 @@
 
 import managers
+import settings
+
 from utils.threads import SmartThread
 from utils.profiling import profiler
 
@@ -29,5 +31,5 @@ class Task(SmartThread):
 
     def run(self):
         managers.engine.select(self._application)
-        with profiler("tasks"):
+        with profiler(settings.PROFILE_TASKS_NAME):
             super(Task, self).run()

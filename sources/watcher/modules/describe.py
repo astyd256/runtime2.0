@@ -2,43 +2,40 @@
 import gc
 from collections import defaultdict
 
-import managers
 from utils.tracing import describe_object, describe_reference
+from utils.checkinterval import maximal_check_interval
+from .. import auxiliary
 from ..auxiliary import select_objects, get_type_name
 
 
-SERVER_OPTION = "server"
+REFERENCE_LIMIT = 800
+REFERENCE_DEPTH = 16
 
 
 def describe(options):
     gc.collect()
 
-    if "changes" in options:
-        source = managers.server.watcher.snapshot.recent
-        if source is None:
-            yield "<reply><error>No snapshot available</error></reply>"
-            return
-    elif "objects" in options:
-        source = None
-    elif "garbage" in options:
-        source = gc.garbage
-    else:
-        return
-
-    filter_by_server = options.get("filter") == SERVER_OPTION
+    source = options.get("source", use=auxiliary.verificators.objects_source)
+    filter_by_server = options.get("filter", use=auxiliary.verificators.server_filter)
 
     reference = defaultdict(list)
-    for item in select_objects(server=filter_by_server, source=source):
-        name = get_type_name(target_type=type(item))
-        reference[name].append(item)
+    with maximal_check_interval:
+        objects = select_objects(server=filter_by_server, source=source)
+        exclude = objects,
+        for object in objects:
+            description = describe_reference(
+                object, limit=REFERENCE_LIMIT, depth=REFERENCE_DEPTH, exclude=exclude)
+            if description:
+                reference[get_type_name(target_type=type(object))].append(
+                    (describe_object(object), description))
 
     yield "<reply>"
     yield "<descriptions>"
     for name, items in reference.iteritems():
         yield "<subgroup name=\"%s\">" % name.encode("xml")
-        for item in items:
+        for description, reference in items:
             yield "<description object=\"%s\">%s</description>" % (
-                describe_object(item).encode("xml"), describe_reference(item).encode("xml"))
+                description.encode("xml"), reference.encode("xml"))
         yield "</subgroup>"
     yield "</descriptions>"
     yield "</reply>"

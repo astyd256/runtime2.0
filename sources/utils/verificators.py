@@ -5,12 +5,16 @@ from .decorators import verificator
 
 UUID_REGEX = re.compile(r"^[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12}$", re.IGNORECASE)
 NAME_REGEX = re.compile(r"^[A-Z][A-Z\d_]*$", re.IGNORECASE)
+QUALIFIED_NAME_REGEX = re.compile(r"^[A-Z][A-Z\d_]*(?:\.[A-Z][A-Z\d_]*)*$", re.IGNORECASE)
 NAME_OR_INTEGER_REGEX = re.compile(r"^(?:[A-Z][A-Z\d_]*|(-[1-9]\d*))$", re.IGNORECASE)
+QUALIFIED_NAME_OR_INTEGER_REGEX = re.compile(r"^(?:[A-Z][A-Z\d_]*(?:\.[A-Z][A-Z\d_]*)*|(-[1-9]\d*))$", re.IGNORECASE)
 UUID_OR_NAME_REGEX = re.compile(r"^(?:[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})|([A-Z][A-Z\d_]*)$", re.IGNORECASE)
 UUID_OR_NONE_REGEX = re.compile(r"^(?:[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})|(none)$", re.IGNORECASE)
 SIZE_REGEX = re.compile(r"^(?P<size>[0-9]+)(?P<measure>[KMG])?$", re.IGNORECASE)
 EXCEPTION_REGEX = NAME_REGEX
 THREAD_REGEX = re.compile(r"^(?:[A-Z][A-Z\d_-]*(?:\s[A-Z][A-Z\d_-]*)*|(-[1-9]\d*))$", re.IGNORECASE)
+
+FLOAT = float
 
 
 def complies(value, verificator):
@@ -32,6 +36,14 @@ def integer(value):
         return int(value)
     except ValueError:
         raise ValueError("Not an integer")
+
+
+@verificator
+def float(value):
+    try:
+        return FLOAT(value)
+    except ValueError:
+        raise ValueError("Not an float")
 
 
 @verificator
@@ -72,12 +84,29 @@ def name(value):
 
 
 @verificator
+def qualified_name(value):
+    if QUALIFIED_NAME_REGEX.match(value):
+        return str(value)
+    else:
+        raise ValueError("Not a name")
+
+
+@verificator
 def name_or_integer(value):
     match = NAME_OR_INTEGER_REGEX.match(value)
     if match:
         return int(value) if match.lastindex else str(value.lower())
     else:
-        raise ValueError("Not a name")
+        raise ValueError("Not a name or integer")
+
+
+@verificator
+def qualified_name_or_integer(value):
+    match = QUALIFIED_NAME_OR_INTEGER_REGEX.match(value)
+    if match:
+        return int(value) if match.lastindex else str(value.lower())
+    else:
+        raise ValueError("Not a name or integer")
 
 
 @verificator
@@ -128,7 +157,7 @@ def exception(value):
     if EXCEPTION_REGEX.match(value):
         try:
             exception = eval(value)
-        except:
+        except Exception:
             raise ValueError("Not an exception: %s" % value)
         if not isinstance(exception, Exception):
             raise ValueError("Not an exception")

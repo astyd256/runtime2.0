@@ -44,6 +44,7 @@ PYTHON_PATH = sys.prefix
 
 WELL_KNOWN_MODULES = "_json", "_ast", "thread", "operator", "itertools", "exceptions"
 
+REPRESENTATION_WIDTH = 40
 REPRESENTATION_VALUE_LIMIT = 40
 
 
@@ -60,16 +61,22 @@ class SafePrettyPrinter(PrettyPrinter):
             return "Unable to represent: %s" % description
 
 
-# cell
+# types
 
-def get_cell_type(x):
+def define_types(argument):
+    global WrapperDescriptorType, TupleIterator
+
     def inner():
         global CellType
         CellType = type(inner.__closure__[0])
+
     inner()
 
+    WrapperDescriptorType = type(str.__dict__["__add__"])
+    TupleIterator = type(iter(()))
 
-get_cell_type("x")
+
+define_types("just a value")
 
 
 # auxiliary
@@ -164,7 +171,7 @@ def extract_stack(frame=None, skip_tracing=True, skip=None, until=None):
     return lines
 
 
-def collect_referrers(referent, limit=16, depth=32, rank=9):
+def collect_referrers(referent, limit=16, depth=32, rank=9, exclude=None):
 
     ACCEPT = "ACCPET"
     REJECT = "REJECT"
@@ -262,6 +269,8 @@ def collect_referrers(referent, limit=16, depth=32, rank=9):
                             part.module = inspect.getmodule(chain.referent)
                     return chain.reduce(part, rank=0.80)
             return chain.reduce(describe_object(chain.referrer), rank=0.80)
+        elif isinstance(chain.referrer, TupleIterator):
+            return chain.reduce(describe_object(chain.referrer), rank=0.01)
         elif getattr(chain.referrer, "func_globals", None) is chain.referent:
             return chain.modify(action=REJECT)
         else:
@@ -315,33 +324,30 @@ def collect_referrers(referent, limit=16, depth=32, rank=9):
 
             return chain.modify("...", action=ACCEPT) if cycle else chain
 
-    def elongate(chain):
-        if len(chain) > 2:
-            yield chain
-        else:
-            referrers = gc.get_referrers(chain[-1])
-            local_exclude = {id(referrers), id(sys._getframe())}
-            exclude.update(local_exclude)
-            try:
-                counter = 0
-                for referrer in referrers:
-                    if (isinstance(referrer, Chain)
-                            or id(referrer) in exclude
-                            or (chain.depth > 1
-                                and id(referrer) in modules
-                                and not isinstance(chain[-1], (tuple, list, set, dict)))):
-                        continue
-                    yield chain.combine(referrer)
-                    counter += 1
-                if counter == 0:
-                    yield chain
-            finally:
-                exclude.difference_update(local_exclude)
-
     def complete(chains):
         for chain in chains:
-            for subchain in elongate(chain):
-                yield subchain
+            if len(chain) > 2:
+                yield chain
+            else:
+                referrers = gc.get_referrers(chain[-1])
+                local_exclude = {id(chains), id(referrers), id(sys._getframe())}
+                exclude.update(local_exclude)
+                try:
+                    counter = 0
+                    for referrer in referrers:
+                        if (isinstance(referrer, Chain)
+                                or id(referrer) in exclude
+                                or (chain.depth > 1
+                                    and id(referrer) in modules
+                                    and not isinstance(chain[-1], (tuple, list, set, dict)))):
+                            continue
+                        yield chain.combine(referrer)
+                        counter += 1
+                    if counter == 0:
+                        yield chain
+                finally:
+                    exclude.difference_update(local_exclude)
+                    del referrers
 
     def iterate(chains):
         for chain in chains:
@@ -356,19 +362,25 @@ def collect_referrers(referent, limit=16, depth=32, rank=9):
             else:
                 yield chain
 
-    exclude, frame = {id(sys.modules)}, sys._getframe()
+    if exclude:
+        exclude = {id(object) for object in exclude}
+    else:
+        exclude = set()
+
+    frame = sys._getframe()
     while frame:
         exclude.add(id(frame))
         frame = frame.f_back
 
+    exclude.add(id(sys.modules))
     modules = set()
     for module in sys.modules.values():
         if module is not None:
             modules.add(id(module.__dict__))
 
-    ready, chains = [], tuple(complete((Chain((referent,)),)))
+    ready, chains = [], (Chain((referent,)),)
     while chains:
-        chains = tuple(complete(iterate(chains)))
+        chains = tuple(iterate(complete(chains)))
         if len(ready) == limit:
             break
 
@@ -470,6 +482,12 @@ def describe_object(value):
     elif type(value).__module__ == "__builtin__":
         name = ""
         module = ""
+        if isinstance(value, (tuple, list, dict, set)):
+            representation = repr(value)
+            details += " %s%s: %d" % (
+                fit(representation[:-1], REPRESENTATION_WIDTH - 2),
+                representation[-1],
+                len(value))
     else:
         kind = "object"
         name = type(value).__name__
@@ -481,16 +499,16 @@ def describe_object(value):
     return " ".join(filter(None, (kind, name, details, module)))
 
 
-def describe_reference(value, limit=16, depth=32, rank=9):
+def describe_reference(value, limit=16, depth=32, rank=9, exclude=None, default=None):
     if value is None:
         return "None"
     else:
-        references = collect_referrers(value, limit=limit, depth=depth, rank=rank)
+        references = collect_referrers(value, limit=limit, depth=depth, rank=rank, exclude=exclude)
         if references:
-            _, _, parts = sorted(references, cmp=lambda x, y: cmp(-x[0], -y[0]))[0]
+            _, _, parts = max(references, key=lambda x: x[0])
             return " < ".join(part for part in parts)
         else:
-            return "no references"
+            return default
 
 
 # formatting

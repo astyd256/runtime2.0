@@ -2,7 +2,12 @@
 import gc
 import threading
 
+from inspect import isfunction
+
+import managers
+
 from utils.tracing import is_server_object
+from utils.profiling import profiler
 from .auxiliary import get_type_name
 
 
@@ -49,23 +54,28 @@ def search_object(string):
         return None
 
 
-def select_objects(string=None, server=True, unknown=True, source=None, filter=None):
+def select_objects(selector=None, server=True, unknown=True, source=None, filter=None):
     if source is None:
-        source = gc.get_objects()
+        if managers.server.watcher.snapshot.exists:
+            source = managers.server.watcher.snapshot.recent
+        else:
+            source = gc.get_objects()
+    elif isfunction(source):
+        source = source()
 
-    if not string:
+    if selector is None:
         objects = (object for object in source)
-    elif string.isdigit():
-        identifier = int(string, 16)
-        objects = (object for object in source if id(object) == identifier)
+    elif selector.isdigit():
+        selector = int(selector, 16)
+        objects = (object for object in source if id(object) == selector)
     else:
-        objects = (object for object in source if get_type_name(object) == string)
+        objects = (object for object in source if get_type_name(object) == selector)
 
     if server:
-        objects = (object for object in source if is_server_object(object, default=unknown))
+        objects = (object for object in objects if is_server_object(object, default=unknown))
 
     if filter:
-        objects = (object for object in source if filter(object))
+        objects = (object for object in objects if filter(object))
 
     return tuple(objects)
 
@@ -77,3 +87,7 @@ def select_types(server=True, unknown=True):
             continue
         types.add(get_type_name(object))
     return tuple(types)
+
+
+def select_profiler(name=None):
+    return profiler(name) if name else profiler

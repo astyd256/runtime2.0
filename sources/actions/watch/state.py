@@ -150,11 +150,11 @@ def run(address=None, port=None, timeout=None, thread=None, object=None):
             if result.threads is not None:
                 with section("threads", len(result.threads)):
                     for id, name, alive, smart, daemon, stack in result.threads:
-                        flags = filter(None, (
+                        details = filter(None, (id,
                             None if alive else "complete",
                             None if smart else "simple",
                             "daemon" if daemon else None))
-                        show(name.lower(), id + (" (%s)" % ", ".join(flags) if flags else ""))
+                        show("%s (%s)" % (name, ", ".join(details)))
 
             if result.objects_count is not None:
                 show("objects", result.objects_count)

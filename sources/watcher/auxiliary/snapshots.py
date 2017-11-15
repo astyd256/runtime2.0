@@ -2,17 +2,20 @@
 import sys
 import gc
 import types
+import weakref
 from threading import Lock
 
 import settings
 from logs import log
 from utils.threads import SmartDaemon
-from utils.tracing import CellType
+from utils.tracing import CellType, WrapperDescriptorType
 
 
-EXCLUDE_TYPES = (types.FrameType, CellType, types.CodeType,
+EXCLUDE_TYPES = (CellType, types.FrameType, types.CodeType, types.TracebackType,
     types.FunctionType, types.LambdaType, types.GeneratorType,
-    types.BuiltinMethodType, types.BuiltinFunctionType)
+    types.BuiltinMethodType, types.BuiltinFunctionType,
+    WrapperDescriptorType, types.MemberDescriptorType, types.GetSetDescriptorType,
+    weakref.ReferenceType, weakref.ProxyType, weakref.CallableProxyType)
 
 
 class WatcherSnapshooter(SmartDaemon):
@@ -28,6 +31,7 @@ class WatcherSnapshooter(SmartDaemon):
     recent = property(_get_recent)
 
     def _collect(self):
+        gc.collect()
         check_interval = sys.getcheckinterval()
         sys.setcheckinterval(sys.maxint)
         try:
@@ -52,9 +56,9 @@ class WatcherSnapshooter(SmartDaemon):
 
     def work(self):
         log.write("Accumulate new objects")
-        gc.collect()
+
+        current = self._collect()
         with self._lock:
-            current = self._collect()
             current.difference_update(self._initial)
             current.discard(id(current))
 
@@ -64,7 +68,6 @@ class WatcherSnapshooter(SmartDaemon):
             self._previous = current
             self._cache = None
 
-            log.write("Accumulate %d object(s)" % len(self._recent))
         return settings.WATCHER_SNAPSHOT_INTERVAL
 
 
@@ -74,6 +77,10 @@ class WatcherSnapshot(object):
         self._lock = Lock()
         self._thread = None
 
+    def _get_exists(self):
+        with self._lock:
+            return self._thread is not None
+
     def _get_recent(self):
         with self._lock:
             if self._thread is None:
@@ -82,6 +89,7 @@ class WatcherSnapshot(object):
                 recent = self._thread.recent
                 return tuple(item for item in gc.get_objects() if id(item) in recent)
 
+    exists = property(_get_exists)
     recent = property(_get_recent)
 
     def start(self):
