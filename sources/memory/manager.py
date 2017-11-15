@@ -12,7 +12,7 @@ import file_access
 from logs import log
 from utils.structure import Structure
 from utils.properties import roproperty  # rwproperty
-from utils.tracing import format_exception_trace, show_exception_trace, describe_object, format_referrers
+from utils.tracing import format_exception_trace, describe_object, format_referrers
 from utils.parsing import Parser, ParsingException
 
 from .constants import DEFAULT_APPLICATION_NAME, APPLICATION_START_CONTEXT
@@ -372,11 +372,12 @@ class Memory(object):
     # cleaning
 
     def track(self, object, sync=None):
-        if sync is not None:
-            sync = ref(sync, lambda reference: self._release_queue.add(object))
-        managers.memory._primaries[object] = sync
-        if self._cleaner is None:
-            self.start_cleaner()
+        if object.primary is object:
+            if sync is not None:
+                sync = ref(sync, lambda reference: self._release_queue.add(object))
+            managers.memory._primaries[object] = sync
+            if self._cleaner is None:
+                self.start_cleaner()
 
     def release(self, object):
         self._release_queue.add(object)
