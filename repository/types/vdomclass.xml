@@ -492,10 +492,12 @@
 		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[class VDOM_vdomclass(VDOM_object):
+<![CDATA[
+from scripting import e2vdom
+class VDOM_vdomclass(VDOM_object):
 
     def render(self, contents=""):
-
+        e2vdom.process(self)
         if self.classname == "":
             #classname = ""
             classname = u" class='%s' " % (self.classauto)

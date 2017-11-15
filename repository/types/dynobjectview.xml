@@ -194,7 +194,7 @@
 			<DisplayName>#Lang(134)</DisplayName>
 			<Description>#Lang(234)</Description>
 			<DefaultValue></DefaultValue>
-			<RegularExpressionValidation>^[A-Za-z][_0-1A-Za-z]*$</RegularExpressionValidation>
+			<RegularExpressionValidation>^([A-Za-z][_0-1A-Za-z]*)?$</RegularExpressionValidation>
 			<ErrorValidationMessage>#Lang(334)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
@@ -1726,7 +1726,7 @@ Visible - the whole content will always be shown without reference to the object
 <![CDATA[import json
 import re
 import sys
-
+from scripting import e2vdom
 from collections import OrderedDict
 from uuid import uuid4
 
@@ -1780,11 +1780,11 @@ class Template(object):
 
     __slots__ = ("_attributes", "_vdomxml", "_object")
 
-    def __init__(self, root, xml, json, attributes=None):
+    def __init__(self, root, vdomxml, vdomjson, attributes=None):
         self._attributes = attributes or {}
-        self._vdomxml = xml
-        # self._object = vdomxml.loads(xml, managers.engine.application)
-        self._object = root.loads(xml, json, handler=root.handler)
+        self._vdomxml = vdomxml
+        # self._object = vdomxml.loads(vdomxml, managers.engine.application)
+        self._object = root.loads(vdomxml, vdomjson, handler=root.handler)
         managers.memory.track(self._object, sync=root)
 
     def __getitem__(self, key):
@@ -1821,8 +1821,12 @@ class Template(object):
 
             for target, attributes in cache.itervalues():
                 target.attributes.update(attributes)
-
-        return managers.engine.render(self._object, parent, "vdom")
+                
+        with managers.engine.start_render(self._object, parent=parent) as context:
+            contents = context.contents
+            declarations, libraries = e2vdom.generate(context.instance)
+            return contents, declarations, libraries
+#        return managers.engine.render(self._object, parent, "vdom")
 
 
 # layouts
@@ -1851,15 +1855,22 @@ class Layout(object):
             self.arrange(element)
 
     def render(self, parent):
-        elements = []
-        for element in self._elements:
-            if isinstance(element, basestring):
-                elements.append(element)
-            else:
-                element["top"] = str(self._top + int(element["top"] or 0))
-                element["left"] = str(self._left + int(element["left"] or 0))
-                elements.append(element.render(parent))
-        return u"".join(elements)
+        with e2vdom.select(dynamic=True):
+            elements = []
+            declarations = []
+            libraries = []
+            for element in self._elements:
+                if isinstance(element, basestring):
+                    elements.append(element)
+                else:
+                    element["top"] = str(self._top + int(element["top"] or 0))
+                    element["left"] = str(self._left + int(element["left"] or 0))
+                    contents, declaration, library = element.render(parent)
+                    elements.append(contents)
+                    declarations.append(declaration)
+                    libraries.append(library)
+            return (u"""{}
+<script type='text/javascript'>{}</script>""".format(u"".join(libraries),u"".join(declarations)),u"".join(elements))
 
 
 class VerticalLayout(Layout):
@@ -1982,7 +1993,7 @@ class DynamicObjectView(VDOM_object):
         # initialize actions
         if actions is not None:
             actions = CachedDict(actions, lambda data: json.dumps(data))
-
+        e2vdom.process(self)
         for index, (uuid, item) in enumerate(data.iteritems(), 1):
             template_name = item.get("vdomclass", "default")
             template_attributes = templates_attributes[template_name]
@@ -2053,7 +2064,8 @@ class DynamicObjectView(VDOM_object):
         layout = self.generate_layout()
         id4js = "o_" + self.id.replace('-', '_')
         insertmethod = ["insertHTMLAtBegining", "insertHTMLAtEnd"][int(self.insertmethod)]
-
+        declarations, layoutcontent = layout.render(self)
+        #request.dyn_libraries[self.name] = declarations
         if request.render_type == "e2vdom" and self.dynamicrender == "1":
             result = u"""<noreplace/>
 <div id="{tmp_id}" style="display:none">{contents}</div>
@@ -2068,7 +2080,7 @@ $(document).ready(function(){{
 </script>""".format(
                 id4js=id4js,
                 tmp_id=str(uuid4()),
-                contents=layout.render(self),
+                contents=layoutcontent,
                 insertmethod=insertmethod,
             )
 
@@ -2085,25 +2097,28 @@ $(document).ready(function(){{
             }
 
             object_style, element_style = self.compile_style()
-            result = u"""{element_style}
+            result = u"""
+{element_style}
 <div name="{name}" id="{id4js}" style="{object_style}" class="{classes}">
 <div class='dov-content'>
 {contents}
 <span class='dov-eoi' style='display:block;clear:both'></span>
 </div>
 </div>
+{declarations}
 <script>jQuery(document).ready(function(){{jQuery("#{id4js}").dynamicObjectView({options});}});</script>"""
             contents += result.format(
+                declarations = declarations,
                 name=self.name,
                 element_style=element_style,
                 id4js=id4js,
                 object_style=object_style,
                 classes=self.classname,
-                contents=layout.render(self),
+                contents=layoutcontent,
                 options=json.dumps(options)
             )
 
-            return VDOM_object.render(self, contents=contents)
+            return super(DynamicObjectView, self).render(contents=contents)
 
     def wysiwyg(self, contents=""):
         from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
