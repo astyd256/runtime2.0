@@ -762,10 +762,11 @@ class VDOM_formcheckbox(VDOM_object):
             %(contents)s
           </div>
           <script type="text/javascript">jQuery(document).ready(function($){
-$('#inp_%(id)s').click(function(){
+$('#inp_%(id)s').on('click',function(e){
   var v = ($(this).is(':checked')) ? "1" : "0";
   execEventBinded('%(clean_id)s', 'change', { "Value": v });
   execEventBinded('%(clean_id)s', v == "1" ? 'checked' : 'unchecked', { "value": v })
+  e.stopPropagation();
 });
           });</script>
         """ % {"id": id, "style": style, "name": self.name, "state": state, 
