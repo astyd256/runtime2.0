@@ -15,6 +15,8 @@ def loads(vdomjson, object, catch, handler=None):
     for event_declaration, event_actions in actions.iteritems():
         try:
             source_name, event_name = event_declaration.split(":")
+            if source_name.split('.')[0] != object.name:
+                source_name = "%s.%s"%(object.name, source_name)
         except:
             raise Exception("Invalid event declaration: %s" % event_declaration)
 
@@ -30,6 +32,8 @@ def loads(vdomjson, object, catch, handler=None):
                 if isinstance(action, list):
                     try:
                         target_name, action_name = action[0].split(":")
+                        if target_name.split('.')[0] != object.name:
+                            target_name = "%s.%s"%(object.name, target_name)                        
                     except:
                         raise Exception("Invalid action declaration: %s" % action[0])
 
