@@ -34,7 +34,7 @@ class MemoryObjectSketch(MemoryBase):
     def _primary(self):
         if self._virtual:
             result = self
-            while result._parent.virtual:
+            while result._parent and result._parent.virtual:
                 result = result._parent
             return result
         else:
