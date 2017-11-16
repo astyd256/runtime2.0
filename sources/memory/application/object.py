@@ -51,6 +51,7 @@ class MemoryObjectSketch(MemoryBase):
     _order = None
     _id = None
     _name = None
+    _original_name = None
 
     def __init__(self, collection, type, application, parent, virtual=False, attributes=None):
         self._collection = collection
@@ -92,6 +93,7 @@ class MemoryObjectSketch(MemoryBase):
     type = rwproperty("_type")
     id = rwproperty("_id")
     name = rwproperty("_name")
+    original_name = roproperty("_original_name")
 
     attributes = roproperty("_attributes")
     objects = roproperty("_objects")
@@ -106,6 +108,12 @@ class MemoryObjectSketch(MemoryBase):
 
     def select(self, name, *names):
         if self._name == name:
+            return self._objects.select(*names)
+        else:
+            return None
+
+    def select_original(self, name, *names):
+        if self._original_name or self._name == name:
             return self._objects.select(*names)
         else:
             return None

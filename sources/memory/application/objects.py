@@ -61,6 +61,8 @@ class MemoryObjects(MemoryBase, MutableMapping):
             if name in self._items_by_name:
                 raise KeyError
             self._items_by_name[name] = item
+            if item._original_name:
+                del item._original_name
             del self._items_by_name[item._name]
 
     def on_complete(self, item, restore):
@@ -68,6 +70,8 @@ class MemoryObjects(MemoryBase, MutableMapping):
             if item._id is None:
                 item._id = str(uuid4())
             if item._name is None or item._name in self._items_by_name:
+                if item._name is not None:
+                    item._original_name = item._name
                 item._name = generate_unique_name(item._name or item._type.name, self._items_by_name)
             item._order = len(self._items)
 
