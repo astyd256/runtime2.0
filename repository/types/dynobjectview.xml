@@ -1824,7 +1824,7 @@ class Template(object):
                 
         with managers.engine.start_render(self._object, parent=parent) as context:
             contents = context.contents
-            declarations, libraries = e2vdom.generate(context.instance)
+            declarations, libraries = e2vdom.generate(context.instance, registrations=True)
             return contents, declarations, libraries
 #        return managers.engine.render(self._object, parent, "vdom")
 
@@ -1869,8 +1869,9 @@ class Layout(object):
                     elements.append(contents)
                     declarations.append(declaration)
                     libraries.append(library)
+            #declarations.extend(e2vdom.registrations())
             return (u"""{}
-<script type='text/javascript'>{}</script>""".format(u"".join(libraries),u"".join(declarations)),u"".join(elements))
+<script type='text/javascript'>{}</script>""".format(u"".join(libraries), u"".join(declarations)),u"".join(elements))
 
 
 class VerticalLayout(Layout):
@@ -1993,7 +1994,7 @@ class DynamicObjectView(VDOM_object):
         # initialize actions
         if actions is not None:
             actions = CachedDict(actions, lambda data: json.dumps(data))
-        e2vdom.process(self)
+        
         for index, (uuid, item) in enumerate(data.iteritems(), 1):
             template_name = item.get("vdomclass", "default")
             template_attributes = templates_attributes[template_name]
@@ -2061,10 +2062,14 @@ class DynamicObjectView(VDOM_object):
         return object_style, element_style
 
     def render(self, contents=""):
-        layout = self.generate_layout()
-        id4js = "o_" + self.id.replace('-', '_')
-        insertmethod = ["insertHTMLAtBegining", "insertHTMLAtEnd"][int(self.insertmethod)]
-        declarations, layoutcontent = layout.render(self)
+        with e2vdom.select(dynamic=True):
+            e2vdom.process(self)
+            layout = self.generate_layout()
+            id4js = "o_" + self.id.replace('-', '_')
+            insertmethod = ["insertHTMLAtBegining", "insertHTMLAtEnd"][int(self.insertmethod)]
+            static_declarations, static_libraries = e2vdom.generate(self)
+            declarations, layoutcontent = layout.render(self)
+            declarations= static_libraries+ "<script type='text/javascript'>"+ static_declarations +"</script>" + declarations
         #request.dyn_libraries[self.name] = declarations
         if request.render_type == "e2vdom" and self.dynamicrender == "1":
             result = u"""<noreplace/>
