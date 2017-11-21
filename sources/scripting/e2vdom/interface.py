@@ -29,27 +29,42 @@ def process(container, parent=None):
 
     parent = container._parent.id if container._parent else None
     registrations = compile_registations(container, parent, dynamic=context.dynamic)
+    #if True:
+    #    registrations = "/*Registrations - %s*/\n%s\n/*End of registrations*/"%(container.id, registrations)
     context.registrations.append(registrations)
 
 
-def generate(container):
+def generate(container, registrations = True):
     try:
         context = getattr(managers.request_manager.current, ATTRIBUTE_NAME)
     except AttributeError:
         context = Context(dynamic=False)
         setattr(managers.request_manager.current, ATTRIBUTE_NAME, context)
-
-    types = container._types
+        
+    
+    types = container._types - context._types
+    context.types |= types
     origin_container_type = container._origin.container.type
 
     # NOTE: in theory there must be used render type of the container:
     #       container._origin.type.render_type
     #       but, for example, Object View has no render type and we
     #       use origin's container render type instead
-
+    regs = []
+    if registrations:
+        regs = context.registrations
+        context._registrations = []
     return compile_declarations_n_libraries(types,
         origin_container_type.render_type, origin_container_type.id,
-        context.registrations, dynamic=context.dynamic)
+        regs, dynamic=context.dynamic)
+
+def registrations():
+    try:
+        context = getattr(managers.request_manager.current, ATTRIBUTE_NAME)
+    except AttributeError:
+        context = Context(dynamic=False)
+        setattr(managers.request_manager.current, ATTRIBUTE_NAME, context)
+    return context.registrations
 
 
 @contextmanager

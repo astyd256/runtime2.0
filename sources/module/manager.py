@@ -176,7 +176,7 @@ class VDOM_module_manager(object):
                     managers.engine.execute(action)
                     if request_object.wholeAnswer:
                         return (None, request_object.wholeAnswer.encode("utf-8"))
-                
+                raise
             # finally:
             #     for key in request_object.files:
             #         if getattr(request_object.files[key][0],"name", None):

@@ -5025,7 +5025,7 @@ class VDOM_htmlcontainer(VDOM_object):
         # dynamic_declarations, dynamic_libraries = dynamic
 
         static_declarations, static_libraries = e2vdom.generate(self)
-        dynamic_declarations, dynamic_libraries = "", ""
+        dynamic_declarations, dynamic_libraries = "", u"".join(managers.request_manager.current.dyn_libraries.itervalues())
 
         javascript_label = "jsdata-%s" % len(static_declarations)
         javascript_resource = application.resources.get_by_label(self.id, javascript_label)

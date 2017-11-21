@@ -199,9 +199,8 @@ def compile_declarations_n_libraries(types, render_type, render_container, regis
     else:
         declarations.append(INIT_CLOSE)
 
-    libraries = ("".join(library) for library in chain(
-        (vdomtype.libraries[render_type] for vdomtype in types),
-        managers.request_manager.current.dyn_libraries.itervalues()))
+    libraries = ("".join(library) for library in 
+        (vdomtype.libraries[render_type] for vdomtype in types))
 
     return "\n".join(declarations), "\n".join(libraries)
 
