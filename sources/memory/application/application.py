@@ -508,7 +508,7 @@ class MemoryApplication(MemoryApplicationSketch):
     def unimport_libraries(self):
         with self.lock:
             for library in self._libraries.itervalues():
-                library.unimport()
+                library.cleanup()
 
     def __invert__(self):
         raise NotImplementedError
