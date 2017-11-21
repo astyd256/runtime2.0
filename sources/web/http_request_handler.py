@@ -223,7 +223,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             (code, ret) = managers.module_manager.process_request(self.__request)
             self.__request.collect_files()
         except Exception as e:
-            raise  # CHECK: TODO: ONLY FOR DEBUG
+            #raise  # CHECK: TODO: ONLY FOR DEBUG
             requestline = "<br>"
             if hasattr(self, "requestline"):
                 requestline = "<br>" + self.requestline + "<br>" + '-' * 80
@@ -829,7 +829,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         SimpleHTTPServer.SimpleHTTPRequestHandler.send_error(self, code, message)
         if excinfo:
             page_debug = VDOM_CONFIG_1["ENABLE-PAGE-DEBUG"]
-            if "1" == page_debug:
+            if "1" == page_debug or True:
                 e = "<br>".join(excinfo.splitlines(True))
                 self.wfile.write(e)
                 self.wfile.flush()

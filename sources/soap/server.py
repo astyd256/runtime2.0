@@ -2999,7 +2999,7 @@ class VDOM_web_services_server(object):
             server_log.write("Precompile %s" % library)
             library.compile()
 
-        # self.invalidate_libraries()
+        app.unimport_libraries()
 
         # app.sync()
         app.save()
