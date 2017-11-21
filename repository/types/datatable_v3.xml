@@ -24,14 +24,14 @@
 	<Attributes>
 		<Attribute>
 			<Name>stateful</Name>
-			<DisplayName>Stateful</DisplayName>
-			<Description>Stateful</Description>
+			<DisplayName>#Lang(199)</DisplayName>
+			<Description>#Lang(299)</Description>
 			<DefaultValue>0</DefaultValue>
 			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
-			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<ErrorValidationMessage>#Lang(399)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<CodeInterface>DropDown((#Lang(499)|0)|(#Lang(499)|1))</CodeInterface>
 			<ColorGroup>1</ColorGroup>
 		</Attribute>
 		<Attribute>
@@ -219,7 +219,7 @@
 			<DisplayName>#Lang(117)</DisplayName>
 			<Description>#Lang(217)</Description>
 			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>^\{0,1}$</RegularExpressionValidation>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
 			<ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
@@ -231,7 +231,7 @@
 			<DisplayName>#Lang(118)</DisplayName>
 			<Description>#Lang(218)</Description>
 			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>^\{0,1}$</RegularExpressionValidation>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
 			<ErrorValidationMessage>#Lang(318)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
@@ -291,7 +291,7 @@
 			<DisplayName>#Lang(124)</DisplayName>
 			<Description>#Lang(224)</Description>
 			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>[01]</RegularExpressionValidation>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
 			<ErrorValidationMessage>#Lang(324)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>

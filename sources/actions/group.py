@@ -1,6 +1,6 @@
 
 import managers
-from .auxiliary import section, show, confirm, search
+from .auxiliary import section, show, warn, confirm, search
 from .auxiliary.constants import GROUP
 
 
@@ -42,7 +42,7 @@ def run(group=None, create=False, system=False, delete=False, description=None, 
 
     if create:
         if managers.user_manager.name_exists(group):
-            show("user or group with such identifier already exists")
+            warn("user or group with such identifier already exists")
             return
         show("create group %s" % group)
         group = managers.user_manager.create_group(group, system=system, descr=description or "")
@@ -50,7 +50,7 @@ def run(group=None, create=False, system=False, delete=False, description=None, 
     else:
         entity, group = search(group=group)
         if entity is not GROUP:
-            show("no group with such identifier")
+            warn("no group with such identifier")
             return
 
     if not (create or delete) and description is None and add is None and remove is None:
@@ -71,7 +71,7 @@ def run(group=None, create=False, system=False, delete=False, description=None, 
     if add:
         objects = recognize(add)
         if not objects:
-            show("no user(s) or group(s) to add")
+            warn("no user(s) or group(s) to add")
             return
 
         with section("add into group %s" % group.login):
@@ -84,7 +84,7 @@ def run(group=None, create=False, system=False, delete=False, description=None, 
         objects = [(entity, user_or_group) for entity, user_or_group in recognize(remove)
             if user_or_group.login in group.members]
         if not objects:
-            show("no user(s) or group(s) to add")
+            warn("no user(s) or group(s) to add")
             return
 
         with section("remove from group %s" % group.login):

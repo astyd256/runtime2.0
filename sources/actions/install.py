@@ -7,31 +7,31 @@ import file_access
 from utils.auxiliary import forfeit
 
 from .auxiliary.constants import TYPE, APPLICATION, EXTENSION, TYPES
-from .auxiliary import section, show, detect, locate_repository
+from .auxiliary import section, show, warn, detect, locate_repository, is_entity_name
 
 
 def install(filename):
     entity = detect(filename)
     if not entity:
-        show("not an application or type: %s" % filename)
+        warn("not an application or type: %s" % filename)
         return
 
     with section("install %s from %s" % (entity, filename), lazy=False):
         notifications = []
         try:
             if entity is TYPE:
-                subject = managers.memory.install_type(filename, into=notifications)
+                subject = managers.memory.install_type(filename=filename, into=notifications)
                 if settings.STORE_BYTECODE:
                     subject.compile()
             elif entity is APPLICATION:
-                subject = managers.memory.install_application(filename, into=notifications)
+                subject = managers.memory.install_application(filename=filename, into=notifications)
                 if settings.STORE_BYTECODE:
                     for library in subject.libraries.itervalues():
                         # show("precompile library %s" % library.name)
                         library.compile()
 
         except Exception as error:
-            show("unable to install %s: %s" % (entity, error))
+            warn("unable to install %s: %s" % (entity, error))
             raise
         else:
             show("contains %s" % subject)
@@ -47,6 +47,21 @@ def run(location):
     """
     if location in TYPES:
         location = locate_repository(TYPE)
+
+    if is_entity_name(location):
+        names = {filename[:-len(EXTENSION)]
+            for filename in managers.file_manager.list(file_access.FILE, None, locate_repository(TYPE))
+                if filename.endswith(EXTENSION)}
+        location, query = None, location
+        if query in names:
+            location = locate_repository(type=query)
+        else:
+            for name in names:
+                if name.startswith(query):
+                    location = locate_repository(type=name)
+        if not location:
+            warn("no such type in the repository: %s" % query)
+            return
 
     if os.path.isdir(location):
         with section("install types from %s" % location):

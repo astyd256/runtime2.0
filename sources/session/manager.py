@@ -61,13 +61,13 @@ class VDOM_session_manager(dict):
 			if dict.__contains__(self, key):
 				s = dict.__getitem__(self, key)
 				if s.is_expired(self.__timeout):
-					# execute session onfinish action
+					# execute session onfinish action and cleanup dynamic objects
 					try:
 						if settings.SERVER and "application_id" in s.context and s.context["application_id"]:
 							application = managers.memory.applications[s.context["application_id"]]
 							action = application.actions.get("sessiononfinish")
 							if action and action.source_code:
-								managers.engine.execute(action)							
+								managers.engine.execute(action)
 					finally:
 						s.context = {}
 						s.clean_files()

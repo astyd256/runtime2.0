@@ -24,7 +24,7 @@ class LogSocketStream(object):
     socket = property(lambda self: self._socket)
 
     def read(self, size):
-        while True:
+        while 1:
             try:
                 value = self._socket.recv(size)
                 break
@@ -48,7 +48,7 @@ class LogSocketStream(object):
         return "".join(chunks)
 
     def write(self, data):
-        while True:
+        while 1:
             try:
                 offset = self._socket.send(data)
                 break

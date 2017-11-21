@@ -85,7 +85,7 @@ class LogFile(object):
                 tell = 0
 
             index, entries = deque(), deque()
-            while True:
+            while 1:
                 try:
                     position = iterator.next()
                 except StopIteration:
@@ -112,8 +112,8 @@ class LogFile(object):
         self._file.seek(tell)
 
         for entry in entries:
-            data = self._formatter.format(*entry)
-            self._file.write(data.encode("utf8"))
+            data = self._formatter.format(*entry).encode("utf8")
+            self._file.write(data)
             self._index.appendleft(tell)
             tell += len(data)
 

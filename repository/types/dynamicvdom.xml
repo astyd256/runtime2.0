@@ -1,548 +1,548 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type>
-    <Information>
-        <ID>9e338259-29be-41d6-ac84-b44e2b294ffe</ID>
-        <Name>dynamicvdom</Name>
-        <DisplayName>#Lang(001)</DisplayName>
-        <ClassName>VDOM_DynamicObject</ClassName>
-        <Description>#Lang(002)</Description>
-        <Version>1.0.1a</Version>
-        <Category>Additional</Category>
-        <InterfaceType>1</InterfaceType>
-        <Dynamic>1</Dynamic>
-        <Moveable>1</Moveable>
-        <Resizable>3</Resizable>
-        <OptimizationPriority>1</OptimizationPriority>
-        <Container>2</Container>
-        <Containers>htmlcontainer, dialog, dialog_2, container</Containers>
-        <Languages>en_US, fr_FR, ru_RU</Languages>
-    </Information>
-    <Attributes>
-        <Attribute>
-            <Name>stateful</Name>
-            <DisplayName>Stateful</DisplayName>
-            <Description>Stateful</Description>
-            <DefaultValue>0</DefaultValue>
-            <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
-            <ErrorValidationMessage>0|1</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>0</InterfaceType>
-            <CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
-            <ColorGroup>1</ColorGroup>
-        </Attribute>
-        <Attribute>
-            <Name>hierarchy</Name>
-            <DisplayName>#Lang(101)</DisplayName>
-            <Description>#Lang(201)</Description>
-            <DefaultValue>0</DefaultValue>
-            <RegularExpressionValidation>^\d+$</RegularExpressionValidation>
-            <ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>0</InterfaceType>
-            <CodeInterface>TextField(2)</CodeInterface>
-            <ColorGroup>1</ColorGroup>
-        </Attribute>
-        <Attribute>
-            <Name>visible</Name>
-            <DisplayName>#Lang(102)</DisplayName>
-            <Description>#Lang(202)</Description>
-            <DefaultValue>1</DefaultValue>
-            <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
-            <ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>0</InterfaceType>
-            <CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
-            <ColorGroup>1</ColorGroup>
-        </Attribute>
-        <Attribute>
-            <Name>zindex</Name>
-            <DisplayName>#Lang(103)</DisplayName>
-            <Description>#Lang(203)</Description>
-            <DefaultValue>0</DefaultValue>
-            <RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
-            <ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>0</InterfaceType>
-            <CodeInterface>TextField(2)</CodeInterface>
-            <ColorGroup>1</ColorGroup>
-        </Attribute>
-        <Attribute>
-            <Name>top</Name>
-            <DisplayName>#Lang(104)</DisplayName>
-            <Description>#Lang(204)</Description>
-            <DefaultValue>0</DefaultValue>
-            <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
-            <ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>0</InterfaceType>
-            <CodeInterface>TextField(4)</CodeInterface>
-            <ColorGroup>1</ColorGroup>
-        </Attribute>
-        <Attribute>
-            <Name>left</Name>
-            <DisplayName>#Lang(105)</DisplayName>
-            <Description>#Lang(205)</Description>
-            <DefaultValue>50</DefaultValue>
-            <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
-            <ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>0</InterfaceType>
-            <CodeInterface>TextField(4)</CodeInterface>
-            <ColorGroup>1</ColorGroup>
-        </Attribute>
-        <Attribute>
-            <Name>width</Name>
-            <DisplayName>#Lang(106)</DisplayName>
-            <Description>#Lang(206)</Description>
-            <DefaultValue>400</DefaultValue>
-            <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
-            <ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>0</InterfaceType>
-            <CodeInterface>TextField(4)</CodeInterface>
-            <ColorGroup>1</ColorGroup>
-        </Attribute>
-        <Attribute>
-            <Name>height</Name>
-            <DisplayName>#Lang(107)</DisplayName>
-            <Description>#Lang(207)</Description>
-            <DefaultValue>250</DefaultValue>
-            <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
-            <ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>0</InterfaceType>
-            <CodeInterface>TextField(4)</CodeInterface>
-            <ColorGroup>1</ColorGroup>
-        </Attribute>
-        <Attribute>
-            <Name>overflow</Name>
-            <DisplayName>#Lang(108)</DisplayName>
-            <Description>#Lang(208)</Description>
-            <DefaultValue>0</DefaultValue>
-            <RegularExpressionValidation>^[0123]$</RegularExpressionValidation>
-            <ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>0</InterfaceType>
-            <CodeInterface>DropDown((#Lang(411)|0)|(#Lang(412)|1)|(#Lang(413)|2)|(#Lang(414)|3))</CodeInterface>
-            <ColorGroup>4</ColorGroup>
-        </Attribute>
-        <Attribute>
-            <Name>classname</Name>
-            <DisplayName>#Lang(109)</DisplayName>
-            <Description>#Lang(209)</Description>
-            <DefaultValue></DefaultValue>
-            <RegularExpressionValidation>^.*$</RegularExpressionValidation>
-            <ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>0</InterfaceType>
-            <CodeInterface>TextField(500)</CodeInterface>
-            <ColorGroup>4</ColorGroup>
-        </Attribute>
-        <Attribute>
-            <Name>vdomxml</Name>
-            <DisplayName>#Lang(110)</DisplayName>
-            <Description>#Lang(210)</Description>
-            <DefaultValue></DefaultValue>
-            <RegularExpressionValidation>.*</RegularExpressionValidation>
-            <ErrorValidationMessage>#Lang(310)</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>3</InterfaceType>
-            <CodeInterface>MultiLine(10000)</CodeInterface>
-            <ColorGroup>2</ColorGroup>
-        </Attribute>
-        <Attribute>
-            <Name>vdomactions</Name>
-            <DisplayName>#Lang(111)</DisplayName>
-            <Description>#Lang(211)</Description>
-            <DefaultValue></DefaultValue>
-            <RegularExpressionValidation>.*</RegularExpressionValidation>
-            <ErrorValidationMessage>#Lang(311)</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>3</InterfaceType>
-            <CodeInterface>MultiLine(10000)</CodeInterface>
-            <ColorGroup>2</ColorGroup>
-        </Attribute>
-        <Attribute>
-            <Name>handler</Name>
-            <DisplayName>#Lang(114)</DisplayName>
-            <Description>#Lang(214)</Description>
-            <DefaultValue></DefaultValue>
-            <RegularExpressionValidation>^[A-Za-z][_0-1A-Za-z]*$</RegularExpressionValidation>
-            <ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>0</InterfaceType>
-            <CodeInterface>TextField(50)</CodeInterface>
-            <ColorGroup>2</ColorGroup>
-        </Attribute>
-        <Attribute>
-            <Name>rendererrormsg</Name>
-            <DisplayName>#Lang(112)</DisplayName>
-            <Description>#Lang(212)</Description>
-            <DefaultValue></DefaultValue>
-            <RegularExpressionValidation>.*</RegularExpressionValidation>
-            <ErrorValidationMessage>#Lang(312)</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>3</InterfaceType>
-            <CodeInterface>MultiLine(10000)</CodeInterface>
-            <ColorGroup>2</ColorGroup>
-        </Attribute>
-        <Attribute>
-            <Name>debugmode</Name>
-            <DisplayName>#Lang(113)</DisplayName>
-            <Description>#Lang(213)</Description>
-            <DefaultValue>0</DefaultValue>
-            <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
-            <ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
-            <Visible>1</Visible>
-            <InterfaceType>0</InterfaceType>
-            <CodeInterface>DropDown((#Lang(427)|0)|(#Lang(428)|1))</CodeInterface>
-            <ColorGroup>2</ColorGroup>
-        </Attribute>
-    </Attributes>
-    <Languages>
-        <Language Code="en_US">
-            <Sentence ID="001">VDOM Dynamic Object</Sentence>
-            <Sentence ID="002"></Sentence>
-            <Sentence ID="003"></Sentence>
-            <Sentence ID="101">Hierarchy</Sentence>
-            <Sentence ID="102">Visibility</Sentence>
-            <Sentence ID="103">Z-Index</Sentence>
-            <Sentence ID="104">Top</Sentence>
-            <Sentence ID="105">Left</Sentence>
-            <Sentence ID="106">Width</Sentence>
-            <Sentence ID="107">Height</Sentence>
-            <Sentence ID="108">Overflow</Sentence>
-            <Sentence ID="109">CSS Class</Sentence>
-            <Sentence ID="110">VDOM XML</Sentence>
-            <Sentence ID="111">Actions</Sentence>
-            <Sentence ID="112">Render Error Message</Sentence>
-            <Sentence ID="113">Debug</Sentence>
-            <Sentence ID="114">Handler</Sentence>
-            <Sentence ID="201">Order of rendering the object on the page. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
-            <Sentence ID="202">Visibility of the object.</Sentence>
-            <Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the z-index indicates the order of their displaying. The larger z-index is, the upper the object lies.</Sentence>
-            <Sentence ID="204">Spacing between the top edge of the container and the object in pixels.</Sentence>
-            <Sentence ID="205">Spacing between the left edge of the container and the object in pixels.</Sentence>
-            <Sentence ID="206">Width of the object in pixels.</Sentence>
-            <Sentence ID="207">Height of the object in pixels.</Sentence>
-            <Sentence ID="208">The overflow control mode:
+	<Information>
+		<ID>9e338259-29be-41d6-ac84-b44e2b294ffe</ID>
+		<Name>dynamicvdom</Name>
+		<DisplayName>#Lang(001)</DisplayName>
+		<ClassName>VDOM_DynamicObject</ClassName>
+		<Description>#Lang(002)</Description>
+		<Version>1.0.1a</Version>
+		<Category>Additional</Category>
+		<InterfaceType>1</InterfaceType>
+		<Dynamic>1</Dynamic>
+		<Moveable>1</Moveable>
+		<Resizable>3</Resizable>
+		<OptimizationPriority>1</OptimizationPriority>
+		<Container>2</Container>
+		<Containers>htmlcontainer, dialog, dialog_2, container</Containers>
+		<Languages>en_US, fr_FR, ru_RU</Languages>
+	</Information>
+	<Attributes>
+		<Attribute>
+			<Name>stateful</Name>
+			<DisplayName>#Lang(199)</DisplayName>
+			<Description>#Lang(299)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(399)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(499)|0)|(#Lang(499)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>hierarchy</Name>
+			<DisplayName>#Lang(101)</DisplayName>
+			<Description>#Lang(201)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d+$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>visible</Name>
+			<DisplayName>#Lang(102)</DisplayName>
+			<Description>#Lang(202)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>zindex</Name>
+			<DisplayName>#Lang(103)</DisplayName>
+			<Description>#Lang(203)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>top</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>left</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue>50</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>width</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue>400</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>height</Name>
+			<DisplayName>#Lang(107)</DisplayName>
+			<Description>#Lang(207)</Description>
+			<DefaultValue>250</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>overflow</Name>
+			<DisplayName>#Lang(108)</DisplayName>
+			<Description>#Lang(208)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[0123]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(411)|0)|(#Lang(412)|1)|(#Lang(413)|2)|(#Lang(414)|3))</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>classname</Name>
+			<DisplayName>#Lang(109)</DisplayName>
+			<Description>#Lang(209)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(500)</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>vdomxml</Name>
+			<DisplayName>#Lang(110)</DisplayName>
+			<Description>#Lang(210)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(310)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>3</InterfaceType>
+			<CodeInterface>MultiLine(10000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>vdomactions</Name>
+			<DisplayName>#Lang(111)</DisplayName>
+			<Description>#Lang(211)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(311)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>3</InterfaceType>
+			<CodeInterface>MultiLine(10000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>handler</Name>
+			<DisplayName>#Lang(114)</DisplayName>
+			<Description>#Lang(214)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^[A-Za-z][_0-1A-Za-z]*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(50)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>rendererrormsg</Name>
+			<DisplayName>#Lang(112)</DisplayName>
+			<Description>#Lang(212)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(312)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>3</InterfaceType>
+			<CodeInterface>MultiLine(10000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>debugmode</Name>
+			<DisplayName>#Lang(113)</DisplayName>
+			<Description>#Lang(213)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(427)|0)|(#Lang(428)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+	</Attributes>
+	<Languages>
+		<Language Code="en_US">
+			<Sentence ID="001">VDOM Dynamic Object</Sentence>
+			<Sentence ID="002"></Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Top</Sentence>
+			<Sentence ID="105">Left</Sentence>
+			<Sentence ID="106">Width</Sentence>
+			<Sentence ID="107">Height</Sentence>
+			<Sentence ID="108">Overflow</Sentence>
+			<Sentence ID="109">CSS Class</Sentence>
+			<Sentence ID="110">VDOM XML</Sentence>
+			<Sentence ID="111">Actions</Sentence>
+			<Sentence ID="112">Render Error Message</Sentence>
+			<Sentence ID="113">Debug</Sentence>
+			<Sentence ID="114">Handler</Sentence>
+			<Sentence ID="201">Order of rendering the object on the page. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
+			<Sentence ID="202">Visibility of the object.</Sentence>
+			<Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the z-index indicates the order of their displaying. The larger z-index is, the upper the object lies.</Sentence>
+			<Sentence ID="204">Spacing between the top edge of the container and the object in pixels.</Sentence>
+			<Sentence ID="205">Spacing between the left edge of the container and the object in pixels.</Sentence>
+			<Sentence ID="206">Width of the object in pixels.</Sentence>
+			<Sentence ID="207">Height of the object in pixels.</Sentence>
+			<Sentence ID="208">The overflow control mode:
 Auto - if the content fits in the object&apos; borders - scrolling will not be shown; if not - the scrolling will be shown;
 Hidden - if the content does not fit in the object&apos; borders - it will be cropped within the borders;
 Scroll - the horizontal and vertical scrolling will always be shown, no matter if the content fits or not;
 Visible - the whole content will always be shown without reference to the object&apos;s borders.</Sentence>
-            <Sentence ID="209">The name of the CSS class.</Sentence>
-            <Sentence ID="210">VDOM XML</Sentence>
-            <Sentence ID="211">Declare events and actions</Sentence>
-            <Sentence ID="212">Render error localization message</Sentence>
-            <Sentence ID="213">Debug mode</Sentence>
-            <Sentence ID="214">Custom dynamic server actions handler</Sentence>
-            <Sentence ID="301">Incorrect value, must be positive integer from 0 to 99.</Sentence>
-            <Sentence ID="302">Incorrect value, must be either 0 or 1.</Sentence>
-            <Sentence ID="303">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="304">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="305">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="306">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="307">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="308">Incorrect value, must be 0, 1, 2 or 3.</Sentence>
-            <Sentence ID="309">Incorrect value.</Sentence>
-            <Sentence ID="310">Incorrect value, must be valid VDOM XML</Sentence>
-            <Sentence ID="311">Incorrect value, must be dictionary like {&apos;src_name:event_name&apos;: [subscription_name, (&apos;dst_name:action&apos;, param1, param2...)]}</Sentence>
-            <Sentence ID="312">Incorrect value</Sentence>
-            <Sentence ID="313">Incorrect value, must be 0 or 1</Sentence>
-            <Sentence ID="314">Incorrect value</Sentence>
-            <Sentence ID="401">Invisible</Sentence>
-            <Sentence ID="402">Visible</Sentence>
-            <Sentence ID="411">Auto</Sentence>
-            <Sentence ID="412">Hidden</Sentence>
-            <Sentence ID="413">Scroll</Sentence>
-            <Sentence ID="414">Visible</Sentence>
-            <Sentence ID="427">Off</Sentence>
-            <Sentence ID="428">On</Sentence>
-            <Sentence ID="501">Hide the object</Sentence>
-            <Sentence ID="502">Show the items of the object</Sentence>
-            <Sentence ID="503">Resize the object width and height</Sentence>
-            <Sentence ID="504">Show the object</Sentence>
-            <Sentence ID="505">Catch child event</Sentence>
-            <Sentence ID="518">Event from subscription was caught</Sentence>
-            <Sentence ID="601">Hide</Sentence>
-            <Sentence ID="603">resizeTo</Sentence>
-            <Sentence ID="604">Show</Sentence>
-            <Sentence ID="605">Catch Event</Sentence>
-            <Sentence ID="614">Show</Sentence>
-            <Sentence ID="701">Fade</Sentence>
-            <Sentence ID="702">Width</Sentence>
-            <Sentence ID="703">Height</Sentence>
-            <Sentence ID="704">Fade</Sentence>
-            <Sentence ID="705">Custom name</Sentence>
-            <Sentence ID="706">VDOM Event reference</Sentence>
-            <Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
-            <Sentence ID="802">New value of width</Sentence>
-            <Sentence ID="803">New value of height</Sentence>
-            <Sentence ID="804">Fade effect, time is indicated in milliseconds</Sentence>
-            <Sentence ID="805">Custom name</Sentence>
-            <Sentence ID="806">VDOM Event reference</Sentence>
-        </Language>
-        <Language Code="fr_FR">
-            <Sentence ID="001">VDOM Dynamic Object</Sentence>
-            <Sentence ID="002"></Sentence>
-            <Sentence ID="003"></Sentence>
-            <Sentence ID="101">Hierarchy</Sentence>
-            <Sentence ID="102">Visibility</Sentence>
-            <Sentence ID="103">Z-Index</Sentence>
-            <Sentence ID="104">Top</Sentence>
-            <Sentence ID="105">Left</Sentence>
-            <Sentence ID="106">Width</Sentence>
-            <Sentence ID="107">Height</Sentence>
-            <Sentence ID="108">Overflow</Sentence>
-            <Sentence ID="109">CSS Class</Sentence>
-            <Sentence ID="110">VDOM XML</Sentence>
-            <Sentence ID="111">Actions</Sentence>
-            <Sentence ID="112">Render Error Message</Sentence>
-            <Sentence ID="113">Debug</Sentence>
-            <Sentence ID="201">Order of rendering the object on the page. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
-            <Sentence ID="202">Visibility of the object.</Sentence>
-            <Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the z-index indicates the order of their displaying. The larger z-index is, the upper the object lies.</Sentence>
-            <Sentence ID="204">Spacing between the top edge of the container and the object in pixels.</Sentence>
-            <Sentence ID="205">Spacing between the left edge of the container and the object in pixels.</Sentence>
-            <Sentence ID="206">Width of the object in pixels.</Sentence>
-            <Sentence ID="207">Height of the object in pixels.</Sentence>
-            <Sentence ID="208">The overflow control mode:
+			<Sentence ID="209">The name of the CSS class.</Sentence>
+			<Sentence ID="210">VDOM XML</Sentence>
+			<Sentence ID="211">Declare events and actions</Sentence>
+			<Sentence ID="212">Render error localization message</Sentence>
+			<Sentence ID="213">Debug mode</Sentence>
+			<Sentence ID="214">Custom dynamic server actions handler</Sentence>
+			<Sentence ID="301">Incorrect value, must be positive integer from 0 to 99.</Sentence>
+			<Sentence ID="302">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="303">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="304">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="305">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="306">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="307">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="308">Incorrect value, must be 0, 1, 2 or 3.</Sentence>
+			<Sentence ID="309">Incorrect value.</Sentence>
+			<Sentence ID="310">Incorrect value, must be valid VDOM XML</Sentence>
+			<Sentence ID="311">Incorrect value, must be dictionary like {&apos;src_name:event_name&apos;: [subscription_name, (&apos;dst_name:action&apos;, param1, param2...)]}</Sentence>
+			<Sentence ID="312">Incorrect value</Sentence>
+			<Sentence ID="313">Incorrect value, must be 0 or 1</Sentence>
+			<Sentence ID="314">Incorrect value</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="411">Auto</Sentence>
+			<Sentence ID="412">Hidden</Sentence>
+			<Sentence ID="413">Scroll</Sentence>
+			<Sentence ID="414">Visible</Sentence>
+			<Sentence ID="427">Off</Sentence>
+			<Sentence ID="428">On</Sentence>
+			<Sentence ID="501">Hide the object</Sentence>
+			<Sentence ID="502">Show the items of the object</Sentence>
+			<Sentence ID="503">Resize the object width and height</Sentence>
+			<Sentence ID="504">Show the object</Sentence>
+			<Sentence ID="505">Catch child event</Sentence>
+			<Sentence ID="518">Event from subscription was caught</Sentence>
+			<Sentence ID="601">Hide</Sentence>
+			<Sentence ID="603">resizeTo</Sentence>
+			<Sentence ID="604">Show</Sentence>
+			<Sentence ID="605">Catch Event</Sentence>
+			<Sentence ID="614">Show</Sentence>
+			<Sentence ID="701">Fade</Sentence>
+			<Sentence ID="702">Width</Sentence>
+			<Sentence ID="703">Height</Sentence>
+			<Sentence ID="704">Fade</Sentence>
+			<Sentence ID="705">Custom name</Sentence>
+			<Sentence ID="706">VDOM Event reference</Sentence>
+			<Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="802">New value of width</Sentence>
+			<Sentence ID="803">New value of height</Sentence>
+			<Sentence ID="804">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="805">Custom name</Sentence>
+			<Sentence ID="806">VDOM Event reference</Sentence>
+		</Language>
+		<Language Code="fr_FR">
+			<Sentence ID="001">VDOM Dynamic Object</Sentence>
+			<Sentence ID="002"></Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Top</Sentence>
+			<Sentence ID="105">Left</Sentence>
+			<Sentence ID="106">Width</Sentence>
+			<Sentence ID="107">Height</Sentence>
+			<Sentence ID="108">Overflow</Sentence>
+			<Sentence ID="109">CSS Class</Sentence>
+			<Sentence ID="110">VDOM XML</Sentence>
+			<Sentence ID="111">Actions</Sentence>
+			<Sentence ID="112">Render Error Message</Sentence>
+			<Sentence ID="113">Debug</Sentence>
+			<Sentence ID="201">Order of rendering the object on the page. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
+			<Sentence ID="202">Visibility of the object.</Sentence>
+			<Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the z-index indicates the order of their displaying. The larger z-index is, the upper the object lies.</Sentence>
+			<Sentence ID="204">Spacing between the top edge of the container and the object in pixels.</Sentence>
+			<Sentence ID="205">Spacing between the left edge of the container and the object in pixels.</Sentence>
+			<Sentence ID="206">Width of the object in pixels.</Sentence>
+			<Sentence ID="207">Height of the object in pixels.</Sentence>
+			<Sentence ID="208">The overflow control mode:
 Auto - if the content fits in the object&apos; borders - scrolling will not be shown; if not - the scrolling will be shown;
 Hidden - if the content does not fit in the object&apos; borders - it will be cropped within the borders;
 Scroll - the horizontal and vertical scrolling will always be shown, no matter if the content fits or not;
 Visible - the whole content will always be shown without reference to the object&apos;s borders.</Sentence>
-            <Sentence ID="209">The name of the CSS class.</Sentence>
-            <Sentence ID="210">VDOM XML</Sentence>
-            <Sentence ID="211">Declare events and actions</Sentence>
-            <Sentence ID="212">Render error localization message</Sentence>
-            <Sentence ID="213">Debug mode</Sentence>
-            <Sentence ID="301">Incorrect value, must be positive integer from 0 to 99.</Sentence>
-            <Sentence ID="302">Incorrect value, must be either 0 or 1.</Sentence>
-            <Sentence ID="303">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="304">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="305">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="306">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="307">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="308">Incorrect value, must be 0, 1, 2 or 3.</Sentence>
-            <Sentence ID="309">Incorrect value.</Sentence>
-            <Sentence ID="310">Incorrect value, must be valid VDOM XML</Sentence>
-            <Sentence ID="311">Incorrect value, must be dictionary like {&apos;src_name:event_name&apos;: [subscription_name, (&apos;dst_name:action&apos;, param1, param2...)]}</Sentence>
-            <Sentence ID="312">Incorrect value</Sentence>
-            <Sentence ID="313">Incorrect value, must be 0 or 1</Sentence>
-            <Sentence ID="314">Incorrect value.</Sentence>
-            <Sentence ID="401">Invisible</Sentence>
-            <Sentence ID="402">Visible</Sentence>
-            <Sentence ID="411">Auto</Sentence>
-            <Sentence ID="412">Hidden</Sentence>
-            <Sentence ID="413">Scroll</Sentence>
-            <Sentence ID="414">Visible</Sentence>
-            <Sentence ID="427">Off</Sentence>
-            <Sentence ID="428">On</Sentence>
-            <Sentence ID="501">Hide the object</Sentence>
-            <Sentence ID="502">Show the items of the object</Sentence>
-            <Sentence ID="503">Resize the object width and height</Sentence>
-            <Sentence ID="504">Show the object</Sentence>
-            <Sentence ID="505">Catch child event</Sentence>
-            <Sentence ID="518">Event from subscription was caught</Sentence>
-            <Sentence ID="601">Hide</Sentence>
-            <Sentence ID="603">resizeTo</Sentence>
-            <Sentence ID="604">Show</Sentence>
-            <Sentence ID="605">Catch Event</Sentence>
-            <Sentence ID="614">Show</Sentence>
-            <Sentence ID="701">Fade</Sentence>
-            <Sentence ID="702">Width</Sentence>
-            <Sentence ID="703">Height</Sentence>
-            <Sentence ID="704">Fade</Sentence>
-            <Sentence ID="705">Custom name</Sentence>
-            <Sentence ID="706">VDOM Event reference</Sentence>
-            <Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
-            <Sentence ID="802">New value of width</Sentence>
-            <Sentence ID="803">New value of height</Sentence>
-            <Sentence ID="804">Fade effect, time is indicated in milliseconds</Sentence>
-            <Sentence ID="805">Custom name</Sentence>
-            <Sentence ID="806">VDOM Event reference</Sentence>
-        </Language>
-        <Language Code="ru_RU">
-            <Sentence ID="001">VDOM Dynamic Object</Sentence>
-            <Sentence ID="002"></Sentence>
-            <Sentence ID="003"></Sentence>
-            <Sentence ID="101">Hierarchy</Sentence>
-            <Sentence ID="102">Visibility</Sentence>
-            <Sentence ID="103">Z-Index</Sentence>
-            <Sentence ID="104">Top</Sentence>
-            <Sentence ID="105">Left</Sentence>
-            <Sentence ID="106">Width</Sentence>
-            <Sentence ID="107">Height</Sentence>
-            <Sentence ID="108">Overflow</Sentence>
-            <Sentence ID="109">CSS Class</Sentence>
-            <Sentence ID="110">VDOM XML</Sentence>
-            <Sentence ID="111">Actions</Sentence>
-            <Sentence ID="112">Render Error Message</Sentence>
-            <Sentence ID="113">Debug</Sentence>
-            <Sentence ID="201">Order of rendering the object on the page. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
-            <Sentence ID="202">Visibility of the object.</Sentence>
-            <Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the z-index indicates the order of their displaying. The larger z-index is, the upper the object lies.</Sentence>
-            <Sentence ID="204">Spacing between the top edge of the container and the object in pixels.</Sentence>
-            <Sentence ID="205">Spacing between the left edge of the container and the object in pixels.</Sentence>
-            <Sentence ID="206">Width of the object in pixels.</Sentence>
-            <Sentence ID="207">Height of the object in pixels.</Sentence>
-            <Sentence ID="208">The overflow control mode:
+			<Sentence ID="209">The name of the CSS class.</Sentence>
+			<Sentence ID="210">VDOM XML</Sentence>
+			<Sentence ID="211">Declare events and actions</Sentence>
+			<Sentence ID="212">Render error localization message</Sentence>
+			<Sentence ID="213">Debug mode</Sentence>
+			<Sentence ID="301">Incorrect value, must be positive integer from 0 to 99.</Sentence>
+			<Sentence ID="302">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="303">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="304">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="305">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="306">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="307">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="308">Incorrect value, must be 0, 1, 2 or 3.</Sentence>
+			<Sentence ID="309">Incorrect value.</Sentence>
+			<Sentence ID="310">Incorrect value, must be valid VDOM XML</Sentence>
+			<Sentence ID="311">Incorrect value, must be dictionary like {&apos;src_name:event_name&apos;: [subscription_name, (&apos;dst_name:action&apos;, param1, param2...)]}</Sentence>
+			<Sentence ID="312">Incorrect value</Sentence>
+			<Sentence ID="313">Incorrect value, must be 0 or 1</Sentence>
+			<Sentence ID="314">Incorrect value.</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="411">Auto</Sentence>
+			<Sentence ID="412">Hidden</Sentence>
+			<Sentence ID="413">Scroll</Sentence>
+			<Sentence ID="414">Visible</Sentence>
+			<Sentence ID="427">Off</Sentence>
+			<Sentence ID="428">On</Sentence>
+			<Sentence ID="501">Hide the object</Sentence>
+			<Sentence ID="502">Show the items of the object</Sentence>
+			<Sentence ID="503">Resize the object width and height</Sentence>
+			<Sentence ID="504">Show the object</Sentence>
+			<Sentence ID="505">Catch child event</Sentence>
+			<Sentence ID="518">Event from subscription was caught</Sentence>
+			<Sentence ID="601">Hide</Sentence>
+			<Sentence ID="603">resizeTo</Sentence>
+			<Sentence ID="604">Show</Sentence>
+			<Sentence ID="605">Catch Event</Sentence>
+			<Sentence ID="614">Show</Sentence>
+			<Sentence ID="701">Fade</Sentence>
+			<Sentence ID="702">Width</Sentence>
+			<Sentence ID="703">Height</Sentence>
+			<Sentence ID="704">Fade</Sentence>
+			<Sentence ID="705">Custom name</Sentence>
+			<Sentence ID="706">VDOM Event reference</Sentence>
+			<Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="802">New value of width</Sentence>
+			<Sentence ID="803">New value of height</Sentence>
+			<Sentence ID="804">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="805">Custom name</Sentence>
+			<Sentence ID="806">VDOM Event reference</Sentence>
+		</Language>
+		<Language Code="ru_RU">
+			<Sentence ID="001">VDOM Dynamic Object</Sentence>
+			<Sentence ID="002"></Sentence>
+			<Sentence ID="003"></Sentence>
+			<Sentence ID="101">Hierarchy</Sentence>
+			<Sentence ID="102">Visibility</Sentence>
+			<Sentence ID="103">Z-Index</Sentence>
+			<Sentence ID="104">Top</Sentence>
+			<Sentence ID="105">Left</Sentence>
+			<Sentence ID="106">Width</Sentence>
+			<Sentence ID="107">Height</Sentence>
+			<Sentence ID="108">Overflow</Sentence>
+			<Sentence ID="109">CSS Class</Sentence>
+			<Sentence ID="110">VDOM XML</Sentence>
+			<Sentence ID="111">Actions</Sentence>
+			<Sentence ID="112">Render Error Message</Sentence>
+			<Sentence ID="113">Debug</Sentence>
+			<Sentence ID="201">Order of rendering the object on the page. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
+			<Sentence ID="202">Visibility of the object.</Sentence>
+			<Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the z-index indicates the order of their displaying. The larger z-index is, the upper the object lies.</Sentence>
+			<Sentence ID="204">Spacing between the top edge of the container and the object in pixels.</Sentence>
+			<Sentence ID="205">Spacing between the left edge of the container and the object in pixels.</Sentence>
+			<Sentence ID="206">Width of the object in pixels.</Sentence>
+			<Sentence ID="207">Height of the object in pixels.</Sentence>
+			<Sentence ID="208">The overflow control mode:
 Auto - if the content fits in the object&apos; borders - scrolling will not be shown; if not - the scrolling will be shown;
 Hidden - if the content does not fit in the object&apos; borders - it will be cropped within the borders;
 Scroll - the horizontal and vertical scrolling will always be shown, no matter if the content fits or not;
 Visible - the whole content will always be shown without reference to the object&apos;s borders.</Sentence>
-            <Sentence ID="209">The name of the CSS class.</Sentence>
-            <Sentence ID="210">VDOM XML</Sentence>
-            <Sentence ID="211">Declare events and actions</Sentence>
-            <Sentence ID="212">Render error localization message</Sentence>
-            <Sentence ID="213">Debug mode</Sentence>
-            <Sentence ID="301">Incorrect value, must be positive integer from 0 to 99.</Sentence>
-            <Sentence ID="302">Incorrect value, must be either 0 or 1.</Sentence>
-            <Sentence ID="303">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="304">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="305">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="306">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="307">Incorrect value, must be positive integer from 0 to 9999</Sentence>
-            <Sentence ID="308">Incorrect value, must be 0, 1, 2 or 3.</Sentence>
-            <Sentence ID="309">Incorrect value.</Sentence>
-            <Sentence ID="310">Incorrect value, must be valid VDOM XML</Sentence>
-            <Sentence ID="311">Incorrect value, must be dictionary like {&apos;src_name:event_name&apos;: [subscription_name, (&apos;dst_name:action&apos;, param1, param2...)]}</Sentence>
-            <Sentence ID="312">Incorrect value</Sentence>
-            <Sentence ID="313">Incorrect value, must be 0 or 1</Sentence>
-            <Sentence ID="401">Invisible</Sentence>
-            <Sentence ID="402">Visible</Sentence>
-            <Sentence ID="411">Auto</Sentence>
-            <Sentence ID="412">Hidden</Sentence>
-            <Sentence ID="413">Scroll</Sentence>
-            <Sentence ID="414">Visible</Sentence>
-            <Sentence ID="427">Off</Sentence>
-            <Sentence ID="428">On</Sentence>
-            <Sentence ID="501">Hide the object</Sentence>
-            <Sentence ID="502">Show the items of the object</Sentence>
-            <Sentence ID="503">Resize the object width and height</Sentence>
-            <Sentence ID="504">Show the object</Sentence>
-            <Sentence ID="505">Catch child event</Sentence>
-            <Sentence ID="518">Event from subscription was caught</Sentence>
-            <Sentence ID="601">Hide</Sentence>
-            <Sentence ID="603">resizeTo</Sentence>
-            <Sentence ID="604">Show</Sentence>
-            <Sentence ID="605">Catch Event</Sentence>
-            <Sentence ID="614">Show</Sentence>
-            <Sentence ID="701">Fade</Sentence>
-            <Sentence ID="702">Width</Sentence>
-            <Sentence ID="703">Height</Sentence>
-            <Sentence ID="704">Fade</Sentence>
-            <Sentence ID="705">Custom name</Sentence>
-            <Sentence ID="706">VDOM Event reference</Sentence>
-            <Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
-            <Sentence ID="802">New value of width</Sentence>
-            <Sentence ID="803">New value of height</Sentence>
-            <Sentence ID="804">Fade effect, time is indicated in milliseconds</Sentence>
-            <Sentence ID="805">Custom name</Sentence>
-            <Sentence ID="806">VDOM Event reference</Sentence>
-        </Language>
-    </Languages>
-    <Resources>
-        <Resource ID="76bfc87a-dbe3-46e3-8d11-cc78a576b63a" Type="png" Name="Icon">
-            iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
-            bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
-            bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
-            eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
-            NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
-            dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
-            dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
-            IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
-            ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
-            cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
-            PSJ4bXAuaWlkOkZGNDBEMDQxMTQyODExRTE5OEYxRDgwMzlBMjcyMUQ0IiB4bXBNTTpEb2N1bWVu
-            dElEPSJ4bXAuZGlkOkZGNDBEMDQyMTQyODExRTE5OEYxRDgwMzlBMjcyMUQ0Ij4gPHhtcE1NOkRl
-            cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkY0MEQwM0YxNDI4MTFFMTk4RjFE
-            ODAzOUEyNzIxRDQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RkY0MEQwNDAxNDI4MTFFMTk4
-            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
-        </Resource>
-    </Resources>
-    <SourceCode>
+			<Sentence ID="209">The name of the CSS class.</Sentence>
+			<Sentence ID="210">VDOM XML</Sentence>
+			<Sentence ID="211">Declare events and actions</Sentence>
+			<Sentence ID="212">Render error localization message</Sentence>
+			<Sentence ID="213">Debug mode</Sentence>
+			<Sentence ID="301">Incorrect value, must be positive integer from 0 to 99.</Sentence>
+			<Sentence ID="302">Incorrect value, must be either 0 or 1.</Sentence>
+			<Sentence ID="303">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="304">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="305">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="306">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="307">Incorrect value, must be positive integer from 0 to 9999</Sentence>
+			<Sentence ID="308">Incorrect value, must be 0, 1, 2 or 3.</Sentence>
+			<Sentence ID="309">Incorrect value.</Sentence>
+			<Sentence ID="310">Incorrect value, must be valid VDOM XML</Sentence>
+			<Sentence ID="311">Incorrect value, must be dictionary like {&apos;src_name:event_name&apos;: [subscription_name, (&apos;dst_name:action&apos;, param1, param2...)]}</Sentence>
+			<Sentence ID="312">Incorrect value</Sentence>
+			<Sentence ID="313">Incorrect value, must be 0 or 1</Sentence>
+			<Sentence ID="401">Invisible</Sentence>
+			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="411">Auto</Sentence>
+			<Sentence ID="412">Hidden</Sentence>
+			<Sentence ID="413">Scroll</Sentence>
+			<Sentence ID="414">Visible</Sentence>
+			<Sentence ID="427">Off</Sentence>
+			<Sentence ID="428">On</Sentence>
+			<Sentence ID="501">Hide the object</Sentence>
+			<Sentence ID="502">Show the items of the object</Sentence>
+			<Sentence ID="503">Resize the object width and height</Sentence>
+			<Sentence ID="504">Show the object</Sentence>
+			<Sentence ID="505">Catch child event</Sentence>
+			<Sentence ID="518">Event from subscription was caught</Sentence>
+			<Sentence ID="601">Hide</Sentence>
+			<Sentence ID="603">resizeTo</Sentence>
+			<Sentence ID="604">Show</Sentence>
+			<Sentence ID="605">Catch Event</Sentence>
+			<Sentence ID="614">Show</Sentence>
+			<Sentence ID="701">Fade</Sentence>
+			<Sentence ID="702">Width</Sentence>
+			<Sentence ID="703">Height</Sentence>
+			<Sentence ID="704">Fade</Sentence>
+			<Sentence ID="705">Custom name</Sentence>
+			<Sentence ID="706">VDOM Event reference</Sentence>
+			<Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="802">New value of width</Sentence>
+			<Sentence ID="803">New value of height</Sentence>
+			<Sentence ID="804">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="805">Custom name</Sentence>
+			<Sentence ID="806">VDOM Event reference</Sentence>
+		</Language>
+	</Languages>
+	<Resources>
+		<Resource ID="76bfc87a-dbe3-46e3-8d11-cc78a576b63a" Type="png" Name="Icon">
+			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOkZGNDBEMDQxMTQyODExRTE5OEYxRDgwMzlBMjcyMUQ0IiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOkZGNDBEMDQyMTQyODExRTE5OEYxRDgwMzlBMjcyMUQ0Ij4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkY0MEQwM0YxNDI4MTFFMTk4RjFE
+			ODAzOUEyNzIxRDQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RkY0MEQwNDAxNDI4MTFFMTk4
+			RjFEODAzOUEyNzIxRDQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			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
+		</Resource>
+	</Resources>
+	<SourceCode>
 <![CDATA[from xml.sax.saxutils import escape as xml_escape
 import managers
 from scripting import e2vdom
@@ -561,10 +561,10 @@ def exception_trace():
 WYSIWYG_IMAGE_UUID = "76bfc87a-dbe3-46e3-8d11-cc78a576b63a"
 
 TEMPLATE = u"""{libraries}
-<div name="{name}" id="{id}" style="{style}" class="{classes}">{contents}
 <script type='text/javascript'>
 {declarations}
 </script>
+<div name="{name}" id="{id}" style="{style}" class="{classes}">{contents}
 </div>"""
 
 
@@ -576,6 +576,7 @@ class VDOM_DynamicObject(VDOM_object):
             with e2vdom.select(dynamic=True):
                 vdomobject = self.loads(self.vdomxml.encode("utf8"), self.vdomactions, handler=self.handler)
                 if vdomobject:
+                    managers.memory.track(vdomobject, sync=self)
                     with managers.engine.start_render(vdomobject, parent=self) as context:
                         contents = context.contents
                         declarations, libraries = e2vdom.generate(context.instance)
@@ -584,7 +585,7 @@ class VDOM_DynamicObject(VDOM_object):
                     return "", "", ""
         except Exception as error:
             ex_trace = exception_trace().replace('\n', '<br>')
-            
+
             if self.debugmode == "1":
                 raise
             else:
@@ -625,51 +626,51 @@ class VDOM_DynamicObject(VDOM_object):
         from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
         contents += get_empty_wysiwyg_value(self, WYSIWYG_IMAGE_UUID)
         return super(VDOM_DynamicObject, self).wysiwyg(contents=contents)]]>
-    </SourceCode>
-    <E2VDOM>
-        <Events>
-            <UserInterfaceEvents>
-                <Event Name="eventcaught" Description="#Lang(518)">
-                    <Parameters>
-                        <Parameter Name="customName" Description="#Lang(901)" Order="0"/>
-                        <Parameter Name="parameters" Description="#Lang(902)" Order="0"/>
-                    </Parameters>
-                </Event>
-            </UserInterfaceEvents>
-        </Events>
-        <Actions>
-            <Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
-                <Action Name="resizeTo" DisplayName="#Lang(603)" Description="#Lang(503)">
-                    <Parameters>
-                        <Parameter Name="width" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-                        <Parameter Name="height" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-                    </Parameters>
-                    <SourceCode>
+	</SourceCode>
+	<E2VDOM>
+		<Events>
+			<UserInterfaceEvents>
+				<Event Name="eventcaught" Description="#Lang(518)">
+					<Parameters>
+						<Parameter Name="customName" Description="#Lang(901)" Order="0"/>
+						<Parameter Name="parameters" Description="#Lang(902)" Order="0"/>
+					</Parameters>
+				</Event>
+			</UserInterfaceEvents>
+		</Events>
+		<Actions>
+			<Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
+				<Action Name="resizeTo" DisplayName="#Lang(603)" Description="#Lang(503)">
+					<Parameters>
+						<Parameter Name="width" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="height" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
 <![CDATA[$j(this.domCont).width(parseInt(width,10)).height(parseInt(height,10));]]>
-                    </SourceCode>
-                </Action>
-                <Action Name="hide" DisplayName="#Lang(601)" Description="#Lang(501)">
-                    <Parameters>
-                        <Parameter Name="fade" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-                    </Parameters>
-                    <SourceCode>
+					</SourceCode>
+				</Action>
+				<Action Name="hide" DisplayName="#Lang(601)" Description="#Lang(501)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
 <![CDATA[vdom_ui_hide(this.domCont, fade);]]>
-                    </SourceCode>
-                </Action>
-                <Action Name="show" DisplayName="#Lang(604)" Description="#Lang(504)">
-                    <Parameters>
-                        <Parameter Name="fade" DisplayName="#Lang(704)" Description="#Lang(804)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-                    </Parameters>
-                    <SourceCode>
+					</SourceCode>
+				</Action>
+				<Action Name="show" DisplayName="#Lang(604)" Description="#Lang(504)">
+					<Parameters>
+						<Parameter Name="fade" DisplayName="#Lang(704)" Description="#Lang(804)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
 <![CDATA[vdom_ui_show(this.domCont, fade);]]>
-                    </SourceCode>
-                </Action>
-                <Action Name="catchEvent" DisplayName="#Lang(605)" Description="#Lang(505)">
-                    <Parameters>
-                        <Parameter Name="customName" DisplayName="#Lang(705)" Description="#Lang(805)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-                        <Parameter Name="evtRef" DisplayName="#Lang(706)" Description="#Lang(806)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-                    </Parameters>
-                    <SourceCode>
+					</SourceCode>
+				</Action>
+				<Action Name="catchEvent" DisplayName="#Lang(605)" Description="#Lang(505)">
+					<Parameters>
+						<Parameter Name="customName" DisplayName="#Lang(705)" Description="#Lang(805)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="evtRef" DisplayName="#Lang(706)" Description="#Lang(806)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode>
 <![CDATA[var params = {};
 for (var i in evtRef.parameters){
   var param = evtRef.parameters[i];
@@ -678,9 +679,9 @@ for (var i in evtRef.parameters){
 
 var id = this.domCont.id;
 execEventBinded(id.substring(2, id.length), "eventcaught", {"customName": customName, "parameters": JSON.stringify(params)});]]>
-                    </SourceCode>
-                </Action>
-            </Container>
-        </Actions>
-    </E2VDOM>
+					</SourceCode>
+				</Action>
+			</Container>
+		</Actions>
+	</E2VDOM>
 </Type>

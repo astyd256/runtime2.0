@@ -1,8 +1,14 @@
 
-from inspect import iscode
+from itertools import chain
+from inspect import iscode, isroutine, ismodule
+from threading import Lock
+
+import js2py
+
 import managers
 import version
 import vscript
+
 from uuid import uuid4
 from vscript.engine import vcompile, vexecute, vevaluate
 from mailing.message import Message, MailAttachment as Attachment
@@ -14,16 +20,26 @@ class VDOM_vscript_libraries(object):
     def __init__(self, owner):
         self._owner = owner
 
-    def register(self, name, source_or_code, data=None, environment=None, context=None):
+    def register(self, name, source, data=None, environment=None, context=None):
         if context is None:
             raise Exception("Require context")
-        if iscode(source_or_code):
-            code = source_or_code
-        else:
-            code, data = self._owner.compile(source_or_code, environment=environment)
 
-        def initializer(context, name, namespace):
-            self._owner.execute(code, data, namespace=namespace, environment=environment)
+        if isroutine(source):
+
+            def initializer(context, name, namespace):
+                code = source(context, name)
+                if isinstance(code, tuple):
+                    code, data = code
+                self._owner.execute(code, data, namespace=namespace, environment=environment)
+
+        else:
+            if iscode(source):
+                code = source
+            else:
+                code, data = self._owner.compile(source, environment=environment)
+
+            def initializer(context, name, namespace):
+                self._owner.execute(code, data, namespace=namespace, environment=environment)
 
         managers.import_manager.register(context, name, initializer)
 
@@ -88,6 +104,164 @@ class VDOM_vscript(object):
         return vevaluate(code, data, use=use, environment=environment, namespace=namespace, result=result)
 
 
+class VDOM_javascript_libraries_module_exports(object):
+
+    def __init__(self):
+        self.__dict__["_namespace"] = {}
+
+    def __getattr__(self, name):
+        return self._namespace[name]
+
+    def __setattr__(self, name, value):
+        self._namespace[name] = value
+
+
+class VDOM_javascript_libraries_module(object):
+
+    def __init__(self):
+        self.__dict__["_exports"] = VDOM_javascript_libraries_module_exports()
+
+    exports = property(lambda self: self._exports)
+
+
+class VDOM_javascript_libraries(object):
+
+    def __init__(self, owner):
+        self._owner = owner
+        self._mapping = {}
+
+    def register(self, name, source_or_namespace, environment=None, context=None):
+        if context is None:
+            raise Exception("Require context")
+
+        def normalize(namespace):
+            if ismodule(namespace):
+                return {name: value for name, value in namespace.__dict__.iteritems()
+                    if not name.startswith("_")}
+            else:
+                return namespace
+
+        if isinstance(source_or_namespace, basestring):
+            code = self._owner.compile(source_or_namespace, context=context, environment=environment)
+            module = VDOM_javascript_libraries_module()
+            self._owner.execute(code, context=context, environment=environment, module=module)
+            namespace = module.exports._namespace
+
+            def initializer(context, name):
+                return namespace
+
+        elif isroutine(source_or_namespace):
+
+            def initializer(context, name):
+                return normalize(source_or_namespace(context, name))
+
+        else:
+
+            def initializer(context, name):
+                return normalize(source_or_namespace)
+
+        try:
+            submapping = self._mapping[context]
+        except KeyError:
+            submapping = self._mapping.setdefault(context, {})
+
+        submapping[name] = initializer
+
+    def unregister(self, name=None, context=None):
+        if context is None:
+            raise Exception("Require context")
+
+        if name is None:
+            try:
+                del self._mapping[context]
+            except KeyError:
+                pass
+        else:
+            try:
+                del self._mapping[context][name]
+            except KeyError:
+                pass
+
+    def exists(self, name=None, context=None):
+        if context is None:
+            return False
+        else:
+            try:
+                return self._mapping[context][name]
+            except KeyError:
+                return False
+
+    def lookup(self, name, context=None):
+        if context is None:
+            return None
+        else:
+            try:
+                initializer = self._mapping[context][name]
+            except KeyError:
+                return None
+            else:
+                return initializer(context, name)
+
+
+class VDOM_javascript(object):
+
+    SIGNATURE = "<javascript>"
+    EMPTY = compile(js2py.translators.DEFAULT_HEADER, "<javascript:header>", "exec")
+
+    def __init__(self):
+        self._lock = Lock()
+        self._libraries = VDOM_javascript_libraries(self)
+        js2py.disable_pyimport()
+
+    libraries = property(lambda self: self._libraries)
+
+    def compile(self, source, context=None, environment=None, **keywords):
+        if context is None:
+            header = ""
+        else:
+            header = "__package__=\"%s\"\n" % ":".join((managers.engine.application.id, context))
+
+        with self._lock:
+            source_in_python = js2py.translate_js(source, header)
+
+        return compile(source_in_python, self.SIGNATURE, "exec")
+
+    def execute(self, source_or_code, context=None, environment=None, **keywords):
+        if iscode(source_or_code):
+            code = source_or_code
+        else:
+            with self._lock:
+                code = self._compile(source_or_code, environment=environment, **keywords)
+
+        namespace = {}
+        exec(self.EMPTY, namespace)
+
+        def require(name):
+            library = self._libraries.lookup(name.to_python(), context=context)
+            if library is None:
+                raise js2py.PyJsException(message="Unable to import \"%s\" library" % name.to_python())
+            return library
+
+        var = namespace["var"].to_python()
+        setattr(var, "require", require)
+
+        for name, value in chain((environment or {}).iteritems(), keywords.iteritems()):
+            if hasattr(var, name):
+                raise Exception("Unable to redefine: \"%s\"" % name)
+            setattr(var, name, value)
+
+        # NOTE: lock here?
+        #       there are possible problems in:
+        #       - ArrayPrototype.join
+        #       - TypedArrayPrototype.join
+        #       - PyJs.own??? - used in all objects
+        exec(code, namespace)
+
+    def evaluate(self, source_or_code, context=None, environment=None, **keywords):
+        # TODO: implement later on demand...
+        raise NotImplementedError
+
+
 class VDOM_mailer(object):
 
     def send(self, *args, **kw):
@@ -128,6 +302,7 @@ class VDOM_server(object):
 
     def __init__(self):
         self._vscript = VDOM_vscript()
+        self._javascript = VDOM_javascript()
         self._mailer = VDOM_mailer()
 
     def _get_version(self):
@@ -143,3 +318,4 @@ class VDOM_server(object):
     mailer = property(lambda self: self._mailer)
     guid = property(_get_guid)
     vscript = property(lambda self: self._vscript)
+    javascript = property(lambda self: self._javascript)

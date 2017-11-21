@@ -1,5 +1,5 @@
 
-from .auxiliary import section, show, search
+from .auxiliary import section, warn, search
 
 
 def run(identifier):
@@ -13,4 +13,5 @@ def run(identifier):
             try:
                 subject.save()
             except Exception as error:
-                show("unable to save %s: %s" % (entity, error))
+                warn("unable to save %s: %s" % (entity, error))
+                raise

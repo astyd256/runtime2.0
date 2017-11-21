@@ -61,8 +61,7 @@ class LogServerSession(SmartDaemon):
         except KeyError:
             raise Exception
 
-        entries = tuple(log.packer.unpack_from(self._stream) for index in range(count))
-        writer.write(*entries)
+        writer.write(*(log.packer.unpack_from(self._stream) for index in range(count)))
 
     # update
 

@@ -20,3 +20,4 @@ import cleanup
 import shell
 import user
 import group
+import soap

@@ -23,14 +23,14 @@
 	<Attributes>
 		<Attribute>
 			<Name>stateful</Name>
-			<DisplayName>Stateful</DisplayName>
-			<Description>Stateful</Description>
+			<DisplayName>#Lang(199)</DisplayName>
+			<Description>#Lang(299)</Description>
 			<DefaultValue>0</DefaultValue>
 			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
-			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<ErrorValidationMessage>#Lang(399)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<CodeInterface>DropDown((#Lang(499)|0)|(#Lang(499)|1))</CodeInterface>
 			<ColorGroup>1</ColorGroup>
 		</Attribute>
 		<Attribute>
@@ -4201,6 +4201,7 @@ class VDOM_fullcalendar(VDOM_object):
 	RENDER_DIV = """<div id="%s" style="%s"></div>"""
 
 	RENDER_SCRIPT = """<script type="text/javascript">
+	$.curCSS = function (element, attrib, val) {$(element).css(attrib, val);};
 	/*Fullcalendar. VDOM Type Version %(version)s. Last modified - %(date_mod)s*/
 	$j(function(){
 

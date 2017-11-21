@@ -16,7 +16,7 @@ from logs import log
 
 from ..constants import DEFAULT_APPLICATION_NAME
 from ..generic import MemoryBase
-from .application import MemoryApplicationSketch, MemoryApplicationRestorationSketch
+from .application import MemoryApplicationSketch, MemoryApplicationRestorationSketch, MemoryApplicationGhost
 
 
 @weak("_owner")
@@ -33,7 +33,7 @@ class MemoryApplications(MemoryBase, Mapping):
         self._owner = owner
         self._lock = owner._lock
         self._items = {}
-        self._queue = set()
+        self._queue = False
         self._event = Event()
         self._known = set()
 
@@ -47,8 +47,11 @@ class MemoryApplications(MemoryBase, Mapping):
             if item._name is None:
                 item._name = DEFAULT_APPLICATION_NAME
 
-            if item._id not in self._known:
+            try:
+                self._known.remove(item._id)
+            except KeyError:
                 self._event.set()
+
             self._items[item._id] = item
 
     def new_sketch(self, restore=False):
@@ -61,21 +64,6 @@ class MemoryApplications(MemoryBase, Mapping):
         item.name = name
         return ~item
 
-    def _exists(self, uuid):
-        if self._queue:
-            try:
-                self._queue.remove(uuid)
-            except KeyError:
-                return False
-            else:
-                return True
-        else:
-            if managers.file_manager.exists(file_access.APPLICATION, uuid, settings.APPLICATION_FILENAME):
-                return True
-            else:
-                self._explore()
-                return False
-
     def _explore(self):
         self._queue = {filename for filename
             in managers.file_manager.list(file_access.APPLICATION)
@@ -83,22 +71,49 @@ class MemoryApplications(MemoryBase, Mapping):
         if not self._queue:
             self._queue = None
 
-    def search(self, uuid_or_name):
+    def search(self, uuid_or_name, autocomplete=False):
         try:
             return self[uuid_or_name]
         except KeyError:
-            with self._lock:
-                for item in self.itervalues():
-                    if item.name.lower().startswith(uuid_or_name):
-                        return item
-                raise
+            if autocomplete:
+                with self._lock:
+                    for item in self.itervalues():
+                        if item.name.lower().startswith(uuid_or_name):
+                            return item
+            return None
 
     def unload(self, uuid, remove=False):
         with self._lock:
-            self._event.set()
-            application = self._items[uuid]
-            application.unimport_libraries()
-            del self._items[uuid]
+            try:
+                application = self._items[uuid]
+            except KeyError:
+                if self._queue is None:
+                    raise
+                elif self._queue is False:
+                    if not managers.file_manager.exists(file_access.APPLICATION, uuid, settings.APPLICATION_FILENAME):
+                        self._explore()
+                        raise
+                elif uuid not in self._queue:
+                    raise
+
+                if remove:
+                    self._queue.remove(uuid)
+                    self._event.set()
+            else:
+                managers.engine.threads.stop(uuid)
+                application.unimport_libraries()
+                del self._items[uuid]
+                application.__class__ = MemoryApplicationGhost
+
+                if remove:
+                    self._event.set()
+                else:
+                    if self._queue is None:
+                        self._queue = {uuid}
+                    elif self._queue is False:
+                        pass
+                    else:
+                        self._queue.add(uuid)
 
     def __getitem__(self, uuid):
         try:
@@ -113,13 +128,19 @@ class MemoryApplications(MemoryBase, Mapping):
                         try:
                             return self._items[uuid]
                         except KeyError:
-                            if self._queue is not None and self._exists(uuid):
-                                self._known.add(uuid)
-                                self._items[uuid] = item = self._owner.load_application(uuid, silently=True)
-                                on_start = item.on_start
-                                return item
-                            else:
+                            if self._queue is None:
                                 raise
+                            elif self._queue is False:
+                                if not managers.file_manager.exists(file_access.APPLICATION, uuid, settings.APPLICATION_FILENAME):
+                                    self._explore()
+                                    raise
+                            else:
+                                self._queue.remove(uuid)
+
+                            self._known.add(uuid)
+                            self._items[uuid] = item = self._owner.load_application(uuid, silently=True)
+                            on_start = item.on_start
+                            return item
                 finally:
                     if on_start:
                         on_start()
@@ -127,7 +148,7 @@ class MemoryApplications(MemoryBase, Mapping):
     def __iter__(self):
         with self._lock:
             self._event.clear()
-            if self._queue is not None:
+            if self._queue is False:
                 self._explore()
 
             items = self._items.keys()
@@ -141,7 +162,7 @@ class MemoryApplications(MemoryBase, Mapping):
 
     def __len__(self):
         with self._lock:
-            if self._queue is not None:
+            if self._queue is False:
                 self._explore()
             return len(self._items) + len(self._queue) if self._queue else len(self._items)
 

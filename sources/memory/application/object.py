@@ -34,7 +34,7 @@ class MemoryObjectSketch(MemoryBase):
     def _primary(self):
         if self._virtual:
             result = self
-            while result._parent.virtual:
+            while result._parent and result._parent.virtual:
                 result = result._parent
             return result
         else:
@@ -51,13 +51,13 @@ class MemoryObjectSketch(MemoryBase):
     _order = None
     _id = None
     _name = None
+    _original_name = None
 
     def __init__(self, collection, type, application, parent, virtual=False, attributes=None):
         self._collection = collection
         self._virtual = virtual
         self._application = application
         self._parent = parent
-        self._container = self._parent._container if self._parent else self
 
         # initialize lock
         if parent:
@@ -86,13 +86,14 @@ class MemoryObjectSketch(MemoryBase):
     order = rwproperty("_order")
     is_virtual = virtual = roproperty("_virtual")
     application = rwproperty("_application")
-    container = roproperty("_container")
+    container = property(lambda self: self._parent.container if self._parent else self)
     parent = rwproperty("_parent")
     primary = roproperty("_primary")
 
     type = rwproperty("_type")
     id = rwproperty("_id")
     name = rwproperty("_name")
+    original_name = roproperty("_original_name")
 
     attributes = roproperty("_attributes")
     objects = roproperty("_objects")
@@ -107,6 +108,12 @@ class MemoryObjectSketch(MemoryBase):
 
     def select(self, name, *names):
         if self._name == name:
+            return self._objects.select(*names)
+        else:
+            return None
+
+    def select_original(self, name, *names):
+        if self._original_name or self._name == name:
             return self._objects.select(*names)
         else:
             return None
@@ -145,6 +152,16 @@ class MemoryObjectDuplicationSketch(MemoryObjectSketch):
         super(MemoryObjectDuplicationSketch, self).__init__(collection,
             another.type, application, parent,
             virtual=parent.virtual, attributes=another.attributes)
+
+
+class MemoryObjectGhost(MemoryBase):
+
+    def __str__(self):
+        return " ".join(filter(None, (
+            "obsolete",
+            "virtual" if self._virtual else None,
+            "object",
+            ":".join(filter(None, (self._id, self._name))))))
 
 
 class MemoryObject(MemoryObjectSketch):
@@ -247,6 +264,9 @@ class MemoryObject(MemoryObjectSketch):
     _factory_invalidates = 0
 
     def factory(self, context, dynamic=None, probe=False):
+        # we are busy
+        managers.memory._operations += 1
+
         # check if already exists
         if dynamic is None:
             try:

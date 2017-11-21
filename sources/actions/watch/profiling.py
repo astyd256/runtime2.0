@@ -1,6 +1,6 @@
 
-from logs import console
 from utils.parsing import VALUE, Parser
+from ..auxiliary import show
 from .auxiliary import query
 
 
@@ -34,20 +34,15 @@ def run(status=None, address=None, port=None, timeout=None):
     profiling status and options
     :param enable_or_disable status: specifies desired status
     """
+    if status is None:
+        request = REQUEST
+    else:
+        request = REQUEST_STATUS % ("enable" if status else "disable")
 
-    try:
-        if status is None:
-            request = REQUEST
-        else:
-            request = REQUEST_STATUS % ("enable" if status else "disable")
+    message = query("watch profiling", address, port, request, timeout=timeout)
 
-        message = query("watch profiling", address, port, request, timeout=timeout)
-
-        status = Parser(builder=builder, notify=True, supress=True).parse(message)
-        if status is None:
-            console.write("unable to get status")
-        else:
-            console.write("profiling is %s" % ("enabled" if status else "disabled"))
-
-    except Exception as error:
-        console.error(error)
+    status = Parser(builder=builder, notify=True, supress=True).parse(message)
+    if status is None:
+        show("unable to get status")
+    else:
+        show("profiling is %s" % ("enabled" if status else "disabled"))

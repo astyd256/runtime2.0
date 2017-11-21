@@ -2,16 +2,16 @@
 
 import sys
 import io
-import os
-import posixpath
-import urllib
+# import os
+# import posixpath
+# import urllib
 import shutil
-import mimetypes
+# import mimetypes
 import thread
-import re
-import socket
-import threading
-import time
+# import re
+# import socket
+# import threading
+# import time
 import traceback
 import select
 import SOAPpy
@@ -19,21 +19,28 @@ import SOAPpy
 if sys.platform.startswith("freebsd"):
     import vdomlib
 
-import SocketServer
+# import SocketServer
 import BaseHTTPServer
 import SimpleHTTPServer
+from time import time
+from threading import current_thread
 from cStringIO import StringIO
-import xml.sax.saxutils
+# import xml.sax.saxutils
 
+import settings
 import managers
+
 from request.request import VDOM_request
 from storage.storage import VDOM_config
 from version import SERVER_NAME, SERVER_VERSION
-import soap.SOAPBuilder
+# import soap.SOAPBuilder
 from soap.wsdl import methods as soap_methods
-from utils.exception import VDOM_exception
+# from utils.exception import VDOM_exception
 
 # A class to describe how header messages are handled
+
+
+THREAD_ATTRIBUTE_NAME = "vdom_web_server_request"
 
 
 class HeaderHandler:
@@ -67,6 +74,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
     def __init__(self, request, client_address, server, args=None):
         """constructor"""
+        setattr(current_thread(), THREAD_ATTRIBUTE_NAME, self)
         #debug("Creating RequestHandler object")
         self.__reject = args["reject"]
         self.__deny = args["deny"]
@@ -81,13 +89,24 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
     def handle(self):
         """Handle multiple requests if necessary."""
-        self.close_connection = 1
-        self.handle_one_request()
-        while self.server.active and not self.close_connection:
-            ready = select.select([self.request], [], [], 0.5)
-            if not ready[0]:
-                continue
-            self.handle_one_request()
+        # self.close_connection = 1
+        # self.handle_one_request()
+        # while self.server.active and not self.close_connection:
+        #     ready = select.select([self.request], [], [], 0.5)
+        #     if not ready[0]:
+        #         continue
+        #     self.handle_one_request()
+        self.close_connection = 0
+        deadline = time() + settings.CONNECTION_INITIAL_TIMEOUT
+        while not self.close_connection:
+            ready = select.select([self.request], [], [], settings.QUANTUM)
+            if self.server.unavailable or not self.server.active:
+                break
+            elif ready[0]:
+                self.handle_one_request()
+                deadline = time() + settings.CONNECTION_SUBSEQUENT_TIMEOUT
+            elif time() > deadline:
+                break
 
     def do_GET(self):
         """serve a GET request"""

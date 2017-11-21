@@ -96,7 +96,7 @@ class MemoryTypes(MemoryBase, Mapping):
 
         self._lazy = False
 
-    def search(self, uuid_or_name):
+    def search(self, uuid_or_name, autocomplete=False):
         if uuid_or_name[8:9] == "-":
             return self.get(uuid_or_name)
         else:
@@ -110,9 +110,18 @@ class MemoryTypes(MemoryBase, Mapping):
                         try:
                             uuid = self._index[uuid_or_name]
                         except KeyError:
+                            if autocomplete:
+                                for name, uuid in self._index.iteritems():
+                                    if name.lower().startswith(uuid_or_name):
+                                        return self.get(uuid)
                             return None
                         else:
                             return self.get(uuid)
+                if autocomplete:
+                    with self._lock:
+                        for name, uuid in self._index.iteritems():
+                            if name.lower().startswith(uuid_or_name):
+                                return self.get(uuid)
                 return None
             else:
                 return self.get(uuid)

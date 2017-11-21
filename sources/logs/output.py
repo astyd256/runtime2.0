@@ -1,7 +1,9 @@
 
+from weakref import ref
 from threading import current_thread, Lock
 import settings
 from logs import console, log
+from utils.tracing import format_exception_trace
 
 
 LOGGING = None
@@ -46,10 +48,18 @@ class SeparateOutput(object):
         raise NotImplementedError
 
     def write(self, message):
-        thread = current_thread()
+
+        def callback(weak):
+            buffer = self._buffer.pop(weak, None)
+            if buffer is not None:
+                value = "".join(buffer)
+                if value:
+                    self._write("%s\n" % value)
+
+        weak = ref(current_thread(), callback)
 
         # HACK: sometimes print output unexpected space
-        if message == " " and thread not in self._buffer:
+        if message == " " and weak not in self._buffer:
             return
 
         try:
@@ -57,20 +67,21 @@ class SeparateOutput(object):
             most += "\n"
         except ValueError:
             try:
-                self._buffer[thread].append(message)
+                self._buffer[weak].append(message)
             except KeyError:
-                self._buffer[thread] = [message]
+                self._buffer[weak] = [message]
         else:
             try:
-                buffer = self._buffer[thread]
+                buffer = self._buffer[weak]
             except KeyError:
-                pass
+                self._buffer[weak] = buffer = []
             else:
                 buffer.append(most)
                 most = "".join(buffer)
+
             with self._lock:
                 self._write(most)
-            self._buffer[thread] = [last]
+            buffer[:] = [last]
 
     def flush(self):
         thread = current_thread()

@@ -1,6 +1,6 @@
 
 from collections import defaultdict
-from cStringIO import StringIO
+from io import StringIO
 
 import settings
 import managers
@@ -114,6 +114,14 @@ class MemoryApplicationSketch(MemoryBase):
 class MemoryApplicationRestorationSketch(MemoryApplicationSketch):
 
     _restore = True
+
+
+class MemoryApplicationGhost(MemoryBase):
+
+    def __str__(self):
+        return " ".join(filter(None, (
+            "obsolete application",
+            ":".join(filter(None, (self._id, self._name.lower()))))))
 
 
 class MemoryApplication(MemoryApplicationSketch):
@@ -246,7 +254,7 @@ class MemoryApplication(MemoryApplicationSketch):
     def compose(self, file=None, shorter=False, excess=False):
         if not file:
             file = StringIO()
-            self.compose(file=file, shorter=True)
+            self.compose(file=file, shorter=shorter)
             return file.getvalue()
 
         file.write(u"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n")
@@ -426,11 +434,16 @@ class MemoryApplication(MemoryApplicationSketch):
                     self.compose(file=file, shorter=True)
                 self._changes = False
 
-    def export(self, filename, excess=False):
+    def export(self, file=None, filename=None, excess=False):
         with self.lock:
-            with managers.file_manager.open(file_access.FILE, None, filename,
-                    mode="w", encoding="utf8") as file:
+            if file is not None:
                 self.compose(file=file, excess=excess)
+            elif filename is not None:
+                with managers.file_manager.open(file_access.FILE, None, filename,
+                        mode="w", encoding="utf8") as file:
+                    self.compose(file=file, excess=excess)
+            else:
+                return self.compose(excess=excess)
 
     # unsafe
     def uninstall(self, remove_zero_resources=True, remove_databases=True, remove_storage=True):

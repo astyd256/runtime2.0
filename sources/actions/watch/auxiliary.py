@@ -1,10 +1,12 @@
 
 from time import time
+
 import re
 import socket
 import select
 import settings
-from logs import console
+
+from ..auxiliary import show, newline
 from utils.parsing import VALUE, Parser
 
 
@@ -35,7 +37,7 @@ def query(caption, address, port, request, timeout=None, datagrams=False):
     if timeout is None:
         timeout = DEFAULT_TIMEOUT
 
-    console.write("%s %s:%s" % (caption, address, port))
+    show("%s %s:%s" % (caption, address, port))
 
     sock = socket.socket(socket.AF_INET, (socket.SOCK_DGRAM if datagrams else socket.SOCK_STREAM))
     sock.settimeout(timeout)
@@ -53,7 +55,7 @@ def query(caption, address, port, request, timeout=None, datagrams=False):
             message, address = sock.recvfrom(FRAME)
         else:
             message = ""
-            while True:
+            while 1:
                 reading, writing, erratic = select.select((sock,), (), (), timeout)
                 if reading:
                     chunk = sock.recv(FRAME)
@@ -63,7 +65,8 @@ def query(caption, address, port, request, timeout=None, datagrams=False):
 
         duration = time() - start
         Parser(builder=builder, notify=True, supress=True).parse(message)
-        console.write("done in %.1f ms" % duration)
+        show("done in %.3f s" % duration)
+        newline()
         return message
     except socket.timeout:
         raise Exception("timeout expired")

@@ -4,6 +4,7 @@ from socket import socket
 from argparse import ArgumentParser
 import settings
 from utils.verificators import port, uuid
+from .legacy import VDOM_CONFIG
 
 
 # verify that server is not running
@@ -32,10 +33,10 @@ arguments = parser.parse_args()
 
 
 if arguments.listen:
-    settings.VDOM_CONFIG["SERVER-ADDRESS"] = settings.SERVER_ADDRESS = arguments.listen
+    VDOM_CONFIG["SERVER-ADDRESS"] = settings.SERVER_ADDRESS = arguments.listen
 
 if arguments.port:
-    settings.VDOM_CONFIG["SERVER-PORT"] = settings.SERVER_PORT = arguments.port
+    VDOM_CONFIG["SERVER-PORT"] = settings.SERVER_PORT = arguments.port
 
 if arguments.application:
     settings.DEFAULT_APPLICATION = arguments.application

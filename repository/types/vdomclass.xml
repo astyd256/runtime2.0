@@ -23,14 +23,14 @@
 	<Attributes>
 		<Attribute>
 			<Name>stateful</Name>
-			<DisplayName>Stateful</DisplayName>
-			<Description>Stateful</Description>
+			<DisplayName>#Lang(199)</DisplayName>
+			<Description>#Lang(299)</Description>
 			<DefaultValue>0</DefaultValue>
 			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
-			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<ErrorValidationMessage>#Lang(399)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<CodeInterface>DropDown((#Lang(499)|0)|(#Lang(499)|1))</CodeInterface>
 			<ColorGroup>1</ColorGroup>
 		</Attribute>
 		<Attribute>
@@ -492,10 +492,12 @@
 		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[class VDOM_vdomclass(VDOM_object):
+<![CDATA[
+from scripting import e2vdom
+class VDOM_vdomclass(VDOM_object):
 
     def render(self, contents=""):
-
+        e2vdom.process(self)
         if self.classname == "":
             #classname = ""
             classname = u" class='%s' " % (self.classauto)
@@ -548,7 +550,7 @@
 
             return VDOM_object.wysiwyg(self, contents=result)
 
-        result = u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order} top="{top}" left="{left}" width="{width}" height="{height}">
+        result = u"""<container name="{name}" id="{id}" visible="{vis}" zindex="{zind}" hierarchy="{hierarchy}" order="{order}" top="{top}" left="{left}" width="{width}" height="{height}">
 <svg>
     <rect x="0" y="0" width="{width}" height="{height}" fill="#EEEEEE" />
 </svg>

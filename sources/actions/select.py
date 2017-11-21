@@ -1,6 +1,6 @@
 
 import managers
-from .auxiliary import section, show
+from .auxiliary import section, show, warn, search
 
 
 def update(data, identifier):
@@ -31,7 +31,7 @@ def select(application):
             update(data, application.id if application else None)
             managers.storage.write_object(VDOM_CONFIG["VIRTUAL-HOSTING-STORAGE-RECORD"], data)
         except Exception as error:
-            show("unable to select application: %s" % error)
+            warn("unable to select application: %s" % error)
 
 
 def retrieve():
@@ -39,7 +39,7 @@ def retrieve():
             data = managers.storage.read_object(VDOM_CONFIG["VIRTUAL-HOSTING-STORAGE-RECORD"]) or {}
             return obtain(data)
         except Exception as error:
-            show("unable to retrieve default application: %s" % error)
+            warn("unable to retrieve default application: %s" % error)
 
 
 def run(identifier=None):
@@ -51,9 +51,8 @@ def run(identifier=None):
         identifier = retrieve()
         show("default application is %s" % identifier)
     else:
-        try:
-            application = managers.memory.applications.search(identifier)
-        except KeyError:
-            show("unable to find: %s" % identifier)
+        entity, application = search(application=identifier)
+        if application is None:
+            warn("unable to find: %s" % identifier)
         else:
             select(application)

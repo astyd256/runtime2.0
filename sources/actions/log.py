@@ -1,7 +1,11 @@
 
 from time import sleep
 import managers
-from logs import console
+from .auxiliary import show, warn
+
+
+PREVIOUS_LOG_LINES_TO_SHOW = 25
+UPDATE_INTERVAL = 0.5
 
 
 def run(name="server", uuid=None):
@@ -15,18 +19,18 @@ def run(name="server", uuid=None):
     elif name == "application":
         log = managers.log_manager.logs.application(uuid)
     else:
-        console.error("unable to find log: %s" % name)
+        warn("unable to find log: %s" % name)
         return
 
     try:
         view = log.view()
-        update = 25
-        while True:
+        update = PREVIOUS_LOG_LINES_TO_SHOW
+        while 1:
             entries = view.read(0, update, format=True)
             for entry in reversed(entries):
-                console.write(entry)
-            sleep(0.5)
+                show(entry, noclip=True)
+            sleep(UPDATE_INTERVAL)
             update = view.update()
     except Exception as error:
-        console.error("unable to view log: %s" % error)
+        warn("unable to view log: %s" % error)
         raise

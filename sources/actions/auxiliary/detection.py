@@ -1,13 +1,21 @@
 
+import re
 from contextlib import closing
 import managers
 import file_access
-from logs import console
 from utils.parsing import native, Parser
 from .constants import TYPE, APPLICATION, USER, GROUP
+from .output import warn
 
 
-def search(identifier=None, user=None, group=None):
+ENTITY_NAME_REGEX = re.compile("[a-z][_0-9a-z]*$", re.IGNORECASE)
+
+
+def is_entity_name(value):
+    return bool(ENTITY_NAME_REGEX.match(value))
+
+
+def search(identifier=None, application=None, type=None, user=None, group=None):
     if user or group:
         if user:
             user = user.lower()
@@ -45,19 +53,24 @@ def search(identifier=None, user=None, group=None):
             entity = GROUP
             identifier = group
 
-        console.error("unable to find %s with such uuid or name: %s" % (entity, identifier))
+        warn("unable to find %s with such uuid or name: %s" % (entity, identifier))
         return None, None
     else:
-        subject = managers.memory.types.search(identifier)
-        if subject:
-            return TYPE, subject
-        else:
-            subject = managers.memory.applications.search(identifier)
+        if identifier:
+            application = type = identifier
+
+        if application:
+            subject = managers.memory.applications.search(application, autocomplete=True)
             if subject:
                 return APPLICATION, subject
-            else:
-                console.error("unable to find application or type with such uuid or name")
-                return None, None
+
+        if type:
+            subject = managers.memory.types.search(type, autocomplete=True)
+            if subject:
+                return TYPE, subject
+
+        warn("unable to find application or type with such uuid or name")
+        return None, None
 
 
 def detect(filename):
@@ -76,7 +89,7 @@ def detect(filename):
     try:
         file = managers.file_manager.open(file_access.FILE, None, filename, mode="rb")
     except Exception as error:
-        console.error("unable to open file: %s" % error)
+        warn("unable to open file: %s" % error)
         return None
     else:
         with closing(file):
@@ -87,10 +100,10 @@ def detect(filename):
                 elif entity is APPLICATION:
                     return entity
                 else:
-                    console.error("file does not contain application or type")
+                    warn("file does not contain application or type")
                     return None
             except Exception as error:
-                console.error("unable to detect %s contents: %s" % (filename, error))
+                warn("unable to detect %s contents: %s" % (filename, error))
                 return None
 
 

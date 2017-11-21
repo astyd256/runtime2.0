@@ -1,7 +1,9 @@
 
 import types
+from weakref import proxy
 from xml.parsers.expat import ParserCreate, ExpatError
 from utils.properties import roproperty, rwproperty
+from utils.decorators import weaker
 from .exceptions import AbortingError, ParsingException, \
     UnableToChangeError, OutOfMemoryError, JunkAfterDocumentError
 from .subparsers import elements, nothing
@@ -69,13 +71,13 @@ class Parser(LegacyInterface):
             builder = empty_builder
 
         if options is MISSING:
-            self._handler = builder(self)
+            self._handler = builder(proxy(self))
         elif isinstance(options, tuple):
-            self._handler = builder(self, *options)
+            self._handler = builder(proxy(self), *options)
         elif isinstance(options, dict):
-            self._handler = builder(self, **options)
+            self._handler = builder(proxy(self), **options)
         else:
-            self._handler = builder(self, options)
+            self._handler = builder(proxy(self), options)
 
         self._parser = ParserCreate()
         self._parser.buffer_text = DEFAULT_BUFFER_TEXT
@@ -85,12 +87,14 @@ class Parser(LegacyInterface):
         else:
             self._handle(self._handler)
 
+        del self._handler
+
         self._result = result
         self._report = []
 
         if notify:
-            self._unexpected_attribute_handler = self._unexpected_attribute_handler
-            self._unexpected_element_handler = self._unexpected_element_handler
+            self._unexpected_attribute_handler = weaker(self._unexpected_attribute_handler)
+            self._unexpected_element_handler = weaker(self._unexpected_element_handler)
         else:
             self._unexpected_attribute_handler = None
             self._unexpected_element_handler = None
@@ -175,15 +179,18 @@ class Parser(LegacyInterface):
         self._result = result
         self._report = []
 
-    def parse(self, chunk=None, file=None, filename=None):
+    def parse(self, value=None, chunk=None, file=None, filename=None):
         """
         Parse value, file or data chunk
-        :param chunk: Parse string (entirely or in consecutive calls as chunks)
+        :param value: Parse string entirely
+        :param chunk: Parse string in consecutive calls as chunks, last call must use "value" argument
         :param file: File-like object to read data from
         :param filename: File name of the file to read data from
         """
         try:
-            if chunk is not None:
+            if value is not None:
+                self._parser.Parse(value, True)
+            elif chunk is not None:
                 self._parser.Parse(chunk)
             elif filename is not None:
                 with open(filename, "rb") as file:

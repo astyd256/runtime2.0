@@ -198,7 +198,7 @@ class MemoryType(MemoryTypeSketch):
     def compose(self, file=None, shorter=False, excess=False):
         if not file:
             file = StringIO()
-            self.compose(file=file, shorter=True)
+            self.compose(file=file, shorter=shorter)
             return file.getvalue()
 
         file.write(u"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n")
@@ -305,10 +305,16 @@ class MemoryType(MemoryTypeSketch):
                     mode="w", encoding="utf8") as file:
                 self.compose(file=file, shorter=True)
 
-    def export(self, filename, excess=False):
-        with managers.file_manager.open(file_access.FILE, None, filename,
-                mode="w", encoding="utf8") as file:
-            self.compose(file=file)
+    def export(self, file=None, filename=None, excess=False):
+        with self.lock:
+            if file is not None:
+                self.compose(file=file, excess=excess)
+            elif filename is not None:
+                with managers.file_manager.open(file_access.FILE, None, filename,
+                        mode="w", encoding="utf8") as file:
+                    self.compose(file=file, excess=excess)
+            else:
+                return self.compose(excess=excess)
 
     def uninstall(self):
         managers.memory.types.unload(self._id, remove=True)

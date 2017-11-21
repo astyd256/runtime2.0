@@ -72,8 +72,9 @@ class VDOM_file_storage(object):
         # return managers.file_manager.get_fd(app_storage, application.id, None, self.__norm_filename(filename))
         return managers.file_manager.open(app_storage, application.id, self.__norm_filename(filename), mode=mode)
 
-    # def opentmp(self, mode="w+b", prefix="app_data"):
-    #     return managers.file_manager.open_tmp_file(mode, prefix)
+    def opentmp(self, mode="w+b", prefix="app_data"):
+        from scripting.wrappers import application
+        return managers.file_manager.open_temporary(None, application.id, mode=mode, prefix=prefix)
 
     def readall(self, filename):
         from scripting.wrappers import application
@@ -125,13 +126,13 @@ class VDOM_file_storage(object):
         # return managers.file_manager.list_app_storage_directory(application.id, self.__norm_filename(foldername))
         return managers.file_manager.list_storage_directory(application.id, self.__norm_filename(foldername))
 
-    # def isfile(self, path):
-    #     from scripting.wrappers import application
-    #     return os.path.isfile(managers.file_manager.get_path(app_storage, application.id, None, self.__norm_filename(path)))
+    def isfile(self, path):
+        from scripting.wrappers import application
+        return os.path.isfile(managers.file_manager.locate(app_storage, application.id, self.__norm_filename(path)))
 
-    # def isdir(self,path):
-    #     from scripting.wrappers import application
-    #     return os.path.isdir(managers.file_manager.get_path(app_storage, application.id, None, self.__norm_filename(path)))
+    def isdir(self,path):
+        from scripting.wrappers import application
+        return os.path.isdir(managers.file_manager.locate(app_storage, application.id, self.__norm_filename(path)))
 
     def __norm_filename(self, filename):
         from scripting.wrappers import application

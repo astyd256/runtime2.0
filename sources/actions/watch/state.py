@@ -1,8 +1,7 @@
 
-from logs import console
 from utils.structure import Structure
 from utils.parsing import VALUE, Parser, ParsingException
-from ..auxiliary import section, show
+from ..auxiliary import section, show, warn
 from .auxiliary import query
 
 
@@ -135,14 +134,9 @@ def run(address=None, port=None, timeout=None, thread=None, object=None):
         if not result:
             raise Exception("Incorrect response")
     except ParsingException as error:
+        warn("unable to parse, line %s: %s" % (error.lineno, error))
         raise
-        console.error("unable to parse, line %s: %s" % (error.lineno, error))
-    except Exception as error:
-        raise
-        console.error(error)
     else:
-        console.write()
-
         if mode is SUMMARY:
             if result.process is not None:
                 with section("process", result.process):
@@ -156,11 +150,11 @@ def run(address=None, port=None, timeout=None, thread=None, object=None):
             if result.threads is not None:
                 with section("threads", len(result.threads)):
                     for id, name, alive, smart, daemon, stack in result.threads:
-                        flags = filter(None, (
+                        details = filter(None, (id,
                             None if alive else "complete",
                             None if smart else "simple",
                             "daemon" if daemon else None))
-                        show(name.lower(), id + (" (%s)" % ", ".join(flags) if flags else ""))
+                        show("%s (%s)" % (name, ", ".join(details)))
 
             if result.objects_count is not None:
                 show("objects", result.objects_count)
@@ -173,7 +167,7 @@ def run(address=None, port=None, timeout=None, thread=None, object=None):
 
         elif mode is THREAD:
             if len(result.threads) != 1:
-                console.write("no thread information")
+                show("no thread information")
             else:
                 id, name, alive, smart, daemon, stack = result.threads[0]
                 with section("summary"):
@@ -189,7 +183,7 @@ def run(address=None, port=None, timeout=None, thread=None, object=None):
 
         elif mode is OBJECT:
             if len(result.objects) != 1:
-                console.write("no object information")
+                show("no object information")
             else:
                 id, type, attributes = result.objects[0]
                 with section("summary"):

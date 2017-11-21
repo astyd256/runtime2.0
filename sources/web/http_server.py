@@ -1,16 +1,16 @@
 
 import sys
-import os
-import time
+# import os
+# import time
 import random
 import socket
 import select
-import traceback
+# import traceback
 import SocketServer
-import BaseHTTPServer
-import SimpleHTTPServer
+# import BaseHTTPServer
+# import SimpleHTTPServer
 import SOAPpy
-import managers
+# import managers
 from utils.pid import VDOM_server_pid
 from utils.exception import VDOM_exception
 from utils.semaphore import VDOM_semaphore
@@ -19,6 +19,7 @@ from vhosting import VDOM_vhosting
 from soap.functions import *
 from soap.wsdl import gen_wsdl
 from soap.wsdl import methods as wsdl_methods
+from .http_request_handler import THREAD_ATTRIBUTE_NAME
 
 
 class VDOM_http_server(SocketServer.ThreadingTCPServer):
@@ -76,7 +77,7 @@ class VDOM_http_server(SocketServer.ThreadingTCPServer):
         self.allow_reuse_address = 1
 
         # call base class constructor
-        SocketServer.TCPServer.__init__(self, server_address, request_handler_class)
+        SocketServer.ThreadingTCPServer.__init__(self, server_address, request_handler_class)
 
         # create semaphore
         self.__sem = VDOM_semaphore()
@@ -94,6 +95,7 @@ class VDOM_http_server(SocketServer.ThreadingTCPServer):
         # send_to_card("online")
 
         self.active = True
+        self.unavailable = False
 
     def __del__(self):
         """destructor, remove pid file"""
@@ -133,15 +135,20 @@ class VDOM_http_server(SocketServer.ThreadingTCPServer):
         """access server address"""
         return self.__server_address
 
+    # def process_request_thread(self, request, client_address):
+    #     setattr(current_thread(), THREAD_ATTRIBUTE_NAME, None)
+    #     return SocketServer.ThreadingTCPServer.process_request_thread(self, request, client_address)
+
     def serve_forever(self):
         """handle each request in separate thread"""
         # while not self.__stop:
-        #	self.handle_request()
+        #   self.handle_request()
 
         SocketServer.ThreadingTCPServer.serve_forever(self)
+
         # while self.__current_connections:
-        while self.active:
-            time.sleep(0.1)
+        # while self.active:
+        #     time.sleep(0.1)
 
     def shutdown(self):
         self.active = False

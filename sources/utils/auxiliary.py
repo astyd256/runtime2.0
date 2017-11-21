@@ -1,4 +1,7 @@
 
+def enquote(value):
+    return "\"%s\"" % value.encode("unicode_escape").replace("\"", "\\\"")
+
 
 def headline(value):
     return value[:1].upper() + value[1:]
@@ -14,9 +17,9 @@ def fitdata(value, width):
         encoding = "unicode-escape"
     else:
         prefix, extra = "", 2
-        encoding = value.encode("string_escape")
+        encoding = "string_escape"
 
-    value = value.encode(encoding).replace("\"", "\\\"").replace("\\'", "'")
+    value = value.encode(encoding).replace("\"", "\\\"")
 
     if width >= 0 and len(value) > width + extra:
         return "%s\"%s\"..." % (prefix, value[:width - extra - 3])

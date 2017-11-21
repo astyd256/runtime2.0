@@ -30,7 +30,7 @@ def run():
     parser = startup.manage.parser
     parser.disable(optional_actions=True)
 
-    while True:
+    while 1:
         try:
             console.stdout.write("manage > ")
             command = raw_input().strip().lstrip("-")
@@ -56,6 +56,6 @@ def run():
                     try:
                         arguments.action.run(*arguments.action.arguments)
                     except Exception:
-                        show_exception_trace()
+                        show_exception_trace(locals=True)
                 else:
                     parser.print_usage()

@@ -2,6 +2,7 @@
 
 import string
 import sys
+import gc
 import os
 import time
 import re
@@ -20,6 +21,9 @@ from collections import OrderedDict
 import settings
 import managers
 import security
+import file_access
+
+from logs import log
 from errors import *
 from memory import COMPUTE_CONTEXT, \
     APPLICATION_START_CONTEXT, APPLICATION_FINISH_CONTEXT, APPLICATION_UNINSTALL_CONTEXT, \
@@ -39,9 +43,15 @@ from database.dbobject import VDOM_sql_query
 from version import SERVER_VERSION as VDOM_server_version
 
 
+# NOTE: this dirty hack is needed because soap utils override server ones
 from importlib import import_module
+
 show_exception_trace = import_module("utils.tracing").show_exception_trace
 verificators = import_module("utils.verificators")
+parsing = import_module("utils.parsing")
+
+native, VALUE, IGNORE = parsing.native, parsing.VALUE, parsing.IGNORE
+Parser, ParsingException = parsing.Parser, parsing.ParsingException
 
 
 if_re = re.compile(r"^([^\(]+)\((.*?)\)$", re.IGNORECASE)
@@ -739,7 +749,7 @@ class VDOM_web_services_server(object):
             if obj:
                 # for o in obj.objects:
                 #     if o == parentid:
-                if parentid in obj.objects.catalog:
+                if parentid in obj.objects:
                     raise SOAPpy.faultType(parent_object_error, _("Create object error"), _("Parent object is the child of copying object"))
 
             # TODO: copy between different applications, may be...
@@ -906,13 +916,94 @@ class VDOM_web_services_server(object):
 
     def set_type(self, sid, skey, typexml):
         """add/update type"""
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
-        ret = managers.server_manager.set_type(typexml)
-        if ret[0]:
-            return self.__success()
+
+        # ret = managers.server_manager.set_type(typexml)
+        # if ret[0]:
+        #     return self.__success()
+        # else:
+        #     return self.__format_error(ret[1])
+
+        def create_empty_file():
+            try:
+                file = managers.file_manager.open_temporary(file_access.FILE, None, delete=False)
+                return file.name
+            finally:
+                file.close()
+
+        def builder(parser):
+
+            def Type():
+
+                @native
+                def section(name, attributes):
+                    if name == "Information":
+
+                        @native
+                        def entry(name, attributes):
+                            if name == "ID":
+                                value = yield VALUE
+                                parser.accept(value)
+                            else:
+                                yield IGNORE
+
+                        return entry
+                    else:
+                        return IGNORE
+
+                return section
+
+            return Type
+
+        source = typexml.encode("utf8")
+
+        # seach uuid and type
+        parser = Parser(builder=builder)
+        try:
+            parser.parse(source)
+        except ParsingException as error:
+            raise Exception(u"Unable to parse: %s" % error)
         else:
-            return self.__format_error(ret[1])
+            if parser.result is None:
+                return self.__format_error("Missing ID attribute")
+            subject = managers.memory.types.get(parser.result)
+            if subject is None:
+                return self.__format_error("There is no such type")
+
+        # suspend web server
+        log.write("Suspend web server")
+        managers.server.web_server.suspend()
+        for uuid in managers.memory.applications:
+            managers.memory.applications.unload(uuid)
+
+        # release all types as possible
+        gc.collect()
+
+        try:
+            # backup current version
+            backup = subject.export()
+
+            # delete current version
+            log.write("Update %s" % subject)
+            if subject:
+                subject.uninstall()
+            del subject
+
+            # install new one and restore if error
+            try:
+                managers.memory.install_type(source)
+            except Exception as error:
+                show_exception_trace(caption="SOAP Set Type: Unable to install: %s" % error)
+                managers.memory.install_type(backup)
+                return self.__format_error("Unable to install: %s" % error)
+        finally:
+            # resume web server
+            log.write("Resume web server")
+            managers.server.web_server.resume()
+
+        return self.__success()
 
     def get_all_types(self, sid, skey):
         """get all types description"""
@@ -1901,7 +1992,10 @@ class VDOM_web_services_server(object):
                 raise VDOM_exception_sec(_("Modifying application is not allowed"))
 
             obj.bindings.clear()
-            obj.events.clear()
+            for event in tuple(event
+                    for event in obj.application.events.catalog.itervalues()
+                    if event.container is obj):
+                del event.source_object.events[event.key]
 
             for uuid, name, target, top, left, state, parameters in bindings:
                 binding = obj.bindings.new_sketch(target, name, parameters=parameters)
@@ -2483,6 +2577,8 @@ class VDOM_web_services_server(object):
 # management ========================================================================================================
 
     def install_application(self, sid, skey, vhname, appxml):
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         request = managers.request_manager.get_request()
@@ -2515,6 +2611,8 @@ class VDOM_web_services_server(object):
             #raise SOAPpy.faultType(app_install_error, _("Install application error"), msg)
 
     def uninstall_application(self, sid, skey, appid):
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         ret = self.__find_application(appid)  # returns (app, error_message)
@@ -2535,27 +2633,36 @@ class VDOM_web_services_server(object):
     def export_application(self, sid, skey, appid):
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
-        ret = self.__find_application(appid)  # returns (app, error_message)
-        if not ret[0]:
-            return ret[1]
-        if ret[0].protected == "1":
+
+        # ret = self.__find_application(appid)  # returns (app, error_message)
+        # if not ret[0]:
+        #     return ret[1]
+        # if ret[0].protected == "1":
+        #     return "<Error>This application could not be exported</Error>"
+        app, error_message = self.__find_application(appid)
+        if not app:
+            return error_message
+        if app.protected:
             return "<Error>This application could not be exported</Error>"
 
-        path = tempfile.mkdtemp("", "", VDOM_CONFIG["TEMP-DIRECTORY"])
+        # path = tempfile.mkdtemp("", "", VDOM_CONFIG["TEMP-DIRECTORY"])
 
-        managers.xml_manager.export_application(appid, "xml", path)
-        toread = os.path.join(path, appid) + ".xml"
-        f = open(toread, "rb")
-        data = f.read()
-        f.close()
+        # managers.xml_manager.export_application(appid, "xml", path)
+        # toread = os.path.join(path, appid) + ".xml"
+        # f = open(toread, "rb")
+        # data = f.read()
+        # f.close()
 
-        try:
-            shutil.rmtree(path)
-        except:
-            pass
-        return data.decode("utf-8")
+        # try:
+        #     shutil.rmtree(path)
+        # except:
+        #     pass
+
+        return app.export()
 
     def update_application(self, sid, skey, appxml):
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         tmpfilename = ""
@@ -2593,6 +2700,8 @@ class VDOM_web_services_server(object):
         return """<Result>\n <ApplicationExists>\n  %s\n </ApplicationExists>\n</Result>""" % result
 
     def backup_application(self, sid, skey, appid, driverid):
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         backupid = skey
@@ -2603,6 +2712,8 @@ class VDOM_web_services_server(object):
         return """<Result> <Revision>%s</Revision></Result>""" % str(result[1])
 
     def get_task_status(self, sid, skey, taskid):
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         status = managers.task_manager.get_status(taskid)
@@ -2613,6 +2724,8 @@ class VDOM_web_services_server(object):
             return self.__format_error(_("Proccess with tid %s does not exists" % taskid))
 
     def restore_application(self, sid, skey, appid, driverid, revision):
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         taskid = skey
@@ -2622,6 +2735,8 @@ class VDOM_web_services_server(object):
         return """<Result><Revision>%s</Revision></Result>""" % str(revision)
 
     def list_backup_drivers(self, sid, skey):
+        raise NotImplementedError
+
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
         backup_drivers = managers.backup_manager.get_storages()

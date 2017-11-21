@@ -24,14 +24,14 @@
 	<Attributes>
 		<Attribute>
 			<Name>stateful</Name>
-			<DisplayName>Stateful</DisplayName>
-			<Description>Stateful</Description>
+			<DisplayName>#Lang(199)</DisplayName>
+			<Description>#Lang(299)</Description>
 			<DefaultValue>0</DefaultValue>
 			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
-			<ErrorValidationMessage>0|1</ErrorValidationMessage>
+			<ErrorValidationMessage>#Lang(399)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((No|0)|(Yes|1))</CodeInterface>
+			<CodeInterface>DropDown((#Lang(499)|0)|(#Lang(499)|1))</CodeInterface>
 			<ColorGroup>1</ColorGroup>
 		</Attribute>
 		<Attribute>
@@ -4215,7 +4215,7 @@ class VDOM_xmldialog(VDOM_object):
 		<Library Target="html"><![CDATA[<link rel="stylesheet" media="screen" type="text/css" href="/9f1c05cd-fee2-6055-2ef4-16fae66214c8.res" />
 <script type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae32145d0.res"></script>
 <script type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae32bafe5.res"></script>
-<script type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae6cbdfa6.res"></script>
+<!--<script type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae6cbdfa6.res"></script>-->
 <script type="text/javascript" src="/966f39fb-3da2-95f2-c33a-398880aff765.res?v2.22"></script>
 <script type="text/javascript" src="/5cd10fee-6e10-5253-24ea-3edb0a87f9ec.res?match"></script>
 <script type="text/javascript" src="/95be4415-7ccb-b87b-f50f-77c8485f6bd9.res?syntaxes"></script>

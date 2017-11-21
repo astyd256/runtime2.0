@@ -7,6 +7,7 @@ from collections import Mapping, MutableMapping
 import managers
 
 from logs import log
+from utils.properties import weak
 from .compiler import STATE_UNMODIFIED, STATE_MODIFIED, \
     STATE_UP_TO_DATE, STATE_REQUIRE_RECOMPUTE, STATE_RECOMPUTE  # STATE_AVOID_RECOMPUTE
 from .compiler.descriptors import make_attribute_name, make_object_name, make_descriptor_name
@@ -76,6 +77,7 @@ class VDOMObjectObjects(Mapping):
         return len(self._owner._objects)
 
 
+@weak("_parent")
 class VDOMObject(object):
 
     # attributes that initialized by the compiler at runtime
@@ -348,10 +350,14 @@ class VDOMObject(object):
     def __str__(self):
         return " ".join(filter(None, (
             "object",
+            self._type.name,
             ":".join(filter(None, (self._id, self._name))))))
 
     def __repr__(self):
         return "<scripting %s at 0x%08X>" % (self, id(self))
+
+    def __describe__(self):
+        return "scripting " + str(self)
 
 
 VDOM_object = VDOMObject

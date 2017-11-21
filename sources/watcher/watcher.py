@@ -6,10 +6,12 @@ import select
 import settings
 
 from logs import log
+from utils.properties import roproperty
 from utils.tracing import show_thread_trace
 from utils.threads import SmartThread
 from utils.parsing import Parser, ParsingException
 
+from .auxiliary import WatcherSnapshot
 from .exceptions import WatcherError
 from .registry import modules
 from .builder import builder
@@ -39,6 +41,10 @@ class Watcher(SmartThread):
         if settings.MONITOR:
             self._monitor = Monitor()
             self._monitor.start()
+
+        self._snapshot = WatcherSnapshot()
+
+    snapshot = roproperty("_snapshot")
 
     def prepare(self):
         log.write("Start " + self.name)

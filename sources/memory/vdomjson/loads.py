@@ -15,10 +15,10 @@ def loads(vdomjson, object, catch, handler=None):
     for event_declaration, event_actions in actions.iteritems():
         try:
             source_name, event_name = event_declaration.split(":")
-        except:
+        except Exception:
             raise Exception("Invalid event declaration: %s" % event_declaration)
 
-        source = object.select(*source_name.split("."))
+        source = object.select_original(*source_name.split("."))
         if not source:
             raise Exception("Unable to find object: %s" % source_name)
 
@@ -30,10 +30,10 @@ def loads(vdomjson, object, catch, handler=None):
                 if isinstance(action, list):
                     try:
                         target_name, action_name = action[0].split(":")
-                    except:
+                    except Exception:
                         raise Exception("Invalid action declaration: %s" % action[0])
 
-                    target = object.select(*target_name.split("."))
+                    target = object.select_original(*target_name.split("."))
                     if not target:
                         raise Exception("Can't find object by name: %s" % target_name)
 

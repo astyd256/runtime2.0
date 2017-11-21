@@ -12,6 +12,7 @@ REQUEST = "<action name=\"query\"><option name=\"graph\">%s</option>%s</action>"
 FILTER_OPTION = "<option name=\"filter\">%s</option>"
 DEPTH_OPTION = "<option name=\"depth\">%s</option>"
 MINIFY_OPTION = "<option name=\"minify\">0</option>"
+CHANGES_OPTION = "<option name=\"source\">changes</option>"
 
 
 def builder(parser):
@@ -32,7 +33,7 @@ def generate_filename(object):
     return "%s.dot" % "-".join((part.lower() for part in object.split(".")))
 
 
-def run(object, location=None, address=None, port=None, timeout=None, depth=None, filter=None, nominify=True):
+def run(object, location=None, address=None, port=None, timeout=None, depth=None, filter=None, nominify=True, changes=False):
     """
     query object graph
     :param object: specifies origin object by its type name or identifier to make graph
@@ -43,6 +44,7 @@ def run(object, location=None, address=None, port=None, timeout=None, depth=None
     :param int depth: specifies depth to scan
     :param str filter: specifies filter
     :param switch nominify: disable output minifying
+    :param switch changes: use object changes as source
     """
     try:
         if location is None:
@@ -59,6 +61,8 @@ def run(object, location=None, address=None, port=None, timeout=None, depth=None
             options.append(DEPTH_OPTION % depth)
         if not nominify:
             options.append(MINIFY_OPTION)
+        if changes:
+            options.append(CHANGES_OPTION)
         request = REQUEST % (object, "".join(options))
 
         message = query("query object graph", address, port, request, timeout=timeout)
