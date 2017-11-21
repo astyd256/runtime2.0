@@ -256,7 +256,7 @@ def collect_referrers(referent, limit=16, depth=32, rank=9, exclude=None):
 
         if len(chain) < 2:
             return chain.modify(rank=0.10, action=ACCEPT)
-        elif isinstance(chain.referrer, (tuple, list, set)):
+        elif isinstance(chain.referrer, (tuple, list, set, frozenset)):
             return chain.reduce(describe_object(chain.referrer), rank=0.80)
         elif isinstance(chain.referrer, dict):
             for key, value in chain.referrer.copy().iteritems():
@@ -339,7 +339,7 @@ def collect_referrers(referent, limit=16, depth=32, rank=9, exclude=None):
                                 or id(referrer) in exclude
                                 or (chain.depth > 1
                                     and id(referrer) in modules
-                                    and not isinstance(chain[-1], (tuple, list, set, dict)))):
+                                    and not isinstance(chain[-1], (tuple, list, set, frozenset, dict)))):
                             continue
                         yield chain.combine(referrer)
                         counter += 1
