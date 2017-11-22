@@ -1,956 +1,974 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type>
-	<Information>
-		<ID>036a5b8f-483f-48ca-fe57-6b767d76173f</ID>
-		<Name>fullcalendar</Name>
-		<DisplayName>#Lang(001)</DisplayName>
-		<ClassName>VDOM_fullcalendar</ClassName>
-		<Description>#Lang(002)</Description>
-		<Version>2.29.8388</Version>
-		<Category>Additional</Category>
-		<InterfaceType>1</InterfaceType>
-		<Icon>#Res(70817b3b-d42d-4273-2b06-16afdd3a785d)</Icon>
-		<EditorIcon>#Res(e9bf2264-1626-4bfe-cfb5-16b02bc0a592)</EditorIcon>
-		<StructureIcon>#Res(295eb21b-f523-0b8a-a6fa-16b082054ab9)</StructureIcon>
-		<Dynamic>1</Dynamic>
-		<Moveable>1</Moveable>
-		<Resizable>3</Resizable>
-		<OptimizationPriority>1</OptimizationPriority>
-		<Container>1</Container>
-		<Containers>htmlcontainer, dialog, container, tablecell</Containers>
-		<Languages>en_US, ru_RU, fr_FR</Languages>
-	</Information>
-	<Attributes>
-		<Attribute>
-			<Name>stateful</Name>
-			<DisplayName>#Lang(199)</DisplayName>
-			<Description>#Lang(299)</Description>
-			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(399)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((#Lang(499)|0)|(#Lang(499)|1))</CodeInterface>
-			<ColorGroup>1</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>hierarchy</Name>
-			<DisplayName>#Lang(101)</DisplayName>
-			<Description>#Lang(201)</Description>
-			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(2)</CodeInterface>
-			<ColorGroup>1</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>visible</Name>
-			<DisplayName>#Lang(102)</DisplayName>
-			<Description>#Lang(202)</Description>
-			<DefaultValue>1</DefaultValue>
-			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
-			<ColorGroup>1</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>zindex</Name>
-			<DisplayName>#Lang(103)</DisplayName>
-			<Description>#Lang(203)</Description>
-			<DefaultValue>1</DefaultValue>
-			<RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(2)</CodeInterface>
-			<ColorGroup>1</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>top</Name>
-			<DisplayName>#Lang(104)</DisplayName>
-			<Description>#Lang(204)</Description>
-			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(4)</CodeInterface>
-			<ColorGroup>1</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>left</Name>
-			<DisplayName>#Lang(105)</DisplayName>
-			<Description>#Lang(205)</Description>
-			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(4)</CodeInterface>
-			<ColorGroup>1</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>width</Name>
-			<DisplayName>#Lang(106)</DisplayName>
-			<Description>#Lang(206)</Description>
-			<DefaultValue>200</DefaultValue>
-			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(4)</CodeInterface>
-			<ColorGroup>1</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>height</Name>
-			<DisplayName>#Lang(107)</DisplayName>
-			<Description>#Lang(207)</Description>
-			<DefaultValue>120</DefaultValue>
-			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(4)</CodeInterface>
-			<ColorGroup>1</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>events</Name>
-			<DisplayName>#Lang(108)</DisplayName>
-			<Description>#Lang(208)</Description>
-			<DefaultValue></DefaultValue>
-			<RegularExpressionValidation>.*</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>Multiline(300)</CodeInterface>
-			<ColorGroup>4</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>view</Name>
-			<DisplayName>#Lang(109)</DisplayName>
-			<Description>#Lang(209)</Description>
-			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((#Lang(403)|0)|(#Lang(404)|1)|(#Lang(405)|2))</CodeInterface>
-			<ColorGroup>4</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>display_date</Name>
-			<DisplayName>#Lang(111)</DisplayName>
-			<Description>#Lang(211)</Description>
-			<DefaultValue>2010-01-01</DefaultValue>
-			<RegularExpressionValidation>.*$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(311)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(15)</CodeInterface>
-			<ColorGroup>4</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>time_format</Name>
-			<DisplayName>#Lang(112)</DisplayName>
-			<Description>#Lang(212)</Description>
-			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>12|24</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(312)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((#Lang(406)|0)|(#Lang(407)|1))</CodeInterface>
-			<ColorGroup>4</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>first_day</Name>
-			<DisplayName>#Lang(113)</DisplayName>
-			<Description>#Lang(213)</Description>
-			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>[0-6]</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((#Lang(408)|1)|(#Lang(409)|2)|(#Lang(411)|3)|(#Lang(412)|4)|(#Lang(413)|5)|(#Lang(414)|6)|(#Lang(415)|0))</CodeInterface>
-			<ColorGroup>4</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>day_names</Name>
-			<DisplayName>#Lang(114)</DisplayName>
-			<Description>#Lang(214)</Description>
-			<DefaultValue>Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday</DefaultValue>
-			<RegularExpressionValidation>[*,*,*,*,*,*,*]</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(300)</CodeInterface>
-			<ColorGroup>2</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>short_day_names</Name>
-			<DisplayName>#Lang(115)</DisplayName>
-			<Description>#Lang(215)</Description>
-			<DefaultValue>Mon,Tue,Wed,Thu,Fri,Sat,Sun</DefaultValue>
-			<RegularExpressionValidation>[*,*,*,*,*,*,*]</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(315)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(300)</CodeInterface>
-			<ColorGroup>2</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>short_month_names</Name>
-			<DisplayName>#Lang(116)</DisplayName>
-			<Description>#Lang(216)</Description>
-			<DefaultValue>Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec</DefaultValue>
-			<RegularExpressionValidation>[*,*,*,*,*,*,*]</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(316)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(300)</CodeInterface>
-			<ColorGroup>2</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>month_names</Name>
-			<DisplayName>#Lang(117)</DisplayName>
-			<Description>#Lang(217)</Description>
-			<DefaultValue>January,February,March,April,May,June,July,August,September,October,November,December</DefaultValue>
-			<RegularExpressionValidation>[*,*,*,*,*,*,*]</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(300)</CodeInterface>
-			<ColorGroup>2</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>editable</Name>
-			<DisplayName>#Lang(118)</DisplayName>
-			<Description>#Lang(218)</Description>
-			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>[0-1]</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(318)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((#Lang(416)|0)|(#Lang(417)|1))</CodeInterface>
-			<ColorGroup>2</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>first_hour</Name>
-			<DisplayName>#Lang(119)</DisplayName>
-			<Description>#Lang(219)</Description>
-			<DefaultValue>8</DefaultValue>
-			<RegularExpressionValidation>.*$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(319)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(300)</CodeInterface>
-			<ColorGroup>2</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>all_day_visible</Name>
-			<DisplayName>#Lang(121)</DisplayName>
-			<Description>#Lang(221)</Description>
-			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>[0-1]</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(321)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((#Lang(418)|0)|(#Lang(419)|1))</CodeInterface>
-			<ColorGroup>2</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>all_day_title</Name>
-			<DisplayName>#Lang(122)</DisplayName>
-			<Description>#Lang(222)</Description>
-			<DefaultValue></DefaultValue>
-			<RegularExpressionValidation>.*$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(322)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(300)</CodeInterface>
-			<ColorGroup>2</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>selectable</Name>
-			<DisplayName>#Lang(123)</DisplayName>
-			<Description>#Lang(223)</Description>
-			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>[0-1]</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(323)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((#Lang(421)|0)|(#Lang(422)|1))</CodeInterface>
-			<ColorGroup>2</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>slot_minutes</Name>
-			<DisplayName>#Lang(124)</DisplayName>
-			<Description>#Lang(224)</Description>
-			<DefaultValue>5</DefaultValue>
-			<RegularExpressionValidation>[0-5]</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(324)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((#Lang(423)|0)|(#Lang(424)|1)|(#Lang(425)|2)|(#Lang(426)|3)|(#Lang(427)|4)|(#Lang(428)|5))</CodeInterface>
-			<ColorGroup>2</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>lazyloading</Name>
-			<DisplayName>#Lang(125)</DisplayName>
-			<Description>#Lang(225)</Description>
-			<DefaultValue>1</DefaultValue>
-			<RegularExpressionValidation>[0-1]</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(325)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((#Lang(429)|1)|(#Lang(431)|0))</CodeInterface>
-			<ColorGroup>3</ColorGroup>
-		</Attribute>
-	</Attributes>
-	<Languages>
-		<Language Code="en_US">
-			<Sentence ID="001">Full calendar</Sentence>
-			<Sentence ID="002">The Full calendar type produces an object displayed as a calendar, that allows creating, editing, viewing and deleting the events.</Sentence>
-			<Sentence ID="003"></Sentence>
-			<Sentence ID="101">Hierarchy</Sentence>
-			<Sentence ID="102">Visibility</Sentence>
-			<Sentence ID="103">Z-Index</Sentence>
-			<Sentence ID="104">Top</Sentence>
-			<Sentence ID="105">Left</Sentence>
-			<Sentence ID="106">Width</Sentence>
-			<Sentence ID="107">Height</Sentence>
-			<Sentence ID="108">Events</Sentence>
-			<Sentence ID="109">View</Sentence>
-			<Sentence ID="111">Default date</Sentence>
-			<Sentence ID="112">Time format</Sentence>
-			<Sentence ID="113">First day in week</Sentence>
-			<Sentence ID="114">Day names</Sentence>
-			<Sentence ID="115">Short Day Names</Sentence>
-			<Sentence ID="116">Short Month Names</Sentence>
-			<Sentence ID="117">Month Names</Sentence>
-			<Sentence ID="118">Editable</Sentence>
-			<Sentence ID="119">First hour</Sentence>
-			<Sentence ID="121">All-day slot visibility</Sentence>
-			<Sentence ID="122">All-day title</Sentence>
-			<Sentence ID="123">Selectable</Sentence>
-			<Sentence ID="124">Slot minutes interval</Sentence>
-			<Sentence ID="125">lazyLoading</Sentence>
-			<Sentence ID="201">The order of rendering the object on the page. The objects with identical values of the Hierarchy attribute are rendered in the order they are written in the XML-file of the VDOM application.</Sentence>
-			<Sentence ID="202">The visibility of the object. In any case the object will exist on the web page, this attribute only makes it invisible.</Sentence>
-			<Sentence ID="203">The position in visual hierarchy of objects. If you have several objects in one container situated on each other, the value of &apos;Z-Index&apos; attribute indicates the order of their displaying. The larger the value is, the upper the object is situated.</Sentence>
-			<Sentence ID="204">Spacing in pixels between the object and the top border of the container, in which the object is situated.</Sentence>
-			<Sentence ID="205">Spacing in pixels between the object and the left border of the container, in which the object is situated.</Sentence>
-			<Sentence ID="206">The width of the object in pixels.</Sentence>
-			<Sentence ID="207">The height of the object in pixels.</Sentence>
-			<Sentence ID="208">The list of events, which are represented as \href{www.ietf.org/rfc/rfc2445.txt}{iCalendar} objects.</Sentence>
-			<Sentence ID="209">The way of displaying the object on loading.</Sentence>
-			<Sentence ID="211">The initial date in &apos;YYYY-MM-DD&apos; format, which is used on loading the object.</Sentence>
-			<Sentence ID="212">The format of displaying the time. If it is set to 12, the time will be displayed as &apos;11am&apos; and &apos;8.30pm&apos;; if it is set to 24, the time will be displayed as &apos;11.00&apos; and &apos;20.30&apos;.</Sentence>
-			<Sentence ID="213">The day of the week that is displayed first.</Sentence>
-			<Sentence ID="214">The names of the days of the week, must be entered through commas without spaces.</Sentence>
-			<Sentence ID="215">The short names of the days of the week, must be entered through commas without spaces.</Sentence>
-			<Sentence ID="216">The short names of the months, must be entered through commas without spaces.</Sentence>
-			<Sentence ID="217">The names of the months, must be entered through commas without spaces.</Sentence>
-			<Sentence ID="218">The possibility of modifying the events. If it is set to &apos;Yes&apos;, the events can be modified, if &apos;No&apos;---cannot.</Sentence>
-			<Sentence ID="219">The first hour that will be visible in the scroll pane. The values must be from 0-23, where 0=midnight, 1=1am and so on. The user will be able to scroll upwards to see events before this time.</Sentence>
-			<Sentence ID="221">Define whether the &apos;all-day&apos; slot is displayed at the top of the calendar or not.</Sentence>
-			<Sentence ID="222">The title of the &apos;all-day&apos; slot at the top of the calendar.</Sentence>
-			<Sentence ID="223">Allow a user to highlight multiple days or timeslots by clicking and dragging.</Sentence>
-			<Sentence ID="224">The frequency of displaying time slots, in minutes.</Sentence>
-			<Sentence ID="225">Loading data dynamically, defines in what case a request for a new list of events will be sent to the server. If it is set to &apos;No&apos;, a request is sent each time some change of date/view takes place; if to &apos;Yes&apos;---a request is sent each time a transition to the next/previous month takes place.</Sentence>
-			<Sentence ID="301">Incorrect value, must be positive integer</Sentence>
-			<Sentence ID="302">Incorrect value</Sentence>
-			<Sentence ID="303">Incorrect value, must be integer from 0 to 99</Sentence>
-			<Sentence ID="304">Incorrect value, must be positive integer</Sentence>
-			<Sentence ID="305">Incorrect value, must be positive integer</Sentence>
-			<Sentence ID="306">Incorrect value, must be positive integer</Sentence>
-			<Sentence ID="307">Incorrect value, must be positive integer</Sentence>
-			<Sentence ID="308">Incorrect value, must be positive integer</Sentence>
-			<Sentence ID="309">Incorrect value</Sentence>
-			<Sentence ID="311">Incorrect value</Sentence>
-			<Sentence ID="312">time format should be 12 or 24</Sentence>
-			<Sentence ID="313">First day: value should be between 0 and 6</Sentence>
-			<Sentence ID="314">enter list with names of weekdays.</Sentence>
-			<Sentence ID="315">enter list with names of weekdays.</Sentence>
-			<Sentence ID="316">enter list with names of weekdays.</Sentence>
-			<Sentence ID="317">enter list with names of weekdays.</Sentence>
-			<Sentence ID="318">Incorrect value</Sentence>
-			<Sentence ID="319">Incorrect value</Sentence>
-			<Sentence ID="321">Incorrect value</Sentence>
-			<Sentence ID="322">Incorrect value</Sentence>
-			<Sentence ID="323">Incorrect value</Sentence>
-			<Sentence ID="324">Incorrect value</Sentence>
-			<Sentence ID="325"></Sentence>
-			<Sentence ID="401">Invisible</Sentence>
-			<Sentence ID="402">Visible</Sentence>
-			<Sentence ID="403">Month</Sentence>
-			<Sentence ID="404">Week</Sentence>
-			<Sentence ID="405">Day</Sentence>
-			<Sentence ID="406">12</Sentence>
-			<Sentence ID="407">24</Sentence>
-			<Sentence ID="408">MO</Sentence>
-			<Sentence ID="409">TU</Sentence>
-			<Sentence ID="411">WE</Sentence>
-			<Sentence ID="412">TH</Sentence>
-			<Sentence ID="413">FR</Sentence>
-			<Sentence ID="414">SA</Sentence>
-			<Sentence ID="415">SU</Sentence>
-			<Sentence ID="416">No</Sentence>
-			<Sentence ID="417">Yes</Sentence>
-			<Sentence ID="418">No</Sentence>
-			<Sentence ID="419">Yes</Sentence>
-			<Sentence ID="421">No</Sentence>
-			<Sentence ID="422">Yes</Sentence>
-			<Sentence ID="423">5</Sentence>
-			<Sentence ID="424">10</Sentence>
-			<Sentence ID="425">15</Sentence>
-			<Sentence ID="426">20</Sentence>
-			<Sentence ID="427">25</Sentence>
-			<Sentence ID="428">30</Sentence>
-			<Sentence ID="429">Yes</Sentence>
-			<Sentence ID="431">No</Sentence>
-			<Sentence ID="501">Change the value of the &apos;View&apos; attribute.</Sentence>
-			<Sentence ID="502">Remove events from the calendar.</Sentence>
-			<Sentence ID="503">Go to the specified date.</Sentence>
-			<Sentence ID="504">Hide the object.</Sentence>
-			<Sentence ID="505">Move the object to a new position.</Sentence>
-			<Sentence ID="506">Set new value of the &apos;Z-Index&apos; attribute.</Sentence>
-			<Sentence ID="507">Go to the next month, week, or year (depending on the value of the &apos;View&apos; attribute).</Sentence>
-			<Sentence ID="508">Go to the previous month, week or year (depending on the value of the &apos;View&apos; attribute).</Sentence>
-			<Sentence ID="509">Resize the object&apos;s width and height.</Sentence>
-			<Sentence ID="511">Add events source dynamically, except the events with the recurrence rule. Events will be immediately fetched from this source and placed on the calendar.</Sentence>
-			<Sentence ID="512">Add events source dynamically, including the events with the recurrence rule. Events will be immediately fetched from this source and placed on the calendar.</Sentence>
-			<Sentence ID="513">Show the object.</Sentence>
-			<Sentence ID="514">Click the object.</Sentence>
-			<Sentence ID="515">Click the object with pressed Ctrl.</Sentence>
-			<Sentence ID="516">Change the value of the &apos;Default date&apos; attribute.</Sentence>
-			<Sentence ID="517">Select several cells at once. This event is temporary and is removed on reloading the page.</Sentence>
-			<Sentence ID="518">Double-click the object.</Sentence>
-			<Sentence ID="519">Click the event in order to edit it.</Sentence>
-			<Sentence ID="521">Move the event or stretch it.</Sentence>
-			<Sentence ID="522">Edit the limits of the event.</Sentence>
-			<Sentence ID="523"></Sentence>
-			<Sentence ID="524">The cursor moves inside the object.</Sentence>
-			<Sentence ID="525">The cursor leaves the object&apos;s bounds.</Sentence>
-			<Sentence ID="526">The cursor points at the object.</Sentence>
-			<Sentence ID="527">Release the left mouse button.</Sentence>
-			<Sentence ID="528">Change the value of the &apos;View&apos; attribute.</Sentence>
-			<Sentence ID="601">Visibility</Sentence>
-			<Sentence ID="602">Next</Sentence>
-			<Sentence ID="603">Visibility</Sentence>
-			<Sentence ID="604">Visibility</Sentence>
-			<Sentence ID="605">Visibility</Sentence>
-			<Sentence ID="606">Visibility</Sentence>
-			<Sentence ID="607">Next</Sentence>
-			<Sentence ID="608">Previous</Sentence>
-			<Sentence ID="609">Visibility</Sentence>
-			<Sentence ID="611">Visibility</Sentence>
-			<Sentence ID="612">Visibility</Sentence>
-			<Sentence ID="613">Visibility</Sentence>
-			<Sentence ID="701">Incorrect value</Sentence>
-			<Sentence ID="702">Incorrect value</Sentence>
-			<Sentence ID="703">Incorrect value</Sentence>
-			<Sentence ID="704">Incorrect value</Sentence>
-			<Sentence ID="705">Incorrect value</Sentence>
-			<Sentence ID="706">Incorrect value</Sentence>
-			<Sentence ID="707">Incorrect value</Sentence>
-			<Sentence ID="708">Incorrect value</Sentence>
-			<Sentence ID="709">Incorrect value</Sentence>
-			<Sentence ID="711">Incorrect value</Sentence>
-			<Sentence ID="712">Incorrect value</Sentence>
-			<Sentence ID="713">Incorrect value</Sentence>
-			<Sentence ID="714">Incorrect value</Sentence>
-			<Sentence ID="801">&apos;month&apos;,&apos;week&apos;,&apos;day&apos;</Sentence>
-			<Sentence ID="802">Date format - YYYY-MM-DD</Sentence>
-			<Sentence ID="803">Date format - YYYY-MM-DD</Sentence>
-			<Sentence ID="804">Date format - YYYY-MM-DD</Sentence>
-			<Sentence ID="805">Incorrect value</Sentence>
-			<Sentence ID="806">Incorrect value</Sentence>
-			<Sentence ID="807">Incorrect value</Sentence>
-			<Sentence ID="808">Incorrect value</Sentence>
-			<Sentence ID="809">Incorrect value</Sentence>
-			<Sentence ID="811">Incorrect value</Sentence>
-			<Sentence ID="812">Incorrect value</Sentence>
-			<Sentence ID="813">Date format - YYYY-MM-DD</Sentence>
-			<Sentence ID="814">Date format - YYYY-MM-DD</Sentence>
-			<Sentence ID="901">Left</Sentence>
-			<Sentence ID="902">Top</Sentence>
-			<Sentence ID="903">Left</Sentence>
-			<Sentence ID="904">Top</Sentence>
-			<Sentence ID="905">Start</Sentence>
-			<Sentence ID="906">Start</Sentence>
-			<Sentence ID="907">End</Sentence>
-			<Sentence ID="908">current view name</Sentence>
-			<Sentence ID="909">current view name</Sentence>
-			<Sentence ID="911">start</Sentence>
-			<Sentence ID="912">end</Sentence>
-			<Sentence ID="913">end</Sentence>
-			<Sentence ID="914">current view name</Sentence>
-			<Sentence ID="915">Left</Sentence>
-			<Sentence ID="916">Top</Sentence>
-			<Sentence ID="917">id</Sentence>
-			<Sentence ID="918"></Sentence>
-			<Sentence ID="919">id</Sentence>
-			<Sentence ID="921">start</Sentence>
-			<Sentence ID="922">end</Sentence>
-			<Sentence ID="923"></Sentence>
-			<Sentence ID="924"></Sentence>
-			<Sentence ID="925"></Sentence>
-			<Sentence ID="926"></Sentence>
-			<Sentence ID="927">current view name</Sentence>
-			<Sentence ID="928">id</Sentence>
-			<Sentence ID="929">start</Sentence>
-			<Sentence ID="931">end</Sentence>
-			<Sentence ID="932"></Sentence>
-			<Sentence ID="933"></Sentence>
-			<Sentence ID="934"></Sentence>
-			<Sentence ID="935">current view name</Sentence>
-			<Sentence ID="936">Start</Sentence>
-			<Sentence ID="937">End</Sentence>
-			<Sentence ID="938">current view name</Sentence>
-			<Sentence ID="939">current view name</Sentence>
-			<Sentence ID="941">Left</Sentence>
-			<Sentence ID="942">Top</Sentence>
-			<Sentence ID="943"></Sentence>
-			<Sentence ID="944"></Sentence>
-			<Sentence ID="945">Left</Sentence>
-			<Sentence ID="946">Top</Sentence>
-			<Sentence ID="947">Left</Sentence>
-			<Sentence ID="948">Top</Sentence>
-			<Sentence ID="949">Left</Sentence>
-			<Sentence ID="951">Top</Sentence>
-		</Language>
-		<Language Code="fr_FR">
-			<Sentence ID="001">Bouton</Sentence>
-			<Sentence ID="002">Lien sur une image</Sentence>
-			<Sentence ID="003"></Sentence>
-			<Sentence ID="101">Hierarchie</Sentence>
-			<Sentence ID="102">Visibilite</Sentence>
-			<Sentence ID="103">Z-Index</Sentence>
-			<Sentence ID="104">Haut</Sentence>
-			<Sentence ID="105">Gauche</Sentence>
-			<Sentence ID="106">Largeur</Sentence>
-			<Sentence ID="107">Hauteur</Sentence>
-			<Sentence ID="108">WTF</Sentence>
-			<Sentence ID="109">OMG</Sentence>
-			<Sentence ID="111">displayDate</Sentence>
-			<Sentence ID="112"></Sentence>
-			<Sentence ID="113">Time Format</Sentence>
-			<Sentence ID="114"></Sentence>
-			<Sentence ID="115">Short Day Names</Sentence>
-			<Sentence ID="116">Short Month Names</Sentence>
-			<Sentence ID="117">Month Names</Sentence>
-			<Sentence ID="118">Editable</Sentence>
-			<Sentence ID="119">First hour</Sentence>
-			<Sentence ID="121">All-day slot visibility</Sentence>
-			<Sentence ID="122">All-day title</Sentence>
-			<Sentence ID="123">Selectable</Sentence>
-			<Sentence ID="124">Slot minutes interval</Sentence>
-			<Sentence ID="125"></Sentence>
-			<Sentence ID="201">Hierarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
-			<Sentence ID="202">Afficher ou cacher l&apos;objet</Sentence>
-			<Sentence ID="203">Niveau de superposition de l&apos;objet par rapport aux autres</Sentence>
-			<Sentence ID="204">Distance depuis le bord haut de l&apos;objet parent en pixels</Sentence>
-			<Sentence ID="205">Distance depuis le bord gauche de l&apos;objet parent en pixels</Sentence>
-			<Sentence ID="206">Largeur de l&apos;objet en pixels</Sentence>
-			<Sentence ID="207">Hauteur de l&apos;objet en pixels</Sentence>
-			<Sentence ID="208">Hierarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
-			<Sentence ID="209"></Sentence>
-			<Sentence ID="211">The initial date when the calendar loads.</Sentence>
-			<Sentence ID="212">Determines the time-text that will be displayed on each event.</Sentence>
-			<Sentence ID="213">The day that each week begins.</Sentence>
-			<Sentence ID="214">Full names of days-of-week.</Sentence>
-			<Sentence ID="215">Full names of days-of-week.</Sentence>
-			<Sentence ID="216">Full names of days-of-week.</Sentence>
-			<Sentence ID="217">Full names of days-of-week.</Sentence>
-			<Sentence ID="218">Determines whether the events on the calendar can be modified.</Sentence>
-			<Sentence ID="219">The text titling the &quot;all-day&quot; slot at the top of the calendar.</Sentence>
-			<Sentence ID="221">Determines if the &quot;all-day&quot; slot is displayed at the top of the calendar.</Sentence>
-			<Sentence ID="222">The text titling the &quot;all-day&quot; slot at the top of the calendar.</Sentence>
-			<Sentence ID="223">Allows a user to highlight multiple days or timeslots by clicking and dragging.</Sentence>
-			<Sentence ID="224">The frequency for displaying time slots, in minutes.</Sentence>
-			<Sentence ID="225"></Sentence>
-			<Sentence ID="301">Valeur Incorrecte, doit etre positive</Sentence>
-			<Sentence ID="302">Valeur Incorrecte</Sentence>
-			<Sentence ID="303">Valeur Incorrecte, doit etre comprise entre 0 et 99</Sentence>
-			<Sentence ID="304">Valeur Incorrecte, doit etre positive</Sentence>
-			<Sentence ID="305">Valeur Incorrecte, doit etre positive</Sentence>
-			<Sentence ID="306">Valeur Incorrecte, doit etre positive</Sentence>
-			<Sentence ID="307">Valeur Incorrecte, doit etre positive</Sentence>
-			<Sentence ID="308">Valeur Incorrecte, doit etre positive</Sentence>
-			<Sentence ID="309">Valeur Incorrecte</Sentence>
-			<Sentence ID="311">Valeur Incorrecte</Sentence>
-			<Sentence ID="312"></Sentence>
-			<Sentence ID="313"></Sentence>
-			<Sentence ID="314"></Sentence>
-			<Sentence ID="315"></Sentence>
-			<Sentence ID="316"></Sentence>
-			<Sentence ID="317"></Sentence>
-			<Sentence ID="318">Valeur Incorrecte</Sentence>
-			<Sentence ID="319">Valeur Incorrecte</Sentence>
-			<Sentence ID="321">Valeur Incorrecte</Sentence>
-			<Sentence ID="322">Valeur Incorrecte</Sentence>
-			<Sentence ID="323">Valeur Incorrecte</Sentence>
-			<Sentence ID="324">Valeur Incorrecte</Sentence>
-			<Sentence ID="325"></Sentence>
-			<Sentence ID="401">Invisible</Sentence>
-			<Sentence ID="402">Visible</Sentence>
-			<Sentence ID="403">month</Sentence>
-			<Sentence ID="404">week</Sentence>
-			<Sentence ID="405">day</Sentence>
-			<Sentence ID="406">12</Sentence>
-			<Sentence ID="407">24</Sentence>
-			<Sentence ID="408">MO</Sentence>
-			<Sentence ID="409">TU</Sentence>
-			<Sentence ID="411">WE</Sentence>
-			<Sentence ID="412">TH</Sentence>
-			<Sentence ID="413">FR</Sentence>
-			<Sentence ID="414">SA</Sentence>
-			<Sentence ID="415">SU</Sentence>
-			<Sentence ID="416">No</Sentence>
-			<Sentence ID="417">Yes</Sentence>
-			<Sentence ID="418">No</Sentence>
-			<Sentence ID="419">Yes</Sentence>
-			<Sentence ID="421">No</Sentence>
-			<Sentence ID="422">Yes</Sentence>
-			<Sentence ID="423"></Sentence>
-			<Sentence ID="424"></Sentence>
-			<Sentence ID="425"></Sentence>
-			<Sentence ID="426"></Sentence>
-			<Sentence ID="427"></Sentence>
-			<Sentence ID="428"></Sentence>
-			<Sentence ID="429">Yes</Sentence>
-			<Sentence ID="431">No</Sentence>
-			<Sentence ID="501">Visibilite</Sentence>
-			<Sentence ID="502">Prochaine</Sentence>
-			<Sentence ID="503">Visibilite</Sentence>
-			<Sentence ID="504">Visibilite</Sentence>
-			<Sentence ID="505">Visibilite</Sentence>
-			<Sentence ID="506">Visibilite</Sentence>
-			<Sentence ID="507">Prochaine</Sentence>
-			<Sentence ID="508">Précédente</Sentence>
-			<Sentence ID="509">Visibilite</Sentence>
-			<Sentence ID="511">Visibilite</Sentence>
-			<Sentence ID="512">Visibilite</Sentence>
-			<Sentence ID="513">Visibilite</Sentence>
-			<Sentence ID="514"></Sentence>
-			<Sentence ID="515"></Sentence>
-			<Sentence ID="516"></Sentence>
-			<Sentence ID="517"></Sentence>
-			<Sentence ID="518"></Sentence>
-			<Sentence ID="519"></Sentence>
-			<Sentence ID="521"></Sentence>
-			<Sentence ID="522"></Sentence>
-			<Sentence ID="523"></Sentence>
-			<Sentence ID="524"></Sentence>
-			<Sentence ID="525"></Sentence>
-			<Sentence ID="526"></Sentence>
-			<Sentence ID="527"></Sentence>
-			<Sentence ID="528"></Sentence>
-			<Sentence ID="601">Visibilite</Sentence>
-			<Sentence ID="602">Prochaine</Sentence>
-			<Sentence ID="603">Visibilite</Sentence>
-			<Sentence ID="604">Visibilite</Sentence>
-			<Sentence ID="605">Visibilite</Sentence>
-			<Sentence ID="606">Visibilite</Sentence>
-			<Sentence ID="607">Prochaine</Sentence>
-			<Sentence ID="608">Précédente</Sentence>
-			<Sentence ID="609">Visibilite</Sentence>
-			<Sentence ID="611">Visibilite</Sentence>
-			<Sentence ID="612">Visibilite</Sentence>
-			<Sentence ID="613">Visibilite</Sentence>
-			<Sentence ID="701">Valeur Incorrecte</Sentence>
-			<Sentence ID="702">Valeur Incorrecte</Sentence>
-			<Sentence ID="703">Valeur Incorrecte</Sentence>
-			<Sentence ID="704">Valeur Incorrecte</Sentence>
-			<Sentence ID="705">Valeur Incorrecte</Sentence>
-			<Sentence ID="706">Valeur Incorrecte</Sentence>
-			<Sentence ID="707">Valeur Incorrecte</Sentence>
-			<Sentence ID="708">Valeur Incorrecte</Sentence>
-			<Sentence ID="709">Valeur Incorrecte</Sentence>
-			<Sentence ID="711">Valeur Incorrecte</Sentence>
-			<Sentence ID="712">Valeur Incorrecte</Sentence>
-			<Sentence ID="713">Valeur Incorrecte</Sentence>
-			<Sentence ID="714">Valeur Incorrecte</Sentence>
-			<Sentence ID="801">&apos;month&apos;,&apos;week&apos;,&apos;day&apos;</Sentence>
-			<Sentence ID="802">Date format - YYYY-MM-DD</Sentence>
-			<Sentence ID="803">Date format - YYYY-MM-DD</Sentence>
-			<Sentence ID="804">Date format - YYYY-MM-DD</Sentence>
-			<Sentence ID="805">Valeur Incorrecte</Sentence>
-			<Sentence ID="806">Valeur Incorrecte</Sentence>
-			<Sentence ID="807">Valeur Incorrecte</Sentence>
-			<Sentence ID="808">Valeur Incorrecte</Sentence>
-			<Sentence ID="809">Valeur Incorrecte</Sentence>
-			<Sentence ID="811">Valeur Incorrecte</Sentence>
-			<Sentence ID="812">Valeur Incorrecte</Sentence>
-			<Sentence ID="813">Date format - YYYY-MM-DD</Sentence>
-			<Sentence ID="814">Date format - YYYY-MM-DD</Sentence>
-			<Sentence ID="901">Gauche</Sentence>
-			<Sentence ID="902">Haut</Sentence>
-			<Sentence ID="903">Gauche</Sentence>
-			<Sentence ID="904">Haut</Sentence>
-			<Sentence ID="905">Start</Sentence>
-			<Sentence ID="906">Start</Sentence>
-			<Sentence ID="907">End</Sentence>
-			<Sentence ID="908"></Sentence>
-			<Sentence ID="909"></Sentence>
-			<Sentence ID="911"></Sentence>
-			<Sentence ID="912"></Sentence>
-			<Sentence ID="913"></Sentence>
-			<Sentence ID="914"></Sentence>
-			<Sentence ID="915">Gauche</Sentence>
-			<Sentence ID="916">Haut</Sentence>
-			<Sentence ID="917"></Sentence>
-			<Sentence ID="918"></Sentence>
-			<Sentence ID="919"></Sentence>
-			<Sentence ID="921"></Sentence>
-			<Sentence ID="922"></Sentence>
-			<Sentence ID="923"></Sentence>
-			<Sentence ID="924"></Sentence>
-			<Sentence ID="925"></Sentence>
-			<Sentence ID="926"></Sentence>
-			<Sentence ID="927"></Sentence>
-			<Sentence ID="928"></Sentence>
-			<Sentence ID="929"></Sentence>
-			<Sentence ID="931"></Sentence>
-			<Sentence ID="932"></Sentence>
-			<Sentence ID="933"></Sentence>
-			<Sentence ID="934"></Sentence>
-			<Sentence ID="935"></Sentence>
-			<Sentence ID="936">Start</Sentence>
-			<Sentence ID="937">End</Sentence>
-			<Sentence ID="938"></Sentence>
-			<Sentence ID="939"></Sentence>
-			<Sentence ID="941">Gauche</Sentence>
-			<Sentence ID="942">Haut</Sentence>
-			<Sentence ID="943"></Sentence>
-			<Sentence ID="944"></Sentence>
-			<Sentence ID="945">Gauche</Sentence>
-			<Sentence ID="946">Haut</Sentence>
-			<Sentence ID="947">Gauche</Sentence>
-			<Sentence ID="948">Haut</Sentence>
-			<Sentence ID="949">Gauche</Sentence>
-			<Sentence ID="951">Haut</Sentence>
-		</Language>
-		<Language Code="ru_RU">
-			<Sentence ID="001">Кнопка</Sentence>
-			<Sentence ID="002">Кнопка в виде ссылки или изображения</Sentence>
-			<Sentence ID="003"></Sentence>
-			<Sentence ID="101">Иерархия</Sentence>
-			<Sentence ID="102">Отображение</Sentence>
-			<Sentence ID="103">Z-Индекс</Sentence>
-			<Sentence ID="104">Верх</Sentence>
-			<Sentence ID="105">Лево</Sentence>
-			<Sentence ID="106">Ширина</Sentence>
-			<Sentence ID="107">Высота</Sentence>
-			<Sentence ID="108">События</Sentence>
-			<Sentence ID="109">Вид</Sentence>
-			<Sentence ID="111">Отображаемая дата</Sentence>
-			<Sentence ID="112">Формат времени</Sentence>
-			<Sentence ID="113"></Sentence>
-			<Sentence ID="114"></Sentence>
-			<Sentence ID="115">Short Day Names</Sentence>
-			<Sentence ID="116">Short Month Names</Sentence>
-			<Sentence ID="117">Month Names</Sentence>
-			<Sentence ID="118">Editable</Sentence>
-			<Sentence ID="119">First hour</Sentence>
-			<Sentence ID="121">All-day slot visibility</Sentence>
-			<Sentence ID="122">All-day title</Sentence>
-			<Sentence ID="123">Selectable</Sentence>
-			<Sentence ID="124">Slot minutes interval</Sentence>
-			<Sentence ID="125"></Sentence>
-			<Sentence ID="201">Приоритет в потоке гипертекста</Sentence>
-			<Sentence ID="202">Отображается объект или нет</Sentence>
-			<Sentence ID="203">Положение в визуальной иерархии объектов</Sentence>
-			<Sentence ID="204">Расстояние от верхней границы родительского контейнера до объекта в пикселях</Sentence>
-			<Sentence ID="205">Расстояние от левой границы родительского контейнера до объекта в пикселях</Sentence>
-			<Sentence ID="206">Ширина объекта в пикселях</Sentence>
-			<Sentence ID="207">Высота объекта в пикселях</Sentence>
-			<Sentence ID="208">Приоритет в потоке гипертекста</Sentence>
-			<Sentence ID="209">Вид календаря при загрузке</Sentence>
-			<Sentence ID="211">Дата при загрузке</Sentence>
-			<Sentence ID="212">Determines the time-text that will be displayed on each event.</Sentence>
-			<Sentence ID="213">The day that each week begins.</Sentence>
-			<Sentence ID="214">Full names of days-of-week.</Sentence>
-			<Sentence ID="215">Full names of days-of-week.</Sentence>
-			<Sentence ID="216">Full names of days-of-week.</Sentence>
-			<Sentence ID="217">Full names of days-of-week.</Sentence>
-			<Sentence ID="218">Determines whether the events on the calendar can be modified.</Sentence>
-			<Sentence ID="219">The text titling the &quot;all-day&quot; slot at the top of the calendar.</Sentence>
-			<Sentence ID="221">Determines if the &quot;all-day&quot; slot is displayed at the top of the calendar.</Sentence>
-			<Sentence ID="222">The text titling the &quot;all-day&quot; slot at the top of the calendar.</Sentence>
-			<Sentence ID="223">Allows a user to highlight multiple days or timeslots by clicking and dragging.</Sentence>
-			<Sentence ID="224">The frequency for displaying time slots, in minutes.</Sentence>
-			<Sentence ID="225"></Sentence>
-			<Sentence ID="301">Неправильное значение</Sentence>
-			<Sentence ID="302">Неправильное значение</Sentence>
-			<Sentence ID="303">Неправильное значение, должно быть целое число от 0 до 99</Sentence>
-			<Sentence ID="304">Неправильное значение, должно быть целое положительное число</Sentence>
-			<Sentence ID="305">Неправильное значение, должно быть целое положительное число</Sentence>
-			<Sentence ID="306">Неправильное значение, должно быть целое положительное число</Sentence>
-			<Sentence ID="307">Неправильное значение, должно быть целое положительное число</Sentence>
-			<Sentence ID="308">Неправильное значение</Sentence>
-			<Sentence ID="309">Неправильное значение</Sentence>
-			<Sentence ID="311">Неправильное значение</Sentence>
-			<Sentence ID="312"></Sentence>
-			<Sentence ID="313"></Sentence>
-			<Sentence ID="314"></Sentence>
-			<Sentence ID="315"></Sentence>
-			<Sentence ID="316"></Sentence>
-			<Sentence ID="317"></Sentence>
-			<Sentence ID="318">Неправильное значение</Sentence>
-			<Sentence ID="319">Неправильное значение</Sentence>
-			<Sentence ID="321">Неправильное значение</Sentence>
-			<Sentence ID="322">Неправильное значение</Sentence>
-			<Sentence ID="323">Неправильное значение</Sentence>
-			<Sentence ID="324">Неправильное значение</Sentence>
-			<Sentence ID="325"></Sentence>
-			<Sentence ID="401">Не отображается</Sentence>
-			<Sentence ID="402">Отображается</Sentence>
-			<Sentence ID="403">месяц</Sentence>
-			<Sentence ID="404">неделя</Sentence>
-			<Sentence ID="405">день</Sentence>
-			<Sentence ID="406">12</Sentence>
-			<Sentence ID="407">24</Sentence>
-			<Sentence ID="408">MO</Sentence>
-			<Sentence ID="409">TU</Sentence>
-			<Sentence ID="411">WE</Sentence>
-			<Sentence ID="412">TH</Sentence>
-			<Sentence ID="413">FR</Sentence>
-			<Sentence ID="414">SA</Sentence>
-			<Sentence ID="415">SU</Sentence>
-			<Sentence ID="416">No</Sentence>
-			<Sentence ID="417">Yes</Sentence>
-			<Sentence ID="418">No</Sentence>
-			<Sentence ID="419">Yes</Sentence>
-			<Sentence ID="421">No</Sentence>
-			<Sentence ID="422">Yes</Sentence>
-			<Sentence ID="423"></Sentence>
-			<Sentence ID="424"></Sentence>
-			<Sentence ID="425"></Sentence>
-			<Sentence ID="426"></Sentence>
-			<Sentence ID="427"></Sentence>
-			<Sentence ID="428"></Sentence>
-			<Sentence ID="429">Yes</Sentence>
-			<Sentence ID="431">No</Sentence>
-			<Sentence ID="501">Отображение</Sentence>
-			<Sentence ID="502">Вперед</Sentence>
-			<Sentence ID="503">Отображение</Sentence>
-			<Sentence ID="504">Отображение</Sentence>
-			<Sentence ID="505">Отображение</Sentence>
-			<Sentence ID="506">Отображение</Sentence>
-			<Sentence ID="507">Вперед</Sentence>
-			<Sentence ID="508">Назад</Sentence>
-			<Sentence ID="509">Отображение</Sentence>
-			<Sentence ID="511">Отображение</Sentence>
-			<Sentence ID="512">Отображение</Sentence>
-			<Sentence ID="513">Отображение</Sentence>
-			<Sentence ID="514"></Sentence>
-			<Sentence ID="515"></Sentence>
-			<Sentence ID="516"></Sentence>
-			<Sentence ID="517"></Sentence>
-			<Sentence ID="518"></Sentence>
-			<Sentence ID="519"></Sentence>
-			<Sentence ID="521"></Sentence>
-			<Sentence ID="522"></Sentence>
-			<Sentence ID="523"></Sentence>
-			<Sentence ID="524"></Sentence>
-			<Sentence ID="525"></Sentence>
-			<Sentence ID="526"></Sentence>
-			<Sentence ID="527"></Sentence>
-			<Sentence ID="528"></Sentence>
-			<Sentence ID="601">Отображение</Sentence>
-			<Sentence ID="602">Вперед</Sentence>
-			<Sentence ID="603">Отображение</Sentence>
-			<Sentence ID="604">Отображение</Sentence>
-			<Sentence ID="605">Отображение</Sentence>
-			<Sentence ID="606">Отображение</Sentence>
-			<Sentence ID="607">Вперед</Sentence>
-			<Sentence ID="608">Назад</Sentence>
-			<Sentence ID="609">Отображение</Sentence>
-			<Sentence ID="611">Отображение</Sentence>
-			<Sentence ID="612">Отображение</Sentence>
-			<Sentence ID="613">Отображение</Sentence>
-			<Sentence ID="701">Неправильное значение</Sentence>
-			<Sentence ID="702">Неправильное значение</Sentence>
-			<Sentence ID="703">Неправильное значение</Sentence>
-			<Sentence ID="704">Неправильное значение</Sentence>
-			<Sentence ID="705">Неправильное значение</Sentence>
-			<Sentence ID="706">Неправильное значение</Sentence>
-			<Sentence ID="707">Неправильное значение</Sentence>
-			<Sentence ID="708">Неправильное значение</Sentence>
-			<Sentence ID="709">Неправильное значение</Sentence>
-			<Sentence ID="711">Неправильное значение</Sentence>
-			<Sentence ID="712">Неправильное значение</Sentence>
-			<Sentence ID="713">Неправильное значение</Sentence>
-			<Sentence ID="714">Неправильное значение</Sentence>
-			<Sentence ID="801">&apos;month&apos;,&apos;week&apos;,&apos;day&apos;</Sentence>
-			<Sentence ID="802">Date format - ГГГГ-ММ-ДД</Sentence>
-			<Sentence ID="803">Date format - ГГГГ-ММ-ДД</Sentence>
-			<Sentence ID="804">Date format - ГГГГ-ММ-ДД</Sentence>
-			<Sentence ID="805">Неправильное значение</Sentence>
-			<Sentence ID="806">Неправильное значение</Sentence>
-			<Sentence ID="807">Неправильное значение</Sentence>
-			<Sentence ID="808">Неправильное значение</Sentence>
-			<Sentence ID="809">Неправильное значение</Sentence>
-			<Sentence ID="811">Неправильное значение</Sentence>
-			<Sentence ID="812">Неправильное значение</Sentence>
-			<Sentence ID="813">Date format - ГГГГ-ММ-ДД</Sentence>
-			<Sentence ID="814">Date format - ГГГГ-ММ-ДД</Sentence>
-			<Sentence ID="901">Лево</Sentence>
-			<Sentence ID="902">Верх</Sentence>
-			<Sentence ID="903">Лево</Sentence>
-			<Sentence ID="904">Верх</Sentence>
-			<Sentence ID="905">Начало</Sentence>
-			<Sentence ID="906">Начало</Sentence>
-			<Sentence ID="907">Конец</Sentence>
-			<Sentence ID="908"></Sentence>
-			<Sentence ID="909"></Sentence>
-			<Sentence ID="911"></Sentence>
-			<Sentence ID="912"></Sentence>
-			<Sentence ID="913"></Sentence>
-			<Sentence ID="914"></Sentence>
-			<Sentence ID="915">Лево</Sentence>
-			<Sentence ID="916">Верх</Sentence>
-			<Sentence ID="917"></Sentence>
-			<Sentence ID="918"></Sentence>
-			<Sentence ID="919"></Sentence>
-			<Sentence ID="921"></Sentence>
-			<Sentence ID="922"></Sentence>
-			<Sentence ID="923"></Sentence>
-			<Sentence ID="924"></Sentence>
-			<Sentence ID="925"></Sentence>
-			<Sentence ID="926"></Sentence>
-			<Sentence ID="927"></Sentence>
-			<Sentence ID="928"></Sentence>
-			<Sentence ID="929"></Sentence>
-			<Sentence ID="931"></Sentence>
-			<Sentence ID="932"></Sentence>
-			<Sentence ID="933"></Sentence>
-			<Sentence ID="934"></Sentence>
-			<Sentence ID="935"></Sentence>
-			<Sentence ID="936">Начало</Sentence>
-			<Sentence ID="937">Конец</Sentence>
-			<Sentence ID="938"></Sentence>
-			<Sentence ID="939"></Sentence>
-			<Sentence ID="941">Лево</Sentence>
-			<Sentence ID="942">Верх</Sentence>
-			<Sentence ID="943"></Sentence>
-			<Sentence ID="944"></Sentence>
-			<Sentence ID="945">Лево</Sentence>
-			<Sentence ID="946">Верх</Sentence>
-			<Sentence ID="947">Лево</Sentence>
-			<Sentence ID="948">Верх</Sentence>
-			<Sentence ID="949">Лево</Sentence>
-			<Sentence ID="951">Верх</Sentence>
-		</Language>
-	</Languages>
-	<Resources>
-		<Resource ID="02dfd9db-16fe-3690-73e1-baf58cd3e6f4" Type="css" Name="Style">
-			LyoNCiAqIEZ1bGxDYWxlbmRhciB2MS41LjEgU3R5bGVzaGVldA0KICoNCiAqIENvcHlyaWdodCAo
+  <Information>
+    <Name>fullcalendar</Name>
+    <DisplayName>#Lang(001)</DisplayName>
+    <Description>#Lang(002)</Description>
+    <ClassName>VDOM_fullcalendar</ClassName>
+    <ID>036a5b8f-483f-48ca-fe57-6b767d76173f</ID>
+    <Icon>#Res(70817b3b-d42d-4273-2b06-16afdd3a785d)</Icon>
+    <EditorIcon>#Res(e9bf2264-1626-4bfe-cfb5-16b02bc0a592)</EditorIcon>
+    <StructureIcon>#Res(295eb21b-f523-0b8a-a6fa-16b082054ab9)</StructureIcon>
+    <Moveable>1</Moveable>
+    <Resizable>3</Resizable>
+    <Container>1</Container>
+    <Category>Additional</Category>
+    <Dynamic>1</Dynamic>
+    <Version>2.30.8388</Version>
+    <InterfaceType>1</InterfaceType>
+    <OptimizationPriority>1</OptimizationPriority>
+    <Containers>htmlcontainer, dialog, container, tablecell</Containers>
+    <Languages>en_US ,fr_FR ,ru_RU</Languages>
+    <Handlers/>
+    <RemoteMethods/>
+    <WCAG/>
+    <XMLScriptName/>
+  </Information>
+  <Attributes>
+    <Attribute>
+      <Name>stateful</Name>
+      <DisplayName>#Lang(101)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(201)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(401)|0)|(#Lang(402)|1))</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(301)</ErrorValidationMessage>
+      <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>hierarchy</Name>
+      <DisplayName>#Lang(102)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(202)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(2)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>visible</Name>
+      <DisplayName>#Lang(103)</DisplayName>
+      <DefaultValue>1</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(203)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(403)|0)|(#Lang(404)|1))</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(303)</ErrorValidationMessage>
+      <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>zindex</Name>
+      <DisplayName>#Lang(104)</DisplayName>
+      <DefaultValue>1</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(204)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(2)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>top</Name>
+      <DisplayName>#Lang(105)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(205)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(4)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>left</Name>
+      <DisplayName>#Lang(106)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(206)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(4)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>width</Name>
+      <DisplayName>#Lang(107)</DisplayName>
+      <DefaultValue>200</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(207)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(4)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>height</Name>
+      <DisplayName>#Lang(108)</DisplayName>
+      <DefaultValue>120</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(208)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(4)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(308)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>events</Name>
+      <DisplayName>#Lang(109)</DisplayName>
+      <DefaultValue/>
+      <Visible>1</Visible>
+      <Help>#Lang(209)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>Multiline(300)</CodeInterface>
+      <Colorgroup>4</Colorgroup>
+      <ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>view</Name>
+      <DisplayName>#Lang(111)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(211)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(405)|0)|(#Lang(406)|1)|(#Lang(407)|2))</CodeInterface>
+      <Colorgroup>4</Colorgroup>
+      <ErrorValidationMessage>#Lang(311)</ErrorValidationMessage>
+      <RegularExpressionValidation>^.*$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>display_date</Name>
+      <DisplayName>#Lang(112)</DisplayName>
+      <DefaultValue>2010-01-01</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(212)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(15)</CodeInterface>
+      <Colorgroup>4</Colorgroup>
+      <ErrorValidationMessage>#Lang(312)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>time_format</Name>
+      <DisplayName>#Lang(113)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(213)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(408)|0)|(#Lang(409)|1))</CodeInterface>
+      <Colorgroup>4</Colorgroup>
+      <ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
+      <RegularExpressionValidation>12|24</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>first_day</Name>
+      <DisplayName>#Lang(114)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(214)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(411)|1)|(#Lang(412)|2)|(#Lang(413)|3)|(#Lang(414)|4)|(#Lang(415)|5)|(#Lang(416)|6)|(#Lang(417)|0))</CodeInterface>
+      <Colorgroup>4</Colorgroup>
+      <ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
+      <RegularExpressionValidation>[0-6]</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>day_names</Name>
+      <DisplayName>#Lang(115)</DisplayName>
+      <DefaultValue>Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(215)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(300)</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(315)</ErrorValidationMessage>
+      <RegularExpressionValidation>[*,*,*,*,*,*,*]</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>short_day_names</Name>
+      <DisplayName>#Lang(116)</DisplayName>
+      <DefaultValue>Mon,Tue,Wed,Thu,Fri,Sat,Sun</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(216)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(300)</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(316)</ErrorValidationMessage>
+      <RegularExpressionValidation>[*,*,*,*,*,*,*]</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>short_month_names</Name>
+      <DisplayName>#Lang(117)</DisplayName>
+      <DefaultValue>Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(217)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(300)</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
+      <RegularExpressionValidation>[*,*,*,*,*,*,*]</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>month_names</Name>
+      <DisplayName>#Lang(118)</DisplayName>
+      <DefaultValue>January,February,March,April,May,June,July,August,September,October,November,December</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(218)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(300)</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(318)</ErrorValidationMessage>
+      <RegularExpressionValidation>[*,*,*,*,*,*,*]</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>editable</Name>
+      <DisplayName>#Lang(119)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(219)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(418)|0)|(#Lang(419)|1))</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(319)</ErrorValidationMessage>
+      <RegularExpressionValidation>[0-1]</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>first_hour</Name>
+      <DisplayName>#Lang(121)</DisplayName>
+      <DefaultValue>8</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(221)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(300)</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(321)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>all_day_visible</Name>
+      <DisplayName>#Lang(122)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(222)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(421)|0)|(#Lang(422)|1))</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(322)</ErrorValidationMessage>
+      <RegularExpressionValidation>[0-1]</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>all_day_title</Name>
+      <DisplayName>#Lang(123)</DisplayName>
+      <DefaultValue/>
+      <Visible>1</Visible>
+      <Help>#Lang(223)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(300)</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(323)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>selectable</Name>
+      <DisplayName>#Lang(124)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(224)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(423)|0)|(#Lang(424)|1))</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(324)</ErrorValidationMessage>
+      <RegularExpressionValidation>[0-1]</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>slot_minutes</Name>
+      <DisplayName>#Lang(125)</DisplayName>
+      <DefaultValue>5</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(225)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(425)|0)|(#Lang(426)|1)|(#Lang(427)|2)|(#Lang(428)|3)|(#Lang(429)|4)|(#Lang(431)|5))</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(325)</ErrorValidationMessage>
+      <RegularExpressionValidation>[0-5]</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>lazyloading</Name>
+      <DisplayName>#Lang(126)</DisplayName>
+      <DefaultValue>1</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(226)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(432)|1)|(#Lang(433)|0))</CodeInterface>
+      <Colorgroup>3</Colorgroup>
+      <ErrorValidationMessage>#Lang(326)</ErrorValidationMessage>
+      <RegularExpressionValidation>[0-1]</RegularExpressionValidation>
+    </Attribute>
+  </Attributes>
+  <Languages>
+    <Language Code="en_US">
+      <Sentence ID="001">Full calendar</Sentence>
+      <Sentence ID="002">The Full calendar type produces an object displayed as a calendar, that allows creating, editing, viewing and deleting the events.</Sentence>
+      <Sentence ID="003"></Sentence>
+      <Sentence ID="101"></Sentence>
+      <Sentence ID="102">Hierarchy</Sentence>
+      <Sentence ID="103">Visibility</Sentence>
+      <Sentence ID="104">Z-Index</Sentence>
+      <Sentence ID="105">Top</Sentence>
+      <Sentence ID="106">Left</Sentence>
+      <Sentence ID="107">Width</Sentence>
+      <Sentence ID="108">Height</Sentence>
+      <Sentence ID="109">Events</Sentence>
+      <Sentence ID="111">View</Sentence>
+      <Sentence ID="112">Default date</Sentence>
+      <Sentence ID="113">Time format</Sentence>
+      <Sentence ID="114">First day in week</Sentence>
+      <Sentence ID="115">Day names</Sentence>
+      <Sentence ID="116">Short Day Names</Sentence>
+      <Sentence ID="117">Short Month Names</Sentence>
+      <Sentence ID="118">Month Names</Sentence>
+      <Sentence ID="119">Editable</Sentence>
+      <Sentence ID="121">First hour</Sentence>
+      <Sentence ID="122">All-day slot visibility</Sentence>
+      <Sentence ID="123">All-day title</Sentence>
+      <Sentence ID="124">Selectable</Sentence>
+      <Sentence ID="125">Slot minutes interval</Sentence>
+      <Sentence ID="126">lazyLoading</Sentence>
+      <Sentence ID="201"></Sentence>
+      <Sentence ID="202">The order of rendering the object on the page. The objects with identical values of the Hierarchy attribute are rendered in the order they are written in the XML-file of the VDOM application.</Sentence>
+      <Sentence ID="203">The visibility of the object. In any case the object will exist on the web page, this attribute only makes it invisible.</Sentence>
+      <Sentence ID="204">The position in visual hierarchy of objects. If you have several objects in one container situated on each other, the value of 'Z-Index' attribute indicates the order of their displaying. The larger the value is, the upper the object is situated.</Sentence>
+      <Sentence ID="205">Spacing in pixels between the object and the top border of the container, in which the object is situated.</Sentence>
+      <Sentence ID="206">Spacing in pixels between the object and the left border of the container, in which the object is situated.</Sentence>
+      <Sentence ID="207">The width of the object in pixels.</Sentence>
+      <Sentence ID="208">The height of the object in pixels.</Sentence>
+      <Sentence ID="209">The list of events, which are represented as \href{www.ietf.org/rfc/rfc2445.txt}{iCalendar} objects.</Sentence>
+      <Sentence ID="211">The way of displaying the object on loading.</Sentence>
+      <Sentence ID="212">The initial date in 'YYYY-MM-DD' format, which is used on loading the object.</Sentence>
+      <Sentence ID="213">The format of displaying the time. If it is set to 12, the time will be displayed as '11am' and '8.30pm'; if it is set to 24, the time will be displayed as '11.00' and '20.30'.</Sentence>
+      <Sentence ID="214">The day of the week that is displayed first.</Sentence>
+      <Sentence ID="215">The names of the days of the week, must be entered through commas without spaces.</Sentence>
+      <Sentence ID="216">The short names of the days of the week, must be entered through commas without spaces.</Sentence>
+      <Sentence ID="217">The short names of the months, must be entered through commas without spaces.</Sentence>
+      <Sentence ID="218">The names of the months, must be entered through commas without spaces.</Sentence>
+      <Sentence ID="219">The possibility of modifying the events. If it is set to 'Yes', the events can be modified, if 'No'---cannot.</Sentence>
+      <Sentence ID="221">The first hour that will be visible in the scroll pane. The values must be from 0-23, where 0=midnight, 1=1am and so on. The user will be able to scroll upwards to see events before this time.</Sentence>
+      <Sentence ID="222">Define whether the 'all-day' slot is displayed at the top of the calendar or not.</Sentence>
+      <Sentence ID="223">The title of the 'all-day' slot at the top of the calendar.</Sentence>
+      <Sentence ID="224">Allow a user to highlight multiple days or timeslots by clicking and dragging.</Sentence>
+      <Sentence ID="225">The frequency of displaying time slots, in minutes.</Sentence>
+      <Sentence ID="226">Loading data dynamically, defines in what case a request for a new list of events will be sent to the server. If it is set to 'No', a request is sent each time some change of date/view takes place; if to 'Yes'---a request is sent each time a transition to the next/previous month takes place.</Sentence>
+      <Sentence ID="301"></Sentence>
+      <Sentence ID="302">Incorrect value, must be positive integer</Sentence>
+      <Sentence ID="303">Incorrect value</Sentence>
+      <Sentence ID="304">Incorrect value, must be integer from 0 to 99</Sentence>
+      <Sentence ID="305">Incorrect value, must be positive integer</Sentence>
+      <Sentence ID="306">Incorrect value, must be positive integer</Sentence>
+      <Sentence ID="307">Incorrect value, must be positive integer</Sentence>
+      <Sentence ID="308">Incorrect value, must be positive integer</Sentence>
+      <Sentence ID="309">Incorrect value, must be positive integer</Sentence>
+      <Sentence ID="311">Incorrect value</Sentence>
+      <Sentence ID="312">Incorrect value</Sentence>
+      <Sentence ID="313">time format should be 12 or 24</Sentence>
+      <Sentence ID="314">First day: value should be between 0 and 6</Sentence>
+      <Sentence ID="315">enter list with names of weekdays.</Sentence>
+      <Sentence ID="316">enter list with names of weekdays.</Sentence>
+      <Sentence ID="317">enter list with names of weekdays.</Sentence>
+      <Sentence ID="318">enter list with names of weekdays.</Sentence>
+      <Sentence ID="319">Incorrect value</Sentence>
+      <Sentence ID="321">Incorrect value</Sentence>
+      <Sentence ID="322">Incorrect value</Sentence>
+      <Sentence ID="323">Incorrect value</Sentence>
+      <Sentence ID="324">Incorrect value</Sentence>
+      <Sentence ID="325">Incorrect value</Sentence>
+      <Sentence ID="326"></Sentence>
+      <Sentence ID="401"></Sentence>
+      <Sentence ID="402"></Sentence>
+      <Sentence ID="403">Invisible</Sentence>
+      <Sentence ID="404">Visible</Sentence>
+      <Sentence ID="405">Month</Sentence>
+      <Sentence ID="406">Week</Sentence>
+      <Sentence ID="407">Day</Sentence>
+      <Sentence ID="408">12</Sentence>
+      <Sentence ID="409">24</Sentence>
+      <Sentence ID="411">MO</Sentence>
+      <Sentence ID="412">TU</Sentence>
+      <Sentence ID="413">WE</Sentence>
+      <Sentence ID="414">TH</Sentence>
+      <Sentence ID="415">FR</Sentence>
+      <Sentence ID="416">SA</Sentence>
+      <Sentence ID="417">SU</Sentence>
+      <Sentence ID="418">No</Sentence>
+      <Sentence ID="419">Yes</Sentence>
+      <Sentence ID="421">No</Sentence>
+      <Sentence ID="422">Yes</Sentence>
+      <Sentence ID="423">No</Sentence>
+      <Sentence ID="424">Yes</Sentence>
+      <Sentence ID="425">5</Sentence>
+      <Sentence ID="426">10</Sentence>
+      <Sentence ID="427">15</Sentence>
+      <Sentence ID="428">20</Sentence>
+      <Sentence ID="429">25</Sentence>
+      <Sentence ID="431">30</Sentence>
+      <Sentence ID="432">Yes</Sentence>
+      <Sentence ID="433">No</Sentence>
+      <Sentence ID="501">Resize the object's width and height.</Sentence>
+      <Sentence ID="502">Hide the object.</Sentence>
+      <Sentence ID="503">Show the object.</Sentence>
+      <Sentence ID="504">Remove events from the calendar.</Sentence>
+      <Sentence ID="505">Move the object to a new position.</Sentence>
+      <Sentence ID="506">Go to the specified date.</Sentence>
+      <Sentence ID="507">Set new value of the 'Z-Index' attribute.</Sentence>
+      <Sentence ID="508">Change the value of the 'View' attribute.</Sentence>
+      <Sentence ID="509">Add events source dynamically, including the events with the recurrence rule. Events will be immediately fetched from this source and placed on the calendar.</Sentence>
+      <Sentence ID="511">Go to the previous month, week or year (depending on the value of the 'View' attribute).</Sentence>
+      <Sentence ID="512">Add events source dynamically, except the events with the recurrence rule. Events will be immediately fetched from this source and placed on the calendar.</Sentence>
+      <Sentence ID="513">Go to the next month, week, or year (depending on the value of the 'View' attribute).</Sentence>
+      <Sentence ID="514"></Sentence>
+      <Sentence ID="515"></Sentence>
+      <Sentence ID="516"></Sentence>
+      <Sentence ID="517"></Sentence>
+      <Sentence ID="518"></Sentence>
+      <Sentence ID="519"></Sentence>
+      <Sentence ID="521"></Sentence>
+      <Sentence ID="522"></Sentence>
+      <Sentence ID="523"></Sentence>
+      <Sentence ID="524"></Sentence>
+      <Sentence ID="525"></Sentence>
+      <Sentence ID="526"></Sentence>
+      <Sentence ID="527"></Sentence>
+      <Sentence ID="528"></Sentence>
+      <Sentence ID="601">Visibility</Sentence>
+      <Sentence ID="602">Visibility</Sentence>
+      <Sentence ID="603">Visibility</Sentence>
+      <Sentence ID="604">Next</Sentence>
+      <Sentence ID="605">Visibility</Sentence>
+      <Sentence ID="606">Visibility</Sentence>
+      <Sentence ID="607">Visibility</Sentence>
+      <Sentence ID="608">Visibility</Sentence>
+      <Sentence ID="609">Visibility</Sentence>
+      <Sentence ID="611">Previous</Sentence>
+      <Sentence ID="612">Visibility</Sentence>
+      <Sentence ID="613">Next</Sentence>
+      <Sentence ID="701">Incorrect value</Sentence>
+      <Sentence ID="702">Incorrect value</Sentence>
+      <Sentence ID="703">Incorrect value</Sentence>
+      <Sentence ID="704">Incorrect value</Sentence>
+      <Sentence ID="705">Incorrect value</Sentence>
+      <Sentence ID="706">Incorrect value</Sentence>
+      <Sentence ID="707">Incorrect value</Sentence>
+      <Sentence ID="708">Incorrect value</Sentence>
+      <Sentence ID="709">Incorrect value</Sentence>
+      <Sentence ID="711">Incorrect value</Sentence>
+      <Sentence ID="712">Incorrect value</Sentence>
+      <Sentence ID="713">Incorrect value</Sentence>
+      <Sentence ID="714">Incorrect value</Sentence>
+      <Sentence ID="801">Incorrect value</Sentence>
+      <Sentence ID="802">Incorrect value</Sentence>
+      <Sentence ID="803">Incorrect value</Sentence>
+      <Sentence ID="804">Incorrect value</Sentence>
+      <Sentence ID="805">Incorrect value</Sentence>
+      <Sentence ID="806">Incorrect value</Sentence>
+      <Sentence ID="807">Date format - YYYY-MM-DD</Sentence>
+      <Sentence ID="808">Date format - YYYY-MM-DD</Sentence>
+      <Sentence ID="809">Date format - YYYY-MM-DD</Sentence>
+      <Sentence ID="811">Incorrect value</Sentence>
+      <Sentence ID="812">'month','week','day'</Sentence>
+      <Sentence ID="813">Date format - YYYY-MM-DD</Sentence>
+      <Sentence ID="814">Date format - YYYY-MM-DD</Sentence>
+      <Sentence ID="901">Start</Sentence>
+      <Sentence ID="902">Start</Sentence>
+      <Sentence ID="903">Start</Sentence>
+      <Sentence ID="904">Start</Sentence>
+      <Sentence ID="905">Start</Sentence>
+      <Sentence ID="906">Start</Sentence>
+      <Sentence ID="907">Start</Sentence>
+      <Sentence ID="908">Start</Sentence>
+      <Sentence ID="909">Start</Sentence>
+      <Sentence ID="911">Start</Sentence>
+      <Sentence ID="912">Start</Sentence>
+      <Sentence ID="913">Start</Sentence>
+      <Sentence ID="914">Start</Sentence>
+      <Sentence ID="915">Start</Sentence>
+      <Sentence ID="916">Start</Sentence>
+      <Sentence ID="917">Start</Sentence>
+      <Sentence ID="918">Start</Sentence>
+      <Sentence ID="919">Start</Sentence>
+      <Sentence ID="921">Start</Sentence>
+      <Sentence ID="922">Start</Sentence>
+      <Sentence ID="923">Start</Sentence>
+      <Sentence ID="924">Start</Sentence>
+      <Sentence ID="925">Start</Sentence>
+      <Sentence ID="926">Start</Sentence>
+      <Sentence ID="927">Start</Sentence>
+      <Sentence ID="928">Start</Sentence>
+      <Sentence ID="929">Start</Sentence>
+      <Sentence ID="931">Start</Sentence>
+      <Sentence ID="932">Start</Sentence>
+      <Sentence ID="933">Start</Sentence>
+      <Sentence ID="934">Start</Sentence>
+      <Sentence ID="935">Start</Sentence>
+      <Sentence ID="936">Start</Sentence>
+      <Sentence ID="937">Start</Sentence>
+      <Sentence ID="938">Start</Sentence>
+      <Sentence ID="939">Start</Sentence>
+      <Sentence ID="941">Start</Sentence>
+      <Sentence ID="942">Start</Sentence>
+      <Sentence ID="943">Start</Sentence>
+      <Sentence ID="944">Start</Sentence>
+      <Sentence ID="945">Start</Sentence>
+      <Sentence ID="946">Start</Sentence>
+      <Sentence ID="947">Start</Sentence>
+      <Sentence ID="948">Start</Sentence>
+      <Sentence ID="949">Start</Sentence>
+      <Sentence ID="951">Start</Sentence>
+    </Language>
+    <Language Code="fr_FR">
+      <Sentence ID="001">Bouton</Sentence>
+      <Sentence ID="002">Lien sur une image</Sentence>
+      <Sentence ID="003"></Sentence>
+      <Sentence ID="101"></Sentence>
+      <Sentence ID="102">Hierarchie</Sentence>
+      <Sentence ID="103">Visibilite</Sentence>
+      <Sentence ID="104">Z-Index</Sentence>
+      <Sentence ID="105">Haut</Sentence>
+      <Sentence ID="106">Gauche</Sentence>
+      <Sentence ID="107">Largeur</Sentence>
+      <Sentence ID="108">Hauteur</Sentence>
+      <Sentence ID="109">WTF</Sentence>
+      <Sentence ID="111">OMG</Sentence>
+      <Sentence ID="112">displayDate</Sentence>
+      <Sentence ID="113"></Sentence>
+      <Sentence ID="114">Time Format</Sentence>
+      <Sentence ID="115"></Sentence>
+      <Sentence ID="116">Short Day Names</Sentence>
+      <Sentence ID="117">Short Month Names</Sentence>
+      <Sentence ID="118">Month Names</Sentence>
+      <Sentence ID="119">Editable</Sentence>
+      <Sentence ID="121">First hour</Sentence>
+      <Sentence ID="122">All-day slot visibility</Sentence>
+      <Sentence ID="123">All-day title</Sentence>
+      <Sentence ID="124">Selectable</Sentence>
+      <Sentence ID="125">Slot minutes interval</Sentence>
+      <Sentence ID="126"></Sentence>
+      <Sentence ID="201"></Sentence>
+      <Sentence ID="202">Hierarchie de l'objet, ordre de chargement de l'objet par rapport aux autres</Sentence>
+      <Sentence ID="203">Afficher ou cacher l'objet</Sentence>
+      <Sentence ID="204">Niveau de superposition de l'objet par rapport aux autres</Sentence>
+      <Sentence ID="205">Distance depuis le bord haut de l'objet parent en pixels</Sentence>
+      <Sentence ID="206">Distance depuis le bord gauche de l'objet parent en pixels</Sentence>
+      <Sentence ID="207">Largeur de l'objet en pixels</Sentence>
+      <Sentence ID="208">Hauteur de l'objet en pixels</Sentence>
+      <Sentence ID="209">Hierarchie de l'objet, ordre de chargement de l'objet par rapport aux autres</Sentence>
+      <Sentence ID="211"></Sentence>
+      <Sentence ID="212">The initial date when the calendar loads.</Sentence>
+      <Sentence ID="213">Determines the time-text that will be displayed on each event.</Sentence>
+      <Sentence ID="214">The day that each week begins.</Sentence>
+      <Sentence ID="215">Full names of days-of-week.</Sentence>
+      <Sentence ID="216">Full names of days-of-week.</Sentence>
+      <Sentence ID="217">Full names of days-of-week.</Sentence>
+      <Sentence ID="218">Full names of days-of-week.</Sentence>
+      <Sentence ID="219">Determines whether the events on the calendar can be modified.</Sentence>
+      <Sentence ID="221">The text titling the "all-day" slot at the top of the calendar.</Sentence>
+      <Sentence ID="222">Determines if the "all-day" slot is displayed at the top of the calendar.</Sentence>
+      <Sentence ID="223">The text titling the "all-day" slot at the top of the calendar.</Sentence>
+      <Sentence ID="224">Allows a user to highlight multiple days or timeslots by clicking and dragging.</Sentence>
+      <Sentence ID="225">The frequency for displaying time slots, in minutes.</Sentence>
+      <Sentence ID="226"></Sentence>
+      <Sentence ID="301"></Sentence>
+      <Sentence ID="302">Valeur Incorrecte, doit etre positive</Sentence>
+      <Sentence ID="303">Valeur Incorrecte</Sentence>
+      <Sentence ID="304">Valeur Incorrecte, doit etre comprise entre 0 et 99</Sentence>
+      <Sentence ID="305">Valeur Incorrecte, doit etre positive</Sentence>
+      <Sentence ID="306">Valeur Incorrecte, doit etre positive</Sentence>
+      <Sentence ID="307">Valeur Incorrecte, doit etre positive</Sentence>
+      <Sentence ID="308">Valeur Incorrecte, doit etre positive</Sentence>
+      <Sentence ID="309">Valeur Incorrecte, doit etre positive</Sentence>
+      <Sentence ID="311">Valeur Incorrecte</Sentence>
+      <Sentence ID="312">Valeur Incorrecte</Sentence>
+      <Sentence ID="313"></Sentence>
+      <Sentence ID="314"></Sentence>
+      <Sentence ID="315"></Sentence>
+      <Sentence ID="316"></Sentence>
+      <Sentence ID="317"></Sentence>
+      <Sentence ID="318"></Sentence>
+      <Sentence ID="319">Valeur Incorrecte</Sentence>
+      <Sentence ID="321">Valeur Incorrecte</Sentence>
+      <Sentence ID="322">Valeur Incorrecte</Sentence>
+      <Sentence ID="323">Valeur Incorrecte</Sentence>
+      <Sentence ID="324">Valeur Incorrecte</Sentence>
+      <Sentence ID="325">Valeur Incorrecte</Sentence>
+      <Sentence ID="326"></Sentence>
+      <Sentence ID="401"></Sentence>
+      <Sentence ID="402"></Sentence>
+      <Sentence ID="403">Invisible</Sentence>
+      <Sentence ID="404">Visible</Sentence>
+      <Sentence ID="405">month</Sentence>
+      <Sentence ID="406">week</Sentence>
+      <Sentence ID="407">day</Sentence>
+      <Sentence ID="408">12</Sentence>
+      <Sentence ID="409">24</Sentence>
+      <Sentence ID="411">MO</Sentence>
+      <Sentence ID="412">TU</Sentence>
+      <Sentence ID="413">WE</Sentence>
+      <Sentence ID="414">TH</Sentence>
+      <Sentence ID="415">FR</Sentence>
+      <Sentence ID="416">SA</Sentence>
+      <Sentence ID="417">SU</Sentence>
+      <Sentence ID="418">No</Sentence>
+      <Sentence ID="419">Yes</Sentence>
+      <Sentence ID="421">No</Sentence>
+      <Sentence ID="422">Yes</Sentence>
+      <Sentence ID="423">No</Sentence>
+      <Sentence ID="424">Yes</Sentence>
+      <Sentence ID="425"></Sentence>
+      <Sentence ID="426"></Sentence>
+      <Sentence ID="427"></Sentence>
+      <Sentence ID="428"></Sentence>
+      <Sentence ID="429"></Sentence>
+      <Sentence ID="431"></Sentence>
+      <Sentence ID="432">Yes</Sentence>
+      <Sentence ID="433">No</Sentence>
+      <Sentence ID="501">Visibilite</Sentence>
+      <Sentence ID="502">Visibilite</Sentence>
+      <Sentence ID="503">Visibilite</Sentence>
+      <Sentence ID="504">Prochaine</Sentence>
+      <Sentence ID="505">Visibilite</Sentence>
+      <Sentence ID="506">Visibilite</Sentence>
+      <Sentence ID="507">Visibilite</Sentence>
+      <Sentence ID="508">Visibilite</Sentence>
+      <Sentence ID="509">Visibilite</Sentence>
+      <Sentence ID="511">Précédente</Sentence>
+      <Sentence ID="512">Visibilite</Sentence>
+      <Sentence ID="513">Prochaine</Sentence>
+      <Sentence ID="514"></Sentence>
+      <Sentence ID="515"></Sentence>
+      <Sentence ID="516"></Sentence>
+      <Sentence ID="517"></Sentence>
+      <Sentence ID="518"></Sentence>
+      <Sentence ID="519"></Sentence>
+      <Sentence ID="521"></Sentence>
+      <Sentence ID="522"></Sentence>
+      <Sentence ID="523"></Sentence>
+      <Sentence ID="524"></Sentence>
+      <Sentence ID="525"></Sentence>
+      <Sentence ID="526"></Sentence>
+      <Sentence ID="527"></Sentence>
+      <Sentence ID="528"></Sentence>
+      <Sentence ID="601">Visibilite</Sentence>
+      <Sentence ID="602">Visibilite</Sentence>
+      <Sentence ID="603">Visibilite</Sentence>
+      <Sentence ID="604">Prochaine</Sentence>
+      <Sentence ID="605">Visibilite</Sentence>
+      <Sentence ID="606">Visibilite</Sentence>
+      <Sentence ID="607">Visibilite</Sentence>
+      <Sentence ID="608">Visibilite</Sentence>
+      <Sentence ID="609">Visibilite</Sentence>
+      <Sentence ID="611">Précédente</Sentence>
+      <Sentence ID="612">Visibilite</Sentence>
+      <Sentence ID="613">Prochaine</Sentence>
+      <Sentence ID="701">Valeur Incorrecte</Sentence>
+      <Sentence ID="702">Valeur Incorrecte</Sentence>
+      <Sentence ID="703">Valeur Incorrecte</Sentence>
+      <Sentence ID="704">Valeur Incorrecte</Sentence>
+      <Sentence ID="705">Valeur Incorrecte</Sentence>
+      <Sentence ID="706">Valeur Incorrecte</Sentence>
+      <Sentence ID="707">Valeur Incorrecte</Sentence>
+      <Sentence ID="708">Valeur Incorrecte</Sentence>
+      <Sentence ID="709">Valeur Incorrecte</Sentence>
+      <Sentence ID="711">Valeur Incorrecte</Sentence>
+      <Sentence ID="712">Valeur Incorrecte</Sentence>
+      <Sentence ID="713">Valeur Incorrecte</Sentence>
+      <Sentence ID="714">Valeur Incorrecte</Sentence>
+      <Sentence ID="801">Valeur Incorrecte</Sentence>
+      <Sentence ID="802">Valeur Incorrecte</Sentence>
+      <Sentence ID="803">Valeur Incorrecte</Sentence>
+      <Sentence ID="804">Valeur Incorrecte</Sentence>
+      <Sentence ID="805">Valeur Incorrecte</Sentence>
+      <Sentence ID="806">Valeur Incorrecte</Sentence>
+      <Sentence ID="807">Date format - YYYY-MM-DD</Sentence>
+      <Sentence ID="808">Date format - YYYY-MM-DD</Sentence>
+      <Sentence ID="809">Date format - YYYY-MM-DD</Sentence>
+      <Sentence ID="811">Valeur Incorrecte</Sentence>
+      <Sentence ID="812">'month','week','day'</Sentence>
+      <Sentence ID="813">Date format - YYYY-MM-DD</Sentence>
+      <Sentence ID="814">Date format - YYYY-MM-DD</Sentence>
+      <Sentence ID="901">Start</Sentence>
+      <Sentence ID="902">Start</Sentence>
+      <Sentence ID="903">Start</Sentence>
+      <Sentence ID="904">Start</Sentence>
+      <Sentence ID="905">Start</Sentence>
+      <Sentence ID="906">Start</Sentence>
+      <Sentence ID="907">Start</Sentence>
+      <Sentence ID="908">Start</Sentence>
+      <Sentence ID="909">Start</Sentence>
+      <Sentence ID="911">Start</Sentence>
+      <Sentence ID="912">Start</Sentence>
+      <Sentence ID="913">Start</Sentence>
+      <Sentence ID="914">Start</Sentence>
+      <Sentence ID="915">Start</Sentence>
+      <Sentence ID="916">Start</Sentence>
+      <Sentence ID="917">Start</Sentence>
+      <Sentence ID="918">Start</Sentence>
+      <Sentence ID="919">Start</Sentence>
+      <Sentence ID="921">Start</Sentence>
+      <Sentence ID="922">Start</Sentence>
+      <Sentence ID="923">Start</Sentence>
+      <Sentence ID="924">Start</Sentence>
+      <Sentence ID="925">Start</Sentence>
+      <Sentence ID="926">Start</Sentence>
+      <Sentence ID="927">Start</Sentence>
+      <Sentence ID="928">Start</Sentence>
+      <Sentence ID="929">Start</Sentence>
+      <Sentence ID="931">Start</Sentence>
+      <Sentence ID="932">Start</Sentence>
+      <Sentence ID="933">Start</Sentence>
+      <Sentence ID="934">Start</Sentence>
+      <Sentence ID="935">Start</Sentence>
+      <Sentence ID="936">Start</Sentence>
+      <Sentence ID="937">Start</Sentence>
+      <Sentence ID="938">Start</Sentence>
+      <Sentence ID="939">Start</Sentence>
+      <Sentence ID="941">Start</Sentence>
+      <Sentence ID="942">Start</Sentence>
+      <Sentence ID="943">Start</Sentence>
+      <Sentence ID="944">Start</Sentence>
+      <Sentence ID="945">Start</Sentence>
+      <Sentence ID="946">Start</Sentence>
+      <Sentence ID="947">Start</Sentence>
+      <Sentence ID="948">Start</Sentence>
+      <Sentence ID="949">Start</Sentence>
+      <Sentence ID="951">Start</Sentence>
+    </Language>
+    <Language Code="ru_RU">
+      <Sentence ID="001">Кнопка</Sentence>
+      <Sentence ID="002">Кнопка в виде ссылки или изображения</Sentence>
+      <Sentence ID="003"></Sentence>
+      <Sentence ID="101"></Sentence>
+      <Sentence ID="102">Иерархия</Sentence>
+      <Sentence ID="103">Отображение</Sentence>
+      <Sentence ID="104">Z-Индекс</Sentence>
+      <Sentence ID="105">Верх</Sentence>
+      <Sentence ID="106">Лево</Sentence>
+      <Sentence ID="107">Ширина</Sentence>
+      <Sentence ID="108">Высота</Sentence>
+      <Sentence ID="109">События</Sentence>
+      <Sentence ID="111">Вид</Sentence>
+      <Sentence ID="112">Отображаемая дата</Sentence>
+      <Sentence ID="113">Формат времени</Sentence>
+      <Sentence ID="114"></Sentence>
+      <Sentence ID="115"></Sentence>
+      <Sentence ID="116">Short Day Names</Sentence>
+      <Sentence ID="117">Short Month Names</Sentence>
+      <Sentence ID="118">Month Names</Sentence>
+      <Sentence ID="119">Editable</Sentence>
+      <Sentence ID="121">First hour</Sentence>
+      <Sentence ID="122">All-day slot visibility</Sentence>
+      <Sentence ID="123">All-day title</Sentence>
+      <Sentence ID="124">Selectable</Sentence>
+      <Sentence ID="125">Slot minutes interval</Sentence>
+      <Sentence ID="126"></Sentence>
+      <Sentence ID="201"></Sentence>
+      <Sentence ID="202">Приоритет в потоке гипертекста</Sentence>
+      <Sentence ID="203">Отображается объект или нет</Sentence>
+      <Sentence ID="204">Положение в визуальной иерархии объектов</Sentence>
+      <Sentence ID="205">Расстояние от верхней границы родительского контейнера до объекта в пикселях</Sentence>
+      <Sentence ID="206">Расстояние от левой границы родительского контейнера до объекта в пикселях</Sentence>
+      <Sentence ID="207">Ширина объекта в пикселях</Sentence>
+      <Sentence ID="208">Высота объекта в пикселях</Sentence>
+      <Sentence ID="209">Приоритет в потоке гипертекста</Sentence>
+      <Sentence ID="211">Вид календаря при загрузке</Sentence>
+      <Sentence ID="212">Дата при загрузке</Sentence>
+      <Sentence ID="213">Determines the time-text that will be displayed on each event.</Sentence>
+      <Sentence ID="214">The day that each week begins.</Sentence>
+      <Sentence ID="215">Full names of days-of-week.</Sentence>
+      <Sentence ID="216">Full names of days-of-week.</Sentence>
+      <Sentence ID="217">Full names of days-of-week.</Sentence>
+      <Sentence ID="218">Full names of days-of-week.</Sentence>
+      <Sentence ID="219">Determines whether the events on the calendar can be modified.</Sentence>
+      <Sentence ID="221">The text titling the "all-day" slot at the top of the calendar.</Sentence>
+      <Sentence ID="222">Determines if the "all-day" slot is displayed at the top of the calendar.</Sentence>
+      <Sentence ID="223">The text titling the "all-day" slot at the top of the calendar.</Sentence>
+      <Sentence ID="224">Allows a user to highlight multiple days or timeslots by clicking and dragging.</Sentence>
+      <Sentence ID="225">The frequency for displaying time slots, in minutes.</Sentence>
+      <Sentence ID="226"></Sentence>
+      <Sentence ID="301"></Sentence>
+      <Sentence ID="302">Неправильное значение</Sentence>
+      <Sentence ID="303">Неправильное значение</Sentence>
+      <Sentence ID="304">Неправильное значение, должно быть целое число от 0 до 99</Sentence>
+      <Sentence ID="305">Неправильное значение, должно быть целое положительное число</Sentence>
+      <Sentence ID="306">Неправильное значение, должно быть целое положительное число</Sentence>
+      <Sentence ID="307">Неправильное значение, должно быть целое положительное число</Sentence>
+      <Sentence ID="308">Неправильное значение, должно быть целое положительное число</Sentence>
+      <Sentence ID="309">Неправильное значение</Sentence>
+      <Sentence ID="311">Неправильное значение</Sentence>
+      <Sentence ID="312">Неправильное значение</Sentence>
+      <Sentence ID="313"></Sentence>
+      <Sentence ID="314"></Sentence>
+      <Sentence ID="315"></Sentence>
+      <Sentence ID="316"></Sentence>
+      <Sentence ID="317"></Sentence>
+      <Sentence ID="318"></Sentence>
+      <Sentence ID="319">Неправильное значение</Sentence>
+      <Sentence ID="321">Неправильное значение</Sentence>
+      <Sentence ID="322">Неправильное значение</Sentence>
+      <Sentence ID="323">Неправильное значение</Sentence>
+      <Sentence ID="324">Неправильное значение</Sentence>
+      <Sentence ID="325">Неправильное значение</Sentence>
+      <Sentence ID="326"></Sentence>
+      <Sentence ID="401"></Sentence>
+      <Sentence ID="402"></Sentence>
+      <Sentence ID="403">Не отображается</Sentence>
+      <Sentence ID="404">Отображается</Sentence>
+      <Sentence ID="405">месяц</Sentence>
+      <Sentence ID="406">неделя</Sentence>
+      <Sentence ID="407">день</Sentence>
+      <Sentence ID="408">12</Sentence>
+      <Sentence ID="409">24</Sentence>
+      <Sentence ID="411">MO</Sentence>
+      <Sentence ID="412">TU</Sentence>
+      <Sentence ID="413">WE</Sentence>
+      <Sentence ID="414">TH</Sentence>
+      <Sentence ID="415">FR</Sentence>
+      <Sentence ID="416">SA</Sentence>
+      <Sentence ID="417">SU</Sentence>
+      <Sentence ID="418">No</Sentence>
+      <Sentence ID="419">Yes</Sentence>
+      <Sentence ID="421">No</Sentence>
+      <Sentence ID="422">Yes</Sentence>
+      <Sentence ID="423">No</Sentence>
+      <Sentence ID="424">Yes</Sentence>
+      <Sentence ID="425"></Sentence>
+      <Sentence ID="426"></Sentence>
+      <Sentence ID="427"></Sentence>
+      <Sentence ID="428"></Sentence>
+      <Sentence ID="429"></Sentence>
+      <Sentence ID="431"></Sentence>
+      <Sentence ID="432">Yes</Sentence>
+      <Sentence ID="433">No</Sentence>
+      <Sentence ID="501">Отображение</Sentence>
+      <Sentence ID="502">Отображение</Sentence>
+      <Sentence ID="503">Отображение</Sentence>
+      <Sentence ID="504">Вперед</Sentence>
+      <Sentence ID="505">Отображение</Sentence>
+      <Sentence ID="506">Отображение</Sentence>
+      <Sentence ID="507">Отображение</Sentence>
+      <Sentence ID="508">Отображение</Sentence>
+      <Sentence ID="509">Отображение</Sentence>
+      <Sentence ID="511">Назад</Sentence>
+      <Sentence ID="512">Отображение</Sentence>
+      <Sentence ID="513">Вперед</Sentence>
+      <Sentence ID="514"></Sentence>
+      <Sentence ID="515"></Sentence>
+      <Sentence ID="516"></Sentence>
+      <Sentence ID="517"></Sentence>
+      <Sentence ID="518"></Sentence>
+      <Sentence ID="519"></Sentence>
+      <Sentence ID="521"></Sentence>
+      <Sentence ID="522"></Sentence>
+      <Sentence ID="523"></Sentence>
+      <Sentence ID="524"></Sentence>
+      <Sentence ID="525"></Sentence>
+      <Sentence ID="526"></Sentence>
+      <Sentence ID="527"></Sentence>
+      <Sentence ID="528"></Sentence>
+      <Sentence ID="601">Отображение</Sentence>
+      <Sentence ID="602">Отображение</Sentence>
+      <Sentence ID="603">Отображение</Sentence>
+      <Sentence ID="604">Вперед</Sentence>
+      <Sentence ID="605">Отображение</Sentence>
+      <Sentence ID="606">Отображение</Sentence>
+      <Sentence ID="607">Отображение</Sentence>
+      <Sentence ID="608">Отображение</Sentence>
+      <Sentence ID="609">Отображение</Sentence>
+      <Sentence ID="611">Назад</Sentence>
+      <Sentence ID="612">Отображение</Sentence>
+      <Sentence ID="613">Вперед</Sentence>
+      <Sentence ID="701">Неправильное значение</Sentence>
+      <Sentence ID="702">Неправильное значение</Sentence>
+      <Sentence ID="703">Неправильное значение</Sentence>
+      <Sentence ID="704">Неправильное значение</Sentence>
+      <Sentence ID="705">Неправильное значение</Sentence>
+      <Sentence ID="706">Неправильное значение</Sentence>
+      <Sentence ID="707">Неправильное значение</Sentence>
+      <Sentence ID="708">Неправильное значение</Sentence>
+      <Sentence ID="709">Неправильное значение</Sentence>
+      <Sentence ID="711">Неправильное значение</Sentence>
+      <Sentence ID="712">Неправильное значение</Sentence>
+      <Sentence ID="713">Неправильное значение</Sentence>
+      <Sentence ID="714">Неправильное значение</Sentence>
+      <Sentence ID="801">Неправильное значение</Sentence>
+      <Sentence ID="802">Неправильное значение</Sentence>
+      <Sentence ID="803">Неправильное значение</Sentence>
+      <Sentence ID="804">Неправильное значение</Sentence>
+      <Sentence ID="805">Неправильное значение</Sentence>
+      <Sentence ID="806">Неправильное значение</Sentence>
+      <Sentence ID="807">Date format - ГГГГ-ММ-ДД</Sentence>
+      <Sentence ID="808">Date format - ГГГГ-ММ-ДД</Sentence>
+      <Sentence ID="809">Date format - ГГГГ-ММ-ДД</Sentence>
+      <Sentence ID="811">Неправильное значение</Sentence>
+      <Sentence ID="812">'month','week','day'</Sentence>
+      <Sentence ID="813">Date format - ГГГГ-ММ-ДД</Sentence>
+      <Sentence ID="814">Date format - ГГГГ-ММ-ДД</Sentence>
+      <Sentence ID="901">Начало</Sentence>
+      <Sentence ID="902">Начало</Sentence>
+      <Sentence ID="903">Начало</Sentence>
+      <Sentence ID="904">Начало</Sentence>
+      <Sentence ID="905">Начало</Sentence>
+      <Sentence ID="906">Начало</Sentence>
+      <Sentence ID="907">Начало</Sentence>
+      <Sentence ID="908">Начало</Sentence>
+      <Sentence ID="909">Начало</Sentence>
+      <Sentence ID="911">Начало</Sentence>
+      <Sentence ID="912">Начало</Sentence>
+      <Sentence ID="913">Начало</Sentence>
+      <Sentence ID="914">Начало</Sentence>
+      <Sentence ID="915">Начало</Sentence>
+      <Sentence ID="916">Начало</Sentence>
+      <Sentence ID="917">Начало</Sentence>
+      <Sentence ID="918">Начало</Sentence>
+      <Sentence ID="919">Начало</Sentence>
+      <Sentence ID="921">Начало</Sentence>
+      <Sentence ID="922">Начало</Sentence>
+      <Sentence ID="923">Начало</Sentence>
+      <Sentence ID="924">Начало</Sentence>
+      <Sentence ID="925">Начало</Sentence>
+      <Sentence ID="926">Начало</Sentence>
+      <Sentence ID="927">Начало</Sentence>
+      <Sentence ID="928">Начало</Sentence>
+      <Sentence ID="929">Начало</Sentence>
+      <Sentence ID="931">Начало</Sentence>
+      <Sentence ID="932">Начало</Sentence>
+      <Sentence ID="933">Начало</Sentence>
+      <Sentence ID="934">Начало</Sentence>
+      <Sentence ID="935">Начало</Sentence>
+      <Sentence ID="936">Начало</Sentence>
+      <Sentence ID="937">Начало</Sentence>
+      <Sentence ID="938">Начало</Sentence>
+      <Sentence ID="939">Начало</Sentence>
+      <Sentence ID="941">Начало</Sentence>
+      <Sentence ID="942">Начало</Sentence>
+      <Sentence ID="943">Начало</Sentence>
+      <Sentence ID="944">Начало</Sentence>
+      <Sentence ID="945">Начало</Sentence>
+      <Sentence ID="946">Начало</Sentence>
+      <Sentence ID="947">Начало</Sentence>
+      <Sentence ID="948">Начало</Sentence>
+      <Sentence ID="949">Начало</Sentence>
+      <Sentence ID="951">Начало</Sentence>
+    </Language>
+  </Languages>
+  <Resources>
+    <Resource ID="02dfd9db-16fe-3690-73e1-baf58cd3e6f4" Name="Style" Type="css"><![CDATA[LyoNCiAqIEZ1bGxDYWxlbmRhciB2MS41LjEgU3R5bGVzaGVldA0KICoNCiAqIENvcHlyaWdodCAo
 			YykgMjAxMSBBZGFtIFNoYXcNCiAqIER1YWwgbGljZW5zZWQgdW5kZXIgdGhlIE1JVCBhbmQgR1BM
 			IGxpY2Vuc2VzLCBsb2NhdGVkIGluDQogKiBNSVQtTElDRU5TRS50eHQgYW5kIEdQTC1MSUNFTlNF
 			LnR4dCByZXNwZWN0aXZlbHkuDQogKg0KICogRGF0ZTogU2F0IEFwciA5IDE0OjA5OjUxIDIwMTEg
@@ -1148,10 +1166,8 @@
 			CWZvbnQtc2l6ZTogMTFweCAgIWltcG9ydGFudDsNCglmb250LWZhbWlseTogbW9ub3NwYWNlOw0K
 			CXRleHQtYWxpZ246IGNlbnRlcjsNCgljdXJzb3I6IHMtcmVzaXplOw0KCX0NCgkNCi5mYy1hZ2Vu
 			ZGEgLnVpLXJlc2l6YWJsZS1yZXNpemluZyB7IC8qIFRPRE86IGJldHRlciBzZWxlY3RvciAqLw0K
-			CV9vdmVyZmxvdzogaGlkZGVuOw0KCX0NCgkNCgkNCg==
-		</Resource>
-		<Resource ID="10b18a20-59c9-2b2b-e4b3-7281bcc66d4f" Type="js" Name="fullcalendar">
-			LyoqDQogKiBAcHJlc2VydmUNCiAqIEZ1bGxDYWxlbmRhciB2MS41LjINCiAqIGh0dHA6Ly9hcnNo
+			CV9vdmVyZmxvdzogaGlkZGVuOw0KCX0NCgkNCgkNCg==]]></Resource>
+    <Resource ID="10b18a20-59c9-2b2b-e4b3-7281bcc66d4f" Name="fullcalendar" Type="js"><![CDATA[LyoqDQogKiBAcHJlc2VydmUNCiAqIEZ1bGxDYWxlbmRhciB2MS41LjINCiAqIGh0dHA6Ly9hcnNo
 			YXcuY29tL2Z1bGxjYWxlbmRhci8NCiAqDQogKiBVc2UgZnVsbGNhbGVuZGFyLmNzcyBmb3IgYmFz
 			aWMgc3R5bGluZy4NCiAqIEZvciBldmVudCBkcmFnICYgZHJvcCwgcmVxdWlyZXMgalF1ZXJ5IFVJ
 			IGRyYWdnYWJsZS4NCiAqIEZvciBldmVudCByZXNpemluZywgcmVxdWlyZXMgalF1ZXJ5IFVJIHJl
@@ -3448,10 +3464,8 @@
 			aV0gPSByaWdodHNbaV0gPT09IHVuZGVmaW5lZCA/IHQubGVmdChpKSArIGUoaSkud2lkdGgoKSA6
 			IHJpZ2h0c1tpXTsNCgl9Ow0KCQ0KCXQuY2xlYXIgPSBmdW5jdGlvbigpIHsNCgkJZWxlbWVudHMg
 			PSB7fTsNCgkJbGVmdHMgPSB7fTsNCgkJcmlnaHRzID0ge307DQoJfTsNCgkNCn0NCg0KfSkoalF1
-			ZXJ5KTs=
-		</Resource>
-		<Resource ID="295eb21b-f523-0b8a-a6fa-16b082054ab9" Type="png" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			ZXJ5KTs=]]></Resource>
+    <Resource ID="295eb21b-f523-0b8a-a6fa-16b082054ab9" Name="Icon" Type="png"><![CDATA[iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
 			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
 			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
@@ -3476,10 +3490,8 @@
 			AMiTL359TbLxndWNw/3Tr9vffzv7ud1ldaVDgDA7IYgTAJp6ubjQcWd3DG9pxOsrsXgBIvup1X0w
 			M9Frac/YCQ/4bv7vnbfJavD09trB0apo2o+LKYWeZCzSutR2Hp8/nNm6/4hMoD40MFKJQVPk0Tjk
 			CLm4maJIGkUPoGNBqlfK9Uqcya2TESlashzlh6+nyGEscnFIa9QGy7XBgS4UhQXqSff/AgwALvPF
-			NxWnjTQAAAAASUVORK5CYII=
-		</Resource>
-		<Resource ID="70817b3b-d42d-4273-2b06-16afdd3a785d" Type="png" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			NxWnjTQAAAAASUVORK5CYII=]]></Resource>
+    <Resource ID="70817b3b-d42d-4273-2b06-16afdd3a785d" Name="Icon" Type="png"><![CDATA[iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
 			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
 			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
@@ -3535,10 +3547,8 @@
 			kcMWx2XBawtEmN7HVsAo9Gpeh1FWXtsVHwGWAy9C1wSR/08cG0AgwJOWdVqhtR4Z4LVDyy2N83xg
 			+G9+IWvfvL6s4EymBwURLlPwmudDXGoahhLHRSsahSW//2JlgpQUMAlZ+V9Ui0Lr5LQkCIG2aZJG
 			nDjcp3uBfB+QeUzgQcjKH7762plLSZbzyVeUKpGZ0QYlOc+0n6U8l8BVqm/B05/oxPVfAgwAzZEz
-			6JfL6roAAAAASUVORK5CYII=
-		</Resource>
-		<Resource ID="c81084e1-0296-56fc-339a-1b9328e787dd" Type="js" Name="es5-shim.min.js">
-			KGZ1bmN0aW9uKG4peyJmdW5jdGlvbiI9PXR5cGVvZiBkZWZpbmU/ZGVmaW5lKG4pOiJmdW5jdGlv
+			6JfL6roAAAAASUVORK5CYII=]]></Resource>
+    <Resource ID="c81084e1-0296-56fc-339a-1b9328e787dd" Name="es5-shim.min.js" Type="js"><![CDATA[KGZ1bmN0aW9uKG4peyJmdW5jdGlvbiI9PXR5cGVvZiBkZWZpbmU/ZGVmaW5lKG4pOiJmdW5jdGlv
 			biI9PXR5cGVvZiBZVUk/WVVJLmFkZCgiZXM1IixuKTpuKCl9KShmdW5jdGlvbigpe2Z1bmN0aW9u
 			IG4oYSl7dHJ5e3JldHVybiBPYmplY3QuZGVmaW5lUHJvcGVydHkoYSwic2VudGluZWwiLHt9KSwi
 			c2VudGluZWwiaW4gYX1jYXRjaChjKXt9fUZ1bmN0aW9uLnByb3RvdHlwZS5iaW5kfHwoRnVuY3Rp
@@ -3695,10 +3705,8 @@
 			PShhPjB8fC0xKSpNYXRoLmZsb29yKE1hdGguYWJzKGEpKSk7cmV0dXJuIGF9LEQ9ImEiIT0iYSJb
 			MF0saT1mdW5jdGlvbihhKXtpZihhPT1udWxsKXRocm93IG5ldyBUeXBlRXJyb3IoImNhbid0IGNv
 			bnZlcnQgIithKyIgdG8gb2JqZWN0Iik7cmV0dXJuIEQmJnR5cGVvZiBhPT0ic3RyaW5nIiYmYT9h
-			LnNwbGl0KCIiKToKT2JqZWN0KGEpfX0pOw==
-		</Resource>
-		<Resource ID="d1e1abad-b15d-450e-b769-4fe10ccb02af" Type="js" Name="rrecur-parser.js">
-			Ly8gdXNlZCBmb3IgSUUgPCA5Ci8vIGFkYXB0ZWQgZnJvbSBodHRwczovL2RldmVsb3Blci5tb3pp
+			LnNwbGl0KCIiKToKT2JqZWN0KGEpfX0pOw==]]></Resource>
+    <Resource ID="d1e1abad-b15d-450e-b769-4fe10ccb02af" Name="rrecur-parser.js" Type="js"><![CDATA[Ly8gdXNlZCBmb3IgSUUgPCA5Ci8vIGFkYXB0ZWQgZnJvbSBodHRwczovL2RldmVsb3Blci5tb3pp
 			bGxhLm9yZy9lbi9KYXZhU2NyaXB0L1JlZmVyZW5jZS9HbG9iYWxfT2JqZWN0cy9BcnJheS9pbmRl
 			eE9mCmlmICghQXJyYXkucHJvdG90eXBlLmluZGV4T2YpCnsKCUFycmF5LnByb3RvdHlwZS5pbmRl
 			eE9mID0gZnVuY3Rpb24oZWx0IC8qLCBmcm9tKi8pCgl7CgkJdmFyIGxlbiA9IHRoaXMubGVuZ3Ro
@@ -4146,10 +4154,8 @@
 			b250aW51ZTsKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQogICAgICAgICAgICBpZiAo
 			IWZvdW5kKSB7CiAgICAgICAgICAgICAgICByZXR1cm4gZmFsc2U7CiAgICAgICAgICAgIH0KICAg
 			ICAgICB9CiAgICB9CgogICAgLy8gY2hlY2sgcnJ1bGVfYnlzZXRwb3MgcHJvY2Vzc2VkIGluIHBl
-			cmlvZF9sb29wCiAgICByZXR1cm4gdHJ1ZTsKfQoK
-		</Resource>
-		<Resource ID="e9bf2264-1626-4bfe-cfb5-16b02bc0a592" Type="jpg" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			cmlvZF9sb29wCiAgICByZXR1cm4gdHJ1ZTsKfQoK]]></Resource>
+    <Resource ID="e9bf2264-1626-4bfe-cfb5-16b02bc0a592" Name="Icon" Type="jpg"><![CDATA[iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
 			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
 			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
@@ -4174,11 +4180,9 @@
 			AMiTL359TbLxndWNw/3Tr9vffzv7ud1ldaVDgDA7IYgTAJp6ubjQcWd3DG9pxOsrsXgBIvup1X0w
 			M9Frac/YCQ/4bv7vnbfJavD09trB0apo2o+LKYWeZCzSutR2Hp8/nNm6/4hMoD40MFKJQVPk0Tjk
 			CLm4maJIGkUPoGNBqlfK9Uqcya2TESlashzlh6+nyGEscnFIa9QGy7XBgS4UhQXqSff/AgwALvPF
-			NxWnjTQAAAAASUVORK5CYII=
-		</Resource>
-	</Resources>
-	<SourceCode>
-<![CDATA[import json
+			NxWnjTQAAAAASUVORK5CYII=]]></Resource>
+  </Resources>
+  <SourceCode><![CDATA[import json
 import vobject
 import datetime
 from dateutil.relativedelta import *
@@ -4199,8 +4203,7 @@ class VDOM_fullcalendar(VDOM_object):
 	DATE_MOD = "18.06.2012"
 
 	RENDER_DIV = """<div id="%s" style="%s"></div>"""
-
-	RENDER_SCRIPT = """<script type="text/javascript">
+	RENDER_SCRIPT = """
 	$.curCSS = function (element, attrib, val) {$(element).css(attrib, val);};
 	/*Fullcalendar. VDOM Type Version %(version)s. Last modified - %(date_mod)s*/
 	$j(function(){
@@ -4308,7 +4311,7 @@ class VDOM_fullcalendar(VDOM_object):
 		$j("#%(id_out)s").fullCalendar( 'render' );
 		$j("#%(id_out)s").fullCalendar( 'gotoDate',  %(year)s, %(month)s, %(day)s);
 	});
-</script>"""
+"""
 
 	def render(self, contents=""):
 
@@ -4445,8 +4448,9 @@ class VDOM_fullcalendar(VDOM_object):
 				"lazy_condition_1"     : lazy_condition_1,
 				"first_hour"           : first_hour
 			}
-
-		return VDOM_fullcalendar.RENDER_SCRIPT % render_params + VDOM_fullcalendar.RENDER_DIV % (id_out, mainstyle)
+		res_id = application.resources.create_temporary(self.id, "renderscript", VDOM_fullcalendar.RENDER_SCRIPT % render_params, "js", "renderscript")
+		request.dyn_libraries[self.name] =  u'<script type="text/javascript" src="/%s.res"></script>' % res_id
+		return  VDOM_fullcalendar.RENDER_DIV % (id_out, mainstyle)
 
 
 	def parse_events(self):
@@ -4502,14 +4506,13 @@ class VDOM_fullcalendar(VDOM_object):
 		image_id = "70817b3b-d42d-4273-2b06-16afdd3a785d"
 		result = get_empty_wysiwyg_value(self, image_id)
 		
-		return VDOM_object.wysiwyg(self, contents=result)]]>
-	</SourceCode>
-	<Libraries>
-		<Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/02dfd9db-16fe-3690-73e1-baf58cd3e6f4.res" />]]></Library>
-		<Library Target="html"><![CDATA[<script type='text/javascript' src='/10b18a20-59c9-2b2b-e4b3-7281bcc66d4f.res'></script>]]></Library>
-		<Library Target="html"><![CDATA[<script type='text/javascript' src='/d1e1abad-b15d-450e-b769-4fe10ccb02af.res'></script>]]></Library>
-		<Library Target="html"><![CDATA[<script type='text/javascript' src='/c81084e1-0296-56fc-339a-1b9328e787dd.res'></script>]]></Library>
-		<Library Target="html"><![CDATA[<script type='text/javascript'>
+		return VDOM_object.wysiwyg(self, contents=result)]]></SourceCode>
+  <Libraries>
+    <Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/02dfd9db-16fe-3690-73e1-baf58cd3e6f4.res" />]]></Library>
+    <Library Target="html"><![CDATA[<script type='text/javascript' src='/10b18a20-59c9-2b2b-e4b3-7281bcc66d4f.res'></script>]]></Library>
+    <Library Target="html"><![CDATA[<script type='text/javascript' src='/d1e1abad-b15d-450e-b769-4fe10ccb02af.res'></script>]]></Library>
+    <Library Target="html"><![CDATA[<script type='text/javascript' src='/c81084e1-0296-56fc-339a-1b9328e787dd.res'></script>]]></Library>
+    <Library Target="html"><![CDATA[<script type='text/javascript'>
 
 function parseRruleSources( sources )
 {
@@ -4579,189 +4582,176 @@ function parseRruleSources( sources )
 	return eventSources;
 }
 </script>]]></Library>
-	</Libraries>
-	<E2VDOM>
-		<Events>
-			<UserInterfaceEvents>
-				<Event Name="dateChanged" Description="#Lang(516)">
-					<Parameters>
-						<Parameter Name="title" Description="#Lang(905)" Order="0"/>
-						<Parameter Name="start" Description="#Lang(906)" Order="0"/>
-						<Parameter Name="end" Description="#Lang(907)" Order="0"/>
-						<Parameter Name="view" Description="#Lang(908)" Order="0"/>
-						<Parameter Name="timezoneOffset" Description="#Lang(909)" Order="0"/>
-					</Parameters>
-				</Event>
-				<Event Name="eventDrag" Description="#Lang(521)">
-					<Parameters>
-						<Parameter Name="id" Description="#Lang(919)" Order="0"/>
-						<Parameter Name="start" Description="#Lang(921)" Order="0"/>
-						<Parameter Name="end" Description="#Lang(922)" Order="0"/>
-						<Parameter Name="instance" Description="#Lang(923)" Order="0"/>
-						<Parameter Name="allDay" Description="#Lang(924)" Order="0"/>
-						<Parameter Name="dayDelta" Description="#Lang(925)" Order="0"/>
-						<Parameter Name="minuteDelta" Description="#Lang(926)" Order="0"/>
-						<Parameter Name="timezoneOffset" Description="#Lang(927)" Order="0"/>
-					</Parameters>
-				</Event>
-				<Event Name="mouseup" Description="#Lang(527)">
-					<Parameters>
-						<Parameter Name="X" Description="#Lang(947)" Order="0"/>
-						<Parameter Name="Y" Description="#Lang(948)" Order="0"/>
-					</Parameters>
-				</Event>
-				<Event Name="viewChanged" Description="#Lang(528)">
-					<Parameters>
-						<Parameter Name="title" Description="#Lang(949)" Order="0"/>
-						<Parameter Name="view" Description="#Lang(951)" Order="0"/>
-					</Parameters>
-				</Event>
-				<Event Name="mousemove" Description="#Lang(524)">
-					<Parameters>
-						<Parameter Name="X" Description="#Lang(941)" Order="0"/>
-						<Parameter Name="Y" Description="#Lang(942)" Order="0"/>
-					</Parameters>
-				</Event>
-				<Event Name="click" Description="#Lang(514)">
-					<Parameters>
-						<Parameter Name="X" Description="#Lang(901)" Order="0"/>
-						<Parameter Name="Y" Description="#Lang(902)" Order="0"/>
-					</Parameters>
-				</Event>
-				<Event Name="daysSelected" Description="#Lang(517)">
-					<Parameters>
-						<Parameter Name="start" Description="#Lang(911)" Order="0"/>
-						<Parameter Name="end" Description="#Lang(912)" Order="0"/>
-						<Parameter Name="allDay" Description="#Lang(913)" Order="0"/>
-						<Parameter Name="timezoneOffset" Description="#Lang(914)" Order="0"/>
-					</Parameters>
-				</Event>
-				<Event Name="dblclick" Description="#Lang(518)">
-					<Parameters>
-						<Parameter Name="X" Description="#Lang(915)" Order="0"/>
-						<Parameter Name="Y" Description="#Lang(916)" Order="0"/>
-					</Parameters>
-				</Event>
-				<Event Name="mouseout" Description="#Lang(525)">
-					<Parameters>
-						<Parameter Name="X" Description="#Lang(943)" Order="0"/>
-						<Parameter Name="Y" Description="#Lang(944)" Order="0"/>
-					</Parameters>
-				</Event>
-				<Event Name="ctrlclick" Description="#Lang(515)">
-					<Parameters>
-						<Parameter Name="X" Description="#Lang(903)" Order="0"/>
-						<Parameter Name="Y" Description="#Lang(904)" Order="0"/>
-					</Parameters>
-				</Event>
-				<Event Name="eventClick" Description="#Lang(519)">
-					<Parameters>
-						<Parameter Name="id" Description="#Lang(917)" Order="0"/>
-						<Parameter Name="instance" Description="#Lang(918)" Order="0"/>
-					</Parameters>
-				</Event>
-				<Event Name="eventResize" Description="#Lang(522)">
-					<Parameters>
-						<Parameter Name="id" Description="#Lang(928)" Order="0"/>
-						<Parameter Name="start" Description="#Lang(929)" Order="0"/>
-						<Parameter Name="end" Description="#Lang(931)" Order="0"/>
-						<Parameter Name="instance" Description="#Lang(932)" Order="0"/>
-						<Parameter Name="dayDelta" Description="#Lang(933)" Order="0"/>
-						<Parameter Name="minuteDelta" Description="#Lang(934)" Order="0"/>
-						<Parameter Name="timezoneOffset" Description="#Lang(935)" Order="0"/>
-					</Parameters>
-				</Event>
-				<Event Name="mouseover" Description="#Lang(526)">
-					<Parameters>
-						<Parameter Name="X" Description="#Lang(945)" Order="0"/>
-						<Parameter Name="Y" Description="#Lang(946)" Order="0"/>
-					</Parameters>
-				</Event>
-				<Event Name="getEvents" Description="#Lang(523)">
-					<Parameters>
-						<Parameter Name="start" Description="#Lang(936)" Order="0"/>
-						<Parameter Name="end" Description="#Lang(937)" Order="0"/>
-						<Parameter Name="view" Description="#Lang(938)" Order="0"/>
-						<Parameter Name="timezoneOffset" Description="#Lang(939)" Order="0"/>
-					</Parameters>
-				</Event>
-			</UserInterfaceEvents>
-		</Events>
-		<Actions>
-			<Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
-				<Action Name="resizeTo" DisplayName="#Lang(609)" Description="#Lang(509)">
-					<Parameters>
-						<Parameter Name="width" DisplayName="#Lang(711)" Description="#Lang(811)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-						<Parameter Name="height" DisplayName="#Lang(712)" Description="#Lang(812)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-					</Parameters>
-					<SourceCode>
-<![CDATA[var _w = parseInt(width,10);
+  </Libraries>
+  <E2vdom>
+    <Events>
+      <Userinterfaceevents>
+        <Event Name="dateChanged" Help="#Lang(514)">
+          <Parameters>
+            <Parameter Name="title" Order="0" VbType="" Help="#Lang(901)"/>
+            <Parameter Name="start" Order="0" VbType="" Help="#Lang(902)"/>
+            <Parameter Name="end" Order="0" VbType="" Help="#Lang(903)"/>
+            <Parameter Name="view" Order="0" VbType="" Help="#Lang(904)"/>
+            <Parameter Name="timezoneOffset" Order="0" VbType="" Help="#Lang(905)"/>
+          </Parameters>
+        </Event>
+        <Event Name="eventDrag" Help="#Lang(515)">
+          <Parameters>
+            <Parameter Name="id" Order="0" VbType="" Help="#Lang(906)"/>
+            <Parameter Name="start" Order="0" VbType="" Help="#Lang(907)"/>
+            <Parameter Name="end" Order="0" VbType="" Help="#Lang(908)"/>
+            <Parameter Name="instance" Order="0" VbType="" Help="#Lang(909)"/>
+            <Parameter Name="allDay" Order="0" VbType="" Help="#Lang(911)"/>
+            <Parameter Name="dayDelta" Order="0" VbType="" Help="#Lang(912)"/>
+            <Parameter Name="minuteDelta" Order="0" VbType="" Help="#Lang(913)"/>
+            <Parameter Name="timezoneOffset" Order="0" VbType="" Help="#Lang(914)"/>
+          </Parameters>
+        </Event>
+        <Event Name="mouseup" Help="#Lang(516)">
+          <Parameters>
+            <Parameter Name="X" Order="0" VbType="" Help="#Lang(915)"/>
+            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(916)"/>
+          </Parameters>
+        </Event>
+        <Event Name="viewChanged" Help="#Lang(517)">
+          <Parameters>
+            <Parameter Name="title" Order="0" VbType="" Help="#Lang(917)"/>
+            <Parameter Name="view" Order="0" VbType="" Help="#Lang(918)"/>
+          </Parameters>
+        </Event>
+        <Event Name="mousemove" Help="#Lang(518)">
+          <Parameters>
+            <Parameter Name="X" Order="0" VbType="" Help="#Lang(919)"/>
+            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(921)"/>
+          </Parameters>
+        </Event>
+        <Event Name="click" Help="#Lang(519)">
+          <Parameters>
+            <Parameter Name="X" Order="0" VbType="" Help="#Lang(922)"/>
+            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(923)"/>
+          </Parameters>
+        </Event>
+        <Event Name="daysSelected" Help="#Lang(521)">
+          <Parameters>
+            <Parameter Name="start" Order="0" VbType="" Help="#Lang(924)"/>
+            <Parameter Name="end" Order="0" VbType="" Help="#Lang(925)"/>
+            <Parameter Name="allDay" Order="0" VbType="" Help="#Lang(926)"/>
+            <Parameter Name="timezoneOffset" Order="0" VbType="" Help="#Lang(927)"/>
+          </Parameters>
+        </Event>
+        <Event Name="dblclick" Help="#Lang(522)">
+          <Parameters>
+            <Parameter Name="X" Order="0" VbType="" Help="#Lang(928)"/>
+            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(929)"/>
+          </Parameters>
+        </Event>
+        <Event Name="mouseout" Help="#Lang(523)">
+          <Parameters>
+            <Parameter Name="X" Order="0" VbType="" Help="#Lang(931)"/>
+            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(932)"/>
+          </Parameters>
+        </Event>
+        <Event Name="ctrlclick" Help="#Lang(524)">
+          <Parameters>
+            <Parameter Name="X" Order="0" VbType="" Help="#Lang(933)"/>
+            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(934)"/>
+          </Parameters>
+        </Event>
+        <Event Name="eventClick" Help="#Lang(525)">
+          <Parameters>
+            <Parameter Name="id" Order="0" VbType="" Help="#Lang(935)"/>
+            <Parameter Name="instance" Order="0" VbType="" Help="#Lang(936)"/>
+          </Parameters>
+        </Event>
+        <Event Name="eventResize" Help="#Lang(526)">
+          <Parameters>
+            <Parameter Name="id" Order="0" VbType="" Help="#Lang(937)"/>
+            <Parameter Name="start" Order="0" VbType="" Help="#Lang(938)"/>
+            <Parameter Name="end" Order="0" VbType="" Help="#Lang(939)"/>
+            <Parameter Name="instance" Order="0" VbType="" Help="#Lang(941)"/>
+            <Parameter Name="dayDelta" Order="0" VbType="" Help="#Lang(942)"/>
+            <Parameter Name="minuteDelta" Order="0" VbType="" Help="#Lang(943)"/>
+            <Parameter Name="timezoneOffset" Order="0" VbType="" Help="#Lang(944)"/>
+          </Parameters>
+        </Event>
+        <Event Name="mouseover" Help="#Lang(527)">
+          <Parameters>
+            <Parameter Name="X" Order="0" VbType="" Help="#Lang(945)"/>
+            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(946)"/>
+          </Parameters>
+        </Event>
+        <Event Name="getEvents" Help="#Lang(528)">
+          <Parameters>
+            <Parameter Name="start" Order="0" VbType="" Help="#Lang(947)"/>
+            <Parameter Name="end" Order="0" VbType="" Help="#Lang(948)"/>
+            <Parameter Name="view" Order="0" VbType="" Help="#Lang(949)"/>
+            <Parameter Name="timezoneOffset" Order="0" VbType="" Help="#Lang(951)"/>
+          </Parameters>
+        </Event>
+      </Userinterfaceevents>
+    </Events>
+    <Actions>
+      <Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
+        <Action Help="#Lang(501)" InterfaceName="#Lang(601)" MethodName="resizeTo">
+          <Parameters>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(701)" ScriptName="width" Help="#Lang(801)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(702)" ScriptName="height" Help="#Lang(802)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[var _w = parseInt(width,10);
 var _h = parseInt(height,10);
 if (!isNaN(_w) && !isNaN(_h))
 {
 	$q(this.domCont).width(_w).height(_h);
 	jQuery("div#"+this.domCont.id).fullCalendar('option', 'height', _h);
-}]]>
-					</SourceCode>
-				</Action>
-				<Action Name="hide" DisplayName="#Lang(604)" Description="#Lang(504)">
-					<Parameters>
-						<Parameter Name="fade" DisplayName="#Lang(705)" Description="#Lang(805)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-					</Parameters>
-					<SourceCode>
-<![CDATA[this.domCont.style.display = 'none';]]>
-					</SourceCode>
-				</Action>
-				<Action Name="show" DisplayName="#Lang(613)" Description="#Lang(513)">
-					<SourceCode>
-<![CDATA[this.domCont.style.display = 'block';]]>
-					</SourceCode>
-				</Action>
-				<Action Name="clearEventSource" DisplayName="#Lang(602)" Description="#Lang(502)">
-					<SourceCode>
-<![CDATA[jQuery("div#"+this.domCont.id).fullCalendar('removeEvents');]]>
-					</SourceCode>
-				</Action>
-				<Action Name="moveTo" DisplayName="#Lang(605)" Description="#Lang(505)">
-					<Parameters>
-						<Parameter Name="newX" DisplayName="#Lang(706)" Description="#Lang(806)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-						<Parameter Name="newY" DisplayName="#Lang(707)" Description="#Lang(807)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-						<Parameter Name="Effect" DisplayName="#Lang(708)" Description="#Lang(808)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-					</Parameters>
-					<SourceCode>
-<![CDATA[vdom_ui_moveTo(this.domCont, newX, newY, Effect);]]>
-					</SourceCode>
-				</Action>
-				<Action Name="gotoDate" DisplayName="#Lang(603)" Description="#Lang(503)">
-					<Parameters>
-						<Parameter Name="year" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-						<Parameter Name="month" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-						<Parameter Name="day" DisplayName="#Lang(704)" Description="#Lang(804)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-					</Parameters>
-					<SourceCode>
-<![CDATA[var _y = parseInt(year);
+}]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(502)" InterfaceName="#Lang(602)" MethodName="hide">
+          <Parameters>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(703)" ScriptName="fade" Help="#Lang(803)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[this.domCont.style.display = 'none';]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(503)" InterfaceName="#Lang(603)" MethodName="show">
+          <Parameters/>
+          <SourceCode><![CDATA[this.domCont.style.display = 'block';]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(504)" InterfaceName="#Lang(604)" MethodName="clearEventSource">
+          <Parameters/>
+          <SourceCode><![CDATA[jQuery("div#"+this.domCont.id).fullCalendar('removeEvents');]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(505)" InterfaceName="#Lang(605)" MethodName="moveTo">
+          <Parameters>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(704)" ScriptName="newX" Help="#Lang(804)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(705)" ScriptName="newY" Help="#Lang(805)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(706)" ScriptName="Effect" Help="#Lang(806)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[vdom_ui_moveTo(this.domCont, newX, newY, Effect);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(506)" InterfaceName="#Lang(606)" MethodName="gotoDate">
+          <Parameters>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(707)" ScriptName="year" Help="#Lang(807)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(708)" ScriptName="month" Help="#Lang(808)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(709)" ScriptName="day" Help="#Lang(809)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[var _y = parseInt(year);
 var _m = parseInt(month);
 var _d = parseInt(day);
 if (!isNaN(_y) && !isNaN(_m) && !isNaN(_d))
-	jQuery("div#"+this.domCont.id).fullCalendar('gotoDate', _y , _m-1, _d);]]>
-					</SourceCode>
-				</Action>
-				<Action Name="moveZindexTo" DisplayName="#Lang(606)" Description="#Lang(506)">
-					<Parameters>
-						<Parameter Name="newZindex" DisplayName="#Lang(709)" Description="#Lang(809)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-					</Parameters>
-					<SourceCode>
-<![CDATA[var _z = parseInt(newZindex);
+	jQuery("div#"+this.domCont.id).fullCalendar('gotoDate', _y , _m-1, _d);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(507)" InterfaceName="#Lang(607)" MethodName="moveZindexTo">
+          <Parameters>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(711)" ScriptName="newZindex" Help="#Lang(811)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[var _z = parseInt(newZindex);
 		  if (!isNaN(_z))
-			this.domCont.style.zindex = _z;]]>
-					</SourceCode>
-				</Action>
-				<Action Name="changeViewTo" DisplayName="#Lang(601)" Description="#Lang(501)">
-					<Parameters>
-						<Parameter Name="viewName" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
-					</Parameters>
-					<SourceCode>
-<![CDATA[var view = false;
+			this.domCont.style.zindex = _z;]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(508)" InterfaceName="#Lang(608)" MethodName="changeViewTo">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(712)" ScriptName="viewName" Help="#Lang(812)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[var view = false;
 			if (viewName == "month")
 				view = "month";
 			else if (viewName == "week")
@@ -4770,40 +4760,33 @@ if (!isNaN(_y) && !isNaN(_m) && !isNaN(_d))
 				view = "agendaDay";
 
 			if (view)
-				jQuery("div#"+this.domCont.id).fullCalendar('changeView',view);]]>
-					</SourceCode>
-				</Action>
-				<Action Name="setEventsWithRrule" DisplayName="#Lang(612)" Description="#Lang(512)">
-					<Parameters>
-						<Parameter Name="eventData" DisplayName="#Lang(714)" Description="#Lang(814)" DefaultValue="{}" RegularExpressionValidation=".*" Interface="" />
-					</Parameters>
-					<SourceCode>
-<![CDATA[eval('var data = ' + eventData + ';');
+				jQuery("div#"+this.domCont.id).fullCalendar('changeView',view);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(509)" InterfaceName="#Lang(609)" MethodName="setEventsWithRrule">
+          <Parameters>
+            <Parameter DefaultValue="{}" Interface="" InterfaceName="#Lang(713)" ScriptName="eventData" Help="#Lang(813)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[eval('var data = ' + eventData + ';');
 jQuery("div#"+this.domCont.id).fullCalendar('addEventSource', parseRruleSources(data));
 /*
 jQuery("div#"+this.domCont.id).fullCalendar('addEventSource', parseRruleSources(eventData));
-*/]]>
-					</SourceCode>
-				</Action>
-				<Action Name="prev" DisplayName="#Lang(608)" Description="#Lang(508)">
-					<SourceCode>
-<![CDATA[jQuery("div#"+this.domCont.id).fullCalendar('prev');]]>
-					</SourceCode>
-				</Action>
-				<Action Name="setEventSource" DisplayName="#Lang(611)" Description="#Lang(511)">
-					<Parameters>
-						<Parameter Name="eventSource" DisplayName="#Lang(713)" Description="#Lang(813)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
-					</Parameters>
-					<SourceCode>
-<![CDATA[jQuery("div#"+this.domCont.id).fullCalendar('addEventSource', eval(eventSource) );]]>
-					</SourceCode>
-				</Action>
-				<Action Name="next" DisplayName="#Lang(607)" Description="#Lang(507)">
-					<SourceCode>
-<![CDATA[jQuery("div#"+this.domCont.id).fullCalendar('next');]]>
-					</SourceCode>
-				</Action>
-			</Container>
-		</Actions>
-	</E2VDOM>
+*/]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(511)" InterfaceName="#Lang(611)" MethodName="prev">
+          <Parameters/>
+          <SourceCode><![CDATA[jQuery("div#"+this.domCont.id).fullCalendar('prev');]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(512)" InterfaceName="#Lang(612)" MethodName="setEventSource">
+          <Parameters>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(714)" ScriptName="eventSource" Help="#Lang(814)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[jQuery("div#"+this.domCont.id).fullCalendar('addEventSource', eval(eventSource) );]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(513)" InterfaceName="#Lang(613)" MethodName="next">
+          <Parameters/>
+          <SourceCode><![CDATA[jQuery("div#"+this.domCont.id).fullCalendar('next');]]></SourceCode>
+        </Action>
+      </Container>
+    </Actions>
+  </E2vdom>
 </Type>

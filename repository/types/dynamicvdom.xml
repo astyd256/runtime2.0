@@ -8,6 +8,9 @@
 		<Description>#Lang(002)</Description>
 		<Version>1.0.1a</Version>
 		<Category>Additional</Category>
+		<Icon>#Res(8fe07d0b-09e4-45e4-aca3-c02dcef57f48)</Icon>
+		<EditorIcon>#Res(093a7ad5-4468-431a-a7cf-8cf3095b3968)</EditorIcon>
+		<StructureIcon>#Res(eafba9be-6b7b-482e-a0c9-921b4022ee52)</StructureIcon>
 		<InterfaceType>1</InterfaceType>
 		<Dynamic>1</Dynamic>
 		<Moveable>1</Moveable>
@@ -443,8 +446,7 @@ Visible - the whole content will always be shown without reference to the object
 		</Language>
 	</Languages>
 	<Resources>
-		<Resource ID="76bfc87a-dbe3-46e3-8d11-cc78a576b63a" Type="png" Name="Icon">
-			iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+	<Resource ID="8fe07d0b-09e4-45e4-aca3-c02dcef57f48" Name="Icon" Type="png"><![CDATA[iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
 			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
 			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
@@ -539,9 +541,67 @@ Visible - the whole content will always be shown without reference to the object
 			7tJ1b2J8NPQ0mLTUXjus/v/J3Q+Qodd/VlUb70Omc3MQGD0M3De3tWX+xdLF+oGB8I1o8Vhd4aza
 			aOmWZNq4B7oBbGaRQA5o8vk0jxNk/tgJE5vpClHX3Ji9IRRy79h/KLJWZ2RYZzTtw5wfadT9sCAf
 			oomQZ31DY3YrdNh3HDkS+SxVEO800OQnolkerE46RRY8HgUzhizGxtQIf0pwuqpR9yQLj0XwjDuI
-			iQkEyZ2K5scGmX7S6/8EGACZm+6vXzttpgAAAABJRU5ErkJggg==
-		</Resource>
-	</Resources>
+			iQkEyZ2K5scGmX7S6/8EGACZm+6vXzttpgAAAABJRU5ErkJggg==]]></Resource>
+    <Resource ID="093a7ad5-4468-431a-a7cf-8cf3095b3968" Name="Icon" Type="png"><![CDATA[iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+			jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVh
+			ZHlxyWU8AAADIGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78i
+			IGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9i
+			ZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAy
+			MDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93
+			d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJk
+			ZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5z
+			OnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0
+			cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JU
+			b29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5p
+			aWQ6RkY0MEQwNDExNDI4MTFFMTk4RjFEODAzOUEyNzIxRDQiIHhtcE1NOkRvY3VtZW50SUQ9Inht
+			cC5kaWQ6RkY0MEQwNDIxNDI4MTFFMTk4RjFEODAzOUEyNzIxRDQiPiA8eG1wTU06RGVyaXZlZEZy
+			b20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGRjQwRDAzRjE0MjgxMUUxOThGMUQ4MDM5QTI3
+			MjFENCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGRjQwRDA0MDE0MjgxMUUxOThGMUQ4MDM5
+			QTI3MjFENCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94
+			cGFja2V0IGVuZD0iciI/PqNgd48AAAS/SURBVEhLrVZpb1RlFH7uOlvn3pmutJYSgQqlra0JmohG
+			If4D+cif8YfoJz6ZmGiIkigJRlAqJVJaWig0UixbgVnudDrL3X3ObcG2UxNJPDczc9/lnOe8Z3ne
+			UWIK/gcJEUOD0mFJ2QkQxxESvCjmbwQoKjRd71ASj16Z+q1exe16Ew0X8BBhKKfhs0I3hs10oqc0
+			m804k5GBqMQIoxCKAIURAj/knArXd1Ha3MTh4eHXYJedMq5WNnDMtHHIyND4ViCohkWvhqbu4xQd
+			1c6e/fyLS5d/gu976O7uhmmk6LgGVdPx6MkjfP3NeXx5/iv0vT2KYwdHXgPMbjTQraRRilysR21o
+			igIn9LHi16HzfdDI4979Jei2bdFxBfO3FnDz+g0cOTqKuYUbuHP/FhZvL6C32IODY5PIW13/hIrO
+			+ggxondhmN43owB3vTryqoHpdAEGoxHrBp6lTai6YcK2bNiFPLoKFqplBzPXrmBl5T5GRg7i0OhR
+			DI8cIoCF8tOnWH+0hvKdJZ7UQMhQtuOQBjUM6ClYBAgJ3uB8yFzGQUgATUOaSJrCGogYGhUcZ1C0
+			C+jr6UN//wHkeAqV6z1DQzjAMPWMjUFlsMWInJ6mEsOREjPN8uG7nIJhV2XIeSismCDw0PZcJipG
+			KpNFniC57n5oZhYRk/9axAsad/nRaUjiLyWS2OEjIVI557faUA0m1Q9DhPSIPiVVJPWQSeWR630L
+			Wq6ISNVhcd9O+dgq4ImygV/dMurUSbyn4gs6ebVVwVJ7HRM5m6CUKIqw+uABlpfvolZx8N3Fb2EP
+			DuDkqU8wdWIc749NQBOv95EmjX9ffYmVTQ8ZVcGJrhw+tW2+a1u7BWCntFvt+MIPF+K1Z093zf+1
+			+nDv1l1jN2RG9pFdnZw0CsOlMfH7ydrDhxgYGGB+Mvuu7zfZcW6XiXGc6r4G+ml8dubafzYuGztO
+			UKvXYDDh2ULxjQxJLtLMk7qH8BIAqeOrGw7mNlt4j8lS2JmLxSzOsLmOZ3Z08B7IgJq/1MpYbrTJ
+			Wxr5KEAxo+IMy/tIOpfsVq7XnfjC8wpGzTwOGzm0WG5S0zpLbpnt/1xtY5REd+74+C7zPzol/Fze
+			wLhpJXpB0m4JEWOJZFfTfHzgB1Cr/DqRsuHEHma9EkphE5WwhZteBW32xTt6EfN/rnaE66UbYCJl
+			oRS7mGEvPItaeBw0MUc9qegxvYDFtTWoPnH7tBQmSbuTZgENxnIz8vFuqoApzg2SY/Ss2QEgHg9p
+			GUxTZ4IOlsmk0qJT1DtuWIlNg9cAe1RJFvyEPRT0qmbCiio5xpN7QY7t7aCJbSih5IA6omeSZno0
+			g2THy4nxldxEEmeWvGpwMUlG8siVs0VaSRNuxxWu13GCNPUS/uFeecSVkBPCf2JRLMSSA7HlMixy
+			ElHZSlSyzDnZqoG3XgeA7PASstsuTCE6jmUkRCcF69Mx9WTeQkVt4XcSVIlEJQgB+VZieqVdxnzr
+			MT4q9HYAnLaLWFeamGlVUWcopHrE91Lg4o+2g3vuC0znt8lOloTbLzkVzNcaMDWVpJXFadZz6l9I
+			7hWiT8sXq2XcZQ/luHeaN9+HVp7X5nbo9/5tIbEmZfamIneIRjbdK38DySWLitiAqEwAAAAASUVO
+			RK5CYII=]]></Resource>
+    <Resource ID="eafba9be-6b7b-482e-a0c9-921b4022ee52" Name="Icon" Type="jpg"><![CDATA[iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+			bWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+			eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEz
+			NDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+			dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+			dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+			IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+			ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+			cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlE
+			PSJ4bXAuaWlkOkM5N0YzQTE2MUZFNDExRTE5QkE0RDY0RTIyQUE4RDAxIiB4bXBNTTpEb2N1bWVu
+			dElEPSJ4bXAuZGlkOkM5N0YzQTE3MUZFNDExRTE5QkE0RDY0RTIyQUE4RDAxIj4gPHhtcE1NOkRl
+			cml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Qzk3RjNBMTQxRkU0MTFFMTlCQTRE
+			NjRFMjJBQThEMDEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Qzk3RjNBMTUxRkU0MTFFMTlC
+			QTRENjRFMjJBQThEMDEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1l
+			dGE+IDw/eHBhY2tldCBlbmQ9InIiPz66Sks/AAAAx0lEQVR42mL8//8/AzFAftERBnUFsf83H7xq
+			BNL1MJqRFAOAoAKIOZDFWXBpeHnvGLrJjEAb20E2wwSIcgHMILMj/xixuYCJkGZxJStGJBvbYTbD
+			XfDjyxsMJ7BzCzMiawaxoS7AAIzfP734//zWHhRBReNoRgYiAcu/f78Zfn17w0AuYPn/9zfD7++v
+			yTfg378/DL++vyc2HWCGAa5oJDYQcUYjSDN6YgIlZSDVgEzTLiGBNGJxQTsan/LMxERKlGFLygAB
+			BgAnHIGhj58zKAAAAABJRU5ErkJggg==]]></Resource>
+    </Resources>
 	<SourceCode>
 <![CDATA[from xml.sax.saxutils import escape as xml_escape
 import managers
@@ -561,11 +621,12 @@ def exception_trace():
 WYSIWYG_IMAGE_UUID = "76bfc87a-dbe3-46e3-8d11-cc78a576b63a"
 
 TEMPLATE = u"""{libraries}
+<div name="{name}" id="{id}" style="{style}" class="{classes}">{contents}
+</div>
 <script type='text/javascript'>
 {declarations}
 </script>
-<div name="{name}" id="{id}" style="{style}" class="{classes}">{contents}
-</div>"""
+{dynlibraries}"""
 
 
 class VDOM_DynamicObject(VDOM_object):
@@ -612,6 +673,10 @@ class VDOM_DynamicObject(VDOM_object):
                 width=self.width,
                 height=self.height,
                 overflow={"1": "hidden", "2": "scroll", "3": "visible"}.get(self.overflow, "auto"))
+        
+        
+        dynlibraries=u"".join(managers.request_manager.current.dyn_libraries.itervalues()) if request.render_type == "e2vdom" else ""
+    
         contents += TEMPLATE.format(
             name=self.name,
             id=u"o_" + self.id.replace('-', '_'),
@@ -619,7 +684,9 @@ class VDOM_DynamicObject(VDOM_object):
             classes=self.classname,
             contents=inner,
             libraries=libraries,
-            declarations=declarations)
+            declarations=declarations,
+            dynlibraries = dynlibraries)
+        
         return super(VDOM_DynamicObject, self).render(contents=contents)
 
     def wysiwyg(self, contents=""):
