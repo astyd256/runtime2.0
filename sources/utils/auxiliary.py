@@ -11,22 +11,6 @@ def forfeit(value):
     return value[:1].lower() + value[1:]
 
 
-def fitdata(value, width):
-    if isinstance(value, unicode):
-        prefix, extra = "u", 3
-        encoding = "unicode-escape"
-    else:
-        prefix, extra = "", 2
-        encoding = "string_escape"
-
-    value = value.encode(encoding).replace("\"", "\\\"")
-
-    if width >= 0 and len(value) > width + extra:
-        return "%s\"%s\"..." % (prefix, value[:width - extra - 3])
-    else:
-        return "%s\"%s\"" % (prefix, value)
-
-
 def lfill(pattern, length):
     pattern_length = len(pattern)
     return pattern * (length // pattern_length) + pattern[:length % pattern_length]
@@ -74,14 +58,6 @@ def rfit(value, width, start=0):
 
 
 fit = lfit
-
-
-def fitrepr(value, width):
-    if isinstance(value, basestring):
-        return repr(value[:width - 3]) + "..." if len(value) > width else repr(value)
-    else:
-        representation = repr(value)
-        return representation[:width - 3] + "..." if len(representation) > width else representation
 
 
 def align(value, width, separator=" ", indent="", filler=" ", padding=" ", hint="...", stretch=0):
