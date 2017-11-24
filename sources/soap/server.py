@@ -773,11 +773,18 @@ class VDOM_web_services_server(object):
             #     tgt_app = app
             # copy_obj = managers.xml_manager.search_object(appid, new_obj_id)
             # self.__copy_events_structure(app, obj, copy_obj, obj_map, action_map, tgt_app)
-            try:
-                parent = app.objects.catalog[parentid]
-            except KeyError:
-                raise SOAPpy.faultType(parent_object_error, _("Create object error"), _("Unable to find parent object"))
-            copy_obj = parent.objects.replicate(obj)
+            if parentid is None:
+                if not obj.is_top_container:
+                    raise SOAPpy.faultType(parent_object_error, _("Create object error"), _("Unable to copy non-container as top container"))
+                copy_obj = app.objects.replicate(obj)
+            else:
+                if obj.is_top_container:
+                    raise SOAPpy.faultType(parent_object_error, _("Create object error"), _("Unable to copy top container as usual object"))
+                try:
+                    parent = app.objects.catalog[parentid]
+                except KeyError:
+                    raise SOAPpy.faultType(parent_object_error, _("Create object error"), _("Unable to find parent object"))
+                copy_obj = parent.objects.replicate(obj)
 
             # tgt_app.sync()
             tgt_app.save()

@@ -104,7 +104,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
             item.objects.clear()
 
             # cleanup structure
-            if item.structure:
+            if self._owner.is_application and not item.virtual:
                 for container in self._owner.application.objects.itervalues(): # pages
                     if item is container:
                         continue
@@ -176,9 +176,6 @@ class MemoryObjects(MemoryBase, MutableMapping):
                 file.write(u"%s</Objects>\n" % ident)
 
     def replicate(self, another):
-        if self._owner.is_application:
-            raise Exception(u"Use 'new' to create new top-level container")
-
         with self._owner.lock:
             copy = None
 

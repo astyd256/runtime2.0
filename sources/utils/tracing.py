@@ -8,10 +8,10 @@ import traceback
 import inspect
 import threading
 import os
-from pprint import PrettyPrinter
 from itertools import islice
 import settings
 from utils.auxiliary import enquote, headline, fit, align, lfill
+from utils.representation import represent
 from utils.console import width
 
 
@@ -46,19 +46,6 @@ WELL_KNOWN_MODULES = "_json", "_ast", "thread", "operator", "itertools", "except
 
 REPRESENTATION_WIDTH = 40
 REPRESENTATION_VALUE_LIMIT = 40
-
-
-class SafePrettyPrinter(PrettyPrinter):
-
-    def pformat(self, value):
-        try:
-            return PrettyPrinter.pformat(self, value)
-        except Exception as error:
-            try:
-                description = str(error)
-            except Exception:
-                description = type(error).__name__
-            return "Unable to represent: %s" % description
 
 
 # types
@@ -256,7 +243,7 @@ def collect_referrers(referent, limit=16, depth=32, rank=9, exclude=None):
 
         if len(chain) < 2:
             return chain.modify(rank=0.10, action=ACCEPT)
-        elif isinstance(chain.referrer, (tuple, list, set)):
+        elif isinstance(chain.referrer, (tuple, list, set, frozenset)):
             return chain.reduce(describe_object(chain.referrer), rank=0.80)
         elif isinstance(chain.referrer, dict):
             for key, value in chain.referrer.copy().iteritems():
@@ -339,7 +326,7 @@ def collect_referrers(referent, limit=16, depth=32, rank=9, exclude=None):
                                 or id(referrer) in exclude
                                 or (chain.depth > 1
                                     and id(referrer) in modules
-                                    and not isinstance(chain[-1], (tuple, list, set, dict)))):
+                                    and not isinstance(chain[-1], (tuple, list, set, frozenset, dict)))):
                             continue
                         yield chain.combine(referrer)
                         counter += 1
@@ -628,14 +615,21 @@ def format_exception_locals(information=None, ignore_builtins=True, caption=None
         lines.append(indent + caption)
         indent += settings.LOGGING_INDENT
 
-    printer = SafePrettyPrinter(width=VALUE_WIDTH)
     for name, value in frame.f_locals.iteritems():
         caption = align(name, NAME_WIDTH - len(indent), " ", filler=filler)
         if ignore_builtins and name == "__builtins__":
-            lines.append("%s%s%s" % (indent, caption, "{...}"))
+            description = "{...}"
         else:
-            lines.append("%s%s%s" % (indent, caption,
-                printer.pformat(value).replace("\n", "\n%s%s" % ("", NAME_WIDTH * " "))))
+            try:
+                description = represent(
+                    value, width=VALUE_WIDTH).replace("\n", "\n%s%s" % ("", NAME_WIDTH * " "))
+            except Exception as error:
+                try:
+                    message = str(error)
+                except Exception:
+                    message = type(error).__name__
+                description = "Unable to represent: %s" % message
+        lines.append("%s%s%s" % (indent, caption, description))
 
     if into is None:
         lines.append("")
