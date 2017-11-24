@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.0.0</Version>
+    <Version>1.4.0</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, accordeon, smartfolderdata</Containers>
@@ -519,6 +519,7 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="539"></Sentence>
       <Sentence ID="541"></Sentence>
       <Sentence ID="542"></Sentence>
+      <Sentence ID="543">Catch child event</Sentence>
       <Sentence ID="601">resizeTo</Sentence>
       <Sentence ID="602">Hide</Sentence>
       <Sentence ID="603">Show</Sentence>
@@ -540,6 +541,7 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="621">Show</Sentence>
       <Sentence ID="622">Show</Sentence>
       <Sentence ID="623">Show</Sentence>
+      <Sentence ID="624">Catch Event</Sentence>
       <Sentence ID="701">Width</Sentence>
       <Sentence ID="702">Height</Sentence>
       <Sentence ID="703">Fade</Sentence>
@@ -575,6 +577,8 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="736"></Sentence>
       <Sentence ID="737"></Sentence>
       <Sentence ID="738"></Sentence>
+      <Sentence ID="739">Custom name</Sentence>
+      <Sentence ID="740">VDOM Event reference</Sentence>
       <Sentence ID="801">New value of width</Sentence>
       <Sentence ID="802">New value of height</Sentence>
       <Sentence ID="803">Fade effect, time is indicated in milliseconds</Sentence>
@@ -610,6 +614,8 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="836">Time of appearance</Sentence>
       <Sentence ID="837">Time of appearance</Sentence>
       <Sentence ID="838">Time of appearance</Sentence>
+      <Sentence ID="839">customName</Sentence>
+      <Sentence ID="840">evtRef</Sentence>
       <Sentence ID="901"></Sentence>
       <Sentence ID="902"></Sentence>
       <Sentence ID="903"></Sentence>
@@ -657,6 +663,8 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="949"></Sentence>
       <Sentence ID="951"></Sentence>
       <Sentence ID="952"></Sentence>
+      <Sentence ID="953">customName</Sentence>
+      <Sentence ID="954">parameters</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="001">Dynamic Object view</Sentence>
@@ -809,6 +817,7 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="539"></Sentence>
       <Sentence ID="541"></Sentence>
       <Sentence ID="542"></Sentence>
+      <Sentence ID="543"></Sentence>
       <Sentence ID="601">resizeTo</Sentence>
       <Sentence ID="602">Hide</Sentence>
       <Sentence ID="603">Show</Sentence>
@@ -830,6 +839,7 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="621">Show</Sentence>
       <Sentence ID="622">Show</Sentence>
       <Sentence ID="623">Show</Sentence>
+      <Sentence ID="624"></Sentence>
       <Sentence ID="701">Width</Sentence>
       <Sentence ID="702">Height</Sentence>
       <Sentence ID="703">Fade</Sentence>
@@ -865,6 +875,8 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="736"></Sentence>
       <Sentence ID="737"></Sentence>
       <Sentence ID="738"></Sentence>
+      <Sentence ID="739"></Sentence>
+      <Sentence ID="740"></Sentence>
       <Sentence ID="801">New value of width</Sentence>
       <Sentence ID="802">New value of height</Sentence>
       <Sentence ID="803">Fade effect, time is indicated in milliseconds</Sentence>
@@ -900,6 +912,8 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="836">Time of appearance</Sentence>
       <Sentence ID="837">Time of appearance</Sentence>
       <Sentence ID="838">Time of appearance</Sentence>
+      <Sentence ID="839"></Sentence>
+      <Sentence ID="840"></Sentence>
       <Sentence ID="901"></Sentence>
       <Sentence ID="902"></Sentence>
       <Sentence ID="903"></Sentence>
@@ -947,6 +961,8 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="949"></Sentence>
       <Sentence ID="951"></Sentence>
       <Sentence ID="952"></Sentence>
+      <Sentence ID="953"></Sentence>
+      <Sentence ID="954"></Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="001">Dynamic Object view</Sentence>
@@ -1099,6 +1115,7 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="539"></Sentence>
       <Sentence ID="541"></Sentence>
       <Sentence ID="542"></Sentence>
+      <Sentence ID="543"></Sentence>
       <Sentence ID="601">resizeTo</Sentence>
       <Sentence ID="602">Скрыть</Sentence>
       <Sentence ID="603">Показать</Sentence>
@@ -1120,6 +1137,7 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="621">Показать</Sentence>
       <Sentence ID="622">Показать</Sentence>
       <Sentence ID="623">Показать</Sentence>
+      <Sentence ID="624"></Sentence>
       <Sentence ID="701">Ширина</Sentence>
       <Sentence ID="702">Высота</Sentence>
       <Sentence ID="703">Исчезновение</Sentence>
@@ -1155,6 +1173,8 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="736"></Sentence>
       <Sentence ID="737"></Sentence>
       <Sentence ID="738"></Sentence>
+      <Sentence ID="739"></Sentence>
+      <Sentence ID="740"></Sentence>
       <Sentence ID="801">Новое значение ширины</Sentence>
       <Sentence ID="802">Новое значение высоты</Sentence>
       <Sentence ID="803">Время исчезновения в миллисекундах</Sentence>
@@ -1190,6 +1210,8 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="836">Время появления</Sentence>
       <Sentence ID="837">Время появления</Sentence>
       <Sentence ID="838">Время появления</Sentence>
+      <Sentence ID="839"></Sentence>
+      <Sentence ID="840"></Sentence>
       <Sentence ID="901"></Sentence>
       <Sentence ID="902"></Sentence>
       <Sentence ID="903"></Sentence>
@@ -1237,6 +1259,8 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="949"></Sentence>
       <Sentence ID="951"></Sentence>
       <Sentence ID="952"></Sentence>
+      <Sentence ID="953"></Sentence>
+      <Sentence ID="954"></Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -1981,6 +2005,12 @@ class CachedDict(dict):
             self.computed_items[key] = self.compute(self.initial_items[key])
         return self.computed_items[key]
 
+    def get(self, key, default=None):
+        try:
+            return self[key]
+        except KeyError:
+            return default
+
 
 # template
 
@@ -2345,66 +2375,13 @@ $(document).ready(function(){{
   <E2vdom>
     <Events>
       <Userinterfaceevents>
-        <Event Name="itemctrldblclick" Help="#Lang(524)">
-          <Parameters>
-            <Parameter Name="itemid" Order="0" VbType="" Help="#Lang(901)"/>
-            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(902)"/>
-            <Parameter Name="X" Order="0" VbType="" Help="#Lang(903)"/>
-            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(904)"/>
-          </Parameters>
-        </Event>
-        <Event Name="itemclick" Help="#Lang(525)">
-          <Parameters>
-            <Parameter Name="itemid" Order="0" VbType="" Help="#Lang(905)"/>
-            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(906)"/>
-            <Parameter Name="X" Order="0" VbType="" Help="#Lang(907)"/>
-            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(908)"/>
-          </Parameters>
-        </Event>
-        <Event Name="itemmouseover" Help="#Lang(526)">
-          <Parameters>
-            <Parameter Name="id" Order="0" VbType="" Help="#Lang(909)"/>
-          </Parameters>
-        </Event>
-        <Event Name="itemmouseout" Help="#Lang(527)">
-          <Parameters>
-            <Parameter Name="id" Order="0" VbType="" Help="#Lang(911)"/>
-          </Parameters>
-        </Event>
-        <Event Name="itemdblclick" Help="#Lang(528)">
-          <Parameters>
-            <Parameter Name="itemid" Order="0" VbType="" Help="#Lang(912)"/>
-            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(913)"/>
-            <Parameter Name="X" Order="0" VbType="" Help="#Lang(914)"/>
-            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(915)"/>
-          </Parameters>
-        </Event>
         <Event Name="childitemclick" Help="#Lang(529)">
           <Parameters>
-            <Parameter Name="itemid" Order="0" VbType="" Help="#Lang(916)"/>
+            <Parameter Name="itemid" Order="" VbType="" Help="#Lang(916)"/>
             <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(917)"/>
             <Parameter Name="X" Order="0" VbType="" Help="#Lang(918)"/>
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(919)"/>
             <Parameter Name="child" Order="0" VbType="" Help="#Lang(921)"/>
-          </Parameters>
-        </Event>
-        <Event Name="childitemdblclick" Help="#Lang(531)">
-          <Parameters>
-            <Parameter Name="itemid" Order="0" VbType="" Help="#Lang(922)"/>
-            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(923)"/>
-            <Parameter Name="X" Order="0" VbType="" Help="#Lang(924)"/>
-            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(925)"/>
-            <Parameter Name="child" Order="0" VbType="" Help="#Lang(926)"/>
-          </Parameters>
-        </Event>
-        <Event Name="itemsselected" Help="#Lang(532)">
-          <Parameters>
-            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(927)"/>
-          </Parameters>
-        </Event>
-        <Event Name="itemsrequest" Help="#Lang(533)">
-          <Parameters>
-            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(928)"/>
           </Parameters>
         </Event>
         <Event Name="childitemctrlclick" Help="#Lang(534)">
@@ -2416,22 +2393,6 @@ $(document).ready(function(){{
             <Parameter Name="child" Order="0" VbType="" Help="#Lang(934)"/>
           </Parameters>
         </Event>
-        <Event Name="dragstart" Help="#Lang(535)">
-          <Parameters>
-            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(935)"/>
-          </Parameters>
-        </Event>
-        <Event Name="itemsloaded" Help="#Lang(536)">
-          <Parameters>
-            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(936)"/>
-          </Parameters>
-        </Event>
-        <Event Name="mouseover" Help="#Lang(537)">
-          <Parameters>
-            <Parameter Name="X" Order="0" VbType="" Help="#Lang(937)"/>
-            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(938)"/>
-          </Parameters>
-        </Event>
         <Event Name="childitemctrldblclick" Help="#Lang(538)">
           <Parameters>
             <Parameter Name="itemid" Order="0" VbType="" Help="#Lang(939)"/>
@@ -2441,9 +2402,37 @@ $(document).ready(function(){{
             <Parameter Name="child" Order="0" VbType="" Help="#Lang(944)"/>
           </Parameters>
         </Event>
+        <Event Name="childitemdblclick" Help="#Lang(531)">
+          <Parameters>
+            <Parameter Name="itemid" Order="0" VbType="" Help="#Lang(922)"/>
+            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(923)"/>
+            <Parameter Name="X" Order="0" VbType="" Help="#Lang(924)"/>
+            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(925)"/>
+            <Parameter Name="child" Order="0" VbType="" Help="#Lang(926)"/>
+          </Parameters>
+        </Event>
+        <Event Name="dragstart" Help="#Lang(535)">
+          <Parameters>
+            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(935)"/>
+          </Parameters>
+        </Event>
         <Event Name="endscroll" Help="#Lang(539)">
           <Parameters>
             <Parameter Name="position" Order="0" VbType="" Help="#Lang(945)"/>
+          </Parameters>
+        </Event>
+        <Event Name="eventcaught" Help="">
+          <Parameters>
+            <Parameter Name="customName" Order="0" VbType="" Help="#Lang(953)"/>
+            <Parameter Name="parameters" Order="1" VbType="" Help="#Lang(954)"/>
+          </Parameters>
+        </Event>
+        <Event Name="itemclick" Help="#Lang(525)">
+          <Parameters>
+            <Parameter Name="itemid" Order="0" VbType="" Help="#Lang(905)"/>
+            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(906)"/>
+            <Parameter Name="X" Order="0" VbType="" Help="#Lang(907)"/>
+            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(908)"/>
           </Parameters>
         </Event>
         <Event Name="itemctrlclick" Help="#Lang(541)">
@@ -2454,22 +2443,76 @@ $(document).ready(function(){{
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(949)"/>
           </Parameters>
         </Event>
+        <Event Name="itemctrldblclick" Help="#Lang(524)">
+          <Parameters>
+            <Parameter Name="itemid" Order="0" VbType="" Help="#Lang(901)"/>
+            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(902)"/>
+            <Parameter Name="X" Order="0" VbType="" Help="#Lang(903)"/>
+            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(904)"/>
+          </Parameters>
+        </Event>
+        <Event Name="itemdblclick" Help="#Lang(528)">
+          <Parameters>
+            <Parameter Name="itemid" Order="0" VbType="" Help="#Lang(912)"/>
+            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(913)"/>
+            <Parameter Name="X" Order="0" VbType="" Help="#Lang(914)"/>
+            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(915)"/>
+          </Parameters>
+        </Event>
+        <Event Name="itemmouseout" Help="#Lang(527)">
+          <Parameters>
+            <Parameter Name="id" Order="0" VbType="" Help="#Lang(911)"/>
+          </Parameters>
+        </Event>
+        <Event Name="itemmouseover" Help="#Lang(526)">
+          <Parameters>
+            <Parameter Name="id" Order="0" VbType="" Help="#Lang(909)"/>
+          </Parameters>
+        </Event>
+        <Event Name="itemsloaded" Help="#Lang(536)">
+          <Parameters>
+            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(936)"/>
+          </Parameters>
+        </Event>
         <Event Name="itemsort" Help="#Lang(542)">
           <Parameters>
             <Parameter Name="id" Order="0" VbType="" Help="#Lang(951)"/>
             <Parameter Name="position" Order="0" VbType="" Help="#Lang(952)"/>
           </Parameters>
         </Event>
+        <Event Name="itemsrequest" Help="#Lang(533)">
+          <Parameters>
+            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(928)"/>
+          </Parameters>
+        </Event>
+        <Event Name="itemsselected" Help="#Lang(532)">
+          <Parameters>
+            <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(927)"/>
+          </Parameters>
+        </Event>
+        <Event Name="mouseover" Help="#Lang(537)">
+          <Parameters>
+            <Parameter Name="X" Order="0" VbType="" Help="#Lang(937)"/>
+            <Parameter Name="Y" Order="0" VbType="" Help="#Lang(938)"/>
+          </Parameters>
+        </Event>
       </Userinterfaceevents>
     </Events>
     <Actions>
       <Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
-        <Action Help="#Lang(501)" InterfaceName="#Lang(601)" MethodName="resizeTo">
+        <Action Help="#Lang(543)" InterfaceName="#Lang(624)" MethodName="catchEvent">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(701)" ScriptName="width" Help="#Lang(801)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(702)" ScriptName="height" Help="#Lang(802)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(839)" ScriptName="customName" Help="#Lang(739)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(840)" ScriptName="evtRef" Help="#Lang(740)" RegularExpressionValidation=".*"/>
           </Parameters>
-          <SourceCode><![CDATA[$j(this.domCont).width(parseInt(width,10)).height(parseInt(height,10));]]></SourceCode>
+          <SourceCode><![CDATA[var params = {};
+for (var i in evtRef.parameters){
+  var param = evtRef.parameters[i];
+  params[param.Name] = param.Value;
+}
+
+var id = this.domCont.id;
+execEventBinded(id.substring(2, id.length), "eventcaught", {"customName": customName, "parameters": JSON.stringify(params)});]]></SourceCode>
         </Action>
         <Action Help="#Lang(502)" InterfaceName="#Lang(602)" MethodName="hide">
           <Parameters>
@@ -2477,21 +2520,24 @@ $(document).ready(function(){{
           </Parameters>
           <SourceCode><![CDATA[vdom_ui_hide(this.domCont, fade);]]></SourceCode>
         </Action>
-        <Action Help="#Lang(503)" InterfaceName="#Lang(603)" MethodName="unselectItems">
+        <Action Help="#Lang(523)" InterfaceName="#Lang(623)" MethodName="insertAfter">
           <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(704)" ScriptName="idlist" Help="#Lang(804)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(705)" ScriptName="start" Help="#Lang(805)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(706)" ScriptName="length" Help="#Lang(806)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="true" Interface="" InterfaceName="#Lang(707)" ScriptName="raiseEvent" Help="#Lang(807)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="'item-id'" Interface="" InterfaceName="#Lang(737)" ScriptName="id" Help="#Lang(837)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(738)" ScriptName="items" Help="#Lang(838)" RegularExpressionValidation=".*"/>
           </Parameters>
-          <SourceCode><![CDATA[var idlist = eval(idlist);
-$("#" + this.domCont.id).dynamicObjectView("unmarkAsSelected", idlist, start, length, raiseEvent);]]></SourceCode>
+          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("insertAfter", id, items);]]></SourceCode>
         </Action>
-        <Action Help="#Lang(504)" InterfaceName="#Lang(604)" MethodName="show">
+        <Action Help="#Lang(518)" InterfaceName="#Lang(618)" MethodName="insertAtBeginning">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(708)" ScriptName="fade" Help="#Lang(808)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(731)" ScriptName="items" Help="#Lang(831)" RegularExpressionValidation=".*"/>
           </Parameters>
-          <SourceCode><![CDATA[vdom_ui_show(this.domCont, fade);]]></SourceCode>
+          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("insertAtBeginning", items);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(513)" InterfaceName="#Lang(613)" MethodName="insertAtEnd">
+          <Parameters>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(724)" ScriptName="items" Help="#Lang(824)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("insertAtEnd", items);]]></SourceCode>
         </Action>
         <Action Help="#Lang(505)" InterfaceName="#Lang(605)" MethodName="insertBefore">
           <Parameters>
@@ -2500,17 +2546,11 @@ $("#" + this.domCont.id).dynamicObjectView("unmarkAsSelected", idlist, start, le
           </Parameters>
           <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("insertBefore", id, items);]]></SourceCode>
         </Action>
-        <Action Help="#Lang(506)" InterfaceName="#Lang(606)" MethodName="selectNone">
-          <Parameters/>
-          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("unmarkAsSelected", undefined, undefined, undefined, true);]]></SourceCode>
-        </Action>
-        <Action Help="#Lang(507)" InterfaceName="#Lang(607)" MethodName="unmarkLoadingAll">
-          <Parameters/>
-          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("unmarkAsLoading");]]></SourceCode>
-        </Action>
-        <Action Help="#Lang(508)" InterfaceName="#Lang(608)" MethodName="markLoadingAll">
-          <Parameters/>
-          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("markAsLoading");]]></SourceCode>
+        <Action Help="#Lang(516)" InterfaceName="#Lang(616)" MethodName="markAsActive">
+          <Parameters>
+            <Parameter DefaultValue="'itemid'" Interface="" InterfaceName="#Lang(726)" ScriptName="itemid" Help="#Lang(826)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("markAsActive", itemid);]]></SourceCode>
         </Action>
         <Action Help="#Lang(509)" InterfaceName="#Lang(609)" MethodName="markLoading">
           <Parameters>
@@ -2521,62 +2561,9 @@ $("#" + this.domCont.id).dynamicObjectView("unmarkAsSelected", idlist, start, le
           <SourceCode><![CDATA[var idlist = eval(idlist);
 $("#" + this.domCont.id).dynamicObjectView("markAsLoading", idlist, start, length);]]></SourceCode>
         </Action>
-        <Action Help="#Lang(511)" InterfaceName="#Lang(611)" MethodName="selectItems">
-          <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(715)" ScriptName="idlist" Help="#Lang(815)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(716)" ScriptName="start" Help="#Lang(816)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(717)" ScriptName="length" Help="#Lang(817)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="true" Interface="" InterfaceName="#Lang(718)" ScriptName="raiseEvent" Help="#Lang(818)" RegularExpressionValidation=".*"/>
-          </Parameters>
-          <SourceCode><![CDATA[var idlist = eval(idlist);
-$("#" + this.domCont.id).dynamicObjectView("markAsSelected", idlist, start, length, raiseEvent);]]></SourceCode>
-        </Action>
-        <Action Help="#Lang(512)" InterfaceName="#Lang(612)" MethodName="selectToggle">
-          <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(719)" ScriptName="idlist" Help="#Lang(819)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(721)" ScriptName="start" Help="#Lang(821)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(722)" ScriptName="length" Help="#Lang(822)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="true" Interface="" InterfaceName="#Lang(723)" ScriptName="raiseEvent" Help="#Lang(823)" RegularExpressionValidation=".*"/>
-          </Parameters>
-          <SourceCode><![CDATA[var idlist = eval(idlist);
-$("#" + this.domCont.id).dynamicObjectView("toogleSelection", idlist, start, length, raiseEvent);]]></SourceCode>
-        </Action>
-        <Action Help="#Lang(513)" InterfaceName="#Lang(613)" MethodName="insertAtEnd">
-          <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(724)" ScriptName="items" Help="#Lang(824)" RegularExpressionValidation=".*"/>
-          </Parameters>
-          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("insertAtEnd", items);]]></SourceCode>
-        </Action>
-        <Action Help="#Lang(514)" InterfaceName="#Lang(614)" MethodName="selectAll">
+        <Action Help="#Lang(508)" InterfaceName="#Lang(608)" MethodName="markLoadingAll">
           <Parameters/>
-          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("markAsSelected", undefined, undefined, undefined, true);]]></SourceCode>
-        </Action>
-        <Action Help="#Lang(515)" InterfaceName="#Lang(615)" MethodName="unmarkAsActive">
-          <Parameters>
-            <Parameter DefaultValue="'itemid'" Interface="" InterfaceName="#Lang(725)" ScriptName="itemid" Help="#Lang(825)" RegularExpressionValidation=".*"/>
-          </Parameters>
-          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("unmarkAsActive", itemid);]]></SourceCode>
-        </Action>
-        <Action Help="#Lang(516)" InterfaceName="#Lang(616)" MethodName="markAsActive">
-          <Parameters>
-            <Parameter DefaultValue="'itemid'" Interface="" InterfaceName="#Lang(726)" ScriptName="itemid" Help="#Lang(826)" RegularExpressionValidation=".*"/>
-          </Parameters>
-          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("markAsActive", itemid);]]></SourceCode>
-        </Action>
-        <Action Help="#Lang(517)" InterfaceName="#Lang(617)" MethodName="umarkLoading">
-          <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(727)" ScriptName="idlist" Help="#Lang(827)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(728)" ScriptName="start" Help="#Lang(828)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(729)" ScriptName="length" Help="#Lang(829)" RegularExpressionValidation=".*"/>
-          </Parameters>
-          <SourceCode><![CDATA[var idlist = eval(idlist);
-$("#" + this.domCont.id).dynamicObjectView("unmarkAsLoading", idlist, start, length);]]></SourceCode>
-        </Action>
-        <Action Help="#Lang(518)" InterfaceName="#Lang(618)" MethodName="insertAtBeginning">
-          <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(731)" ScriptName="items" Help="#Lang(831)" RegularExpressionValidation=".*"/>
-          </Parameters>
-          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("insertAtBeginning", items);]]></SourceCode>
+          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("markAsLoading");]]></SourceCode>
         </Action>
         <Action Help="#Lang(519)" InterfaceName="#Lang(619)" MethodName="refresh">
           <Parameters>
@@ -2588,6 +2575,10 @@ if (typeof idlist === 'object')
 else
   $("#" + this.domCont.id).dynamicObjectView("reload");]]></SourceCode>
         </Action>
+        <Action Help="#Lang(522)" InterfaceName="#Lang(622)" MethodName="removeAll">
+          <Parameters/>
+          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("removeItems");]]></SourceCode>
+        </Action>
         <Action Help="#Lang(521)" InterfaceName="#Lang(621)" MethodName="removeItems">
           <Parameters>
             <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(733)" ScriptName="idlist" Help="#Lang(833)" RegularExpressionValidation=".*"/>
@@ -2598,16 +2589,75 @@ else
           <SourceCode><![CDATA[var idlist = eval(idlist);
 $("#" + this.domCont.id).dynamicObjectView("removeItems", idlist, start, length, raiseEvent);]]></SourceCode>
         </Action>
-        <Action Help="#Lang(522)" InterfaceName="#Lang(622)" MethodName="removeAll">
-          <Parameters/>
-          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("removeItems");]]></SourceCode>
-        </Action>
-        <Action Help="#Lang(523)" InterfaceName="#Lang(623)" MethodName="insertAfter">
+        <Action Help="#Lang(501)" InterfaceName="#Lang(601)" MethodName="resizeTo">
           <Parameters>
-            <Parameter DefaultValue="'item-id'" Interface="" InterfaceName="#Lang(737)" ScriptName="id" Help="#Lang(837)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(738)" ScriptName="items" Help="#Lang(838)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(701)" ScriptName="width" Help="#Lang(801)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(702)" ScriptName="height" Help="#Lang(802)" RegularExpressionValidation=".*"/>
           </Parameters>
-          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("insertAfter", id, items);]]></SourceCode>
+          <SourceCode><![CDATA[$j(this.domCont).width(parseInt(width,10)).height(parseInt(height,10));]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(514)" InterfaceName="#Lang(614)" MethodName="selectAll">
+          <Parameters/>
+          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("markAsSelected", undefined, undefined, undefined, true);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(511)" InterfaceName="#Lang(611)" MethodName="selectItems">
+          <Parameters>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(715)" ScriptName="idlist" Help="#Lang(815)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(716)" ScriptName="start" Help="#Lang(816)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(717)" ScriptName="length" Help="#Lang(817)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="true" Interface="" InterfaceName="#Lang(718)" ScriptName="raiseEvent" Help="#Lang(818)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[var idlist = eval(idlist);
+$("#" + this.domCont.id).dynamicObjectView("markAsSelected", idlist, start, length, raiseEvent);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(506)" InterfaceName="#Lang(606)" MethodName="selectNone">
+          <Parameters/>
+          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("unmarkAsSelected", undefined, undefined, undefined, true);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(512)" InterfaceName="#Lang(612)" MethodName="selectToggle">
+          <Parameters>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(719)" ScriptName="idlist" Help="#Lang(819)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(721)" ScriptName="start" Help="#Lang(821)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(722)" ScriptName="length" Help="#Lang(822)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="true" Interface="" InterfaceName="#Lang(723)" ScriptName="raiseEvent" Help="#Lang(823)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[var idlist = eval(idlist);
+$("#" + this.domCont.id).dynamicObjectView("toogleSelection", idlist, start, length, raiseEvent);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(504)" InterfaceName="#Lang(604)" MethodName="show">
+          <Parameters>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(708)" ScriptName="fade" Help="#Lang(808)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[vdom_ui_show(this.domCont, fade);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(517)" InterfaceName="#Lang(617)" MethodName="umarkLoading">
+          <Parameters>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(727)" ScriptName="idlist" Help="#Lang(827)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(728)" ScriptName="start" Help="#Lang(828)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(729)" ScriptName="length" Help="#Lang(829)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[var idlist = eval(idlist);
+$("#" + this.domCont.id).dynamicObjectView("unmarkAsLoading", idlist, start, length);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(515)" InterfaceName="#Lang(615)" MethodName="unmarkAsActive">
+          <Parameters>
+            <Parameter DefaultValue="'itemid'" Interface="" InterfaceName="#Lang(725)" ScriptName="itemid" Help="#Lang(825)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("unmarkAsActive", itemid);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(507)" InterfaceName="#Lang(607)" MethodName="unmarkLoadingAll">
+          <Parameters/>
+          <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("unmarkAsLoading");]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(503)" InterfaceName="#Lang(603)" MethodName="unselectItems">
+          <Parameters>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(704)" ScriptName="idlist" Help="#Lang(804)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(705)" ScriptName="start" Help="#Lang(805)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(706)" ScriptName="length" Help="#Lang(806)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="true" Interface="" InterfaceName="#Lang(707)" ScriptName="raiseEvent" Help="#Lang(807)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[var idlist = eval(idlist);
+$("#" + this.domCont.id).dynamicObjectView("unmarkAsSelected", idlist, start, length, raiseEvent);]]></SourceCode>
         </Action>
       </Container>
     </Actions>

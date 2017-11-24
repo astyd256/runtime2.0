@@ -2208,8 +2208,8 @@ class VDOM_web_services_server(object):
 
     def __do_get_server_actions_list(self, obj, full):
         # if not len(obj.actions["name"]):
-        if not obj.actions:
-            return ""
+        #if not obj.actions:
+        #    return ""
         if 1 == obj.type.container:
             return ""
 
