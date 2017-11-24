@@ -4542,6 +4542,15 @@
 		window.%(id)s_codeeditor.save();
 	});
 	window.%(id)s_codeeditor.refresh();
+
+	var el = $('#%(id)s');
+
+	var intervalId = setInterval(function() {
+		if (el.is(':visible')) {
+			window.%(id)s_codeeditor.refresh();
+			clearInterval(intervalId);
+		}
+	}, 200);
 });</script>
 			""" % {
 				"mode":       self.syntax,
