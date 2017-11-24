@@ -4448,6 +4448,9 @@ class VDOM_fullcalendar(VDOM_object):
 				"lazy_condition_1"     : lazy_condition_1,
 				"first_hour"           : first_hour
 			}
+		resource = application.resources.get_by_label(self.id, "renderscript")
+		if resource:
+			application.resources.delete(resource.id)
 		res_id = application.resources.create_temporary(self.id, "renderscript", VDOM_fullcalendar.RENDER_SCRIPT % render_params, "js", "renderscript")
 		request.dyn_libraries[self.name] =  u'<script type="text/javascript" src="/%s.res"></script>' % res_id
 		return  VDOM_fullcalendar.RENDER_DIV % (id_out, mainstyle)
