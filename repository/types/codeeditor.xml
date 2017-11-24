@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_codeeditor</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.389.8400</Version>
+		<Version>1.389.8401</Version>
 		<Category>Form</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(2a2d2448-2e13-b0bb-8a81-17014fba35bd)</Icon>
@@ -4542,6 +4542,15 @@
 		window.%(id)s_codeeditor.save();
 	});
 	window.%(id)s_codeeditor.refresh();
+
+	var el = $('#%(id)s');
+
+	var intervalId = setInterval(function() {
+		if (el.is(':visible')) {
+			window.%(id)s_codeeditor.refresh();
+			clearInterval(intervalId);
+		}
+	}, 200);
 });</script>
 			""" % {
 				"mode":       self.syntax,
