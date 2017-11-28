@@ -262,12 +262,10 @@ class EACObject(object):
 
     def set_events(self, data):
         """data is dictionary or string (JSON)"""
-        if isinstance(data, dict):
-            data = json.dumps(data)
         self.events_data = data
 
     def get_eacviewer_url(self, host, email):
-        param = urllib.urlencode({
+        param = {
             'eac_token': self.eac_token,
             'session_token': self.session_token,
             'login_container': self.login_container,
@@ -279,8 +277,20 @@ class EACObject(object):
             'app_id': self.app_id,
             'server': self.api_server,
             'email': email,
-            'pattern': self.get_data
-        })
+            'pattern': self.get_data if isinstance(self.get_data, basestring) \
+                        else json.dumps(self.get_data),
+            'pattern_post': self.post_data if isinstance(self.post_data, basestring) \
+                        else json.dumps(self.post_data),
+            'vdomxml': self.vdomxml_data.encode('utf8') if isinstance(self.vdomxml_data, unicode) else self.vdomxml_data,
+            'events': self.events_data,
+            'static': '0' if self.dynamic else '1'
+        }
+
+        for k in param.keys():
+            if not param[k]:
+                param.pop(k)
+
+        param = urllib.urlencode(param)
 
         protocol = 'https'
         if '://' in host:
@@ -297,44 +307,43 @@ class EACObject(object):
         root.setAttribute('SessionToken', self.session_token)
         root.setAttribute('Auth', self.auth)
         # api
-        if self.api_server:
-            api = doc.createElement('API')
-            api.setAttribute('server', self.api_server)
-            api.setAttribute('appID', self.app_id)
-            root.appendChild(api)
-            # login
-            login = doc.createElement('LOGIN')
-            login.setAttribute('container', self.login_container)
-            login.setAttribute('action', self.login_method)
-            api.appendChild(login)
-            # get
-            get = doc.createElement('GET')
-            get.setAttribute('container', self.get_container)
-            get.setAttribute('action', self.get_method)
-            pattern = doc.createElement('PATTERN')
-            get.appendChild(pattern)
-            api.appendChild(get)
-            if self.get_data:
-                append_cdata(doc, pattern, self.get_data)
-            # post
-            post = doc.createElement('POST')
-            post.setAttribute('container', self.post_container)
-            post.setAttribute('action', self.post_method)
-            pattern = doc.createElement('PATTERN')
-            post.appendChild(pattern)
-            api.appendChild(post)
-            if self.post_data:
-                append_cdata(doc, pattern, self.post_data)
+        api = doc.createElement('API')
+        api.setAttribute('server', self.api_server)
+        api.setAttribute('appID', self.app_id)
+        root.appendChild(api)
+        # login
+        login = doc.createElement('LOGIN')
+        login.setAttribute('container', self.login_container)
+        login.setAttribute('action', self.login_method)
+        api.appendChild(login)
+        # get
+        get = doc.createElement('GET')
+        get.setAttribute('container', self.get_container)
+        get.setAttribute('action', self.get_method)
+        pattern = doc.createElement('PATTERN')
+        get.appendChild(pattern)
+        api.appendChild(get)
+        if self.get_data:
+            self.__append_cdata(doc, pattern, self.get_data)
+        # post
+        post = doc.createElement('POST')
+        post.setAttribute('container', self.post_container)
+        post.setAttribute('action', self.post_method)
+        pattern = doc.createElement('PATTERN')
+        post.appendChild(pattern)
+        api.appendChild(post)
+        if self.post_data:
+            self.__append_cdata(doc, pattern, self.post_data)
         # events
         events = doc.createElement('EVENTS')
         root.appendChild(events)
         if self.events_data:
-            append_cdata(doc, events, self.events_data)
+            self.__append_cdata(doc, events, self.events_data)
         # vdomxml
         vdomxml = doc.createElement('VDOMXML')
         root.appendChild(vdomxml)
         if self.vdomxml_data:
-            append_cdata(doc, vdomxml, self.vdomxml_data)
+            self.__append_cdata(doc, vdomxml, self.vdomxml_data)
         # metadata
         metadata = doc.createElement('METADATA')
         root.appendChild(metadata)
@@ -355,10 +364,14 @@ class EACObject(object):
             vdomxml = doc.createElement('VDOMXML')
             item.appendChild(vdomxml)
             if self.item_vdomxml:
-                append_cdata(doc, vdomxml, self.item_vdomxml)
+                self.__append_cdata(doc, vdomxml, self.item_vdomxml)
 
         return root.toprettyxml(encoding='utf8')
         #return root.toxml(encoding='utf8')
+
+    def __append_cdata(self, doc, elem, data):
+        append_cdata(doc, elem,
+            json.dumps(data) if isinstance(data, dict) else data)
 
 
     def send(self, toemail, subject, body):
