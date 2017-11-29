@@ -287,7 +287,9 @@ class EACObject(object):
                         else json.dumps(self.post_data),
             'vdomxml': self.vdomxml_data.encode('utf8') if isinstance(self.vdomxml_data, unicode) else self.vdomxml_data,
             'events': self.events_data,
-            'static': '0' if self.dynamic else '1'
+            'static': '0' if self.dynamic else '1',
+            'layout': self.layout,
+            'widgets': self.widgets
         }
 
         for k in param.keys():
