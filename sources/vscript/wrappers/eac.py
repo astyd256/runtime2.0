@@ -182,6 +182,23 @@ class v_eac(generic):
             return self._eac_obj.item_vdomxml
 
     @AutoCast
+    @v_PropertySimple
+    def v_layout(self, value, retVal):
+        if not retVal:
+            self._eac_obj.layout = value
+        else:
+            return self._eac_obj.layout
+
+    @AutoCast
+    @v_PropertySimple
+    def v_widgets(self, value, retVal):
+        if not retVal:
+            self._eac_obj.widgets = value
+        else:
+            return self._eac_obj.widgets
+
+
+    @AutoCast
     def v_add_tag(self, name, color):
         self._eac_obj.tags[name] = color
 

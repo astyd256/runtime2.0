@@ -216,6 +216,10 @@ class EACObject(object):
         self.eac_app_name = ''
         self.eac_token = ''
         self.eac_method = ''
+        # layout
+        self.layout = ''
+        self.widgets = ''
+
 
     @classmethod
     def from_data(cls, eac_token, payload):
@@ -366,8 +370,17 @@ class EACObject(object):
             if self.item_vdomxml:
                 self.__append_cdata(doc, vdomxml, self.item_vdomxml)
 
+        if self.layout:
+            layout = parseString(self.layout)
+            root.appendChild(layout)
+
+        if self.widgets:
+            widgets = doc.createElement('WIDGETS')
+            self.__append_cdata(doc, widgets, self.widgets)
+            root.appendChild(widgets)
+
         return root.toprettyxml(encoding='utf8')
-        #return root.toxml(encoding='utf8')
+
 
     def __append_cdata(self, doc, elem, data):
         append_cdata(doc, elem,
