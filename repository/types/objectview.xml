@@ -179,23 +179,35 @@
 		</Attribute>
 		<Attribute>
 			<Name>bindings</Name>
-			<DisplayName>#Lang(126)</DisplayName>
-			<Description>#Lang(326)</Description>
+			<DisplayName>#Lang(115)</DisplayName>
+			<Description>#Lang(215)</Description>
 			<DefaultValue></DefaultValue>
 			<RegularExpressionValidation>.*</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(226)</ErrorValidationMessage>
+			<ErrorValidationMessage>#Lang(315)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>3</InterfaceType>
 			<CodeInterface>MultiLine(10000)</CodeInterface>
 			<ColorGroup>2</ColorGroup>
 		</Attribute>
 		<Attribute>
+			<Name>lifetime</Name>
+			<DisplayName>#Lang(127)</DisplayName>
+			<Description>#Lang(327)</Description>
+			<DefaultValue>1</DefaultValue>
+			<RegularExpressionValidation>^[12]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(227)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(424)|1)|(#Lang(425)|2))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
 			<Name>tmpobj</Name>
-			<DisplayName>#Lang(115)</DisplayName>
-			<Description>#Lang(215)</Description>
+			<DisplayName>#Lang(116)</DisplayName>
+			<Description>#Lang(216)</Description>
 			<DefaultValue></DefaultValue>
 			<RegularExpressionValidation>.*</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(315)</ErrorValidationMessage>
+			<ErrorValidationMessage>#Lang(316)</ErrorValidationMessage>
 			<Visible>0</Visible>
 			<InterfaceType>3</InterfaceType>
 			<CodeInterface>MultiLine(10000)</CodeInterface>
@@ -203,11 +215,11 @@
 		</Attribute>
 		<Attribute>
 			<Name>overflow</Name>
-			<DisplayName>#Lang(116)</DisplayName>
-			<Description>#Lang(216)</Description>
+			<DisplayName>#Lang(117)</DisplayName>
+			<Description>#Lang(217)</Description>
 			<DefaultValue>0</DefaultValue>
 			<RegularExpressionValidation>^[0123]$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(316)</ErrorValidationMessage>
+			<ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
 			<CodeInterface>DropDown((#Lang(413)|0)|(#Lang(414)|1)|(#Lang(415)|2)|(#Lang(416)|3))</CodeInterface>
@@ -215,11 +227,11 @@
 		</Attribute>
 		<Attribute>
 			<Name>classname</Name>
-			<DisplayName>#Lang(117)</DisplayName>
-			<Description>#Lang(217)</Description>
+			<DisplayName>#Lang(118)</DisplayName>
+			<Description>#Lang(218)</Description>
 			<DefaultValue></DefaultValue>
 			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
+			<ErrorValidationMessage>#Lang(318)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
 			<CodeInterface>TextField(500)</CodeInterface>
@@ -227,11 +239,11 @@
 		</Attribute>
 		<Attribute>
 			<Name>loading</Name>
-			<DisplayName>#Lang(118)</DisplayName>
-			<Description>#Lang(218)</Description>
+			<DisplayName>#Lang(119)</DisplayName>
+			<Description>#Lang(219)</Description>
 			<DefaultValue>0</DefaultValue>
 			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(318)</ErrorValidationMessage>
+			<ErrorValidationMessage>#Lang(319)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
 			<CodeInterface>DropDown((#Lang(417)|1)|(#Lang(418)|0))</CodeInterface>
@@ -239,11 +251,11 @@
 		</Attribute>
 		<Attribute>
 			<Name>itemstorender</Name>
-			<DisplayName>#Lang(119)</DisplayName>
-			<Description>#Lang(219)</Description>
+			<DisplayName>#Lang(121)</DisplayName>
+			<Description>#Lang(221)</Description>
 			<DefaultValue></DefaultValue>
 			<RegularExpressionValidation>.*</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(319)</ErrorValidationMessage>
+			<ErrorValidationMessage>#Lang(321)</ErrorValidationMessage>
 			<Visible>0</Visible>
 			<InterfaceType>0</InterfaceType>
 			<CodeInterface>TextField(9999999)</CodeInterface>
@@ -251,11 +263,11 @@
 		</Attribute>
 		<Attribute>
 			<Name>noreplace</Name>
-			<DisplayName>#Lang(121)</DisplayName>
-			<Description>#Lang(221)</Description>
+			<DisplayName>#Lang(122)</DisplayName>
+			<Description>#Lang(222)</Description>
 			<DefaultValue>0</DefaultValue>
 			<RegularExpressionValidation>.*</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(321)</ErrorValidationMessage>
+			<ErrorValidationMessage>#Lang(322)</ErrorValidationMessage>
 			<Visible>0</Visible>
 			<InterfaceType>0</InterfaceType>
 			<CodeInterface>TextField(10)</CodeInterface>
@@ -263,11 +275,11 @@
 		</Attribute>
 		<Attribute>
 			<Name>dynamicloading</Name>
-			<DisplayName>#Lang(122)</DisplayName>
-			<Description>#Lang(222)</Description>
+			<DisplayName>#Lang(123)</DisplayName>
+			<Description>#Lang(223)</Description>
 			<DefaultValue>0</DefaultValue>
 			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(322)</ErrorValidationMessage>
+			<ErrorValidationMessage>#Lang(323)</ErrorValidationMessage>
 			<Visible>0</Visible>
 			<InterfaceType>0</InterfaceType>
 			<CodeInterface>DropDown((#Lang(419)|0)|(#Lang(421)|1))</CodeInterface>
@@ -275,18 +287,6 @@
 		</Attribute>
 		<Attribute>
 			<Name>itemslimit</Name>
-			<DisplayName>#Lang(123)</DisplayName>
-			<Description>#Lang(223)</Description>
-			<DefaultValue>10</DefaultValue>
-			<RegularExpressionValidation>\d*</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(323)</ErrorValidationMessage>
-			<Visible>0</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(100)</CodeInterface>
-			<ColorGroup>3</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>itemscount</Name>
 			<DisplayName>#Lang(124)</DisplayName>
 			<Description>#Lang(224)</Description>
 			<DefaultValue>10</DefaultValue>
@@ -298,12 +298,24 @@
 			<ColorGroup>3</ColorGroup>
 		</Attribute>
 		<Attribute>
-			<Name>dynamicrender</Name>
+			<Name>itemscount</Name>
 			<DisplayName>#Lang(125)</DisplayName>
 			<Description>#Lang(225)</Description>
+			<DefaultValue>10</DefaultValue>
+			<RegularExpressionValidation>\d*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(325)</ErrorValidationMessage>
+			<Visible>0</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(100)</CodeInterface>
+			<ColorGroup>3</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>dynamicrender</Name>
+			<DisplayName>#Lang(126)</DisplayName>
+			<Description>#Lang(226)</Description>
 			<DefaultValue>0</DefaultValue>
 			<RegularExpressionValidation>[01]</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(325)</ErrorValidationMessage>
+			<ErrorValidationMessage>#Lang(326)</ErrorValidationMessage>
 			<Visible>0</Visible>
 			<InterfaceType>0</InterfaceType>
 			<CodeInterface>DropDown((#Lang(422)|0)|(#Lang(423)|1))</CodeInterface>
@@ -333,17 +345,18 @@ Before using the Object view type, create a new VDOM package top-level container
 			<Sentence ID="112">Layout</Sentence>
 			<Sentence ID="113">Drag-and-drop</Sentence>
 			<Sentence ID="114">Sortable</Sentence>
-			<Sentence ID="115">Hierarchy</Sentence>
-			<Sentence ID="116">Overflow</Sentence>
-			<Sentence ID="117">CSS Class</Sentence>
-			<Sentence ID="118">Loading</Sentence>
-			<Sentence ID="119"></Sentence>
+			<Sentence ID="115">Bindings</Sentence>
+			<Sentence ID="116">Hierarchy</Sentence>
+			<Sentence ID="117">Overflow</Sentence>
+			<Sentence ID="118">CSS Class</Sentence>
+			<Sentence ID="119">Loading</Sentence>
 			<Sentence ID="121"></Sentence>
-			<Sentence ID="122">Dynamic Load</Sentence>
-			<Sentence ID="123">Items count</Sentence>
+			<Sentence ID="122"></Sentence>
+			<Sentence ID="123">Dynamic Load</Sentence>
 			<Sentence ID="124">Items count</Sentence>
-			<Sentence ID="125">Dynamic render</Sentence>
-			<Sentence ID="126">Bindings</Sentence>
+			<Sentence ID="125">Items count</Sentence>
+			<Sentence ID="126">Dynamic render</Sentence>
+			<Sentence ID="127">Lifetime</Sentence>
 			<Sentence ID="201"></Sentence>
 			<Sentence ID="202">Order of rendering the object on the page. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
 			<Sentence ID="203">Visibility of the object.</Sentence>
@@ -360,21 +373,22 @@ vertical - the items are disposed vertically without changing their width;
 vertical wide - the  items are disposed vertically, their width is stretched to the Object view object&apos;s boundaries.</Sentence>
 			<Sentence ID="213">Using drag-and-drop.</Sentence>
 			<Sentence ID="214">Sort items using drag-n-drop</Sentence>
-			<Sentence ID="215"></Sentence>
-			<Sentence ID="216">The overflow control mode:
+			<Sentence ID="215">Bindings</Sentence>
+			<Sentence ID="216"></Sentence>
+			<Sentence ID="217">The overflow control mode:
 Auto - if the content fits in the object&apos; borders - scrolling will not be shown; if not - the scrolling will be shown;
 Hidden - if the content does not fit in the object&apos; borders - it will be cropped within the borders;
 Scroll - the horizontal and vertical scrolling will always be shown, no matter if the content fits or not;
 Visible - the whole content will always be shown without reference to the object&apos;s borders.</Sentence>
-			<Sentence ID="217">The name of the CSS class.</Sentence>
-			<Sentence ID="218">Show progress control over the item after left-click or double-click on it.</Sentence>
-			<Sentence ID="219"></Sentence>
+			<Sentence ID="218">The name of the CSS class.</Sentence>
+			<Sentence ID="219">Show progress control over the item after left-click or double-click on it.</Sentence>
 			<Sentence ID="221"></Sentence>
-			<Sentence ID="222">Use dynamic loading of items. See WIKI for details.</Sentence>
-			<Sentence ID="223">Number of items to load for each request in infinite scroll mode</Sentence>
+			<Sentence ID="222"></Sentence>
+			<Sentence ID="223">Use dynamic loading of items. See WIKI for details.</Sentence>
 			<Sentence ID="224">Number of items to load for each request in infinite scroll mode</Sentence>
-			<Sentence ID="225">as a replacement for dynamicloading. now dynamicloading is not use.</Sentence>
-			<Sentence ID="226">Invalid value</Sentence>
+			<Sentence ID="225">Number of items to load for each request in infinite scroll mode</Sentence>
+			<Sentence ID="226">as a replacement for dynamicloading. now dynamicloading is not use.</Sentence>
+			<Sentence ID="227">Incorrect value</Sentence>
 			<Sentence ID="301"></Sentence>
 			<Sentence ID="302">Incorrect value, must be positive integer from 0 to 99.</Sentence>
 			<Sentence ID="303">Incorrect value, must be either 0 or 1.</Sentence>
@@ -388,17 +402,18 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="312">Incorrect value, must be either 0, 1 or 2.</Sentence>
 			<Sentence ID="313">Incorrect value, must be either 0 or 1.</Sentence>
 			<Sentence ID="314">Incorrect value</Sentence>
-			<Sentence ID="315">Hierarchy of the object</Sentence>
-			<Sentence ID="316">Incorrect value, must be 0, 1, 2 or 3.</Sentence>
-			<Sentence ID="317">Incorrect value.</Sentence>
+			<Sentence ID="315">Invalid value</Sentence>
+			<Sentence ID="316">Hierarchy of the object</Sentence>
+			<Sentence ID="317">Incorrect value, must be 0, 1, 2 or 3.</Sentence>
 			<Sentence ID="318">Incorrect value.</Sentence>
-			<Sentence ID="319"></Sentence>
+			<Sentence ID="319">Incorrect value.</Sentence>
 			<Sentence ID="321"></Sentence>
-			<Sentence ID="322">Incorrect value, must be 0 or 1</Sentence>
-			<Sentence ID="323">Incorrect value</Sentence>
+			<Sentence ID="322"></Sentence>
+			<Sentence ID="323">Incorrect value, must be 0 or 1</Sentence>
 			<Sentence ID="324">Incorrect value</Sentence>
-			<Sentence ID="325">Invalid value</Sentence>
-			<Sentence ID="326">Bindings</Sentence>
+			<Sentence ID="325">Incorrect value</Sentence>
+			<Sentence ID="326">Invalid value</Sentence>
+			<Sentence ID="327">Lifetime</Sentence>
 			<Sentence ID="401"></Sentence>
 			<Sentence ID="402"></Sentence>
 			<Sentence ID="403">Invisible</Sentence>
@@ -420,6 +435,8 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="421">Yes</Sentence>
 			<Sentence ID="422">No</Sentence>
 			<Sentence ID="423">Yes</Sentence>
+			<Sentence ID="424">Request</Sentence>
+			<Sentence ID="425">Session</Sentence>
 			<Sentence ID="501">Resize the object width and height</Sentence>
 			<Sentence ID="502">Hide the object</Sentence>
 			<Sentence ID="503">Load the items of the object on scrolling to them.</Sentence>
@@ -523,17 +540,18 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="112">Layout</Sentence>
 			<Sentence ID="113">Drag-and-drop</Sentence>
 			<Sentence ID="114"></Sentence>
-			<Sentence ID="115">Hierarchy</Sentence>
-			<Sentence ID="116">Overflow</Sentence>
-			<Sentence ID="117">CSS Class</Sentence>
-			<Sentence ID="118"></Sentence>
+			<Sentence ID="115">Bindings</Sentence>
+			<Sentence ID="116">Hierarchy</Sentence>
+			<Sentence ID="117">Overflow</Sentence>
+			<Sentence ID="118">CSS Class</Sentence>
 			<Sentence ID="119"></Sentence>
 			<Sentence ID="121"></Sentence>
 			<Sentence ID="122"></Sentence>
 			<Sentence ID="123"></Sentence>
 			<Sentence ID="124"></Sentence>
 			<Sentence ID="125"></Sentence>
-			<Sentence ID="126">Bindings</Sentence>
+			<Sentence ID="126"></Sentence>
+			<Sentence ID="127">Lifetime</Sentence>
 			<Sentence ID="201"></Sentence>
 			<Sentence ID="202">Order of rendering the object on the page</Sentence>
 			<Sentence ID="203">Visibility of the object</Sentence>
@@ -547,17 +565,18 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="212">Items layout</Sentence>
 			<Sentence ID="213">Define if drag-and-drop is used or not</Sentence>
 			<Sentence ID="214"></Sentence>
-			<Sentence ID="215"></Sentence>
-			<Sentence ID="216">Overflow control mode</Sentence>
-			<Sentence ID="217">Names of CSS classes</Sentence>
-			<Sentence ID="218"></Sentence>
+			<Sentence ID="215">Bindings</Sentence>
+			<Sentence ID="216"></Sentence>
+			<Sentence ID="217">Overflow control mode</Sentence>
+			<Sentence ID="218">Names of CSS classes</Sentence>
 			<Sentence ID="219"></Sentence>
 			<Sentence ID="221"></Sentence>
 			<Sentence ID="222"></Sentence>
 			<Sentence ID="223"></Sentence>
 			<Sentence ID="224"></Sentence>
 			<Sentence ID="225"></Sentence>
-			<Sentence ID="226">Invalid value</Sentence>
+			<Sentence ID="226"></Sentence>
+			<Sentence ID="227">Incorrect value</Sentence>
 			<Sentence ID="301"></Sentence>
 			<Sentence ID="302">Incorrect value, must be positive integer</Sentence>
 			<Sentence ID="303">Incorrect value, must be 0 or 1</Sentence>
@@ -571,17 +590,18 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="312">Incorrect, must be 0, 1 or 2</Sentence>
 			<Sentence ID="313"></Sentence>
 			<Sentence ID="314"></Sentence>
-			<Sentence ID="315">Hierarchy of the object</Sentence>
-			<Sentence ID="316">Incorrect value</Sentence>
+			<Sentence ID="315">Invalid value</Sentence>
+			<Sentence ID="316">Hierarchy of the object</Sentence>
 			<Sentence ID="317">Incorrect value</Sentence>
-			<Sentence ID="318"></Sentence>
+			<Sentence ID="318">Incorrect value</Sentence>
 			<Sentence ID="319"></Sentence>
 			<Sentence ID="321"></Sentence>
 			<Sentence ID="322"></Sentence>
 			<Sentence ID="323"></Sentence>
 			<Sentence ID="324"></Sentence>
 			<Sentence ID="325"></Sentence>
-			<Sentence ID="326">Bindings</Sentence>
+			<Sentence ID="326"></Sentence>
+			<Sentence ID="327">Lifetime</Sentence>
 			<Sentence ID="401"></Sentence>
 			<Sentence ID="402"></Sentence>
 			<Sentence ID="403">Invisible</Sentence>
@@ -603,6 +623,8 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="421"></Sentence>
 			<Sentence ID="422"></Sentence>
 			<Sentence ID="423"></Sentence>
+			<Sentence ID="424">Request</Sentence>
+			<Sentence ID="425">Session</Sentence>
 			<Sentence ID="501">Resize the object width and height</Sentence>
 			<Sentence ID="502">Hide the object</Sentence>
 			<Sentence ID="503">Show the items of the object</Sentence>
@@ -706,17 +728,18 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="112">Расположение</Sentence>
 			<Sentence ID="113">Перемещение</Sentence>
 			<Sentence ID="114"></Sentence>
-			<Sentence ID="115">Иерархия</Sentence>
-			<Sentence ID="116">Переполнение</Sentence>
-			<Sentence ID="117">Класс CSS</Sentence>
-			<Sentence ID="118"></Sentence>
+			<Sentence ID="115">Bindings</Sentence>
+			<Sentence ID="116">Иерархия</Sentence>
+			<Sentence ID="117">Переполнение</Sentence>
+			<Sentence ID="118">Класс CSS</Sentence>
 			<Sentence ID="119"></Sentence>
 			<Sentence ID="121"></Sentence>
 			<Sentence ID="122"></Sentence>
 			<Sentence ID="123"></Sentence>
 			<Sentence ID="124"></Sentence>
 			<Sentence ID="125"></Sentence>
-			<Sentence ID="126">Bindings</Sentence>
+			<Sentence ID="126"></Sentence>
+			<Sentence ID="127">Lifetime</Sentence>
 			<Sentence ID="201"></Sentence>
 			<Sentence ID="202">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
 			<Sentence ID="203">Отображение объекта</Sentence>
@@ -730,17 +753,18 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="212">Расположение элементов</Sentence>
 			<Sentence ID="213">Использовать перемещение или нет</Sentence>
 			<Sentence ID="214"></Sentence>
-			<Sentence ID="215"></Sentence>
-			<Sentence ID="216">Режим переполнения</Sentence>
-			<Sentence ID="217">Имена классов CSS</Sentence>
-			<Sentence ID="218"></Sentence>
+			<Sentence ID="215">Bindings</Sentence>
+			<Sentence ID="216"></Sentence>
+			<Sentence ID="217">Режим переполнения</Sentence>
+			<Sentence ID="218">Имена классов CSS</Sentence>
 			<Sentence ID="219"></Sentence>
 			<Sentence ID="221"></Sentence>
 			<Sentence ID="222"></Sentence>
 			<Sentence ID="223"></Sentence>
 			<Sentence ID="224"></Sentence>
 			<Sentence ID="225"></Sentence>
-			<Sentence ID="226">Invalid value</Sentence>
+			<Sentence ID="226"></Sentence>
+			<Sentence ID="227">Incorrect value</Sentence>
 			<Sentence ID="301"></Sentence>
 			<Sentence ID="302">Неправильное значение, должно быть указано целое положительное число</Sentence>
 			<Sentence ID="303">Неправильное значение, должен быть указан 0 или 1</Sentence>
@@ -754,17 +778,18 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="312">Неправильное значение, дожен быть указан 0, 1 или 2</Sentence>
 			<Sentence ID="313"></Sentence>
 			<Sentence ID="314"></Sentence>
-			<Sentence ID="315">Приоритет в потоке гипертекста</Sentence>
-			<Sentence ID="316">Неправильное значение</Sentence>
+			<Sentence ID="315">Invalid value</Sentence>
+			<Sentence ID="316">Приоритет в потоке гипертекста</Sentence>
 			<Sentence ID="317">Неправильное значение</Sentence>
-			<Sentence ID="318"></Sentence>
+			<Sentence ID="318">Неправильное значение</Sentence>
 			<Sentence ID="319"></Sentence>
 			<Sentence ID="321"></Sentence>
 			<Sentence ID="322"></Sentence>
 			<Sentence ID="323"></Sentence>
 			<Sentence ID="324"></Sentence>
 			<Sentence ID="325"></Sentence>
-			<Sentence ID="326">Bindings</Sentence>
+			<Sentence ID="326"></Sentence>
+			<Sentence ID="327">Lifetime</Sentence>
 			<Sentence ID="401"></Sentence>
 			<Sentence ID="402"></Sentence>
 			<Sentence ID="403">Не отображать</Sentence>
@@ -786,6 +811,8 @@ Visible - the whole content will always be shown without reference to the object
 			<Sentence ID="421"></Sentence>
 			<Sentence ID="422"></Sentence>
 			<Sentence ID="423"></Sentence>
+			<Sentence ID="424">Request</Sentence>
+			<Sentence ID="425">Session</Sentence>
 			<Sentence ID="501">Изменить ширину и высоту</Sentence>
 			<Sentence ID="502">Скрыть объект</Sentence>
 			<Sentence ID="503">Показать элементы объекта</Sentence>
@@ -1203,8 +1230,7 @@ Visible - the whole content will always be shown without reference to the object
 		</Resource>
 	</Resources>
 	<SourceCode>
-<![CDATA[
-import sys
+<![CDATA[import sys
 import re
 import json
 from collections import OrderedDict
@@ -1447,6 +1473,11 @@ class VDOM_objectview(VDOM_object):
                 name="vdomclass%d" % index, virtual=True, attributes=source_object.attributes)
             copy.objects.replicate(source_object.objects)
             copy.actions.replicate(source_object.actions)
+
+            if self.lifetime == "1":
+                managers.memory.track(copy, sync=managers.request_manager.current)
+            elif self.lifetime == "2":
+                managers.memory.track(copy, sync=managers.session_manager.current)
 
             classes = " ".join(filter(None, (
                 u"%s-item" % classname,
@@ -1945,7 +1976,7 @@ for (var x in items) {
 }]]>
 					</SourceCode>
 				</Action>
-				<Action Name="selectAll" DisplayName="#Lang(612)" Description="#Lang(512)">
+				<Action Name="selectAll" DisplayName="#Lang(609)" Description="#Lang(509)">
 					<SourceCode>
 <![CDATA[var o = this.domCont;
 $j('>div.ov-content>div[dataid]',o).addClass('selected');
@@ -1954,7 +1985,7 @@ vdom_ov_getSelected(o.id.substring(2, o.id.length));]]>
 				</Action>
 				<Action Name="insertAtEnd" DisplayName="#Lang(611)" Description="#Lang(511)">
 					<Parameters>
-						<Parameter Name="items" DisplayName="#Lang(713)" Description="#Lang(813)" DefaultValue="[]" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="items" DisplayName="#Lang(712)" Description="#Lang(812)" DefaultValue="[]" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
 					<SourceCode>
 <![CDATA[if (typeof items === 'object') {
@@ -1966,9 +1997,9 @@ vdom_ov_getSelected(o.id.substring(2, o.id.length));]]>
 }]]>
 					</SourceCode>
 				</Action>
-				<Action Name="selectToggle" DisplayName="#Lang(609)" Description="#Lang(509)">
+				<Action Name="selectToggle" DisplayName="#Lang(612)" Description="#Lang(512)">
 					<Parameters>
-						<Parameter Name="idlist" DisplayName="#Lang(712)" Description="#Lang(812)" DefaultValue="[]" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="idlist" DisplayName="#Lang(713)" Description="#Lang(813)" DefaultValue="[]" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
 					<SourceCode>
 <![CDATA[if (typeof idlist === 'object') {

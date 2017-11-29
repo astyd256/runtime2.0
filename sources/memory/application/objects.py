@@ -105,7 +105,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
 
             # cleanup structure
             if self._owner.is_application and not item.virtual:
-                for container in self._owner.application.objects.itervalues(): # pages
+                for container in self._owner.objects.itervalues():
                     if item is container:
                         continue
                     for level in container.structure.itervalues():
