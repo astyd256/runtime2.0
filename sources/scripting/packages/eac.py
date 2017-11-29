@@ -371,7 +371,7 @@ class EACObject(object):
                 self.__append_cdata(doc, vdomxml, self.item_vdomxml)
 
         if self.layout:
-            layout = parseString(self.layout)
+            layout = parseString(self.layout).documentElement
             root.appendChild(layout)
 
         if self.widgets:
