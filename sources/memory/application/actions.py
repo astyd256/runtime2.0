@@ -3,10 +3,10 @@ from weakref import ref
 from collections import MutableMapping
 from uuid import uuid4
 
-from utils.generators import generate_unique_name
 from utils.properties import lazy, weak, roproperty
 
 from ..generic import MemoryBase
+from ..naming import UniqueNameDictionary
 from .catalogs import MemoryActionsCatalog, MemoryActionsDynamicCatalog
 from .action import MemoryActionSketch, MemoryActionRestorationSketch, MemoryActionDuplicationSketch
 
@@ -30,7 +30,7 @@ class MemoryActions(MemoryBase, MutableMapping):
         def __get__(self, instance, owner=None):
             with instance._owner.lock:
                 instance.__dict__["_items"] = {}
-                return instance.__dict__.setdefault("_items_by_name", {})
+                return instance.__dict__.setdefault("_items_by_name", UniqueNameDictionary())
 
     _items = MemoryActionsItemsProperty()
     _items_by_name = MemoryActionsItemsByNameProperty()
@@ -66,7 +66,7 @@ class MemoryActions(MemoryBase, MutableMapping):
             if item._id is None:
                 item._id = str(uuid4())
             if item._name is None or item._name in self._items_by_name:
-                item._name = generate_unique_name(item._name or NAME_BASE, self._items_by_name)
+                item._name = self._items_by_name.generate(item._name, NAME_BASE)
 
             self._items[item._id] = item
             self._items_by_name[item._name] = item
