@@ -118,12 +118,8 @@ class Memory(object):
                 except KeyError:
                     break
                 else:
-                    log.write("Release %s" % object)
-                    try:
-                        self._primaries.pop(object)
-                    except KeyError:
-                        pass
-                    else:
+                    if self._primaries.pop(object, None) is not None:
+                        log.write("Release %s" % object)
                         object._collection.on_delete(object)
 
             if settings.SHOW_TRACKED_PRIMARIES:

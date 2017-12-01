@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.4.0</Version>
+    <Version>1.5.0</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, accordeon, smartfolderdata</Containers>
@@ -520,6 +520,9 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="541"></Sentence>
       <Sentence ID="542"></Sentence>
       <Sentence ID="543">Catch child event</Sentence>
+      <Sentence ID="544">set CSS Class</Sentence>
+      <Sentence ID="545">Add CSS class</Sentence>
+      <Sentence ID="546">remove CSS Class</Sentence>
       <Sentence ID="601">resizeTo</Sentence>
       <Sentence ID="602">Hide</Sentence>
       <Sentence ID="603">Show</Sentence>
@@ -542,6 +545,9 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="622">Show</Sentence>
       <Sentence ID="623">Show</Sentence>
       <Sentence ID="624">Catch Event</Sentence>
+      <Sentence ID="625">setClass</Sentence>
+      <Sentence ID="626">addClass</Sentence>
+      <Sentence ID="627">removeClass</Sentence>
       <Sentence ID="701">Width</Sentence>
       <Sentence ID="702">Height</Sentence>
       <Sentence ID="703">Fade</Sentence>
@@ -579,6 +585,9 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="738"></Sentence>
       <Sentence ID="739">Custom name</Sentence>
       <Sentence ID="740">VDOM Event reference</Sentence>
+      <Sentence ID="741">className</Sentence>
+      <Sentence ID="742">className</Sentence>
+      <Sentence ID="743">className</Sentence>
       <Sentence ID="801">New value of width</Sentence>
       <Sentence ID="802">New value of height</Sentence>
       <Sentence ID="803">Fade effect, time is indicated in milliseconds</Sentence>
@@ -616,6 +625,9 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="838">Time of appearance</Sentence>
       <Sentence ID="839">customName</Sentence>
       <Sentence ID="840">evtRef</Sentence>
+      <Sentence ID="841">className</Sentence>
+      <Sentence ID="842">className</Sentence>
+      <Sentence ID="843">className</Sentence>
       <Sentence ID="901"></Sentence>
       <Sentence ID="902"></Sentence>
       <Sentence ID="903"></Sentence>
@@ -818,6 +830,9 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="541"></Sentence>
       <Sentence ID="542"></Sentence>
       <Sentence ID="543"></Sentence>
+      <Sentence ID="544"></Sentence>
+      <Sentence ID="545"></Sentence>
+      <Sentence ID="546"></Sentence>
       <Sentence ID="601">resizeTo</Sentence>
       <Sentence ID="602">Hide</Sentence>
       <Sentence ID="603">Show</Sentence>
@@ -840,6 +855,9 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="622">Show</Sentence>
       <Sentence ID="623">Show</Sentence>
       <Sentence ID="624"></Sentence>
+      <Sentence ID="625"></Sentence>
+      <Sentence ID="626"></Sentence>
+      <Sentence ID="627"></Sentence>
       <Sentence ID="701">Width</Sentence>
       <Sentence ID="702">Height</Sentence>
       <Sentence ID="703">Fade</Sentence>
@@ -877,6 +895,9 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="738"></Sentence>
       <Sentence ID="739"></Sentence>
       <Sentence ID="740"></Sentence>
+      <Sentence ID="741"></Sentence>
+      <Sentence ID="742"></Sentence>
+      <Sentence ID="743"></Sentence>
       <Sentence ID="801">New value of width</Sentence>
       <Sentence ID="802">New value of height</Sentence>
       <Sentence ID="803">Fade effect, time is indicated in milliseconds</Sentence>
@@ -914,6 +935,9 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="838">Time of appearance</Sentence>
       <Sentence ID="839"></Sentence>
       <Sentence ID="840"></Sentence>
+      <Sentence ID="841"></Sentence>
+      <Sentence ID="842"></Sentence>
+      <Sentence ID="843"></Sentence>
       <Sentence ID="901"></Sentence>
       <Sentence ID="902"></Sentence>
       <Sentence ID="903"></Sentence>
@@ -1116,6 +1140,9 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="541"></Sentence>
       <Sentence ID="542"></Sentence>
       <Sentence ID="543"></Sentence>
+      <Sentence ID="544"></Sentence>
+      <Sentence ID="545"></Sentence>
+      <Sentence ID="546"></Sentence>
       <Sentence ID="601">resizeTo</Sentence>
       <Sentence ID="602">Скрыть</Sentence>
       <Sentence ID="603">Показать</Sentence>
@@ -1138,6 +1165,9 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="622">Показать</Sentence>
       <Sentence ID="623">Показать</Sentence>
       <Sentence ID="624"></Sentence>
+      <Sentence ID="625"></Sentence>
+      <Sentence ID="626"></Sentence>
+      <Sentence ID="627"></Sentence>
       <Sentence ID="701">Ширина</Sentence>
       <Sentence ID="702">Высота</Sentence>
       <Sentence ID="703">Исчезновение</Sentence>
@@ -1175,6 +1205,9 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="738"></Sentence>
       <Sentence ID="739"></Sentence>
       <Sentence ID="740"></Sentence>
+      <Sentence ID="741"></Sentence>
+      <Sentence ID="742"></Sentence>
+      <Sentence ID="743"></Sentence>
       <Sentence ID="801">Новое значение ширины</Sentence>
       <Sentence ID="802">Новое значение высоты</Sentence>
       <Sentence ID="803">Время исчезновения в миллисекундах</Sentence>
@@ -1212,6 +1245,9 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="838">Время появления</Sentence>
       <Sentence ID="839"></Sentence>
       <Sentence ID="840"></Sentence>
+      <Sentence ID="841"></Sentence>
+      <Sentence ID="842"></Sentence>
+      <Sentence ID="843"></Sentence>
       <Sentence ID="901"></Sentence>
       <Sentence ID="902"></Sentence>
       <Sentence ID="903"></Sentence>
@@ -2500,6 +2536,12 @@ $(document).ready(function(){{
     </Events>
     <Actions>
       <Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
+        <Action Help="#Lang(545)" InterfaceName="#Lang(626)" MethodName="addClass">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(842)" ScriptName="className" Help="#Lang(742)" RegularExpressionValidation=""/>
+          </Parameters>
+          <SourceCode><![CDATA[$q(this.domCont).addClass(className);]]></SourceCode>
+        </Action>
         <Action Help="#Lang(543)" InterfaceName="#Lang(624)" MethodName="catchEvent">
           <Parameters>
             <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(839)" ScriptName="customName" Help="#Lang(739)" RegularExpressionValidation=".*"/>
@@ -2579,6 +2621,12 @@ else
           <Parameters/>
           <SourceCode><![CDATA[$("#" + this.domCont.id).dynamicObjectView("removeItems");]]></SourceCode>
         </Action>
+        <Action Help="#Lang(546)" InterfaceName="#Lang(627)" MethodName="removeClass">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(843)" ScriptName="className" Help="#Lang(743)" RegularExpressionValidation=""/>
+          </Parameters>
+          <SourceCode><![CDATA[$q(this.domCont).removeClass(className);]]></SourceCode>
+        </Action>
         <Action Help="#Lang(521)" InterfaceName="#Lang(621)" MethodName="removeItems">
           <Parameters>
             <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(733)" ScriptName="idlist" Help="#Lang(833)" RegularExpressionValidation=".*"/>
@@ -2623,6 +2671,12 @@ $("#" + this.domCont.id).dynamicObjectView("markAsSelected", idlist, start, leng
           </Parameters>
           <SourceCode><![CDATA[var idlist = eval(idlist);
 $("#" + this.domCont.id).dynamicObjectView("toogleSelection", idlist, start, length, raiseEvent);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(544)" InterfaceName="#Lang(625)" MethodName="setClass">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(841)" ScriptName="className" Help="#Lang(741)" RegularExpressionValidation=""/>
+          </Parameters>
+          <SourceCode><![CDATA[$q(this.domCont).attr('class',className);]]></SourceCode>
         </Action>
         <Action Help="#Lang(504)" InterfaceName="#Lang(604)" MethodName="show">
           <Parameters>

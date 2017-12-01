@@ -2,10 +2,10 @@
 from weakref import ref
 from collections import MutableMapping
 
-from utils.generators import generate_unique_name
 from utils.properties import lazy, weak, roproperty
 
 from ..generic import MemoryBase
+from ..naming import UniqueNameDictionary
 from .library import MemoryLibrarySketch, MemoryLibraryRestorationSketch
 
 
@@ -17,7 +17,7 @@ class MemoryLibraries(MemoryBase, MutableMapping):
 
     @lazy
     def _items(self):
-        return {}
+        return UniqueNameDictionary()
 
     def __init__(self, owner):
         self._owner = owner
@@ -34,7 +34,7 @@ class MemoryLibraries(MemoryBase, MutableMapping):
     def on_complete(self, item, restore):
         with self._owner.lock:
             if item._name is None or item._name in self._items:
-                item._name = generate_unique_name(item._name or NAME_BASE, self._items)
+                item._name = self._items.generate(item._name, NAME_BASE)
             self._items[item._name] = item
 
     def new_sketch(self, restore=False):
