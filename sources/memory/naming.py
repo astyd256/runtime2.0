@@ -14,7 +14,6 @@ class UniqueNameDictionary(dict):
     def generate(self, origin, prototype):
         if self._cache and self._cache[0] == (origin or prototype):
             common, padding, index = self._cache[1:]
-            simple = True
         else:
             if origin and origin[-1] in DIGITS:
                 value = PATTERN.match(origin).group(1)
@@ -26,9 +25,8 @@ class UniqueNameDictionary(dict):
                 common = origin or prototype
                 padding = 0
                 index = 1
-            simple = len(self) < 7  # force simple on small numbers
 
-        if simple:
+        if len(self) < 7:  # force simple on small numbers
             while 1:
                 name = "%s%0*d" % (common, padding, index)
                 if name not in self:
