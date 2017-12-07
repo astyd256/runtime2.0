@@ -8,16 +8,17 @@ import urllib
 import urllib2
 import email
 import email.utils
+import jlayout
 
 from xml.dom.minidom import parseString
 from xml.dom import getDOMImplementation
+
 
 
 class FakeLogger(object):
     def debug(self, *args):
         args = ' '.join(map(repr,args))
         debug('[REMOTE_API CALL] '+args)
-
 
 
 logger = FakeLogger()
@@ -38,12 +39,25 @@ def isData(node):
 def append_cdata(doc, parent, data):
     start = 0
     while True:
-        i = data.find("]]", start)
-        if i == -1:
-            break
+        i = data.find("]]>", start)
+        if i < 0: break
         parent.appendChild(doc.createCDATASection(data[start:i+2]))
         start = i + 2
     parent.appendChild(doc.createCDATASection(data[start:]))
+
+
+def try_number(s):
+    try:
+        return int(s)
+    except ValueError:
+        pass
+
+    try:
+        return float(s)
+    except ValueError:
+        pass
+
+    return s
 
 
 class EACContent(object):
@@ -134,8 +148,38 @@ class EACContent(object):
             result['item'] = self._parse_item(item_el[0])
         return result
 
-    def parse_wholexml(self, wholexml):
+    def _parse_layout_section(self, layout):
+        result = {}
+        for k,v in layout.attributes.items():
+            result[k] = try_number(v)
 
+        if result['type'] == 'border':
+            result['items'] = dict((k, None) for k in ['north', 'west', 'center', 'east', 'south'])
+        else:
+            result['items'] = []
+
+        for child in layout.childNodes:
+            if isData(child): continue
+
+            widget_el = child.getElementsByTagName('WIDGET')
+            widget = dict(widget_el[0].attributes.items()) if widget_el else None
+
+            pane_config = {}
+            for k,v in child.attributes.items():
+                pane_config[k] = try_number(v)
+
+            pane_config['widget'] = widget
+
+            if '-' in child.tagName:
+                key = child.tagName.split('-', 1)[1].lower()
+                result['items'][key] = pane_config
+            else:
+                result['items'].append(pane_config)
+
+        return result
+
+
+    def parse_wholexml(self, wholexml):
         try:
             dom = parseString(wholexml)
         except Exception:
@@ -147,7 +191,7 @@ class EACContent(object):
             'api': '',
             'events': '',
             'vdom': '',
-            'metadata': {}
+            'metadata': {},
         }
 
         whole_el = dom.getElementsByTagName("WHOLEXML")
@@ -168,11 +212,21 @@ class EACContent(object):
 
         vdomxml_el = whole_el.getElementsByTagName("VDOMXML")
         if vdomxml_el:
-            result_whole['vdom'] = getText(vdomxml_el[0].childNodes).replace("]]", "]]")
+            result_whole['vdom'] = getText(vdomxml_el[0].childNodes)
 
         metadata_el = whole_el.getElementsByTagName("METADATA")
         if metadata_el:
             result_whole['metadata'] = self._parse_metadata_section(metadata_el[0])
+
+        layout_el = whole_el.getElementsByTagName("LAYOUT")
+        if layout_el:
+            widgets_el = whole_el.getElementsByTagName("WIDGETS")
+
+            layout_config = self._parse_layout_section(layout_el[0])
+            widgets = json.loads(getText(widgets_el[0].childNodes))
+
+            layout_data = jlayout.build_wholexml_data(layout_config, widgets)
+            result_whole.update(layout_data)
 
         return result_whole
 
@@ -386,7 +440,7 @@ class EACObject(object):
 
     def __append_cdata(self, doc, elem, data):
         append_cdata(doc, elem,
-            json.dumps(data) if isinstance(data, dict) else data)
+            json.dumps(data, indent=2) if isinstance(data, dict) else data)
 
 
     def send(self, toemail, subject, body):
