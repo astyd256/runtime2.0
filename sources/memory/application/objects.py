@@ -25,7 +25,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
 
         def __get__(self, instance, owner=None):
             with instance._owner.lock:
-                instance.__dict__.setdefault("_items_by_name", {})
+                instance.__dict__.setdefault("_items_by_name", UniqueNameDictionary())
                 return instance.__dict__.setdefault("_items", OrderedDict())
 
     class MemoryObjectsItemsByNameProperty(object):
