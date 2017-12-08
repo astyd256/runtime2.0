@@ -225,10 +225,10 @@ def vexecute(code, source, object=None, namespace=None, environment=None, use=No
         finally:
             del traceback
     except errors.python:
-        error_class, error, traceback = sys.exc_info()
+        error_class, error, traceback = information = sys.exc_info()
         try:
-            report = format_exception_trace(information=(error_class, error, traceback), locals=True)
-            new_error = errors.internal_error(replace=search_exception_place(error, traceback), cause=error, report=report)
+            report = format_exception_trace(information=information, locals=True)
+            new_error = errors.internal_error(replace=search_exception_place(error, traceback), cause=information, report=report)
             check_exception(new_error, traceback, errors.generic.runtime)
             raise new_error, None, traceback
         finally:

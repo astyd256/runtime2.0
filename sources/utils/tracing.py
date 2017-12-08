@@ -8,6 +8,7 @@ import traceback
 import inspect
 import threading
 import os
+from collections import OrderedDict
 from itertools import islice
 import settings
 from utils.auxiliary import enquote, headline, fit, align, lfill
@@ -46,6 +47,8 @@ WELL_KNOWN_MODULES = "_json", "_ast", "thread", "operator", "itertools", "except
 
 REPRESENTATION_WIDTH = 40
 REPRESENTATION_VALUE_LIMIT = 40
+
+MAXIMAL_CAUSES_EXTRACTION = 10
 
 
 # types
@@ -109,6 +112,26 @@ def restore_source_path(path):
         return PYTHON_PATH + path[len(PYTHON_PATH):]
     else:
         return path
+
+
+def extract_causes(exception):
+    # NOTE: currently used in vscript to show original errors
+    #       in Python 3 we can user native __cause__ mechanism
+    result = []
+    while 1:
+        information = getattr(exception, "cause", None)
+        if information is None or not isinstance(information, tuple) or len(information) != 3:
+            break
+
+        exception = information[1]
+        if not isinstance(exception, BaseException):
+            break
+
+        result.append(information)
+        if len(result) == MAXIMAL_CAUSES_EXTRACTION:
+            break
+
+    return result
 
 
 def extract_stack(frame=None, skip_tracing=True, skip=None, until=None):
@@ -400,21 +423,29 @@ def is_server_object(object, default=True):
 
 # describers
 
-def describe_exception(extype, exvalue):
+def describe_exception(exception):
+    name = type(exception).__name__
+
     try:
-        if isinstance(exvalue, types.InstanceType):
-            value = getattr(exvalue, "__str__")()
+        if isinstance(exception, types.InstanceType):
+            description = getattr(exception, "__str__")()
         else:
             try:
-                value = str(exvalue)
+                description = str(exception)
             except Exception:
-                value = unicode(exvalue).encode("ascii", "backslashreplace")
+                description = unicode(exception).encode("ascii", "backslashreplace")
     except Exception:
-        value = ""
-    return "%s: %s" % (extype.__name__, headline(value)) if value else extype.__name__
+        description = None
+
+    if description:
+        return "%s: %s" % (name, headline(description))
+    else:
+        return name
 
 
-def describe_thread(thread):
+def describe_thread(thread=None):
+    if thread is None:
+        thread = threading.current_thread()
     extra = tuple(filter(None, (
         "Daemon" if thread.daemon else None,
         "Stopping" if getattr(thread, "_stopping", None) else None)))
@@ -506,6 +537,14 @@ def format_source_point(path, line, function, indent="", width=LOCATION_WIDTH):
     return fullname + ending
 
 
+def extract_trace(stack, limit=sys.maxint):
+    entries = islice(reversed(stack), limit) if DEEPER_LATER else stack[len(stack) - limit:]
+    result = []
+    for path, line, function, statement in entries:
+        result.append((clarify_source_path(path), line, function, statement or UNKNOWN_STATEMENT))
+    return result
+
+
 def format_trace(stack, limit=sys.maxint,
         statements=True, caption=None, compact=COMPACT_DEFAULT_MODE,
         indent="", filler=DEFAULT_FILLER, into=None):
@@ -539,6 +578,20 @@ def format_trace(stack, limit=sys.maxint,
     if into is None:
         lines.append("")
         return "\n".join(lines)
+
+
+def extract_thread_trace(thread=None, limit=sys.maxint, skip=None, until=None):
+    if thread is None:
+        stack = extract_stack(skip=skip, until=until)
+    else:
+        try:
+            frame = sys._current_frames()[thread.ident]
+        except KeyError:
+            return []
+        else:
+            stack = extract_stack(frame, skip=skip, until=until)
+
+    return extract_trace(stack, limit=limit)
 
 
 def format_thread_trace(thread=None, limit=sys.maxint,
@@ -580,6 +633,18 @@ def format_thread_trace(thread=None, limit=sys.maxint,
         return "\n".join(lines)
 
 
+def extract_threads_trace(limit=sys.maxint, current=True):
+    current_thread = None if current else threading.current_thread()
+
+    result = OrderedDict()
+    for thread in threading.enumerate():
+        if thread == current_thread:
+            continue
+        result[thread] = extract_thread_trace(thread, limit=limit, skip=None, until=None)
+
+    return result
+
+
 def format_threads_trace(limit=sys.maxint,
         statements=True, compact=COMPACT_DEFAULT_MODE, current=True,
         indent="", filler=DEFAULT_FILLER, into=None):
@@ -603,6 +668,28 @@ def format_threads_trace(limit=sys.maxint,
     if into is None:
         lines.append("")
         return "\n".join(lines)
+
+
+def extract_exception_locals(information=None, ignore_builtins=True):
+    extype, exvalue, extraceback = information or sys.exc_info()
+    frame = inspect.getinnerframes(extraceback)[-1][0]
+
+    result = {}
+    for name, value in frame.f_locals.iteritems():
+        if ignore_builtins and name == "__builtins__":
+            description = "{...}"
+        else:
+            try:
+                description = represent(value)
+            except Exception as error:
+                try:
+                    message = str(error)
+                except Exception:
+                    message = type(error).__name__
+                description = "Unable to represent: %s" % message
+        result[name] = description
+
+    return result
 
 
 def format_exception_locals(information=None, ignore_builtins=True, caption=None,
@@ -636,12 +723,35 @@ def format_exception_locals(information=None, ignore_builtins=True, caption=None
         return "\n".join(lines)
 
 
+def extract_exception_trace(information=None, limit=sys.maxint,
+        locals=False, threads=False, separate_exception=False):
+    extype, exvalue, extraceback = information = information or sys.exc_info()
+    if exvalue is None:
+        return
+
+    stack = traceback.extract_tb(extraceback)
+    description = describe_exception(exvalue)
+    causes = extract_causes(exvalue)
+    trace = extract_trace(stack, limit=limit)
+
+    result = description, causes, trace
+    if locals:
+        result += extract_exception_locals(information),
+    if threads:
+        result += extract_threads_trace(limit=limit, current=False),
+
+    return result
+
+
 def format_exception_trace(information=None, limit=sys.maxint,
         statements=True, caption=None, label=None, compact=COMPACT_DEFAULT_MODE,
         locals=False, threads=False, separate=False,
         indent="", filler=DEFAULT_FILLER, into=None):
-    lines = [] if into is None else into
     extype, exvalue, extraceback = information = information or sys.exc_info()
+    if exvalue is None:
+        return
+
+    lines = [] if into is None else into
     stack = traceback.extract_tb(extraceback)
 
     if separate:
@@ -652,16 +762,14 @@ def format_exception_trace(information=None, limit=sys.maxint,
     if caption:
         lines.append(caption)
 
-    description = describe_exception(extype, exvalue)
+    description = describe_exception(exvalue)
     if label:
         description = "%s: %s" % (label, description)
     lines.append("%s%s" % (indent, description))
 
-    # NOTE: currently used in vscript to show original errors
-    #       in Python 3 we can user native __cause__ mechanism
-    cause = getattr(exvalue, "cause", None)
-    if cause is not None and isinstance(cause, BaseException):
-        lines.append("Caused by: %s" % describe_exception(type(cause), cause))
+    causes = extract_causes(exvalue)
+    for cause_type, cause_value, cause_traceback in causes:
+        lines.append("Caused by: %s" % describe_exception(cause_value))
 
     if locals:
         format_exception_locals(information, indent=indent + settings.LOGGING_INDENT, into=lines)

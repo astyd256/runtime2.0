@@ -36,6 +36,8 @@ from version import SERVER_NAME, SERVER_VERSION
 # import soap.SOAPBuilder
 from soap.wsdl import methods as soap_methods
 # from utils.exception import VDOM_exception
+from utils.tracing import format_exception_trace
+from utils.pages import compose_page, compose_trace
 
 # A class to describe how header messages are handled
 
@@ -794,46 +796,67 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def send_error(self, code, message=None, excinfo=None):
         """ send error """
         try:
-            short, long = self.responses[code]
+            short, explanation = self.responses[code]
         except KeyError:
-            short, long = '???', '???'
+            short, explanation = "???", "???"
         if message is None:
             message = short
 
-        try:
-            accept_language = self.headers.get("Accept-Language", "")
-            separator = accept_language.find("-")
-            if separator < 0:
-                language = VDOM_CONFIG["DEFAULT-LANGUAGE"]
-            language = accept_language[0:]
-        except:
-            language = VDOM_CONFIG["DEFAULT-LANGUAGE"]
+        self.log_error("code %d, message %s", code, message)
 
-        # filename=VDOM_CONFIG["HTTP-ERROR-PAGES-DIRECTORY"]+"/"+str(code)+".htm"
+        self.send_response(code, message)
+        self.send_header("Connection", "close")
 
-        # if os.path.exists(filename):
-        #   file=open(filename, "rb")
-        #   content=file.read()
-        #   file.close()
+        if code < 200 or code in (204, 205, 304):
+            content = None
+        else:
+            content = compose_page(
+                explanation, title="Error", heading="Error %d: %s" % (code, message),
+                extra=compose_trace if settings.SHOW_PAGE_DEBUG else None)
+            self.send_header("Content-Type", self.error_content_type)
 
-        #   self.send_response(code, message)
-        #   self.send_header("Content-Type", "text/html")
-        #   self.send_header('Connection', 'close')
-        #   self.end_headers()
-        #   if self.command!='HEAD' and code>=200 and code not in (204, 304):
-        #       self.wfile.write(content)
-        #   else:
-        #       pass
-        # else:
-        self.requestline = ""
-        SimpleHTTPServer.SimpleHTTPRequestHandler.send_error(self, code, message)
-        if excinfo:
-            page_debug = VDOM_CONFIG_1["ENABLE-PAGE-DEBUG"]
-            if "1" == page_debug or True:
-                e = "<br>".join(excinfo.splitlines(True))
-                self.wfile.write(e)
-                self.wfile.flush()
-                self.finish()
+        self.end_headers()
+        if self.command != "HEAD" and content:
+            self.wfile.write(content)
+
+        ###
+
+        # NOTE: obsolete implementation
+
+        # try:
+        #     accept_language = self.headers.get("Accept-Language", "")
+        #     separator = accept_language.find("-")
+        #     if separator < 0:
+        #         language = VDOM_CONFIG["DEFAULT-LANGUAGE"]
+        #     language = accept_language[0:]
+        # except:
+        #     language = VDOM_CONFIG["DEFAULT-LANGUAGE"]
+
+        # # filename=VDOM_CONFIG["HTTP-ERROR-PAGES-DIRECTORY"]+"/"+str(code)+".htm"
+
+        # # if os.path.exists(filename):
+        # #   file=open(filename, "rb")
+        # #   content=file.read()
+        # #   file.close()
+
+        # #   self.send_response(code, message)
+        # #   self.send_header("Content-Type", "text/html")
+        # #   self.send_header('Connection', 'close')
+        # #   self.end_headers()
+        # #   if self.command!='HEAD' and code>=200 and code not in (204, 304):
+        # #       self.wfile.write(content)
+        # #   else:
+        # #       pass
+        # # else:
+        # self.requestline = ""
+        # SimpleHTTPServer.SimpleHTTPRequestHandler.send_error(self, code, message)
+        # if excinfo:
+        #     page_debug = VDOM_CONFIG_1["ENABLE-PAGE-DEBUG"]
+        #     if "1" == page_debug or True:
+        #         e = "<br>".join(excinfo.splitlines(True))
+        #         self.wfile.write(e)
+        #         self.wfile.flush()
+        #         self.finish()
 
     def log_error(self, *args):
         pass
