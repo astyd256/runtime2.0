@@ -8,6 +8,7 @@ import urllib
 import urllib2
 import email
 import email.utils
+import base64
 import jlayout
 
 from xml.dom.minidom import parseString
@@ -120,7 +121,7 @@ class EACContent(object):
         }
         vdomxml_el = item.getElementsByTagName("VDOMXML")
         if vdomxml_el:
-            result['vdom'] = getText(vdomxml_el[0].childNodes)#.replace("]]", "]]")
+            result['vdom'] = getText(vdomxml_el[0].childNodes)
         plugin_el = item.getElementsByTagName("PLUGIN")
         if plugin_el:
             result['plugin'] = plugin_el[0].attributes.get("id", "")
@@ -178,6 +179,21 @@ class EACContent(object):
 
         return result
 
+    def _parse_widgets_section(self, widgets_el):
+        payload = getText(widgets_el.childNodes)
+
+        try:
+            return json.loads(base64.decodestring(payload))
+        except:
+            pass
+
+        try:
+            return json.loads(payload)
+        except:
+            pass
+
+        return {}
+
 
     def parse_wholexml(self, wholexml):
         try:
@@ -220,10 +236,16 @@ class EACContent(object):
 
         layout_el = whole_el.getElementsByTagName("LAYOUT")
         if layout_el:
-            widgets_el = whole_el.getElementsByTagName("WIDGETS")
+            result_whole['layout_xml'] = layout_el[0].toprettyxml()
 
+        widgets_el = whole_el.getElementsByTagName("WIDGETS")
+        if widgets_el:
+            result_whole['widgets'] = self._parse_widgets_section(widgets_el[0])
+
+        # update "vdom" and "events" values in result by compilation from layout / widgets
+        if layout_el and widgets_el:
             layout_config = self._parse_layout_section(layout_el[0])
-            widgets = json.loads(getText(widgets_el[0].childNodes))
+            widgets = result_whole['widgets']
 
             layout_data = jlayout.build_wholexml_data(layout_config, widgets)
             result_whole.update(layout_data)
@@ -270,7 +292,7 @@ class EACObject(object):
         self.eac_app_name = ''
         self.eac_token = ''
         self.eac_method = ''
-        # layout
+        # layout / widgets
         self.layout = ''
         self.widgets = ''
 
@@ -316,6 +338,11 @@ class EACObject(object):
         eac.eac_app_name = ''
         eac.eac_token = eac_token
         eac.eac_method = ''
+
+        # layout / widgets
+        eac.layout = whole.get('layout_xml', '')
+        eac.widgets = whole.get('widgets', {})
+
         return eac
 
     def set_events(self, data):
@@ -432,7 +459,12 @@ class EACObject(object):
 
         if self.widgets:
             widgets = doc.createElement('WIDGETS')
-            self.__append_cdata(doc, widgets, self.widgets)
+
+            payload = self.widgets
+            if not isinstance(payload, basestring):
+                payload = json.dumps(payload, indent=2)
+
+            self.__append_cdata(doc, widgets, base64.encodestring(payload))
             root.appendChild(widgets)
 
         return root.toprettyxml(encoding='utf8')
