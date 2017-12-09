@@ -133,7 +133,7 @@ ENABLE_PYTHON_INLINES = False
 
 # debugging
 
-SHOW_PAGE_DEBUG = True
+SHOW_PAGE_DEBUG = False
 SHOW_TRACKED_PRIMARIES = False
 
 # emails
