@@ -844,7 +844,7 @@ def build_wholexml_data(layout, widgets):
 
     result = {
         'vdom' : result_vdomxml,
-        'events' : events_part,
+        'events' : json.dumps(events_part, indent=2),
     }
 
     for k,v in result.items():
