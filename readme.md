@@ -158,7 +158,7 @@ Manage utility also have several actions to help with debugging and profiling.
 
 This action require enabled watcher.
 
-Show objects statistics for all server objects or accumulated from the last snapshort.
+Show objects statistics for all server objects or accumulated from the last snapshot.
 
 Action:
 
