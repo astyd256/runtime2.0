@@ -215,3 +215,20 @@ Action:
 
     watch query callgraph c:\temp
     watch query callgraph c:\temp tasks
+
+### Query object graph
+
+This command require enabled profiler.
+
+Action:
+
+    watch query graph <fully qualified type name>
+    watch query graph <fully qualified type name> <location>
+
+Where *fully qualified type name* is a full type name with module and *location* is the file name or directory for the resulting graph file.
+
+Example:
+
+    watch query graph memory.application.object.MemoryObject c:\temp --depth 5
+
+There we request object graph for all (memory.application.object.)MemoryObject objects with depth of 5.
