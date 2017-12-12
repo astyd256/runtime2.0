@@ -78,21 +78,30 @@ Or can work in interactive mode - just lunch manage.py without arguments.
 
 ### Install application or type
 
-Action:
+Install application or type from desired location, install all types from repository or install appropriate type from repository.
+
+Actions:
 
     install <location>
+    install types
+    install <type name>
+
+Where *location* is the location of the application XML file.
 
 Example:
 
     install x:\data\promail.xml
 
-Where *location* is the location of the application XML file.
-
 ### Uninstall application or type
 
-Action:
+Uninstall application, type or all installed types.
 
-    uninstall <application or type name or uuid>
+Actions:
+
+    uninstall <identifier>
+    uninstall types
+
+Where *identifier* is an application or type name or uuid.
 
 Example:
 
@@ -100,9 +109,14 @@ Example:
 
 ### Select default application
 
+Select default application or display current one.
+
 Action:
 
-    select <application name or uuid>
+    select
+    select <identifier>
+
+Where *identifier* is an application name or uuid.
 
 Example:
 
@@ -128,7 +142,9 @@ Show some information about available application or type like id, name, attribu
 
 Action:
 
-    show <application or type name or uuid>
+    show <identifier>
+
+Where *identifier* is an application name or uuid.
 
 Example:
 
@@ -138,19 +154,31 @@ Example:
 
 Manage utility also have several actions to help with debugging and profiling.
 
-### Show object statistics
+### Show objects statistics
 
 This action require enabled watcher.
 
+Show objects statistics for all server objects or accumulated from the last snapshort.
+
 Action:
 
-    watch analyze objects
+    watch analyze
 
 Example:
 
-    watch analyze objects --sort counter --lim 75
+    watch analyze --all --lim 75 --sort counter
 
-This command show 75 most common object types sorted by count.
+This command show 75 most common object types including built-in and sorted by count.
+
+### Memorize objects state
+
+This action require enabled watcher.
+
+This action force watcher to memorize current object state and show further statistics on changes form this snapshot.
+
+Action:
+
+    watch memorize
 
 ### Show profiling statistics
 
