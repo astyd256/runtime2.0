@@ -5,6 +5,7 @@ import managers
 import file_access
 
 from utils.auxiliary import forfeit
+from memory.manager import AlreadyExistsError
 
 from .auxiliary.constants import TYPE, APPLICATION, EXTENSION, TYPES
 from .auxiliary import section, show, warn, detect, locate_repository, is_entity_name
@@ -30,6 +31,8 @@ def install(filename):
                         # show("precompile library %s" % library.name)
                         library.compile()
 
+        except AlreadyExistsError:
+            show("already installed")
         except Exception as error:
             warn("unable to install %s: %s" % (entity, error))
             raise
