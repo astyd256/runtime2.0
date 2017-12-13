@@ -261,7 +261,7 @@ class Memory(object):
         except IOError as error:
             cleanup(context.uuid)
             raise Exception("Unable to read from %s: %s" % (description, error.strerror))
-        except:
+        except:  # noqa
             cleanup(context.uuid)
             raise
 
@@ -325,7 +325,7 @@ class Memory(object):
         except IOError as error:
             cleanup(context.uuid)
             raise Exception("Unable to read %s: %s" % (description, error.strerror))
-        except:
+        except:  # noqa
             cleanup(context.uuid)
             raise
 
