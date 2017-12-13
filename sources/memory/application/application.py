@@ -22,6 +22,7 @@ from .libraries import MemoryLibraries
 
 
 NOT_LOADED = "NOT LOADED"
+TEMPORARY_EXTENSION = ".new"
 
 
 @weak("_collection")
@@ -429,9 +430,21 @@ class MemoryApplication(MemoryApplicationSketch):
             with self.lock:
                 self._save_queue = False
                 log.write("Save %s" % self)
-                with managers.file_manager.open(file_access.APPLICATION, self._id, settings.APPLICATION_FILENAME,
-                        mode="w", encoding="utf8") as file:
-                    self.compose(file=file, shorter=True)
+
+                filename = settings.APPLICATION_FILENAME
+                new_filename = filename + TEMPORARY_EXTENSION
+
+                try:
+                    with managers.file_manager.open(file_access.APPLICATION, self._id, new_filename,
+                            mode="w", encoding="utf8") as file:
+                        self.compose(file=file, shorter=True)
+                except:  # noqa
+                    managers.file_manager.delete(file_access.APPLICATION, self._id, new_filename)
+                    raise
+                else:
+                    managers.file_manager.delete(file_access.APPLICATION, self._id, filename)
+                    managers.file_manager.rename(file_access.APPLICATION, self._id, new_filename, filename)
+
                 self._changes = False
 
     def export(self, file=None, filename=None, excess=False):
