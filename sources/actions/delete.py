@@ -3,7 +3,7 @@ import managers
 from .auxiliary import section, confirm, show, warn
 
 
-def run(identifier="broken"):
+def run(identifier):
     """
     delete (broken) application
     :param uuid identifier: application uuid

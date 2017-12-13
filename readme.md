@@ -107,6 +107,20 @@ Example:
 
     uninstall promail
 
+### Delete application
+
+Emergency delete application and cleanup infrastructure without proper uninstall procedure.
+
+Actions:
+
+    delete <identifier>
+
+Where *identifier* is an application uuid.
+
+Example:
+
+    delete 7f459762-e1ba-42d3-a0e1-e74beda2eb85
+
 ### Select default application
 
 Select default application or display current one.
