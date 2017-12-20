@@ -3003,7 +3003,7 @@ class VDOM_web_services_server(object):
         library.source_code = data
         # HACK: vscript libraries require precompile
         if app.scripting_language == "vscript" and not settings.STORE_BYTECODE:
-            server_log.write("Precompile %s" % library)
+            log.write("Precompile %s" % library)
             library.compile()
 
         app.unimport_libraries()
