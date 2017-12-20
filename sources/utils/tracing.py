@@ -501,11 +501,15 @@ def describe_object(value):
         name = ""
         module = ""
         if isinstance(value, (tuple, list, dict, set)):
-            representation = repr(value)
-            details += " %s%s: %d" % (
-                fit(representation[:-1], REPRESENTATION_WIDTH - 2),
-                representation[-1],
-                len(value))
+            try:
+                representation = repr(value)
+            except Exception:
+                details = "unrepresentable"
+            else:
+                details += " %s%s: %d" % (
+                    fit(representation[:-1], REPRESENTATION_WIDTH - 2),
+                    representation[-1],
+                    len(value))
     else:
         kind = "object"
         name = type(value).__name__
