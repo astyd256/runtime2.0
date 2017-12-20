@@ -1,18 +1,41 @@
 
 import re
+from logs.levels import NAME_TO_LEVEL as LOG_LEVEL_MAPPING
 from .decorators import verificator
 
 
-UUID_REGEX = re.compile(r"^[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12}$", re.IGNORECASE)
-NAME_REGEX = re.compile(r"^[A-Z][A-Z\d_]*$", re.IGNORECASE)
-QUALIFIED_NAME_REGEX = re.compile(r"^[A-Z][A-Z\d_]*(?:\.[A-Z][A-Z\d_]*)*$", re.IGNORECASE)
-NAME_OR_INTEGER_REGEX = re.compile(r"^(?:[A-Z][A-Z\d_]*|(-[1-9]\d*))$", re.IGNORECASE)
-QUALIFIED_NAME_OR_INTEGER_REGEX = re.compile(r"^(?:[A-Z][A-Z\d_]*(?:\.[A-Z][A-Z\d_]*)*|(-[1-9]\d*))$", re.IGNORECASE)
-UUID_OR_NAME_REGEX = re.compile(r"^(?:[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})|([A-Z][A-Z\d_]*)$", re.IGNORECASE)
-UUID_OR_NONE_REGEX = re.compile(r"^(?:[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})|(none)$", re.IGNORECASE)
-SIZE_REGEX = re.compile(r"^(?P<size>[0-9]+)(?P<measure>[KMG])?$", re.IGNORECASE)
+UUID_REGEX = re.compile(
+    r"^[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12}$",
+    re.IGNORECASE)
+NAME_REGEX = re.compile(
+    r"^[A-Z][A-Z\d_]*$",
+    re.IGNORECASE)
+QUALIFIED_NAME_REGEX = re.compile(
+    r"^[A-Z][A-Z\d_]*(?:\.[A-Z][A-Z\d_]*)*$",
+    re.IGNORECASE)
+NAME_OR_INTEGER_REGEX = re.compile(
+    r"^(?:[A-Z][A-Z\d_]*|(-[1-9]\d*))$",
+    re.IGNORECASE)
+QUALIFIED_NAME_OR_INTEGER_REGEX = re.compile(
+    r"^(?:[A-Z][A-Z\d_]*(?:\.[A-Z][A-Z\d_]*)*|(-[1-9]\d*))$",
+    re.IGNORECASE)
+UUID_OR_NAME_REGEX = re.compile(
+    r"^(?:[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})|([A-Z][A-Z\d_]*)$",
+    re.IGNORECASE)
+UUID_OR_NONE_REGEX = re.compile(
+    r"^(?:[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})|(none)$",
+    re.IGNORECASE)
+SIZE_REGEX = re.compile(
+    r"^(?P<size>[0-9]+)(?P<measure>[KMG])?$",
+    re.IGNORECASE)
+LLP = "^%s$" % "|".join(LOG_LEVEL_MAPPING)
+LOG_LEVEL_REGEX = re.compile(
+    "^%s$" % "|".join(LOG_LEVEL_MAPPING),
+    re.IGNORECASE)
 EXCEPTION_REGEX = NAME_REGEX
-THREAD_REGEX = re.compile(r"^(?:[A-Z][A-Z\d_-]*(?:\s[A-Z][A-Z\d_-]*)*|(-[1-9]\d*))$", re.IGNORECASE)
+THREAD_REGEX = re.compile(
+    r"^(?:[A-Z][A-Z\d_-]*(?:\s[A-Z][A-Z\d_-]*)*|(-[1-9]\d*))$",
+    re.IGNORECASE)
 
 FLOAT = float
 
@@ -150,6 +173,15 @@ def enable_or_disable(value):
         return {"enable": True, "disable": False}[value.lower()]
     except KeyError:
         raise ValueError("Not an enable or disable")
+
+
+@verificator
+def log_level(value):
+    match = LOG_LEVEL_REGEX.match(value)
+    if match:
+        return LOG_LEVEL_MAPPING[value.upper()]
+    else:
+        raise ValueError("Not a log level")
 
 
 @verificator

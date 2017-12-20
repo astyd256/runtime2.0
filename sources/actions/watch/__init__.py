@@ -10,6 +10,8 @@ import memorize
 import describe
 import query
 import profiling
+import logging
+import debugging
 import raise_
 
 

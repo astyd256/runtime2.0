@@ -29,16 +29,21 @@ def builder(parser):
     return reply
 
 
-def run(status=None, address=None, port=None, timeout=None):
+def run(status=None, enable=False, disable=False, address=None, port=None, timeout=None):
     """
     profiling status and options
     :param enable_or_disable status: specifies desired status
+    :param switch enable: enable profiling
+    :param switch disable: disable profiling
     """
-    if status is None:
-        request = REQUEST
-    else:
+    if status is not None:
         request = REQUEST_STATUS % ("enable" if status else "disable")
-
+    elif enable:
+        request = REQUEST_STATUS % "enable"
+    elif disable:
+        request = REQUEST_STATUS % "disable"
+    else:
+        request = REQUEST
     message = query("watch profiling", address, port, request, timeout=timeout)
 
     status = Parser(builder=builder, notify=True, supress=True).parse(message)

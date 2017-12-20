@@ -7,3 +7,5 @@ from describe import describe
 from query import query
 from intrude import intrude
 from profiling import profiling
+from debugging import debugging
+from logging import logging

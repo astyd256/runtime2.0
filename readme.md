@@ -246,3 +246,45 @@ Action:
 
     watch query callgraph c:\temp
     watch query callgraph c:\temp tasks
+
+### Check profiling status
+
+This command require enabled profiler.
+
+Action:
+
+    watch profiling
+
+### Enable or disable profiling
+
+This command require enabled profiler.
+
+Action:
+
+    watch profiling --enable
+    watch profiling --disable
+
+### Show or change log level
+
+This command require enabled profiler.
+
+Action:
+
+    watch logging
+    watch logging --level <log level>
+
+Where *log level* is a one of *debug*, *message*, *warning* or *error*.
+
+Example:
+
+    watch logging --level warning
+
+### Show or change show page debug
+
+This command require enabled profiler.
+
+Action:
+
+    watch debugging
+    watch debugging --showpagedebug enable
+    watch debugging --showpagedebug disable

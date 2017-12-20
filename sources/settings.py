@@ -81,7 +81,7 @@ MAIN_NAME = "Main"
 LOGGER = "native"  # "native", "ovh"
 START_LOG_SERVER = True
 
-LOG_LEVEL = 0  # 0 (DEBUG), 1 (MESSAGE), 2 (WARNING), 3 (ERROR)
+LOG_LEVEL = 0  # 0 (DEBUG), 1 (MESSAGE), 2 (WARNING), 3 (ERROR), can change at runtime
 CONSOLE_LOG_LEVEL = 0
 
 LOGGING_ADDRESS = "127.0.0.1"
@@ -104,7 +104,7 @@ if MANAGE:
 
 # profiling
 
-PROFILING = False
+PROFILING = False  # can change at runtime
 PROFILING_SAVE_PERIODICITY = 5.0
 PROFILE_DEFAULT_NAME = "server"
 PROFILE_TASKS_NAME = "tasks"
@@ -134,7 +134,7 @@ ENABLE_PYTHON_INLINES = False
 
 # debugging
 
-SHOW_PAGE_DEBUG = False
+SHOW_PAGE_DEBUG = False  # can change at runtime
 SHOW_TRACKED_PRIMARIES = False
 
 # emails
