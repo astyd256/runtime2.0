@@ -3,14 +3,14 @@ import settings
 import managers
 import file_access
 
-from logs import server_log
+from logs import log
 from utils.properties import aroproperty
 from utils.tracing import format_exception_trace, show_exception_trace
 from engine.exceptions import RenderTermination
 from .constants import SOURCE_CODE, LISTING
 from .subsystems import select
 from .bytecode import ErrorBytecode
-from .exceptions import SourceSyntaxError
+from .exceptions import SourceSyntaxError, ExecutionTimeoutError
 
 
 class Executable(object):
@@ -132,10 +132,20 @@ class Executable(object):
             __import__(package)
             namespace["__package__"] = package
 
+        normally = False
         try:
+            managers.script_manager.watch()
             self.bytecode.execute(context, namespace, arguments)
+            normally = True  # complete before exception was raised
+            managers.script_manager.ignore()  # and cancel exception
+        except ExecutionTimeoutError:
+            if not normally:
+                log.warning("Terminated due to timeout: %s" % self)
+                raise Exception("Terminated due to timeout")
         except RenderTermination:
             raise
         except Exception:
             show_exception_trace(caption="Unhandled exception in %s" % self, locals=True)
             raise
+        finally:
+            managers.script_manager.cancel()
