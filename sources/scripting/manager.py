@@ -44,8 +44,8 @@ class ScriptManager(object):
             else:
                 counter, deadline = self._threads[thread]
                 self._threads[thread] = counter + 1, deadline
-        if self._cleaner is None:
-            self.start_cleaner()
+            if self._cleaner is None:
+                self.start_cleaner()
 
     def cancel(self):
         thread = current_thread()
