@@ -120,7 +120,7 @@ class Executable(object):
     def compile(self):
         self.__dict__.pop("bytecode", None)
         bytecode = self.bytecode
-        bytecode.explain()
+        bytecode.explain()  # report possible errors
         return bytecode
 
     def execute(self, context=None, namespace=None, arguments=None):

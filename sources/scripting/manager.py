@@ -1,7 +1,7 @@
 
 import ctypes
 from time import time
-from threading import current_thread, Lock
+from threading import current_thread, RLock
 from weakref import WeakKeyDictionary
 
 from logs import log
@@ -13,7 +13,7 @@ from .daemon import ScriptCleaner
 class ScriptManager(object):
 
     def __init__(self):
-        self._lock = Lock()
+        self._lock = RLock()
         self._threads = WeakKeyDictionary()
         self._cleaner = None
 
@@ -27,10 +27,11 @@ class ScriptManager(object):
                     self._threads.pop(thread, None)
 
     def start_cleaner(self):
-        if self._cleaner is None:
-            self._cleaner = ScriptCleaner(self)
-            self._cleaner.start()
-        return self._cleaner
+        with self._lock:
+            if self._cleaner is None:
+                self._cleaner = ScriptCleaner(self)
+                self._cleaner.start()
+            return self._cleaner
 
     def ignore(self):
         ctypes.pythonapi.PyThreadState_SetAsyncExc(current_thread().ident, None)

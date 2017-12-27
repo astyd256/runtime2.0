@@ -16,7 +16,6 @@ class ScriptCleaner(SmartDaemon):
         log.write("Start %s\n" % self.name)
 
     def cleanup(self):
-        self._manager.clean(everything=True)
         log.write("Stop %s\n" % self.name)
 
     def work(self):
