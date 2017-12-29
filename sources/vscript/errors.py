@@ -67,6 +67,14 @@ class internal_error(generic):
             self.cause = cause
 
 
+class lock_error(internal_error):
+
+    def __init__(self, line=None):
+        internal_error.__init__(self,
+                message="Lock error",
+                line=line)
+
+
 class object_variable_not_set(generic):
 
     number = 91

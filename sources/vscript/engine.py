@@ -3,7 +3,8 @@ import sys
 import re
 
 from weakref import WeakKeyDictionary
-from utils.mutex import VDOM_named_mutex_auto as auto_mutex
+from threading import Lock
+# from utils.mutex import VDOM_named_mutex_auto as auto_mutex
 from utils.tracing import format_exception_trace
 from . import errors, lexemes, syntax
 from .variables import variant
@@ -36,6 +37,7 @@ vscript_default_environment = {
     u"v_session": None,
     u"v_application": None}
 
+vscript_global_lock = Lock()
 weakuses = WeakKeyDictionary()
 
 
@@ -107,7 +109,9 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
         else:
             return vscript_default_code, vscript_default_source
     if not safe:
-        mutex = auto_mutex("vscript_engine_compile_mutex")
+        # mutex = auto_mutex("vscript_engine_compile_mutex")
+        if not vscript_global_lock.acquire(False):
+            raise errors.lock_error
     try:
         source = None
         if not quiet and listing:
@@ -163,7 +167,8 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
             del traceback
     finally:
         if not safe:
-            del mutex
+            # del mutex
+            vscript_global_lock.release()
 
 
 def vexecute(code, source, object=None, namespace=None, environment=None, use=None, quiet=None):
