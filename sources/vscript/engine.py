@@ -3,7 +3,7 @@ import sys
 import re
 
 from weakref import WeakKeyDictionary
-from threading import Lock
+from threading import RLock
 # from utils.mutex import VDOM_named_mutex_auto as auto_mutex
 from utils.tracing import format_exception_trace
 from . import errors, lexemes, syntax
@@ -37,7 +37,8 @@ vscript_default_environment = {
     u"v_session": None,
     u"v_application": None}
 
-vscript_global_lock = Lock()
+vscript_global_lock = RLock()
+vscript_global_counter = 0
 weakuses = WeakKeyDictionary()
 
 
@@ -101,6 +102,7 @@ def check_exception(error, traceback, error_type):
 
 def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package=None,
              lines=None, environment=None, use=None, anyway=1, quiet=None, listing=False, safe=None):
+    global vscript_global_counter
     if script is None:
         if let is not None:
             script = "result=%s" % let
@@ -110,8 +112,11 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
             return vscript_default_code, vscript_default_source
     if not safe:
         # mutex = auto_mutex("vscript_engine_compile_mutex")
-        if not vscript_global_lock.acquire(False):
+        vscript_global_lock.acquire()
+        if vscript_global_counter:
+            vscript_global_lock.release()
             raise errors.lock_error
+        vscript_global_counter += 1
     try:
         source = None
         if not quiet and listing:
@@ -169,6 +174,7 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
         if not safe:
             # del mutex
             vscript_global_lock.release()
+            vscript_global_counter -= 1
 
 
 def vexecute(code, source, object=None, namespace=None, environment=None, use=None, quiet=None):
