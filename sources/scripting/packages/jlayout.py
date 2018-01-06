@@ -1,5 +1,4 @@
-#!python
-
+import copy
 import json
 
 
@@ -39,7 +38,7 @@ LIB_JLAYOUT_ALL_JS = u"""
                 // Apparently:
                 //  * Opera returns -1px instead of none
                 //  * IE6 returns undefined instead of none
-                return {'width': (name === 'max' && (width === undefined || width === 'none' || num(width) === -1) && Number.MAX_VALUE) || num(width), 
+                return {'width': (name === 'max' && (width === undefined || width === 'none' || num(width) === -1) && Number.MAX_VALUE) || num(width),
                         'height': (name === 'max' && (height === undefined || height === 'none' || num(height) === -1) && Number.MAX_VALUE) || num(height)};
             }
         };
@@ -108,12 +107,33 @@ LIB_JLAYOUT_ALL_JS = u"""
         my.rows = spec.rows || 0;
         my.fillVertical = spec.fill && spec.fill === 'vertical';
 
-        if (my.rows > 0) {
-            my.columns = Math.floor((my.items.length + my.rows - 1) / my.rows); 
-        } else {
+        if (my.rows > 0 && my.columns <= 0) {
+            my.columns = Math.floor((my.items.length + my.rows - 1) / my.rows);
+        }
+
+        if (my.columns > 0 && my.rows <= 0) {
             my.rows = Math.floor((my.items.length + my.columns - 1) / my.columns);
         }
-    
+
+        if (my.columns <= 0 && my.rows <= 0) {
+            if (my.fillVertical) {
+                my.rows = my.items.length;
+                my.columns = 1;
+            } else {
+                my.columns = my.items.length;
+                my.rows = 1;
+            }
+        }
+
+        if (my.items.length > my.rows * my.columns) {
+            if (my.fillVertical) {
+                my.rows = Math.floor((my.items.length + my.columns - 1) / my.columns);
+            } else {
+                my.columns = Math.floor((my.items.length + my.rows - 1) / my.rows);
+            }
+        }
+
+
         that.items = function () {
             var r = [];
             Array.prototype.push.apply(r, my.items);
@@ -156,9 +176,9 @@ LIB_JLAYOUT_ALL_JS = u"""
 
         function typeLayout(type) {
             return function (container) {
-                var i = 0, 
-                    width = 0, 
-                    height = 0, 
+                var i = 0,
+                    width = 0,
+                    height = 0,
                     type_size,
                     insets = container.insets();
 
@@ -168,7 +188,7 @@ LIB_JLAYOUT_ALL_JS = u"""
                     height = Math.max(height, type_size.height);
                 }
                 return {
-                    'width': insets.left + insets.right + my.columns * width + (my.columns - 1) * my.hgap, 
+                    'width': insets.left + insets.right + my.columns * width + (my.columns - 1) * my.hgap,
                     'height': insets.top + insets.bottom + my.rows * height + (my.rows - 1) * my.vgap
                 };
             };
@@ -219,7 +239,7 @@ LIB_JLAYOUT_ALL_JS = u"""
                         h = zeroArray([], my.rows),
                         type_size,
                         insets = container.insets();
-            
+
                     for (i = 0; i < my.items.length; i += 1) {
                         r = Math.floor(i / my.columns);
                         c = i % my.columns;
@@ -263,6 +283,7 @@ LIB_JLAYOUT_ALL_JS = u"""
                 for (i = 0; i < my.items.length; i += 1) {
                     r = Math.floor(i / my.columns);
                     c = i % my.columns;
+
                     d = my.items[i].preferredSize();
                     d.width = sw * d.width;
                     d.height = sh * d.height;
@@ -286,8 +307,10 @@ LIB_JLAYOUT_ALL_JS = u"""
                     }
                     x += w[c] + my.hgap;
                 }
+
                 return container;
             };
+
             return that;
         };
     }
@@ -310,11 +333,11 @@ LIB_JLAYOUT_ALL_JS = u"""
         var my = {},
             that = {};
 
-        
+
         my.hgap = typeof options.hgap === 'number' && !isNaN(options.hgap) ? options.hgap : 5;
         my.vgap = typeof options.vgap === 'number' && !isNaN(options.vgap) ? options.vgap : 5;
         my.items = options.items || [];
-        my.alignment = (options.alignment && (options.alignment === 'center' || options.alignment === 'right' || options.alignment === 'left') && options.alignment) || 'left';     
+        my.alignment = (options.alignment && (options.alignment === 'center' || options.alignment === 'right' || options.alignment === 'left') && options.alignment) || 'left';
 
         that.items = function () {
             var r = [];
@@ -369,7 +392,7 @@ LIB_JLAYOUT_ALL_JS = u"""
             for (; i < len; i += 1) {
                 if (my.items[i].isVisible()) {
                     itemSize = my.items[i].preferredSize();
-                    
+
                     if ((rowSize.width + itemSize.width) > parentSize.width) {
                         align(currentRow, offset, rowSize, parentSize);
 
@@ -393,9 +416,9 @@ LIB_JLAYOUT_ALL_JS = u"""
 
         function typeLayout(type) {
             return function (container) {
-                var i = 0, 
-                    width = 0, 
-                    height = 0, 
+                var i = 0,
+                    width = 0,
+                    height = 0,
                     typeSize,
                     firstComponent = false,
                     insets = container.insets();
@@ -417,7 +440,7 @@ LIB_JLAYOUT_ALL_JS = u"""
 
         that.preferred = typeLayout('preferred');
         that.minimum = typeLayout('minimum');
-        that.maximum = typeLayout('maximum');       
+        that.maximum = typeLayout('maximum');
 
         return that;
     };
@@ -470,7 +493,7 @@ LIB_JLAYOUT_ALL_JS = u"""
                 items.push(center);
             }
             return items;
-        };      
+        };
 
         that.layout = function (container) {
             var size = container.bounds(),
@@ -550,7 +573,7 @@ LIB_JLAYOUT_ALL_JS = u"""
                 }
 
                 return {
-                    'width': width + insets.left + insets.right, 
+                    'width': width + insets.left + insets.right,
                     'height': height + insets.top + insets.bottom
                 };
             };
@@ -584,7 +607,7 @@ if (jQuery && jLayout) {
             $.each(['min', 'max'], function (i, name) {
                 that[name + 'imumSize'] = function (value) {
                     var l = item.data('jlayout');
-                    
+
                     if (l) {
                         return l[name + 'imum'](that);
                     } else {
@@ -593,10 +616,21 @@ if (jQuery && jLayout) {
                 };
             });
 
+
+            function findMax(key, $el) {
+                if (!$el.length) return 0;
+
+                return $el.toArray().reduce(function(res, x) {
+                    x = $(x);
+                    return Math.max(res, x[key](false), findMax(key, x.children()));
+                }, 0);
+            }
+
+
             $.extend(that, {
                 doLayout: function () {
                     var l = item.data('jlayout');
-                    
+
                     if (l) {
                         l.layout(that);
                     }
@@ -610,9 +644,9 @@ if (jQuery && jLayout) {
                         b = item.border();
 
                     return {
-                        'top': p.top, 
-                        'bottom': p.bottom + b.bottom + b.top, 
-                        'left': p.left, 
+                        'top': p.top,
+                        'bottom': p.bottom + b.bottom + b.top,
+                        'left': p.left,
                         'right': p.right + b.right + b.left
                     };
                 },
@@ -634,15 +668,18 @@ if (jQuery && jLayout) {
                             tmp.height = value.height - (item.outerHeight(true) - item.height());
                             tmp.height = (tmp.height >= 0) ? tmp.height : 0;
                         }
+
                         item.css(tmp);
                         return item;
+
                     } else {
                         tmp = item.position();
+
                         return {
                             'x': tmp.left,
                             'y': tmp.top,
-                            'width': item.outerWidth(false),
-                            'height': item.outerHeight(false)
+                            'width': findMax('outerWidth', item),
+                            'height': findMax('outerHeight', item)
                         };
                     }
                 },
@@ -674,6 +711,7 @@ if (jQuery && jLayout) {
                         size.width += margin.left + margin.right;
                         size.height += margin.top + margin.bottom;
                     }
+
                     return size;
                 }
             });
@@ -687,7 +725,7 @@ if (jQuery && jLayout) {
                     o = ( element.data('layout') ) ? $.extend(opts, element.data('layout')) : opts,
                     elementWrapper = wrap(element, o.resize);
 
-                if (o.type === 'border' && typeof jLayout.border !== 'undefined') {                
+                if (o.type === 'border' && typeof jLayout.border !== 'undefined') {
                     $.each(['north', 'south', 'west', 'east', 'center'], function (i, name) {
                         if (element.children().hasClass(name)) {
                             o[name] = wrap(element.children('.' + name + ':first'));
@@ -725,13 +763,13 @@ if (jQuery && jLayout) {
                             o.items[i] = wrap($(this));
                         }
                     });
-                    element.data('jlayout', jLayout.flow(o));                   
+                    element.data('jlayout', jLayout.flow(o));
                 }
-                
+
                 if (o.resize) {
                     elementWrapper.bounds(elementWrapper.preferredSize());
                 }
-                
+
                 elementWrapper.doLayout();
                 element.css({position: 'relative'});
                 if ($.ui !== undefined) {
@@ -744,6 +782,7 @@ if (jQuery && jLayout) {
             resize: true,
             type: 'grid'
         };
+
     }(jQuery));
 }
 """
@@ -752,25 +791,45 @@ if (jQuery && jLayout) {
 INIT_JLAYOUT_JS = u"""
 
 (function() {
+
     jQuery(function($) {
+        var options = %s,
+            $container = $('[objname="jlayout_widgets"]'),
+            $widgets = $container.children();
 
-        var data = %s;
+        $container.parent().children()
+            .add($widgets)
+            .removeAttr('style');
 
-        data.items = data.items.map(function(item, i) {
+        $widgets.css({display: 'inline-block'});
+
+        if (options.debug) {
+            $widgets.css({border : '1px dashed black', });
+            console.log('jLayout Options:', options);
+            delete options.debug;
+        }
+
+        Object.keys(options.items).forEach(function(key) {
+            var item = options.items[key];
+
             if (Boolean(item) == false)
-                return null;
+                return;
 
-            var el = $('[objname="pane_' + i + '"]');
-            
-            if (item.width) el = el.width(item.width);
-            if (item.height) el = el.height(item.height);
+            var $x = $(`[objname="pane_${key}"]`);
 
-            return el;
-        });
+            if (item.width) $x.width(item.width);
+            if (item.height) $x.height(item.height);
 
-        $('[objname="jlayout_container"]').layout(data);
+            if (options.type === 'border') {
+                $x.addClass(key);
+            }
+        })
 
+        delete options.items;
+
+        $container.layout(options);
     });
+
 })();
 
 
@@ -779,41 +838,50 @@ INIT_JLAYOUT_JS = u"""
 
 
 RESULT_VDOMXML_TEMPLATE = u"""
-    <FLEXCONTAINER name="jlayout_container">
+<CONTAINER name="jlayout_container" visible="1" overflow="3" left="0" top="0" width="0" height="0">
+
+    <CONTAINER name="jlayout_widgets" visible="1" overflow="3" left="0" top="0" width="0" height="0">
 
         {widgets_part}
 
-        <HYPERTEXT name="jlayout_js_code">
-            <Attribute name="htmlcode">
-                <![CDATA[
-                    <script>
-                        {js_code}
-                    </script>
-                ]]>
-            </Attribute>
-        </HYPERTEXT>
+    </CONTAINER>
 
-    </FLEXCONTAINER>
+    <HYPERTEXT name="jlayout_js_code">
+        <Attribute name="htmlcode">
+            <![CDATA[
+                <script>
+                    {js_code}
+                </script>
+            ]]>
+        </Attribute>
+    </HYPERTEXT>
+
+</CONTAINER>
+
 """
 
 
 LAYOUT_PANE_TEMPLATE = u"""
-    <FLEXCONTAINER name="pane_{index}">
+    <CONTAINER name="pane_{index}" visible="1" overflow="3" left="0" top="0" width="0" height="0">
         {widget_vdomxml}
-    </FLEXCONTAINER>
+    </CONTAINER>
 """
 
 
 
 def build_wholexml_data(layout, widgets):
-    if layout['type'] == 'border':
-        raise Exception('"border" layouts not implemented!')
-
     widgets_part = []
     events_part = {}
 
-    for i,item in enumerate(layout['items']):
-        if not item['widget']: 
+    if isinstance(layout['items'], dict):
+        iter_items = layout['items'].iteritems()
+    else:
+        iter_items = enumerate(layout['items'])
+
+    for key,item in iter_items:
+        if not item: continue
+
+        if not item['widget']:
             item['widget'] = {}
 
         widget_id = item['widget'].get('id', None)
@@ -821,12 +889,14 @@ def build_wholexml_data(layout, widgets):
         vdomxml, events = widgets.get(widget_id, ('', {}))
         if not vdomxml: continue
 
-        pane = LAYOUT_PANE_TEMPLATE.format(index=i, widget_vdomxml=vdomxml)
+        pane = LAYOUT_PANE_TEMPLATE.format(index=key, widget_vdomxml=vdomxml)
         widgets_part.append(pane)
 
-        preffix = 'jlayout_container.pane_{}.'.format(i)
+        preffix = 'jlayout_container.jlayout_widgets.pane_{}.'.format(key)
 
-        for event,actions in events.copy().iteritems():
+        for event,actions in copy.deepcopy(events).iteritems():
+            if not actions: continue
+
             for action in actions:
                 if action and ':' in action[0]:
                     action[0] = preffix + action[0]
