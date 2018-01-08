@@ -173,8 +173,8 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
     finally:
         if not safe:
             # del mutex
-            vscript_global_lock.release()
             vscript_global_counter -= 1
+            vscript_global_lock.release()
 
 
 def vexecute(code, source, object=None, namespace=None, environment=None, use=None, quiet=None):
