@@ -36,7 +36,7 @@ class ScriptManager(object):
     def ignore(self):
         ctypes.pythonapi.PyThreadState_SetAsyncExc(current_thread().ident, None)
 
-    def watch(self, timeout=3):
+    def watch(self, timeout=60):
         thread = current_thread()
         with self._lock:
             values = self._threads.get(thread)
