@@ -1,7 +1,10 @@
 
 from contextlib import contextmanager
 from threading import local, current_thread, enumerate as enumerate_threads
+
+import settings
 import managers
+
 from logs import log
 from memory import COMPUTE_CONTEXT, RENDER_CONTEXT, WYSIWYG_CONTEXT
 from utils.profiling import profiler
@@ -58,16 +61,19 @@ class Engine(object):
     def compute(self, object, parent=None):
         log.write("Compute %s" % object)
         previous = self.select(object.application)
+        managers.script_manager.constrain(settings.COMPUTE_TIMEOUT)
         try:
             with profiler:
                 instance = object.factory(COMPUTE_CONTEXT)(parent)
                 instance.recompute()
         finally:
+            managers.script_manager.revoke()
             self.select(previous)
 
     def render(self, object, parent=None, render_type=None):
         log.write("Render %s" % object)
         previous = self.select(object.application)
+        managers.script_manager.constrain(settings.RENDER_TIMEOUT)
         try:
             with profiler:
                 instance = object.factory(RENDER_CONTEXT)(parent)
@@ -76,6 +82,7 @@ class Engine(object):
         except RenderTermination:
             return ""
         finally:
+            managers.script_manager.revoke()
             self.select(previous)
             # statistics.show("Render %s" % object)
 
@@ -83,38 +90,45 @@ class Engine(object):
     def start_render(self, object, parent=None, render_type=None):
         log.write("Render %s" % object)
         previous = self.select(object.application)
+        managers.script_manager.constrain(settings.RENDER_TIMEOUT)
         try:
             with profiler:
                 yield RenderContext(object.factory(RENDER_CONTEXT)(parent))
         except RenderTermination:
             return
         finally:
+            managers.script_manager.revoke()
             self.select(previous)
             # statistics.show("Render %s" % object)
 
     def wysiwyg(self, object, parent=None):
         log.write("Wysiwyg %s" % object)
         previous = self.select(object.application)
+        managers.script_manager.constrain(settings.WYSIWYG_TIMEOUT)
         try:
             with profiler:
                 instance = object.factory(WYSIWYG_CONTEXT)(parent)
                 return instance.wysiwyg()
         finally:
+            managers.script_manager.revoke()
             self.select(previous)
 
     @contextmanager
     def start_wysiwyg(self, object, parent=None):
         log.write("Wysiwyg %s" % object)
         previous = self.select(object.application)
+        managers.script_manager.constrain(settings.WYSIWYG_TIMEOUT)
         try:
             with profiler:
                 yield WysiwygContext(object.factory(WYSIWYG_CONTEXT)(parent))
         finally:
+            managers.script_manager.revoke()
             self.select(previous)
 
     def execute(self, action, parent=None, context=None, render=None):
         log.write("Execute%s %s" % (" and render" if render else "", action))
         previous = self.select(action.owner.application)
+        managers.script_manager.constrain(settings.SCRIPT_TIMEOUT)
         try:
             # try:
             #     namespace = managers.request_manager.get_request().session().context
@@ -133,6 +147,7 @@ class Engine(object):
         except RenderTermination:
             return "" if render else None
         finally:
+            managers.script_manager.revoke()
             self.select(previous)
             # statistics.show("Execute%s %s" % (" and render" if render else "", action))
 

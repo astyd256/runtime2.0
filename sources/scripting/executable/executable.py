@@ -1,16 +1,20 @@
 
+import sys
+
 import settings
 import managers
 import file_access
 
 from logs import log
 from utils.properties import aroproperty
-from utils.tracing import format_exception_trace, show_exception_trace
+from utils.tracing import show_exception_trace
 from engine.exceptions import RenderTermination
+
+from ..manager import ScriptTimeoutError
 from .constants import SOURCE_CODE, LISTING
 from .subsystems import select
 from .bytecode import ErrorBytecode
-from .exceptions import SourceSyntaxError, ExecutionTimeoutError
+from .exceptions import SourceSyntaxError, CompilationError, RequirePrecompileError
 
 
 class Executable(object):
@@ -90,37 +94,55 @@ class Executable(object):
             self.__dict__.pop("bytecode", None)
 
     def _compile(self):
-        try:
-            extension = self.subsystem.extensions.get(LISTING)
-            if extension:
-                if settings.STORE_BYTECODE:
-                    location = self.locate(LISTING)
-                    if location:
-                        signature = location + extension
+        while 1:
+            try:
+                extension = self.subsystem.extensions.get(LISTING)
+                if extension:
+                    if settings.STORE_BYTECODE:
+                        location = self.locate(LISTING)
+                        if location:
+                            signature = location + extension
+                        else:
+                            signature = None
                     else:
                         signature = None
                 else:
-                    signature = None
-            else:
-                location = self.locate(SOURCE_CODE)
-                if location:
-                    signature = location + self.subsystem.source_extension
+                    location = self.locate(SOURCE_CODE)
+                    if location:
+                        signature = location + self.subsystem.source_extension
+                    else:
+                        signature = None
+
+                return self.subsystem.compile(self, signature)
+            except RequirePrecompileError as error:
+                executable = error.executable
+                if executable is self:
+                    log.write("Require %s" % self)
+                    raise
                 else:
-                    signature = None
+                    log.write("Precompile %s" % executable)
+                    try:
+                        executable.compile()
+                    except Exception:
+                        show_exception_trace(caption="Unable to precompile %s" % executable, locals=True)
+                        return ErrorBytecode(self, cause=sys.exc_info())
+            except CompilationError as error:
+                log.error("Unable to compile %s\n%sDue to error in %s" %
+                    (self, settings.LOGGING_INDENT, error.source))
+                return ErrorBytecode(self, cause=sys.exc_info())
+            except SourceSyntaxError as error:
+                log.error("Unable to compile %s\n%sDue to syntax error%s: %s"
+                    % (self, settings.LOGGING_INDENT,
+                        (" on line %d" % error.lineno if error.lineno else ""), error))
+                return ErrorBytecode(self, cause=sys.exc_info())
+            except Exception as error:
+                show_exception_trace(caption="Unable to compile %s" % self, locals=True)
+                return ErrorBytecode(self, cause=sys.exc_info())
 
-            return self.subsystem.compile(self, signature)
-        except Exception as error:
-            message = "Unable to compile %s" % self
-            if isinstance(error, SourceSyntaxError):
-                details = "%s\nError on line %s: %s" % (message, error.lineno, error)
-            else:
-                details = format_exception_trace(caption=message, locals=True)
-            return ErrorBytecode(message, details)
-
-    def compile(self):
-        self.__dict__.pop("bytecode", None)
+    def compile(self, force=False):
+        if force:
+            self.__dict__.pop("bytecode", None)
         bytecode = self.bytecode
-        bytecode.explain()  # report possible errors
         return bytecode
 
     def execute(self, context=None, namespace=None, arguments=None):
@@ -133,19 +155,20 @@ class Executable(object):
             namespace["__package__"] = package
 
         normally = False
+        managers.script_manager.watch()
         try:
-            managers.script_manager.watch()
             self.bytecode.execute(context, namespace, arguments)
             normally = True  # complete before exception was raised
             managers.script_manager.ignore()  # and cancel exception
-        except ExecutionTimeoutError:
+        except ScriptTimeoutError:
             if not normally:
-                log.warning("Terminated due to timeout: %s" % self)
-                raise Exception("Terminated due to timeout")
-        except RenderTermination:
+                message = "Terminate %s due to timeout" % self
+                log.warning(message)
+                raise Exception(message)
+        except (RenderTermination, CompilationError, RequirePrecompileError):
             raise
         except Exception:
             show_exception_trace(caption="Unhandled exception in %s" % self, locals=True)
             raise
         finally:
-            managers.script_manager.cancel()
+            managers.script_manager.leave()

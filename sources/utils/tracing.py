@@ -575,7 +575,7 @@ def format_trace(stack, limit=sys.maxint,
         if statements:
             lines.append("%s%s%s" % (indent,
                 align(location, width - len(indent), " ", filler=filler),
-                align(statement or UNKNOWN_STATEMENT, STATEMENT_WIDTH, " ", filler=" ")))
+                align(statement or UNKNOWN_STATEMENT, STATEMENT_WIDTH, "", filler=" ")))
         else:
             lines.append("%s%s" % (indent, location))
 
@@ -765,6 +765,7 @@ def format_exception_trace(information=None, limit=sys.maxint,
 
     if caption:
         lines.append(caption)
+        indent += settings.LOGGING_INDENT
 
     description = describe_exception(exvalue)
     if label:
@@ -773,7 +774,7 @@ def format_exception_trace(information=None, limit=sys.maxint,
 
     causes = extract_causes(exvalue)
     for cause_type, cause_value, cause_traceback in causes:
-        lines.append("Caused by: %s" % describe_exception(cause_value))
+        lines.append("%sCaused by: %s" % (indent, describe_exception(cause_value)))
 
     if locals:
         format_exception_locals(information, indent=indent + settings.LOGGING_INDENT, into=lines)

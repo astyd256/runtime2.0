@@ -123,6 +123,7 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
             debug("- - - - - - - - - - - - - - - - - - - -")
             for line, statement in enumerate(script.split("\n")):
                 debug((u"  %s      %s" % (unicode(line + 1).ljust(4), statement.expandtabs(4))).encode("ascii", "backslashreplace"))
+            debug("- - - - - - - - - - - - - - - - - - - -")
         lexer.lineno = 1
         try:
             parser.package = package
@@ -134,7 +135,6 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
         if lines:
             source[0:0] = ((None, 0, line) for line in lines)
         if not quiet and listing:
-            debug("- - - - - - - - - - - - - - - - - - - -")
             for line, data in enumerate(source):
                 debug((u"  %s %s %s%s" % (unicode(line + 1).ljust(4),
                         unicode("" if data[0] is None else data[0]).ljust(4),
