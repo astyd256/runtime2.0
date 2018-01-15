@@ -6,6 +6,7 @@ from utils import verificators
 from utils.checkinterval import maximal_check_interval
 
 from .. import auxiliary
+from ..exceptions import WatcherError
 from ..auxiliary import select_types, select_objects, select_profiler, \
     generate_graph, generate_call_graph_profile, generate_call_graph
 
@@ -130,6 +131,8 @@ def query(options):
             keywords["color_nodes"] = color_nodes
 
         with select_profiler(name).hold() as location:
+            if location is None:
+                raise WatcherError("Unable to obtain statistics")
             profile = generate_call_graph_profile(location)
         data = generate_call_graph(profile, **keywords) if profile else None
 
