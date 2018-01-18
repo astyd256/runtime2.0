@@ -181,6 +181,31 @@ def extract_stack(frame=None, skip_tracing=True, skip=None, until=None):
     return lines
 
 
+def extract_caller(recursion=True):
+    if recursion:
+        frame = sys._getframe(3)
+    else:
+        frame = sys._getframe(2)
+        code = frame.f_code
+        while frame.f_code == code:
+            frame = frame.f_back
+
+    code = frame.f_code
+    lineno = frame.f_lineno
+    code = frame.f_code
+    filename = code.co_filename
+    name = code.co_name
+
+    linecache.checkcache(filename)
+    line = linecache.getline(filename, lineno, frame.f_globals)
+    if line:
+        line = line.strip()
+    else:
+        line = None
+
+    return filename, lineno, name, line
+
+
 def collect_referrers(referent, limit=16, depth=32, rank=9, exclude=None):
 
     ACCEPT = "ACCPET"
@@ -531,6 +556,15 @@ def describe_reference(value, limit=16, depth=32, rank=9, exclude=None, default=
             return " < ".join(part for part in parts)
         else:
             return default
+
+
+def describe_caller(recursion=True, statement=False):
+    path, line, function, caller_statement = extract_caller(recursion=recursion)
+    description = ":".join(map(str, (path, line, function)))
+    if statement:
+        return description, caller_statement
+    else:
+        return description
 
 
 # formatting
