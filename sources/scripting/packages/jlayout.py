@@ -797,9 +797,17 @@ INIT_JLAYOUT_JS = u"""
             $container = $('[objname="jlayout_widgets"]'),
             $widgets = $container.children();
 
+        // fix "flexgrid" to "flexGrid" (it's right form for jLayout component)
+        if (options.type.toLowerCase() === 'flexgrid')
+            options.type = 'flexGrid';
+
+        // remove VDOM styles from VDOM Containers
         $container.parent().children()
             .add($widgets)
             .removeAttr('style');
+
+        // set width/height of placeholder to 100%%
+        $container.parent().width('100%%').height('100%%');
 
         $widgets.css({display: 'inline-block'});
 
