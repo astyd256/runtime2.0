@@ -6,9 +6,9 @@ from ..variables import variant
 
 class v_list(generic):
 
-	def __init__(self):
+	def __init__(self, items=None):
 		generic.__init__(self)
-		self._items=[]
+		self._items=[] if items is None else items
 
 
 	items=property(lambda self: self._items)
@@ -17,25 +17,38 @@ class v_list(generic):
 	def erase(self, *arguments):
 		if arguments:
 			if len(arguments)>1: raise errors.wrong_number_of_arguments
-			try: del self._items[argument[0].as_integer]
+			try: del self._items[arguments[0].as_integer]
 			except KeyError: raise errors.subscript_out_of_range
 		else:
-			self._value.clear()
-	
+			del self._items[:]
+
+
+	@classmethod
+	def v_from(cls, *items):
+		return cls(items=list(items))
+
+	@classmethod
+	def v_fromarray(cls, array):
+		return cls(items=array.as_array.flatten())
+
 
 	def v_count(self, **keywords):
 		if "let" in keywords or "set" in keywords:
 			raise errors.errors.object_has_no_property
 		else:
 			return integer(len(self._items))
-	
+
 
 	def v_append(self, value):
 		self._items.append(value.subtype)
 		return v_mismatch
 
 	def v_insert(self, index, value):
-		self._items.insert(as_integer(index), value.subtype)
+		self._items.insert(index.as_integer, value.subtype)
+		return v_mismatch
+
+	def v_extend(self, another):
+		self._items.extend(another.as_specific(v_list)._items)
 		return v_mismatch
 
 	def v_remove(self, value):
@@ -43,8 +56,13 @@ class v_list(generic):
 		except ValueError: raise errors.element_not_found
 		return v_mismatch
 
+	def v_removeall(self, value):
+		simple=value.as_simple
+		self._items=filter(lambda item: item!=simple, self._items)
+		return v_mismatch
+
 	def v_index(self, value):
-		try: return self._items.index(value.subtype)
+		try: return integer(self._items.index(value.subtype))
 		except ValueError: raise errors.element_not_found
 
 	def v_push(self, value):
@@ -54,10 +72,10 @@ class v_list(generic):
 	def v_pop(self, index=None):
 		try: return self._items.pop(-1 if index is None else index.as_integer)
 		except KeyError: raise errors.subscript_out_of_range
-	
-	
+
+
 	def __iter__(self):
 		for item in self._items: yield variant(item)
-	
+
 	def __len__(self):
 		return integer(len(self._items))
