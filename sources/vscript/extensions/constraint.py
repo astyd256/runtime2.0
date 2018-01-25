@@ -12,7 +12,7 @@ class InstancesDict(defaultdict):
 
 	def __missing__(self, key):
 		return key()
-		
+
 class v_problem(generic):
 
 	def __init__(self):
@@ -21,7 +21,7 @@ class v_problem(generic):
 		self._instances=InstancesDict()
 		self._iterator=None
 		self._solution=None
-			
+
 	def v_solution(self, key=None, **keywords):
 		if "let" in keywords or "set" in keywords:
 			raise errors.object_has_no_property(u"solution")
@@ -66,7 +66,7 @@ class v_problem(generic):
 			raise errors.internal_error(str(error))
 		self._iterator=None
 		return v_mismatch
-		
+
 	def v_addconstraint(self, klass, name, *names):
 		instance=self._instances[klass]
 		constraint=getattr(instance, "v_%s"%name.as_string)

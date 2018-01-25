@@ -73,10 +73,10 @@ class scripting_dictionary(generic):
 		self._items.clear()
 		return v_mismatch
 
-		
+
 	def __iter__(self):
 		for item in self._items: yield variant(item)
-		
+
 	def __len__(self):
 		return integer(len(self._items))
 

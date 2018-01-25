@@ -10,6 +10,29 @@ class v_list(generic):
 		generic.__init__(self)
 		self._items=[] if items is None else items
 
+	def __call__(self, *arguments, **keywords):
+		if "let" in keywords:
+			if len(arguments)!=1:
+				raise errors.wrong_number_of_arguments
+			try:
+				self._items[arguments[0].as_integer]=keywords["let"].as_simple
+			except IndexError:
+				raise errors.subscript_out_of_range
+		elif "set" in keywords:
+			if len(arguments)!=1:
+				raise errors.wrong_number_of_arguments
+			try:
+				self._items[arguments[0].as_integer]=keywords["set"].as_complex
+			except IndexError:
+				raise errors.subscript_out_of_range
+		else:
+			if len(arguments)!=1:
+				raise errors.wrong_number_of_arguments
+			try:
+				return self._items[arguments[0].as_integer]
+			except IndexError:
+				raise errors.subscript_out_of_range
+
 
 	items=property(lambda self: self._items)
 

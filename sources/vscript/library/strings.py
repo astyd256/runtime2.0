@@ -1,5 +1,5 @@
 
-import datetime, re
+import re
 from .. import errors
 from ..subtypes import v_null, array, integer, string, empty
 
@@ -109,7 +109,7 @@ def v_instrrev(argument1, argument2, start=None, compare=None):
 		return v_null
 	return integer(string1.as_string.lower().rfind(string2.as_string.lower(), 0, start)+1) if compare \
 		else integer(string1.as_string.rfind(string2.as_string, 0, start)+1)
-	
+
 
 def v_left(string1, length):
 	length=length.as_integer
