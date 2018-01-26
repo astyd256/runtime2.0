@@ -28,7 +28,10 @@ class VDOM_database_manager(object):
             is_dirty_index = False
             for id in self.__index:  # check for not existing or temporary resources
                 database = self.__index[id]
-                database.set_wal_mode()
+                try:
+                    database.set_wal_mode()
+                except Exception:
+                    remove_list.append(id)
                 if managers.file_manager.exists(file_access.database, database.owner_id, database.filename):
                     self.__database_by_name[(database.owner_id, database.name)] = database
                 else:

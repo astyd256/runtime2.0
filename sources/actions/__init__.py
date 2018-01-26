@@ -17,6 +17,7 @@ import offload
 import index
 import compile
 import cleanup
+import delete
 import shell
 import user
 import group

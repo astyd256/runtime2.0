@@ -6,9 +6,10 @@ import settings
 import managers
 import file_access
 
-from logs import server_log
 from utils.properties import aroproperty, roproperty
+
 from .constants import LISTING, SYMBOLS, BYTECODE
+from .exceptions import CompilationError
 
 
 class Bytecode(object):
@@ -94,21 +95,15 @@ class Bytecode(object):
 
 class ErrorBytecode(Bytecode):
 
-    __slots__ = ("_message", "_details")
+    __slots__ = ("_name", "_source", "_cause")
 
     source_extension = ()
     extensions = {}
 
-    message = roproperty("_message")
-    details = roproperty("_details")
-
-    def __init__(self, message, details):
-        self._message = message
-        self._details = details
-
-    def explain(self):
-        server_log.error(self._details)
+    def __init__(self, executable, cause=None):
+        self._name = executable.name
+        self._source = str(executable)
+        self._cause = cause
 
     def execute(self, context, namespace, arguments):
-        server_log.error(self._details)
-        raise Exception(self._message)
+        raise CompilationError("Unable to compile \"%s\"" % self._name, self._source, self._cause)

@@ -151,7 +151,8 @@ class MemoryObjectDuplicationSketch(MemoryObjectSketch):
     def __init__(self, collection, application, parent, another):
         super(MemoryObjectDuplicationSketch, self).__init__(collection,
             another.type, application, parent,
-            virtual=parent.virtual, attributes=another.attributes)
+            virtual=parent.virtual if parent else False,
+            attributes=another.attributes)
 
 
 class MemoryObjectGhost(MemoryBase):

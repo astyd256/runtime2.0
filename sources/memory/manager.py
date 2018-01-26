@@ -1,4 +1,5 @@
 
+import gc
 import os
 import os.path
 
@@ -66,6 +67,10 @@ class Memory(object):
         #         # managers.file_manager.clear(file_access.type_source, type, None)
         #         managers.file_manager.cleanup_directory(file_access.type_source, type)
 
+        if settings.MANUAL_GARBAGE_COLLECTING:
+            gc.disable()
+            self.start_cleaner()
+
     lock = roproperty("_lock")
     types = roproperty("_types")
     applications = roproperty("_applications")
@@ -92,7 +97,7 @@ class Memory(object):
         for entity in entities:
             try:
                 entity.save()
-            except:
+            except:  # noqa
                 log.error("Unable to save %s, details below\n%s" %
                     (entity, format_exception_trace(locals=True, separate=True)))
 
@@ -118,12 +123,8 @@ class Memory(object):
                 except KeyError:
                     break
                 else:
-                    log.write("Release %s" % object)
-                    try:
-                        self._primaries.pop(object)
-                    except KeyError:
-                        pass
-                    else:
+                    if self._primaries.pop(object, None) is not None:
+                        log.write("Release %s" % object)
                         object._collection.on_delete(object)
 
             if settings.SHOW_TRACKED_PRIMARIES:
@@ -146,6 +147,9 @@ class Memory(object):
                     else:
                         log.write("No primary objects to track")
                     self._primaries_cache = primaries
+
+            if settings.MANUAL_GARBAGE_COLLECTING:
+                gc.collect()
 
     # scheduling
 
@@ -265,7 +269,7 @@ class Memory(object):
         except IOError as error:
             cleanup(context.uuid)
             raise Exception("Unable to read from %s: %s" % (description, error.strerror))
-        except:
+        except:  # noqa
             cleanup(context.uuid)
             raise
 
@@ -329,7 +333,7 @@ class Memory(object):
         except IOError as error:
             cleanup(context.uuid)
             raise Exception("Unable to read %s: %s" % (description, error.strerror))
-        except:
+        except:  # noqa
             cleanup(context.uuid)
             raise
 

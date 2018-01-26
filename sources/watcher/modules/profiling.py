@@ -1,19 +1,18 @@
 
-import re
 from logs import log
+from utils import verificators
 from utils.profiling import profiler
 from ..exceptions import OptionError
-
-
-STATUS_REGEX = re.compile("enable$|disable$", re.MULTILINE)
 
 
 def profiling(options):
     status = options.get("status")
     if status is not None:
-        if not STATUS_REGEX.match(status):
+        try:
+            status = verificators.enable_or_disable(status)
+        except ValueError:
             raise OptionError("Incorrect status")
-        status = status == "enable"
+
         if profiler.status != status:
             log.write("%s profiling" % ("Enable" if status else "Disable"))
             profiler.status = status

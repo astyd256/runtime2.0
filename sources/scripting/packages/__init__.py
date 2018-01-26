@@ -1,2 +1,2 @@
 
-from eac import EACObject
+from eac import EACObject, EACContent

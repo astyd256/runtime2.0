@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>0</Dynamic>
-    <Version>1.236.6200</Version>
+    <Version>1.237.6200</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>form, container</Containers>
@@ -210,11 +210,23 @@
       <DisplayName>#Lang(117)</DisplayName>
       <DefaultValue/>
       <Visible>1</Visible>
-      <Help>#Lang(317)</Help>
+      <Help>#Lang(217)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>TextField(500)</CodeInterface>
       <Colorgroup>4</Colorgroup>
-      <ErrorValidationMessage>#Lang(217)</ErrorValidationMessage>
+      <ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
+      <RegularExpressionValidation>^.*$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>customname</Name>
+      <DisplayName>#Lang(118)</DisplayName>
+      <DefaultValue/>
+      <Visible>1</Visible>
+      <Help>#Lang(318)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(100)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(218)</ErrorValidationMessage>
       <RegularExpressionValidation>^.*$</RegularExpressionValidation>
     </Attribute>
   </Attributes>
@@ -239,6 +251,7 @@
       <Sentence ID="115">FontWeight</Sentence>
       <Sentence ID="116">FontSize</Sentence>
       <Sentence ID="117">Class CSS</Sentence>
+      <Sentence ID="118">Custom name</Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Order of rendering the object on the page</Sentence>
       <Sentence ID="203">Visibility of the object</Sentence>
@@ -254,7 +267,8 @@
       <Sentence ID="214">Label to the right of the checkbox</Sentence>
       <Sentence ID="215">Font weight</Sentence>
       <Sentence ID="216">Font size of the object in point</Sentence>
-      <Sentence ID="217">Incorrect CSS class value.</Sentence>
+      <Sentence ID="217">Names of CSS classes.</Sentence>
+      <Sentence ID="218">invalid custom name for input</Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Incorrect value, must be even integer from 0 to 99</Sentence>
       <Sentence ID="303">Incorrect value, must be either 0 or 1</Sentence>
@@ -270,7 +284,8 @@
       <Sentence ID="314">Incorrect value</Sentence>
       <Sentence ID="315">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="316">Incorrect value, must be even positive integer</Sentence>
-      <Sentence ID="317">Names of CSS classes.</Sentence>
+      <Sentence ID="317">Incorrect CSS class value.</Sentence>
+      <Sentence ID="318">custom name for input</Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">Invisible</Sentence>
@@ -380,6 +395,7 @@
       <Sentence ID="115">Graisse</Sentence>
       <Sentence ID="116">Taille</Sentence>
       <Sentence ID="117"></Sentence>
+      <Sentence ID="118"></Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Hiérarchie de l'objet, ordre de chargement de l'objet par rapport aux autres</Sentence>
       <Sentence ID="203">Afficher ou cacher l'objet</Sentence>
@@ -396,6 +412,7 @@
       <Sentence ID="215">Graisse de la police</Sentence>
       <Sentence ID="216">Taille de la police</Sentence>
       <Sentence ID="217"></Sentence>
+      <Sentence ID="218"></Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Valeur Incorrecte, doit être positive</Sentence>
       <Sentence ID="303">Valeur Incorrecte, doit être 0 ou 1</Sentence>
@@ -412,6 +429,7 @@
       <Sentence ID="315">Valeur Incorrecte</Sentence>
       <Sentence ID="316">Valeur Incorrecte, doit être positive</Sentence>
       <Sentence ID="317"></Sentence>
+      <Sentence ID="318"></Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">Invisible</Sentence>
@@ -521,6 +539,7 @@
       <Sentence ID="115">Выделение шрифта</Sentence>
       <Sentence ID="116">Размер шрифта</Sentence>
       <Sentence ID="117"></Sentence>
+      <Sentence ID="118"></Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
       <Sentence ID="203">Режим отображения объекта</Sentence>
@@ -537,6 +556,7 @@
       <Sentence ID="215">Выделение шрифта</Sentence>
       <Sentence ID="216">Размер шрифта</Sentence>
       <Sentence ID="217"></Sentence>
+      <Sentence ID="218"></Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
       <Sentence ID="303">Неправильное значение, должен быть указан 0 или 1</Sentence>
@@ -553,6 +573,7 @@
       <Sentence ID="315">Неправильное значение, должен быть указан 0 или 1</Sentence>
       <Sentence ID="316">Неправильное значение, должно быть целое положительное число</Sentence>
       <Sentence ID="317"></Sentence>
+      <Sentence ID="318"></Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">Не отображать</Sentence>
@@ -769,7 +790,7 @@ $('#inp_%(id)s').on('click',function(e){
   e.stopPropagation();
 });
           });</script>
-        """ % {"id": id, "style": style, "name": self.name, "state": state, 
+        """ % {"id": id, "style": style, "name":self.customname or self.name, "state": state, 
             "tabind": self.tabindex, "value": self.value, "disable": disable,"label": self.label, 
             "contents": contents, "clean_id": clean_id, "css_class": css_class}
 

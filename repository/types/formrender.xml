@@ -3885,43 +3885,43 @@
 	<SourceCode>
 <![CDATA[class VDOM_formrender(VDOM_object):
 
-	def render(self, contents=""):
-		display = u"display: none;" if self.visible == "0" else u""
-		woid = (self.id).replace('-', '_')
-		
-		id = u"o_" + woid
-		ov = u"auto"
-		style = u"overflow:{ovf};z-index:{zind};position:{pos};top:{top}px;left:{left}px;width:{wid}px;height:{hei}px;" \
-			.format(ovf = ov, zind = self.zindex, pos = self.position, 
-					top = self.top, left = self.left, wid = self.width, hei = self.height)
+    def render(self, contents=""):
+        display = u"display: none;" if self.visible == "0" else u""
+        woid = (self.id).replace('-', '_')
 
-		classname = u"""class="%s" """ % self.classname if self.classname else u""
+        id = u"o_" + woid
+        ov = u"auto"
+        style = u"overflow:{ovf};z-index:{zind};position:{pos};top:{top}px;left:{left}px;width:{wid}px;height:{hei}px;" \
+                    .format(ovf = ov, zind = self.zindex, pos = self.position, 
+                                top = self.top, left = self.left, wid = self.width, hei = self.height)
 
-		if VDOM_CONFIG_1["DEBUG"] == "1":
-			debug_info = u"objtype='formbuilder' objname='%s' ver='%s'" % (self.name, self.type.version)
-		else:
-			debug_info = u""
+        classname = u"""class="%s" """ % self.classname if self.classname else u""
 
-		result = \
-			u"""<div {debug_info} id="{id}" style="display:block;margin:0; {display} {style}" name="{name}" style="overflow:visible" {classname}></div>  	
-				<script>jQuery(function($) {{		
-					$('#{id}').formRender({{dataType: '{datatype}',formData: `{contents}`, i18n: {{locale: '{language}'}}}});
-				 }});</script>
-			""".format(
-					debug_info = debug_info, id = id,  woid= woid, display = display, style = style, name = self.name, 
-					contents = self.data or "[]" if self.datatype=='json' else "'<form-template></form-template>'", classname = classname,
-					datatype=self.datatype, language=self.language)
-					
- 
-		return VDOM_object.render(self, contents=result)
+        if VDOM_CONFIG_1["DEBUG"] == "1":
+            debug_info = u"objtype='formbuilder' objname='%s' ver='%s'" % (self.name, self.type.version)
+        else:
+            debug_info = u""
 
-	def wysiwyg(self, contents=""):
-		import utils.wysiwyg
-			
-		image_id = "54e7f8ab-64f1-b113-029e-1703a76c6fa4"
-		result = utils.wysiwyg.get_empty_wysiwyg_value(self, image_id)
-			
-		return VDOM_object.wysiwyg(self, contents=result)]]>
+        result = \
+                    u"""<div {debug_info} id="{id}" style="display:block;margin:0; {display} {style}" name="{name}" style="overflow:visible" {classname}></div>  	
+                        <script>jQuery(function($) {{		
+                        $('#{id}').formRender({{dataType: '{datatype}',formData: `{contents}`, i18n: {{locale: '{language}'}}}});
+                        }});</script>
+                        """.format(
+                               debug_info = debug_info, id = id,  woid= woid, display = display, style = style, name = self.name, 
+                                        contents = self.data or "[]" if self.datatype=='json' else "'<form-template></form-template>'", classname = classname,
+                                        datatype=self.datatype, language=self.language)
+
+
+        return VDOM_object.render(self, contents=result)
+
+    def wysiwyg(self, contents=""):
+        from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
+
+        image_id = "54e7f8ab-64f1-b113-029e-1703a76c6fa4"
+        result = get_empty_wysiwyg_value(self, image_id)
+
+        return VDOM_object.wysiwyg(self, contents=result)]]>
 	</SourceCode>
 	<Libraries>
 		<Library Target="html"><![CDATA[<script type="text/javascript" src="/cfaa29cf-4e45-d3ce-c065-3fd1ec4e3d97.res"></script>]]></Library>

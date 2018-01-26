@@ -78,31 +78,59 @@ Or can work in interactive mode - just lunch manage.py without arguments.
 
 ### Install application or type
 
-Action:
+Install application or type from desired location, install all types from repository or install appropriate type from repository.
+
+Actions:
 
     install <location>
+    install types
+    install <type name>
+
+Where *location* is the location of the application XML file.
 
 Example:
 
     install x:\data\promail.xml
 
-Where *location* is the location of the application XML file.
-
 ### Uninstall application or type
 
-Action:
+Uninstall application, type or all installed types.
 
-    uninstall <application or type name or uuid>
+Actions:
+
+    uninstall <identifier>
+    uninstall types
+
+Where *identifier* is an application or type name or uuid.
 
 Example:
 
     uninstall promail
 
+### Delete application
+
+Emergency delete application and cleanup infrastructure without proper uninstall procedure.
+
+Actions:
+
+    delete <identifier>
+
+Where *identifier* is an application uuid.
+
+Example:
+
+    delete 7f459762-e1ba-42d3-a0e1-e74beda2eb85
+
 ### Select default application
+
+Select default application or display current one.
 
 Action:
 
-    select <application name or uuid>
+    select
+    select <identifier>
+
+Where *identifier* is an application name or uuid.
 
 Example:
 
@@ -128,7 +156,9 @@ Show some information about available application or type like id, name, attribu
 
 Action:
 
-    show <application or type name or uuid>
+    show <identifier>
+
+Where *identifier* is an application name or uuid.
 
 Example:
 
@@ -138,19 +168,48 @@ Example:
 
 Manage utility also have several actions to help with debugging and profiling.
 
-### Show object statistics
+### Show objects statistics
+
+This action require enabled watcher.
+
+Show objects statistics for all server objects or accumulated from the last snapshot.
+
+Action:
+
+    watch analyze
+
+Example:
+
+    watch analyze --all --lim 75 --sort counter
+
+This command show 75 most common object types including built-in and sorted by count.
+
+### Memorize objects state
+
+This action require enabled watcher.
+
+This action force watcher to memorize current object state and show further statistics on changes form this snapshot.
+
+Action:
+
+    watch memorize
+
+### Query object graph
 
 This action require enabled watcher.
 
 Action:
 
-    watch analyze objects
+    watch query graph <fully qualified type name>
+    watch query graph <fully qualified type name> <location>
+
+Where *fully qualified type name* is a full type name with module and *location* is the file name or directory for the resulting graph file.
 
 Example:
 
-    watch analyze objects --sort counter --lim 75
+    watch query graph memory.application.object.MemoryObject c:\temp --depth 5
 
-This command show 75 most common object types sorted by count.
+There we request object graph for all (memory.application.object.)MemoryObject objects with depth of 5.
 
 ### Show profiling statistics
 
@@ -187,3 +246,45 @@ Action:
 
     watch query callgraph c:\temp
     watch query callgraph c:\temp tasks
+
+### Check profiling status
+
+This command require enabled profiler.
+
+Action:
+
+    watch profiling
+
+### Enable or disable profiling
+
+This command require enabled profiler.
+
+Action:
+
+    watch profiling --enable
+    watch profiling --disable
+
+### Show or change log level
+
+This command require enabled profiler.
+
+Action:
+
+    watch logging
+    watch logging --level <log level>
+
+Where *log level* is a one of *debug*, *message*, *warning* or *error*.
+
+Example:
+
+    watch logging --level warning
+
+### Show or change show page debug
+
+This command require enabled profiler.
+
+Action:
+
+    watch debugging
+    watch debugging --showpagedebug enable
+    watch debugging --showpagedebug disable

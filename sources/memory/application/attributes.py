@@ -153,7 +153,8 @@ class MemoryAttributes(MemoryAttributesSketch):
                     self._owner.autosave()
 
     def __getitem__(self, name):
-        return self._items.get(name, self._attributes[name].default_value)
+        value = self._items.get(name)
+        return self._attributes[name].default_value if value is None else value
 
     def __setitem__(self, name, value):
         self.update({name: value})

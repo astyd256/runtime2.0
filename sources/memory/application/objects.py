@@ -8,10 +8,10 @@ import managers
 import security
 
 from utils.exception import VDOMSecurityError
-from utils.generators import generate_unique_name
 from utils.properties import lazy, weak, roproperty
 
 from ..generic import MemoryBase
+from ..naming import UniqueNameDictionary
 from .catalogs import MemoryObjectsCatalog, MemoryObjectsDynamicCatalog
 
 
@@ -25,7 +25,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
 
         def __get__(self, instance, owner=None):
             with instance._owner.lock:
-                instance.__dict__.setdefault("_items_by_name", {})
+                instance.__dict__.setdefault("_items_by_name", UniqueNameDictionary())
                 return instance.__dict__.setdefault("_items", OrderedDict())
 
     class MemoryObjectsItemsByNameProperty(object):
@@ -33,7 +33,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
         def __get__(self, instance, owner=None):
             with instance._owner.lock:
                 instance.__dict__.setdefault("_items", OrderedDict())
-                return instance.__dict__.setdefault("_items_by_name", {})
+                return instance.__dict__.setdefault("_items_by_name", UniqueNameDictionary())
 
     _items = MemoryObjectsItemsProperty()
     _items_by_name = MemoryObjectsItemsByNameProperty()
@@ -72,7 +72,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
             if item._name is None or item._name in self._items_by_name:
                 if item._name is not None:
                     item._original_name = item._name
-                item._name = generate_unique_name(item._name or item._type.name, self._items_by_name)
+                item._name = self._items_by_name.generate(item._name, item._type.name)
             item._order = len(self._items)
 
             if item._virtual == self._owner.virtual:
@@ -104,8 +104,8 @@ class MemoryObjects(MemoryBase, MutableMapping):
             item.objects.clear()
 
             # cleanup structure
-            if item.structure:
-                for container in self._owner.application.objects.itervalues(): # pages
+            if self._owner.is_application and not item.virtual:
+                for container in self._owner.objects.itervalues():
                     if item is container:
                         continue
                     for level in container.structure.itervalues():
@@ -176,9 +176,6 @@ class MemoryObjects(MemoryBase, MutableMapping):
                 file.write(u"%s</Objects>\n" % ident)
 
     def replicate(self, another):
-        if self._owner.is_application:
-            raise Exception(u"Use 'new' to create new top-level container")
-
         with self._owner.lock:
             copy = None
 

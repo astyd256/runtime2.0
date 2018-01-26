@@ -892,7 +892,9 @@ def application_builder(parser, installation_callback=None):
                 ~application
 
                 # HACK: vscript libraries require precompile
-                if application.scripting_language == VSCRIPT_LANGUAGE and not settings.STORE_BYTECODE:
+                if (settings.ENABLE_VSCRIPT_PRECOMPILE
+                        and application.scripting_language == VSCRIPT_LANGUAGE
+                        and not settings.STORE_BYTECODE):
                     for library in application.libraries.itervalues():
                         server_log.write("Precompile %s" % library)
                         library.compile()

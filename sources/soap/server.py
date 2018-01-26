@@ -773,11 +773,18 @@ class VDOM_web_services_server(object):
             #     tgt_app = app
             # copy_obj = managers.xml_manager.search_object(appid, new_obj_id)
             # self.__copy_events_structure(app, obj, copy_obj, obj_map, action_map, tgt_app)
-            try:
-                parent = app.objects.catalog[parentid]
-            except KeyError:
-                raise SOAPpy.faultType(parent_object_error, _("Create object error"), _("Unable to find parent object"))
-            copy_obj = parent.objects.replicate(obj)
+            if parentid is None:
+                if not obj.is_top_container:
+                    raise SOAPpy.faultType(parent_object_error, _("Create object error"), _("Unable to copy non-container as top container"))
+                copy_obj = app.objects.replicate(obj)
+            else:
+                if obj.is_top_container:
+                    raise SOAPpy.faultType(parent_object_error, _("Create object error"), _("Unable to copy top container as usual object"))
+                try:
+                    parent = app.objects.catalog[parentid]
+                except KeyError:
+                    raise SOAPpy.faultType(parent_object_error, _("Create object error"), _("Unable to find parent object"))
+                copy_obj = parent.objects.replicate(obj)
 
             # tgt_app.sync()
             tgt_app.save()
@@ -2208,8 +2215,8 @@ class VDOM_web_services_server(object):
 
     def __do_get_server_actions_list(self, obj, full):
         # if not len(obj.actions["name"]):
-        if not obj.actions:
-            return ""
+        #if not obj.actions:
+        #    return ""
         if 1 == obj.type.container:
             return ""
 
@@ -2995,8 +3002,8 @@ class VDOM_web_services_server(object):
 
         library.source_code = data
         # HACK: vscript libraries require precompile
-        if app.scripting_language == "vscript" and not settings.STORE_BYTECODE:
-            server_log.write("Precompile %s" % library)
+        if app.scripting_language == "vscript":
+            log.write("Precompile %s" % library)
             library.compile()
 
         app.unimport_libraries()

@@ -1,8 +1,8 @@
 
-import urllib, urllib2, httplib, mimetools, codecs
+import urllib2, httplib, mimetools, codecs
 from StringIO import StringIO
 from .. import errors
-from ..subtypes import generic, boolean, binary, string, true, false, v_empty, v_mismatch
+from ..subtypes import generic, boolean, binary, string, true, false, v_empty, v_mismatch, v_nothing
 
 
 v_connectionerror=urllib2.URLError
@@ -14,7 +14,7 @@ class v_proxy(generic):
 		generic.__init__(self)
 		self._value={}
 
-		
+
 	def build_handler(self):
 		return urllib2.ProxyHandler(self._value)
 
@@ -37,7 +37,7 @@ class v_passwordmanager(generic):
 		self._username=None
 		self._password=None
 
-	
+
 	def build_handler(self, proxy):
 		http_proxy=proxy.value.get("http", None)
 		if http_proxy:
@@ -79,8 +79,8 @@ class v_connection(generic):
 		self._proxy=None
 		self._authentication=None
 		self._timeout=None
-		
-			
+
+
 	def erase(self):
 		if self._value:
 			try: self._value.close()
@@ -159,4 +159,3 @@ class v_connection(generic):
 		if self._value is None: raise errors.invalid_procedure_call(name=u"close")
 		self.erase()
 		return v_mismatch
-		

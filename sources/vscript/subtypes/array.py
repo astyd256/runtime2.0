@@ -51,10 +51,6 @@ def erase(items):
 	else:
 		items[:]=[v_empty]*len(items)
 
-def count(items):
-	return sum(len(item) for item in items) \
-		if items and isinstance(items[0], list) else len(items)
-
 
 class array(subtype):
 
@@ -196,20 +192,44 @@ class array(subtype):
 			raise errors.subscript_out_of_range
 		return copylist(items)
 
+	def flatten(self):
+		if len(self._subscripts)==1:
+			return list(self._items)
+		else:
+			return list(self)
+
 	def lbound(self, dimension):
 		if dimension<1 or dimension>len(self._subscripts):
-			raise errors.wrong_number_of_arguments
-		if self._subscripts[dimension-1]<0:
 			raise errors.subscript_out_of_range
+		# NOTE: VBScript returns zero
+		# if self._subscripts[dimension-1]<0:
+		# 	raise errors.subscript_out_of_range
 		return 0
 
 	def ubound(self, dimension):
 		if dimension<1 or dimension>len(self._subscripts):
-			raise errors.wrong_number_of_arguments
-		if self._subscripts[dimension-1]<0:
 			raise errors.subscript_out_of_range
+		# NOTE: VBScript returns negative value
+		# if self._subscripts[dimension-1]<0:
+		# 	raise errors.subscript_out_of_range
 		return self._subscripts[dimension-1]
-	
+
+	def append(self, value):
+		if len(self._subscripts)!=1:
+			raise errors.invalid_procedure_call
+		if self._static:
+			raise errors.static_array
+		self._items.append(value.as_simple)
+		self._subscripts[0]+=1
+
+	def remove(self, value):
+		if len(self._subscripts)!=1:
+			raise errors.invalid_procedure_call
+		if self._static:
+			raise errors.static_array
+		simple=value.as_simple
+		self._items=filter(lambda item: item!=simple, self._items)
+		self._subscripts=[len(self._items)-1]
 
 	def __iter__(self):
 		edge=len(self._subscripts)-1
@@ -232,11 +252,8 @@ class array(subtype):
 				level+=1
 
 	def __len__(self):
-		return count(self._items)
+		return reduce(lambda x, y: x * (y + 1), self._subscripts, 1)
 
 
 	def __repr__(self):
 		return "ARRAY@%08X:%r"%(id(self), self._items)
-
-
-	

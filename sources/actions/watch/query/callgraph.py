@@ -62,7 +62,7 @@ def run(location, name=None, address=None, port=None, timeout=None, nodethreshol
         message = query("query call graph", address, port, request, timeout=timeout)
         parser = Parser(builder=builder, notify=True, supress=True)
         result = parser.parse(message)
-        if not result or not result.graph:
+        if not result or result.graph is None:
             raise Exception("Incorrect response")
     except ParsingException as error:
         console.error("unable to parse, line %s: %s" % (error.lineno, error))
@@ -70,6 +70,10 @@ def run(location, name=None, address=None, port=None, timeout=None, nodethreshol
         console.error(error)
     else:
         console.write()
+
+        if not result.graph:
+            show("graph is empty")
+            return
 
         with section("summary"):
             show("location", location)

@@ -45,7 +45,7 @@ class VDOM_module_resource(VDOM_module):
 		else:
 			filename = file
 		try:
-			resource = managers.resource_manager.get_resource(application_id, filename.split(".")[0])
+			resource = managers.resource_manager.get_resource(application_id, filename)
 			if not resource:
 				raise VDOM_exception("Resource not found")
 			self.fd = resource.get_fd()

@@ -67,6 +67,14 @@ class internal_error(generic):
             self.cause = cause
 
 
+class lock_error(internal_error):
+
+    def __init__(self, line=None):
+        internal_error.__init__(self,
+                message="Lock error",
+                line=line)
+
+
 class object_variable_not_set(generic):
 
     number = 91
@@ -93,7 +101,7 @@ class invalid_character(generic):
 
     def __init__(self, character, line=None):
         generic.__init__(self,
-                message=u"Invalid character: '%s'" % character,
+                message=u"Invalid character '%s'" % character,
                 line=line)
 
 
@@ -103,7 +111,7 @@ class syntax_error(generic):
 
     def __init__(self, token, line=None):
         generic.__init__(self,
-                message=u"Syntax error: '%s'" % token,
+                message=u"Invalid token '%s'" % token,
                 line=line)
 
 
@@ -111,7 +119,7 @@ class unknown_syntax_error(generic):
 
     def __init__(self, line=None):
         generic.__init__(self,
-                message=u"Syntax error: Unexpected character",
+                message=u"Invalid token",
                 line=line)
 
 

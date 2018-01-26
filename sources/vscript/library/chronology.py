@@ -22,7 +22,7 @@ def get_week_count(firstdayofweek, firstweekofyear, year, month, day):
 			day_cnt += 1
 	if (firstweekofyear == 2 and day_cnt < 4) or (firstweekofyear == 3 and day_cnt < 7):
 		week_cnt = -1
-	if month != 1:		
+	if month != 1:
 		week_cnt += len(data)
 		if data[len(data)-1][6] == 0:
 			week_cnt -= 1
@@ -33,7 +33,7 @@ def get_week_count(firstdayofweek, firstweekofyear, year, month, day):
 			if data[len(data)-1][6] == 0:
 				week_cnt -= 1
 	#here we have week count in week_cnt before current month
-	data = cl.monthdayscalendar(year, month)	
+	data = cl.monthdayscalendar(year, month)
 	for week in range(0, len(data)):
 		week_cnt += 1
 		if day in data[week]:
@@ -61,7 +61,7 @@ def inc_month(year, month, day, cnt):
 		month = month % 12
 	elif month == 0:
 		year -= 1
-		month = 12		
+		month = 12
 	return year, month, min(day, max_dayin_month(year, month))
 
 def inc_day(year, month, day, cnt):
@@ -87,13 +87,13 @@ def inc_day(year, month, day, cnt):
 				year -= 1
 				month = 12
 			day = max_dayin_month(year, month)
-		ymMax = max_dayin_month(year, month)	
+		ymMax = max_dayin_month(year, month)
 	return year, month, day
 
 def inc_hour(year, month, day, hour, cnt):
 	""" Increments/Decrements hour on cnt, adjusting date correspondingly """
 	hour += cnt
-	if not hour in range(1, 25):	
+	if not hour in range(1, 25):
 		daydiff, hour = hour // 24, hour % 24
 		year, month, day = inc_day(year, month, day, daydiff)
 	return year, month, day, hour
@@ -203,7 +203,7 @@ def v_month(value):
 
 def v_day(value):
 	return integer(decode_date(value.as_date)[2])
-	
+
 def v_weekday(value, firstdayofweek=None):
 	value=value.as_date
 	firstdayofweek=1 if firstdayofweek is None else firstdayofweek.as_integer
@@ -233,17 +233,17 @@ def v_dateadd(interval, number, value):
 	if interval==u"yyyy":
 		year+=number
 		day=min(max_dayin_month(year, month), day)
-	elif interval==u"q":		
-		year, month, day=inc_month(year, month, day, number*3)		
+	elif interval==u"q":
+		year, month, day=inc_month(year, month, day, number*3)
 	elif interval==u"m":
-		year, month, day=inc_month(year, month, day, number)		
+		year, month, day=inc_month(year, month, day, number)
 	elif interval==u"y":
 		year, month, day=inc_day(year, month, day, number)
-	elif interval==u"d":		
+	elif interval==u"d":
 		year, month, day=inc_day(year, month, day, number)
-	elif interval==u"w":		
+	elif interval==u"w":
 		year, month, day=inc_day(year, month, day, number)
-	elif interval==u"ww":		
+	elif interval==u"ww":
 		year, month, day=inc_day(year, month, day, number*7)
 	elif interval==u"h":
 		year, month, day, hour=inc_hour(year, month, day, hour, number)
@@ -314,7 +314,7 @@ def v_weekdayname(weekday, abbreviate=None, firstdayofweek=None):
 	if firstdayofweek<1 or firstdayofweek>7:
 		raise errors.invalid_procedure_call(name=u"weekday")
 	result=weekday+firstdayofweek-1
-	result=result-7 if result>7 else result	
+	result=result-7 if result>7 else result
 	result-=2
-	result=6 if result==-1 else result	
+	result=6 if result==-1 else result
 	return string(day_abbr[result]) if abbreviate else string(day_name[result])

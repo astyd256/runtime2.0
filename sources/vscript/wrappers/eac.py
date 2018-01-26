@@ -1,7 +1,7 @@
 from importlib import import_module
 from .. import errors
 from ..subtypes import generic, string
-from .util import AutoCast, v_PropertySimple
+from .util import AutoCast, v_PropertySimple, v_PropertyReadOnly
 
 EACObject = import_module('scripting.packages').EACObject
 
@@ -182,12 +182,33 @@ class v_eac(generic):
             return self._eac_obj.item_vdomxml
 
     @AutoCast
+    @v_PropertySimple
+    def v_layout(self, value, retVal):
+        if not retVal:
+            self._eac_obj.layout = value
+        else:
+            return self._eac_obj.layout
+
+    @AutoCast
+    @v_PropertySimple
+    def v_widgets(self, value, retVal):
+        if not retVal:
+            self._eac_obj.widgets = value
+        else:
+            return self._eac_obj.widgets
+
+    @AutoCast
     def v_add_tag(self, name, color):
         self._eac_obj.tags[name] = color
 
     @AutoCast
     def v_remove_tag(self, name):
         self._eac_obj.tags.pop(name, None)
+
+    @AutoCast
+    @v_PropertyReadOnly
+    def v_tags(self):
+        return self._eac_obj.tags.keys()
 
     @AutoCast
     def v_get_wholexml(self):

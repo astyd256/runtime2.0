@@ -54,7 +54,7 @@ class v_xmlnodelist(generic):
 			if len(arguments)!=1: raise errors.wrong_number_of_arguments
 			return wrap(self._nodes.item(arguments[0].as_integer))
 
-		
+
 	def v_length(self, **keywords):
 		if "let" in keywords or "set" in keywords:
 			raise errors.object_has_no_property("length")
@@ -73,7 +73,7 @@ class v_xmlnodelist(generic):
 
 
 class v_xmlnode(generic):
-	
+
 	def __init__(self, node):
 		self._node=node
 
@@ -195,13 +195,13 @@ class v_xmlnode(generic):
 	def v_isprocessinginstruction(self):
 		# return boolean(self._node.nodeType==self._node.PROCESSING_INSTRUCTION_NODE)
 		raise errors.not_implemented
-	
+
 	def v_iscomment(self):
 		return boolean(self._node.nodeType==self._node.COMMENT_NODE)
 
 	def v_isdocument(self):
 		return boolean(self._node.nodeType==self._node.DOCUMENT_NODE)
-		
+
 	def v_isdocumenttype(self):
 		# return boolean(self._node.nodeType==self._node.DOCUMENT_TYPE_NODE)
 		raise errors.not_implemented
@@ -248,11 +248,11 @@ class v_xmlnode(generic):
 			return v_mismatch
 		else:
 			raise errors.invalid_procedure_call(name="replace")
-	
+
 	def v_normalize(self):
 		self._node.normalize()
 		return v_mismatch
-	
+
 	def v_clone(self, deep=None):
 		if deep is None:
 			return wrap(self._node.cloneNode())
@@ -266,7 +266,7 @@ class v_xmlnode(generic):
 			return string(self._node.toprettyxml(
 				indent=default_indent if indent is None else indent.as_string,
 				newline=default_newline if newline is None else newline.as_string))
-		
+
 
 class v_xmlattributemap(generic):
 
@@ -352,7 +352,7 @@ class v_xmlelement(v_xmlnode):
 				return string(default.as_string)
 
 	def v_getattributens(self, namespaceuri, name, default=None):
-		name=as_string(name)
+		name=name.as_string
 		if default is None:
 			return string(self._node.getAttributeNS(namespaceuri.as_string, name))
 		else:
@@ -403,7 +403,7 @@ class v_xmlelement(v_xmlnode):
 
 
 class v_xmldocument(v_xmlelement):
-	
+
 	def __init__(self):
 		self._document=xml.dom.minidom.Document()
 		self._node=self._document.documentElement
@@ -416,7 +416,7 @@ class v_xmldocument(v_xmlelement):
 		return v_mismatch
 
 	def v_doctype(self):
-		raise errors.not_implemented		
+		raise errors.not_implemented
 
 	def v_createelement(self, name):
 		return v_xmlelement(self._node.createElement(name.as_string))
@@ -435,8 +435,8 @@ class v_xmldocument(v_xmlelement):
 		raise errors.not_implemented
 
 	def v_createattribute(self, name):
-		return v_xmlattribute(self._node.createAttribute(value.as_string))
+		return v_xmlattribute(self._node.createAttribute(name.as_string))
 
 	def v_createattributens(self, namespaceuri, name):
 		return v_xmlattribute(
-			self._node.createAttributeNS(namespaceuri.as_string, value.as_string))
+			self._node.createAttributeNS(namespaceuri.as_string, name.as_string))

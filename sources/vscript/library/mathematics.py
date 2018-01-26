@@ -30,7 +30,7 @@ def v_exp(number):
 def v_int(number):
 	number=number.as_number
 	return integer(number) if isinstance(number, int) else double(math.floor(number))
-	
+
 def v_fix(number):
 	number=number.as_number
 	return integer(number) if isinstance(number, int) else double(math.modf(number)[1])

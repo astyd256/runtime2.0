@@ -12,7 +12,7 @@ from request import VDOM_request_manager
 from resource import VDOM_resource_manager, VDOM_resource_editor
 from database import VDOM_database_manager
 from security import VDOM_user_manager, VDOM_acl_manager
-from scripting import VDOM_compiler, VDOM_dispatcher
+from scripting import VDOM_compiler, VDOM_dispatcher, ScriptManager
 from memory import VDOM_memory
 from engine import VDOM_engine
 
@@ -34,7 +34,8 @@ managers.register("user_manager", VDOM_user_manager, lazy=True)
 managers.register("acl_manager", VDOM_acl_manager, lazy=True)
 managers.register("dispatcher", VDOM_dispatcher, lazy=True)
 managers.register("compiler", VDOM_compiler, lazy=True)
-managers.register("memory", VDOM_memory, lazy=True)
+managers.register("script_manager", ScriptManager, lazy=True)
+managers.register("memory", VDOM_memory, lazy=not settings.MANUAL_GARBAGE_COLLECTING)
 managers.register("engine", VDOM_engine, lazy=True)
 
 managers.register("session_manager", VDOM_session_manager, lazy=True)

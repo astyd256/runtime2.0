@@ -100,7 +100,7 @@ class VDOM_resource_manager(object):
 
     def get_resource(self, owner_id, res_id):
         """Getting resource object"""
-        return self.__main_index.get(res_id) or self.__main_index.get(self.__name_index.get(res_id.lower()))
+        return self.__main_index.get(res_id.split(".")[0]) or self.__main_index.get(self.__name_index.get(res_id.lower()))
         #return res.load_copy() if res else None
 
     def get_resource_by_label(self, object_id, label):

@@ -3,7 +3,8 @@ import sys
 import re
 
 from weakref import WeakKeyDictionary
-from utils.mutex import VDOM_named_mutex_auto as auto_mutex
+from threading import RLock
+# from utils.mutex import VDOM_named_mutex_auto as auto_mutex
 from utils.tracing import format_exception_trace
 from . import errors, lexemes, syntax
 from .variables import variant
@@ -36,6 +37,8 @@ vscript_default_environment = {
     u"v_session": None,
     u"v_application": None}
 
+vscript_global_lock = RLock()
+vscript_global_counter = 0
 weakuses = WeakKeyDictionary()
 
 
@@ -99,6 +102,7 @@ def check_exception(error, traceback, error_type):
 
 def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package=None,
              lines=None, environment=None, use=None, anyway=1, quiet=None, listing=False, safe=None):
+    global vscript_global_counter
     if script is None:
         if let is not None:
             script = "result=%s" % let
@@ -107,13 +111,19 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
         else:
             return vscript_default_code, vscript_default_source
     if not safe:
-        mutex = auto_mutex("vscript_engine_compile_mutex")
+        # mutex = auto_mutex("vscript_engine_compile_mutex")
+        vscript_global_lock.acquire()
+        if vscript_global_counter:
+            vscript_global_lock.release()
+            raise errors.lock_error
+        vscript_global_counter += 1
     try:
         source = None
         if not quiet and listing:
             debug("- - - - - - - - - - - - - - - - - - - -")
             for line, statement in enumerate(script.split("\n")):
                 debug((u"  %s      %s" % (unicode(line + 1).ljust(4), statement.expandtabs(4))).encode("ascii", "backslashreplace"))
+            debug("- - - - - - - - - - - - - - - - - - - -")
         lexer.lineno = 1
         try:
             parser.package = package
@@ -125,7 +135,6 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
         if lines:
             source[0:0] = ((None, 0, line) for line in lines)
         if not quiet and listing:
-            debug("- - - - - - - - - - - - - - - - - - - -")
             for line, data in enumerate(source):
                 debug((u"  %s %s %s%s" % (unicode(line + 1).ljust(4),
                         unicode("" if data[0] is None else data[0]).ljust(4),
@@ -163,7 +172,9 @@ def vcompile(script=None, let=None, set=None, filename=None, bytecode=1, package
             del traceback
     finally:
         if not safe:
-            del mutex
+            # del mutex
+            vscript_global_counter -= 1
+            vscript_global_lock.release()
 
 
 def vexecute(code, source, object=None, namespace=None, environment=None, use=None, quiet=None):
@@ -225,10 +236,10 @@ def vexecute(code, source, object=None, namespace=None, environment=None, use=No
         finally:
             del traceback
     except errors.python:
-        error_class, error, traceback = sys.exc_info()
+        error_class, error, traceback = information = sys.exc_info()
         try:
-            report = format_exception_trace(information=(error_class, error, traceback), locals=True)
-            new_error = errors.internal_error(replace=search_exception_place(error, traceback), cause=error, report=report)
+            report = format_exception_trace(information=information, locals=True)
+            new_error = errors.internal_error(replace=search_exception_place(error, traceback), cause=information, report=report)
             check_exception(new_error, traceback, errors.generic.runtime)
             raise new_error, None, traceback
         finally:

@@ -6,9 +6,6 @@ import settings
 import managers
 
 
-QUANTUM = settings.QUANTUM
-
-
 class MemoryWriter(SmartDaemon):
 
     name = "Memory Writer"
@@ -16,7 +13,7 @@ class MemoryWriter(SmartDaemon):
     def __init__(self, manager):
         managers.file_manager.start_daemon()
         super(MemoryWriter, self).__init__(name=MemoryWriter.name,
-            quantum=QUANTUM, dependencies=FileWriter.name)
+            quantum=settings.QUANTUM, dependencies=FileWriter.name)
         self._manager = manager
 
     def prepare(self):
@@ -40,7 +37,7 @@ class MemoryCleaner(SmartDaemon):
     def __init__(self, manager):
         managers.file_manager.start_daemon()
         super(MemoryCleaner, self).__init__(name=MemoryCleaner.name,
-            quantum=QUANTUM, dependencies=FileWriter.name)
+            quantum=settings.QUANTUM, dependencies=FileWriter.name)
         self._manager = manager
 
     def prepare(self):
