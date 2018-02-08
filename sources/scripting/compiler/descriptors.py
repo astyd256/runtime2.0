@@ -30,7 +30,8 @@ def make_descriptor_name(name):
 
 
 def make_descriptor_class_name(name):
-    return "ScriptingObject%sDescriptor" % "".join(part.capitalize() for part in name.split("_"))
+    # return "ScriptingObject%sDescriptor" % "".join(part.capitalize() for part in name.split("_"))
+    return "%s_property" % name
 
 
 # exceptions

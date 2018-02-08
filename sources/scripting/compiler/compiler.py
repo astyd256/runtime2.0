@@ -11,22 +11,21 @@ from .descriptors import make_attribute_name, make_object_name, make_descriptor_
     create_object_descriptor, create_ghost_object_descriptor
 
 
-DEFAULT_MODULE_NAME = "scripting"
-MAXIMAL_LINE_LENGTH = 139
+DEFAULT_MODULE_NAME = "scripting.classes"
 UUID_REGEX = re.compile(r"^([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})$", re.IGNORECASE)
-# RENDER_TYPE = "html"
+# MAXIMAL_LINE_LENGTH = 139
 
 
 class Compiler(object):
 
-    def compile(self, origin, context, dynamic=None):
+    def compile(self, origin, context, dynamic=None, mapping=None):
         # origin: type, id, name, order, stateful, hierarchy
         #         attributes, objects, actions.get(context)
         #         factory(context)
         log.write("Compile %s in %s context%s" % (origin, context, (" as dynamic" if dynamic else "")))
 
         # prepare compilation profile and execute on_compile
-        profile = CompilationProfile(origin, context, dynamic=dynamic)
+        profile = CompilationProfile(origin, context, dynamic=dynamic, mapping=mapping)
         with profile:
             managers.dispatcher.dispatch_handler(origin, "on_compile", profile)
 
@@ -72,8 +71,6 @@ class Compiler(object):
             "_ghosts": tuple(entry.origin.name for entry in profile.entries if not entry.dynamic)
         }
 
-        # TODO: avoid double descriptor assigments for not hidden in namespace attributes
-
         if profile.stateful:
             # enable stateful behaviour
             class_namespace["_values"] = {name: value for name, value in origin.attributes.iteritems()}
@@ -89,8 +86,7 @@ class Compiler(object):
         else:
             # add usual attributes and descriptors
             for name, value in origin.attributes.iteritems():
-                attribute_name = make_attribute_name(name)
-                class_namespace[attribute_name] = value
+                class_namespace[make_attribute_name(name)] = value
                 descriptor = create_attribute_descriptor(name)
                 class_namespace[make_descriptor_name(name)] = descriptor
                 if name not in instance_namespace:
@@ -99,26 +95,28 @@ class Compiler(object):
 
         # go through objects
         for entry in profile.entries:
+            # cache variables
             entry_class = entry.klass
+            entry_origin_name = entry.origin.name
 
             # gather e2vdom atributes
             types |= entry_class._types
 
             if entry.dynamic:
-                # generate name
-                object_name = make_object_name(entry.origin.name)
-
-                # retrieve entry class and its name
+                # cache variable
                 entry_class_name = entry_class.__name__
+
+                # generate name
+                object_name = make_object_name(entry_origin_name)
 
                 # add to namespace and insert declaration
                 module_namespace[entry_class_name] = entry_class
                 initialize.append(u"\tself.%s = %s(self)\n" % (object_name, entry_class_name))
 
                 # add descriptor if identifier already not in use
-                if entry.origin.name not in instance_namespace:
-                    class_namespace[entry.origin.name] = create_object_descriptor(entry.origin.name)
-                    instance_namespace.add(entry.origin.name)
+                if entry_origin_name not in instance_namespace:
+                    class_namespace[entry_origin_name] = create_object_descriptor(entry_origin_name)
+                    instance_namespace.add(entry_origin_name)
 
                 # add optional handlers
                 for where, name in (
@@ -128,7 +126,7 @@ class Compiler(object):
                         (wysiwyg, "on_wysiwyg")):
                     handler = getattr(entry, name)
                     if handler:
-                        handler_name = u"object_%s_%s" % (entry.origin.name, name)
+                        handler_name = u"object_%s_%s" % (entry_origin_name, name)
                         class_namespace[handler_name] = handler
                         where.append(u"\tself.%s(self.%s)\n" % (handler_name, object_name))
 
@@ -141,17 +139,17 @@ class Compiler(object):
                 wysiwyg_contents.append(u", self.%s.wysiwyg()" % object_name)
             else:
                 # add ghost descriptor if identifier already not in use
-                if entry.origin.name not in instance_namespace:
-                    class_namespace[entry.origin.name] = create_ghost_object_descriptor(entry.origin.name)
-                    instance_namespace.add(entry.origin.name)
+                if entry_origin_name not in instance_namespace:
+                    class_namespace[entry_origin_name] = create_ghost_object_descriptor(entry_origin_name)
+                    instance_namespace.add(entry_origin_name)
 
-                log.write("Prerender \"%s\" for %s" % (entry.origin.name, origin))
+                log.write("Prerender \"%s\" for %s" % (entry_origin_name, origin))
 
                 # TODO: there are possible problems with deleting this child or origin object
                 #       during execute, render or wysiwyg execution in overrided type's methods
 
                 # instantiate
-                instance = entry.klass(None)  # no parent here also skip execute due static
+                instance = entry_class(None)  # no parent here also skip execute due static
 
                 # add render and wysiwyg contents
                 render_contents.append(u", %r" % instance.render())

@@ -1,7 +1,11 @@
 
 from collections import Sequence
+
+import settings
+
 from logs import log
 from utils.properties import roproperty, rwproperty
+from .analyzer import analyze_script_structure
 
 
 class CompilationProfileEntity(object):
@@ -22,10 +26,12 @@ class CompilationProfileEntity(object):
 
 class CompilationProfileEntry(CompilationProfileEntity):
 
-    def __init__(self, origin, context, on_initialize, on_execute, on_render, on_wysiwyg):
+    def __init__(self, origin, context,
+            on_initialize, on_execute, on_render, on_wysiwyg,
+            dynamic=None, mapping=None):
         super(CompilationProfileEntry, self).__init__(origin, context)
 
-        self._klass = origin.factory(context)  # also need to calculate dynamic
+        self._klass = origin.factory(context, dynamic=dynamic, mapping=mapping)  # also need to calculate dynamic
 
         self._dynamic = self._klass._dynamic
         self._optimization_priority = self._klass._optimization_priority
@@ -52,9 +58,13 @@ class CompilationProfileEntries(Sequence):
         self._profile = profile
         self._items = []
 
-    def new(self, origin, on_initialize=None, on_execute=None, on_render=None, on_wysiwyg=None):
-        item = CompilationProfileEntry(origin, self._profile.context,
-            on_initialize, on_execute, on_render, on_wysiwyg)
+    def new(self, origin,
+            on_initialize=None, on_execute=None, on_render=None, on_wysiwyg=None,
+            dynamic=None, mapping=None):
+        item = CompilationProfileEntry(
+            origin, self._profile.context,
+            on_initialize, on_execute, on_render, on_wysiwyg,
+            dynamic=dynamic, mapping=mapping)
         self._items.append(item)
         return item
 
@@ -73,10 +83,11 @@ class CompilationProfileEntries(Sequence):
 
 class CompilationProfile(CompilationProfileEntity):
 
-    def __init__(self, origin, context, dynamic=None):
+    def __init__(self, origin, context, dynamic=None, mapping=None):
         super(CompilationProfile, self).__init__(origin, context)
 
         self._dynamic = dynamic or origin.type.dynamic
+        self._mapping = mapping
         self._optimization_priority = origin.type.optimization_priority
 
         self._action = origin.actions.get(context)
@@ -84,9 +95,26 @@ class CompilationProfile(CompilationProfileEntity):
         self._entries = CompilationProfileEntries(self)
 
     def __enter__(self):
-        for child in self._origin.objects.itervalues():
-            if not child.type.invisible:
-                self._entries.new(child)
+        # analyze source if action
+        if self._action and settings.ANALYZE_SCRIPT_STRUCTURE:
+            mapping = analyze_script_structure(self._action.source_code, self._action.scripting_language, self._mapping)
+        else:
+            mapping = self._mapping
+
+        # generate entries for inner objects
+        if mapping:
+            for child in self._origin.objects.itervalues():
+                if not child.type.invisible:
+                    submapping = mapping.get(child.name, self)
+                    if submapping is self:
+                        self._entries.new(child)
+                    else:
+                        self._entries.new(child, dynamic=1, mapping=submapping)
+        else:
+            for child in self._origin.objects.itervalues():
+                if not child.type.invisible:
+                    self._entries.new(child)
+
         return self
 
     def __exit__(self, extype, exvalue, extraceback):

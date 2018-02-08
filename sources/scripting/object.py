@@ -41,11 +41,9 @@ class VDOMObjectAttributes(MutableMapping):
         self._owner = owner
 
     def __getitem__(self, name):
-        # return getattr(self._owner, make_attribute_name(name))
         return getattr(self._owner, make_descriptor_name(name))
 
     def __setitem__(self, name, value):
-        # setattr(self._owner, make_attribute_name(name), value)
         setattr(self._owner, make_descriptor_name(name), value)
 
     def __delitem__(self, name):
@@ -68,7 +66,10 @@ class VDOMObjectObjects(Mapping):
         try:
             return getattr(self._owner, make_object_name(name))
         except AttributeError:
-            return self._owner._instantiate(name)
+            if name in self._owner._objects:
+                return self._owner._instantiate(name)
+            else:
+                raise
 
     def __iter__(self):
         return iter(self._owner._objects)

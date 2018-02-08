@@ -264,7 +264,7 @@ class MemoryObject(MemoryObjectSketch):
     _factory_calls = 0
     _factory_invalidates = 0
 
-    def factory(self, context, dynamic=None, probe=False):
+    def factory(self, context, dynamic=None, mapping=None, probe=False):
         # we are busy
         managers.memory._operations += 1
 
@@ -287,8 +287,8 @@ class MemoryObject(MemoryObjectSketch):
         # start main loop
         while 1:
             try:
-                new_klass = managers.compiler.compile(self, context, dynamic=dynamic)
-            except:
+                new_klass = managers.compiler.compile(self, context, dynamic=dynamic, mapping=mapping)
+            except BaseException:
                 # just decrease calls counter on error
                 with self.lock:
                     self._factory_calls -= 1
