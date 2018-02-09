@@ -345,6 +345,12 @@ class VDOM_web_services_server(object):
 
         # app.sync()
         app.save()
+        
+        data = managers.storage.read_object(VDOM_CONFIG["VIRTUAL-HOSTING-STORAGE-RECORD"]) or {}
+        if 0 not in data:
+            data[0] = str(app.id)        
+            managers.storage.write_object(VDOM_CONFIG["VIRTUAL-HOSTING-STORAGE-RECORD"], data)
+        
         # return "<Application ID=\"%s\">\n%s</Application>" % (appid, self.__app_info(app))
         return "<Application ID=\"%s\">\n%s</Application>" % (app.id, self.__app_info(app))
 
