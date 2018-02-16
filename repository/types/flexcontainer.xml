@@ -14,9 +14,10 @@
     <Container>2</Container>
     <Category>Standard</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.1271.8388</Version>
+    <Version>1.1271.8389</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
+    <RenderType>container</RenderType>
     <Containers>htmlcontainer, dialog, container, flexcontainer, tablecell, form, accordeon, tabview, dialog_2, vdomclass, desktopapplication, desktopshared, smartfolderdata</Containers>
     <Languages>en_US ,ru_RU ,fr_FR</Languages>
     <Handlers>on_update</Handlers>
