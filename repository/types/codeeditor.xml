@@ -146,15 +146,27 @@
       <RegularExpressionValidation>^.*$</RegularExpressionValidation>
     </Attribute>
     <Attribute>
+      <Name>is_readonly</Name>
+      <DisplayName>#Lang(113)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(313)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(412)|1)|(#Lang(413)|0))</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(213)</ErrorValidationMessage>
+      <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
       <Name>customname</Name>
       <DisplayName>#Lang(112)</DisplayName>
       <DefaultValue/>
       <Visible>1</Visible>
-      <Help>#Lang(312)</Help>
+      <Help>#Lang(212)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>TextField(100)</CodeInterface>
       <Colorgroup>1</Colorgroup>
-      <ErrorValidationMessage>#Lang(212)</ErrorValidationMessage>
+      <ErrorValidationMessage>#Lang(312)</ErrorValidationMessage>
       <RegularExpressionValidation>^.*$</RegularExpressionValidation>
     </Attribute>
   </Attributes>
@@ -174,6 +186,7 @@
       <Sentence ID="109">Value</Sentence>
       <Sentence ID="111">Syntax</Sentence>
       <Sentence ID="112">Custom name</Sentence>
+      <Sentence ID="113">readonly</Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Order of rendering the object on the page</Sentence>
       <Sentence ID="203">Visibility of the object</Sentence>
@@ -184,7 +197,8 @@
       <Sentence ID="208">Height of the object in pixels</Sentence>
       <Sentence ID="209">Text to display</Sentence>
       <Sentence ID="211">Syntax</Sentence>
-      <Sentence ID="212">invalid custom name for input</Sentence>
+      <Sentence ID="212">custom name for input</Sentence>
+      <Sentence ID="213">newAttribute11</Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Incorrect value, must be even integer from 0 to 99</Sentence>
       <Sentence ID="303">Incorrect value, must be either 0 or 1</Sentence>
@@ -195,7 +209,8 @@
       <Sentence ID="308">Incorrect value, must be even positive integer</Sentence>
       <Sentence ID="309">Incorrect value</Sentence>
       <Sentence ID="311">Incorrect value</Sentence>
-      <Sentence ID="312">custom name for input</Sentence>
+      <Sentence ID="312">invalid custom name for input</Sentence>
+      <Sentence ID="313">Toggle readonly mode</Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">Invisible</Sentence>
@@ -206,52 +221,54 @@
       <Sentence ID="408">Javascript</Sentence>
       <Sentence ID="409">HTML</Sentence>
       <Sentence ID="411">CSS</Sentence>
-      <Sentence ID="501">Show the object</Sentence>
+      <Sentence ID="412">ReadOnly</Sentence>
+      <Sentence ID="413">Editable</Sentence>
+      <Sentence ID="501">Set new text value</Sentence>
       <Sentence ID="502">Hide the object</Sentence>
-      <Sentence ID="503">Show the object</Sentence>
+      <Sentence ID="503">Move the object to a new position</Sentence>
       <Sentence ID="504">Show the object</Sentence>
-      <Sentence ID="505">Set cursor to line</Sentence>
-      <Sentence ID="506">Set new text value</Sentence>
-      <Sentence ID="507">Show the object</Sentence>
-      <Sentence ID="508">Set new text value</Sentence>
-      <Sentence ID="509">Move the object to a new position</Sentence>
+      <Sentence ID="505">Show the object</Sentence>
+      <Sentence ID="506">Set cursor to line</Sentence>
+      <Sentence ID="507">Set new text value</Sentence>
+      <Sentence ID="508">Show the object</Sentence>
+      <Sentence ID="509">Show the object</Sentence>
       <Sentence ID="511">Set new text value</Sentence>
       <Sentence ID="512">Show the object</Sentence>
       <Sentence ID="513"></Sentence>
       <Sentence ID="514"></Sentence>
-      <Sentence ID="601">Show</Sentence>
+      <Sentence ID="601">setValue</Sentence>
       <Sentence ID="602">Hide</Sentence>
-      <Sentence ID="603">Show</Sentence>
+      <Sentence ID="603">moveTo</Sentence>
       <Sentence ID="604">Show</Sentence>
-      <Sentence ID="605">setCursor</Sentence>
-      <Sentence ID="606">setValue</Sentence>
-      <Sentence ID="607">Show</Sentence>
-      <Sentence ID="608">setValue</Sentence>
-      <Sentence ID="609">moveTo</Sentence>
+      <Sentence ID="605">Show</Sentence>
+      <Sentence ID="606">setCursor</Sentence>
+      <Sentence ID="607">setValue</Sentence>
+      <Sentence ID="608">Show</Sentence>
+      <Sentence ID="609">Show</Sentence>
       <Sentence ID="611">setValue</Sentence>
       <Sentence ID="612">Show</Sentence>
       <Sentence ID="701">Fade</Sentence>
-      <Sentence ID="702"></Sentence>
-      <Sentence ID="703">Fade</Sentence>
-      <Sentence ID="704">Fade</Sentence>
+      <Sentence ID="702">newX</Sentence>
+      <Sentence ID="703">newY</Sentence>
+      <Sentence ID="704">Effect</Sentence>
       <Sentence ID="705">Fade</Sentence>
-      <Sentence ID="706">line</Sentence>
-      <Sentence ID="707">Fade</Sentence>
-      <Sentence ID="708">Value</Sentence>
-      <Sentence ID="709">newX</Sentence>
-      <Sentence ID="711">newY</Sentence>
-      <Sentence ID="712">Effect</Sentence>
+      <Sentence ID="706"></Sentence>
+      <Sentence ID="707">line</Sentence>
+      <Sentence ID="708">Fade</Sentence>
+      <Sentence ID="709">Fade</Sentence>
+      <Sentence ID="711">Value</Sentence>
+      <Sentence ID="712">Fade</Sentence>
       <Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
-      <Sentence ID="802"></Sentence>
-      <Sentence ID="803">Fade effect, time is indicated in milliseconds</Sentence>
-      <Sentence ID="804">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="802">X-coordinate of the new position relative to the left upper corner of the container</Sentence>
+      <Sentence ID="803">Y-coordinate of the new position relative to the left upper corner of the container</Sentence>
+      <Sentence ID="804">Visual effect of moving, time is indicated in milliseconds</Sentence>
       <Sentence ID="805">Fade effect, time is indicated in milliseconds</Sentence>
-      <Sentence ID="806">Line number</Sentence>
-      <Sentence ID="807">Fade effect, time is indicated in milliseconds</Sentence>
-      <Sentence ID="808">New text value</Sentence>
-      <Sentence ID="809">X-coordinate of the new position relative to the left upper corner of the container</Sentence>
-      <Sentence ID="811">Y-coordinate of the new position relative to the left upper corner of the container</Sentence>
-      <Sentence ID="812">Visual effect of moving, time is indicated in milliseconds</Sentence>
+      <Sentence ID="806"></Sentence>
+      <Sentence ID="807">Line number</Sentence>
+      <Sentence ID="808">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="809">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="811">New text value</Sentence>
+      <Sentence ID="812">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="901"></Sentence>
       <Sentence ID="902"></Sentence>
       <Sentence ID="903"></Sentence>
@@ -271,6 +288,7 @@
       <Sentence ID="109">Valeur</Sentence>
       <Sentence ID="111"></Sentence>
       <Sentence ID="112"></Sentence>
+      <Sentence ID="113"></Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Hiérarchie de l'objet, ordre de chargement de l'objet par rapport aux autres</Sentence>
       <Sentence ID="203">Afficher ou cacher l'objet</Sentence>
@@ -282,6 +300,7 @@
       <Sentence ID="209">Texte dans le champs</Sentence>
       <Sentence ID="211"></Sentence>
       <Sentence ID="212"></Sentence>
+      <Sentence ID="213"></Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Valeur Incorrecte, doit être positive</Sentence>
       <Sentence ID="303">Valeur Incorrecte, doit être 0 ou 1</Sentence>
@@ -293,6 +312,7 @@
       <Sentence ID="309">Valeur Incorrecte</Sentence>
       <Sentence ID="311"></Sentence>
       <Sentence ID="312"></Sentence>
+      <Sentence ID="313"></Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">Invisible</Sentence>
@@ -303,52 +323,54 @@
       <Sentence ID="408"></Sentence>
       <Sentence ID="409"></Sentence>
       <Sentence ID="411"></Sentence>
-      <Sentence ID="501">Show the object</Sentence>
+      <Sentence ID="412"></Sentence>
+      <Sentence ID="413"></Sentence>
+      <Sentence ID="501">Set new text</Sentence>
       <Sentence ID="502">Hide the object</Sentence>
-      <Sentence ID="503">Show the object</Sentence>
+      <Sentence ID="503">Move object to selected point</Sentence>
       <Sentence ID="504">Show the object</Sentence>
-      <Sentence ID="505"></Sentence>
-      <Sentence ID="506">Set new text</Sentence>
-      <Sentence ID="507">Show the object</Sentence>
-      <Sentence ID="508">Set new text</Sentence>
-      <Sentence ID="509">Move object to selected point</Sentence>
+      <Sentence ID="505">Show the object</Sentence>
+      <Sentence ID="506"></Sentence>
+      <Sentence ID="507">Set new text</Sentence>
+      <Sentence ID="508">Show the object</Sentence>
+      <Sentence ID="509">Show the object</Sentence>
       <Sentence ID="511">Set new text</Sentence>
       <Sentence ID="512">Show the object</Sentence>
       <Sentence ID="513"></Sentence>
       <Sentence ID="514"></Sentence>
-      <Sentence ID="601">Show</Sentence>
+      <Sentence ID="601">setValue</Sentence>
       <Sentence ID="602">Hide</Sentence>
-      <Sentence ID="603">Show</Sentence>
+      <Sentence ID="603">moveTo</Sentence>
       <Sentence ID="604">Show</Sentence>
-      <Sentence ID="605"></Sentence>
-      <Sentence ID="606">setValue</Sentence>
-      <Sentence ID="607">Show</Sentence>
-      <Sentence ID="608">setValue</Sentence>
-      <Sentence ID="609">moveTo</Sentence>
+      <Sentence ID="605">Show</Sentence>
+      <Sentence ID="606"></Sentence>
+      <Sentence ID="607">setValue</Sentence>
+      <Sentence ID="608">Show</Sentence>
+      <Sentence ID="609">Show</Sentence>
       <Sentence ID="611">setValue</Sentence>
       <Sentence ID="612">Show</Sentence>
       <Sentence ID="701">Fade</Sentence>
-      <Sentence ID="702"></Sentence>
-      <Sentence ID="703">Fade</Sentence>
-      <Sentence ID="704">Fade</Sentence>
+      <Sentence ID="702">newX</Sentence>
+      <Sentence ID="703">newY</Sentence>
+      <Sentence ID="704">Effect</Sentence>
       <Sentence ID="705">Fade</Sentence>
       <Sentence ID="706"></Sentence>
-      <Sentence ID="707">Fade</Sentence>
-      <Sentence ID="708">Value</Sentence>
-      <Sentence ID="709">newX</Sentence>
-      <Sentence ID="711">newY</Sentence>
-      <Sentence ID="712">Effect</Sentence>
-      <Sentence ID="801">Time of appearance</Sentence>
-      <Sentence ID="802"></Sentence>
-      <Sentence ID="803">Fade time</Sentence>
-      <Sentence ID="804">Time of appearance</Sentence>
+      <Sentence ID="707"></Sentence>
+      <Sentence ID="708">Fade</Sentence>
+      <Sentence ID="709">Fade</Sentence>
+      <Sentence ID="711">Value</Sentence>
+      <Sentence ID="712">Fade</Sentence>
+      <Sentence ID="801">Fade time</Sentence>
+      <Sentence ID="802">X-coordinate of new point</Sentence>
+      <Sentence ID="803">Y-coordinate of new point</Sentence>
+      <Sentence ID="804">Visual effect by moving</Sentence>
       <Sentence ID="805">Time of appearance</Sentence>
       <Sentence ID="806"></Sentence>
-      <Sentence ID="807">Time of appearance</Sentence>
-      <Sentence ID="808">New text</Sentence>
-      <Sentence ID="809">X-coordinate of new point</Sentence>
-      <Sentence ID="811">Y-coordinate of new point</Sentence>
-      <Sentence ID="812">Visual effect by moving</Sentence>
+      <Sentence ID="807"></Sentence>
+      <Sentence ID="808">Time of appearance</Sentence>
+      <Sentence ID="809">Time of appearance</Sentence>
+      <Sentence ID="811">New text</Sentence>
+      <Sentence ID="812">Time of appearance</Sentence>
       <Sentence ID="901"></Sentence>
       <Sentence ID="902"></Sentence>
       <Sentence ID="903"></Sentence>
@@ -368,6 +390,7 @@
       <Sentence ID="109">Значение</Sentence>
       <Sentence ID="111"></Sentence>
       <Sentence ID="112"></Sentence>
+      <Sentence ID="113"></Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
       <Sentence ID="203">Режим отображения объекта</Sentence>
@@ -379,6 +402,7 @@
       <Sentence ID="209">Отображаемый текст</Sentence>
       <Sentence ID="211"></Sentence>
       <Sentence ID="212"></Sentence>
+      <Sentence ID="213"></Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
       <Sentence ID="303">Неправильное значение, должен быть указан 0 или 1</Sentence>
@@ -390,6 +414,7 @@
       <Sentence ID="309">Неправильное значение</Sentence>
       <Sentence ID="311"></Sentence>
       <Sentence ID="312"></Sentence>
+      <Sentence ID="313"></Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">Не отображать</Sentence>
@@ -400,52 +425,54 @@
       <Sentence ID="408"></Sentence>
       <Sentence ID="409"></Sentence>
       <Sentence ID="411"></Sentence>
-      <Sentence ID="501">Показать объект</Sentence>
+      <Sentence ID="412"></Sentence>
+      <Sentence ID="413"></Sentence>
+      <Sentence ID="501">Установить новый текст</Sentence>
       <Sentence ID="502">Скрыть объект</Sentence>
-      <Sentence ID="503">Показать объект</Sentence>
+      <Sentence ID="503">Сдвинуть объект в заданную точку</Sentence>
       <Sentence ID="504">Показать объект</Sentence>
-      <Sentence ID="505"></Sentence>
-      <Sentence ID="506">Установить новый текст</Sentence>
-      <Sentence ID="507">Показать объект</Sentence>
-      <Sentence ID="508">Установить новый текст</Sentence>
-      <Sentence ID="509">Сдвинуть объект в заданную точку</Sentence>
+      <Sentence ID="505">Показать объект</Sentence>
+      <Sentence ID="506"></Sentence>
+      <Sentence ID="507">Установить новый текст</Sentence>
+      <Sentence ID="508">Показать объект</Sentence>
+      <Sentence ID="509">Показать объект</Sentence>
       <Sentence ID="511">Установить новый текст</Sentence>
       <Sentence ID="512">Показать объект</Sentence>
       <Sentence ID="513"></Sentence>
       <Sentence ID="514"></Sentence>
-      <Sentence ID="601">Показать</Sentence>
+      <Sentence ID="601">Установить текст</Sentence>
       <Sentence ID="602">Скрыть</Sentence>
-      <Sentence ID="603">Показать</Sentence>
+      <Sentence ID="603">Сдвинуть</Sentence>
       <Sentence ID="604">Показать</Sentence>
-      <Sentence ID="605"></Sentence>
-      <Sentence ID="606">Установить текст</Sentence>
-      <Sentence ID="607">Показать</Sentence>
-      <Sentence ID="608">Установить текст</Sentence>
-      <Sentence ID="609">Сдвинуть</Sentence>
+      <Sentence ID="605">Показать</Sentence>
+      <Sentence ID="606"></Sentence>
+      <Sentence ID="607">Установить текст</Sentence>
+      <Sentence ID="608">Показать</Sentence>
+      <Sentence ID="609">Показать</Sentence>
       <Sentence ID="611">Установить текст</Sentence>
       <Sentence ID="612">Показать</Sentence>
-      <Sentence ID="701">Появление</Sentence>
-      <Sentence ID="702"></Sentence>
-      <Sentence ID="703">Исчезновение</Sentence>
-      <Sentence ID="704">Появление</Sentence>
+      <Sentence ID="701">Исчезновение</Sentence>
+      <Sentence ID="702">Координата по оси X</Sentence>
+      <Sentence ID="703">Координата по оси X</Sentence>
+      <Sentence ID="704">Эффект</Sentence>
       <Sentence ID="705">Появление</Sentence>
       <Sentence ID="706"></Sentence>
-      <Sentence ID="707">Появление</Sentence>
-      <Sentence ID="708">Текст</Sentence>
-      <Sentence ID="709">Координата по оси X</Sentence>
-      <Sentence ID="711">Координата по оси X</Sentence>
-      <Sentence ID="712">Эффект</Sentence>
-      <Sentence ID="801">Время появления в миллисекундах</Sentence>
-      <Sentence ID="802"></Sentence>
-      <Sentence ID="803">Время исчезновения в миллисекундах</Sentence>
-      <Sentence ID="804">Время появления в миллисекундах</Sentence>
+      <Sentence ID="707"></Sentence>
+      <Sentence ID="708">Появление</Sentence>
+      <Sentence ID="709">Появление</Sentence>
+      <Sentence ID="711">Текст</Sentence>
+      <Sentence ID="712">Появление</Sentence>
+      <Sentence ID="801">Время исчезновения в миллисекундах</Sentence>
+      <Sentence ID="802">Координата новой точки по оси X</Sentence>
+      <Sentence ID="803">Координата новой точки по оси Y</Sentence>
+      <Sentence ID="804">Визуальный эффект при перетаскивании</Sentence>
       <Sentence ID="805">Время появления в миллисекундах</Sentence>
       <Sentence ID="806"></Sentence>
-      <Sentence ID="807">Время появления в миллисекундах</Sentence>
-      <Sentence ID="808">Новый текст</Sentence>
-      <Sentence ID="809">Координата новой точки по оси X</Sentence>
-      <Sentence ID="811">Координата новой точки по оси Y</Sentence>
-      <Sentence ID="812">Визуальный эффект при перетаскивании</Sentence>
+      <Sentence ID="807"></Sentence>
+      <Sentence ID="808">Время появления в миллисекундах</Sentence>
+      <Sentence ID="809">Время появления в миллисекундах</Sentence>
+      <Sentence ID="811">Новый текст</Sentence>
+      <Sentence ID="812">Время появления в миллисекундах</Sentence>
       <Sentence ID="901"></Sentence>
       <Sentence ID="902"></Sentence>
       <Sentence ID="903"></Sentence>
@@ -4534,6 +4561,8 @@
 			debug_info = u"objtype='codeeditor' objname='%s' ver='%s'" % (self.name, self.type.version)
 		else:
 			debug_info = u""
+			
+		is_readonly = "true" if self.is_readonly == "1" else "false"
 
 		result = u"""
 <style type="text/css">
@@ -4551,6 +4580,7 @@
 		mode: '%(mode)s',
 		lineNumbers: true,
 		styleActiveLine: true,
+		readOnly: %(is_readonly)s,
 		onCursorActivity: function() { window.%(id)s_codeeditor.matchHighlight("CodeMirror-matchhighlight"); }
 	});
 	$q('#%(id)s').parents('form:first').submit(function(){
@@ -4576,7 +4606,8 @@
 				"value":      unicode(self.value).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;'),
 				"width":      self.width,
 				"height":     self.height,
-				"debug_info": debug_info
+				"debug_info": debug_info,
+				"is_readonly": is_readonly
 			}
 
 		return VDOM_object.render(self, contents=result)
@@ -4741,70 +4772,70 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
     </Events>
     <Actions>
       <Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
-        <Action Help="#Lang(511)" InterfaceName="#Lang(611)" MethodName="getValue">
+        <Action Help="#Lang(501)" InterfaceName="#Lang(601)" MethodName="getValue">
           <Parameters/>
           <SourceCode><![CDATA[eval('var x='+this.domCont.id+"_codeeditor.getValue(value);");
 execEventBinded(id.substring(2, id.length), "getvalue", {value:x});]]></SourceCode>
         </Action>
         <Action Help="#Lang(502)" InterfaceName="#Lang(602)" MethodName="hide">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(703)" ScriptName="fade" Help="#Lang(803)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(701)" ScriptName="fade" Help="#Lang(801)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[vdom_ui_hide(this.domCont, fade);]]></SourceCode>
         </Action>
-        <Action Help="#Lang(509)" InterfaceName="#Lang(609)" MethodName="moveTo">
+        <Action Help="#Lang(503)" InterfaceName="#Lang(603)" MethodName="moveTo">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(709)" ScriptName="newX" Help="#Lang(809)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(711)" ScriptName="newY" Help="#Lang(811)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(712)" ScriptName="Effect" Help="#Lang(812)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(702)" ScriptName="newX" Help="#Lang(802)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(703)" ScriptName="newY" Help="#Lang(803)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(704)" ScriptName="Effect" Help="#Lang(804)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[vdom_ui_moveTo(this.domCont, newX, newY, Effect);]]></SourceCode>
         </Action>
-        <Action Help="#Lang(512)" InterfaceName="#Lang(612)" MethodName="refresh">
+        <Action Help="#Lang(504)" InterfaceName="#Lang(604)" MethodName="refresh">
           <Parameters/>
           <SourceCode><![CDATA[eval(this.domCont.id+"_codeeditor.refresh();");]]></SourceCode>
         </Action>
-        <Action Help="#Lang(501)" InterfaceName="#Lang(601)" MethodName="resizeTo">
+        <Action Help="#Lang(505)" InterfaceName="#Lang(605)" MethodName="resizeTo">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(701)" ScriptName="width" Help="#Lang(801)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(702)" ScriptName="height" Help="#Lang(802)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(705)" ScriptName="width" Help="#Lang(805)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(706)" ScriptName="height" Help="#Lang(806)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[var w = parseInt(width,10), h = parseInt(height,10), o = $q(this.domCont);
 o.width(w).height(h);
 $q('.CodeMirror-scroll', o).width(w).height(h);
 eval(this.domCont.id+"_codeeditor.refresh();");]]></SourceCode>
         </Action>
-        <Action Help="#Lang(505)" InterfaceName="#Lang(605)" MethodName="setCursor">
+        <Action Help="#Lang(506)" InterfaceName="#Lang(606)" MethodName="setCursor">
           <Parameters>
-            <Parameter DefaultValue="1" Interface="" InterfaceName="#Lang(706)" ScriptName="line" Help="#Lang(806)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="1" Interface="" InterfaceName="#Lang(707)" ScriptName="line" Help="#Lang(807)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[eval('window.'+this.domCont.id+'_codeeditor.focus(); window.'+this.domCont.id+'_codeeditor.setCursor('+parseInt(line,10)+');');]]></SourceCode>
         </Action>
-        <Action Help="#Lang(506)" InterfaceName="#Lang(606)" MethodName="setFocus">
+        <Action Help="#Lang(507)" InterfaceName="#Lang(607)" MethodName="setFocus">
           <Parameters/>
           <SourceCode><![CDATA[eval('window.'+this.domCont.id+'_codeeditor.focus();');]]></SourceCode>
         </Action>
-        <Action Help="#Lang(507)" InterfaceName="#Lang(607)" MethodName="setSyntax">
+        <Action Help="#Lang(508)" InterfaceName="#Lang(608)" MethodName="setSyntax">
           <Parameters>
-            <Parameter DefaultValue="'xml'" Interface="" InterfaceName="#Lang(707)" ScriptName="syntax" Help="#Lang(807)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="'xml'" Interface="" InterfaceName="#Lang(708)" ScriptName="syntax" Help="#Lang(808)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[]]></SourceCode>
         </Action>
-        <Action Help="#Lang(504)" InterfaceName="#Lang(604)" MethodName="setTheme">
+        <Action Help="#Lang(509)" InterfaceName="#Lang(609)" MethodName="setTheme">
           <Parameters>
-            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(705)" ScriptName="theme" Help="#Lang(805)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(709)" ScriptName="theme" Help="#Lang(809)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[]]></SourceCode>
         </Action>
-        <Action Help="#Lang(508)" InterfaceName="#Lang(608)" MethodName="setValue">
+        <Action Help="#Lang(511)" InterfaceName="#Lang(611)" MethodName="setValue">
           <Parameters>
-            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(708)" ScriptName="value" Help="#Lang(808)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(711)" ScriptName="value" Help="#Lang(811)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[eval(this.domCont.id+"_codeeditor.setValue(value);");]]></SourceCode>
         </Action>
-        <Action Help="#Lang(503)" InterfaceName="#Lang(603)" MethodName="show">
+        <Action Help="#Lang(512)" InterfaceName="#Lang(612)" MethodName="show">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(704)" ScriptName="fade" Help="#Lang(804)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(712)" ScriptName="fade" Help="#Lang(812)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[vdom_ui_show(this.domCont, fade);]]></SourceCode>
         </Action>
