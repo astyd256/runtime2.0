@@ -135,6 +135,10 @@ ENABLE_PYTHON_INLINES = False
 ENABLE_VSCRIPT_PRECOMPILE = True
 VSCRIPT_AUTO_PRECOMPILE = True
 
+# soap
+
+AUTOSELECT_NEW_APPLICATION = False
+
 # debugging
 
 SHOW_PAGE_DEBUG = False  # can change at runtime

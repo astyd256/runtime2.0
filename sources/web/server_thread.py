@@ -16,6 +16,8 @@ class WebServer(SmartThread):
         SmartThread.__init__(self, name="Web Server")
         self.__server = None
 
+    http_server = property(lambda self: self.__server)
+
     def main(self):
         log.write("Start %s\n" % self.name)
         server_address = (VDOM_CONFIG["SERVER-ADDRESS"], VDOM_CONFIG["SERVER-PORT"])
