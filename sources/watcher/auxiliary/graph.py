@@ -121,17 +121,17 @@ def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH,
         elif isinstance(source, dict):
             try:
                 label = quote(repr(source.keys()[source.values().index(target)]))
-                elementary_edges.append((id(source), mapping.get(id(target), id(target)), label))
-                return
-            except ValueError:
-                pass
+            except BaseException:
+                label = "?"
+            elementary_edges.append((id(source), mapping.get(id(target), id(target)), label))
+            return
         elif isinstance(source, (tuple, list)):
             try:
                 label = str(source.index(target))
-                elementary_edges.append((id(source), mapping.get(id(target), id(target)), label))
-                return
-            except ValueError:
-                pass
+            except BaseException:
+                label = "?"
+            elementary_edges.append((id(source), mapping.get(id(target), id(target)), label))
+            return
         elif isinstance(source, types.FrameType) and source.f_back is target:
             traceback_edges.append((id(source), mapping.get(id(target), id(target)), ""))
             return
@@ -140,7 +140,7 @@ def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH,
             if target in source:
                 elementary_edges.append((id(source), mapping.get(id(target), id(target)), ""))
                 return
-        except:
+        except BaseException:
             pass
 
         for name in dir(source):

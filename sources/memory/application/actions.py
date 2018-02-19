@@ -1,5 +1,4 @@
 
-from weakref import ref
 from collections import MutableMapping
 from uuid import uuid4
 
