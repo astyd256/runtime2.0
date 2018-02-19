@@ -13,6 +13,7 @@ from memory.interface import VDOM_memory_interface
 import managers
 from utils.file_argument import File_argument
 import tempfile
+from utils.properties import weak
 
 class MFSt(FieldStorage):
 
@@ -20,7 +21,7 @@ class MFSt(FieldStorage):
 		return tempfile.NamedTemporaryFile("w+b",prefix="vdomupload",dir=VDOM_CONFIG["TEMP-DIRECTORY"],delete=False)
 
 
-
+@weak("_VDOM_request__handler")
 class VDOM_request:
 	"""VDOM server request object"""
 
