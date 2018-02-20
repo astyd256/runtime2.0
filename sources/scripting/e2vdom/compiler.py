@@ -25,8 +25,7 @@ DEFINE_ENGINE_AND_DISPATCHER = \
         "delete {dispatcher_name};" \
     "}}\n" \
     "{dispatcher_name}=new VDOM_EventDispatcher();\n" \
-    "{engine_name}=new VDOM_EventEngine({dispatcher_name}, EventQueue);"\
-    "\n"
+    "{engine_name}=new VDOM_EventEngine({dispatcher_name}, EventQueue);"
 ADD_DISPATCH_EVENT = u"{dispatcher_name}.addDispatchEvent({source}, {target});"
 
 DEFINE_CLASS = \
@@ -34,8 +33,9 @@ DEFINE_CLASS = \
         "this.Base=VDOM_Object;\n" \
         "this.Base(id, eventEngine);\n" \
         "{extra}" \
-    "}};" \
-    "{class_name}.prototype=new VDOM_Object;"
+    "}};\n" \
+    "{class_name}.prototype=new VDOM_Object;"\
+    "\n"
 
 DEFINE_CLASS_REGISTERATION = u"this.registerEvents([{events}]);"
 DEFINE_CLASS_ACTION = \
@@ -82,10 +82,13 @@ def compile_registations(container, parent, dynamic):
         engine_name=engine_name,
         dispatcher_name=dispatcher_name))
 
-    lines.append(DEFINE_CLASS.format(
-        class_name=OBJECT_TYPE_NAME % id4code,
-        extra=""))
-
+    
+    #OBJECT_TYPE_NAME never used
+    #lines.append(DEFINE_CLASS.format(
+    #    class_name=OBJECT_TYPE_NAME % id4code,
+    #    extra=""))
+    
+    
     def iterate_container_and_non_containers():
         yield container._origin
         for subobject in container._origin.objects.itervalues():
@@ -182,10 +185,12 @@ def compile_declarations_n_libraries(types, render_type, render_container, regis
         declarations.append(DEFINE_EVENT_QUEUE)
 
     for vdomtype in types:
-        if CONTAINER <= vdomtype.container <= TOP_CONTAINER:
-            declarations.append(DEFINE_CLASS.format(
-                class_name=OBJECT_TYPE_NAME % vdomtype.id.replace("-", "_"),
-                extra=""))
+        #OBJECT_TYPE_NAME never used
+        #if CONTAINER <= vdomtype.container <= TOP_CONTAINER:
+        #    declarations.append(DEFINE_CLASS.format(
+        #        class_name=TYPE_NAME % vdomtype.id.replace("-", "_"),
+        #        extra=""))
+            
         compile_declaration(render_container, vdomtype, declarations, dynamic=dynamic)
 
     if not dynamic:
