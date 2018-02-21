@@ -7,16 +7,38 @@ from utils.properties import weak
 
 from .profile import CompilationProfile
 from .descriptors import make_attribute_name, make_object_name, make_descriptor_name, \
-    create_attribute_descriptor, create_stateful_attribute_descriptor, \
-    create_object_descriptor, create_ghost_object_descriptor
+    AttributeDescriptors, StatefulAttributeDescriptors, \
+    ObjectDescriptors, GhostObjectDescriptors
+from .daemon import CompilerCleaner
 
 
+CLEANUP_INTERVAL = 60
 DEFAULT_MODULE_NAME = "scripting.classes"
 UUID_REGEX = re.compile(r"^([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})$", re.IGNORECASE)
 # MAXIMAL_LINE_LENGTH = 139
 
 
 class Compiler(object):
+
+    def __init__(self):
+        self._attribute_descriptors = AttributeDescriptors()
+        self._stateful_attribute_descriptors = StatefulAttributeDescriptors()
+        self._object_descriptors = ObjectDescriptors()
+        self._ghost_object_descriptors = GhostObjectDescriptors()
+
+        self._cleaner = CompilerCleaner(self)
+        self._cleaner.start()
+
+    def clean(self):
+
+        def routine():
+            log.write("Clean compiler caches")
+            self._object_descriptors.squeeze()
+            self._ghost_object_descriptors.squeeze()
+            return CLEANUP_INTERVAL
+
+        self.clean = routine
+        return CLEANUP_INTERVAL
 
     def compile(self, origin, context, dynamic=None, mapping=None):
         # origin: type, id, name, order, stateful, hierarchy
@@ -78,7 +100,7 @@ class Compiler(object):
 
             # add stateful attributes descriptors
             for name in origin.attributes:
-                descriptor = create_stateful_attribute_descriptor(name)
+                descriptor = self._stateful_attribute_descriptors[name]
                 class_namespace[make_descriptor_name(name)] = descriptor
                 if name not in instance_namespace:
                     class_namespace[name] = descriptor
@@ -87,7 +109,7 @@ class Compiler(object):
             # add usual attributes and descriptors
             for name, value in origin.attributes.iteritems():
                 class_namespace[make_attribute_name(name)] = value
-                descriptor = create_attribute_descriptor(name)
+                descriptor = self._attribute_descriptors[name]
                 class_namespace[make_descriptor_name(name)] = descriptor
                 if name not in instance_namespace:
                     class_namespace[name] = descriptor
@@ -115,7 +137,7 @@ class Compiler(object):
 
                 # add descriptor if identifier already not in use
                 if entry_origin_name not in instance_namespace:
-                    class_namespace[entry_origin_name] = create_object_descriptor(entry_origin_name)
+                    class_namespace[entry_origin_name] = self._object_descriptors[entry_origin_name]
                     instance_namespace.add(entry_origin_name)
 
                 # add optional handlers
@@ -140,7 +162,7 @@ class Compiler(object):
             else:
                 # add ghost descriptor if identifier already not in use
                 if entry_origin_name not in instance_namespace:
-                    class_namespace[entry_origin_name] = create_ghost_object_descriptor(entry_origin_name)
+                    class_namespace[entry_origin_name] = self._ghost_object_descriptors[entry_origin_name]
                     instance_namespace.add(entry_origin_name)
 
                 log.write("Prerender \"%s\" for %s" % (entry_origin_name, origin))

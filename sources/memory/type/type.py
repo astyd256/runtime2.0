@@ -322,12 +322,14 @@ class MemoryType(MemoryTypeSketch):
         managers.memory.cleanup_type_infrastructure(self._id)
 
     def factory(self, context, probe=False):
-        with self._lock:
-            if self._class is None:
-                if probe:
-                    return None
-                self._class = scripting.create_type_object(self)
-            return self._class
+        if self._class is None:
+            if probe:
+                return None
+            else:
+                with self._lock:
+                    if self._class is None:
+                        self._class = scripting.create_type_object(self)
+        return self._class
 
     def __invert__(self):
         raise NotImplementedError

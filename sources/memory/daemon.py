@@ -51,4 +51,4 @@ class MemoryCleaner(SmartDaemon):
         return self._manager.clean()
 
     def __repr__(self):
-        return "<memory writer at 0x%08X>" % id(self)
+        return "<memory cleaner at 0x%08X>" % id(self)
