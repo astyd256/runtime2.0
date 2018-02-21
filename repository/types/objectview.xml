@@ -1461,7 +1461,11 @@ class VDOM_objectview(VDOM_object):
 
         if not source_object:
             return u"Invalid VDOM class"
-
+        used_types = set()
+        used_types.add(source_object.type)
+        for obj in source_object.objects.values():
+            used_types.add(obj.type)        
+        
         source_classname = source_object.attributes["classname"]
         source_width = source_object.attributes["width"]
         source_height = source_object.attributes["height"]
@@ -1545,7 +1549,8 @@ class VDOM_objectview(VDOM_object):
                         source_width, source_height)))
             else:
                 contents.append(managers.engine.render(copy, parent_object, "vdom"))
-
+        
+        e2vdom.update_types(self,used_types)
         return "".join(contents)
 
     def render(self, contents=""):

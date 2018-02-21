@@ -29,11 +29,19 @@ def process(container, parent=None):
 
     parent = container._parent.id if container._parent else None
     registrations = compile_registations(container, parent, dynamic=context.dynamic)
-    # if True:
+    #if True:
     #    registrations = "/*Registrations - %s*/\n%s\n/*End of registrations*/"%(container.id, registrations)
     context.registrations.append(registrations)
 
-
+def update_types(container, newtype):
+    try:
+        context = getattr(managers.request_manager.current, ATTRIBUTE_NAME)
+    except AttributeError:
+        context = Context(dynamic=False)
+        setattr(managers.request_manager.current, ATTRIBUTE_NAME, context)
+	
+    context._types |= newtype
+    
 def generate(container, registrations=True):
     try:
         context = getattr(managers.request_manager.current, ATTRIBUTE_NAME)
@@ -42,7 +50,7 @@ def generate(container, registrations=True):
         setattr(managers.request_manager.current, ATTRIBUTE_NAME, context)
 
     types = container._types - context._types
-    context.types |= types
+    context._types |= types
     origin_container_type = container._origin.container.type
 
     # NOTE: in theory there must be used render type of the container:
@@ -53,7 +61,7 @@ def generate(container, registrations=True):
     if registrations:
         regs = context.registrations
         context._registrations = []
-    return compile_declarations_n_libraries(types,
+    return compile_declarations_n_libraries(context.types,
         origin_container_type.render_type, origin_container_type.id,
         regs, dynamic=context.dynamic)
 
