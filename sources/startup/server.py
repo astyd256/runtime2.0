@@ -12,7 +12,7 @@ from .legacy import VDOM_CONFIG
 probe_socket = socket()
 try:
     probe_socket.bind((settings.SERVER_ADDRESS, settings.SERVER_PORT))
-except:
+except BaseException:
     sys.stdout.write("Server is already running or incorrect address or port\n")
     sys.exit(0)
 finally:
