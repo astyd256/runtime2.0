@@ -26,7 +26,7 @@ TEMPORARY_LOCATION = "../temp"
 DATABASES_LOCATION = DATA_LOCATION + "/databases"
 STORAGE_LOCATION = DATA_LOCATION + "/storage"
 LOGS_LOCATION = DATA_LOCATION
-INDEX_LOCATION = DATA_LOCATION + "/memory.index"
+INDEX_LOCATION = DATA_LOCATION + "/memory.index"  # memory type index
 
 SERVER_PIDFILE_LOCATION = TEMPORARY_LOCATION + "/server.pid"
 LOGGER_PIDFILE_LOCATION = TEMPORARY_LOCATION + "/logger.pid"
@@ -46,43 +46,43 @@ TYPE_FILENAME = "type.xml"
 APPLICATION_LIBRARIES_DIRECTORY = "libraries"
 TYPE_MODULE_NAME = "type"
 REPOSITORY_TYPES_DIRECTORY = "types"
-RESOURCE_LINE_LENGTH = 76
-STORE_DEFAULT_VALUES = False
-PRELOAD_DEFAULT_APPLICATION = False
-MANUAL_GARBAGE_COLLECTING = False
+RESOURCE_LINE_LENGTH = 76  # line length for stored resources
+STORE_DEFAULT_VALUES = False  # store default attribute values on disk
+PRELOAD_DEFAULT_APPLICATION = False  # preload default application on start
+MANUAL_GARBAGE_COLLECTING = False  # collect garbage on server idle instead auto
 
 # autosave
 
 ALLOW_TO_CHANGE = None  # "00000000-0000-0000-0000-000000000000", ...
-AUTOSAVE_APPLICATIONS = True
+AUTOSAVE_APPLICATIONS = True  # periodically save application
 
 # sessions
 
-SESSION_LIFETIME = 1200
+SESSION_LIFETIME = 1200  # life time for web sessions
 
 # timeouts
 
-SCRIPT_TIMEOUT = 30.1
-COMPUTE_TIMEOUT = 30.1
-RENDER_TIMEOUT = 30.1
-WYSIWYG_TIMEOUT = 30.1
+SCRIPT_TIMEOUT = 30.1  # default termination timeout for arbitrary actions
+COMPUTE_TIMEOUT = 30.1  # cumulutive timeout for all comupter actions
+RENDER_TIMEOUT = 30.1  # cumulative timeout for all onload actions
+WYSIWYG_TIMEOUT = 30.1  # cumulative timeout fro all wysiwyg actinos
 
-CONNECTION_INITIAL_TIMEOUT = 3.0
-CONNECTION_SUBSEQUENT_TIMEOUT = 30.0
+CONNECTION_INITIAL_TIMEOUT = 3.0  # initial connection timeout before disconnect
+CONNECTION_SUBSEQUENT_TIMEOUT = 30.0  # connection timeout after receive any data
 
 # threading
 
-QUANTUM = 0.5
-COUNTDOWN = 3.0
-MAIN_NAME = "Main"
+QUANTUM = 0.5  # default idle quantum for smart threads
+COUNTDOWN = 3.0  # left for compatibility...
+MAIN_NAME = "Main"  #  main thread name
 
 # logging
 
 LOGGER = "native"  # "native", "ovh"
-START_LOG_SERVER = True
+START_LOG_SERVER = True  # start log server on start for native logger
 
 LOG_LEVEL = 0  # 0 (DEBUG), 1 (MESSAGE), 2 (WARNING), 3 (ERROR), can change at runtime
-CONSOLE_LOG_LEVEL = 0
+CONSOLE_LOG_LEVEL = 0  # separate log level for console output
 
 LOGGING_ADDRESS = "127.0.0.1"
 LOGGING_PORT = 1010
@@ -94,55 +94,55 @@ OVH_LOGGING_TLS = True
 OVH_LOGGING_TOKEN = "3d01766a-bdf1-4e20-83bc-1e4cf812e3a5"
 
 LOGGING_TIMESTAMP = "%Y-%m-%d %H:%M:%S"
-DISCOVER_LOGGING_MODULE = True
-LOGGING_OUTPUT = True
+DISCOVER_LOGGING_MODULE = True  # discover calling module for logging
+LOGGING_OUTPUT = True  # log all standard and error outputs
 LOGGING_INDENT = "    "
 
-if MANAGE:
+if MANAGE:  # override logging settings for manage utility
     LOGGER = None
     LOG_LEVEL = 2
 
 # profiling
 
 PROFILING = False  # can change at runtime
-PROFILING_SAVE_PERIODICITY = 5.0
-PROFILE_DEFAULT_NAME = "server"
-PROFILE_TASKS_NAME = "tasks"
+PROFILING_SAVE_PERIODICITY = 5.0  # interval to save profiling
+PROFILE_DEFAULT_NAME = "server"  # profile name for engine tasks
+PROFILE_TASKS_NAME = "tasks"  # profile name for background tasks
 PROFILE_LOCATION = DATA_LOCATION
 PROFILE_EXTENSION = "prs"
 PROFILE_FILENAME_TEMPLATE = PROFILE_LOCATION + "/%s." + PROFILE_EXTENSION
 
 # scripting
 
-STORE_BYTECODE = False
-STORE_ACTIONS_BYTECODE = False
-ANALYZE_SCRIPT_STRUCTURE = True
+STORE_BYTECODE = False  # store executables bytecode on disk
+STORE_ACTIONS_BYTECODE = False  # store action bytecode on disk
+ANALYZE_SCRIPT_STRUCTURE = True  # analyze actions to collect dependencies
 
 # watcher
 
 WATCHER = True
 WATCHER_ADDRESS = "127.0.0.1"
 WATCHER_PORT = 1011
-MONITOR = None
-WATCHER_SNAPSHOT_INTERVAL = 5.0
+MONITOR = None  # monitor running threads for debugging
+WATCHER_SNAPSHOT_INTERVAL = 5.0  # interval to refresh snapshot for memorize
 
 # vscript
 
 DISABLE_VSCRIPT = 0
-OPTIMIZE_VSCRIPT_PARSER = 0
-SHOW_VSCRIPT_LISTING = False
-ENABLE_PYTHON_INLINES = False
-ENABLE_VSCRIPT_PRECOMPILE = True
-VSCRIPT_AUTO_PRECOMPILE = True
+OPTIMIZE_VSCRIPT_PARSER = 0  # enable optimization for lexer and parser
+SHOW_VSCRIPT_LISTING = False  # show listing on compilation for debugging
+ENABLE_PYTHON_INLINES = False  # allow python inline with apostroph for debugging
+ENABLE_VSCRIPT_PRECOMPILE = True  # precompile all scripts on start
+VSCRIPT_AUTO_PRECOMPILE = True  # precompile dependencies when needed
 
 # soap
 
-AUTOSELECT_NEW_APPLICATION = False
+AUTOSELECT_NEW_APPLICATION = False  # auto-select new application on create
 
 # debugging
 
 SHOW_PAGE_DEBUG = False  # can change at runtime
-SHOW_TRACKED_PRIMARIES = False
+SHOW_TRACKED_PRIMARIES = False  # log trached primaries for debugging
 
 # emails
 
