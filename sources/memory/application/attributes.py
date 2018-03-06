@@ -46,7 +46,9 @@ class MemoryAttributesSketch(MemoryBase, MutableMapping):
             raise Exception("The object has no \"%s\" attribute " % name)
         value = DEREFERENCE_REGEX.sub(lambda match: match.group(1), value)
         if not self._owner.type.attributes[name].verify(value):
-            raise ValueError(u"Unacceptable value for \"%s\" attribute: \"%s\"" % (name, value.replace('"', '\"')))
+            # TODO: return exception after resolve all issues in applications
+            # raise ValueError(u"Unacceptable value for \"%s\" attribute: \"%s\"" % (name, value.replace('"', '\"')))
+            log.warning(u"Unacceptable value for \"%s\" attribute of %s: \"%s\"" % (name, self._owner, value.replace('"', '\"')))
         self._query.add(name)
         setattr(self._items, name, value)
 
