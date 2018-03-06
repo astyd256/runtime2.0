@@ -1,7 +1,4 @@
 
-from time import time
-
-
 STATE_UNMODIFIED = "UNMODIFIED"
 STATE_MODIFIED = "MODIFIED"
 
@@ -26,15 +23,15 @@ def make_type_class_name(type):
 
 
 def make_attribute_name(name):
-    return u"_%s_attribute" % name
+    return "_%s_attribute" % name
 
 
 def make_object_name(name):
-    return u"_%s_object" % name
+    return "_%s_object" % name
 
 
 def make_descriptor_name(name):
-    return u"_%s_descriptor" % name
+    return "_%s_descriptor" % name
 
 
 def make_descriptor_class_name(name):

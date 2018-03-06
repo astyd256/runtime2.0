@@ -1,17 +1,42 @@
 
 from collections import OrderedDict, Mapping
-from utils.properties import weak, roproperty
+from utils.properties import weak, lazy, roproperty
 from ..generic import MemoryBase
 from .attribute import MemoryTypeAttributeSketch
+
+
+class MemoryTypeAttributesValues(object):
+
+    def __init__(self, values=None):
+        if values:
+            self.__dict__ = values
+            for name in set(values) - self._set:
+                del self.__dict__[name]
+
+    def __str__(self):
+        return self._description
+
+    def __repr__(self):
+        return "<memory %s at 0x%08X>" % (self, id(self))
 
 
 @weak("_owner")
 class MemoryTypeAttributes(MemoryBase, Mapping):
 
+    @lazy
+    def klass(self):
+        names = tuple(self._items)
+        namespace = {name: attribute.default_value for name, attribute in self._items.iteritems()}
+        namespace.update({
+            "__module__": "memory.type.attributes",
+            "_description": "attributes values of %s" % self._owner,
+            "_enumeration": names,
+            "_set": set(names)})
+        return type("AttributesValues", (MemoryTypeAttributesValues,), namespace)
+
     def __init__(self, owner):
         self._owner = owner
-        # NOTE: OrderedDict used to make debug more convenient
-        self._items = OrderedDict()  # {}
+        self._items = OrderedDict()
 
     owner = roproperty("_owner")
 

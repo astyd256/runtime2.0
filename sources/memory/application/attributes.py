@@ -26,33 +26,39 @@ class MemoryAttributesSketch(MemoryBase, MutableMapping):
 
         def __get__(self, instance, owner=None):
             with instance._owner.lock:
-                return instance.__dict__.setdefault("_query", set(instance._items))
+                return instance.__dict__.setdefault("_query", set(instance._items._set))
 
     _cdata = CDataLazyProperty()
     _query = QueryLazyProperty()
 
     def __init__(self, owner, values=None):
         self._owner = owner
-        self._attributes = owner.type.attributes
-        self._items = {name: value for name, value in values.iteritems()
-            if name in self._attributes} if values else {}
+        self._items = owner.type.attributes.klass(values)
 
     def __getitem__(self, name):
-        return self._items[name]
+        try:
+            return getattr(self._items, name)
+        except AttributeError:
+            raise KeyError(name)
 
     def __setitem__(self, name, value):
+        if name not in self._items._set:
+            raise Exception("The object has no \"%s\" attribute " % name)
         value = DEREFERENCE_REGEX.sub(lambda match: match.group(1), value)
+        if not self._owner.type.attributes[name].verify(value):
+            raise ValueError(u"Unacceptable value for \"%s\" attribute: \"%s\"" % (name, value.replace('"', '\"')))
         self._query.add(name)
-        self._items[name] = value
+        setattr(self._items, name, value)
 
     def __delitem__(self, name):
-        del self._items[name]
+        self._query.add(name)
+        self._items.__dict__.pop(name, None)
 
     def __iter__(self):
-        return iter(self._attributes)
+        return iter(self._items._enumeration)
 
     def __len__(self):
-        return len(self._attributes)
+        return len(self._items._enumeration)
 
     def __invert__(self):
         self.__class__ = MemoryAttributes
@@ -69,30 +75,31 @@ class MemoryAttributes(MemoryAttributesSketch):
 
     # unsafe
     def compose(self, ident=u"", file=None, shorter=False, excess=False):
-        if self._items:
-            skip_defaults = not (settings.STORE_DEFAULT_VALUES or excess)
+        skip_defaults = not (settings.STORE_DEFAULT_VALUES or excess)
 
-            for name in self._query:
-                value = self._items[name]
-                cdata = len(value) > FORCE_CDATA_LENGTH or FORCE_CDATA_REGEX.search(value)
+        for name in self._query:
+            value = getattr(self._items, name)
+            if value == getattr(self._items.__class__, name):
+                self._items.__dict__.pop(name, None)
+
+            if (self._owner.type.attributes[name].complexity
+                    or len(value) > FORCE_CDATA_LENGTH or FORCE_CDATA_REGEX.search(value)):
+                if name not in self._cdata:
+                    self._cdata.add(name)
+            else:
                 if name in self._cdata:
-                    if not cdata:
-                        self._cdata.remove(name)
-                else:
-                    if cdata:
-                        self._cdata.add(name)
+                    self._cdata.remove(name)
 
-            self._query.clear()
+        self._query.clear()
 
-            file.write(u"%s<Attributes>\n" % ident)
-            for name, value in self._items.iteritems() if skip_defaults \
-                    else ((name, self._items.get(name, attribute.default_value)) for name, attribute in self._attributes.iteritems()):
-                if skip_defaults and value == self._attributes[name].default_value:
-                    continue
-                complexity = self._attributes[name].complexity or name in self._cdata
-                file.write(u"%s\t<Attribute Name=\"%s\">%s</Attribute>\n" %
-                    (ident, name, value.encode("cdata" if complexity else "xml")))
-            file.write(u"%s</Attributes>\n" % ident)
+        if skip_defaults and not self._items.__dict__:
+            return
+
+        file.write(u"%s<Attributes>\n" % ident)
+        for name in self._items.__dict__ if skip_defaults else self._items._enumeration:
+            file.write(u"%s\t<Attribute Name=\"%s\">%s</Attribute>\n" %
+                (ident, name, getattr(self._items, name).encode("cdata" if name in self._cdata else "xml")))
+        file.write(u"%s</Attributes>\n" % ident)
 
     def update(self, *arguments, **keywords):
         if arguments:
@@ -110,12 +117,9 @@ class MemoryAttributes(MemoryAttributesSketch):
         with self._owner.lock:
             for name, value in values.iteritems():
                 try:
-                    current_value = self._items[name]
-                except KeyError:
-                    try:
-                        current_value = self._attributes[name].default_value
-                    except KeyError:
-                        raise Exception("The object has no \"%s\" attribute " % name)
+                    current_value = getattr(self._items, name)
+                except AttributeError:
+                    raise Exception("The object has no \"%s\" attribute " % name)
 
                 if not isinstance(value, basestring):
                     value = str(value)
@@ -128,19 +132,18 @@ class MemoryAttributes(MemoryAttributesSketch):
             if updates:
                 managers.dispatcher.dispatch_handler(self._owner, "on_update", updates)
 
-                layout = False
                 if updates:
+                    layout = False
                     for name, value in updates.iteritems():
                         if not isinstance(value, basestring):
                             value = str(value)
 
-                        if not self._attributes[name].verify(value):
+                        if not self._owner.type.attributes[name].verify(value):
                             raise ValueError(u"Unacceptable value for \"%s\" attribute: \"%s\"" % (name, value.replace('"', '\"')))
 
-                        self._query.add(name)
-
                         log.write("Update %s attrbiute \"%s\" to \"%s\"" % (self._owner, name, value.replace('"', '\"')))
-                        self._items[name] = value
+                        self._query.add(name)
+                        setattr(self._items, name, value)
 
                         if name in LAYOUT_ATTRIBUTES:
                             layout = True
@@ -152,17 +155,14 @@ class MemoryAttributes(MemoryAttributesSketch):
                             managers.dispatcher.dispatch_handler(parent, "on_layout", self._owner)
                     self._owner.autosave()
 
-    def __getitem__(self, name):
-        value = self._items.get(name)
-        return self._attributes[name].default_value if value is None else value
-
     def __setitem__(self, name, value):
         self.update({name: value})
 
     def __delitem__(self, name):
-        managers.dispatcher.dispatch_handler(self._owner, "on_update", {name: self._attributes[name].default_value})
+        managers.dispatcher.dispatch_handler(self._owner, "on_update", {name: self._owner.type.attributes[name].default_value})
         log.write("Reset %s attrbiute \"%s\"" % (self._owner, name))
-        self._items.pop(name, None)
+        self._query.add(name)
+        self._items.__dict__.pop(name, None)
         self._owner.invalidate(upward=1)
         self._owner.autosave()
 

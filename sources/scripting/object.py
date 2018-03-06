@@ -179,9 +179,8 @@ class VDOMObject(object):
         instance = origin.objects[name].factory(context, dynamic=1)(self)
 
         # need recompilation due to new dynamic child if it is actual
-        with origin.lock:
-            if self.__class__ is origin.factory(context, probe=True):
-                origin.invalidate(contexts=context, upward=True)
+        if self.__class__ is origin.factory(context, probe=True):
+            origin.invalidate(contexts=context, upward=True)
 
         # assign attribute
         setattr(self, make_object_name(name), instance)
@@ -301,7 +300,7 @@ class VDOMObject(object):
     def loads(self, xmldata, jsondata=None, handler=None):
         try:
             root = vdomxml.loads(xmldata, self._origin)
-        except:
+        except BaseException:
             if xmldata.strip():
                 raise
             else:
@@ -314,7 +313,7 @@ class VDOMObject(object):
             try:
                 vdomjson.loads(jsondata, root, self._origin,
                     handler=self._origin.actions.get(handler) if handler else None)
-            except:
+            except BaseException:
                 if jsondata.strip():
                     raise
 

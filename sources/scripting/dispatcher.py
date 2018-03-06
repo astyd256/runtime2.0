@@ -40,7 +40,7 @@ class DispatcherEntry(object):
                     if not self._module:
                         try:
                             self._module = __import__(self._type.module_name)
-                        except:
+                        except BaseException:
                             log.error("[Dispatcher] Unable to import module: %s" % format_exception_trace())
                             self._module = {"__doc__": "Unable to load %s" % self._type.module_name}
                     self._handlers[name] = handler = getattr(self._module, name, None)
@@ -82,7 +82,7 @@ class Dispatcher(object):
         if handler:
             try:
                 return handler(_object_, *arguments, **keywords)
-            except:
+            except BaseException:
                 show_exception_trace(caption="Unhandled exception in %s %s handler" % (_object_.type, _name_), locals=True)
 
     # Underscores are used to avoid name conflicts with keywords
