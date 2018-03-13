@@ -33,7 +33,10 @@ class MemoryAttributesSketch(MemoryBase, MutableMapping):
 
     def __init__(self, owner, values=None):
         self._owner = owner
-        self._items = owner.type.attributes.klass(values)
+        self._items = owner.type.attributes.klass()
+
+        if values:
+            self.update(values)
 
     def __getitem__(self, name):
         try:
