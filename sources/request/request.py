@@ -22,7 +22,7 @@ class MFSt(FieldStorage):
 
 
 @weak("_handler")
-class VDOM_request:
+class VDOM_request(object):
 	"""VDOM server request object"""
 
 	#------------------------------------------------------------
