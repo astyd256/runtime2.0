@@ -492,7 +492,7 @@
       <CodeInterface>DropDown((#Lang(473)|0)|(#Lang(474)|1)|(#Lang(475)|2)|(#Lang(476)|3)|(#Lang(477)|4)|(#Lang(478)|5)|(#Lang(479)|6)|(#Lang(481)|7))</CodeInterface>
       <Colorgroup>0</Colorgroup>
       <ErrorValidationMessage>#Lang(343)</ErrorValidationMessage>
-      <RegularExpressionValidation>^[012345]$</RegularExpressionValidation>
+      <RegularExpressionValidation>^[01234567]$</RegularExpressionValidation>
     </Attribute>
     <Attribute>
       <Name>footer</Name>

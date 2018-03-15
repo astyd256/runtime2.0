@@ -3,7 +3,6 @@ from itertools import chain
 from inspect import iscode, isroutine, ismodule
 from threading import Lock
 
-import js2py
 
 import managers
 import version
@@ -206,9 +205,11 @@ class VDOM_javascript_libraries(object):
 class VDOM_javascript(object):
 
     SIGNATURE = "<javascript>"
-    EMPTY = compile(js2py.translators.DEFAULT_HEADER, "<javascript:header>", "exec")
+    EMPTY = None
 
     def __init__(self):
+        import js2py
+        self.EMPTY = compile(js2py.translators.DEFAULT_HEADER, "<javascript:header>", "exec")
         self._lock = Lock()
         self._libraries = VDOM_javascript_libraries(self)
         js2py.disable_pyimport()
@@ -302,7 +303,8 @@ class VDOM_server(object):
 
     def __init__(self):
         self._vscript = VDOM_vscript()
-        self._javascript = VDOM_javascript()
+        self._javascript = None
+        
         self._mailer = VDOM_mailer()
 
     def _get_version(self):
@@ -313,9 +315,14 @@ class VDOM_server(object):
         # return utils.uuid.uuid4()
         return uuid4()
 
+    def _load_javascript(self):
+        if self._javascript is None:
+            self._javascript = VDOM_javascript()
+        return self._javascript
+    
     version = property(_get_version)
     # mailer=property(lambda self: managers.email_manager)
     mailer = property(lambda self: self._mailer)
     guid = property(_get_guid)
     vscript = property(lambda self: self._vscript)
-    javascript = property(lambda self: self._javascript)
+    javascript = property(_load_javascript)

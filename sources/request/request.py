@@ -21,8 +21,8 @@ class MFSt(FieldStorage):
 		return tempfile.NamedTemporaryFile("w+b",prefix="vdomupload",dir=VDOM_CONFIG["TEMP-DIRECTORY"],delete=False)
 
 
-@weak("_VDOM_request__handler")
-class VDOM_request:
+@weak("_handler")
+class VDOM_request(object):
 	"""VDOM server request object"""
 
 	#------------------------------------------------------------
@@ -104,7 +104,7 @@ class VDOM_request:
 		self.__session = managers.session_manager[sid]
 		self.__arguments = VDOM_request_arguments(args)
 		self.__server = handler.server
-		self.__handler = handler
+		self._handler = handler
 		self.app_vhname = self.__environment.environment()["HTTP_HOST"].lower()
 		vh = handler.server.virtual_hosting()
 		self.__app_id = vh.get_site(self.app_vhname)
@@ -161,9 +161,9 @@ class VDOM_request:
 
 	def set_nocache(self):
 		if not self.__nocache:
-			self.__handler.send_response(200)
-			self.__handler.send_headers()
-			self.__handler.end_headers() #TODO!
+			self._handler.send_response(200)
+			self._handler.send_headers()
+			self._handler.end_headers() #TODO!
 			self.wfile.write(self.output())
 			#self.wfile.write('\n')
 		self.__nocache = True
@@ -171,9 +171,9 @@ class VDOM_request:
 
 	def send_htmlcode(self, code=200):
 		if not self.__nocache:
-			self.__handler.send_response(code)
-			self.__handler.send_headers()
-			self.__handler.end_headers() 
+			self._handler.send_response(code)
+			self._handler.send_headers()
+			self._handler.end_headers() 
 			self.wfile.write(self.output())
 		self.__nocache = True
 		self.nokeepalive = True
@@ -254,7 +254,7 @@ class VDOM_request:
 		return self.__app
 
 	def handler(self):
-		return self.__handler
+		return self._handler
 
 	def app_id(self):
 		"""get application identifier"""

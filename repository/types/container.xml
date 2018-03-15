@@ -87,7 +87,7 @@
 			<DisplayName>#Lang(105)</DisplayName>
 			<Description>#Lang(205)</Description>
 			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<RegularExpressionValidation>^-?\d{1,4}$</RegularExpressionValidation>
 			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
@@ -99,7 +99,7 @@
 			<DisplayName>#Lang(106)</DisplayName>
 			<Description>#Lang(206)</Description>
 			<DefaultValue>50</DefaultValue>
-			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<RegularExpressionValidation>^-?\d{1,4}$</RegularExpressionValidation>
 			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
@@ -147,7 +147,7 @@
 			<DisplayName>#Lang(111)</DisplayName>
 			<Description>#Lang(211)</Description>
 			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>^[012345]$</RegularExpressionValidation>
+			<RegularExpressionValidation>^[01234567]$</RegularExpressionValidation>
 			<ErrorValidationMessage>#Lang(311)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
