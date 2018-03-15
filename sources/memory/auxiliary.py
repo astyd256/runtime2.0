@@ -1,16 +1,17 @@
 
 import ast
-from cStringIO import StringIO
 import re
+from cStringIO import StringIO
 import binascii
-# import base64
 import settings
+
 
 CHUNK_SIZE = (settings.RESOURCE_LINE_LENGTH // 4) * 3
 READ_CHUNK_COUNT = 1000
 
 INDEX_LINE_REGEX = re.compile(r"^(?P<uuid>[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})\:(?P<name>[A-Z]\w*)$", re.IGNORECASE)
 STRANGE_REGEX = re.compile(r"^\n\t+$")
+DEREFERENCE_REGEX = re.compile(r"\#RES\(([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})\)", re.IGNORECASE)
 
 
 def wrapfilelike(function):
@@ -54,7 +55,7 @@ def clean_attribute_value(value):
     if STRANGE_REGEX.match(value):
         return u""
     else:
-        return value
+        return DEREFERENCE_REGEX.sub(lambda match: match.group(1), value)
 
 
 def clean_source_code(source_code):

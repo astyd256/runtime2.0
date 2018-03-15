@@ -51,6 +51,11 @@ STORE_DEFAULT_VALUES = False  # store default attribute values on disk
 PRELOAD_DEFAULT_APPLICATION = False  # preload default application on start
 MANUAL_GARBAGE_COLLECTING = False  # collect garbage on server idle instead auto
 
+# compiler
+
+SHOW_PAGE_LISTING = False  # show compiler page listing for debugging
+ENABLE_STATIC_WYSIWYG = False  # allow to embed static wysiwyg into objects
+
 # autosave
 
 ALLOW_TO_CHANGE = None  # "00000000-0000-0000-0000-000000000000", ...

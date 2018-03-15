@@ -206,7 +206,7 @@ def lazyproperty(name, initializer, lock=None, exclusive=True):
 
     def __get__(self, instance, owner=None):
         with {lock}:
-            instance.__dict__.get("{name}", initializer(instance))
+            return instance.__dict__.get("{name}", initializer(instance))
                 """.format(name=name, lock=lock), "<lazyproperty:%s>" % name, "exec")
 
         exec(bytecode, namespace)

@@ -10,7 +10,6 @@ from ..generic import MemoryBase
 
 FORCE_CDATA_LENGTH = 1024
 FORCE_CDATA_REGEX = re.compile(u"[\u0000-\u0019\"<=>]", re.MULTILINE)
-DEREFERENCE_REGEX = re.compile(r"\#RES\(([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})\)", re.IGNORECASE)
 LAYOUT_ATTRIBUTES = {"top", "left", "width", "height", "hierarchy"}
 
 
@@ -25,15 +24,37 @@ class MemoryAttributesSketch(MemoryBase, MutableMapping):
     class QueryLazyProperty(object):
 
         def __get__(self, instance, owner=None):
-            with instance._owner.lock:
-                return instance.__dict__.setdefault("_query", set(instance._items._set))
+            return instance.__dict__.setdefault("_query", set(instance._items._set))
 
     _cdata = CDataLazyProperty()
     _query = QueryLazyProperty()
 
     def __init__(self, owner, values=None):
         self._owner = owner
-        self._items = owner.type.attributes.klass(values)
+        self._items = owner.type.attributes.klass()
+
+        if values:
+            self.update(values)
+
+    def iternondefault(self):
+        return iter(self._items.__dict__)
+
+    def iternondefaultitems(self):
+        return self._items.__dict__.iteritems()
+
+    def update(self, values):
+        for name, value in values.iteritems():
+            try:
+                self._owner.type.attributes[name].verify(value)
+            except AttributeError:
+                raise Exception("The %s has no \"%s\" attribute " % (self._owner, name))
+            except ValueError:
+                # TODO: return ValueError after resolve all issues in applications
+                log.warning(u"Unacceptable value for \"%s\" attribute of %s: \"%s\""
+                    % (name, self._owner, value.replace('"', '\"')))
+
+        self._query.update(values)
+        self._items.__dict__.update(values)
 
     def __getitem__(self, name):
         try:
@@ -42,15 +63,17 @@ class MemoryAttributesSketch(MemoryBase, MutableMapping):
             raise KeyError(name)
 
     def __setitem__(self, name, value):
-        if name not in self._items._set:
-            raise Exception("The object has no \"%s\" attribute " % name)
-        value = DEREFERENCE_REGEX.sub(lambda match: match.group(1), value)
-        if not self._owner.type.attributes[name].verify(value):
-            # TODO: return exception after resolve all issues in applications
-            # raise ValueError(u"Unacceptable value for \"%s\" attribute: \"%s\"" % (name, value.replace('"', '\"')))
-            log.warning(u"Unacceptable value for \"%s\" attribute of %s: \"%s\"" % (name, self._owner, value.replace('"', '\"')))
+        try:
+            self._owner.type.attributes[name].verify(value)
+        except AttributeError:
+            raise Exception("The %s has no \"%s\" attribute " % (self._owner, name))
+        except ValueError:
+            # TODO: return ValueError after resolve all issues in applications
+            log.warning(u"Unacceptable value for \"%s\" attribute of %s: \"%s\""
+                % (name, self._owner, value.replace('"', '\"')))
+
         self._query.add(name)
-        setattr(self._items, name, value)
+        self._items.__dict__[name] = value
 
     def __delitem__(self, name):
         self._query.add(name)
@@ -94,14 +117,12 @@ class MemoryAttributes(MemoryAttributesSketch):
 
         self._query.clear()
 
-        if skip_defaults and not self._items.__dict__:
-            return
-
-        file.write(u"%s<Attributes>\n" % ident)
-        for name in self._items.__dict__ if skip_defaults else self._items._enumeration:
-            file.write(u"%s\t<Attribute Name=\"%s\">%s</Attribute>\n" %
-                (ident, name, getattr(self._items, name).encode("cdata" if name in self._cdata else "xml")))
-        file.write(u"%s</Attributes>\n" % ident)
+        if not skip_defaults or self._items.__dict__:
+            file.write(u"%s<Attributes>\n" % ident)
+            for name in self._items.__dict__ if skip_defaults else self._items._enumeration:
+                file.write(u"%s\t<Attribute Name=\"%s\">%s</Attribute>\n" %
+                    (ident, name, getattr(self._items, name).encode("cdata" if name in self._cdata else "xml")))
+            file.write(u"%s</Attributes>\n" % ident)
 
     def update(self, *arguments, **keywords):
         if arguments:
@@ -118,15 +139,13 @@ class MemoryAttributes(MemoryAttributesSketch):
         updates = {}
         with self._owner.lock:
             for name, value in values.iteritems():
-                try:
-                    current_value = getattr(self._items, name)
-                except AttributeError:
-                    raise Exception("The object has no \"%s\" attribute " % name)
-
                 if not isinstance(value, basestring):
                     value = str(value)
 
-                value = DEREFERENCE_REGEX.sub(lambda match: match.group(1), value)
+                try:
+                    current_value = getattr(self._items, name)
+                except AttributeError:
+                    raise Exception("The %s has no \"%s\" attribute " % (self._owner, name))
 
                 if current_value != value:
                     updates[name] = value
@@ -140,12 +159,17 @@ class MemoryAttributes(MemoryAttributesSketch):
                         if not isinstance(value, basestring):
                             value = str(value)
 
-                        if not self._owner.type.attributes[name].verify(value):
-                            raise ValueError(u"Unacceptable value for \"%s\" attribute: \"%s\"" % (name, value.replace('"', '\"')))
+                        try:
+                            self._owner.type.attributes[name].verify(value)
+                        except AttributeError:
+                            raise Exception("The %s has no \"%s\" attribute " % (self._owner, name))
+                        except ValueError:
+                            raise ValueError(u"Unacceptable value for \"%s\" attribute of %s: \"%s\"" %
+                                (name, self._owner, value.replace('"', '\"')))
 
                         log.write("Update %s attrbiute \"%s\" to \"%s\"" % (self._owner, name, value.replace('"', '\"')))
                         self._query.add(name)
-                        setattr(self._items, name, value)
+                        self._items.__dict__[name] = value
 
                         if name in LAYOUT_ATTRIBUTES:
                             layout = True

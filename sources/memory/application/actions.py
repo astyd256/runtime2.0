@@ -21,14 +21,14 @@ class MemoryActions(MemoryBase, MutableMapping):
 
         def __get__(self, instance, owner=None):
             with instance._owner.lock:
-                instance.__dict__["_items_by_name"] = UniqueNameDictionary()
+                instance.__dict__.setdefault("_items_by_name", UniqueNameDictionary())
                 return instance.__dict__.setdefault("_items", {})
 
     class MemoryActionsItemsByNameProperty(object):
 
         def __get__(self, instance, owner=None):
             with instance._owner.lock:
-                instance.__dict__["_items"] = {}
+                instance.__dict__.setdefault("_items", {})
                 return instance.__dict__.setdefault("_items_by_name", UniqueNameDictionary())
 
     _items = MemoryActionsItemsProperty()

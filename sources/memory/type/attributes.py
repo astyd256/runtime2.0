@@ -7,12 +7,6 @@ from .attribute import MemoryTypeAttributeSketch
 
 class MemoryTypeAttributesValues(object):
 
-    def __init__(self, values=None):
-        if values:
-            self.__dict__ = values
-            for name in set(values) - self._set:
-                del self.__dict__[name]
-
     def __str__(self):
         return self._description
 
@@ -31,7 +25,7 @@ class MemoryTypeAttributes(MemoryBase, Mapping):
             "__module__": "memory.type.attributes",
             "_description": "attributes values of %s" % self._owner,
             "_enumeration": names,
-            "_set": set(names)})
+            "_set": frozenset(names)})
         return type("AttributesValues", (MemoryTypeAttributesValues,), namespace)
 
     def __init__(self, owner):

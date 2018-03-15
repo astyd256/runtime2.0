@@ -1,10 +1,10 @@
 
-from collections import Sequence
+from collections import deque, Sequence
 
 import settings
 
 from logs import log
-from utils.properties import roproperty, rwproperty
+from utils.properties import lazy, roproperty, rwproperty
 from .analyzer import analyze_script_structure
 
 
@@ -28,7 +28,7 @@ class CompilationProfileEntry(CompilationProfileEntity):
 
     def __init__(self, origin, context,
             on_initialize, on_execute, on_render, on_wysiwyg,
-            dynamic=None, mapping=None):
+            dynamic, mapping):
         super(CompilationProfileEntry, self).__init__(origin, context)
 
         self._klass = origin.factory(context, dynamic=dynamic, mapping=mapping)  # also need to calculate dynamic
@@ -56,70 +56,93 @@ class CompilationProfileEntries(Sequence):
 
     def __init__(self, profile):
         self._profile = profile
-        self._items = []
+        self._items = deque()
 
     def new(self, origin,
             on_initialize=None, on_execute=None, on_render=None, on_wysiwyg=None,
-            dynamic=None, mapping=None):
-        item = CompilationProfileEntry(
-            origin, self._profile.context,
-            on_initialize, on_execute, on_render, on_wysiwyg,
-            dynamic=dynamic, mapping=mapping)
+            dynamic=None):
+        submapping = self._profile._mapping.get(origin.name, self)
+        if submapping is self:
+            item = CompilationProfileEntry(
+                origin, self._profile._context,
+                on_initialize, on_execute, on_render, on_wysiwyg,
+                dynamic, None)
+        else:
+            item = CompilationProfileEntry(
+                origin, self._profile._context,
+                on_initialize, on_execute, on_render, on_wysiwyg,
+                1, submapping)
         self._items.append(item)
         return item
 
-    def _finalize(self):
-        self._items.sort(key=lambda item: (item.hierarchy, item.optimization_priority))
-
-    def clear(self):
-        self._items = []
+    def normalize(self):
+        self._items = sorted(self._items, key=lambda item: (item.hierarchy, item.optimization_priority))
 
     def __getitem__(self, index):
         return self._items[index]
 
     def __len__(self):
-        return len(self._entries)
+        return len(self._items)
+
+
+class CompilationProfileEmptyEntries(Sequence):
+
+    def normalize(self):
+        pass
+
+    def __getitem__(self, index):
+        raise IndexError
+
+    def __len__(self):
+        return 0
+
+
+class CompilationProfileEmptyMapping(object):
+
+    def get(self, name, default):
+        return None
 
 
 class CompilationProfile(CompilationProfileEntity):
+
+    _empty_entries = CompilationProfileEmptyEntries()
+    _empty_mapping = CompilationProfileEmptyMapping()
+
+    @lazy
+    def _mapping(self):
+        if self._action and settings.ANALYZE_SCRIPT_STRUCTURE:
+            return analyze_script_structure(self._action.source_code, self._action.scripting_language, self._source_mapping)
+        else:
+            return self._source_mapping or self._empty_mapping
+
+    @lazy
+    def _entries(self):
+        if self._origin.objects:
+            entries = CompilationProfileEntries(self)
+            for child in self._origin.objects.itervalues():
+                if child.type.invisible:
+                    continue
+                entries.new(child)
+            return entries
+        else:
+            return self._empty_entries
 
     def __init__(self, origin, context, dynamic=None, mapping=None):
         super(CompilationProfile, self).__init__(origin, context)
 
         self._dynamic = dynamic or origin.type.dynamic
-        self._mapping = mapping
+        self._source_mapping = mapping
         self._optimization_priority = origin.type.optimization_priority
 
         self._action = origin.actions.get(context)
-        self._class_name = "%s_%s_%s" % (origin.type.class_name, origin.id.replace("-", "_"), context.replace("-", "_"))
-        self._entries = CompilationProfileEntries(self)
+        self._class_name = "_".join((origin.type.class_name, origin.id.replace("-", "_"), context.replace("-", "_")))
 
     def __enter__(self):
-        # analyze source if action
-        if self._action and settings.ANALYZE_SCRIPT_STRUCTURE:
-            mapping = analyze_script_structure(self._action.source_code, self._action.scripting_language, self._mapping)
-        else:
-            mapping = self._mapping
-
-        # generate entries for inner objects
-        if mapping:
-            for child in self._origin.objects.itervalues():
-                if not child.type.invisible:
-                    submapping = mapping.get(child.name, self)
-                    if submapping is self:
-                        self._entries.new(child)
-                    else:
-                        self._entries.new(child, dynamic=1, mapping=submapping)
-        else:
-            for child in self._origin.objects.itervalues():
-                if not child.type.invisible:
-                    self._entries.new(child)
-
-        return self
+        self._entries = CompilationProfileEntries(self)
+        return self._entries
 
     def __exit__(self, extype, exvalue, extraceback):
-        if not extype:
-            self._finalize()
+        pass
 
     def _set_dynamic(self, value):
         if value < self._dynamic:
@@ -141,16 +164,15 @@ class CompilationProfile(CompilationProfileEntity):
     class_name = rwproperty("_class_name")
     entries = roproperty("_entries")
 
-    def _finalize(self):
-        self._entries._finalize()
+    def normalize(self):
+        self._entries.normalize()
 
         # already dynamic
         if self._dynamic:
             return
 
         # check action and enable dynamic if exists
-        # TODO: check if action has source code
-        if self._action:
+        if self._action and self._action.source_code:
             log.write("Enable dynamic for %s due to %s action presence" % (self._origin, self._action.name))
             self._dynamic = 1
             return

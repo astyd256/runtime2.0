@@ -9,7 +9,7 @@ from ..exceptions import NoSnapshotError
 
 MISSING = "MISSING"
 OBJECTS_SELECTOR_REGEX = re.compile(
-    r"^(?:[A-Z][A-Z\d_]*|[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})(?:\.[A-Z][A-Z\d_]*)*$",
+    r"^(?:[A-Z_][A-Z\d_]*|[A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})(?:\.[A-Z_][A-Z\d_]*)*$",
     re.IGNORECASE)
 SERVER_OPTION = "server"
 

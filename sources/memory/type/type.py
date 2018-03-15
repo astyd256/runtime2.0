@@ -5,7 +5,6 @@ from io import StringIO
 
 import settings
 import file_access
-import scripting
 import managers
 
 from utils.id import guid2mod
@@ -40,8 +39,20 @@ class MemoryTypeSketch(MemoryBase, Executable):
         return __import__(self._module_name)
 
     @lazy
-    def _klass(self):
+    def _module_class(self):
         return self._module.__dict__[self._class_name]
+
+    @lazy
+    def _scripting_instance(self):
+        return managers.compiler.create_scripting_class(self)()
+
+    @lazy
+    def _stateless_class(self):
+        return managers.compiler.create_class(self, stateful=False)
+
+    @lazy
+    def _stateful_class(self):
+        return managers.compiler.create_class(self, stateful=True)
 
     _id = None
     _name = None
@@ -80,8 +91,6 @@ class MemoryTypeSketch(MemoryBase, Executable):
         self._user_interface_events = MemoryTypeUserInterfaceEvents(self)
         self._object_events = MemoryTypeObjectEvents(self)
         self._actions = MemoryTypeActions(self)
-
-        self._class = None
 
     def _set_id(self, value):
         self._id = value
@@ -130,7 +139,10 @@ class MemoryTypeSketch(MemoryBase, Executable):
     executable = roproperty("_executable")
     module_name = roproperty("_module_name")
     module = roproperty("_module")
-    klass = roproperty("_klass")
+    module_class = roproperty("_module_class")
+    scripting_instance = roproperty("_scripting_instance")
+    stateless_class = roproperty("_stateless_class")
+    stateful_class = roproperty("_stateful_class")
 
     def locate(self, entity):
         if entity is SOURCE_CODE or settings.STORE_BYTECODE:
@@ -320,16 +332,6 @@ class MemoryType(MemoryTypeSketch):
         managers.memory.types.unload(self._id, remove=True)
         managers.resource_manager.invalidate_resources(self._id)
         managers.memory.cleanup_type_infrastructure(self._id)
-
-    def factory(self, context, probe=False):
-        if self._class is None:
-            if probe:
-                return None
-            else:
-                with self._lock:
-                    if self._class is None:
-                        self._class = scripting.create_type_object(self)
-        return self._class
 
     def __invert__(self):
         raise NotImplementedError

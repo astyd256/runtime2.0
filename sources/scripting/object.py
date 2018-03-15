@@ -10,29 +10,7 @@ from logs import log
 from utils.properties import weak
 from .compiler import STATE_UNMODIFIED, STATE_MODIFIED, \
     STATE_UP_TO_DATE, STATE_REQUIRE_RECOMPUTE, STATE_RECOMPUTE  # STATE_AVOID_RECOMPUTE
-from .compiler.descriptors import make_attribute_name, make_object_name, make_descriptor_name
-
-
-# class VDOMType(object):
-
-#     def __init__(self, id, name, version):
-#         self._id = id
-#         self._name = name
-#         self._version = version
-
-#     id = property(lambda self: self.__class__._id)
-#     name = property(lambda self: self.__class__._name)
-#     version = property(lambda self: self.__class__._version)
-
-#     def __call__(self, context, attributes=None):
-
-#         def __init__(self, parent):
-#             self._origin = None
-#             self._action = None
-#             self._context = context
-
-#         klass = type("OBJECT", (VDOMObject,), {})
-#         return klass
+from .compiler.descriptors import make_object_name, make_descriptor_name
 
 
 class VDOMObjectAttributes(MutableMapping):
@@ -50,8 +28,7 @@ class VDOMObjectAttributes(MutableMapping):
         raise NotImplementedError
 
     def __iter__(self):
-        for name in self._owner._attributes:
-            yield getattr(self._owner, make_attribute_name(name))
+        return iter(self._owner._attributes)
 
     def __len__(self):
         return len(self._owner._attributes)
@@ -97,6 +74,7 @@ class VDOMObject(object):
     # compiler atributes
     #   _dynamic                dynamic or static object
     #   _optimization_priority  object's optimization priority
+    #   _namespace              common class namespace
 
     # e2vdom attributes
     #   _types                  all descendant types including object's type
@@ -105,10 +83,10 @@ class VDOMObject(object):
 
     # attributes and objects
     #   _attributes             all attributes names
-    #   _get_objects            all child object's names
+    #   _objects                all child object's names
 
     # stateful attributes
-    #   _values                 original attributes values
+    #   _values                 initial attributes values
 
     def __init__(self, parent):
         # log.write("Initialize %s" % self)

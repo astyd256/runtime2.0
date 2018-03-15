@@ -96,7 +96,8 @@ class MemoryTypeAttribute(MemoryTypeAttributeSketch):
         file.write(u"%s</Attribute>\n" % ident)
 
     def verify(self, value):
-        return self._regex.match(value) is not None
+        if not self._regex.match(value):
+            raise ValueError
 
     def __invert__(self):
         raise NotImplementedError

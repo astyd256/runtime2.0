@@ -9,6 +9,7 @@ from utils import verificators
 
 from ..constants import NON_CONTAINER, CONTAINER, TOP_CONTAINER, RENDER_CONTEXT
 from ..generic import MemoryBase
+from ..empties import ChangeEmptyError, EmptySet
 
 from .attributes import MemoryAttributesSketch
 from .actions import MemoryActions
@@ -53,6 +54,8 @@ class MemoryObjectSketch(MemoryBase):
     _name = None
     _original_name = None
 
+    _dependents = EmptySet()
+
     def __init__(self, collection, type, application, parent, virtual=False, attributes=None):
         self._collection = collection
         self._virtual = virtual
@@ -78,7 +81,6 @@ class MemoryObjectSketch(MemoryBase):
         self._actions = MemoryActions(self)
 
         # internal
-        self._dependents = set()
         self._classes = {}
 
     # lock = property(lambda self: self._application.lock)
@@ -245,7 +247,7 @@ class MemoryObject(MemoryObjectSketch):
                 # validate only same (non-)virtual objects in chain
                 if self._parent and self._virtual == self._parent.virtual:
                     self._parent.invalidate(contexts=contexts, upward=True)
-                for dependent in self.__dict__.get("_dependents", ()):
+                for dependent in self._dependents:
                     log.write("Invalidate %s dependent %s" % (self, dependent))
                     dependent.invalidate(contexts=contexts, upward=True)
 
@@ -255,7 +257,10 @@ class MemoryObject(MemoryObjectSketch):
 
     def attach(self, object):
         with self.lock:
-            self._dependents.add(object)
+            try:
+                self._dependents.add(object)
+            except ChangeEmptyError:
+                self._dependents = {object}
 
     def detach(self, object):
         with self.lock:

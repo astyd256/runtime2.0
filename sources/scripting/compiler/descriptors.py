@@ -1,4 +1,8 @@
 
+from utils.decorators import cache_by_argument
+
+# object's states
+
 STATE_UNMODIFIED = "UNMODIFIED"
 STATE_MODIFIED = "MODIFIED"
 
@@ -16,24 +20,24 @@ class AvoidRecomputeError(AttributeError):
         super(AttributeError, self).__init__("%r avoid recompute when update %r" % (owner, name))
 
 
-# name functions
+# naming functions
 
-def make_type_class_name(type):
-    return "%sType" % type.class_name
-
-
+@cache_by_argument
 def make_attribute_name(name):
     return "_%s_attribute" % name
 
 
+@cache_by_argument
 def make_object_name(name):
     return "_%s_object" % name
 
 
+@cache_by_argument
 def make_descriptor_name(name):
     return "_%s_descriptor" % name
 
 
+@cache_by_argument
 def make_descriptor_class_name(name):
     return "%s_property" % name
 
@@ -178,35 +182,3 @@ descriptor={class_name}()
         exec(compile(source, "<scripting ghost object descriptor %s>" % name, "exec"),
             self.namespace, namespace)
         return self.setdefault(name, namespace["descriptor"])
-
-
-# scripting type
-
-def create_type_object(type):
-    namespace = {
-        "_id": type.id,
-        "_name": type.name,
-        "_version": type.version
-    }
-
-    source = """
-class {class_name}(object):
-
-    __module__ = "scripting"
-
-    _id = _id
-    _name = _name
-    _version = _version
-
-    id = property(lambda self: self.__class__._id)
-    name = property(lambda self: self.__class__._name)
-    version = property(lambda self: self.__class__._version)
-    class_name = property(lambda self: "{name}")
-
-object={class_name}()
-    """.format(
-        name=type.class_name,
-        class_name=make_type_class_name(type))
-
-    exec(compile(source, "<scripting type %s>" % type, "exec"), namespace)
-    return namespace["object"]
