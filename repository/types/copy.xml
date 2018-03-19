@@ -389,7 +389,8 @@ def on_compile(object, profile):
     if source_object:
         profile.dynamic = 1
         profile.optimization_priority = source_object.type.optimization_priority
-        profile.entries.new(source_object, on_render=on_render, on_wysiwyg=on_wysiwyg)
+        with profile as entries:
+            entries.new(source_object, on_render=on_render, on_wysiwyg=on_wysiwyg)
 
 
 class VDOM_copy(VDOM_object):
