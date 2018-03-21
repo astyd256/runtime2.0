@@ -2777,29 +2777,39 @@ class VDOM_web_services_server(object):
         return "<Result>%s</Result>" % ret
 
     def set_application_vhost(self, sid, skey, appid, hostname):
-        raise NotImplementedError
-
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
+
         if not managers.acl_manager.session_user_can_manage():
             raise SOAPpy.faultType(server_manage_error, _("Server management is not allowed"), _(""))
+
+        app, error_message = self.__find_application(appid)
+        if not app:
+            return error_message
+
         if not hostname or hostname.lower() == "default" or hostname == 0:
-            managers.virtual_hosts.set_def_site(appid)
+            # managers.virtual_hosts.set_def_site(appid)
+            managers.server.web_server.http_server.virtual_hosting().set_def_site(str(app.id))
         else:
-            managers.virtual_hosts.set_site(hostname, appid)
+            # managers.virtual_hosts.set_site(hostname, appid)
+            managers.server.web_server.http_server.virtual_hosting().set_site(hostname, str(appid))
+
         return "<Result>OK</Result>"
 
     def delete_application_vhost(self, sid, skey, hostname):
-        raise NotImplementedError
-
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
+
         if not managers.acl_manager.session_user_can_manage():
             raise SOAPpy.faultType(server_manage_error, _("Server management is not allowed"), _(""))
+
         if not hostname or hostname.lower() == "default" or hostname == 0:
-            managers.virtual_hosts.set_def_site(None)
+            # managers.virtual_hosts.set_def_site(None)
+            managers.server.web_server.http_server.virtual_hosting().set_def_site(None)
         else:
-            managers.virtual_hosts.set_site(hostname, None)
+            # managers.virtual_hosts.set_site(hostname, None)
+            managers.server.web_server.http_server.virtual_hosting().set_site(hostname, None)
+
         return "<Result>OK</Result>"
 
 # ==================================================================================================================

@@ -3,56 +3,93 @@ import managers
 from .auxiliary import section, show, warn, search
 
 
-def update(data, identifier):
+DEFAULT = 0
+
+
+def update(data, identifier, entry):
     if identifier:
-        data[0] = str(identifier)
-    elif 0 in data:
-        del data[0]
+        data[entry] = str(identifier)
+    elif (entry) in data:
+        del data[entry]
 
 
-def obtain(data):
+def lookup(data, entry):
     try:
-        identifier = data[0]
+        identifier = data[entry]
     except KeyError:
-        return "no"
+        return None
     else:
         try:
             application = managers.memory.applications[identifier]
-        except:
-            return "%s" % identifier
+        except KeyError:
+            return str(identifier)
         else:
             return "%s:%s" % (application.id, application.name.lower())
 
 
-def select(application):
-    with section("select %s as default application" % application, lazy=False):
+def select(application, name=None):
+    with section("select %s %s" % (application, ("for %s" % name if name else "as default")), lazy=False):
         try:
             data = managers.storage.read_object(VDOM_CONFIG["VIRTUAL-HOSTING-STORAGE-RECORD"]) or {}
-            update(data, application.id if application else None)
+            update(data, application.id, name or DEFAULT)
             managers.storage.write_object(VDOM_CONFIG["VIRTUAL-HOSTING-STORAGE-RECORD"], data)
         except Exception as error:
             warn("unable to select application: %s" % error)
 
 
-def retrieve():
+def delete_(name=None):
+    with section("delete %s" % ("association for %s" % name if name else "default association"), lazy=False):
         try:
             data = managers.storage.read_object(VDOM_CONFIG["VIRTUAL-HOSTING-STORAGE-RECORD"]) or {}
-            return obtain(data)
+            update(data, None, name or DEFAULT)
+            managers.storage.write_object(VDOM_CONFIG["VIRTUAL-HOSTING-STORAGE-RECORD"], data)
         except Exception as error:
-            warn("unable to retrieve default application: %s" % error)
+            warn("unable to delete association: %s" % error)
 
 
-def run(identifier=None):
+def display(name=None):
+    try:
+        data = managers.storage.read_object(VDOM_CONFIG["VIRTUAL-HOSTING-STORAGE-RECORD"]) or {}
+    except Exception as error:
+        warn("unable to retrieve data: %s" % error)
+
+    if name:
+        identifier = lookup(data, name)
+        if identifier:
+            show("application for %s is %s" % (name, identifier))
+        else:
+            show("no application for %s" % name)
+    else:
+        if not data:
+            show("no default application")
+        else:
+            default = lookup(data, DEFAULT)
+            if default:
+                show("default application is %s" % default)
+            with section("available associations"):
+                for name in data:
+                    if name is DEFAULT:
+                        continue
+                    show(str(name), lookup(data, name))
+
+
+def run(identifier=None, name=None, delete=False):
     """
     select default application
     :param uuid_or_name identifier: application uuid or name
+    :param name: specify name
+    :param switch delete: delete association
     """
-    if identifier is None:
-        identifier = retrieve()
-        show("default application is %s" % identifier)
+    if delete and identifier:
+        warn("identifier is not allowed on delete: %s" % identifier)
+        return
+
+    if delete:
+        delete_(name)
+    elif identifier is None:
+        display(name)
     else:
         entity, application = search(application=identifier)
         if application is None:
             warn("unable to find: %s" % identifier)
-        else:
-            select(application)
+        select(application, name)

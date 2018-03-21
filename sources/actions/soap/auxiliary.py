@@ -20,13 +20,18 @@ def builder(parser):
     return Error
 
 
-def soap_query(caption, address, user, password, method, application=None):
+def soap_query(caption, address, user, password, method, *arguments, **keywords):
+    application = keywords.get("application")
+
     start = time()
     show("%s %s" % (caption, address))
 
     try:
         connection = VDOMServiceSingleThread.connect(address, user, md5(password).hexdigest(), application)
-        response = connection.remote(method, no_app_id=not application)
+        response = connection.remote(
+            method,
+            params=(list(arguments) if arguments else None),
+            no_app_id=not application)
     except faultType as error:
         raise SOAPError(error.faultstring)
     except VDOMServiceCallError as error:
