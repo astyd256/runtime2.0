@@ -37,13 +37,13 @@ def generate_filename(object):
 def run(location, name=None, address=None, port=None, timeout=None, nodethreshold=None, edgethreshold=None):
     """
     query object graph
-    :param location: specifies location to store graph
+    :arg location: specifies location to store graph
     :param name: specifies profile name
     :param address: specifies server address
-    :param int port: specifies server port
-    :param float timeout: specifies timeout to wait for reply
-    :param float nodethreshold: specifies node threshold to filter
-    :param float edgethreshold: specifies edge threshold to filter
+    :key int port: specifies server port
+    :key float timeout: specifies timeout to wait for reply
+    :key float nodethreshold: specifies node threshold to filter
+    :key float edgethreshold: specifies edge threshold to filter
     """
     try:
         if os.path.isdir(location):

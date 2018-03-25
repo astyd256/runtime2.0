@@ -32,9 +32,12 @@ def builder(parser):
 def run(status=None, enable=False, disable=False, address=None, port=None, timeout=None):
     """
     profiling status and options
-    :param enable_or_disable status: specifies desired status
-    :param switch enable: enable profiling
-    :param switch disable: disable profiling
+    :arg enable_or_disable status: specifies desired status
+    :key switch enable: enable profiling
+    :key switch disable: disable profiling
+    :param address: specifies server address
+    :key int port: specifies server port
+    :key float timeout: specifies timeout to wait for reply
     """
     if status is not None:
         request = REQUEST_STATUS % ("enable" if status else "disable")

@@ -10,8 +10,8 @@ from .auxiliary import section, show, warn, confirm, search, autocomplete, locat
 def run(identifier, location):
     """
     offload static resources
-    :param uuid_or_name identifier: uuid or name of application
-    :param location: output file or directory
+    :arg uuid_or_name identifier: uuid or name of application
+    :arg location: output file or directory
     """
     application = managers.memory.applications.search(identifier)
     if application is None:

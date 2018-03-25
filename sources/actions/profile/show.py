@@ -33,17 +33,25 @@ SORT_BY_CALLS = "SORT BY CALLS"
 SORT_BY_TOTAL = "SORT BY TOTAL"
 SORT_BY_CUMULATIVE = "SORT BY CUMULATIVE"
 SORT_VALUES = {
+    "n": SORT_BY_NAME,
     "name": SORT_BY_NAME,
+    "ca": SORT_BY_CALLS,
     "calls": SORT_BY_CALLS,
+    "t": SORT_BY_TOTAL,
     "total": SORT_BY_TOTAL,
+    "cu": SORT_BY_CUMULATIVE,
     "cumulative": SORT_BY_CUMULATIVE
 }
 
 ORDER_BY_ASCENDING = "ORDER BY ASCENDING"
 ORDER_BY_DESCENDING = "ORDER BY DESCENDING"
 ORDER_VALUES = {
+    "a": ORDER_BY_ASCENDING,
     "asc": ORDER_BY_ASCENDING,
-    "desc": ORDER_BY_DESCENDING
+    "ascending": ORDER_BY_ASCENDING,
+    "d": ORDER_BY_DESCENDING,
+    "desc": ORDER_BY_DESCENDING,
+    "descending": ORDER_BY_DESCENDING
 }
 
 SORT_MAPPING = {
@@ -76,14 +84,14 @@ def make_name(path, line, function):
 def run(name=None, location=None, headers=False, sort=None, order=None, limit=50, nolimit=False, all=False):
     """
     show server last profile statistics: name, calls, total and cumulative times
-    :param name: specifies profile name
-    :param location: input file location with stored profile statistics
-    :param switch headers: show columns headers
-    :param sort: sort entries by "name", by "calls", by "total" or by "cumulative"
-    :param order: sort entries "asc"ending or "desc"ending
-    :param switch nolimit: disable output entries limit
-    :param int limit: limit output to specified number of entries
-    :param switch all: show all entries including from non-server code
+    :arg name: specifies profile name
+    :arg location: input file location with stored profile statistics
+    :key switch headers: show columns headers
+    :key sort: sort entries by "name", by "calls", by "total" or by "cumulative"
+    :key order: sort entries "asc"ending or "desc"ending
+    :key switch nolimit: disable output entries limit
+    :key int limit: limit output to specified number of entries
+    :key switch all: show all entries including from non-server code
     """
 
     if location is None:

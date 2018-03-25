@@ -10,7 +10,7 @@ ENTITIES = TYPES, APPLICATIONS
 def run(identifier="all"):
     """
     compile or recompile application or type
-    :param uuid_or_name identifier: application or type uuid or name
+    :arg uuid_or_name identifier: application or type uuid or name
     """
     if not settings.STORE_BYTECODE:
         warn("storing is disabled")

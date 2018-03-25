@@ -10,10 +10,10 @@ ENTITIES = TYPES, APPLICATIONS
 def run(identifier, location=None, excess=False, yes=False):
     """
     export application or type
-    :param uuid_or_name identifier: uuid or name of application or type or "types"
-    :param location: output file or directory (repository by default)
-    :param switch excess: export excess information (like attributes with default values)
-    :param switch yes: assume positive answer to confirmation request
+    :arg uuid_or_name identifier: uuid or name of application or type or "types"
+    :arg location: output file or directory (repository by default)
+    :key switch excess: export excess information (like attributes with default values)
+    :key switch yes: assume positive answer to confirmation request
     """
     if location in REPOSITORY:
         location = None

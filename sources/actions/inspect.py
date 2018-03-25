@@ -67,9 +67,9 @@ def show_level(item, level=0, expand=0, select=False, actions=False, indent=""):
 def run(identifier, depth=DEFAULT_DEPTH, actions=False):
     """
     inspect object
-    :param uuid identifier: object uuid to inspect
-    :param int depth: limit the depth of showing for underlying objects
-    :param switch actions: show actions
+    :arg uuid identifier: object uuid to inspect
+    :key int depth: limit the depth of showing for underlying objects
+    :key switch actions: show actions
     """
     subject = search_object(identifier)
     if subject:

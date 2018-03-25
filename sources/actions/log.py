@@ -11,8 +11,8 @@ UPDATE_INTERVAL = 0.5
 def run(name="server", uuid=None):
     """
     view log
-    :param name: log name
-    :param uuid uuid: application uuid
+    :arg name: log name
+    :arg uuid uuid: application uuid
     """
     if name in ("server", "network", "security"):
         log = getattr(managers.log_manager.logs, name)

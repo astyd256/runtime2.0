@@ -12,7 +12,7 @@ from .index import run as index
 def run(renew=False):
     """
     deploy runtime on the system
-    :param switch renew: renew current installation
+    :key switch renew: renew current installation
     """
     LOCATIONS = (
     ("applications", (file_access.APPLICATION, None)),

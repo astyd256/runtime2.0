@@ -11,8 +11,11 @@ RESPONSE = "<reply/>"
 def run(thread, exception=None, address=None, port=None, timeout=None):
     """
     raise exception
-    :param thread thread: specifies thread name or identifier
-    :param exception exception: specifies exception class
+    :arg thread thread: specifies thread name or identifier
+    :key exception exception: specifies exception class
+    :param address: specifies server address
+    :key int port: specifies server port
+    :key float timeout: specifies timeout to wait for reply
     """
 
     if exception is None:

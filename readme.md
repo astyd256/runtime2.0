@@ -76,6 +76,9 @@ To perform action utility can be called from the command line as follow:
 
 Or can work in interactive mode - just lunch manage.py without arguments.
 
+Each action can have several arguments and/or keywords with shortcuts.
+Shortcuts are generated automatically from first letters so please use full abbreviations when writing scripts.
+
 ### Install application or type
 
 Install application or type from desired location, install all types from repository or install appropriate type from repository.
@@ -136,6 +139,23 @@ Example:
 
     select promail
 
+### Associate virtual host name with application
+
+Associate virtual host name with application, display one or delete
+
+Action:
+
+    select --name <name>
+    select <identifier> --name <name>
+    select --name <name> --delete
+
+Example:
+
+    select promail --name mail
+    select --name mail --delete
+
+Where *identifier* is an application name or uuid and *name* is a virtual host name.
+
 ### List available applications and types
 
 Action:
@@ -180,7 +200,7 @@ Action:
 
 Example:
 
-    watch analyze --all --lim 75 --sort counter
+    watch analyze --all --limit 75 --sort counter
 
 This command show 75 most common object types including built-in and sorted by count.
 

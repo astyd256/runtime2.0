@@ -76,9 +76,9 @@ def display(name=None):
 def run(identifier=None, name=None, delete=False):
     """
     select default application
-    :param uuid_or_name identifier: application uuid or name
-    :param name: specify name
-    :param switch delete: delete association
+    :arg uuid_or_name identifier: application uuid or name
+    :key name: specify name
+    :key switch delete: delete association
     """
     if delete and identifier:
         warn("identifier is not allowed on delete: %s" % identifier)

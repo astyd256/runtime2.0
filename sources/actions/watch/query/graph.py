@@ -36,15 +36,15 @@ def generate_filename(object):
 def run(object, location=None, address=None, port=None, timeout=None, depth=None, filter=None, nominify=True, changes=False):
     """
     query object graph
-    :param object: specifies origin object by its type name or identifier to make graph
+    :arg object: specifies origin object by its type name or identifier to make graph
     :param location: specifies location to store graph
     :param address: specifies server address
-    :param int port: specifies server port
-    :param float timeout: specifies timeout to wait for reply
-    :param int depth: specifies depth to scan
-    :param str filter: specifies filter
-    :param switch nominify: disable output minifying
-    :param switch changes: use object changes as source
+    :key int port: specifies server port
+    :key float timeout: specifies timeout to wait for reply
+    :key int depth: specifies depth to scan
+    :key str filter: specifies filter
+    :key switch nominify: disable output minifying
+    :key switch changes: use object changes as source
     """
     try:
         if location is None:

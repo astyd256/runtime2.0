@@ -31,11 +31,11 @@ def builder(parser):
 def run(location, name=None, address=None, port=None, timeout=None):
     """
     query profile statistics
-    :param location: specifies location to store graph
+    :arg location: specifies location to store graph
     :param name: specifies profile name
     :param address: specifies server address
-    :param int port: specifies server port
-    :param float timeout: specifies timeout to wait for reply
+    :key int port: specifies server port
+    :key float timeout: specifies timeout to wait for reply
     """
     try:
         if os.path.isdir(location):

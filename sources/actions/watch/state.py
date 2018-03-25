@@ -109,10 +109,10 @@ def run(address=None, port=None, timeout=None, thread=None, object=None):
     """
     query server state
     :param address: specifies server address
-    :param int port: specifies server port
-    :param float timeout: specifies timeout to wait for reply
-    :param thread: query thread state by its name or identifier
-    :param object: query object state by its type name or identifier
+    :key int port: specifies server port
+    :key float timeout: specifies timeout to wait for reply
+    :key thread: query thread state by its name or identifier
+    :key object: query object state by its type name or identifier
     """
     try:
         if thread:

@@ -18,15 +18,21 @@ GROUP_BY_NAME_OPTION = "<option name=\"group\">name</option>"
 SORT_BY_NAME = "SORT BY NAME"
 SORT_BY_COUNTER = "SORT BY COUNTYER"
 SORT_VALUES = {
+    "n": SORT_BY_NAME,
     "name": SORT_BY_NAME,
+    "c": SORT_BY_COUNTER,
     "counter": SORT_BY_COUNTER
 }
 
 ORDER_BY_ASCENDING = "ORDER BY ASCENDING"
 ORDER_BY_DESCENDING = "ORDER BY DESCENDING"
 ORDER_VALUES = {
+    "a": ORDER_BY_ASCENDING,
     "asc": ORDER_BY_ASCENDING,
-    "desc": ORDER_BY_DESCENDING
+    "ascending": ORDER_BY_ASCENDING,
+    "d": ORDER_BY_DESCENDING,
+    "desc": ORDER_BY_DESCENDING,
+    "descending": ORDER_BY_DESCENDING
 }
 
 COUNTER_REGEX = re.compile("(\d+)(?:\s*\((\d+)\))?")
@@ -71,16 +77,16 @@ def run(address=None, port=None, timeout=None,
     """
     analyze server objects
     :param address: specifies server address
-    :param int port: specifies server port
-    :param float timeout: specifies timeout to wait for reply
-    :param switch all: disable objects filtering
-    :param switch nogroup: disable grouping by name
-    :param sort: sort entries by "name" or by "counter"
-    :param order: sort entries "asc"ending or "desc"ending
-    :param int limit: limit output
-    :param switch objects: use all objects
-    :param switch garbage: use objects from garbage
-    :param switch changes: use changes
+    :key int port: specifies server port
+    :key float timeout: specifies timeout to wait for reply
+    :key switch all: disable objects filtering
+    :key switch nogroup: disable grouping by name
+    :key sort: sort entries by "name" or by "counter"
+    :key order: sort entries "asc"ending or "desc"ending
+    :key int limit: limit output
+    :key switch objects: use all objects
+    :key switch garbage: use objects from garbage
+    :key switch changes: use changes
     """
     try:
         if sum((objects, garbage, changes)) > 1:

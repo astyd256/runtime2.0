@@ -8,12 +8,14 @@ from argparse import OPTIONAL, REMAINDER, SUPPRESS, ArgumentParser, ArgumentType
 
 import utils.verificators
 from utils.structure import Structure
+from utils.console import CONSOLE_WIDTH
 
 
 SUPRESS_HELP = "SUPRESS HELP"
 DOCSTRING_HELP_REGEX = re.compile(r"^\s*(?P<help>[^:].*)?$", re.MULTILINE)
-DOCSTRING_ARGUMENT_REGEX = re.compile(r"^:param(?:\s+(?P<type>\w+))?\s+(?P<name>\w+):\s?(?P<help>.*)$", re.MULTILINE)
-DEFAULT_LETTERS = False
+DOCSTRING_ARGUMENT_REGEX = re.compile(
+    r"^:(?P<kind>param(?:eter)?|arg(?:ument)?|key(?:word)?)"
+    r"(?:\s+(?P<type>\w+))?\s+(?P<name>\w+):\s?(?P<help>.*)$", re.MULTILINE)
 SWITCH_VALUES = {
     "0": False, "1": True,
     "no": False, "yes": True,
@@ -22,8 +24,28 @@ SWITCH_VALUES = {
     "disabled": False, "enabled": True
 }
 
+ARGUMENT_ONLY = Structure(is_argument=True, is_keyword=False, is_polymorph=False)
+ARGUMENT_AND_KEYWORDS = Structure(is_argument=True, is_keyword=True, is_polymorph=True)
+KEYWORD_ONLY = Structure(is_argument=False, is_keyword=True, is_polymorph=False)
+
+OPTION_TYPE = {
+    "param": ARGUMENT_AND_KEYWORDS,
+    "parameter": ARGUMENT_AND_KEYWORDS,
+    "arg": ARGUMENT_ONLY,
+    "argument": ARGUMENT_ONLY,
+    "key": KEYWORD_ONLY,
+    "keyword": KEYWORD_ONLY
+}
+
+DEFAULT_METADATA = ARGUMENT_AND_KEYWORDS, None, None, None
+
 DEFAULT_ACTION_NAME = "DEFAULT"
 ALIAS_NAME = "ALIAS"
+
+OVERRIDE_ARGUMENT_STRING = False
+ALTERNATIVE_ARGUMENT_STRING = False
+
+MAXIMAL_HELP_WIDTH = 139
 
 
 def switch(value):
@@ -33,13 +55,13 @@ def switch(value):
         raise ValueError("Not an switch")
 
 
-def make_verificator(verificator):
+def make_verificator(verificator, name=None):
     def wrapper(value):
         try:
             return verificator(value)
         except ValueError as error:
             raise ArgumentTypeError(str(error))
-    wrapper.name = verificator.__name__
+    wrapper.name = name or verificator.__name__
     wrapper.verificator = verificator
     return wrapper
 
@@ -52,16 +74,26 @@ class HiddenHelpFormatter(HelpFormatter):
         else:
             return super(HiddenHelpFormatter, self)._format_action(action)
 
+    def _format_action_invocation(self, action):
+        if not action.option_strings:
+            metavar, = self._metavar_formatter(action, action.dest)(1)
+            return metavar
+        else:
+            if action.nargs == 0:
+                return ", ".join(action.option_strings)
+            else:
+                default = action.dest.upper()
+                return "%s %s" % (", ".join(action.option_strings), self._format_args(action, default))
+
 
 class StoreMandatoryAction(Action):
 
     def __init__(self, option_strings, dest, nargs=None, const=None,
             default=None, type=None, choices=None, required=False, help=None, metavar=None):
         if nargs == 0:
-            raise ValueError('nargs for store actions must be > 0; if you '
-                'have nothing to store, actions such as store true or store const may be more appropriate')
+            raise ValueError("Require arguments to store")
         if const is not None and nargs != OPTIONAL:
-            raise ValueError('nargs must be %r to supply const' % OPTIONAL)
+            raise ValueError("Must be optional to store constant" % OPTIONAL)
         super(StoreMandatoryAction, self).__init__(option_strings=option_strings, dest=dest, nargs=nargs, const=const,
             default=default, type=type, choices=choices, required=required, help=help, metavar=metavar)
 
@@ -70,8 +102,14 @@ class StoreMandatoryAction(Action):
             setattr(namespace, self.dest, values)
 
 
-verificators = {native.__name__: make_verificator(native)
-    for native in (int, long, float, complex, str, unicode, bool, tuple, list, dict, set, switch)}
+verificators = {native.__name__: make_verificator(native, name=name)
+    for native, name in (
+        (int, "integer"), (long, "integer"),
+        (float, "float"), (complex, "complex"),
+        (str, "string"), (unicode, "stirng"),
+        (bool, "boolean"),
+        (tuple, "list"), (list, "list"), (dict, "mapping"), (set, "list"),
+        (switch, "boolean"))}
 
 for name in dir(utils.verificators):
     native = getattr(utils.verificators, name)
@@ -79,7 +117,7 @@ for name in dir(utils.verificators):
         verificators[name] = make_verificator(native)
 
 
-def autoparse(alias, routine, subparsers, letters=None):
+def autoparse(alias, routine, subparsers, autoletters=True):
     names, arguments, keywords, defaults = inspect.getargspec(routine)
     metadata, description = {}, None
 
@@ -94,37 +132,81 @@ def autoparse(alias, routine, subparsers, letters=None):
             description = match.group("help")
         matches = DOCSTRING_ARGUMENT_REGEX.finditer(docstirng)
         for match in matches:
-            media = match.group("type")
-            metadata[match.group("name")] = media, verificators.get(media), match.group("help")
+            name = match.group("name")
+            if name not in names:
+                raise Exception("Argument \"%s\" is described but absent in \"%s\""
+                    % (name, routine.__module__))
 
-    subparser = subparsers.add_parser(alias, help=description, formatter_class=HiddenHelpFormatter)
+            try:
+                entity = OPTION_TYPE[match.group("kind")]
+            except KeyError:
+                raise Exception("Wrong description for \"%s\" of \"%s\""
+                    % (name, routine.__module__))
+
+            media = match.group("type")
+            metadata[name] = entity, media, verificators.get(media), match.group("help")
+
+    def formatter(prog):
+        width = min(MAXIMAL_HELP_WIDTH, CONSOLE_WIDTH)
+        return HiddenHelpFormatter(prog, max_help_position=width * 3 // 2, width=width)
+
+    subparser = subparsers.add_parser(alias, help=description, formatter_class=formatter)
 
     for name in mandatory:
-        media, verificator, description = metadata.get(name, (None, None, None))
+        entity, media, verificator, description = metadata.get(name, (None, None, None))
+        if entity.is_keyword:
+            raise Exception("Argument \"%s\" is described as keyword of \"%s\""
+                % (name, routine.__module__))
         subparser.add_argument(name, type=verificator, help=description)
 
     if defaults:
-        letters = set("h") if letters or DEFAULT_LETTERS else None
+        letters = set("h")
         for name, default in izip(optional, defaults):
-            media, verificator, description = metadata.get(name, (None, None, None))
-            flags_keywords = {}
+            entity, media, verificator, description = metadata.get(name, DEFAULT_METADATA)
+            keywords = {}
 
-            if letters is None or name[0] in letters:
-                flags = "--%s" % name,
-            else:
-                flags = "-%s" % name[0], "--%s" % name
-                letters.add(name[0])
+            if entity.is_keyword:
+                if autoletters and name[0] not in letters:
+                    flags = "-%s" % name[0], "--%s" % name
+                    letters.add(name[0])
+                else:
+                    flags = "--%s" % name,
 
             if media == "switch":
-                flags_keywords["action"] = "store_false" if default else "store_true"
+                keywords["action"] = "store_false" if default else "store_true"
             else:
-                flags_keywords["type"] = verificator
-                flags_keywords["metavar"] = "<%s>" % (media or "str")  # (media or "str").upper()
+                keywords["action"] = StoreMandatoryAction
+                keywords["type"] = verificator
 
-            group = subparser.add_mutually_exclusive_group()
-            group.add_argument(name, type=verificator, nargs=OPTIONAL,
-                default=default, action=StoreMandatoryAction, help=SUPRESS_HELP)
-            group.add_argument(*flags, help=description, **flags_keywords)
+                if entity.is_keyword and OVERRIDE_ARGUMENT_STRING:
+                    value = getattr(verificator, "name", "string")
+                    keywords["metavar"] = "<%s>" % value.replace("_", " ") \
+                        if ALTERNATIVE_ARGUMENT_STRING else value.upper()
+
+            if entity.is_polymorph:
+                group = subparser.add_mutually_exclusive_group()
+                group.add_argument(
+                    name,
+                    action=StoreMandatoryAction, type=verificator,
+                    nargs=OPTIONAL, default=default,
+                    help=SUPRESS_HELP)
+                group.add_argument(
+                    *flags,
+                    default=default,
+                    help=description,
+                    **keywords)
+            elif entity.is_argument:
+                subparser.add_argument(
+                    name,
+                    action=StoreMandatoryAction, type=verificator,
+                    nargs=OPTIONAL, default=default,
+                    help=description)
+            else:
+                subparser.add_argument(
+                    *flags,
+                    default=default,
+                    help=description,
+                    **keywords)
 
     if arguments:
         subparser.add_argument(arguments, nargs=REMAINDER)
@@ -141,7 +223,9 @@ class AutoArgumentParser(ArgumentParser):
         package = keywords.pop("package", None)
         module = keywords.pop("module", None)
         alias = keywords.pop("alias", None)
+
         super(AutoArgumentParser, self).__init__(*arguments, **keywords)
+
         if module:
             self._package = package or module.__package__ + "."
             self._name = "#%s" % (alias or module.__name__)
@@ -158,6 +242,8 @@ class AutoArgumentParser(ArgumentParser):
                 if not isinstance(submodule, ModuleType):
                     continue
                 if not (submodule.__package__ and (submodule.__package__ + ".").startswith(self._package)):
+                    continue
+                if not getattr(submodule, "AUTOPARSE", True):
                     continue
 
                 description = submodule.__doc__.strip() if submodule.__doc__ else None

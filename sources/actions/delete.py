@@ -6,7 +6,7 @@ from .auxiliary import section, confirm, show, warn
 def run(identifier):
     """
     delete (broken) application
-    :param uuid identifier: application uuid
+    :arg uuid identifier: application uuid
     """
 
     if not confirm("cleanup %s" % identifier):

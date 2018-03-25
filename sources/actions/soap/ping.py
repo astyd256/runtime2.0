@@ -11,8 +11,8 @@ def run(address=None, user=None, password=None):
     """
     soap ping
     :param address: remote server address (localhost by default)
-    :param user: login user name (root by default)
-    :param password: login password
+    :key user: login user name (root by default)
+    :key password: login password
     """
     if address is None:
         address = DEFAULT_ADDRESS

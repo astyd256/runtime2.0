@@ -43,7 +43,7 @@ def unlang(subject, value):
     try:
         match = lang_regex.search(value)
         return subject.sentences["en_US"][int(match.group(1))]
-    except:
+    except BaseException:
         return value
 
 
@@ -89,7 +89,7 @@ def interface(subject, attribute):
         try:
             pairs = [(left[1:], right[:-1]) for left, right in grouper(value.split("|"), 2)]
             return "dropdown: %s" % ", ".join((compose(*pair) for pair in sorted(pairs, key=lambda pair: pair[-1])))
-        except:
+        except BaseException:
             raise
             return "dropdown"
 
@@ -132,9 +132,9 @@ def validation_pattern(subject, attribute):
 def run(identifier, description=False, details=False):
     """
     show application or type
-    :param uuid_or_name identifier: application or type uuid or name
-    :param switch description: show attributes description
-    :param switch details: show attribute details
+    :arg uuid_or_name identifier: application or type uuid or name
+    :key switch description: show attributes description
+    :key switch details: show attribute details
     """
     entity, subject = search(identifier)
     if entity is TYPE:

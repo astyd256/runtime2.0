@@ -32,11 +32,11 @@ def builder(parser):
 def run(object, address=None, port=None, timeout=None, all=None):
     """
     query server
-    :param object: specifies origin object
+    :arg object: specifies origin object
     :param address: specifies server address
-    :param int port: specifies server port
-    :param float timeout: specifies timeout to wait for reply
-    :param switch all: disable objects filtering
+    :key int port: specifies server port
+    :key float timeout: specifies timeout to wait for reply
+    :key switch all: disable objects filtering
     """
     try:
         # request = REQUEST_ALL if all else REQUEST

@@ -16,13 +16,13 @@ def explain(name, value):
 def run(user=None, create=False, system=False, delete=False, password=None, email=None, level=None):
     """
     show user information or change password
-    :param user: specifies user
-    :param switch create: create new user
-    :param switch system: force creation of system user
-    :param switch delete: delete user
-    :param password: password to set
-    :param email: email to set
-    :param level: security level to set
+    :arg user: specifies user
+    :key switch create: create new user
+    :key switch system: force creation of system user
+    :key switch delete: delete user
+    :key password: password to set
+    :key email: email to set
+    :key level: security level to set
     """
     if user is None:
         with section("available users"):

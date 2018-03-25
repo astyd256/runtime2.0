@@ -26,13 +26,13 @@ def recognize(query):
 def run(group=None, create=False, system=False, delete=False, description=None, add=None, remove=None):
     """
     show group information
-    :param group: specifies group
-    :param switch create: create new group
-    :param switch system: force creation of system group
-    :param switch delete: delete group
-    :param description: group description to set
-    :param add: add member(s) to group
-    :param remove: remove member(s) from group
+    :arg group: specifies group
+    :key switch create: create new group
+    :key switch system: force creation of system group
+    :key switch delete: delete group
+    :key description: group description to set
+    :key add: add member(s) to group
+    :key remove: remove member(s) from group
     """
     if group is None:
         with section("available groups"):

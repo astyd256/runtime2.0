@@ -33,7 +33,10 @@ def builder(parser):
 def run(level=None, address=None, port=None, timeout=None):
     """
     logging status and options
-    :param log_level level: specifies desired log level
+    :arg log_level level: specifies desired log level
+    :param address: specifies server address
+    :key int port: specifies server port
+    :key float timeout: specifies timeout to wait for reply
     """
     if level is None:
         request = REQUEST

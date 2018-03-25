@@ -32,7 +32,10 @@ def builder(parser):
 def run(showpagedebug=None, address=None, port=None, timeout=None):
     """
     debugging status and options
-    :param enable_or_disable showpagedebug: specifies desired status for page debug
+    :arg enable_or_disable showpagedebug: specifies desired status for page debug
+    :param address: specifies server address
+    :key int port: specifies server port
+    :key float timeout: specifies timeout to wait for reply
     """
     if showpagedebug is None:
         request = REQUEST

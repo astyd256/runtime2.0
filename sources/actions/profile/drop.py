@@ -9,7 +9,7 @@ from ..auxiliary import show, warn
 def run(name=None):
     """
     drop last profile
-    :param name: specifies profile name
+    :arg name: specifies profile name
     """
 
     if name:

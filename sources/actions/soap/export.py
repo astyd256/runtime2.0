@@ -10,11 +10,11 @@ DEFAULT_USER = "root"
 def run(identifier, location, address=None, user=None, password=None):
     """
     export application or type
-    :param uuid identifier: uuid of application
-    :param location: output file or directory
+    :arg uuid identifier: uuid of application
+    :arg location: output file or directory
     :param address: remote server address (localhost by default)
-    :param user: login user name (root by default)
-    :param password: login password
+    :key user: login user name (root by default)
+    :key password: login password
     """
     if address is None:
         address = DEFAULT_ADDRESS

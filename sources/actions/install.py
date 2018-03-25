@@ -10,8 +10,10 @@ from memory.manager import AlreadyExistsError
 from .auxiliary.constants import TYPE, APPLICATION, EXTENSION, TYPES
 from .auxiliary import section, show, warn, detect, locate_repository, is_entity_name
 
+from .select import select as select_default
 
-def install(filename):
+
+def install(filename, select=False):
     entity = detect(filename)
     if not entity:
         warn("not an application or type: %s" % filename)
@@ -41,12 +43,17 @@ def install(filename):
             with section("notifications"):
                 for lineno, message in notifications:
                     show("line %d: %s" % (lineno, forfeit(message)))
+            if select:
+                if entity is not APPLICATION:
+                    raise Exception("can't select non-application")
+                select_default(subject)
 
 
-def run(location):
+def run(location, select=False):
     """
     install application or type
-    :param location: input filename with application or type or directory to search
+    :arg location: input filename with application or type or directory to search
+    :key switch select: select application as default
     """
     if location in TYPES:
         location = locate_repository(TYPE)
@@ -70,6 +77,6 @@ def run(location):
         with section("install types from %s" % location):
             for filename in managers.file_manager.list(file_access.FILE, None, location):
                 if filename.endswith(EXTENSION):
-                    install(os.path.join(location, filename))
+                    install(os.path.join(location, filename), select=select)
     else:
-        install(location)
+        install(location, select=select)

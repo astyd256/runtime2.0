@@ -10,7 +10,7 @@ def run(address=None, port=None):
     """
     memorize server object's state
     :param address: specifies server address
-    :param int port: specifies server port
+    :key int port: specifies server port
     """
     message = query("memorize", address, port, REQUEST)
     if message != RESPONSE:

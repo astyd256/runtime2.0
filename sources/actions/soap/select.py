@@ -10,13 +10,12 @@ DEFAULT_USER = "root"
 def run(identifier=None, name=None, delete=False, address=None, user=None, password=None):
     """
     select application through soap
-    :param uuid identifier: uuid of application to select
-    :param name: site name
-    :param switch delete: delete association
-    :param location: output file or directory
+    :arg uuid identifier: uuid of application to select
+    :key name: site name
+    :key switch delete: delete association
     :param address: remote server address (localhost by default)
-    :param user: login user name (root by default)
-    :param password: login password
+    :key user: login user name (root by default)
+    :key password: login password
     """
     if delete:
         if identifier:

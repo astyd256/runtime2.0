@@ -5,7 +5,7 @@ from .auxiliary import section, warn, search
 def run(identifier):
     """
     re-save application or type
-    :param uuid_or_name identifier: application or type uuid or name
+    :arg uuid_or_name identifier: application or type uuid or name
     """
     entity, subject = search(identifier)
     if subject:
