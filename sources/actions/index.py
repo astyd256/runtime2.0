@@ -1,6 +1,6 @@
 
 import managers
-from .auxiliary import section, show
+from .auxiliary import show
 
 
 def run():
@@ -8,5 +8,4 @@ def run():
     update memory index
     """
     managers.memory.types.save()
-    with section("write memory index", lazy=False):
-        show("done")
+    show("write memory index")

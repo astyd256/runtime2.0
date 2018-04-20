@@ -5,6 +5,8 @@ import os
 import os.path
 import io
 
+from utils.console import CONSOLE_WIDTH
+
 
 class SettingsImporter(object):
 
@@ -54,5 +56,10 @@ class SettingsImporter(object):
 
         sys.modules[fullname] = module
         exec(code, module.__dict__)
+
+        if CONSOLE_WIDTH < module.__dict__.get("MANAGE_LINE_WIDTH"):
+            module.__dict__["MANAGE_LINE_WIDTH"] = CONSOLE_WIDTH
+            module.__dict__["MANAGE_NAME_WIDTH"] = CONSOLE_WIDTH * 30 // 100
+            module.__dict__["MANAGE_LONG_NAME_WIDTH"] = CONSOLE_WIDTH * 70 // 100
 
         return module

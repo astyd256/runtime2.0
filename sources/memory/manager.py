@@ -135,13 +135,14 @@ class Memory(object):
                         lines.append("Tracked primary objects:")
                         for primary, reference in primaries.iteritems():
                             lines.append("    %s" % primary)
-                            referent = reference()
-                            if referent is None:
-                                lines.append("        sync: weakreaf no more available")
-                            else:
-                                format_referrers(referent, limit=4,
-                                    caption="sync: %s, references:" % describe_object(referent),
-                                    indent="        ", into=lines)
+                            if reference:
+                                referent = reference()
+                                if referent is None:
+                                    lines.append("        sync: weakreaf no more available")
+                                else:
+                                    format_referrers(referent, limit=4,
+                                        caption="sync: %s, references:" % describe_object(referent),
+                                        indent="        ", into=lines)
                             break
                         log.write("\n".join(lines))
                     else:
@@ -208,7 +209,7 @@ class Memory(object):
         try:
             self.prepare_application_infrastructure(application.id)
             return application
-        except:
+        except BaseException:
             cleanup(application.id)
             raise
 

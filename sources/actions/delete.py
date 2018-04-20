@@ -1,6 +1,6 @@
 
 import managers
-from .auxiliary import section, confirm, show, warn
+from .auxiliary import section, confirm, warn
 
 
 def run(identifier):
@@ -18,5 +18,3 @@ def run(identifier):
         except:  # noqa
             warn("unable to delete application")
             raise
-        else:
-            show("done")

@@ -10,9 +10,10 @@ from argparse import ArgumentParser
 import datetime
 datetime.datetime.strptime("2012-01-01", "%Y-%m-%d")
 
+
 # settings
 
-from .importers.settings import SettingsImporter
+from .importers.settings import SettingsImporter  # noqa
 
 importer = SettingsImporter()
 sys.meta_path.append(importer)
@@ -22,7 +23,7 @@ sys.meta_path.remove(importer)
 
 # override
 
-from .override import override
+from .override import override  # noqa
 
 parser = ArgumentParser(add_help=False)
 parser.add_argument("-c", "--configure", dest="filename", default=None)
@@ -32,24 +33,30 @@ if arguments.filename:
     override(arguments.filename)
 
 
+# hack to run builder cleanly
+
+if settings.MANAGE:
+    from . import builder  # noqa
+
+
 # initialize
 
-import utils.codecs
-import utils.system
-import utils.threads
-import logs
+import utils.codecs  # noqa
+import utils.system  # noqa
+import utils.threads  # noqa
+import logs  # noqa
 
 
 # register libraries finder
 
-from .importers.finder import ScriptingFinder
+from .importers.finder import ScriptingFinder  # noqa
 
 sys.meta_path.append(ScriptingFinder())
 
 
 # start log server
 
-from logs import VDOM_log_server
+from logs import VDOM_log_server  # noqa
 
 if settings.START_LOG_SERVER and settings.LOGGER == "native":
     VDOM_log_server().start()
@@ -57,13 +64,13 @@ if settings.START_LOG_SERVER and settings.LOGGER == "native":
 
 # prepare manager
 
-from importers.manager import ImportManager
+from importers.manager import ImportManager  # noqa
 
 
 # obsolete
 
-from . import legacy
-from .debug import debug, DebugFile
+from . import legacy  # noqa
+from .debug import debug, DebugFile  # noqa
 
 __builtin__.VDOM_CONFIG = legacy.VDOM_CONFIG
 __builtin__.VDOM_CONFIG_1 = legacy.VDOM_CONFIG_1

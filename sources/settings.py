@@ -50,6 +50,7 @@ RESOURCE_LINE_LENGTH = 76  # line length for stored resources
 STORE_DEFAULT_VALUES = False  # store default attribute values on disk
 PRELOAD_DEFAULT_APPLICATION = False  # preload default application on start
 MANUAL_GARBAGE_COLLECTING = False  # collect garbage on server idle instead auto
+BINARY_LOADS_EXTENSION = True  # use binary memory.vdomxml.loads if available
 
 # compiler
 
@@ -143,6 +144,16 @@ VSCRIPT_AUTO_PRECOMPILE = True  # precompile dependencies when needed
 # soap
 
 AUTOSELECT_NEW_APPLICATION = False  # auto-select new application on create
+
+# manage
+
+MANAGE_LINE_WIDTH = 139  # desired console line width
+MANAGE_NAME_WIDTH = 36  # desired width for names and captions
+MANAGE_LONG_NAME_WIDTH = 85  # desired width for long list lines
+
+# building
+
+TREAT_WARNINGS_AS_ERRORS = True  # treat warnings as errors when building extensions
 
 # debugging
 

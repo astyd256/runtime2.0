@@ -3,9 +3,9 @@ import re
 from contextlib import closing
 import managers
 import file_access
+from utils.output import warn
 from utils.parsing import native, Parser
 from .constants import TYPE, APPLICATION, USER, GROUP
-from .output import warn
 
 
 ENTITY_NAME_REGEX = re.compile("[a-z][_0-9a-z]*$", re.IGNORECASE)

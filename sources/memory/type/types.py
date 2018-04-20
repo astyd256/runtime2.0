@@ -100,6 +100,7 @@ class MemoryTypes(MemoryBase, Mapping):
         if uuid_or_name[8:9] == "-":
             return self.get(uuid_or_name)
         else:
+            uuid_or_name = uuid_or_name.lower()
             try:
                 uuid = self._index[uuid_or_name]
             except KeyError:

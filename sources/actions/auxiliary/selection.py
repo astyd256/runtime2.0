@@ -1,9 +1,8 @@
 
 import managers
-
+from utils.output import section, warn, confirm
 from .constants import TYPE, APPLICATION, ALL, TYPES, APPLICATIONS
 from .detection import search
-from .output import section, show, warn, confirm
 
 
 ENTITIES = {

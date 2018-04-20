@@ -1,26 +1,53 @@
 
+import sys
+
 from contextlib import contextmanager
 from textwrap import wrap
-from logs import console
+
+import settings
+
 from utils.structure import Structure
 from utils.auxiliary import align
 from utils.console import CONSOLE_WIDTH
 
 
 ABSENT = "ABSENT"
-INDENT = "    "
-WARN_INDENT = ""
-
-LINE_WIDTH = 119
-NAME_WIDTH = 36
-LONG_NAME_WIDTH = 85
+AUTOINDENT = "AUTO"
+ERROR_PREFIX = "ERROR: "
 
 
+class ConsoleWrapper(object):
+
+    def _get_stdout(self):
+        logs = sys.modules.get("logs")
+        if logs:
+            return logs.console.stdout
+        else:
+            return sys.stdout
+
+    stdout = property(_get_stdout)
+
+    def write(self, message=None):
+        logs = sys.modules.get("logs")
+        if logs:
+            logs.console.write(message)
+        else:
+            print message or ""
+
+    def error(self, message=None):
+        logs = sys.modules.get("logs")
+        if logs:
+            logs.console.error(message)
+        else:
+            print ERROR_PREFIX + (message or "").replace("\n", "\n" + ERROR_PREFIX)
+
+
+console = ConsoleWrapper()
 global_context = Structure(
     previous=None,
     show_section=None,
     indent="",
-    width=LINE_WIDTH)
+    width=settings.MANAGE_LINE_WIDTH)
 
 
 def escape(value):
@@ -43,8 +70,8 @@ def section(name=None, value=ABSENT, indent=None, longer=False, width=None, lazy
     context = Structure(
         previous=global_context,
         show_section=show_section,
-        indent=indent + INDENT,
-        width=width or LINE_WIDTH)
+        indent=indent + settings.LOGGING_INDENT,
+        width=width or settings.MANAGE_LINE_WIDTH)
 
     if not (value is ABSENT and lazy):
         context.show_section()
@@ -68,7 +95,7 @@ def reformat(value, caption, continuation="", noclip=False):
         for part in value.splitlines()))
 
 
-def show(name=None, value=ABSENT, indent=None, longer=False, noclip=False):
+def show(name=None, value=ABSENT, indent=None, longer=False, continuation="", noclip=False):
     global global_context
 
     if indent is None:
@@ -87,7 +114,7 @@ def show(name=None, value=ABSENT, indent=None, longer=False, noclip=False):
         value = name
     else:
         if isinstance(longer, bool):
-            width = LONG_NAME_WIDTH if longer else NAME_WIDTH
+            width = settings.MANAGE_LONG_NAME_WIDTH if longer else settings.MANAGE_NAME_WIDTH
         else:
             width = longer
         caption = align(name, width, filler="." if name else " ", indent=indent)
@@ -95,14 +122,16 @@ def show(name=None, value=ABSENT, indent=None, longer=False, noclip=False):
     if not isinstance(value, basestring):
         value = str(value)
 
-    console.write(reformat(value, caption, noclip=noclip))
+    console.write(reformat(value, caption, continuation=continuation, noclip=noclip))
 
 
-def warn(message, indent=None, noclip=False):
+def warn(message, indent=None, continuation="", noclip=False):
     global global_context
 
     if indent is None:
-        indent = WARN_INDENT
+        indent = ""
+    elif indent is AUTOINDENT:
+        indent = global_context.indent
 
     if global_context.show_section:
         global_context.show_section()
@@ -110,7 +139,7 @@ def warn(message, indent=None, noclip=False):
     if not isinstance(message, basestring):
         message = str(message)
 
-    console.error(reformat(message, indent, noclip=noclip))
+    console.error(reformat(message, indent, continuation=continuation, noclip=noclip))
 
 
 def confirm(message=None, question=None):
@@ -137,7 +166,7 @@ def newline(lazy=True):
         previous=global_context,
         show_section=show_section,
         indent=global_context.indent,
-        width=LINE_WIDTH)
+        width=settings.MANAGE_LINE_WIDTH)
 
     if not lazy:
         context.show_section()
