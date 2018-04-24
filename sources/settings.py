@@ -80,12 +80,12 @@ CONNECTION_SUBSEQUENT_TIMEOUT = 30.0  # connection timeout after receive any dat
 
 QUANTUM = 0.5  # default idle quantum for smart threads
 COUNTDOWN = 3.0  # left for compatibility...
-MAIN_NAME = "Main"  #  main thread name
+MAIN_NAME = "Main"  # main thread name
 
 # logging
 
 LOGGER = "native"  # "native", "ovh"
-START_LOG_SERVER = True  # start log server on start for native logger
+START_LOG_SERVER = True  # start log server on start for native logger
 
 LOG_LEVEL = 0  # 0 (DEBUG), 1 (MESSAGE), 2 (WARNING), 3 (ERROR), can change at runtime
 CONSOLE_LOG_LEVEL = 0  # separate log level for console output

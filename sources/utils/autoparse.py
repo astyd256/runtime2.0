@@ -4,7 +4,7 @@ import re
 
 from types import FunctionType, ModuleType
 from itertools import izip, chain
-from argparse import OPTIONAL, REMAINDER, SUPPRESS, ArgumentParser, ArgumentTypeError, HelpFormatter, Action
+from argparse import OPTIONAL, SUPPRESS, ArgumentParser, ArgumentTypeError, HelpFormatter, Action
 
 import utils.verificators
 from utils.structure import Structure
@@ -133,7 +133,7 @@ def autoparse(alias, routine, subparsers, autoletters=True):
         matches = DOCSTRING_ARGUMENT_REGEX.finditer(docstirng)
         for match in matches:
             name = match.group("name")
-            if name not in names:
+            if name not in names and name != arguments:
                 raise Exception("Argument \"%s\" is described but absent in \"%s\""
                     % (name, routine.__module__))
 
@@ -160,7 +160,7 @@ def autoparse(alias, routine, subparsers, autoletters=True):
         subparser.add_argument(name, type=verificator, help=description)
 
     if defaults:
-        letters = set("h")
+        letters = set("ch")
         for name, default in izip(optional, defaults):
             entity, media, verificator, description = metadata.get(name, DEFAULT_METADATA)
             keywords = {}
@@ -209,7 +209,11 @@ def autoparse(alias, routine, subparsers, autoletters=True):
                     **keywords)
 
     if arguments:
-        subparser.add_argument(arguments, nargs=REMAINDER)
+        entity, media, verificator, description = metadata.get(arguments, DEFAULT_METADATA)
+        if entity.is_keyword:
+            raise Exception("Optional arguments \"%s\" is described as keyword of \"%s\""
+                % (arguments, routine.__module__))
+        subparser.add_argument(arguments, type=verificator, nargs="*", help=description)
 
     return routine, names, arguments
 

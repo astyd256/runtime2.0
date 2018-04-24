@@ -9,7 +9,7 @@ from setuptools import setup
 import settings
 
 from utils.output import section, show, warn
-from .buffer import OutputBuffer
+from utils.capture import OutputCapture
 
 
 SETUP_SCRIPT = """
@@ -21,6 +21,10 @@ setup(name="runtime",
         "clean": {"build_lib": temporary, "build_temp": temporary}
     })
 """
+
+
+class ReportBuilderFailureError(Exception):
+    pass
 
 
 class BuildExtension(build_ext):
@@ -48,49 +52,49 @@ class BuildExtension(build_ext):
 
 class Builder(object):
 
-    def __init__(self, **keywords):
+    def __init__(self, extensions):
         self._temporary = os.path.join(settings.TEMPORARY_LOCATION, "builder")
-        self._extensions = keywords
+        self._extensions = extensions
+
+    def execute(self, *options, **keywords):
+        capture = OutputCapture("setup.log")
+        arguments_backup = sys.argv[:]
+        try:
+            sys.argv = ["setup.py"] + list(options)
+            with capture:
+                exec(SETUP_SCRIPT, {
+                    "BuildExtension": BuildExtension,
+                    "temporary": self._temporary,
+                    "extensions": keywords.get("extensions"),
+                    "setup": setup}, {})
+        except BaseException as error:
+            show("")
+            warn(re.sub(r"^(error:\s)?", "", str(error), flags=re.IGNORECASE))
+            for line in capture.lines:
+                warn(line,
+                    indent=settings.LOGGING_INDENT,
+                    continuation=settings.LOGGING_INDENT)
+            raise ReportBuilderFailureError
+        finally:
+            sys.argv = arguments_backup
+
+    def list(self):
+        with section("extensions"):
+            for name in self._extensions:
+                show(name)
+
+    def cleanup(self):
+        show("cleanup build directories")
+        self.execute("clean")
 
     def build(self, *arguments):
+        with section("build extensions"):
+            for name in arguments or self._extensions:
+                try:
+                    extension = self._extensions[name]
+                except KeyError:
+                    warn("extension \"%s\" not found" % name)
+                    raise ReportBuilderFailureError
 
-        def build_extension(extension):
-            arguments_backup = sys.argv[:]
-            try:
-                sys.argv = "setup.py", "build_ext", "--inplace", "clean"
-                with output_buffer:
-                    exec(SETUP_SCRIPT, {
-                        "BuildExtension": BuildExtension,
-                        "temporary": self._temporary,
-                        "setup": setup,
-                        "extensions": [extension]}, {})
-            except BaseException as error:
-                show("")
-                warn(re.sub(r"^(error:\s)?", "", str(error), flags=re.IGNORECASE))
-                for line in output_buffer.lines:
-                    warn(line,
-                        indent=settings.LOGGING_INDENT,
-                        continuation=settings.LOGGING_INDENT)
-                raise
-            finally:
-                sys.argv = arguments_backup
-
-        try:
-            output_buffer = OutputBuffer()
-            with section("build extensions"):
-                if arguments:
-                    for name in arguments:
-                        extension = self._extensions.get(name)
-                        if not extension:
-                            warn("extension \"%s\" not found" % name)
-                            return False
-                        show("build %s extension" % extension.name)
-                        build_extension(extension)
-                else:
-                    for extension in self._extensions.itervalues():
-                        show("build %s extension" % extension.name)
-                        build_extension(extension)
-        except BaseException:
-            return False
-        else:
-            return True
+                show("build %s extension" % extension.name)
+                self.execute("build_ext", "--inplace", "clean", extensions=[extension])

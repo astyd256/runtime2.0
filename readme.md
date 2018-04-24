@@ -14,7 +14,11 @@ The first is needed to check that system meets all requirements:
 * python-ldap (pip install python-ldap)
 * soappy (pip install soappy)
 
-Then download latest runtime. After that must be performed deploy action:
+Then download latest runtime. Before first run is needed to build C extensions:
+
+    python manage.py build
+
+After that must be performed deploy action:
 
     python manage.py deploy
 
@@ -78,6 +82,27 @@ Or can work in interactive mode - just lunch manage.py without arguments.
 
 Each action can have several arguments and/or keywords with shortcuts.
 Shortcuts are generated automatically from first letters so please use full abbreviations when writing scripts.
+
+### Build C extensions
+
+This action can only be called from the command line.
+
+Build server C extensions, show list of available extensions or clear temporary files.
+
+Actions:
+
+    build
+    build <extension> ...
+    build --list
+    build --clean
+
+Where *extension* is a specific extension to build.
+
+Example:
+
+    build
+
+This command build all available extensions.
 
 ### Install application or type
 
