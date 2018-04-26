@@ -9,7 +9,8 @@ from ..generic import MemoryBase
 
 
 FORCE_CDATA_LENGTH = 1024
-FORCE_CDATA_REGEX = re.compile(u"[\u0000-\u0019\"<=>]", re.MULTILINE)
+FORCE_CDATA_REGEX = re.compile(u"[\t\n\r\"<=>]", re.MULTILINE)
+PROHIBITED_CHARACTERS = re.compile(ur"[\x00-\x08\x0B\x0C\x0E-\x19]")
 LAYOUT_ATTRIBUTES = {"top", "left", "width", "height", "hierarchy"}
 
 
@@ -121,7 +122,8 @@ class MemoryAttributes(MemoryAttributesSketch):
             file.write(u"%s<Attributes>\n" % ident)
             for name in self._items.__dict__ if skip_defaults else self._items._enumeration:
                 file.write(u"%s\t<Attribute Name=\"%s\">%s</Attribute>\n" %
-                    (ident, name, getattr(self._items, name).encode("cdata" if name in self._cdata else "xml")))
+                    (ident, name, PROHIBITED_CHARACTERS.sub("?",
+                        getattr(self._items, name)).encode("cdata" if name in self._cdata else "xml")))
             file.write(u"%s</Attributes>\n" % ident)
 
     def update(self, *arguments, **keywords):
