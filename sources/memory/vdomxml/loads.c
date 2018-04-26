@@ -12,7 +12,7 @@
 #   error "Require at least 31 bits to keep hashes"
 #endif
 
-#define DEBUG 
+#define DEBUG
 #define DECODE_STRING
 
 #define BUFFER_LENGTH 16

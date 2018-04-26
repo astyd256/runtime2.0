@@ -169,7 +169,8 @@ class MemoryAttributes(MemoryAttributesSketch):
                             raise ValueError(u"Unacceptable value for \"%s\" attribute of %s: \"%s\"" %
                                 (name, self._owner, value.replace('"', '\"')))
 
-                        log.write("Update %s attrbiute \"%s\" to \"%s\"" % (self._owner, name, value.replace('"', '\"')))
+                        if settings.DETAILED_LOGGING:
+                            log.write("Update %s attrbiute \"%s\" to \"%s\"" % (self._owner, name, value.replace('"', '\"')))
                         self._query.add(name)
                         self._items.__dict__[name] = value
 
@@ -188,7 +189,8 @@ class MemoryAttributes(MemoryAttributesSketch):
 
     def __delitem__(self, name):
         managers.dispatcher.dispatch_handler(self._owner, "on_update", {name: self._owner.type.attributes[name].default_value})
-        log.write("Reset %s attrbiute \"%s\"" % (self._owner, name))
+        if settings.DETAILED_LOGGING:
+            log.write("Reset %s attrbiute \"%s\"" % (self._owner, name))
         self._query.add(name)
         self._items.__dict__.pop(name, None)
         self._owner.invalidate(upward=1)

@@ -103,7 +103,8 @@ class Memory(object):
 
     def clean(self, everything=False):
         if everything:
-            log.write("Release objects")
+            if settings.DETAILED_LOGGING:
+                log.write("Release objects")
             while 1:
                 try:
                     object, reference = self._primaries.popitem()
@@ -124,10 +125,11 @@ class Memory(object):
                     break
                 else:
                     if self._primaries.pop(object, None) is not None:
-                        log.write("Release %s" % object)
+                        if settings.DETAILED_LOGGING:
+                            log.write("Release %s" % object)
                         object._collection.on_delete(object)
 
-            if settings.SHOW_TRACKED_PRIMARIES:
+            if settings.DETAILED_LOGGING and settings.SHOW_TRACKED_PRIMARIES:
                 primaries = self._primaries.copy()
                 if primaries != self._primaries_cache:
                     if primaries:

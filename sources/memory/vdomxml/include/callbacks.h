@@ -119,11 +119,9 @@ close_element_name(Parse *parse)
         return NEXT;
     case AttributeElement:
         return NEXT;
-#ifdef DEBUG
     default:
         PyErr_SetString(PyExc_RuntimeError, "Wrong element type");
         return FAILURE;
-#endif
     }
 }
 
@@ -150,11 +148,9 @@ open_element_content(Parse *parse)
         if (reset_substrings(parse))
             return FAILURE;
         return NEXT;
-#ifdef DEBUG
     default:
         PyErr_SetString(PyExc_RuntimeError, "Wrong element type");
         return FAILURE;
-#endif
     }
 }
 
@@ -188,11 +184,9 @@ start_element_substring(Parse *parse)
             return FAILURE;
         substring->data = parse->data;
         return NEXT;
-#ifdef DEBUG
     default:
         PyErr_SetString(PyExc_RuntimeError, "Wrong element type");
         return FAILURE;
-#endif
     }
 }
 
@@ -217,11 +211,9 @@ start_element_substring_from_mark(Parse *parse)
             return FAILURE;
         substring->data = parse->mark;
         return NEXT;
-#ifdef DEBUG
     default:
         PyErr_SetString(PyExc_RuntimeError, "Wrong element type");
         return FAILURE;
-#endif
     }
 }
 
@@ -334,11 +326,9 @@ close_element(Parse *parse)
         release_python_object(value);
         release_element(parse);
         return NEXT;
-#ifdef DEBUG
     default:
         PyErr_SetString(PyExc_RuntimeError, "Wrong element type");
         return FAILURE;
-#endif
     }
 }
 
@@ -369,11 +359,9 @@ close_element_and_check_name(Parse *parse)
             return FAILURE;
         }
         return close_element(parse);
-#ifdef DEBUG
     default:
         PyErr_SetString(PyExc_RuntimeError, "Wrong element type");
         return FAILURE;
-#endif
     }
 }
 
@@ -432,11 +420,9 @@ close_attribute_name(Parse *parse)
                because we already know them */
 
             return NEXT;
-#ifdef DEBUG
         default:
             PyErr_SetString(PyExc_RuntimeError, "Wrong attribute type");
             return FAILURE;
-#endif
         }
     case AttributeElement:
 
@@ -449,11 +435,9 @@ close_attribute_name(Parse *parse)
             return FAILURE;
         }
         return NEXT;
-#ifdef DEBUG
     default:
         PyErr_SetString(PyExc_RuntimeError, "Wrong element type");
         return FAILURE;
-#endif
     };
 }
 
@@ -581,12 +565,10 @@ close_attribute(Parse *parse)
             release_python_object(parse->element->attributes);
         parse->element->attributes = value;
         return NEXT;
-#ifdef DEBUG
     default:
         release_python_object(value);
         PyErr_SetString(PyExc_RuntimeError, "Wrong element type");
         return FAILURE;
-#endif
     }
 }
 
@@ -846,11 +828,9 @@ open_cdata_name(Parse *parse)
     case AttributeElement:
         parse->mark = parse->data;
         return NEXT;
-#ifdef DEBUG
     default:
         PyErr_SetString(PyExc_RuntimeError, "Wrong element type");
         return FAILURE;
-#endif
     }
 }
 

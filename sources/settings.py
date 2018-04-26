@@ -85,10 +85,12 @@ MAIN_NAME = "Main"  # main thread name
 # logging
 
 LOGGER = "native"  # "native", "ovh"
-START_LOG_SERVER = True  # start log server on start for native logger
+START_LOG_SERVER = True  # start log server in case of native logger
 
 LOG_LEVEL = 0  # 0 (DEBUG), 1 (MESSAGE), 2 (WARNING), 3 (ERROR), can change at runtime
 CONSOLE_LOG_LEVEL = 0  # separate log level for console output
+
+DETAILED_LOGGING = False  # log elementary operations, can change at runtime
 
 LOGGING_ADDRESS = "127.0.0.1"
 LOGGING_PORT = 1010

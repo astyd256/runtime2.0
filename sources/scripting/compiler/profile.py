@@ -149,7 +149,8 @@ class CompilationProfile(CompilationProfileEntity):
             raise Exception("Dynamic can't be lowered")
         if value > 1:
             raise ValueError("Dynamic must be 0 or 1")
-        log.write("Change profile to %s for %s in %s context" % (("dynamic" if self._dynamic else "NOT dynamic"), self._origin, self._context))
+        if settings.DETAILED_LOGGING:
+            log.write("Change profile to %s for %s in %s context" % (("dynamic" if self._dynamic else "NOT dynamic"), self._origin, self._context))
         self._dynamic = value
 
     def _set_optimization_priority(self, value):
@@ -173,25 +174,29 @@ class CompilationProfile(CompilationProfileEntity):
 
         # check action and enable dynamic if exists
         if self._action and self._action.source_code:
-            log.write("Enable dynamic for %s due to %s action presence" % (self._origin, self._action.name))
+            if settings.DETAILED_LOGGING:
+                log.write("Enable dynamic for %s due to %s action presence" % (self._origin, self._action.name))
             self._dynamic = 1
             return
 
         # check stateful attribute
         if self._stateful:
-            log.write("Enable dynamic for %s due to stateful attribute" % self._origin)
+            if settings.DETAILED_LOGGING:
+                log.write("Enable dynamic for %s due to stateful attribute" % self._origin)
             self._dynamic = 1
             return
 
         for child in self._entries:
             # object with dynamic child must be dynamic
             if child.dynamic:
-                log.write("Enable dynamic for %s due to child dynamic attribute" % self._origin)
+                if settings.DETAILED_LOGGING:
+                    log.write("Enable dynamic for %s due to child dynamic attribute" % self._origin)
                 self._dynamic = 1
                 return
 
             # object with handlers must be dynamic too
             if child.on_initialize or child.on_execute or child.on_render or child.on_wysiwyg:
-                log.write("Enable dynamic for %s due to handler(s) presence" % self._origin)
+                if settings.DETAILED_LOGGING:
+                    log.write("Enable dynamic for %s due to handler(s) presence" % self._origin)
                 self._dynamic = 1
                 return

@@ -4,10 +4,13 @@ import json
 from copy import copy
 from collections import Mapping, MutableMapping
 
+import settings
 import managers
 
 from logs import log
 from utils.properties import weak
+from utils.tracing import format_thread_trace
+
 from .compiler import STATE_UNMODIFIED, STATE_MODIFIED, \
     STATE_UP_TO_DATE, STATE_REQUIRE_RECOMPUTE, STATE_RECOMPUTE  # STATE_AVOID_RECOMPUTE
 from .compiler.descriptors import make_object_name, make_descriptor_name
@@ -131,7 +134,8 @@ class VDOMObject(object):
     def execute(self, namespace=None):
         action = self._action
         if action:
-            log.write("Execute %s" % action)
+            if settings.DETAILED_LOGGING:
+                log.write("Execute %s" % action)
             action.execute(context=self, namespace=namespace)
 
     def compute(self):
@@ -147,7 +151,8 @@ class VDOMObject(object):
         return contents
 
     def _instantiate(self, name):
-        log.write("Instantiate %s attribute \"%s\" object" % (self, name))
+        if settings.DETAILED_LOGGING:
+            log.write("Instantiate %s attribute \"%s\" object" % (self, name))
 
         # obtain context and inmaterial child object
         origin = self._origin
@@ -170,7 +175,8 @@ class VDOMObject(object):
         return instance
 
     def _dynamic_render(self, contents=""):
-        log.write("Dynamic render %s" % self)
+        if settings.DETAILED_LOGGING:
+            log.write("Dynamic render %s" % self)
         chunks = [contents]
         for name in self._objects:
             try:
@@ -182,7 +188,8 @@ class VDOMObject(object):
         return self.__class__.__bases__[0].render(self, contents=u"".join(chunks))
 
     def _dynamic_wysiwyg(self, contents=""):
-        log.write("Dynamic wysiwyg %s" % self)
+        if settings.DETAILED_LOGGING:
+            log.write("Dynamic wysiwyg %s" % self)
         chunks = [contents]
         for name in self._objects:
             try:
@@ -209,7 +216,8 @@ class VDOMObject(object):
         if chunks is None:
             chunks = {}
         if self._update_state is STATE_MODIFIED:
-            log.write("Separate render %s" % self)
+            if settings.DETAILED_LOGGING:
+                log.write("Separate render %s" % self)
             chunks[self._id] = self.render()
         else:
             for name in self._objects:
@@ -219,12 +227,13 @@ class VDOMObject(object):
         return chunks
 
     def write(self, data, action_name=None):
-        log.write(u"Write action %s data to client: %d characters" % (action_name, len(data)))
+        if settings.DETAILED_LOGGING:
+            log.write(u"Write action %s data to client: %d characters" % (action_name, len(data)))
         render_type = managers.request_manager.current.render_type
         if render_type != "e2vdom":
-            log.warning("Perform write when render type is \"%s\"" % render_type)
-            from utils.tracing import format_thread_trace
-            log.warning(format_thread_trace(statements=False, skip=("write", "action"), until="scripting.executable"))
+            log.warning("Perform write when render type is \"%s\"\n%s" % (render_type,
+                format_thread_trace(statements=False, indent=settings.LOGGING_INDENT,
+                    skip=("write", "action"), until="scripting.executable")))
         # else:
         #     from utils.tracing import format_thread_trace
         #     log.debug(format_thread_trace(statements=False, skip=("write", "action"), until="scripting.executable"))
@@ -298,7 +307,8 @@ class VDOMObject(object):
         return root
 
     def _fetch(self):
-        log.write("Fetch %s attributes" % self)
+        if settings.DETAILED_LOGGING:
+            log.write("Fetch %s attributes" % self)
         request = managers.request_manager.current
         try:
             self._attributes = (request.next_state or request.last_state)[self._id]
@@ -306,13 +316,15 @@ class VDOMObject(object):
             self._attributes = self._values
 
     def _switch(self):
-        log.write("Switch %s attributes" % self)
+        if settings.DETAILED_LOGGING:
+            log.write("Switch %s attributes" % self)
         request = managers.request_manager.get_request()
         if request.next_state:
             state = request.next_state
             index = state["#"]
         else:
-            log.write("Allocate new state")
+            if settings.DETAILED_LOGGING:
+                log.write("Allocate new state")
             request.next_state = state = request.last_state.copy()
             # LOCK SESSION
             session = request.session()

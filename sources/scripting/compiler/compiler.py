@@ -34,7 +34,8 @@ class Compiler(object):
     def clean(self):
 
         def routine():
-            log.write("Clean compiler caches")
+            if settings.DETAILED_LOGGING:
+                log.write("Clean compiler caches")
             self._object_descriptors.squeeze()
             self._ghost_object_descriptors.squeeze()
             return CLEANUP_INTERVAL
@@ -87,7 +88,8 @@ class Compiler(object):
         # origin: type, id, name, order, stateful, hierarchy
         #         attributes, objects, actions.get(context)
         #         factory(context)
-        log.write("Compile %s in %s context%s" % (origin, context, (" as dynamic" if dynamic else "")))
+        if settings.DETAILED_LOGGING:
+            log.write("Compile %s in %s context%s" % (origin, context, (" as dynamic" if dynamic else "")))
 
         # prepare compilation profile and execute on_compile
         profile = CompilationProfile(origin, context, dynamic=dynamic, mapping=mapping)
@@ -198,7 +200,8 @@ class Compiler(object):
                     class_namespace[entry_origin_name] = self._ghost_object_descriptors[entry_origin_name]
                     instance_namespace.add(entry_origin_name)
 
-                log.write("Prerender \"%s\" for %s" % (entry_origin_name, origin))
+                if settings.DETAILED_LOGGING:
+                    log.write("Prerender \"%s\" for %s" % (entry_origin_name, origin))
 
                 # TODO: there are possible problems with deleting this child or origin object
                 #       during execute, render or wysiwyg execution in overrided type's methods
@@ -255,7 +258,7 @@ class Compiler(object):
 
         # compile methods
         if source:
-            if settings.SHOW_PAGE_LISTING:
+            if settings.DETAILED_LOGGING and settings.SHOW_PAGE_LISTING:
                 log.write("Compose %s in %s context" % (origin, context))
                 from utils.auxiliary import fit
                 clean_source = "\n".join(fit(line, MAXIMAL_LINE_LENGTH) for line in "".join(source).splitlines())
@@ -274,7 +277,8 @@ class Compiler(object):
             for name in ("__init__", "execute", "render", "wysiwyg"):
                 method = module_namespace.get(name)
                 if method:
-                    # log.write("Override \"%s\" for %s" % (name, origin))
+                    if settings.DETAILED_LOGGING:
+                        log.write("Override \"%s\" for %s" % (name, origin))
                     setattr(klass, name, method)
 
         return klass

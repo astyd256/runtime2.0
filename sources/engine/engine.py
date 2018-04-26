@@ -42,7 +42,8 @@ class Engine(object):
             application = managers.memory.applications[application]
         previous = self._storage.application
         if application is not previous:
-            log.write("Select %s" % (application or "no application"))
+            if settings.DETAILED_LOGGING:
+                log.write("Select %s" % (application or "no application"))
             self._storage.application = application
             # TODO: check this thread using
             current_thread().application = application.id if application else None

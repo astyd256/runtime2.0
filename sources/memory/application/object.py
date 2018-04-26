@@ -1,6 +1,7 @@
 
 from threading import RLock
 
+import settings
 import managers
 
 from logs import log
@@ -216,20 +217,24 @@ class MemoryObject(MemoryObjectSketch):
             if "_classes" in self.__dict__:
                 if contexts:
                     if isinstance(contexts, basestring):
-                        log.write("Invalidate %s in %s context" % (self, contexts))
+                        if settings.DETAILED_LOGGING:
+                            log.write("Invalidate %s in %s context" % (self, contexts))
                         self._classes.pop(contexts, None)
                     else:
-                        log.write("Invalidate %s in %s contexts" % (self, ", ".join(contexts)))
+                        if settings.DETAILED_LOGGING:
+                            log.write("Invalidate %s in %s contexts" % (self, ", ".join(contexts)))
                         for context in contexts:
                             self._classes.pop(context, None)
                 else:
-                    log.write("Invalidate %s" % self)
+                    if settings.DETAILED_LOGGING:
+                        log.write("Invalidate %s" % self)
                     self._classes = {}
 
             # NOTE: this can delete compiled e2vdom scripts
             # TODO: check necessity of resource invalidation
             #       possible this must be done on object delete
             # NOTE: cleanup=False to avoid excessive file operations
+
             # cleanup resources
             managers.resource_manager.invalidate_resources(self._id, cleanup=False)
 
@@ -244,11 +249,13 @@ class MemoryObject(MemoryObjectSketch):
                 #       virtual objects will be stored between render
                 #       it may be worth adding a special attribute
                 #       that break invalidate chain for dynamic objects
+
                 # validate only same (non-)virtual objects in chain
                 if self._parent and self._virtual == self._parent.virtual:
                     self._parent.invalidate(contexts=contexts, upward=True)
                 for dependent in self._dependents:
-                    log.write("Invalidate %s dependent %s" % (self, dependent))
+                    if settings.DETAILED_LOGGING:
+                        log.write("Invalidate %s dependent %s" % (self, dependent))
                     dependent.invalidate(contexts=contexts, upward=True)
 
             # update factory counter to indicate a change
