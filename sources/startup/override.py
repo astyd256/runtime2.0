@@ -1,11 +1,13 @@
 
 import os.path
-import json
 
+from ast import literal_eval
 from StringIO import StringIO
 from ConfigParser import SafeConfigParser
 
 import settings
+
+from utils.auxiliary import enquote
 
 
 DEFAULT_SECTION = "NONAME"
@@ -37,37 +39,28 @@ def override(filename):
             settings_name = name.replace("-", "_").upper()
 
             if settings_name.startswith("_"):
-                print "Ignore unsupported option: %s" % name
+                print "Ignore unsupported option: %s" % enquote(name)
                 continue
 
             current_value = getattr(settings, settings_name, MISSING)
             if current_value is MISSING:
-                print "Ignore unknown option: %s" % name
+                print "Ignore unknown option: %s" % enquote(name)
                 continue
 
             try:
-                if value == "None":
-                    setattr(settings, settings_name, None)
-                elif isinstance(current_value, bool):
-                    setattr(settings, settings_name, bool(value))
-                elif isinstance(current_value, int):
-                    setattr(settings, settings_name, int(value))
-                elif isinstance(current_value, float):
-                    setattr(settings, settings_name, float(value))
-                elif isinstance(current_value, basestring):
-                    setattr(settings, settings_name, str(value))
-                elif isinstance(current_value, dict):
-                    setattr(settings, settings_name, json.loads(value))
-                else:
-                    for caster in (int, float, json.loads):
-                        try:
-                            value = caster(value)
-                            break
-                        except Exception:
-                            continue
-                    setattr(settings, settings_name, value)
-            except Exception as error:
-                print "Unable to parse option %s: %s" % (name, error)
+                new_value = literal_eval(value)
+            except ValueError:
+                print "Ignore wrong value for %s option: %s" % (enquote(name), enquote(value))
+                continue
+
+            if not (current_value is None
+                    or new_value is None
+                    or type(new_value) is type(current_value)):
+                print "Ignore %s value for %s %s option: %s" % (type(new_value).__name__,
+                    type(current_value).__name__, enquote(name), enquote(value))
+                continue
+
+            setattr(settings, settings_name, new_value)
 
     override_from_section(DEFAULT_SECTION)
     for name in EXTRA_SECTIONS:
