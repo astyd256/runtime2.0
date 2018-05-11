@@ -1,5 +1,6 @@
 *.pyc
 *.pyd
+*.so
 sources/vscript/tables/lexer.py
 sources/vscript/tables/parser.py
 applications/*
