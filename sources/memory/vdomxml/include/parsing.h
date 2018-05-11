@@ -89,7 +89,7 @@ cleanup_elements_clean(Element *element)
 static void
 cleanup_elements(Parse *parse)
 {
-    iterate_stockpile(&parse->stockpiles.elements, cleanup_elements_clean);
+    iterate_stockpile(&parse->stockpiles.elements, (StockpileIterateCallback)cleanup_elements_clean);
     release_all_on_stockpile(&parse->stockpiles.elements);
 }
 
@@ -140,6 +140,6 @@ cleanup_references_clean(PyObject **object)
 static void
 cleanup_references(Parse *parse)
 {
-    iterate_stockpile(&parse->stockpiles.references, cleanup_references_clean);
+    iterate_stockpile(&parse->stockpiles.references, (StockpileIterateCallback)cleanup_references_clean);
     release_all_on_stockpile(&parse->stockpiles.references);
 }

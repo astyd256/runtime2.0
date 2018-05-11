@@ -52,7 +52,7 @@ static PyObject *memory_types_search = NULL;
 /* Import */
 
 static int
-import_objects()
+import_objects(void)
 {
     PyObject *managers, *memory, *types;
 
@@ -93,7 +93,7 @@ finalize_object(PyObject **object)
 static int
 finalize_objects(Parse *parse)
 {
-    if (iterate_stockpile(&parse->stockpiles.references, finalize_object))
+    if (iterate_stockpile(&parse->stockpiles.references, (StockpileIterateCallback)finalize_object))
         return 1;
     release_all_on_stockpile(&parse->stockpiles.references);
     return 0;
@@ -119,8 +119,8 @@ parse(Data data, DataSize size, int is_unicode, PyObject *origin)
 
     if (is_unicode)
     {
-        parse.match_string = unicode_match_string;
-        parse.is_equal_to_string = unicode_is_equal_to_string;
+        parse.match_string = (MatchString)unicode_match_string;
+        parse.is_equal_to_string = (IsEqualToString)unicode_is_equal_to_string;
         parse.is_equal_to_python_string = unicode_is_equal_to_python_string;
         parse.python_string_is_equal_to_string = unicode_python_string_is_equal_to_string;
         parse.create_python_string = unicode_create_python_string;
@@ -298,6 +298,8 @@ parse(Data data, DataSize size, int is_unicode, PyObject *origin)
 #ifdef DEBUG
             parse.return_state = NEXT;
 #endif
+        default:
+            break;
         }
     }
 

@@ -3,6 +3,7 @@ import weakref
 import socket
 from collections import deque
 from threading import Lock
+from time import sleep
 
 import settings
 from logs import log
@@ -129,6 +130,7 @@ class Logger(BaseLogger):
                             return
                     except socket.error as error:
                         log.error(error.strerror or str(error))
+                        sleep(RECONNECT_TIMEOUT)
 
                 # create stream
                 self._stream = LogSocketStream(self, stream_socket)

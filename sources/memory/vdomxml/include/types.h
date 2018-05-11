@@ -1,6 +1,7 @@
 
 
 typedef char *Data;
+typedef Py_UNICODE *UnicodeData;
 typedef Py_ssize_t DataSize;
 typedef Py_ssize_t Length;
 typedef unsigned long Hash;
@@ -23,6 +24,8 @@ typedef struct
     unsigned int batch_size;
 }
 Stockpile;
+
+typedef int (* StockpileIterateCallback)(void *);
 
 
 typedef enum
@@ -74,7 +77,7 @@ typedef int (*IsEqualToString)(Data, Data, char *);
 typedef int (*IsEqualToPythonString)(Data, Data, PyObject *);
 typedef int (*PythonStringIsEqualToString)(PyObject *, char *);
 typedef PyObject *(*CreatePythonString)(Data, Data);
-typedef PyObject *(*CreateEmptyPythonString)();
+typedef PyObject *(*CreateEmptyPythonString)(void);
 typedef PyObject *(*CreatePythonStringFromSubstrings)(Substrings *);
 typedef DataSize (*WriteCharacter)(Data, Character);
 

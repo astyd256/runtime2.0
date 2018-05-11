@@ -6,10 +6,10 @@
     (0x10000 + ((((Character)(high) & 0x03FF) << 10) | ((Character)(low) & 0x03FF)))
 
 
-#define STRING_NEXT(data, stop) (Character)(*((unsigned char *)(data))++)
+#define STRING_NEXT(data, stop) (Character)(*(data)++)
 
 #ifdef Py_UNICODE_WIDE
-#   define UNICODE_NEXT(data, stop) (Character)(*((Py_UNICODE *)(data))++)
+#   define UNICODE_NEXT(data, stop) (data += Py_UNICODE_SIZE, (Character)(((Py_UNICODE *)(data))[-1]))
 #else
 #   define UNICODE_NEXT(data, stop) \
         (((IS_HIGH_SURROGATE(*((Py_UNICODE *)(data))) \
@@ -17,7 +17,7 @@
             && IS_LOW_SURROGATE(((Py_UNICODE *)(data))[1]))) \
         ? (((Py_UNICODE *)(data)) += 2, \
             JOIN_SURROGATES(((Py_UNICODE *)(data))[-2], ((Py_UNICODE *)(data))[-1])) \
-        : (Character)(*((Py_UNICODE *)(data))++))
+        : (data += Py_UNICODE_SIZE, (Character)(((Py_UNICODE *)(data))[-1])))
 #endif
 
 
@@ -34,13 +34,13 @@ string_match_string(Data data, Data stop, char *value)
 };
 
 static int
-unicode_match_string(Data data, Data stop, char *value)
+unicode_match_string(UnicodeData data, UnicodeData stop, char *value)
 {
     for (;;)
     {
         if (*value == '\0')
             return data == stop;
-        if (data == stop || tolower(*((Py_UNICODE *)data)++) != *value++)
+        if (data == stop || tolower((char)(*data++)) != *value++)
             return 0;
     };
 };
@@ -59,13 +59,13 @@ string_is_equal_to_string(Data data, Data stop, char *value)
 };
 
 static int
-unicode_is_equal_to_string(Data data, Data stop, char *value)
+unicode_is_equal_to_string(UnicodeData data, UnicodeData stop, char *value)
 {
     for (;;)
     {
         if (*value == '\0')
             return data == stop;
-        if (data == stop || *((Py_UNICODE *)data)++ != *value++)
+        if (data == stop || (char)(*data++) != *value++)
             return 0;
     };
 };
@@ -99,7 +99,7 @@ string_python_string_is_equal_to_string(PyObject *object, char *value)
 static int
 unicode_python_string_is_equal_to_string(PyObject *object, char *value)
 {
-    Data data = (Data)PyUnicode_AS_DATA(object);
+    UnicodeData data = (UnicodeData)PyUnicode_AS_DATA(object);
     DataSize size = PyUnicode_GET_DATA_SIZE(object);
     return unicode_is_equal_to_string(data, data + size, value);
 };
@@ -180,13 +180,13 @@ unicode_create_python_string_from_substrings(Substrings *substrings)
 
 
 static PyObject *
-string_create_empty_python_string()
+string_create_empty_python_string(void)
 {
     return Py_BuildValue("s", "");
 }
 
 static PyObject *
-unicode_create_empty_python_string()
+unicode_create_empty_python_string(void)
 {
     return Py_BuildValue("u", "");
 }

@@ -104,7 +104,7 @@ release_all_on_stockpile(Stockpile *stockpile)
 }
 
 static int
-iterate_stockpile(Stockpile *stockpile, int function(void *))
+iterate_stockpile(Stockpile *stockpile, StockpileIterateCallback function)
 {
     Batch *batch = stockpile->list;
     while (batch)
