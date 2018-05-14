@@ -1,7 +1,13 @@
 
+import os
+
 from sys import exit
 from argparse import ArgumentParser
 from setuptools import Extension
+
+import settings
+
+from utils.output import show, warn
 from .builder import Builder, ReportBuilderFailureError
 
 
@@ -39,6 +45,15 @@ except ArgumentsError as error:
     show_warning = True
 else:
     show_warning = False
+
+    if not os.path.isdir(settings.TEMPORARY_LOCATION):
+        show("prepare temporary directory")
+        try:
+            os.makedirs(settings.TEMPORARY_LOCATION)
+        except Exception as error:
+            warn("unable to prepare temporary directory: %s" % error)
+            exit(1)
+
     try:
         builder = Builder(EXTENSIONS)
         if arguments.list:

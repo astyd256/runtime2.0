@@ -8,7 +8,6 @@ def run(identifier):
     delete (broken) application
     :arg uuid identifier: application uuid
     """
-
     if not confirm("cleanup %s" % identifier):
         return
 
