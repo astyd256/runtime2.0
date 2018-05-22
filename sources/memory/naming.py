@@ -3,7 +3,7 @@ import re
 
 
 DIGITS = set("0123456789")
-PATTERN = re.compile(".+?(\d+)")
+PATTERN = re.compile(r".+?(\d+)")
 
 
 class UniqueNameDictionary(dict):

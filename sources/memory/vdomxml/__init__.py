@@ -2,10 +2,9 @@
 from .dumps import dumps
 import settings
 
-if settings.BINARY_LOADS_EXTENSION:
-    try:
-        from ._loads import loads
-    except ImportError:
-        from .loads import loads
-else:
-    from .loads import loads
+try:
+    if not settings.BINARY_LOADS_EXTENSION:
+        raise ImportError
+    from ._loads import loads, BaseException as ParsingException
+except ImportError:
+    from .loads import loads, BaseException as ParsingException

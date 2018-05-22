@@ -10,10 +10,36 @@ import managers
 from logs import log
 from utils.properties import weak
 from utils.tracing import format_thread_trace
+from memory import vdomxml, vdomjson
 
 from .compiler import STATE_UNMODIFIED, STATE_MODIFIED, \
     STATE_UP_TO_DATE, STATE_REQUIRE_RECOMPUTE, STATE_RECOMPUTE  # STATE_AVOID_RECOMPUTE
 from .compiler.descriptors import make_object_name, make_descriptor_name
+
+
+class ParsingError(Exception):
+
+    def __init__(self, message, line=None, column=None):
+        super(ParsingError, self).__init__(message)
+        self.message = message
+        self.line = line
+        self.column = column
+
+    def __str__(self):
+        details = ""
+        if self.line:
+            details += " on line %d" % self.line
+            if self.column:
+                details += ", column %d" % self.column
+        return super(ParsingError, self).__str__() + details
+
+
+class VDOMXMLParsingError(ParsingError):
+    pass
+
+
+class VDOMJSONParsingError(ParsingError):
+    pass
 
 
 class VDOMObjectAttributes(MutableMapping):
@@ -287,9 +313,13 @@ class VDOMObject(object):
     def loads(self, xmldata, jsondata=None, handler=None):
         try:
             root = vdomxml.loads(xmldata, self._origin)
-        except BaseException:
+        except BaseException as error:
             if xmldata.strip():
-                raise
+                if isinstance(error, vdomxml.ParsingException):
+                    raise VDOMXMLParsingError(str(error),
+                        getattr(error, "line", None), getattr(error, "column", None))
+                else:
+                    raise
             else:
                 return None
 
@@ -300,9 +330,13 @@ class VDOMObject(object):
             try:
                 vdomjson.loads(jsondata, root, self._origin,
                     handler=self._origin.actions.get(handler) if handler else None)
-            except BaseException:
+            except BaseException as error:
                 if jsondata.strip():
-                    raise
+                    if isinstance(error, vdomjson.ParsingException):
+                        raise VDOMJSONParsingError(str(error),
+                            getattr(error, "line", None), getattr(error, "column", None))
+                    else:
+                        raise
 
         return root
 
@@ -351,4 +385,3 @@ class VDOMObject(object):
 
 
 VDOM_object = VDOMObject
-from memory import vdomxml, vdomjson

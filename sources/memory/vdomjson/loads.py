@@ -1,12 +1,33 @@
 
+import re
 import json
+
+
+ERROR_REGEX = re.compile(r"(.+): line (\d+) column \d+ \(char (\d+)\)$")
+
+
+class ParsingException(Exception):
+
+    def __init__(self, message, line=None, column=None):
+        super(ParsingException, self).__init__(message)
+        self.message = message
+        self.line = line
+        self.column = column
 
 
 def loads(vdomjson, object, catch, handler=None):
     try:
         actions = json.loads(vdomjson)
     except Exception as error:
-        raise Exception("Unable to parse VDOM JSON: %s" % error)
+        message = str(error)
+        match = ERROR_REGEX.match(message)
+        if match:
+            message, line, column = match.groups()
+            raise ParsingException(message, int(line), int(column))
+        elif isinstance(error, ValueError):
+            raise ParsingException(message)
+        else:
+            raise
 
     if not actions:
         return ()

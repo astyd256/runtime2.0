@@ -10,7 +10,6 @@ import managers
 from utils.id import guid2mod
 from utils.properties import lazy, weak, constant, roproperty, rwproperty
 from scripting.executable import SOURCE_CODE, Executable
-from scripting.object import VDOMObject
 
 from ..constants import NON_CONTAINER, PYTHON_LANGUAGE
 from ..generic import MemoryBase
@@ -199,6 +198,7 @@ class MemoryType(MemoryTypeSketch):
     languages = roproperty("_languages")
 
     def execute(self, context=None, namespace=None, arguments=None):
+        from scripting.object import VDOMObject
         # statistics.increase("module.execute")
         if self.scripting_language == PYTHON_LANGUAGE:
             if namespace is None:

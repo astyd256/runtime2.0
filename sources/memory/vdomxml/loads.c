@@ -376,62 +376,91 @@ static PyMethodDef module_methods[] =
 
 PyMODINIT_FUNC init_loads(void)
 {
-    PyObject *module;
+    PyObject *module, *none, *error_dictionary;
 
     module = Py_InitModule("_loads", module_methods);
     if (!module)
         return;
 
-    if (!BaseException)
-    {
-        PyObject *none, *error_dictionary;
+    /* release objects in case of reinitialization */
 
-        none = Py_BuildValue("");
-        if (!none)
-            return;
-
-        error_dictionary = PyDict_New();
-        if (!error_dictionary)
-            return;
-        if (PyDict_SetItemString(error_dictionary, "line", none))
-            return;
-        if (PyDict_SetItemString(error_dictionary, "column", none))
-            return;
-
-        BaseException = PyErr_NewException("memory.vdomxml.loads.BaseException", NULL, error_dictionary);
-        if (!BaseException)
-            return;
-        if (PyModule_AddObject(module, "BaseException", BaseException))
-            return;
-
-        UnableToParseError = PyErr_NewException("memory.vdomxml.loads.UnableToParseError", BaseException, NULL);
-        if (!UnableToParseError)
-            return;
-        if (PyModule_AddObject(module, "UnableToParseError", UnableToParseError))
-            return;
-
-        WrongCharacterError = PyErr_NewException("memory.vdomxml.loads.WrongCharacterError", BaseException, NULL);
-        if (!WrongCharacterError)
-            return;
-        if (PyModule_AddObject(module, "WrongCharacterError", WrongCharacterError))
-            return;
-
-        NameDoesNotMatchError = PyErr_NewException("memory.vdomxml.loads.NameDoesNotMatchError", BaseException, NULL);
-        if (!NameDoesNotMatchError)
-            return;
-        if (PyModule_AddObject(module, "NameDoesNotMatchError", NameDoesNotMatchError))
-            return;
-
-        TypeNotFoundError = PyErr_NewException("memory.vdomxml.loads.TypeNotFoundError", BaseException, NULL);
-        if (!TypeNotFoundError)
-            return;
-        if (PyModule_AddObject(module, "TypeNotFoundError", TypeNotFoundError))
-            return;
-    }
+    Py_XDECREF(BaseException);
+    Py_XDECREF(UnableToParseError);
+    Py_XDECREF(WrongCharacterError);
+    Py_XDECREF(NameDoesNotMatchError);
+    Py_XDECREF(TypeNotFoundError);
 
     if (memory_types_search)
     {
         Py_DECREF(memory_types_search);
         memory_types_search = NULL;
     }
+
+    /* construct module execptions */
+
+    error_dictionary = PyDict_New();
+    if (!error_dictionary)
+        return;
+
+    none = Py_BuildValue("");
+    if (!none)
+    {
+        Py_DECREF(error_dictionary);
+        return;
+    }
+    if (PyDict_SetItemString(error_dictionary, "line", none))
+    {
+        Py_DECREF(none);
+        Py_DECREF(error_dictionary);
+        return;
+    }
+
+    none = Py_BuildValue("");
+    if (!none)
+    {
+        Py_DECREF(error_dictionary);
+        return;
+    }
+    if (PyDict_SetItemString(error_dictionary, "column", none))
+    {
+        Py_DECREF(none);
+        Py_DECREF(error_dictionary);
+        return;
+    }
+
+    BaseException = PyErr_NewException("memory.vdomxml.loads.BaseException", NULL, error_dictionary);
+    if (!BaseException)
+    {
+        Py_DECREF(error_dictionary);
+        return;
+    }
+
+    Py_DECREF(error_dictionary);
+
+    if (PyModule_AddObject(module, "BaseException", BaseException))
+        return;
+
+    UnableToParseError = PyErr_NewException("memory.vdomxml.loads.UnableToParseError", BaseException, NULL);
+    if (!UnableToParseError)
+        return;
+    if (PyModule_AddObject(module, "UnableToParseError", UnableToParseError))
+        return;
+
+    WrongCharacterError = PyErr_NewException("memory.vdomxml.loads.WrongCharacterError", BaseException, NULL);
+    if (!WrongCharacterError)
+        return;
+    if (PyModule_AddObject(module, "WrongCharacterError", WrongCharacterError))
+        return;
+
+    NameDoesNotMatchError = PyErr_NewException("memory.vdomxml.loads.NameDoesNotMatchError", BaseException, NULL);
+    if (!NameDoesNotMatchError)
+        return;
+    if (PyModule_AddObject(module, "NameDoesNotMatchError", NameDoesNotMatchError))
+        return;
+
+    TypeNotFoundError = PyErr_NewException("memory.vdomxml.loads.TypeNotFoundError", BaseException, NULL);
+    if (!TypeNotFoundError)
+        return;
+    if (PyModule_AddObject(module, "TypeNotFoundError", TypeNotFoundError))
+        return;
 }

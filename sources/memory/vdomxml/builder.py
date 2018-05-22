@@ -1,8 +1,7 @@
 
-from uuid import uuid4
 import managers
 from utils.structure import Structure
-from utils.parsing import VALUE, native, UnexpectedAttributeValueError, MissingAttributeError
+from utils.parsing import VALUE, native, UnexpectedAttributeValueError
 
 
 def vdomxml_builder(parser, origin):
@@ -13,14 +12,11 @@ def vdomxml_builder(parser, origin):
         if object_type is None:
             raise UnexpectedAttributeValueError("Unknown type: %s" % name)
 
-        try:
-            object_name = attributes.pop("name")
-        except KeyError:
-            raise MissingAttributeError("Require name")
-
         object = parent_objects.new_sketch(object_type, virtual=True)
-        object.id = str(uuid4())
-        object.name = object_name
+
+        object_name = attributes.pop("name", None)
+        if object_name:
+            object.name = object_name
 
         object.attributes.update(attributes)
         attributes.clear()
@@ -36,7 +32,7 @@ def vdomxml_builder(parser, origin):
         @native
         def element(name, attributes):
             if name == "attribute":
-                key = attributes.pop("name")
+                key = attributes.pop("name", None)
                 value = yield VALUE
                 context.parent.attributes[key] = value
             else:

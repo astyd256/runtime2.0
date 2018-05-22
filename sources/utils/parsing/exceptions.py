@@ -13,6 +13,8 @@ class ParsingException(Exception):
         self.lineno = lineno
         self.column = column
 
+    line = property(lambda self: self.lineno)
+
 
 # parser errors
 

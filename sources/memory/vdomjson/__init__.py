@@ -1,2 +1,2 @@
 
-from .loads import loads
+from .loads import loads, ParsingException
