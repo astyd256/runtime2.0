@@ -70,12 +70,12 @@ class VDOM_resource_manager(object):
                 return self.__label_index[(object_id, attributes["label"])].id
             res_descriptor = VDOM_resource_descriptor(owner_id, attributes.get("id"),attributes.get("res_format"))
 
-            self.__main_index[res_descriptor.id] = res_descriptor
+            
             if "label" in attributes:
                 self.__label_index[(object_id, attributes["label"])] = res_descriptor
                 res_descriptor.object_id = object_id
-            else:
-                res_descriptor = copy.copy(res_descriptor)
+            #else:
+            #    res_descriptor = copy.copy(res_descriptor)
             for key in attributes:
                 if key == "name":
                     setattr(res_descriptor, "name", unicode(attributes["name"]).encode('ascii', 'ignore'))
@@ -88,7 +88,8 @@ class VDOM_resource_manager(object):
                 res_descriptor.res_type = "permanent"
             if "res_format" not in attributes:
                 res_descriptor.res_format = ""
-
+                
+            self.__main_index[res_descriptor.id] = res_descriptor
             # managers.file_manager.write(file_access.resource,
             #     res_descriptor.application_id, object_id, res_descriptor.filename, bin_data, None, write_async)
             managers.file_manager.write(file_access.resource,
