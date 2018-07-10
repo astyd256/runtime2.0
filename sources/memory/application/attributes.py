@@ -11,6 +11,7 @@ from ..generic import MemoryBase
 FORCE_CDATA_LENGTH = 1024
 FORCE_CDATA_REGEX = re.compile(u"[\t\n\r\"<=>]", re.MULTILINE)
 PROHIBITED_CHARACTERS = re.compile(ur"[\x00-\x08\x0B\x0C\x0E-\x19]")
+DEREFERENCE_REGEX = re.compile(r"\#RES\(([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})\)", re.IGNORECASE)
 LAYOUT_ATTRIBUTES = {"top", "left", "width", "height", "hierarchy"}
 
 
@@ -45,6 +46,7 @@ class MemoryAttributesSketch(MemoryBase, MutableMapping):
 
     def update(self, values):
         for name, value in values.iteritems():
+            value = DEREFERENCE_REGEX.sub(lambda match: match.group(1), value)
             try:
                 self._owner.type.attributes[name].verify(value)
             except AttributeError:
@@ -148,7 +150,7 @@ class MemoryAttributes(MemoryAttributesSketch):
                     current_value = getattr(self._items, name)
                 except AttributeError:
                     raise Exception("The %s has no \"%s\" attribute " % (self._owner, name))
-
+                value = DEREFERENCE_REGEX.sub(lambda match: match.group(1), value)
                 if current_value != value:
                     updates[name] = value
 
