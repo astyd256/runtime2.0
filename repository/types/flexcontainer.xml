@@ -1704,15 +1704,14 @@ class VDOM_flexcontainer(VDOM_object):
 		
 		
 		background_color = u"background-color: #%s;" % self.backgroundcolor if self.backgroundcolor != "" else u""
-        if self.backgroundimage:
-            try:
-                UUID(self.backgroundimage, version=4)
-                background_image = u"background-image: url('%s');" % utils.id.id2link1(self.backgroundimage)
-            
-            except ValueError:
-                background_image = u"background-image: url('%s');" % self.backgroundimage
-        else:
-            background_image = ""
+		if self.backgroundimage:
+			try:
+				UUID(self.backgroundimage, version=4)
+				background_image = u"background-image: url('%s');" % utils.id.id2link1(self.backgroundimage)
+			except ValueError:
+				background_image = u"background-image: url('%s');" % self.backgroundimage
+		else:
+			background_image = ""
 
 		if self.backgroundposition != "":
 			backgroundposition = u""" background-position:{backgroundposition};"""\
