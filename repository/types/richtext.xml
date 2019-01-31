@@ -17,7 +17,7 @@
 		<Resizable>3</Resizable>
 		<OptimizationPriority>1</OptimizationPriority>
 		<Container>1</Container>
-		<Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
+		<Containers>htmlcontainer, flexcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
 		<Languages>en_US, ru_RU, fr_FR</Languages>
 	</Information>
 	<Attributes>
