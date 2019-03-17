@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_DynamicObject</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.4.0</Version>
+		<Version>1.5.0</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(8fe07d0b-09e4-45e4-aca3-c02dcef57f48)</Icon>
@@ -795,8 +795,7 @@ class VDOM_DynamicObject(VDOM_object):
 					</Parameters>
 					<SourceCode>
 <![CDATA[var params = {};
-for (var i in evtRef.parameters){
-  var param = evtRef.parameters[i];
+for (var param of evtRef.parameters){
   params[param.Name] = param.Value;
 }
 

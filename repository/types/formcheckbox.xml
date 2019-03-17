@@ -179,7 +179,7 @@
       <CodeInterface>TextField(100)</CodeInterface>
       <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
-      <RegularExpressionValidation>^.+$</RegularExpressionValidation>
+      <RegularExpressionValidation>^.*$</RegularExpressionValidation>
     </Attribute>
     <Attribute>
       <Name>fontweight</Name>
@@ -222,11 +222,11 @@
       <DisplayName>#Lang(118)</DisplayName>
       <DefaultValue/>
       <Visible>1</Visible>
-      <Help>#Lang(318)</Help>
+      <Help>#Lang(218)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>TextField(100)</CodeInterface>
       <Colorgroup>1</Colorgroup>
-      <ErrorValidationMessage>#Lang(218)</ErrorValidationMessage>
+      <ErrorValidationMessage>#Lang(318)</ErrorValidationMessage>
       <RegularExpressionValidation>^.*$</RegularExpressionValidation>
     </Attribute>
   </Attributes>
@@ -268,7 +268,7 @@
       <Sentence ID="215">Font weight</Sentence>
       <Sentence ID="216">Font size of the object in point</Sentence>
       <Sentence ID="217">Names of CSS classes.</Sentence>
-      <Sentence ID="218">invalid custom name for input</Sentence>
+      <Sentence ID="218">custom name for input</Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Incorrect value, must be even integer from 0 to 99</Sentence>
       <Sentence ID="303">Incorrect value, must be either 0 or 1</Sentence>
@@ -285,7 +285,7 @@
       <Sentence ID="315">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="316">Incorrect value, must be even positive integer</Sentence>
       <Sentence ID="317">Incorrect CSS class value.</Sentence>
-      <Sentence ID="318">custom name for input</Sentence>
+      <Sentence ID="318">invalid custom name for input</Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">Invisible</Sentence>

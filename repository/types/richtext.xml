@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_richtext</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>2.10.6720</Version>
+		<Version>2.11.6720</Version>
 		<Category>Standard</Category>
 		<InterfaceType>2</InterfaceType>
 		<Icon>#Res(17333984-cd46-da9a-7d1a-08ae87d1af21)</Icon>

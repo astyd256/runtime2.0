@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.5.0</Version>
+    <Version>1.6.0</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, accordeon, smartfolderdata</Containers>
@@ -2548,8 +2548,7 @@ $(document).ready(function(){{
             <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(840)" ScriptName="evtRef" Help="#Lang(740)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[var params = {};
-for (var i in evtRef.parameters){
-  var param = evtRef.parameters[i];
+for (var param of evtRef.parameters){
   params[param.Name] = param.Value;
 }
 

@@ -14,10 +14,10 @@
     <Container>1</Container>
     <Category>Standard</Category>
     <Dynamic>0</Dynamic>
-    <Version>2.76.6720</Version>
+    <Version>2.77.6720</Version>
     <InterfaceType>2</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
-		<Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass,flexcontainer</Containers>
+    <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, flexcontainer</Containers>
     <Languages>en_US ,ru_RU ,fr_FR</Languages>
     <Handlers>on_update</Handlers>
     <RemoteMethods/>

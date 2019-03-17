@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_form</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.52.8388</Version>
+		<Version>1.53.8388</Version>
 		<Category>Form</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(54e7f8ab-64f1-b113-029e-1703a76c6fa4)</Icon>
@@ -765,17 +765,17 @@ $j(function(){
     }
     
     var a = $j('#%(id)s').serializeArray();
-    for (k in a){
-      if(typeof a[k].name !== 'undefined' && typeof a[k].value !== 'undefined') {
-        if (formData.hasOwnProperty(a[k].name)){
-          if (jQuery.isArray(formData[a[k].name])){
-            formData[a[k].name].push(a[k].value);
+    for (var k of a){
+      if(typeof k.name !== 'undefined' && typeof k.value !== 'undefined') {
+        if (formData.hasOwnProperty(k.name)){
+          if (jQuery.isArray(formData[k.name])){
+            formData[k.name].push(k.value);
           } else {
-            v = formData[a[k].name];
-            formData[a[k].name] = new Array(v, a[k].value);
+            v = formData[k.name];
+            formData[k.name] = new Array(v, k.value);
           }
         } else {
-          formData[a[k].name]=a[k].value;
+          formData[k.name]=k.value;
         }
       }
     }

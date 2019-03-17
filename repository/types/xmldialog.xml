@@ -3656,7 +3656,7 @@ class VDOM_xmldialog(VDOM_object):
             window["xmlDialogTinyEditors"][i].post();
 
         var x=[], a=$q(this).serializeArray();
-        for (k in a) if(typeof a[k].name !== 'undefined' && typeof a[k].value !== 'undefined') x[escapeXml(a[k].name)]=a[k].value;
+        for (var k of a) if(typeof k.name !== 'undefined' && typeof k.value !== 'undefined') x[escapeXml(k.name)]=k.value;
         execEventBinded('%(idn)s', "submit", x);
         return false;
     });

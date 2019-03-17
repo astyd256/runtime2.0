@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_list</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.132.8388</Version>
+		<Version>1.134.8388</Version>
 		<Category>Standard</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(4a582b3d-09ee-8ac1-1451-08a964bbb510)</Icon>
@@ -1010,8 +1010,8 @@ if (t.hasClass('multiselect')){
 					</Parameters>
 					<SourceCode>
 <![CDATA[var t = $(this.domCont), id = this.domCont.id;
-for (var i in items){
-  l = t.find('li[itemid="'+items[i]+'"]');
+for (var i of items){
+  l = t.find('li[itemid="'+i+'"]');
   if (l.hasClass('selected')){
     l.removeClass('selected');
   }
@@ -1034,8 +1034,8 @@ if (!t.hasClass('multiselect')){
   only1 = true;
 }
 
-for (var i in items){
-  l = t.find('li[itemid="'+items[i]+'"]');
+for (var i of items){
+  l = t.find('li[itemid="'+i+'"]');
   if (!l.hasClass('selected')){
     l.addClass('selected');
   }
