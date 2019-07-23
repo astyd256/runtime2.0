@@ -14,10 +14,9 @@
     <Container>2</Container>
     <Category>Standard</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.1271.8389</Version>
+    <Version>1.1273.8389</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
-    <RenderType>container</RenderType>
     <Containers>htmlcontainer, dialog, container, flexcontainer, tablecell, form, accordeon, tabview, dialog_2, vdomclass, desktopapplication, desktopshared, smartfolderdata</Containers>
     <Languages>en_US ,ru_RU ,fr_FR</Languages>
     <Handlers>on_update</Handlers>
@@ -800,6 +799,7 @@
       <Sentence ID="526"></Sentence>
       <Sentence ID="527"></Sentence>
       <Sentence ID="528"></Sentence>
+      <Sentence ID="529">Toggle CSS class</Sentence>
       <Sentence ID="601">dragStart</Sentence>
       <Sentence ID="602">dragStop</Sentence>
       <Sentence ID="603">dragStart</Sentence>
@@ -816,6 +816,7 @@
       <Sentence ID="615">startResizeX</Sentence>
       <Sentence ID="616">startResizeXY</Sentence>
       <Sentence ID="617">startResizeY</Sentence>
+      <Sentence ID="618">toggleClass</Sentence>
       <Sentence ID="701">Fade</Sentence>
       <Sentence ID="702">newX</Sentence>
       <Sentence ID="703">newY</Sentence>
@@ -831,6 +832,7 @@
       <Sentence ID="714"></Sentence>
       <Sentence ID="715">Transparency</Sentence>
       <Sentence ID="716">Fade</Sentence>
+      <Sentence ID="717">Name of CSS class</Sentence>
       <Sentence ID="801">Fade effect, time is indicated in milliseconds.</Sentence>
       <Sentence ID="802">X-coordinate of new point</Sentence>
       <Sentence ID="803">Y-coordinate of new point</Sentence>
@@ -846,6 +848,7 @@
       <Sentence ID="814"></Sentence>
       <Sentence ID="815">New transparency value</Sentence>
       <Sentence ID="816">Fade effect, time is indicated in milliseconds.</Sentence>
+      <Sentence ID="817">className</Sentence>
       <Sentence ID="901">Current X-value</Sentence>
       <Sentence ID="902">Current Y-value</Sentence>
       <Sentence ID="903">Cursor position</Sentence>
@@ -1113,6 +1116,7 @@
       <Sentence ID="526"></Sentence>
       <Sentence ID="527"></Sentence>
       <Sentence ID="528"></Sentence>
+      <Sentence ID="529">Toggle CSS class</Sentence>
       <Sentence ID="601">Начать перетаскивание</Sentence>
       <Sentence ID="602">Закончить перетаскивание</Sentence>
       <Sentence ID="603">Начать перетаскивание</Sentence>
@@ -1129,6 +1133,7 @@
       <Sentence ID="615">Начать изменение ширины</Sentence>
       <Sentence ID="616">Начать изменение размеров</Sentence>
       <Sentence ID="617">Начать изменение высоты</Sentence>
+      <Sentence ID="618">toggleClass</Sentence>
       <Sentence ID="701">Затухание</Sentence>
       <Sentence ID="702">X</Sentence>
       <Sentence ID="703">Y</Sentence>
@@ -1144,6 +1149,7 @@
       <Sentence ID="714"></Sentence>
       <Sentence ID="715">Прозрачность</Sentence>
       <Sentence ID="716">Задержка</Sentence>
+      <Sentence ID="717">Name of CSS class</Sentence>
       <Sentence ID="801">Время исчезновения</Sentence>
       <Sentence ID="802">X-координата новой точки</Sentence>
       <Sentence ID="803">Y-координата новой точки</Sentence>
@@ -1159,6 +1165,7 @@
       <Sentence ID="814"></Sentence>
       <Sentence ID="815">Новое значение прозрачности</Sentence>
       <Sentence ID="816">Время задержки</Sentence>
+      <Sentence ID="817">className</Sentence>
       <Sentence ID="901">Текущее значение X</Sentence>
       <Sentence ID="902">Текущее значение Y</Sentence>
       <Sentence ID="903">Позиция курсора</Sentence>
@@ -1426,6 +1433,7 @@
       <Sentence ID="526"></Sentence>
       <Sentence ID="527"></Sentence>
       <Sentence ID="528"></Sentence>
+      <Sentence ID="529">Toggle CSS class</Sentence>
       <Sentence ID="601">dragStart</Sentence>
       <Sentence ID="602">dragStop</Sentence>
       <Sentence ID="603">dragStart</Sentence>
@@ -1442,6 +1450,7 @@
       <Sentence ID="615">startResizeX</Sentence>
       <Sentence ID="616">startResizeXY</Sentence>
       <Sentence ID="617">startResizeY</Sentence>
+      <Sentence ID="618">toggleClass</Sentence>
       <Sentence ID="701">Fade</Sentence>
       <Sentence ID="702">newX</Sentence>
       <Sentence ID="703">newY</Sentence>
@@ -1457,6 +1466,7 @@
       <Sentence ID="714"></Sentence>
       <Sentence ID="715">Transparency</Sentence>
       <Sentence ID="716">Fade</Sentence>
+      <Sentence ID="717">Name of CSS class</Sentence>
       <Sentence ID="801">Fade time</Sentence>
       <Sentence ID="802">X-coordinate of new point</Sentence>
       <Sentence ID="803">Y-coordinate of new point</Sentence>
@@ -1472,6 +1482,7 @@
       <Sentence ID="814"></Sentence>
       <Sentence ID="815">New transparency value</Sentence>
       <Sentence ID="816">Time of appearance</Sentence>
+      <Sentence ID="817">className</Sentence>
       <Sentence ID="901">Current X-value</Sentence>
       <Sentence ID="902">Current Y-value</Sentence>
       <Sentence ID="903">Cursor position</Sentence>
@@ -2223,6 +2234,12 @@ vdom_ui_startResizeXY(this.domCont);
           <SourceCode><![CDATA[
 vdom_ui_startResizeY(this.domCont);
 					]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(529)" InterfaceName="#Lang(618)" MethodName="toggleClass">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(817)" ScriptName="className" Help="#Lang(717)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[$q(this.domCont).toggleClass(className);]]></SourceCode>
         </Action>
       </Container>
     </Actions>

@@ -17,7 +17,7 @@
     <Version>2.77.6720</Version>
     <InterfaceType>2</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
-    <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, flexcontainer</Containers>
+    <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass,flexcontainer</Containers>
     <Languages>en_US ,ru_RU ,fr_FR</Languages>
     <Handlers>on_update</Handlers>
     <RemoteMethods/>
@@ -493,10 +493,12 @@
       <Sentence ID="511"></Sentence>
       <Sentence ID="512"></Sentence>
       <Sentence ID="513"></Sentence>
+      <Sentence ID="514">Toggle CSS class</Sentence>
       <Sentence ID="601">Visibility</Sentence>
       <Sentence ID="602">Visibility</Sentence>
       <Sentence ID="603">Visibility</Sentence>
       <Sentence ID="604">Visibility</Sentence>
+      <Sentence ID="605">toggleClass</Sentence>
       <Sentence ID="701">Incorrect value, must be 0 or 1</Sentence>
       <Sentence ID="702">Incorrect value, must be 0 or 1</Sentence>
       <Sentence ID="703">Incorrect value, must be 0 or 1</Sentence>
@@ -504,13 +506,15 @@
       <Sentence ID="705">Incorrect value, must be 0 or 1</Sentence>
       <Sentence ID="706">Incorrect value, must be 0 or 1</Sentence>
       <Sentence ID="707">Incorrect value</Sentence>
-      <Sentence ID="801">Incorrect value, must be either 0 or 1</Sentence>
+      <Sentence ID="708">Name of CSS class</Sentence>
+      <Sentence ID="801">Name of CSS class</Sentence>
       <Sentence ID="802">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="803">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="804">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="805">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="806">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="807">Incorrect value, must be either 0 or 1</Sentence>
+      <Sentence ID="808">className</Sentence>
       <Sentence ID="901">Left</Sentence>
       <Sentence ID="902">Top</Sentence>
       <Sentence ID="903">Left</Sentence>
@@ -658,10 +662,12 @@
       <Sentence ID="511"></Sentence>
       <Sentence ID="512"></Sentence>
       <Sentence ID="513"></Sentence>
+      <Sentence ID="514">Toggle CSS class</Sentence>
       <Sentence ID="601">Отображение</Sentence>
       <Sentence ID="602">Отображение</Sentence>
       <Sentence ID="603">Отображение</Sentence>
       <Sentence ID="604">Отображение</Sentence>
+      <Sentence ID="605">toggleClass</Sentence>
       <Sentence ID="701">Неправильное значение</Sentence>
       <Sentence ID="702">Неправильное значение</Sentence>
       <Sentence ID="703">Неправильное значение</Sentence>
@@ -669,6 +675,7 @@
       <Sentence ID="705">Неправильное значение</Sentence>
       <Sentence ID="706">Неправильное значение</Sentence>
       <Sentence ID="707">Неправильное значение</Sentence>
+      <Sentence ID="708">Name of CSS class</Sentence>
       <Sentence ID="801">Неправильное значение</Sentence>
       <Sentence ID="802">Неправильное значение</Sentence>
       <Sentence ID="803">Неправильное значение</Sentence>
@@ -676,6 +683,7 @@
       <Sentence ID="805">Неправильное значение</Sentence>
       <Sentence ID="806">Неправильное значение</Sentence>
       <Sentence ID="807">Неправильное значение</Sentence>
+      <Sentence ID="808">className</Sentence>
       <Sentence ID="901">Слева</Sentence>
       <Sentence ID="902">Сверху</Sentence>
       <Sentence ID="903">Слева</Sentence>
@@ -823,10 +831,12 @@
       <Sentence ID="511"></Sentence>
       <Sentence ID="512"></Sentence>
       <Sentence ID="513"></Sentence>
+      <Sentence ID="514">Toggle CSS class</Sentence>
       <Sentence ID="601">Visibilité</Sentence>
       <Sentence ID="602">Visibilité</Sentence>
       <Sentence ID="603">Visibilité</Sentence>
       <Sentence ID="604">Visibilité</Sentence>
+      <Sentence ID="605">toggleClass</Sentence>
       <Sentence ID="701">Valeur Incorrecte, doit être 0 ou 1</Sentence>
       <Sentence ID="702">Valeur Incorrecte, doit être 0 ou 1</Sentence>
       <Sentence ID="703">Valeur Incorrecte, doit être 0 ou 1</Sentence>
@@ -834,6 +844,7 @@
       <Sentence ID="705">Valeur Incorrecte, doit être 0 ou 1</Sentence>
       <Sentence ID="706">Valeur Incorrecte, doit être 0 ou 1</Sentence>
       <Sentence ID="707">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+      <Sentence ID="708">Name of CSS class</Sentence>
       <Sentence ID="801">Valeur Incorrecte, doit être 0 ou 1</Sentence>
       <Sentence ID="802">Valeur Incorrecte, doit être 0 ou 1</Sentence>
       <Sentence ID="803">Valeur Incorrecte, doit être 0 ou 1</Sentence>
@@ -841,6 +852,7 @@
       <Sentence ID="805">Valeur Incorrecte, doit être 0 ou 1</Sentence>
       <Sentence ID="806">Valeur Incorrecte, doit être 0 ou 1</Sentence>
       <Sentence ID="807">Valeur Incorrecte, doit être 0 ou 1</Sentence>
+      <Sentence ID="808">className</Sentence>
       <Sentence ID="901">Gauche</Sentence>
       <Sentence ID="902">Haut</Sentence>
       <Sentence ID="903">Gauche</Sentence>
@@ -1252,6 +1264,12 @@ vdom_ui_resizeTo(this.domCont, width, height);
           <SourceCode><![CDATA[
 vdom_ui_show(this.domCont, fade);
 					]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(514)" InterfaceName="#Lang(605)" MethodName="toggleClass">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(808)" ScriptName="className" Help="#Lang(708)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[$q(this.domCont).toggleClass(className);]]></SourceCode>
         </Action>
       </Container>
     </Actions>
