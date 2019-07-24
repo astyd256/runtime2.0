@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.507.8388</Version>
+    <Version>4.518.8388</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -490,20 +490,24 @@
       <Sentence ID="517"></Sentence>
       <Sentence ID="518"></Sentence>
       <Sentence ID="519"></Sentence>
+      <Sentence ID="520">Set new data for table</Sentence>
       <Sentence ID="601">custom</Sentence>
       <Sentence ID="602">hide</Sentence>
       <Sentence ID="603">selectAll</Sentence>
       <Sentence ID="604">selectItems</Sentence>
       <Sentence ID="605">selectNone</Sentence>
       <Sentence ID="606">show</Sentence>
+      <Sentence ID="607">setData</Sentence>
       <Sentence ID="701">Incorrect value, must be string</Sentence>
       <Sentence ID="702">fade</Sentence>
       <Sentence ID="703">idlist</Sentence>
       <Sentence ID="704">fade</Sentence>
+      <Sentence ID="705">New data for table</Sentence>
       <Sentence ID="801">Incorrect value, must be string</Sentence>
       <Sentence ID="802">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="803">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="804">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="805">data</Sentence>
       <Sentence ID="901">cellData</Sentence>
       <Sentence ID="902">cellData</Sentence>
       <Sentence ID="903">cellData</Sentence>
@@ -653,20 +657,24 @@
       <Sentence ID="517"></Sentence>
       <Sentence ID="518"></Sentence>
       <Sentence ID="519"></Sentence>
+      <Sentence ID="520">Set new data for table</Sentence>
       <Sentence ID="601">custom</Sentence>
       <Sentence ID="602">hide</Sentence>
       <Sentence ID="603">selectAll</Sentence>
       <Sentence ID="604">selectItems</Sentence>
       <Sentence ID="605">selectNone</Sentence>
       <Sentence ID="606">show</Sentence>
+      <Sentence ID="607">setData</Sentence>
       <Sentence ID="701"></Sentence>
       <Sentence ID="702">fade</Sentence>
       <Sentence ID="703"></Sentence>
       <Sentence ID="704"></Sentence>
+      <Sentence ID="705">New data for table</Sentence>
       <Sentence ID="801"></Sentence>
       <Sentence ID="802">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="803">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="804">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="805">data</Sentence>
       <Sentence ID="901">cellData</Sentence>
       <Sentence ID="902">cellData</Sentence>
       <Sentence ID="903">cellData</Sentence>
@@ -816,20 +824,24 @@
       <Sentence ID="517"></Sentence>
       <Sentence ID="518"></Sentence>
       <Sentence ID="519"></Sentence>
+      <Sentence ID="520">Set new data for table</Sentence>
       <Sentence ID="601">custom</Sentence>
       <Sentence ID="602">hide</Sentence>
       <Sentence ID="603">selectAll</Sentence>
       <Sentence ID="604">selectItems</Sentence>
       <Sentence ID="605">selectNone</Sentence>
       <Sentence ID="606">show</Sentence>
+      <Sentence ID="607">setData</Sentence>
       <Sentence ID="701"></Sentence>
       <Sentence ID="702">Исчезновение</Sentence>
       <Sentence ID="703"></Sentence>
       <Sentence ID="704"></Sentence>
+      <Sentence ID="705">New data for table</Sentence>
       <Sentence ID="801"></Sentence>
       <Sentence ID="802">Время исчезновения в миллисекундах</Sentence>
       <Sentence ID="803">Время исчезновения в миллисекундах</Sentence>
       <Sentence ID="804">Время исчезновения в миллисекундах</Sentence>
+      <Sentence ID="805">data</Sentence>
       <Sentence ID="901">cellData</Sentence>
       <Sentence ID="902">cellData</Sentence>
       <Sentence ID="903">cellData</Sentence>
@@ -1710,19 +1722,19 @@ $j(function(){
     </Events>
     <Actions>
       <Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
-        <Action Help="#Lang(501)" DisplayName="#Lang(601)" Name="custom">
+        <Action Help="#Lang(501)" InterfaceName="#Lang(601)" MethodName="custom">
           <Parameters>
-            <Parameter DefaultValue="" Interface="custom" DisplayName="#Lang(701)" ScriptName="custom" Help="#Lang(801)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="" Interface="custom" InterfaceName="#Lang(701)" ScriptName="custom" Help="#Lang(801)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[eval(custom);]]></SourceCode>
         </Action>
-        <Action Help="#Lang(502)" DisplayName="#Lang(602)" Name="hide">
+        <Action Help="#Lang(502)" InterfaceName="#Lang(602)" MethodName="hide">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="fade" DisplayName="#Lang(702)" ScriptName="fade" Help="#Lang(802)" RegularExpressionValidation="^\d+$"/>
+            <Parameter DefaultValue="0" Interface="fade" InterfaceName="#Lang(702)" ScriptName="fade" Help="#Lang(802)" RegularExpressionValidation="^\d+$"/>
           </Parameters>
           <SourceCode><![CDATA[vdom_ui_hide(this.domCont, fade);]]></SourceCode>
         </Action>
-        <Action Help="#Lang(503)" DisplayName="#Lang(603)" Name="selectAll">
+        <Action Help="#Lang(503)" InterfaceName="#Lang(603)" MethodName="selectAll">
           <Parameters/>
           <SourceCode><![CDATA[const id_table = '#t_' + this.domCont.id;
 const table = $(id_table).DataTable();
@@ -1731,9 +1743,9 @@ for (i = 0; i < number; i++)
 	$(table.row( i ).node()).addClass('selected');
 ]]></SourceCode>
         </Action>
-        <Action Help="#Lang(504)" DisplayName="#Lang(604)" Name="selectItems">
+        <Action Help="#Lang(504)" InterfaceName="#Lang(604)" MethodName="selectItems">
           <Parameters>
-            <Parameter DefaultValue="[]" Interface="idlist" DisplayName="#Lang(703)" ScriptName="idlist" Help="#Lang(803)" RegularExpressionValidation="^.*$"/>
+            <Parameter DefaultValue="[]" Interface="idlist" InterfaceName="#Lang(703)" ScriptName="idlist" Help="#Lang(803)" RegularExpressionValidation="^.*$"/>
           </Parameters>
           <SourceCode><![CDATA[const id_table = '#t_' + this.domCont.id;
 const table = $(id_table).DataTable();
@@ -1743,7 +1755,7 @@ mas.forEach(function(id) {
 });
 ]]></SourceCode>
         </Action>
-        <Action Help="#Lang(505)" DisplayName="#Lang(605)" Name="selectNone">
+        <Action Help="#Lang(505)" InterfaceName="#Lang(605)" MethodName="selectNone">
           <Parameters/>
           <SourceCode><![CDATA[const id_table = '#t_' + this.domCont.id;
 const table = $(id_table).DataTable();
@@ -1755,9 +1767,20 @@ for (i = 0; i < number; i++) {
 }
 ]]></SourceCode>
         </Action>
-        <Action Help="#Lang(506)" DisplayName="#Lang(606)" Name="show">
+        <Action Help="#Lang(520)" InterfaceName="#Lang(607)" MethodName="setData">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="fade" DisplayName="#Lang(704)" ScriptName="fade" Help="#Lang(804)" RegularExpressionValidation="^\d+$"/>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(805)" ScriptName="data" Help="#Lang(705)" RegularExpressionValidation=""/>
+          </Parameters>
+          <SourceCode><![CDATA[const id_table = '#t_' + this.domCont.id;
+const table = $(id_table).DataTable();
+table.clear();
+table.rows.add(data);
+table.draw();
+]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(506)" InterfaceName="#Lang(606)" MethodName="show">
+          <Parameters>
+            <Parameter DefaultValue="0" Interface="fade" InterfaceName="#Lang(704)" ScriptName="fade" Help="#Lang(804)" RegularExpressionValidation="^\d+$"/>
           </Parameters>
           <SourceCode><![CDATA[vdom_ui_show(this.domCont, fade);]]></SourceCode>
         </Action>
