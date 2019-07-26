@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.518.8388</Version>
+    <Version>4.519.8388</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -477,8 +477,8 @@
       <Sentence ID="503">Select all the rows</Sentence>
       <Sentence ID="504">Deselect all the rows</Sentence>
       <Sentence ID="505">Deselect all the rows</Sentence>
-      <Sentence ID="506">Show the object</Sentence>
-      <Sentence ID="507"></Sentence>
+      <Sentence ID="506">Set new data for table</Sentence>
+      <Sentence ID="507">Show the object</Sentence>
       <Sentence ID="508"></Sentence>
       <Sentence ID="509"></Sentence>
       <Sentence ID="511"></Sentence>
@@ -490,24 +490,24 @@
       <Sentence ID="517"></Sentence>
       <Sentence ID="518"></Sentence>
       <Sentence ID="519"></Sentence>
-      <Sentence ID="520">Set new data for table</Sentence>
+      <Sentence ID="521"></Sentence>
       <Sentence ID="601">custom</Sentence>
       <Sentence ID="602">hide</Sentence>
       <Sentence ID="603">selectAll</Sentence>
       <Sentence ID="604">selectItems</Sentence>
       <Sentence ID="605">selectNone</Sentence>
-      <Sentence ID="606">show</Sentence>
-      <Sentence ID="607">setData</Sentence>
+      <Sentence ID="606">setData</Sentence>
+      <Sentence ID="607">show</Sentence>
       <Sentence ID="701">Incorrect value, must be string</Sentence>
       <Sentence ID="702">fade</Sentence>
       <Sentence ID="703">idlist</Sentence>
-      <Sentence ID="704">fade</Sentence>
-      <Sentence ID="705">New data for table</Sentence>
+      <Sentence ID="704">data</Sentence>
+      <Sentence ID="705">fade</Sentence>
       <Sentence ID="801">Incorrect value, must be string</Sentence>
       <Sentence ID="802">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="803">Fade effect, time is indicated in milliseconds</Sentence>
-      <Sentence ID="804">Fade effect, time is indicated in milliseconds</Sentence>
-      <Sentence ID="805">data</Sentence>
+      <Sentence ID="804">New data for table</Sentence>
+      <Sentence ID="805">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="901">cellData</Sentence>
       <Sentence ID="902">cellData</Sentence>
       <Sentence ID="903">cellData</Sentence>
@@ -644,8 +644,8 @@
       <Sentence ID="503">Select all the rows</Sentence>
       <Sentence ID="504">Deselect all the rows</Sentence>
       <Sentence ID="505">Deselect all the rows</Sentence>
-      <Sentence ID="506">Show the object</Sentence>
-      <Sentence ID="507"></Sentence>
+      <Sentence ID="506">Set new data for table</Sentence>
+      <Sentence ID="507">Show the object</Sentence>
       <Sentence ID="508"></Sentence>
       <Sentence ID="509"></Sentence>
       <Sentence ID="511"></Sentence>
@@ -657,24 +657,24 @@
       <Sentence ID="517"></Sentence>
       <Sentence ID="518"></Sentence>
       <Sentence ID="519"></Sentence>
-      <Sentence ID="520">Set new data for table</Sentence>
+      <Sentence ID="521"></Sentence>
       <Sentence ID="601">custom</Sentence>
       <Sentence ID="602">hide</Sentence>
       <Sentence ID="603">selectAll</Sentence>
       <Sentence ID="604">selectItems</Sentence>
       <Sentence ID="605">selectNone</Sentence>
-      <Sentence ID="606">show</Sentence>
-      <Sentence ID="607">setData</Sentence>
+      <Sentence ID="606">setData</Sentence>
+      <Sentence ID="607">show</Sentence>
       <Sentence ID="701"></Sentence>
       <Sentence ID="702">fade</Sentence>
       <Sentence ID="703"></Sentence>
-      <Sentence ID="704"></Sentence>
-      <Sentence ID="705">New data for table</Sentence>
+      <Sentence ID="704">data</Sentence>
+      <Sentence ID="705"></Sentence>
       <Sentence ID="801"></Sentence>
       <Sentence ID="802">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="803">Fade effect, time is indicated in milliseconds</Sentence>
-      <Sentence ID="804">Fade effect, time is indicated in milliseconds</Sentence>
-      <Sentence ID="805">data</Sentence>
+      <Sentence ID="804">New data for table</Sentence>
+      <Sentence ID="805">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="901">cellData</Sentence>
       <Sentence ID="902">cellData</Sentence>
       <Sentence ID="903">cellData</Sentence>
@@ -811,8 +811,8 @@
       <Sentence ID="503">Выделить все строки</Sentence>
       <Sentence ID="504">Снять выделение всех строк</Sentence>
       <Sentence ID="505">Снять выделение всех строк</Sentence>
-      <Sentence ID="506">Отобразить объект</Sentence>
-      <Sentence ID="507"></Sentence>
+      <Sentence ID="506">Set new data for table</Sentence>
+      <Sentence ID="507">Отобразить объект</Sentence>
       <Sentence ID="508"></Sentence>
       <Sentence ID="509"></Sentence>
       <Sentence ID="511"></Sentence>
@@ -824,24 +824,24 @@
       <Sentence ID="517"></Sentence>
       <Sentence ID="518"></Sentence>
       <Sentence ID="519"></Sentence>
-      <Sentence ID="520">Set new data for table</Sentence>
+      <Sentence ID="521"></Sentence>
       <Sentence ID="601">custom</Sentence>
       <Sentence ID="602">hide</Sentence>
       <Sentence ID="603">selectAll</Sentence>
       <Sentence ID="604">selectItems</Sentence>
       <Sentence ID="605">selectNone</Sentence>
-      <Sentence ID="606">show</Sentence>
-      <Sentence ID="607">setData</Sentence>
+      <Sentence ID="606">setData</Sentence>
+      <Sentence ID="607">show</Sentence>
       <Sentence ID="701"></Sentence>
       <Sentence ID="702">Исчезновение</Sentence>
       <Sentence ID="703"></Sentence>
-      <Sentence ID="704"></Sentence>
-      <Sentence ID="705">New data for table</Sentence>
+      <Sentence ID="704">data</Sentence>
+      <Sentence ID="705"></Sentence>
       <Sentence ID="801"></Sentence>
       <Sentence ID="802">Время исчезновения в миллисекундах</Sentence>
       <Sentence ID="803">Время исчезновения в миллисекундах</Sentence>
-      <Sentence ID="804">Время исчезновения в миллисекундах</Sentence>
-      <Sentence ID="805">data</Sentence>
+      <Sentence ID="804">New data for table</Sentence>
+      <Sentence ID="805">Время исчезновения в миллисекундах</Sentence>
       <Sentence ID="901">cellData</Sentence>
       <Sentence ID="902">cellData</Sentence>
       <Sentence ID="903">cellData</Sentence>
@@ -1263,14 +1263,16 @@ class VDOM_datatable_v4(VDOM_object):
 
 			$('#%(id_table)s tbody').on( 'click', 'td', function () {
 				const idx = table.cell( this ).index().column;
+				const idy = table.cell( this ).index().row;
 				const title = table.column( idx ).title();
-				execEventBinded('%(idn)s', 'cellclick', {keyField:JSON.stringify(table.cell( this ).index()), cellData:table.row(this).data(), headerData:title});
+				execEventBinded('%(idn)s', 'cellclick', {keyField:JSON.stringify(table.cell( this ).index()), cellData:table.row( idy ).data(), headerData:title});
 			} );
 			
 			$('#%(id_table)s tbody').on( 'dblclick', 'td', function () {
 				const idx = table.cell( this ).index().column;
+				const idy = table.cell( this ).index().row;
 				const title = table.column( idx ).title();
-				execEventBinded('%(idn)s', 'celldblclick', {keyField:JSON.stringify(table.cell( this ).index()), cellData:table.row(this).data(), headerData:title});
+				execEventBinded('%(idn)s', 'celldblclick', {keyField:JSON.stringify(table.cell( this ).index()), cellData:table.row( idy ).data(), headerData:title});
 			} );
 
 			%(customfunc)s
@@ -1648,72 +1650,72 @@ $j(function(){
   <E2vdom>
     <Events>
       <Userinterfaceevents>
-        <Event Name="cellclick" Help="#Lang(507)">
+        <Event Name="cellclick" Help="#Lang(508)">
           <Parameters>
             <Parameter Name="keyField" Order="" VbType="" Help="#Lang(901)"/>
             <Parameter Name="cellData" Order="0" VbType="" Help="#Lang(902)"/>
             <Parameter Name="headerData" Order="0" VbType="" Help="#Lang(903)"/>
           </Parameters>
         </Event>
-        <Event Name="celldblclick" Help="#Lang(508)">
+        <Event Name="celldblclick" Help="#Lang(509)">
           <Parameters>
             <Parameter Name="keyField" Order="0" VbType="" Help="#Lang(904)"/>
             <Parameter Name="cellData" Order="0" VbType="" Help="#Lang(905)"/>
             <Parameter Name="headerData" Order="0" VbType="" Help="#Lang(906)"/>
           </Parameters>
         </Event>
-        <Event Name="custom" Help="#Lang(509)">
+        <Event Name="custom" Help="#Lang(511)">
           <Parameters>
             <Parameter Name="params" Order="0" VbType="" Help="#Lang(907)"/>
           </Parameters>
         </Event>
-        <Event Name="dragstart" Help="#Lang(511)">
+        <Event Name="dragstart" Help="#Lang(512)">
           <Parameters>
             <Parameter Name="params" Order="0" VbType="" Help="#Lang(908)"/>
           </Parameters>
         </Event>
-        <Event Name="headerselected" Help="#Lang(512)">
+        <Event Name="headerselected" Help="#Lang(513)">
           <Parameters>
             <Parameter Name="headername" Order="0" VbType="" Help="#Lang(909)"/>
           </Parameters>
         </Event>
-        <Event Name="load" Help="#Lang(513)">
+        <Event Name="load" Help="#Lang(514)">
           <Parameters>
             <Parameter Name="width" Order="0" VbType="" Help="#Lang(911)"/>
             <Parameter Name="height" Order="0" VbType="" Help="#Lang(912)"/>
           </Parameters>
         </Event>
-        <Event Name="mousedown" Help="#Lang(514)">
+        <Event Name="mousedown" Help="#Lang(515)">
           <Parameters>
             <Parameter Name="X" Order="0" VbType="" Help="#Lang(913)"/>
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(914)"/>
           </Parameters>
         </Event>
-        <Event Name="mousemove" Help="#Lang(515)">
+        <Event Name="mousemove" Help="#Lang(516)">
           <Parameters>
             <Parameter Name="X" Order="0" VbType="" Help="#Lang(915)"/>
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(916)"/>
           </Parameters>
         </Event>
-        <Event Name="mouseout" Help="#Lang(516)">
+        <Event Name="mouseout" Help="#Lang(517)">
           <Parameters>
             <Parameter Name="X" Order="0" VbType="" Help="#Lang(917)"/>
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(918)"/>
           </Parameters>
         </Event>
-        <Event Name="mouseover" Help="#Lang(517)">
+        <Event Name="mouseover" Help="#Lang(518)">
           <Parameters>
             <Parameter Name="X" Order="0" VbType="" Help="#Lang(919)"/>
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(921)"/>
           </Parameters>
         </Event>
-        <Event Name="mouseup" Help="#Lang(518)">
+        <Event Name="mouseup" Help="#Lang(519)">
           <Parameters>
             <Parameter Name="X" Order="0" VbType="" Help="#Lang(922)"/>
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(923)"/>
           </Parameters>
         </Event>
-        <Event Name="rowsselected" Help="#Lang(519)">
+        <Event Name="rowsselected" Help="#Lang(521)">
           <Parameters>
             <Parameter Name="keyList" Order="0" VbType="" Help="#Lang(924)"/>
           </Parameters>
@@ -1767,9 +1769,9 @@ for (i = 0; i < number; i++) {
 }
 ]]></SourceCode>
         </Action>
-        <Action Help="#Lang(520)" InterfaceName="#Lang(607)" MethodName="setData">
+        <Action Help="#Lang(506)" InterfaceName="#Lang(606)" MethodName="setData">
           <Parameters>
-            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(805)" ScriptName="data" Help="#Lang(705)" RegularExpressionValidation=""/>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(704)" ScriptName="data" Help="#Lang(804)" RegularExpressionValidation=""/>
           </Parameters>
           <SourceCode><![CDATA[const id_table = '#t_' + this.domCont.id;
 const table = $(id_table).DataTable();
@@ -1778,9 +1780,9 @@ table.rows.add(data);
 table.draw();
 ]]></SourceCode>
         </Action>
-        <Action Help="#Lang(506)" InterfaceName="#Lang(606)" MethodName="show">
+        <Action Help="#Lang(507)" InterfaceName="#Lang(607)" MethodName="show">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="fade" InterfaceName="#Lang(704)" ScriptName="fade" Help="#Lang(804)" RegularExpressionValidation="^\d+$"/>
+            <Parameter DefaultValue="0" Interface="fade" InterfaceName="#Lang(705)" ScriptName="fade" Help="#Lang(805)" RegularExpressionValidation="^\d+$"/>
           </Parameters>
           <SourceCode><![CDATA[vdom_ui_show(this.domCont, fade);]]></SourceCode>
         </Action>
