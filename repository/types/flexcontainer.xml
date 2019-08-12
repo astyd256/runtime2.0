@@ -136,7 +136,7 @@
     <Attribute>
       <Name>flexwrap</Name>
       <DisplayName>#Lang(111)</DisplayName>
-      <DefaultValue>2</DefaultValue>
+      <DefaultValue>5</DefaultValue>
       <Visible>1</Visible>
       <Help>#Lang(211)</Help>
       <InterfaceType>0</InterfaceType>
@@ -789,7 +789,7 @@
       <Sentence ID="515">Start changing width of the object</Sentence>
       <Sentence ID="516">Start changing size of the object</Sentence>
       <Sentence ID="517">Start changing height of the object</Sentence>
-      <Sentence ID="518"></Sentence>
+      <Sentence ID="518">Toggle CSS class</Sentence>
       <Sentence ID="519"></Sentence>
       <Sentence ID="521"></Sentence>
       <Sentence ID="522"></Sentence>
@@ -799,7 +799,8 @@
       <Sentence ID="526"></Sentence>
       <Sentence ID="527"></Sentence>
       <Sentence ID="528"></Sentence>
-      <Sentence ID="529">Toggle CSS class</Sentence>
+      <Sentence ID="529"></Sentence>
+      <Sentence ID="530">Set css for flexcontainer</Sentence>
       <Sentence ID="601">dragStart</Sentence>
       <Sentence ID="602">dragStop</Sentence>
       <Sentence ID="603">dragStart</Sentence>
@@ -817,6 +818,7 @@
       <Sentence ID="616">startResizeXY</Sentence>
       <Sentence ID="617">startResizeY</Sentence>
       <Sentence ID="618">toggleClass</Sentence>
+      <Sentence ID="619">setStyle</Sentence>
       <Sentence ID="701">Fade</Sentence>
       <Sentence ID="702">newX</Sentence>
       <Sentence ID="703">newY</Sentence>
@@ -832,7 +834,8 @@
       <Sentence ID="714"></Sentence>
       <Sentence ID="715">Transparency</Sentence>
       <Sentence ID="716">Fade</Sentence>
-      <Sentence ID="717">Name of CSS class</Sentence>
+      <Sentence ID="717">className</Sentence>
+      <Sentence ID="718">Css style value</Sentence>
       <Sentence ID="801">Fade effect, time is indicated in milliseconds.</Sentence>
       <Sentence ID="802">X-coordinate of new point</Sentence>
       <Sentence ID="803">Y-coordinate of new point</Sentence>
@@ -848,7 +851,8 @@
       <Sentence ID="814"></Sentence>
       <Sentence ID="815">New transparency value</Sentence>
       <Sentence ID="816">Fade effect, time is indicated in milliseconds.</Sentence>
-      <Sentence ID="817">className</Sentence>
+      <Sentence ID="817">Name of CSS class</Sentence>
+      <Sentence ID="818">cssStyleValue</Sentence>
       <Sentence ID="901">Current X-value</Sentence>
       <Sentence ID="902">Current Y-value</Sentence>
       <Sentence ID="903">Cursor position</Sentence>
@@ -1106,7 +1110,7 @@
       <Sentence ID="515">Начать изменение ширины объекта</Sentence>
       <Sentence ID="516">Начать изменение размеров объекта</Sentence>
       <Sentence ID="517">Начать изменение высоты объекта</Sentence>
-      <Sentence ID="518"></Sentence>
+      <Sentence ID="518">Toggle CSS class</Sentence>
       <Sentence ID="519"></Sentence>
       <Sentence ID="521"></Sentence>
       <Sentence ID="522"></Sentence>
@@ -1116,7 +1120,8 @@
       <Sentence ID="526"></Sentence>
       <Sentence ID="527"></Sentence>
       <Sentence ID="528"></Sentence>
-      <Sentence ID="529">Toggle CSS class</Sentence>
+      <Sentence ID="529"></Sentence>
+      <Sentence ID="530">Set css for flexcontainer</Sentence>
       <Sentence ID="601">Начать перетаскивание</Sentence>
       <Sentence ID="602">Закончить перетаскивание</Sentence>
       <Sentence ID="603">Начать перетаскивание</Sentence>
@@ -1134,6 +1139,7 @@
       <Sentence ID="616">Начать изменение размеров</Sentence>
       <Sentence ID="617">Начать изменение высоты</Sentence>
       <Sentence ID="618">toggleClass</Sentence>
+      <Sentence ID="619">setStyle</Sentence>
       <Sentence ID="701">Затухание</Sentence>
       <Sentence ID="702">X</Sentence>
       <Sentence ID="703">Y</Sentence>
@@ -1149,7 +1155,8 @@
       <Sentence ID="714"></Sentence>
       <Sentence ID="715">Прозрачность</Sentence>
       <Sentence ID="716">Задержка</Sentence>
-      <Sentence ID="717">Name of CSS class</Sentence>
+      <Sentence ID="717">className</Sentence>
+      <Sentence ID="718">Css style value</Sentence>
       <Sentence ID="801">Время исчезновения</Sentence>
       <Sentence ID="802">X-координата новой точки</Sentence>
       <Sentence ID="803">Y-координата новой точки</Sentence>
@@ -1165,7 +1172,8 @@
       <Sentence ID="814"></Sentence>
       <Sentence ID="815">Новое значение прозрачности</Sentence>
       <Sentence ID="816">Время задержки</Sentence>
-      <Sentence ID="817">className</Sentence>
+      <Sentence ID="817">Name of CSS class</Sentence>
+      <Sentence ID="818">cssStyleValue</Sentence>
       <Sentence ID="901">Текущее значение X</Sentence>
       <Sentence ID="902">Текущее значение Y</Sentence>
       <Sentence ID="903">Позиция курсора</Sentence>
@@ -1423,7 +1431,7 @@
       <Sentence ID="515">Start changing width of the object</Sentence>
       <Sentence ID="516">Start changing size of the object</Sentence>
       <Sentence ID="517">Start changing height of the object</Sentence>
-      <Sentence ID="518"></Sentence>
+      <Sentence ID="518">Toggle CSS class</Sentence>
       <Sentence ID="519"></Sentence>
       <Sentence ID="521"></Sentence>
       <Sentence ID="522"></Sentence>
@@ -1433,7 +1441,8 @@
       <Sentence ID="526"></Sentence>
       <Sentence ID="527"></Sentence>
       <Sentence ID="528"></Sentence>
-      <Sentence ID="529">Toggle CSS class</Sentence>
+      <Sentence ID="529"></Sentence>
+      <Sentence ID="530">Set css for flexcontainer</Sentence>
       <Sentence ID="601">dragStart</Sentence>
       <Sentence ID="602">dragStop</Sentence>
       <Sentence ID="603">dragStart</Sentence>
@@ -1451,6 +1460,7 @@
       <Sentence ID="616">startResizeXY</Sentence>
       <Sentence ID="617">startResizeY</Sentence>
       <Sentence ID="618">toggleClass</Sentence>
+      <Sentence ID="619">setStyle</Sentence>
       <Sentence ID="701">Fade</Sentence>
       <Sentence ID="702">newX</Sentence>
       <Sentence ID="703">newY</Sentence>
@@ -1466,7 +1476,8 @@
       <Sentence ID="714"></Sentence>
       <Sentence ID="715">Transparency</Sentence>
       <Sentence ID="716">Fade</Sentence>
-      <Sentence ID="717">Name of CSS class</Sentence>
+      <Sentence ID="717">className</Sentence>
+      <Sentence ID="718">Css style value</Sentence>
       <Sentence ID="801">Fade time</Sentence>
       <Sentence ID="802">X-coordinate of new point</Sentence>
       <Sentence ID="803">Y-coordinate of new point</Sentence>
@@ -1482,7 +1493,8 @@
       <Sentence ID="814"></Sentence>
       <Sentence ID="815">New transparency value</Sentence>
       <Sentence ID="816">Time of appearance</Sentence>
-      <Sentence ID="817">className</Sentence>
+      <Sentence ID="817">Name of CSS class</Sentence>
+      <Sentence ID="818">cssStyleValue</Sentence>
       <Sentence ID="901">Current X-value</Sentence>
       <Sentence ID="902">Current Y-value</Sentence>
       <Sentence ID="903">Cursor position</Sentence>
@@ -2041,63 +2053,63 @@ def on_update(object, attributes):
   <E2vdom>
     <Events>
       <Userinterfaceevents>
-        <Event Name="border" Help="#Lang(518)">
+        <Event Name="border" Help="#Lang(519)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(901)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(902)"/>
             <Parameter Name="pos" Order="" VbType="" Help="#Lang(903)"/>
           </Parameters>
         </Event>
-        <Event Name="click" Help="#Lang(519)">
+        <Event Name="click" Help="#Lang(521)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(904)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(905)"/>
           </Parameters>
         </Event>
-        <Event Name="corner" Help="#Lang(521)">
+        <Event Name="corner" Help="#Lang(522)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(906)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(907)"/>
             <Parameter Name="pos" Order="" VbType="" Help="#Lang(908)"/>
           </Parameters>
         </Event>
-        <Event Name="ctrlclick" Help="#Lang(522)">
+        <Event Name="ctrlclick" Help="#Lang(523)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(909)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(911)"/>
           </Parameters>
         </Event>
-        <Event Name="dblclick" Help="#Lang(523)">
+        <Event Name="dblclick" Help="#Lang(524)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(912)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(913)"/>
           </Parameters>
         </Event>
-        <Event Name="mousedown" Help="#Lang(524)">
+        <Event Name="mousedown" Help="#Lang(525)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(914)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(915)"/>
           </Parameters>
         </Event>
-        <Event Name="mousemove" Help="#Lang(525)">
+        <Event Name="mousemove" Help="#Lang(526)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(916)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(917)"/>
           </Parameters>
         </Event>
-        <Event Name="mouseout" Help="#Lang(526)">
+        <Event Name="mouseout" Help="#Lang(527)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(918)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(919)"/>
           </Parameters>
         </Event>
-        <Event Name="mouseover" Help="#Lang(527)">
+        <Event Name="mouseover" Help="#Lang(528)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(921)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(922)"/>
           </Parameters>
         </Event>
-        <Event Name="mouseup" Help="#Lang(528)">
+        <Event Name="mouseup" Help="#Lang(529)">
           <Parameters>
             <Parameter Name="X" Order="" VbType="" Help="#Lang(923)"/>
             <Parameter Name="Y" Order="" VbType="" Help="#Lang(924)"/>
@@ -2200,6 +2212,13 @@ $j(this.domCont).width(parseInt(width,10)).height(parseInt(height,10));
 $j(this.domCont).attr('class', cssClass);
 		  ]]></SourceCode>
         </Action>
+        <Action Help="#Lang(530)" InterfaceName="#Lang(619)" MethodName="setStyle">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(818)" ScriptName="cssStyleValue" Help="#Lang(718)" RegularExpressionValidation=""/>
+          </Parameters>
+          <SourceCode><![CDATA[var t=$q(this.domCont);
+t.attr('style', t.attr('style') + ';' + cssStyleValue);]]></SourceCode>
+        </Action>
         <Action Help="#Lang(513)" InterfaceName="#Lang(613)" MethodName="setTransparency">
           <Parameters>
             <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(715)" ScriptName="value" Help="#Lang(815)" RegularExpressionValidation=".*"/>
@@ -2235,9 +2254,9 @@ vdom_ui_startResizeXY(this.domCont);
 vdom_ui_startResizeY(this.domCont);
 					]]></SourceCode>
         </Action>
-        <Action Help="#Lang(529)" InterfaceName="#Lang(618)" MethodName="toggleClass">
+        <Action Help="#Lang(518)" InterfaceName="#Lang(618)" MethodName="toggleClass">
           <Parameters>
-            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(817)" ScriptName="className" Help="#Lang(717)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(717)" ScriptName="className" Help="#Lang(817)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[$q(this.domCont).toggleClass(className);]]></SourceCode>
         </Action>
