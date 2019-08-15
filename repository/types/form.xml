@@ -783,7 +783,7 @@ $j(function(){
     return false;
   });
 
-  $j('#%(id)s input[type=submit], #%(id)s button[type=submit]').click(function(){
+  $('#%(id)s').on( "click", "button[type=submit], input[type=submit]", function(){
     var form = $('#%(id)s');
     if (!form.children('input[name=__submit_trigger__]').length){
       form.append('<input type="hidden" name="__submit_trigger__" value="' + $(this).attr('name') + '" />');
