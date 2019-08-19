@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.99.9200</Version>
+    <Version>1.100.9200</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers/>
@@ -149,7 +149,7 @@
       <Name>split</Name>
       <DisplayName>#Lang(112)</DisplayName>
       <DefaultValue>1</DefaultValue>
-      <Visible>1</Visible>
+      <Visible>0</Visible>
       <Help>#Lang(212)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>DropDown((#Lang(405)|1)|(#Lang(406)|0))</CodeInterface>
@@ -348,18 +348,6 @@
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>border</Name>
-      <DisplayName>#Lang(124)</DisplayName>
-      <DefaultValue>1</DefaultValue>
-      <Visible>1</Visible>
-      <Help>#Lang(224)</Help>
-      <InterfaceType>0</InterfaceType>
-      <CodeInterface>DropDown((#Lang(421)|0)|(#Lang(422)|1))</CodeInterface>
-      <Colorgroup>4</Colorgroup>
-      <ErrorValidationMessage>#Lang(324)</ErrorValidationMessage>
-      <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
-    </Attribute>
-    <Attribute>
       <Name>datatype</Name>
       <DisplayName>#Lang(125)</DisplayName>
       <DefaultValue>json</DefaultValue>
@@ -525,7 +513,6 @@ return "";
       <Sentence ID="121">Highlight weekend</Sentence>
       <Sentence ID="122">CSS Class</Sentence>
       <Sentence ID="123">Style</Sentence>
-      <Sentence ID="124">Border</Sentence>
       <Sentence ID="125">Data Type</Sentence>
       <Sentence ID="126">UI language</Sentence>
       <Sentence ID="127">Base tasks</Sentence>
@@ -551,7 +538,6 @@ return "";
       <Sentence ID="221">Color to highlight the weekend</Sentence>
       <Sentence ID="222">CSS class name</Sentence>
       <Sentence ID="223">Custom style for gantt elements</Sentence>
-      <Sentence ID="224">Define if the border is visible or not</Sentence>
       <Sentence ID="225">Data Type</Sentence>
       <Sentence ID="226">UI language code</Sentence>
       <Sentence ID="227">Define base tasks of gantt chart</Sentence>
@@ -577,7 +563,6 @@ return "";
       <Sentence ID="321">Error in highlight weekend</Sentence>
       <Sentence ID="322">Names of CSS classes</Sentence>
       <Sentence ID="323">Error in style</Sentence>
-      <Sentence ID="324">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="325">Invalid data type</Sentence>
       <Sentence ID="326">Wrong language</Sentence>
       <Sentence ID="327">Error in base tasks</Sentence>
@@ -667,8 +652,6 @@ return "";
       <Sentence ID="811">New data for gantt chart</Sentence>
       <Sentence ID="812">CSS style value</Sentence>
       <Sentence ID="813">Fade effect, time is indicated in milliseconds</Sentence>
-      <Sentence ID="901">Current X-value</Sentence>
-      <Sentence ID="902">Current X-value</Sentence>
       <Sentence ID="903">Current X-value</Sentence>
       <Sentence ID="904">Current X-value</Sentence>
       <Sentence ID="905">Current X-value</Sentence>
@@ -717,7 +700,6 @@ return "";
       <Sentence ID="121"></Sentence>
       <Sentence ID="122">Class</Sentence>
       <Sentence ID="123">Style</Sentence>
-      <Sentence ID="124">Bordure</Sentence>
       <Sentence ID="125"></Sentence>
       <Sentence ID="126"></Sentence>
       <Sentence ID="127">Base tasks</Sentence>
@@ -743,7 +725,6 @@ return "";
       <Sentence ID="221"></Sentence>
       <Sentence ID="222">CSS class name</Sentence>
       <Sentence ID="223">Custom style for gantt elements</Sentence>
-      <Sentence ID="224">Afficher ou masquer la bordure</Sentence>
       <Sentence ID="225"></Sentence>
       <Sentence ID="226"></Sentence>
       <Sentence ID="227">Define base tasks of gantt chart</Sentence>
@@ -769,7 +750,6 @@ return "";
       <Sentence ID="321"></Sentence>
       <Sentence ID="322">Incorrect value</Sentence>
       <Sentence ID="323">Error in style</Sentence>
-      <Sentence ID="324">Valeur Incorrecte, doit être 0 ou 1</Sentence>
       <Sentence ID="325"></Sentence>
       <Sentence ID="326"></Sentence>
       <Sentence ID="327">Error in base tasks</Sentence>
@@ -859,8 +839,6 @@ return "";
       <Sentence ID="811">New data for gantt chart</Sentence>
       <Sentence ID="812">New CSS style value</Sentence>
       <Sentence ID="813">Time of appearance</Sentence>
-      <Sentence ID="901">Current X-value</Sentence>
-      <Sentence ID="902">Current X-value</Sentence>
       <Sentence ID="903">Current X-value</Sentence>
       <Sentence ID="904">Current X-value</Sentence>
       <Sentence ID="905">Current X-value</Sentence>
@@ -909,7 +887,6 @@ return "";
       <Sentence ID="121"></Sentence>
       <Sentence ID="122">Класс CSS</Sentence>
       <Sentence ID="123">Style</Sentence>
-      <Sentence ID="124">Граница</Sentence>
       <Sentence ID="125"></Sentence>
       <Sentence ID="126"></Sentence>
       <Sentence ID="127">Base tasks</Sentence>
@@ -935,7 +912,6 @@ return "";
       <Sentence ID="221"></Sentence>
       <Sentence ID="222">Имя класса CSS</Sentence>
       <Sentence ID="223">Custom style for gantt elements</Sentence>
-      <Sentence ID="224">Отображение границы</Sentence>
       <Sentence ID="225"></Sentence>
       <Sentence ID="226"></Sentence>
       <Sentence ID="227">Define base tasks of gantt chart</Sentence>
@@ -961,7 +937,6 @@ return "";
       <Sentence ID="321"></Sentence>
       <Sentence ID="322">Неправильное значение</Sentence>
       <Sentence ID="323">Error in style</Sentence>
-      <Sentence ID="324">Неправильное значение, должен быть указан 0 или 1</Sentence>
       <Sentence ID="325"></Sentence>
       <Sentence ID="326"></Sentence>
       <Sentence ID="327">Error in base tasks</Sentence>
@@ -1051,8 +1026,6 @@ return "";
       <Sentence ID="811">New data for gantt chart</Sentence>
       <Sentence ID="812">Новое значение стиля</Sentence>
       <Sentence ID="813">Время появления в миллисекундах</Sentence>
-      <Sentence ID="901">Текущее значение X</Sentence>
-      <Sentence ID="902">Текущее значение X</Sentence>
       <Sentence ID="903">Текущее значение X</Sentence>
       <Sentence ID="904">Текущее значение X</Sentence>
       <Sentence ID="905">Текущее значение X</Sentence>
@@ -1160,7 +1133,7 @@ class VDOM_gantt(VDOM_object):
         woid = (self.id).replace('-', '_')
         
         id = u"o_" + woid
-        id_gantt = u"g_" + id
+        id_gantt = u"g_" + woid
         ov = u"auto"
         style = u"overflow:{ovf};z-index:{zind};position:{pos};top:{top}px;left:{left}px;width:{wid}px;height:{hei}px;" \
                     .format(ovf = ov, zind = self.zindex, pos = self.position, 
@@ -1301,7 +1274,14 @@ class VDOM_gantt(VDOM_object):
                     },
                     {name: "text", label: "Task name", width: "*", tree: true, resize: true},
                     {name: "start_date", label: "Start time", align: "center", width: 80},
-                    {name: "deadline", label: "Deadline", width: 80, align: "center"},
+                    {name: "deadline", label: "Deadline", width: 80, align: "center", template: function (obj) {
+                            if(obj.deadline) {
+                                console.log(obj.deadline);
+                                return obj.deadline
+                            }
+                            return ""
+                        }
+                    },
                     {name: "duration", label: "Duration", align: "center", width: 60},
                     {name: "add", label: "", width: 36}
                 ];
@@ -1322,38 +1302,6 @@ class VDOM_gantt(VDOM_object):
                     }
                     return false;
                 });
-
-                gantt.templates.task_class = function (start, end, task) {
-                    if (task.deadline){
-                        if (task.deadline && end.valueOf() > task.deadline.valueOf()) {
-                            return 'overdue overdue_task';
-                        }
-
-                        if (task.deadline && end.valueOf() <= task.deadline.valueOf()) {
-                            return task.type + "_task";
-                        }
-                    }
-                    else {
-                        switch(task.type){
-                            case gantt.config.types.meeting:
-                                return "meeting_task";
-
-                            case gantt.config.types.work:
-                                return "work_task";
-
-                            case gantt.config.types.overdue:
-                                return "overdue_task";
-
-                            case gantt.config.types.four:
-                                return "four_task";
-
-                            case gantt.config.types.completed:
-                                return "completed_task";
-
-                        }
-                    }
-                    return "";
-                };
 
                 gantt.templates.rightside_text = function (start, end, task) {
                     if (task.deadline) {
@@ -1393,41 +1341,43 @@ class VDOM_gantt(VDOM_object):
                 </style>
 
                 <script>
-                    gantt.attachEvent("onAfterTaskDelete", function(id,item){
-                        execEventBinded('%(woid)s', 'onTaskChanged', {item: JSON.stringify(item), id: id});
-                        return true;
-                    });
-
-                    gantt.attachEvent("onAfterTaskUpdate", function(id,item){
-                        execEventBinded('%(woid)s', 'onTaskChanged', {item: JSON.stringify(item), id: id});
-                        return true;
-                    });
-
-                    gantt.attachEvent("onAfterTaskAdd", function(id,item){
-                        execEventBinded('%(woid)s', 'onTaskChanged', {item: JSON.stringify(item), id: id});
-                        return true;
-                    });
-
-                    
-                    gantt.attachEvent("onAfterLinkAdd", function(id,item){
-                        execEventBinded('%(woid)s', 'onLinkChanged', {item: JSON.stringify(item), id: id});
-                        return true;
-                    });
-
-                    gantt.attachEvent("onAfterLinkDelete", function(id,item){
-                        execEventBinded('%(woid)s', 'onLinkChanged', {item: JSON.stringify(item), id: id});
-                        return true;
-                    });
-
-                    gantt.attachEvent("onAfterLinkUpdate", function(id,item){
-                        execEventBinded('%(woid)s', 'onLinkChanged', {item: JSON.stringify(item), id: id});
-                        return true;
-                    });
 
                     %(params)s
                     //cosnt gantt = Gantt.getGanttInstance();
                     gantt.init("%(id_gantt)s");
                     %(data)s
+                    
+                    gantt.attachEvent("onAfterTaskDelete", function(id,item){
+                        execEventBinded('%(woid)s', 'ontaskchanged', {item: JSON.stringify(item), id: id});
+                        return true;
+                    });
+
+                    gantt.attachEvent("onAfterTaskUpdate", function(id,item){
+                        execEventBinded('%(woid)s', 'ontaskchanged', {item: JSON.stringify(item), id: id});
+                        return true;
+                    });
+
+                    gantt.attachEvent("onAfterTaskAdd", function(id,item){
+                        execEventBinded('%(woid)s', 'ontaskchanged', {item: JSON.stringify(item), id: id});
+                        return true;
+                    });
+
+                    
+                    gantt.attachEvent("onAfterLinkAdd", function(id,item){
+                        execEventBinded('%(woid)s', 'onlinkchanged', {item: JSON.stringify(item), id: id});
+                        return true;
+                    });
+
+                    gantt.attachEvent("onAfterLinkDelete", function(id,item){
+                        execEventBinded('%(woid)s', 'onlinkchanged', {item: JSON.stringify(item), id: id});
+                        return true;
+                    });
+
+                    gantt.attachEvent("onAfterLinkUpdate", function(id,item){
+                        execEventBinded('%(woid)s', 'onlinkchanged', {item: JSON.stringify(item), id: id});
+                        return true;
+                    });
+                    
                 </script>
             """ % {
                         "debug_info":         debug_info,
@@ -1460,12 +1410,6 @@ class VDOM_gantt(VDOM_object):
   <E2vdom>
     <Events>
       <Userinterfaceevents>
-        <Event Name="blur" Help="#Lang(513)">
-          <Parameters>
-            <Parameter Name="itemValue" Order="" VbType="" Help="#Lang(901)"/>
-            <Parameter Name="charCount" Order="0" VbType="" Help="#Lang(902)"/>
-          </Parameters>
-        </Event>
         <Event Name="click" Help="#Lang(514)">
           <Parameters>
             <Parameter Name="X" Order="0" VbType="" Help="#Lang(903)"/>
@@ -1517,18 +1461,18 @@ class VDOM_gantt(VDOM_object):
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(919)"/>
           </Parameters>
         </Event>
-        <Event Name="onBeforeTaskAdd" Help="#Lang(524)">
+        <Event Name="onbeforetaskadd" Help="#Lang(524)">
           <Parameters>
             <Parameter Name="params" Order="0" VbType="" Help="#Lang(921)"/>
           </Parameters>
         </Event>
-        <Event Name="onLinkChanged" Help="#Lang(525)">
+        <Event Name="onlinkchanged" Help="#Lang(525)">
           <Parameters>
             <Parameter Name="item" Order="0" VbType="" Help="#Lang(922)"/>
             <Parameter Name="id" Order="0" VbType="" Help="#Lang(923)"/>
           </Parameters>
         </Event>
-        <Event Name="onTaskChanged" Help="#Lang(526)">
+        <Event Name="ontaskchanged" Help="#Lang(526)">
           <Parameters>
             <Parameter Name="item" Order="0" VbType="" Help="#Lang(924)"/>
             <Parameter Name="id" Order="0" VbType="" Help="#Lang(925)"/>
