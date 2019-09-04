@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Standard</Category>
     <Dynamic>0</Dynamic>
-    <Version>1.141.6200</Version>
+    <Version>1.142.6200</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, vdomclass, accordeon</Containers>
@@ -1216,13 +1216,12 @@ class VDOM_button(VDOM_object):
         id_out = u"o_%s" % (self.id).replace('-', '_')
         styleblock = u""
         scriptblock = u""
-
         if self.disabled == "0":
             disabled_html = u""
         else:
             zindex_disabled = u"z-index:%s;" % str(int(self.zindex) + 1)
             disabled_html = u"""<div id='{id}_e2vdomhelper' class='disabled-over' style='{zindex_disabled}background:#fff;opacity:0.01;filter:alpha(opacity=1);position:absolute;left:{left}px;top:{top}px;width:{width}px;height:{height}px;'></div>
-                """.format(id = id_out, zindex_disabled = zindex_disabled, width = self.width, height = self.height, left = self.left, top = self.top)
+                """.format(id = id_out, zindex_disabled = zindex_disabled, width = self.width, height = self.height, left = self.left, top = self.top, classname = clname)
 
         overcss = u"<style>\n" + self.style % {"id": id_out} + u"</style>" if self.style else u""
         disablecss = u""
@@ -1332,9 +1331,9 @@ class VDOM_button(VDOM_object):
             debug_info = u"objtype='button' objname='%s' ver='%s'" % (self.name, self.type.version)
         else:
             debug_info = u""
-
+        clname = u"holder_" + self.classname if self.classname else u""
         return u"""{ocss}
-                    <div {debug_info} id="{id}" style="{style}{disp}">
+                    <div {debug_info} id="{id}" style="{style}{disp}" class="{classname}">
                         {anchor}{repr}</a>
                     </div>{disabled}{styleblk}{scriptblk}{disablecss}
                 """.format(
@@ -1345,6 +1344,7 @@ class VDOM_button(VDOM_object):
                         style = style, disp = display,
                         anchor = anchor,
                         disabled = disabled_html,
+                        classname = clname,
                         styleblk = styleblock, scriptblk = scriptblock, disablecss = disablecss)
         
         
