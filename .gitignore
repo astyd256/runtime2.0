@@ -10,3 +10,5 @@ resources/*
 temp/*
 types/*
 fonts/*
+
+.DS_Store
