@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Standard</Category>
     <Dynamic>0</Dynamic>
-    <Version>1.142.6200</Version>
+    <Version>1.143.6200</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, vdomclass, accordeon</Containers>
@@ -1331,7 +1331,7 @@ class VDOM_button(VDOM_object):
             debug_info = u"objtype='button' objname='%s' ver='%s'" % (self.name, self.type.version)
         else:
             debug_info = u""
-        clname = u"holder_" + self.classname if self.classname else u""
+        clname = u"holder_" + self.classname.split(' ')[0] if self.classname else u"" #take only first class
         return u"""{ocss}
                     <div {debug_info} id="{id}" style="{style}{disp}" class="{classname}">
                         {anchor}{repr}</a>
