@@ -1201,7 +1201,7 @@ $j("""+id+"""_tds).bind('click dblclick', function(e){
 		classlast = u""
 
 		if vheader:
-			theader = u'<tr header class="thead"><th checkbox class="th-cell th-cell-0"><div class="tri"><input type="checkbox" /><em></em></div></th>' if self.selectionmode == "1" else u'<tr header class="thead">'
+			theader = u'<tr header class="thead"><th checkbox class="th-cell th-cell-0"><div class="tri"><label for="{0}"></label><input id="{0}" type="checkbox" /><em></em></div></th>'.format(str(id)+"tri") if self.selectionmode == "1" else u'<tr header class="thead">'
 			for (index, colname) in zip(range(len(vheader)), vheader):
 				theader += u'<th index="'+unicode(index+1)+'" class="th-cell th-cell-'+unicode(index+1)+'">' + unicode(colname) + u'</th>'
 
@@ -1244,7 +1244,8 @@ $j("""+id+"""_tds).bind('click dblclick', function(e){
 					checked = checked,
 					visible = visible )
 			else:
-				tristate = u'<input type="checkbox" />'
+				#tristate = u'<input type="checkbox" />'
+				tristate = u'<label for={0}></label><input id={0} type="checkbox" />'.format(str(id) + str(index))
 
 			#tdata += u'<td checkbox align="center" class="cell cell-0"><input type="checkbox" />%s</td>' % tristate if self.selectionmode == "1" else ""
 			tdata += u'<td checkbox align="center" class="cell cell-0">%s</td>' % tristate if self.selectionmode == "1" else ""
