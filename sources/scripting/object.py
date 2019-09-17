@@ -140,7 +140,7 @@ class VDOMObject(object):
         return self._objects_collection
 
     parent = property(lambda self: self._parent)
-    state = property(_get_state)
+    object_state = property(_get_state)
 
     context = property(lambda self: self._context)
 
@@ -354,20 +354,20 @@ class VDOMObject(object):
             log.write("Switch %s attributes" % self)
         request = managers.request_manager.get_request()
         if request.next_state:
-            state = request.next_state
-            index = state["#"]
+            object_state = request.next_state
+            index = object_state["#"]
         else:
             if settings.DETAILED_LOGGING:
                 log.write("Allocate new state")
-            request.next_state = state = request.last_state.copy()
+            request.next_state = object_state = request.last_state.copy()
             # LOCK SESSION
             session = request.session()
-            state["#"] = index = len(session.states)
-            session.states.append(state)
+            object_state["#"] = index = len(session.states)
+            session.states.append(object_state)
             # UNLOCK SESSION
-        attributes = state.get(self._id, self._attributes)
+        attributes = object_state.get(self._id, self._attributes)
         if attributes.get("#", 0) < index:
-            state[self._id] = attributes = copy(attributes)
+            object_state[self._id] = attributes = copy(attributes)
             attributes["#"] = index
         self._attributes = attributes
 
