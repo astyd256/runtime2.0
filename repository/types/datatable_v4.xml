@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.521.8388</Version>
+    <Version>4.522.8388</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -242,18 +242,6 @@
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>hiddenfields</Name>
-      <DisplayName>#Lang(121)</DisplayName>
-      <DefaultValue/>
-      <Visible>1</Visible>
-      <Help>#Lang(221)</Help>
-      <InterfaceType>0</InterfaceType>
-      <CodeInterface>TextField(1000)</CodeInterface>
-      <Colorgroup>2</Colorgroup>
-      <ErrorValidationMessage>#Lang(321)</ErrorValidationMessage>
-      <RegularExpressionValidation>.*</RegularExpressionValidation>
-    </Attribute>
-    <Attribute>
       <Name>selectedrows</Name>
       <DisplayName>#Lang(122)</DisplayName>
       <DefaultValue/>
@@ -342,7 +330,7 @@
       <Name>customcolumns</Name>
       <DisplayName>#Lang(129)</DisplayName>
       <DefaultValue/>
-      <Visible>0</Visible>
+      <Visible>1</Visible>
       <Help>#Lang(229)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>MultiLine(10000)</CodeInterface>
@@ -1093,44 +1081,27 @@ class VDOM_datatable_v4(VDOM_object):
         raise Exception (u"Incorrect value in data %s" % self.data)
     else:
       src_data = [[]]
-
-    if self.key:
-      try:
-        key = json.loads(self.key)
-        if isinstance(key, int):
-          raise Exception (u"Incorrect value in key %s" % self.key)
-        else:
-          order = u""
-          for header_value in header:
-            for key_value in key: 
-              if key_value == header_value:
-                order += u"""[ %(header_index)s, "asc" ],
-                """ % {"header_index": header.index(header_value)}
-      except:
-        raise Exception (u"Incorrect value in key %s" % self.key)
-    else:
-      order = u""
       
-    hidden_numbers = []
-    column_defs = ""
-    if self.hiddenfields:
-      try:
-        hidden = json.loads(self.hiddenfields)
-        if isinstance(hidden, int):
-          if len(header) > hidden:
-            hidden_numbers = [hidden]
-        else:
-          for header_value in header:
-            for hidden_v in hidden:
-              if header_value == hidden_v:
-                hidden_numbers.append(header.index(header_value))
-        for i in hidden_numbers:
-          column_defs += u"""{ "visible": false, "targets": %(i)s },""" % {"i": i}
-      except:
-        column_defs = ""
-    
-    if self.customcolumns:
-      column_defs += self.customcolumns
+    if self.key and not self.customcolumns:
+      if self.key in [_['title'] for _ in col_title]:
+        self.customcolumns = """{
+        'targets': 0,
+        'className': 'hide_column',
+        'createdCell':  function (td, cellData, rowData, row, col) {
+        $(td).css({'display': 'none'})
+        $(td).attr('data-key',cellData); 
+      }
+    }"""
+    elif self.key and self.customcolumns:
+      if self.key in [_['title'] for _ in col_title]:
+        self.customcolumns += """{
+        'targets': 0,
+        'className': 'hide_column',
+        'createdCell':  function (td, cellData, rowData, row, col) {
+        $(td).css({'display': 'none'})
+        $(td).attr('data-key',cellData); 
+      }
+    }"""
 
     if self.fixedheight == "1":
       fixed_height = u"""height = "%(height)spx" """% {"height": self.height}
@@ -1237,17 +1208,12 @@ class VDOM_datatable_v4(VDOM_object):
       const table = $('#%(id_table)s').DataTable({
         data: %(data)s,
         columns: %(columns)s,
-        "columnDefs": [
-          %(column_defs)s
-        ],
-        "order": [
-          %(order)s
-        ],
         %(paging)s
         %(searching)s
         %(scroll)s
         %(page_length)s
         %(show_header)s
+        "columnDefs": [%(customcolumns)s],
         initComplete : function() {
           %(selectedrows)s
         },
@@ -1293,9 +1259,8 @@ class VDOM_datatable_v4(VDOM_object):
         "id":              id,
         "idn":             idn,
         "id_table":        id_table,
+        "customcolumns":   self.customcolumns,
         "show_header":     show_header,
-        "column_defs":     column_defs,
-        "order":           order,
         "page_length":     page_length,
         "paging":          paging,
         "searching":       searching,
