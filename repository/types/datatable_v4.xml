@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.523.8388</Version>
+    <Version>4.524.8388</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -1153,7 +1153,14 @@ class VDOM_datatable_v4(VDOM_object):
             }
             else {
                 table.$('tr.selected').removeClass('selected');
-          execEventBinded('%(idn)s', 'rowsselected', {keyList: table.row( this ).index()});
+                const idy = table.row( this ).index()
+                const element = $(this);
+                const key_column = element.children()[0];
+                let key = $(key_column).attr('data-key');
+                if (key == null) {
+                  key = idy;
+                }
+          execEventBinded('%(idn)s', 'rowsselected', {keyList: key});
                 $(this).addClass('selected');
             }
         } );
