@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.522.8388</Version>
+    <Version>4.523.8388</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -1208,6 +1208,7 @@ class VDOM_datatable_v4(VDOM_object):
       const table = $('#%(id_table)s').DataTable({
         data: %(data)s,
         columns: %(columns)s,
+        "order": [],
         %(paging)s
         %(searching)s
         %(scroll)s
