@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_tree</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>2.20.8388</Version>
+		<Version>2.21.8388</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(cbd47a55-cfad-bba6-e2a5-16f2a90371de)</Icon>
@@ -17,7 +17,7 @@
 		<Resizable>3</Resizable>
 		<OptimizationPriority>1</OptimizationPriority>
 		<Container>1</Container>
-		<Containers>htmlcontainer, dialog, container, tablecell, form</Containers>
+		<Containers>htmlcontainer, dialog, container, tablecell, form, flexcontainer</Containers>
 		<Languages>en_US, ru_RU, fr_FR</Languages>
 	</Information>
 	<Attributes>
