@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.524.8388</Version>
+    <Version>4.525.8388</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -1735,12 +1735,22 @@ for (i = 0; i < number; i++)
           <Parameters>
             <Parameter DefaultValue="[]" Interface="idlist" InterfaceName="#Lang(703)" ScriptName="idlist" Help="#Lang(803)" RegularExpressionValidation="^.*$"/>
           </Parameters>
-          <SourceCode><![CDATA[const id_table = '#t_' + this.domCont.id;
+          <SourceCode><![CDATA[
+const id_table = '#t_' + this.domCont.id;
 const table = $(id_table).DataTable();
 const mas  = idlist;
-mas.forEach(function(id) {
-  $(table.row( id ).node()).addClass('selected');
-});
+
+const tableData = table.rows().data().toArray()
+let keysFromTable = []
+tableData.forEach(el => {
+  keysFromTable.push(el[0])
+})
+
+mas.forEach( idFromAttr => {
+  let cellPosition = keysFromTable.indexOf(idFromAttr)
+  if (cellPosition === -1) return;
+  $(table.row( cellPosition ).node()).addClass('selected');
+})
 ]]></SourceCode>
         </Action>
         <Action Help="#Lang(505)" InterfaceName="#Lang(605)" MethodName="selectNone">
