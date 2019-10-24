@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.525.8388</Version>
+    <Version>4.526.8388</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -1253,7 +1253,14 @@ class VDOM_datatable_v4(VDOM_object):
         const idx = table.cell( this ).index().column;
         const idy = table.cell( this ).index().row;
         const title = table.column( idx ).title();
-        execEventBinded('%(idn)s', 'celldblclick', {keyField:JSON.stringify(table.cell( this ).index()), cellData:table.row( idy ).data(), headerData:title});
+        const el = $(this);
+        const parent = el.parent();
+        const first_col = parent.children()[0];
+        let key = $(first_col).attr('data-key');
+        if (key == null) {
+            key = idy;
+        }
+        execEventBinded('%(idn)s', 'celldblclick', {keyField: key, cellData:table.row( idy ).data(), headerData:title});
       } );
 
       %(customfunc)s

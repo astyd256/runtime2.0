@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.22.6200</Version>
+    <Version>1.23.6200</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>form, password, container</Containers>
@@ -157,6 +157,18 @@
       <ErrorValidationMessage>#Lang(212)</ErrorValidationMessage>
       <RegularExpressionValidation>^.*$</RegularExpressionValidation>
     </Attribute>
+	<Attribute>
+      <Name>focused</Name>
+      <DisplayName>#Lang(115)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(215)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(411)|0)|(#Lang(412)|1))</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(315)</ErrorValidationMessage>
+      <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+    </Attribute>
   </Attributes>
   <Languages>
     <Language Code="en_US">
@@ -174,6 +186,7 @@
       <Sentence ID="109">Value</Sentence>
       <Sentence ID="111">TabIndex</Sentence>
       <Sentence ID="112">Custom name</Sentence>
+	  <Sentence ID="115">Focused</Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Order of rendering the object on the page</Sentence>
       <Sentence ID="203">Visibility of the object</Sentence>
@@ -185,6 +198,7 @@
       <Sentence ID="209">Text to display</Sentence>
       <Sentence ID="211">Index number of switching the elements on pressing the tab key</Sentence>
       <Sentence ID="212">invalid custom name for input</Sentence>
+	  <Sentence ID="215">Define if the focus is set there after rendering the page or not</Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Incorrect value, must be even integer from 0 to 99</Sentence>
       <Sentence ID="303">Incorrect value, must be either 0 or 1</Sentence>
@@ -196,10 +210,13 @@
       <Sentence ID="309">Incorrect value</Sentence>
       <Sentence ID="311">Incorrect value, must be even positive integer</Sentence>
       <Sentence ID="312">custom name for input</Sentence>
+	  <Sentence ID="315">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">Invisible</Sentence>
       <Sentence ID="404">Visible</Sentence>
+	  <Sentence ID="411">No</Sentence>
+      <Sentence ID="412">Yes</Sentence>
       <Sentence ID="501">Hide the object</Sentence>
       <Sentence ID="502">Show the object</Sentence>
       <Sentence ID="503">Hide the object</Sentence>
@@ -604,6 +621,7 @@ class VDOM_formtextarea(VDOM_object):
 
 	def render(self, contents=""):
 		display = u"display:none;" if self.visible == "0" else u""
+		clean_id = (self.id).replace('-', '_')
 		id = u"o_" + (self.id).replace('-', '_')			
 
 		style = u"""z-index: {zind}; position: {pos}; top: {top}px; left: {left}px;
@@ -613,6 +631,20 @@ class VDOM_formtextarea(VDOM_object):
 
 		result = u"""<textarea id="{id}" name="{name}" tabindex="{tabind}" style="{style}">{value}</textarea>"""\
 				.format(id = id, name = self.customname or self.name, tabind = self.tabindex, style = style, value = self.value)
+		
+		focused = u"$q('#%s').focus();" % id if self.focused == "1" else ""
+				
+		result += u"""<script type='text/javascript'>
+$j(document).ready(function(){
+	$j('#%(id)s').blur(function(){
+		var x = $j.trim($j(this).val());
+		execEventBinded("%(clean_id)s", "blur", { itemValue: x, charCount: x.length });
+	});
+	$j('#%(id)s').focusin(function(){
+		execEventBinded("%(clean_id)s", "focus", {});
+	});
+	%(focused)s
+});</script>""" % { "id": id, "clean_id": clean_id, "focused": focused }
 
 		return VDOM_object.render(self, contents=result)
 
@@ -651,6 +683,11 @@ class VDOM_formtextarea(VDOM_object):
           <Parameters>
             <Parameter Name="X" Order="0" VbType="" Help="#Lang(903)"/>
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(904)"/>
+          </Parameters>
+        </Event>
+		<Event Name="valuechange" Help="#Lang(515)">
+          <Parameters>
+            <Parameter Name="itemValue" Order="0" VbType="" Help="#Lang(907)"/>
           </Parameters>
         </Event>
         <Event Name="mousedown" Help="#Lang(513)">
