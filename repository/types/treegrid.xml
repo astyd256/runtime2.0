@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.69.9200</Version>
+    <Version>1.70.9200</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -145,6 +145,30 @@
       <ErrorValidationMessage>#Lang(311)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
+    <Attribute>
+      <Name>key</Name>
+      <DisplayName>#Lang(923)</DisplayName>
+      <DefaultValue/>
+      <Visible>1</Visible>
+      <Help>#Lang(923)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(1000)</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(923)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+			<Name>hiddenfields</Name>
+			<DisplayName>#Lang(924)</DisplayName>
+			<Description>#Lang(924)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(924)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(1000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
     <Attribute>
       <Name>rows_height</Name>
       <DisplayName>#Lang(112)</DisplayName>
@@ -377,6 +401,8 @@
       <Sentence ID="919">cellData</Sentence>
       <Sentence ID="921">cellData</Sentence>
       <Sentence ID="922">cellData</Sentence>
+      <Sentence ID="923">key</Sentence>
+      <Sentence ID="924">Hidden fields</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="001">TreeGrid</Sentence>
@@ -512,6 +538,8 @@
       <Sentence ID="919">cellData</Sentence>
       <Sentence ID="921">cellData</Sentence>
       <Sentence ID="922">cellData</Sentence>
+      <Sentence ID="923">key</Sentence>
+      <Sentence ID="924">Hidden fields</Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="001">TreeGrid</Sentence>
@@ -647,6 +675,8 @@
       <Sentence ID="919">cellData</Sentence>
       <Sentence ID="921">cellData</Sentence>
       <Sentence ID="922">cellData</Sentence>
+      <Sentence ID="923">key</Sentence>
+      <Sentence ID="924">Hidden fields</Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -851,6 +881,19 @@ class VDOM_treegrid(VDOM_object):
 		params = []
 		#custom_style = []
 
+
+		def create_styles_for_hidden_field(col_number):
+			return """
+			.dhx_grid-header-cell:nth-child({0})
+			{{display: none;}}
+			.dhx_grid-cell:nth-child({0})
+			{{display: none;}}""".format(col_number+1)
+
+		hidden_fields_styles = ""
+		if self.hiddenfields:
+			fields_for_hidde = json.loads(self.hiddenfields)
+			hidden_fields_styles = ' '.join([create_styles_for_hidden_field(col_number) for col_number in fields_for_hidde])
+
 		if self.fit_to_container == "1":
 			params.append(u"fitToContainer:true,")
 
@@ -876,19 +919,30 @@ class VDOM_treegrid(VDOM_object):
         	<div id="%(id_treegrid)s" style="width:100%%; height:100%%;"></div>
 		</div>
 	<style type="text/css">
+		%(hidden_fields_styles)s
 		%(selfstyle)s
 	</style>
 
 	<script type="text/javascript">
-
                     var %(id_treegrid)s = new dhx.TreeGrid("%(id_treegrid)s", {
                     columns: %(columns)s,
+                    columnsAutoWidth: false,
                     data: %(data)s,
                     %(params)s
                 });
 
-				%(id_treegrid)s.events.on("cellClick", function (row,column) {
-					execEventBinded('%(idn)s', 'cellclick', {cellData:JSON.stringify(row), columnData:JSON.stringify(column)});
+
+				%(id_treegrid)s.events.on("cellClick", function (row, column) {
+          //window.console.log(row);
+          //window.console.log('********');
+          //window.console.log(column);
+
+          const key = row.%(keyField)s
+
+					execEventBinded('%(idn)s', 'cellclick', {
+            keyField: key,
+            cellData:JSON.stringify(row), 
+            columnData:JSON.stringify(column)});
 				});
 
 				%(id_treegrid)s.events.on("cellDblClick", function (row,column) {
@@ -906,7 +960,9 @@ class VDOM_treegrid(VDOM_object):
 				"cssclass":        cssclass,
                 "params":          '\n'.join(params),
 				"data":            self.data,
-				"columns":         self.columns
+				"columns":         self.columns,
+				"keyField":        self.key,
+				"hidden_fields_styles": hidden_fields_styles
 		}
 
 		return VDOM_object.render(self, contents=result)
