@@ -233,18 +233,16 @@ class VDOM_database(object):
 
     def create(self, table_name, table_diffinition=""):
         from scripting.wrappers import application
-        application_memmory = managers.xml_manager.get_application(application.id)
-        parent = application_memmory.search_objects_by_name(self.__name)
+        application_memmory = managers.memory.applications.get(application.id)
+        parent = application_memmory.objects.get(self.__name)
         if not parent:
             raise Exception("Database %s is not exist. Cannot create table inside." % self.__name)
         if table_name in parent[0].get_objects_by_name().keys():
-            obj = application_memmory.search_objects_by_name(table_name)[0]
+            obj = application_memmory.objects.get(table_name)[0]
             return self.database.get_table(obj.id, table_name, table_diffinition)
         else:
             # obj_name, obj_id = application_memmory.create_object(DBTABLE_ID, parent[0])
-            obj_name, obj_id = application_memmory.create_object(DBTABLE_ID, parent[0], False)
-            obj = application_memmory.search_object(obj_id)
-            obj.set_name(table_name)
+            obj_name, obj_id = parent.objects.new(managers.memory.types[DBTABLE_ID], name=table_name)
             # obj.set_attributes({"top":500,"left":600,"width": 200,"height":300})
             return self.database.get_table(obj_id, table_name, table_diffinition)
 

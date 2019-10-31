@@ -7,7 +7,7 @@ from logs import log
 from utils.properties import roproperty
 from utils.tracing import format_exception_trace, show_exception_trace
 
-# import managers
+import managers
 # from soap.errors import *
 # import utils
 # from utils.exception import *
@@ -95,4 +95,28 @@ class Dispatcher(object):
             return method(_object_, *arguments, **keywords)
 
 
+    def dispatch_action(self, app_id, object_id, func_name, xml_param, xml_data):
+        app = managers.memory.applications.get(app_id)
+        if not app:
+            raise Exception("Application not found:%s"%app_id)
+        obj = app.objects.catalog[object_id]
+        action = obj.actions.get(func_name) if obj else None
+        if not action:
+            raise Exception("Action not found:%s"%func_name)
+
+        request = managers.request_manager.get_request()
+        request.arguments().arguments({"xml_param": [xml_param], "xml_data": [xml_data]})
+
+        try:
+            managers.engine.execute(action)
+        except Exception as error:
+            if hasattr(error, "message") and isinstance(error.message, unicode):
+                message = unicode(error).encode("utf8")
+            else:
+                message = str(error)
+            raise SOAPpy.faultType(remote_method_call_error, _("Remote method call error"), message)
+
+        response = request.session().value("response")
+        request.session().remove("response")
+        return response or ""
 VDOM_dispatcher = Dispatcher

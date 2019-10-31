@@ -4,12 +4,12 @@ import sys
 import io
 # import os
 # import posixpath
-# import urllib
+import urllib
 import shutil
 # import mimetypes
 import thread
 # import re
-# import socket
+import socket
 # import threading
 # import time
 import traceback
@@ -18,6 +18,10 @@ import SOAPpy
 
 if sys.platform.startswith("freebsd"):
     import vdomlib
+
+import webdav_server
+from wsgidav.wsgidav_app import WsgiDAVApp
+from wsgiref.util import guess_scheme
 
 # import SocketServer
 import BaseHTTPServer
@@ -88,7 +92,160 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             SimpleHTTPServer.SimpleHTTPRequestHandler.__init__(self, request, client_address, server)
         except:
             raise
-
+        
+    def start_response(self, status, response_headers, exc_info=None):
+        if exc_info:
+            try:
+                raise exc_info[0], exc_info[1], exc_info[2]
+                # do stuff w/exc_info here
+            finally:
+                exc_info = None    # Avoid circular ref.
+        status_code = int(status.split(' ')[0])
+        status_message = status[status.find(' ')+1:]
+        #print (">>>%s %s"%(status_code,status_message))
+        try:
+            self.send_response(status_code, status_message)
+        except socket.error as e:#TODO: find why socket already closed when error in Webdav
+            return
+        for header in response_headers:
+            if header[0] != 'Date':
+                self.send_header(header[0], header[1])
+    
+        cookies = self.__request.response_cookies()
+        if "sid" in cookies:
+            cookies["sid"]["path"] = "/"
+            self.wfile.write("%s\r\n" % cookies.output())
+    
+        self.end_headers()
+        #print response_headers
+        #_str = '\n'.join( traceback.format_stack() )
+        #print _str
+        #cgi.escape( str )		
+        return self.wfile.write
+    
+    def get_environ(self):
+        env = self.__request.environment().environment().copy()
+        #env = {}
+        env['wsgi.input']        = self.rfile
+        env['wsgi.errors']       = sys.stderr
+        env['wsgi.version']      = (1, 0)
+        env['wsgi.run_once']     = False
+        env['wsgi.url_scheme']   = guess_scheme(env)
+        env['wsgi.multithread']  = True
+        env['wsgi.multiprocess'] = True
+        env['SERVER_PROTOCOL'] = self.request_version
+        env['REQUEST_METHOD'] = self.command
+        if '?' in self.path:
+            path,query = self.path.split('?',1)
+        else:
+            path,query = self.path,''
+    
+        env['PATH_INFO'] = urllib.unquote(path)
+        env['QUERY_STRING'] = query
+    
+        host = self.address_string()
+        if host != self.client_address[0]:
+            env['REMOTE_HOST'] = host
+        env['REMOTE_ADDR'] = self.client_address[0]
+    
+        if self.headers.typeheader is None:
+            env['CONTENT_TYPE'] = self.headers.type
+        else:
+            env['CONTENT_TYPE'] = self.headers.typeheader
+    
+        length = self.headers.getheader('content-length')
+        if length:
+            env['CONTENT_LENGTH'] = length
+        script_name = env.get('SCRIPT_NAME')
+        if script_name:
+            env['SCRIPT_NAME'] = script_name.rstrip("/")
+    
+        for h in self.headers.headers:
+            k,v = h.split(':',1)
+            k=k.replace('-','_').upper(); v=v.strip()
+            if k in env:
+                continue                    # skip content length, type,etc.
+            if 'HTTP_'+k in env:
+                if 'HTTP_'+k not in self.__request.environment().environment():
+                    env['HTTP_'+k] += ','+v     # comma-separate multiple headers
+            else:
+                env['HTTP_'+k] = v
+        return env
+    
+    def handle_one_request(self):
+        """Handle a single HTTP request.
+    
+        You normally don't need to override this method; see the class
+        __doc__ string for information on how to handle specific HTTP
+        commands such as GET and POST.
+    
+        """
+        try:
+            self.raw_requestline = self.rfile.readline()
+            if len(self.raw_requestline) > 65536:
+                self.requestline = ''
+                self.request_version = ''
+                self.command = ''
+                self.send_error(414)
+                return            
+            if not self.raw_requestline:
+                self.close_connection = 1
+                return
+            if not self.parse_request():
+                # An error code has been sent, just exit
+                return
+            mname = 'do_' + self.command
+            host = self.headers.get("host")
+    
+            vh = self.server.virtual_hosting()
+    
+            app_id = (vh.get_site(host.lower()) if host else None) or vh.get_def_site()
+            if not app_id:
+                managers.memory.load_apps()	
+            self.wsgidav_app = None
+            if app_id:
+                try:
+                    #if app_id not in managers.memory.applications:
+                    #    managers.memory.load_application(app_id)					
+                    appl = managers.memory.applications[app_id]
+                    self.wsgidav_app = getattr(appl, 'wsgidav_app', None)
+                except VDOM_exception_missing_app as e:
+                    debug(e)			
+                else:
+                    #dav_map = getattr(appl,"dav_map",None)
+                    #if not dav_map:
+                    #	appl.dav_map = set()
+                    #	dav_map = appl.dav_map
+                    #	for obj in appl.get_objects_list():
+                    #		if obj.type.id == '1a43b186-5c83-92fa-7a7f-5b6c252df941':
+                    #			dav_map.add("/" + obj.name)
+                    #for realm in dav_map:    
+                    #	if self.path.startswith(realm):
+                    #		mname = 'do_WebDAV'
+                    realm = self.path.strip("/").split("/").pop(0)
+                    if managers.webdav_manager.check_webdav_share_path(appl.id, realm):
+                        mname = 'do_WebDAV'
+                                 
+    
+            if self.command not in ("GET", "POST"):
+                mname = 'do_WebDAV'
+            
+            if mname == 'do_WebDAV' and self.wsgidav_app is None:
+                managers.webdav_manager.load_webdav(app_id)
+                self.wsgidav_app = appl.wsgidav_app                  
+    
+            if not hasattr(self, mname):
+                self.send_error(501, "Unsupported method (%r)" % self.command)
+                return
+            method = getattr(self, mname)
+            method()
+            self.wfile.flush() #actually send the response if not already done.
+        except socket.timeout, e:
+            #a read or a write timed out.  Discard this connection
+            self.log_error("Request timed out: %r", e)
+            self.close_connection = 1
+            return	
+        
     def handle(self):
         """Handle multiple requests if necessary."""
         # self.close_connection = 1
@@ -109,7 +266,38 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 deadline = time() + settings.CONNECTION_SUBSEQUENT_TIMEOUT
             elif time() > deadline:
                 break
-
+    
+    def do_WebDAV(self):
+        if self.__reject:
+            self.send_error(503, self.responses[503][0])
+            return None		
+        self.create_request(self.command.lower())
+        environ = self.get_environ()
+        application = self.wsgidav_app
+        if not application:
+            self.send_error(404, self.responses[404][0])
+            return
+        elif environ["REQUEST_METHOD"] == "OPTIONS" and environ["PATH_INFO"] in ("/", "*"):
+            import wsgidav.util as util
+            self.start_response("200 OK", [("Content-Type", "text/html"),
+                                                           ("Content-Length", "0"),
+                                                                ("DAV", "1,2"),
+                                                                ("Server", "DAV/2"),
+                                                                ("Date", util.getRfc1123Time()),
+                                                                ])		
+            return
+    
+        if environ["REQUEST_METHOD"] == "PROPFIND" and environ["PATH_INFO"] in ("/", "*"):
+            providers = self.wsgidav_app.providerMap.keys()
+            if providers:
+                environ["PATH_INFO"] = providers[0]#Need some testing if this approach will work
+            else:
+                self.send_error(404, self.responses[404][0])
+                return
+        #print "<<<%s %s"%(environ["REQUEST_METHOD"], environ["PATH_INFO"])
+        for v in application(environ, self.start_response):
+            self.wfile.write(v)
+            
     def do_GET(self):
         """serve a GET request"""
         # create request object
@@ -155,9 +343,12 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             sys.setcheckinterval(100)
             #self.copyfile(f, self.wfile)
             f.close()
-
+            
+    
+            
     def create_request(self, method):
         """initialize request, <method> is either 'post' or 'get'"""
+        
         #debug("CREATE REQUEST %s"%self)
         #import gc
         #debug("\nGarbage: "+str(len(gc.garbage))+"\n")

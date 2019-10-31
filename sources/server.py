@@ -22,7 +22,7 @@ from server import VDOM_server
 from session import VDOM_session_manager
 from module import VDOM_module_manager
 from soap import VDOM_soap_server
-
+from webdav_server import VDOM_webdav_manager
 
 managers.register("log_manager", VDOM_log_manager)
 managers.register("import_manager", ImportManager)
@@ -46,8 +46,8 @@ managers.register("resource_editor", VDOM_resource_editor, lazy=True)
 # managers.register("email_manager", VDOM_email_manager, lazy=True)
 managers.register("module_manager", VDOM_module_manager)
 managers.register("soap_server", VDOM_soap_server)
+managers.register("webdav_manager", VDOM_webdav_manager)
 managers.register("server", VDOM_server)
-
 
 on_prepare = (lambda: managers.memory.applications.default) if settings.PRELOAD_DEFAULT_APPLICATION else None
 managers.server.start(on_prepare)

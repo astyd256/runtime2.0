@@ -156,11 +156,11 @@ MANAGE_LONG_NAME_WIDTH = 85  # desired width for long list lines
 
 # building
 
-TREAT_WARNINGS_AS_ERRORS = True  # treat warnings as errors when building extensions
+TREAT_WARNINGS_AS_ERRORS = False  # treat warnings as errors when building extensions
 
 # debugging
 
-SHOW_PAGE_DEBUG = False  # can change at runtime
+SHOW_PAGE_DEBUG = True  # can change at runtime
 SHOW_TRACKED_PRIMARIES = False  # log trached primaries for debugging
 
 # emails

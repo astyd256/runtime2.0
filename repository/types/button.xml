@@ -1216,6 +1216,7 @@ class VDOM_button(VDOM_object):
         id_out = u"o_%s" % (self.id).replace('-', '_')
         styleblock = u""
         scriptblock = u""
+        clname = u"holder_" + self.classname.split(' ')[0] if self.classname else u"" #take only first class
         if self.disabled == "0":
             disabled_html = u""
         else:
@@ -1331,7 +1332,7 @@ class VDOM_button(VDOM_object):
             debug_info = u"objtype='button' objname='%s' ver='%s'" % (self.name, self.type.version)
         else:
             debug_info = u""
-        clname = u"holder_" + self.classname.split(' ')[0] if self.classname else u"" #take only first class
+        
         return u"""{ocss}
                     <div {debug_info} id="{id}" style="{style}{disp}" class="{classname}">
                         {anchor}{repr}</a>

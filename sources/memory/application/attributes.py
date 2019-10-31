@@ -49,8 +49,10 @@ class MemoryAttributesSketch(MemoryBase, MutableMapping):
             value = DEREFERENCE_REGEX.sub(lambda match: match.group(1), value)
             try:
                 self._owner.type.attributes[name].verify(value)
-            except AttributeError:
-                raise Exception("The %s has no \"%s\" attribute " % (self._owner, name))
+            except (AttributeError, KeyError):
+                #raise Exception("The %s has no \"%s\" attribute " % (self._owner, name))
+                pass
+                #del values[name]
             except ValueError:
                 # TODO: return ValueError after resolve all issues in applications
                 log.warning(u"Unacceptable value for \"%s\" attribute of %s: \"%s\""
