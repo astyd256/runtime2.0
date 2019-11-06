@@ -42,7 +42,6 @@ from soap.wsdl import methods as soap_methods
 # from utils.exception import VDOM_exception
 from utils.tracing import format_exception_trace
 from utils.pages import compose_page, compose_trace
-
 # A class to describe how header messages are handled
 
 
@@ -201,7 +200,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     
             app_id = (vh.get_site(host.lower()) if host else None) or vh.get_def_site()
             if not app_id:
-                managers.memory.load_apps()	
+                app_id = managers.memory.applications.default.id
             self.wsgidav_app = None
             if app_id:
                 try:
@@ -209,7 +208,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     #    managers.memory.load_application(app_id)					
                     appl = managers.memory.applications[app_id]
                     self.wsgidav_app = getattr(appl, 'wsgidav_app', None)
-                except VDOM_exception_missing_app as e:
+                except KeyError as e:
                     debug(e)			
                 else:
                     #dav_map = getattr(appl,"dav_map",None)
