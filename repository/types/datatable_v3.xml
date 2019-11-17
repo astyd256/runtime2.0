@@ -1245,7 +1245,7 @@ $j("""+id+"""_tds).bind('click dblclick', function(e){
 					visible = visible )
 			else:
 				#tristate = u'<input type="checkbox" />'
-				tristate = u'<input id={0} type="checkbox" /><label for={0}></label>'.format(str(id) + str(index))
+				tristate = u'<input id={0} type="checkbox" /><label for={0}></label>'.format(str(id) + str(row_i))
 
 			#tdata += u'<td checkbox align="center" class="cell cell-0"><input type="checkbox" />%s</td>' % tristate if self.selectionmode == "1" else ""
 			tdata += u'<td checkbox align="center" class="cell cell-0">%s</td>' % tristate if self.selectionmode == "1" else ""
