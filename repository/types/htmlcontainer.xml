@@ -14,7 +14,7 @@
     <Container>3</Container>
     <Category>Standard</Category>
     <Dynamic>1</Dynamic>
-    <Version>2.107.9200</Version>
+    <Version>2.108.9200</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers/>
@@ -574,6 +574,8 @@
       <Sentence ID="933">Description</Sentence>
       <Sentence ID="934">Description</Sentence>
       <Sentence ID="935">Description</Sentence>
+      <Sentence ID="936">browserZoom</Sentence>
+      <Sentence ID="937">zoom</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="001">Conteneur HTML</Sentence>
@@ -784,6 +786,8 @@
       <Sentence ID="933">Description</Sentence>
       <Sentence ID="934">Description</Sentence>
       <Sentence ID="935">Description</Sentence>
+      <Sentence ID="936">browserZoom</Sentence>
+      <Sentence ID="937">zoom</Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="001">Контейнер</Sentence>
@@ -994,6 +998,8 @@
       <Sentence ID="933">Описание</Sentence>
       <Sentence ID="934">Описание</Sentence>
       <Sentence ID="935">Описание</Sentence>
+      <Sentence ID="936">browserZoom</Sentence>
+      <Sentence ID="937">zoom</Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -3782,6 +3788,13 @@ window.setTimeout(function(){
     window.location = url;
 },500);
 return false;]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(936)" InterfaceName="#Lang(936)" MethodName="browserZoom">
+          <Parameters>
+            <Parameter DefaultValue="100" Interface="" InterfaceName="#Lang(937)" ScriptName="zoom" Help="#Lang(937)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[zoom = $(window).width()/zoom*100;
+            document.body.style.zoom = zoom + "%"]]></SourceCode>
         </Action>
         <Action Help="#Lang(508)" InterfaceName="#Lang(608)" MethodName="goToLabel">
           <Parameters>
