@@ -200,7 +200,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     
             app_id = (vh.get_site(host.lower()) if host else None) or vh.get_def_site()
             if not app_id:
-                app_id = managers.memory.applications.default.id
+                app_id = managers.memory.applications.default.id if managers.memory.applications.default else None
             self.wsgidav_app = None
             if app_id:
                 try:
