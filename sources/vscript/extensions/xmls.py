@@ -220,7 +220,7 @@ class v_xmlnode(generic):
 	def v_append(self, node):
 		node=node.as_is
 		if isinstance(node, v_xmlnode):
-			self._node.appendChild(node)
+			self._node.appendChild(node._node)
 			return v_mismatch
 		else:
 			raise errors.invalid_procedure_call(name="append")
@@ -228,7 +228,7 @@ class v_xmlnode(generic):
 	def v_insert(self, node, reference):
 		node, reference=node.as_is, reference.as_is
 		if isinstance(node, v_xmlnode) and isinstance(reference, v_xmlnode):
-			self._node.insertBefore(node, reference)
+			self._node.insertBefore(node._node, reference._node)
 			return v_mismatch
 		else:
 			raise errors.invalid_procedure_call(name="insert")
@@ -236,7 +236,7 @@ class v_xmlnode(generic):
 	def v_remove(self, node):
 		node=node.as_is
 		if isinstance(node, v_xmlnode):
-			self._node.removeChild(node)
+			self._node.removeChild(node._node)
 			return v_mismatch
 		else:
 			raise errors.invalid_procedure_call(name="remove")
@@ -244,7 +244,7 @@ class v_xmlnode(generic):
 	def v_replace(self, node, reference):
 		node, reference=node.as_is, reference.as_is
 		if isinstance(node, v_xmlnode) and isinstance(reference, v_xmlnode):
-			self._node.replaceChild(reference, node)
+			self._node.replaceChild(reference, node._node)
 			return v_mismatch
 		else:
 			raise errors.invalid_procedure_call(name="replace")
@@ -381,7 +381,7 @@ class v_xmlelement(v_xmlnode):
 	def v_setattributenode(self, node):
 		node=node.as_is
 		if isinstance(node, v_xmlattribute):
-			return wrap(self._node.setAttributeNode(node))
+			return wrap(self._node.setAttributeNode(node._node))
 		else:
 			raise errors.invalid_procedure_call(name="setattributenode")
 
@@ -419,24 +419,24 @@ class v_xmldocument(v_xmlelement):
 		raise errors.not_implemented
 
 	def v_createelement(self, name):
-		return v_xmlelement(self._node.createElement(name.as_string))
+		return v_xmlelement(self._document.createElement(name.as_string))
 
 	def v_createelementns(self, namespaceuri, name):
 		return v_xmlelement(
-			self._node.createElementNS(namespaceuri.as_string, name.as_string))
+			self._document.createElementNS(namespaceuri.as_string, name.as_string))
 
 	def v_createtextnode(self, value):
-		return v_xmlnode(self._node.createTextNode(value.as_string))
+		return v_xmlnode(self._document.createTextNode(value.as_string))
 
 	def v_createcomment(self, value):
-		return v_xmlnode(self._node.createTextNode(value.as_string))
+		return v_xmlnode(self._document.createTextNode(value.as_string))
 
 	def v_createprocessinginstruction(self, target, value):
 		raise errors.not_implemented
 
 	def v_createattribute(self, name):
-		return v_xmlattribute(self._node.createAttribute(name.as_string))
+		return v_xmlattribute(self._document.createAttribute(name.as_string))
 
 	def v_createattributens(self, namespaceuri, name):
 		return v_xmlattribute(
-			self._node.createAttributeNS(namespaceuri.as_string, name.as_string))
+			self._document.createAttributeNS(namespaceuri.as_string, name.as_string))
