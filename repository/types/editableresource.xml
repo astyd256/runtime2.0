@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_editableresource</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.93.6720</Version>
+		<Version>1.94.6720</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(a61a9853-638a-8f83-0a70-16a8c65eb8a1)</Icon>
@@ -17,7 +17,7 @@
 		<Resizable>1</Resizable>
 		<OptimizationPriority>1</OptimizationPriority>
 		<Container>1</Container>
-		<Containers>htmlcontainer, dialog, container, tablecell, form, password</Containers>
+		<Containers>htmlcontainer, dialog, container, tablecell, form, password, flexcontainer</Containers>
 		<Languages>en_US, ru_RU, fr_FR</Languages>
 	</Information>
 	<Attributes>
