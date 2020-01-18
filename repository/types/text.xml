@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Standard</Category>
     <Dynamic>0</Dynamic>
-    <Version>3.108.6720</Version>
+    <Version>3.109.6720</Version>
     <InterfaceType>3</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, tablecell, form, password, dialog_2, vdomclass, flexcontainer</Containers>
@@ -1123,6 +1123,44 @@ class VDOM_text(VDOM_object):
             <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(810)" ScriptName="className" Help="#Lang(710)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[$q(this.domCont).toggleClass(className);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(512)" InterfaceName="#Lang(612)" MethodName="setClass">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(714)" ScriptName="cssClass" Help="#Lang(814)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[
+$j(this.domCont).attr('class', cssClass);
+      ]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(502)" InterfaceName="#Lang(602)" MethodName="changeClass">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(702)" ScriptName="newClass" Help="#Lang(802)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(703)" ScriptName="oldClass" Help="#Lang(803)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[
+if ($j(this.domCont).hasClass(oldClass)){
+  $j(this.domCont).removeClass(oldClass);
+  $j(this.domCont).addClass(newClass);
+}else{
+  console.info("Object " + this.domCont.id + " hasn't class " + oldClass);
+}
+      ]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(509)" InterfaceName="#Lang(609)" MethodName="removeClass">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(711)" ScriptName="className" Help="#Lang(811)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[
+$j(this.domCont).removeClass(className);
+      ]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(501)" InterfaceName="#Lang(601)" MethodName="addClass">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(701)" ScriptName="newClass" Help="#Lang(801)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[
+$q(this.domCont).addClass(newClass);
+      ]]></SourceCode>
         </Action>
       </Container>
     </Actions>
