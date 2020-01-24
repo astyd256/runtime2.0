@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_editableresource</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.95.6720</Version>
+		<Version>1.96.6720</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(a61a9853-638a-8f83-0a70-16a8c65eb8a1)</Icon>
@@ -180,7 +180,7 @@
 			<Sentence ID="107">Height</Sentence>
 			<Sentence ID="108">Data</Sentence>
 			<Sentence ID="109">Data type</Sentence>
-			<Sentence ID="111">Import way</Sentence>
+			<Sentence ID="111">Import as</Sentence>
 			<Sentence ID="112">Overflow</Sentence>
 			<Sentence ID="201">Order of rendering the object on the page. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
 			<Sentence ID="202">Visibility of the object.</Sentence>
@@ -208,9 +208,9 @@
 			<Sentence ID="402">Visible</Sentence>
 			<Sentence ID="403">JavaScript</Sentence>
 			<Sentence ID="404">CSS</Sentence>
-			<Sentence ID="405">header</Sentence>
-			<Sentence ID="406">inline</Sentence>
-			<Sentence ID="407">dyn_lib</Sentence>
+			<Sentence ID="405">External file</Sentence>
+			<Sentence ID="406">Header inline</Sentence>
+			<Sentence ID="407">Parent inline</Sentence>
 			<Sentence ID="408">Auto</Sentence>
 			<Sentence ID="409">Hidden</Sentence>
 			<Sentence ID="411">Scroll</Sentence>
@@ -230,7 +230,7 @@
 			<Sentence ID="107">Hauteur</Sentence>
 			<Sentence ID="108">Data</Sentence>
 			<Sentence ID="109">Data type</Sentence>
-			<Sentence ID="111">Import way</Sentence>
+			<Sentence ID="111">Import as</Sentence>
 			<Sentence ID="112">Overflow</Sentence>
 			<Sentence ID="201">Hiérarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
 			<Sentence ID="202">Afficher ou cacher l&apos;objet</Sentence>
@@ -258,9 +258,9 @@
 			<Sentence ID="402">Visible</Sentence>
 			<Sentence ID="403">JavaScript</Sentence>
 			<Sentence ID="404">CSS</Sentence>
-			<Sentence ID="405">header</Sentence>
-			<Sentence ID="406">inline</Sentence>
-			<Sentence ID="407">dyn_lib</Sentence>
+			<Sentence ID="405">External file</Sentence>
+			<Sentence ID="406">Header inline</Sentence>
+			<Sentence ID="407">Parent inline</Sentence>
 			<Sentence ID="408">Auto</Sentence>
 			<Sentence ID="409">Hidden</Sentence>
 			<Sentence ID="411">Scroll</Sentence>
@@ -280,7 +280,7 @@
 			<Sentence ID="107">Высота</Sentence>
 			<Sentence ID="108">Данные</Sentence>
 			<Sentence ID="109">Тип данных</Sentence>
-			<Sentence ID="111">Import way</Sentence>
+			<Sentence ID="111">Import as</Sentence>
 			<Sentence ID="112">Переполнение</Sentence>
 			<Sentence ID="201">Приоритет в потоке гипертекста</Sentence>
 			<Sentence ID="202">Режим отображения объекта</Sentence>
@@ -308,9 +308,9 @@
 			<Sentence ID="402">Отображать</Sentence>
 			<Sentence ID="403">JavaScript</Sentence>
 			<Sentence ID="404">CSS</Sentence>
-			<Sentence ID="405">header</Sentence>
-			<Sentence ID="406">inline</Sentence>
-			<Sentence ID="407">dyn_lib</Sentence>
+			<Sentence ID="405">External file</Sentence>
+			<Sentence ID="406">Header inline</Sentence>
+			<Sentence ID="407">Parent inline</Sentence>
 			<Sentence ID="408">Авто</Sentence>
 			<Sentence ID="409">Скрытый</Sentence>
 			<Sentence ID="411">Прокрутка</Sentence>
@@ -442,26 +442,22 @@ class VDOM_editableresource(VDOM_object):
                     udata = u'<script type="text/javascript" src="/%s.res"></script>' % res_id
                     if self.import_way == "1":
                         udata = u'<script>{}</script>'.format(self.data)
+                    if self.import_way == "2":
+                        udata = u'<script>{}</script>'.format(self.data)
+                        return VDOM_object.render(self, contents=udata)
                     request.dyn_libraries[self.name] = udata
                     return VDOM_object.render(self, contents="")
                 else:
                     udata = '<!-- no res for script -->'
-            elif self.datatype == "2":
+            elif self.datatype == "2" or self.datatype == "3":
                 # first line of the css must be: @charset "UTF-8";
                 if res_id:
                     udata = u'<style rel="stylesheet" type="text/css">@import url("/%s.css");</style>' % res_id
                     if self.import_way == "1":
                         udata = u'<style>{}</style>'.format(self.data)
-                    request.dyn_libraries[self.name] = udata
-                    return VDOM_object.render(self, contents="")
-                else:
-                    udata = '<!-- no res for style -->'
-            elif self.datatype == "3":
-                # first line of the css must be: @charset "UTF-8";
-                if res_id:
-                    udata = u'<style rel="stylesheet" type="text/css">@import url("/%s.css");</style>' % res_id
-                    if self.import_way == "1":
+                    if self.import_way == "2":
                         udata = u'<style>{}</style>'.format(self.data)
+                        return VDOM_object.render(self, contents=udata)
                     request.dyn_libraries[self.name] = udata
                     return VDOM_object.render(self, contents="")
                 else:
