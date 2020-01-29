@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_image</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.5.8391</Version>
+		<Version>1.6.8391</Version>
 		<Category>Standard</Category>
 		<InterfaceType>4</InterfaceType>
 		<Icon>#Res(e8115c4a-903a-a4c6-c0bc-08a336586d51)</Icon>
@@ -190,6 +190,18 @@
 			<CodeInterface>TextField(5000)</CodeInterface>
 			<ColorGroup>0</ColorGroup>
 		</Attribute>
+		<Attribute>
+	      <Name>classname</Name>
+	      <DisplayName>#Lang(122)</DisplayName>
+	      <DefaultValue/>
+	      <Visible>1</Visible>
+	      <Help>#Lang(222)</Help>
+	      <InterfaceType>0</InterfaceType>
+	      <CodeInterface>TextField(500)</CodeInterface>
+	      <Colorgroup>4</Colorgroup>
+	      <ErrorValidationMessage>#Lang(322)</ErrorValidationMessage>
+	      <RegularExpressionValidation>^.*$</RegularExpressionValidation>
+	    </Attribute>
 	</Attributes>
 	<Languages>
 		<Language Code="en_US">
@@ -209,6 +221,7 @@
 			<Sentence ID="112">Hint</Sentence>
 			<Sentence ID="113">Hierarchy</Sentence>
 			<Sentence ID="114">Base64 Stream</Sentence>
+			<Sentence ID="122">CSS Class</Sentence>
 			<Sentence ID="201">Order of rendering the object on the page. Must be positive integer from 0 to 99. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
 			<Sentence ID="202">Visibility of the object.</Sentence>
 			<Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the z-index indicates the order of their displaying. The larger z-index is, the upper the object lies.</Sentence>
@@ -327,6 +340,7 @@
 			<Sentence ID="112">Hint</Sentence>
 			<Sentence ID="113">Hiérarchie</Sentence>
 			<Sentence ID="114">Base64 Stream</Sentence>
+			<Sentence ID="122">CSS Class</Sentence>
 			<Sentence ID="201">Hiérarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
 			<Sentence ID="202">Afficher ou cacher l&apos;objet</Sentence>
 			<Sentence ID="203">Niveau de superposition de l&apos;objet par rapport aux autres</Sentence>
@@ -445,6 +459,7 @@
 			<Sentence ID="112">Подсказка</Sentence>
 			<Sentence ID="113">Иерархия</Sentence>
 			<Sentence ID="114">Base64 данные</Sentence>
+			<Sentence ID="122">CSS Class</Sentence>
 			<Sentence ID="201">Приоритет в потоке гипертекста</Sentence>
 			<Sentence ID="202">Отображается объект или нет</Sentence>
 			<Sentence ID="203">Заголовок контейнера</Sentence>
@@ -743,17 +758,19 @@ class VDOM_image(VDOM_object):
             ih = u"""height="{height}" """.format(height = self.height)
 
         result = \
-            u"""<div id="{id}" style=" {visible} {style}">
+            u"""<div objname={name} class="{classname}" id="{id}" style=" {visible} {style}">
                     <img src="{link}" {width} {height} tabindex="{tabindex}" {title} />
                 </div>
             """.format(
                     id = id,
+                    name= self.name,
                     visible = visible,
                     style = style,
                     link = link,
                     width = iw,
                     height = ih,
                     tabindex = self.tabindex,
+                    classname = self.classname, 
                     title = title)
 
         return VDOM_object.render(self, contents=result)
