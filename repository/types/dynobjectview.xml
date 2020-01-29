@@ -14,10 +14,10 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.6.1</Version>
+    <Version>1.6.2</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
-    <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, accordeon, smartfolderdata</Containers>
+    <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, accordeon, smartfolderdata, flexcontainer</Containers>
     <Languages>en_US ,fr_FR ,ru_RU</Languages>
     <Handlers/>
     <RemoteMethods/>

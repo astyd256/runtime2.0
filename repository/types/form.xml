@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_form</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.53.8388</Version>
+		<Version>1.53.8389</Version>
 		<Category>Form</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(54e7f8ab-64f1-b113-029e-1703a76c6fa4)</Icon>
@@ -17,7 +17,7 @@
 		<Resizable>3</Resizable>
 		<OptimizationPriority>1</OptimizationPriority>
 		<Container>2</Container>
-		<Containers>htmlcontainer, dialog, container, tablecell, accordeon, dialog_2, vdomclass, smartfolderdata</Containers>
+		<Containers>htmlcontainer, dialog, container, tablecell, accordeon, dialog_2, vdomclass, smartfolderdata, flexcontainer</Containers>
 		<Languages>en_US, ru_RU, fr_FR</Languages>
 	</Information>
 	<Attributes>

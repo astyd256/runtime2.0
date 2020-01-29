@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_growl</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.29.8507</Version>
+		<Version>1.29.8508</Version>
 		<Category>Additional</Category>
 		<InterfaceType>3</InterfaceType>
 		<Icon>#Res(325920db-4f3a-da8e-bbfe-16b3a511efbe)</Icon>
@@ -17,7 +17,7 @@
 		<Resizable>0</Resizable>
 		<OptimizationPriority>1</OptimizationPriority>
 		<Container>1</Container>
-		<Containers>htmlcontainer, dialog, container, tablecell, form</Containers>
+		<Containers>htmlcontainer, dialog, container, tablecell, form, flexcontainer</Containers>
 		<Languages>en_US, ru_RU, fr_FR</Languages>
 	</Information>
 	<Attributes>

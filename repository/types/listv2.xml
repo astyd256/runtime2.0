@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_listv2</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.0.1a</Version>
+		<Version>1.0.2a</Version>
 		<Category>Standard</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(e1246b00-381e-4b32-bad7-4a647a08d557)</Icon>
@@ -17,7 +17,7 @@
 		<Resizable>3</Resizable>
 		<OptimizationPriority>1</OptimizationPriority>
 		<Container>1</Container>
-		<Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, smartfolderdata</Containers>
+		<Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, smartfolderdata, flexcontainer</Containers>
 		<Languages>en_US, fr_FR, ru_RU</Languages>
 	</Information>
 	<Attributes>
