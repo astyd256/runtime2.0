@@ -13,6 +13,7 @@ The first is needed to check that system meets all requirements:
 * xappy (copy module for windows)
 * python-ldap (pip install python-ldap)
 * soappy (pip install soappy)
+* pyScss[(docs)](https://pyscss.readthedocs.io/en/latest/index.html) (pip install pyScss) 
 
 Then download latest runtime. Before first run is needed to build C extensions:
 
