@@ -59,6 +59,18 @@
 			<ColorGroup>1</ColorGroup>
 		</Attribute>
 		<Attribute>
+			<Name>render_mode</Name>
+			<DisplayName>#Lang(928)</DisplayName>
+			<Description>#Lang(928)</Description>
+			<DefaultValue>2</DefaultValue>
+			<RegularExpressionValidation>^[012]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(925)|0)|(#Lang(926)|1)|(#Lang(927)|2))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
 			<Name>zindex</Name>
 			<DisplayName>#Lang(103)</DisplayName>
 			<Description>#Lang(203)</Description>
@@ -99,24 +111,48 @@
 			<DisplayName>#Lang(106)</DisplayName>
 			<Description>#Lang(206)</Description>
 			<DefaultValue></DefaultValue>
-			<RegularExpressionValidation>^\d{0,4}$</RegularExpressionValidation>
+			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw)|auto|)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
 			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(4)</CodeInterface>
-			<ColorGroup>1</ColorGroup>
+			<CodeInterface>TextField(32)</CodeInterface>
+			<ColorGroup>4</ColorGroup>
 		</Attribute>
 		<Attribute>
 			<Name>height</Name>
 			<DisplayName>#Lang(107)</DisplayName>
 			<Description>#Lang(207)</Description>
 			<DefaultValue></DefaultValue>
-			<RegularExpressionValidation>^\d{0,4}$</RegularExpressionValidation>
+			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw)|auto|)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
 			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(4)</CodeInterface>
-			<ColorGroup>1</ColorGroup>
+			<CodeInterface>TextField(32)</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>backgroundposition</Name>
+			<DisplayName>#Lang(135)</DisplayName>
+			<DefaultValue>center</DefaultValue>
+			<Visible>1</Visible>
+			<Help>#Lang(309)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(32)</CodeInterface>
+			<Colorgroup>0</Colorgroup>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+		</Attribute>
+		<Attribute>
+			<Name>backgroundrepeat</Name>
+			<DisplayName>#Lang(136)</DisplayName>
+			<DefaultValue>no-repeat</DefaultValue>
+			<Visible>1</Visible>
+			<Help>#Lang(309)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(32)</CodeInterface>
+			<Colorgroup>0</Colorgroup>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
 		</Attribute>
 		<Attribute>
 			<Name>tabindex</Name>
@@ -222,6 +258,8 @@
 			<Sentence ID="113">Hierarchy</Sentence>
 			<Sentence ID="114">Base64 Stream</Sentence>
 			<Sentence ID="122">CSS Class</Sentence>
+			<Sentence ID="135">Background position</Sentence>
+			<Sentence ID="136">Background repreat</Sentence>
 			<Sentence ID="201">Order of rendering the object on the page. Must be positive integer from 0 to 99. By default the value of hierarchy is 0, that means, that the object will be rendered in the order it is written in the XML-file of the VDOM application.</Sentence>
 			<Sentence ID="202">Visibility of the object.</Sentence>
 			<Sentence ID="203">Position in visual hierarchy of objects. If you have several objects in one container situated on each other, the z-index indicates the order of their displaying. The larger z-index is, the upper the object lies.</Sentence>
@@ -322,6 +360,10 @@
 			<Sentence ID="922">Top</Sentence>
 			<Sentence ID="923">Left</Sentence>
 			<Sentence ID="924">Top</Sentence>
+			<Sentence ID="925">image</Sentence>
+			<Sentence ID="926">bacgkround image</Sentence>
+			<Sentence ID="927">image into div</Sentence>
+			<Sentence ID="928">Render mode</Sentence>
 		</Language>
 		<Language Code="fr_FR">
 			<Sentence ID="001">Image</Sentence>
@@ -341,6 +383,8 @@
 			<Sentence ID="113">Hiérarchie</Sentence>
 			<Sentence ID="114">Base64 Stream</Sentence>
 			<Sentence ID="122">CSS Class</Sentence>
+			<Sentence ID="135">Background position</Sentence>
+			<Sentence ID="136">Background repreat</Sentence>
 			<Sentence ID="201">Hiérarchie de l&apos;objet, ordre de chargement de l&apos;objet par rapport aux autres</Sentence>
 			<Sentence ID="202">Afficher ou cacher l&apos;objet</Sentence>
 			<Sentence ID="203">Niveau de superposition de l&apos;objet par rapport aux autres</Sentence>
@@ -441,6 +485,10 @@
 			<Sentence ID="922">Haut</Sentence>
 			<Sentence ID="923">Gauche</Sentence>
 			<Sentence ID="924">Haut</Sentence>
+			<Sentence ID="925">image</Sentence>
+			<Sentence ID="926">bacgkround image</Sentence>
+			<Sentence ID="927">image into div</Sentence>
+			<Sentence ID="928">Render mode</Sentence>
 		</Language>
 		<Language Code="ru_RU">
 			<Sentence ID="001">Изображение</Sentence>
@@ -460,6 +508,8 @@
 			<Sentence ID="113">Иерархия</Sentence>
 			<Sentence ID="114">Base64 данные</Sentence>
 			<Sentence ID="122">CSS Class</Sentence>
+			<Sentence ID="135">Background position</Sentence>
+			<Sentence ID="136">Background repreat</Sentence>
 			<Sentence ID="201">Приоритет в потоке гипертекста</Sentence>
 			<Sentence ID="202">Отображается объект или нет</Sentence>
 			<Sentence ID="203">Заголовок контейнера</Sentence>
@@ -560,6 +610,10 @@
 			<Sentence ID="922">Верх</Sentence>
 			<Sentence ID="923">Лево</Sentence>
 			<Sentence ID="924">Верх</Sentence>
+			<Sentence ID="925">image</Sentence>
+			<Sentence ID="926">bacgkround image</Sentence>
+			<Sentence ID="927">image into div</Sentence>
+			<Sentence ID="928">Render mode</Sentence>
 		</Language>
 	</Languages>
 	<Resources>
@@ -739,39 +793,85 @@ class VDOM_image(VDOM_object):
 
         visible = u"display:none;" if self.visible == "0" else ""
 
-        style = u"z-index: {zindex}; position: {position}; top: {top}px; left: {left}px".format(
+        style = u"z-index: {zindex}; \
+		          position: {position}; \
+				  top: {top}px; \
+				  left: {left}px; \
+				  background-position: {backgroundposition}; \
+				  background-repeat: {backgroundrepeat}".format(
             zindex = self.zindex,
             position = self.position,
             top = self.top,
-            left = self.left)
+            left = self.left,
+			backgroundposition = self.backgroundposition,
+			backgroundrepeat = self.backgroundrepeat)
         id = 'o_' + (self.id).replace('-', '_')
         title = iw = ih = ""
         if self.hint:
             title = u"""title="{hint}" """.format(hint = self.hint)
-        if self.width == "":
-            self.width = 0
-        if int(self.width) > 0:
-            iw = u"""width="{width}" """.format(width = self.width)
-        if self.height == "":
-            self.height = 0
-        if int(self.height) > 0:
-            ih = u"""height="{height}" """.format(height = self.height)
 
-        result = \
-            u"""<div objname={name} class="{classname}" id="{id}" style=" {visible} {style}">
-                    <img src="{link}" {width} {height} tabindex="{tabindex}" {title} />
-                </div>
-            """.format(
-                    id = id,
-                    name= self.name,
-                    visible = visible,
-                    style = style,
-                    link = link,
-                    width = iw,
-                    height = ih,
-                    tabindex = self.tabindex,
-                    classname = self.classname, 
-                    title = title)
+        if self.width == "":
+            self.width = "0px"
+        iw = u"""width="{width}" """.format(width = self.width)
+
+        if self.height == "":
+            self.height = "0px"
+        ih = u"""height="{height}" """.format(height = self.height)
+
+        result = ""
+        if self.render_mode == "0":
+            style_mixin = ";background-image: url({link}); \
+			                height: {height}; \
+							width: {width};".format(link=link,height=self.height,width=self.width)
+            result = \
+				u"""<img objname={name} class="{classname}" src="{link}" tabindex="{tabindex}" style=" {visible} {style}" {title} />
+				""".format(
+						id = id,
+						name= self.name,
+						visible = visible,
+						style = style + style_mixin,
+						link = link,
+						width = iw,
+						height = ih,
+						tabindex = self.tabindex,
+						classname = self.classname, 
+						title = title)
+        if self.render_mode == "1":
+            style_mixin = ";background-image: url({link}); height: {height}; width: {width};".format(link=link,height=self.height,width=self.width)
+            result = \
+				u"""<div objname={name} class="{classname}" {width} {height} id="{id}" style=" {visible} {style}"></div>
+				""".format(
+						id = id,
+						name= self.name,
+						visible = visible,
+						style = style + style_mixin,
+						link = link,
+						width = iw,
+						height = ih,
+						tabindex = self.tabindex,
+						classname = self.classname, 
+						title = title)
+
+        if self.render_mode == "2":
+            style_mixin = ";background-image: url({link}); \
+			                height: {height}; \
+							width: {width};".format(link=link,height=self.height,width=self.width)	
+            result = \
+				u"""<div objname={name} class="{classname}" id="{id}" style=" {visible} {style}">
+						<img src="{link}" style="{style_mixin}" tabindex="{tabindex}" {title} />
+					</div>
+				""".format(
+						id = id,
+						name= self.name,
+						visible = visible,
+						style = style,
+						link = link,
+						width = iw,
+						height = ih,
+						tabindex = self.tabindex,
+						classname = self.classname, 
+						title = title,
+						style_mixin=style_mixin)
 
         return VDOM_object.render(self, contents=result)
 
