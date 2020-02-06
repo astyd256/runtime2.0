@@ -83,6 +83,18 @@
 			<ColorGroup>1</ColorGroup>
 		</Attribute>
 		<Attribute>
+			<Name>positioning1</Name>
+			<DisplayName>#Lang(121)</DisplayName>
+			<DefaultValue>1</DefaultValue>
+			<Visible>1</Visible>
+			<Help>#Lang(121)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(458)|1)|(#Lang(459)|2)|(#Lang(461)|3)|(#Lang(462)|0))</CodeInterface>
+			<Colorgroup>1</Colorgroup>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<RegularExpressionValidation>^[0123]$</RegularExpressionValidation>
+		</Attribute>
+		<Attribute>
 			<Name>top</Name>
 			<DisplayName>#Lang(104)</DisplayName>
 			<Description>#Lang(204)</Description>
@@ -101,6 +113,30 @@
 			<DefaultValue>0</DefaultValue>
 			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
 			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>right</Name>
+			<DisplayName>#Lang(929)</DisplayName>
+			<Description>#Lang(929)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>		
+		<Attribute>
+			<Name>bottom</Name>
+			<DisplayName>#Lang(930)</DisplayName>
+			<Description>#Lang(930)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
 			<CodeInterface>TextField(4)</CodeInterface>
@@ -257,6 +293,7 @@
 			<Sentence ID="112">Hint</Sentence>
 			<Sentence ID="113">Hierarchy</Sentence>
 			<Sentence ID="114">Base64 Stream</Sentence>
+			<Sentence ID="121">Position</Sentence>
 			<Sentence ID="122">CSS Class</Sentence>
 			<Sentence ID="135">Background position</Sentence>
 			<Sentence ID="136">Background repreat</Sentence>
@@ -286,6 +323,10 @@
 			<Sentence ID="313">Incorrect value, must be positive integer.</Sentence>
 			<Sentence ID="401">Invisible</Sentence>
 			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="458">Absolute</Sentence>
+			<Sentence ID="459">Relative</Sentence>
+			<Sentence ID="461">Fixed</Sentence>
+			<Sentence ID="462">Static</Sentence>
 			<Sentence ID="501">Visibility</Sentence>
 			<Sentence ID="502">Visibility</Sentence>
 			<Sentence ID="503">Visibility</Sentence>
@@ -364,6 +405,8 @@
 			<Sentence ID="926">bacgkround image</Sentence>
 			<Sentence ID="927">image into div</Sentence>
 			<Sentence ID="928">Render mode</Sentence>
+			<Sentence ID="929">Right</Sentence>
+			<Sentence ID="930">Bottom</Sentence>
 		</Language>
 		<Language Code="fr_FR">
 			<Sentence ID="001">Image</Sentence>
@@ -382,6 +425,7 @@
 			<Sentence ID="112">Hint</Sentence>
 			<Sentence ID="113">Hiérarchie</Sentence>
 			<Sentence ID="114">Base64 Stream</Sentence>
+			<Sentence ID="121">Position</Sentence>
 			<Sentence ID="122">CSS Class</Sentence>
 			<Sentence ID="135">Background position</Sentence>
 			<Sentence ID="136">Background repreat</Sentence>
@@ -433,6 +477,10 @@
 			<Sentence ID="522"></Sentence>
 			<Sentence ID="523"></Sentence>
 			<Sentence ID="524"></Sentence>
+			<Sentence ID="458">Absolute</Sentence>
+			<Sentence ID="459">Relative</Sentence>
+			<Sentence ID="461">Fixed</Sentence>
+			<Sentence ID="462">Static</Sentence>
 			<Sentence ID="601">Visibilité</Sentence>
 			<Sentence ID="602">Visibilité</Sentence>
 			<Sentence ID="603">Visibilité</Sentence>
@@ -489,6 +537,8 @@
 			<Sentence ID="926">bacgkround image</Sentence>
 			<Sentence ID="927">image into div</Sentence>
 			<Sentence ID="928">Render mode</Sentence>
+			<Sentence ID="929">Right</Sentence>
+			<Sentence ID="930">Bottom</Sentence>
 		</Language>
 		<Language Code="ru_RU">
 			<Sentence ID="001">Изображение</Sentence>
@@ -507,6 +557,7 @@
 			<Sentence ID="112">Подсказка</Sentence>
 			<Sentence ID="113">Иерархия</Sentence>
 			<Sentence ID="114">Base64 данные</Sentence>
+			<Sentence ID="121">Position</Sentence>
 			<Sentence ID="122">CSS Class</Sentence>
 			<Sentence ID="135">Background position</Sentence>
 			<Sentence ID="136">Background repreat</Sentence>
@@ -536,6 +587,10 @@
 			<Sentence ID="313">Неправильное значение, должно быть целое положительное число</Sentence>
 			<Sentence ID="401">Не отображается</Sentence>
 			<Sentence ID="402">Отображается</Sentence>
+			<Sentence ID="458">Absolute</Sentence>
+			<Sentence ID="459">Relative</Sentence>
+			<Sentence ID="461">Fixed</Sentence>
+			<Sentence ID="462">Static</Sentence>
 			<Sentence ID="501">Отображение</Sentence>
 			<Sentence ID="502">Отображение</Sentence>
 			<Sentence ID="503">Отображение</Sentence>
@@ -614,6 +669,8 @@
 			<Sentence ID="926">bacgkround image</Sentence>
 			<Sentence ID="927">image into div</Sentence>
 			<Sentence ID="928">Render mode</Sentence>
+			<Sentence ID="929">Right</Sentence>
+			<Sentence ID="930">Bottom</Sentence>
 		</Language>
 	</Languages>
 	<Resources>
@@ -792,19 +849,31 @@ class VDOM_image(VDOM_object):
             link = ""
 
         visible = u"display:none;" if self.visible == "0" else ""
-
+        position = "static"
+        if self.positioning1 == "0":
+            position = "static" 
+        if self.positioning1 == "1":
+            position = "absolute"
+        if self.positioning1 == "2":
+            position = "relative"
+        if self.positioning1 == "3":
+            position = "fixed"
         style = u"z-index: {zindex}; \
-		          position: {position}; \
 				  top: {top}px; \
 				  left: {left}px; \
+				  right: {right}px; \
+				  bottom: {bottom}px; \
 				  background-position: {backgroundposition}; \
-				  background-repeat: {backgroundrepeat}".format(
+				  background-repeat: {backgroundrepeat}; \
+				  position: {position};".format(
             zindex = self.zindex,
-            position = self.position,
             top = self.top,
             left = self.left,
-			backgroundposition = self.backgroundposition,
-			backgroundrepeat = self.backgroundrepeat)
+			right = self.right,
+			bottom = self.bottom,
+            backgroundposition = self.backgroundposition,
+            backgroundrepeat = self.backgroundrepeat,
+            position = position)
         id = 'o_' + (self.id).replace('-', '_')
         title = iw = ih = ""
         if self.hint:
