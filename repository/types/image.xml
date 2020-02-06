@@ -97,7 +97,7 @@
 		<Attribute>
 			<Name>flexgrow</Name>
 			<DisplayName>#Lang(932)</DisplayName>
-			<DefaultValue/>
+			<DefaultValue>0</DefaultValue>
 			<Visible>1</Visible>
 			<Help>#Lang(932)</Help>
 			<InterfaceType>0</InterfaceType>
@@ -109,7 +109,7 @@
 		<Attribute>
 			<Name>flexbasis</Name>
 			<DisplayName>#Lang(933)</DisplayName>
-			<DefaultValue/>
+			<DefaultValue>auto</DefaultValue>
 			<Visible>1</Visible>
 			<Help>#Lang(933)</Help>
 			<InterfaceType>0</InterfaceType>
@@ -121,7 +121,7 @@
 		<Attribute>
 			<Name>orderchild</Name>
 			<DisplayName>#Lang(934)</DisplayName>
-			<DefaultValue/>
+			<DefaultValue>0</DefaultValue>
 			<Visible>1</Visible>
 			<Help>#Lang(934)</Help>
 			<InterfaceType>0</InterfaceType>
@@ -133,7 +133,7 @@
 		<Attribute>
 			<Name>flexshrink</Name>
 			<DisplayName>#Lang(935)</DisplayName>
-			<DefaultValue/>
+			<DefaultValue>1</DefaultValue>
 			<Visible>1</Visible>
 			<Help>#Lang(935)</Help>
 			<InterfaceType>0</InterfaceType>
@@ -1033,7 +1033,7 @@ class VDOM_image(VDOM_object):
 				  clear: {clear}; \
 				  margin: {margin}; \
 				  padding: {padding}; \
-				  self-align: {alignself}; \
+				  align-self: {alignself}; \
 				  flex-grow: {flexgrow}; \
 				  flex-basis: {flexbasis}; \
 				  order: {order}; \
@@ -1217,7 +1217,7 @@ def on_update(object, attributes):
         # if o.attributes.width != width or o.attributes.height != height:
         #     o.set_attributes({"width": width, "height": height})
         if o.attributes["width"] != width or o.attributes["height"] != height:
-            attributes.update(width=str(width), height=str(height))
+            attributes.update(width=str(width) + "px", height=str(height) + "px")
     else:
         # if "width" in param and param["width"]["value"] != '' and int(param["width"]["value"]) > 2500:
         #     o.set_attributes({"width": 2500})
