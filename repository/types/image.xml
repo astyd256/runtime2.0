@@ -83,6 +83,102 @@
 			<ColorGroup>1</ColorGroup>
 		</Attribute>
 		<Attribute>
+			<Name>alignself</Name>
+			<DisplayName>#Lang(931)</DisplayName>
+			<DefaultValue>auto</DefaultValue>
+			<Visible>1</Visible>
+			<Help>#Lang(931)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(447)|flex-start)|(#Lang(448)|flex-end)|(#Lang(449)|center)|(#Lang(451)|baseline)|(#Lang(452)|stretch)|(#Lang(453)|auto))</CodeInterface>
+			<Colorgroup>3</Colorgroup>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+		</Attribute>
+		<Attribute>
+			<Name>flexgrow</Name>
+			<DisplayName>#Lang(932)</DisplayName>
+			<DefaultValue/>
+			<Visible>1</Visible>
+			<Help>#Lang(932)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<Colorgroup>3</Colorgroup>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<RegularExpressionValidation>^\d{0,2}$</RegularExpressionValidation>
+		</Attribute>
+		<Attribute>
+			<Name>flexbasis</Name>
+			<DisplayName>#Lang(933)</DisplayName>
+			<DefaultValue/>
+			<Visible>1</Visible>
+			<Help>#Lang(933)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(6)</CodeInterface>
+			<Colorgroup>3</Colorgroup>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<RegularExpressionValidation>(\d{1,4}(px)|\d{1,4}(em)|\d{1,4}(%))|^auto$|^$</RegularExpressionValidation>
+		</Attribute>
+		<Attribute>
+			<Name>orderchild</Name>
+			<DisplayName>#Lang(934)</DisplayName>
+			<DefaultValue/>
+			<Visible>1</Visible>
+			<Help>#Lang(934)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(2)</CodeInterface>
+			<Colorgroup>3</Colorgroup>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<RegularExpressionValidation>^\d{0,2}$</RegularExpressionValidation>
+		</Attribute>
+		<Attribute>
+			<Name>flexshrink</Name>
+			<DisplayName>#Lang(935)</DisplayName>
+			<DefaultValue/>
+			<Visible>1</Visible>
+			<Help>#Lang(935)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(3)</CodeInterface>
+			<Colorgroup>3</Colorgroup>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<RegularExpressionValidation>^\d{0,3}$</RegularExpressionValidation>
+			</Attribute>
+		<Attribute>
+			<Name>float</Name>
+			<DisplayName>#Lang(117)</DisplayName>
+			<DefaultValue>0</DefaultValue>
+			<Visible>1</Visible>
+			<Help>#Lang(217)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(454)|none)|(#Lang(455)|left)|(#Lang(456)|right)|(#Lang(457)|both))</CodeInterface>
+			<Colorgroup>4</Colorgroup>
+			<ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+		</Attribute>
+		<Attribute>
+			<Name>margins</Name>
+			<DisplayName>#Lang(118)</DisplayName>
+			<DefaultValue/>
+			<Visible>1</Visible>
+			<Help>#Lang(118)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(32)</CodeInterface>
+			<Colorgroup>4</Colorgroup>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%)|auto|)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
+		</Attribute>
+		<Attribute>
+			<Name>paddings</Name>
+			<DisplayName>#Lang(119)</DisplayName>
+			<DefaultValue/>
+			<Visible>1</Visible>
+			<Help>#Lang(119)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(32)</CodeInterface>
+			<Colorgroup>4</Colorgroup>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%)|auto|)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
+		</Attribute>
+		<Attribute>
 			<Name>positioning1</Name>
 			<DisplayName>#Lang(121)</DisplayName>
 			<DefaultValue>1</DefaultValue>
@@ -293,6 +389,9 @@
 			<Sentence ID="112">Hint</Sentence>
 			<Sentence ID="113">Hierarchy</Sentence>
 			<Sentence ID="114">Base64 Stream</Sentence>
+			<Sentence ID="117">Float</Sentence>
+			<Sentence ID="118">Margins</Sentence>
+     		<Sentence ID="119">Paddings</Sentence>
 			<Sentence ID="121">Position</Sentence>
 			<Sentence ID="122">CSS Class</Sentence>
 			<Sentence ID="135">Background position</Sentence>
@@ -323,6 +422,18 @@
 			<Sentence ID="313">Incorrect value, must be positive integer.</Sentence>
 			<Sentence ID="401">Invisible</Sentence>
 			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="446"></Sentence>
+			<Sentence ID="447">flex-start</Sentence>
+			<Sentence ID="448">flex-end</Sentence>
+			<Sentence ID="449">center</Sentence>
+			<Sentence ID="451">baseline</Sentence>
+			<Sentence ID="452">stretch</Sentence>
+			<Sentence ID="452">stretch</Sentence>
+			<Sentence ID="453">auto</Sentence>
+			<Sentence ID="454">none</Sentence>
+			<Sentence ID="455">Left</Sentence>
+			<Sentence ID="456">Right</Sentence>
+			<Sentence ID="457">Both</Sentence>
 			<Sentence ID="458">Absolute</Sentence>
 			<Sentence ID="459">Relative</Sentence>
 			<Sentence ID="461">Fixed</Sentence>
@@ -407,6 +518,11 @@
 			<Sentence ID="928">Render mode</Sentence>
 			<Sentence ID="929">Right</Sentence>
 			<Sentence ID="930">Bottom</Sentence>
+			<Sentence ID="931">Align-self</Sentence>
+			<Sentence ID="932">Flex-grow</Sentence>
+			<Sentence ID="933">Flex-basis</Sentence>
+			<Sentence ID="934">Order</Sentence>
+			<Sentence ID="935">Flex-shrink</Sentence>
 		</Language>
 		<Language Code="fr_FR">
 			<Sentence ID="001">Image</Sentence>
@@ -425,6 +541,9 @@
 			<Sentence ID="112">Hint</Sentence>
 			<Sentence ID="113">Hiérarchie</Sentence>
 			<Sentence ID="114">Base64 Stream</Sentence>
+			<Sentence ID="117">Float</Sentence>
+			<Sentence ID="118">Margins</Sentence>
+      		<Sentence ID="119">Paddings</Sentence>
 			<Sentence ID="121">Position</Sentence>
 			<Sentence ID="122">CSS Class</Sentence>
 			<Sentence ID="135">Background position</Sentence>
@@ -455,6 +574,21 @@
 			<Sentence ID="313">Valeur Incorrecte, doit être positive</Sentence>
 			<Sentence ID="401">Invisible</Sentence>
 			<Sentence ID="402">Visible</Sentence>
+			<Sentence ID="446"></Sentence>
+			<Sentence ID="447">flex-start</Sentence>
+			<Sentence ID="448">flex-end</Sentence>
+			<Sentence ID="449">center</Sentence>
+			<Sentence ID="451">baseline</Sentence>
+			<Sentence ID="452">stretch</Sentence>
+			<Sentence ID="453">auto</Sentence>
+			<Sentence ID="454">none</Sentence>
+			<Sentence ID="455">Left</Sentence>
+			<Sentence ID="456">Right</Sentence>
+			<Sentence ID="457">Both</Sentence>
+			<Sentence ID="458">Absolute</Sentence>
+			<Sentence ID="459">Relative</Sentence>
+			<Sentence ID="461">Fixed</Sentence>
+			<Sentence ID="462">Static</Sentence>
 			<Sentence ID="501">Visibilité</Sentence>
 			<Sentence ID="502">Visibilité</Sentence>
 			<Sentence ID="503">Visibilité</Sentence>
@@ -539,6 +673,11 @@
 			<Sentence ID="928">Render mode</Sentence>
 			<Sentence ID="929">Right</Sentence>
 			<Sentence ID="930">Bottom</Sentence>
+			<Sentence ID="931">Align-self</Sentence>
+			<Sentence ID="932">Flex-grow</Sentence>
+			<Sentence ID="933">Flex-basis</Sentence>
+			<Sentence ID="934">Order</Sentence>
+			<Sentence ID="935">Flex-shrink</Sentence>
 		</Language>
 		<Language Code="ru_RU">
 			<Sentence ID="001">Изображение</Sentence>
@@ -557,6 +696,9 @@
 			<Sentence ID="112">Подсказка</Sentence>
 			<Sentence ID="113">Иерархия</Sentence>
 			<Sentence ID="114">Base64 данные</Sentence>
+			<Sentence ID="117">Float</Sentence>
+			<Sentence ID="118">Margins</Sentence>
+      		<Sentence ID="119">Paddings</Sentence>
 			<Sentence ID="121">Position</Sentence>
 			<Sentence ID="122">CSS Class</Sentence>
 			<Sentence ID="135">Background position</Sentence>
@@ -587,6 +729,17 @@
 			<Sentence ID="313">Неправильное значение, должно быть целое положительное число</Sentence>
 			<Sentence ID="401">Не отображается</Sentence>
 			<Sentence ID="402">Отображается</Sentence>
+			<Sentence ID="446"></Sentence>
+			<Sentence ID="447">flex-start</Sentence>
+			<Sentence ID="448">flex-end</Sentence>
+			<Sentence ID="449">center</Sentence>
+			<Sentence ID="451">baseline</Sentence>
+			<Sentence ID="452">stretch</Sentence>
+			<Sentence ID="453">auto</Sentence>
+			<Sentence ID="454">none</Sentence>
+			<Sentence ID="455">Left</Sentence>
+			<Sentence ID="456">Right</Sentence>
+			<Sentence ID="457">Both</Sentence>
 			<Sentence ID="458">Absolute</Sentence>
 			<Sentence ID="459">Relative</Sentence>
 			<Sentence ID="461">Fixed</Sentence>
@@ -671,6 +824,11 @@
 			<Sentence ID="928">Render mode</Sentence>
 			<Sentence ID="929">Right</Sentence>
 			<Sentence ID="930">Bottom</Sentence>
+			<Sentence ID="931">Align-self</Sentence>
+			<Sentence ID="932">Flex-grow</Sentence>
+			<Sentence ID="933">Flex-basis</Sentence>
+			<Sentence ID="934">Order</Sentence>
+			<Sentence ID="935">Flex-shrink</Sentence>
 		</Language>
 	</Languages>
 	<Resources>
@@ -858,6 +1016,11 @@ class VDOM_image(VDOM_object):
             position = "relative"
         if self.positioning1 == "3":
             position = "fixed"
+
+        clear = "none"
+        if self.float == 'both':
+            clear = "both"
+            self.float = "none"
         style = u"z-index: {zindex}; \
 				  top: {top}px; \
 				  left: {left}px; \
@@ -865,7 +1028,16 @@ class VDOM_image(VDOM_object):
 				  bottom: {bottom}px; \
 				  background-position: {backgroundposition}; \
 				  background-repeat: {backgroundrepeat}; \
-				  position: {position};".format(
+				  position: {position}; \
+				  float: {float}; \
+				  clear: {clear}; \
+				  margin: {margin}; \
+				  padding: {padding}; \
+				  self-align: {alignself}; \
+				  flex-grow: {flexgrow}; \
+				  flex-basis: {flexbasis}; \
+				  order: {order}; \
+				  flex-shrink: {flexshrink};".format(
             zindex = self.zindex,
             top = self.top,
             left = self.left,
@@ -873,7 +1045,16 @@ class VDOM_image(VDOM_object):
 			bottom = self.bottom,
             backgroundposition = self.backgroundposition,
             backgroundrepeat = self.backgroundrepeat,
-            position = position)
+            position = position,
+			float = self.float,
+			clear = clear,
+			margin = self.margins,
+			padding = self.paddings,
+			alignself = self.alignself,
+			flexgrow = self.flexgrow,
+			flexbasis = self.flexbasis,
+			order = self.orderchild,
+			flexshrink = self.flexshrink)
         id = 'o_' + (self.id).replace('-', '_')
         title = iw = ih = ""
         if self.hint:
