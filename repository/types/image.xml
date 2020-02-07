@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_image</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.6.8392</Version>
+		<Version>2.6.8392</Version>
 		<Category>Standard</Category>
 		<InterfaceType>4</InterfaceType>
 		<Icon>#Res(e8115c4a-903a-a4c6-c0bc-08a336586d51)</Icon>
@@ -263,6 +263,18 @@
 			<ColorGroup>4</ColorGroup>
 		</Attribute>
 		<Attribute>
+		<Name>backgroundcolor</Name>
+			<DisplayName>#Lang(100)</DisplayName>
+			<DefaultValue/>
+			<Visible>1</Visible>
+			<Help>#Lang(100)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>Color()</CodeInterface>
+			<Colorgroup>4</Colorgroup>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+		</Attribute>
+		<Attribute>
 			<Name>backgroundposition</Name>
 			<DisplayName>#Lang(135)</DisplayName>
 			<DefaultValue>center</DefaultValue>
@@ -376,6 +388,7 @@
 			<Sentence ID="001">Image</Sentence>
 			<Sentence ID="002">The Image type produces an object displayed as an image. As a resource file here can be used image of any well-known type format: png, jpg, gif, bmp. The &quot;Width&quot; and &quot;Height&quot; attributes of the Image object change their values according to the size of the resource file.</Sentence>
 			<Sentence ID="003"></Sentence>
+			<Sentence ID="100">Background color</Sentence>
 			<Sentence ID="101">Hierarchy</Sentence>
 			<Sentence ID="102">Visibility</Sentence>
 			<Sentence ID="103">Z-Index</Sentence>
@@ -528,6 +541,7 @@
 			<Sentence ID="001">Image</Sentence>
 			<Sentence ID="002">Image</Sentence>
 			<Sentence ID="003"></Sentence>
+			<Sentence ID="100">Background color</Sentence>
 			<Sentence ID="101">Hiérarchie</Sentence>
 			<Sentence ID="102">Visibilité</Sentence>
 			<Sentence ID="103">Z-Index</Sentence>
@@ -683,6 +697,7 @@
 			<Sentence ID="001">Изображение</Sentence>
 			<Sentence ID="002">Изображение</Sentence>
 			<Sentence ID="003"></Sentence>
+			<Sentence ID="100">Background color</Sentence>
 			<Sentence ID="101">Иерархия</Sentence>
 			<Sentence ID="102">Отображение</Sentence>
 			<Sentence ID="103">Z-Индекс</Sentence>
@@ -1037,7 +1052,8 @@ class VDOM_image(VDOM_object):
 				  flex-grow: {flexgrow}; \
 				  flex-basis: {flexbasis}; \
 				  order: {order}; \
-				  flex-shrink: {flexshrink};".format(
+				  flex-shrink: {flexshrink}; \
+				  background-color: #{backgroundcolor}".format(
             zindex = self.zindex,
             top = self.top,
             left = self.left,
@@ -1054,7 +1070,8 @@ class VDOM_image(VDOM_object):
 			flexgrow = self.flexgrow,
 			flexbasis = self.flexbasis,
 			order = self.orderchild,
-			flexshrink = self.flexshrink)
+			flexshrink = self.flexshrink,
+			backgroundcolor = self.backgroundcolor)
         id = 'o_' + (self.id).replace('-', '_')
         title = iw = ih = ""
         if self.hint:
@@ -1150,8 +1167,8 @@ class VDOM_image(VDOM_object):
                         hierarchy = self.hierarchy,
                         top = self.top,
                         left = self.left,
-                        width = self.width or 50,
-                        height = self.height or 50,
+                        width = ''.join(ch for ch in self.width if ch.isdigit()) or 50,
+                        height = ''.join(ch for ch in self.height if ch.isdigit()) or 50,
                         image_x = 0,
                         image_y = 0,
                         image_id = self.value,
