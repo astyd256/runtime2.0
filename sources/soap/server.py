@@ -2475,7 +2475,7 @@ class VDOM_web_services_server(object):
         return "<Resource><![CDATA[%s]]></Resource>" % utils.encode.encode_resource(_data)
 
     def execute_sql(self, sid, skey, appid, dbid, sql, script):
-        raise NotImplementedError
+        # raise NotImplementedError
 
         if not self.__check_session(sid, skey):
             return self.__session_key_error()
