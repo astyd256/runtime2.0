@@ -243,7 +243,7 @@
 			<DisplayName>#Lang(106)</DisplayName>
 			<Description>#Lang(206)</Description>
 			<DefaultValue></DefaultValue>
-			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw)|auto|)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
+			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw|)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw|)|auto)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
 			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
@@ -255,7 +255,7 @@
 			<DisplayName>#Lang(107)</DisplayName>
 			<Description>#Lang(207)</Description>
 			<DefaultValue></DefaultValue>
-			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw)|auto|)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
+			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw|)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw|)|auto)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
 			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
@@ -1077,6 +1077,13 @@ class VDOM_image(VDOM_object):
         if self.hint:
             title = u"""title="{hint}" """.format(hint = self.hint)
 
+        if self.width.isdigit():
+            self.width = str(self.width) + "px"
+
+        if self.height.isdigit():
+            self.height = str(self.height) + "px"
+
+
         if self.width == "":
             self.width = "0px"
         iw = u"""width="{width}" """.format(width = self.width)
@@ -1120,12 +1127,11 @@ class VDOM_image(VDOM_object):
 						title = title)
 
         if self.render_mode == "2":
-            style_mixin = ";background-image: url({link}); \
-			                height: {height}; \
-							width: {width};".format(link=link,height=self.height,width=self.width)	
+            style_mixin = ";height: {height}; \
+							width: {width};".format(height=self.height,width=self.width)	
             result = \
-				u"""<div objname={name} class="{classname}" id="{id}" style=" {visible} {style}">
-						<img src="{link}" style="{style_mixin}" tabindex="{tabindex}" {title} />
+				u"""<div objname={name} class="{classname}" id="{id}" style="{style_mixin} {visible} {style}">
+						<img src="{link}" tabindex="{tabindex}" {title} />
 					</div>
 				""".format(
 						id = id,
