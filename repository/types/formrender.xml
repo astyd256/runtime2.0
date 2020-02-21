@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.13.9200</Version>
+    <Version>1.14.9200</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>form</Containers>
@@ -704,9 +704,8 @@ class VDOM_formrender(VDOM_object):
         current_language = language.get(self.language, 'a9f8d2bc-1a80-bc8e-11cd-1e4a7b049588')
 
         id = u"o_" + woid
-        ov = u"auto"
-        style = u"overflow:{ovf};z-index:{zind};position:{pos};top:{top}px;left:{left}px;width:{wid}px;height:{hei}px;" \
-                    .format(ovf = ov, zind = self.zindex, pos = self.position, 
+        style = u"z-index:{zind};position:{pos};top:{top}px;left:{left}px;width:{wid}px;height:{hei}px;" \
+                    .format(zind = self.zindex, pos = self.position, 
                                 top = self.top, left = self.left, wid = self.width, hei = self.height)
 
         classname = u"""class="%s" """ % self.classname if self.classname else u""
