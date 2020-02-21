@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_editableresource</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.96.6720</Version>
+		<Version>1.97.6720</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(a61a9853-638a-8f83-0a70-16a8c65eb8a1)</Icon>
@@ -138,7 +138,7 @@
 			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
-			<CodeInterface>DropDown((#Lang(403)|1)|(#Lang(404)|2)|(#Lang(413)|3))</CodeInterface>
+			<CodeInterface>DropDown((#Lang(403)|1)|(#Lang(404)|2)|(#Lang(413)|3)|(#Lang(414)|4))</CodeInterface>
 			<ColorGroup>2</ColorGroup>
 		</Attribute>
 		<Attribute>
@@ -216,6 +216,7 @@
 			<Sentence ID="411">Scroll</Sentence>
 			<Sentence ID="412">Visible</Sentence>
 			<Sentence ID="413">SCSS</Sentence>
+			<Sentence ID="414">OFF</Sentence>
 		</Language>
 		<Language Code="fr_FR">
 			<Sentence ID="001">HTML</Sentence>
@@ -266,6 +267,7 @@
 			<Sentence ID="411">Scroll</Sentence>
 			<Sentence ID="412">Visible</Sentence>
 			<Sentence ID="413">SCSS</Sentence>
+			<Sentence ID="414">OFF</Sentence>
 		</Language>
 		<Language Code="ru_RU">
 			<Sentence ID="001">Гипертекст</Sentence>
@@ -316,6 +318,7 @@
 			<Sentence ID="411">Прокрутка</Sentence>
 			<Sentence ID="412">Отображать</Sentence>
 			<Sentence ID="413">SCSS</Sentence>
+			<Sentence ID="414">OFF</Sentence>
 		</Language>
 	</Languages>
 	<Resources>
@@ -427,6 +430,8 @@ from scss.compiler import compile_string
 class VDOM_editableresource(VDOM_object):
 
     def render(self, contents=""):
+        if self.datatype == "4":
+            return VDOM_object.render(self, contents="")
         if self.visible == "1":
             resource = application.resources.get_by_label(self.id, "userdata")
             if resource:
@@ -473,7 +478,7 @@ class VDOM_editableresource(VDOM_object):
             return VDOM_object.render(self, contents="")
             
     def get_data_format (self) :
-        format_dict = {"1":"JS", "2":"CSS", "3": "SCSS"}
+        format_dict = {"1":"JS", "2":"CSS", "3": "SCSS", "4": "OFF"}
 
         text_format = ""
         try:
