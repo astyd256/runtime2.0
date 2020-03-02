@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.7.9200</Version>
+    <Version>1.7.9201</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, tablecell, accordeon, dialog_2, vdomclass, smartfolderdata</Containers>
@@ -1067,7 +1067,8 @@ class VDOM_formbuilder(VDOM_object):
                       `<ul class="dropdown-menu inner" role="menu"></ul>`
                     );
 
-                    data = JSON.parse(fieldData.value);
+                    if (fieldData.value) data = JSON.parse(fieldData.value);
+                    else data = []
                     data.forEach(el => {{
                       const item = $(
                         `<li data-value="${{el.data_value}}" data-level="${{el.data_level}}" class="level-${{el.data_level}}">`
