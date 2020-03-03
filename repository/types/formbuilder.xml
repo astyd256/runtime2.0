@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.7.9202</Version>
+    <Version>1.8.9202</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, tablecell, accordeon, dialog_2, vdomclass, smartfolderdata</Containers>
@@ -1036,6 +1036,13 @@ class VDOM_formbuilder(VDOM_object):
                           <path d="M3.94348 9.48811H8.91973V10.969H3.94348V9.48811Z" fill="black" />
                           <path d="M3.94348 11.9991H8.91973V13.48H3.94348V11.9991Z" fill="black" />
                         </svg>`
+              }},
+              {{
+                label: "Image",
+                attrs: {{
+                  type: "image"
+                }},
+                icon: `<div style='position: relative; padding-left: 26px;'><span style='font-size: 25px;float: left;top: -10px;left: -5px;position: absolute;'>🖻</span><div>`
               }}
             ];
             var templates = {{
@@ -1099,6 +1106,28 @@ class VDOM_formbuilder(VDOM_object):
                       search: true,
                       width: 250
                     }});
+                  }}
+                }};
+              }},
+              image: function(fieldData) {{
+                return {{
+                  field: '<span id="' + fieldData.name + '">',
+                  onRender: function() {{
+                    if (fieldData.value) data = JSON.parse(fieldData.value)
+                    else data = {{}}
+                    const width = data.width;
+                    const height = data.height;
+                    const id = `data-id='${{fieldData.name}}'`;
+                    const src = data.src;
+                    const styles = 
+                    `
+                      img[${{id}}] 
+                      {{
+                          width: ${{width}};
+                          height: ${{height}};
+                      }}
+                    `
+                    $(document.getElementById(fieldData.name)).html(`<style>${{styles}}</style><img ${{id}} src='${{src}}'/>`);
                   }}
                 }};
               }}
