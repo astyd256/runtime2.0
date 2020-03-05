@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_editableresource</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.97.6720</Version>
+		<Version>1.98.6720</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(a61a9853-638a-8f83-0a70-16a8c65eb8a1)</Icon>
@@ -432,6 +432,7 @@ class VDOM_editableresource(VDOM_object):
     def render(self, contents=""):
         if self.datatype == "4":
             return VDOM_object.render(self, contents="")
+        import_way_is_inline = self.import_way=="1" or self.import_way=="2"
         if self.visible == "1":
             resource = application.resources.get_by_label(self.id, "userdata")
             if resource:
@@ -439,30 +440,34 @@ class VDOM_editableresource(VDOM_object):
             else:
                 res_type = "js" if self.datatype == '1' else "css" if (self.datatype == '2' or self.datatype == '3') else "txt"
                 self.data = compile_string(self.data) if self.datatype == '3' else self.data
-                res_id = application.resources.create_temporary(self.id, "data", self.data, res_type, "data")
+                if not import_way_is_inline:
+                    res_id = application.resources.create_temporary(self.id, "data", self.data, res_type, "data")
 
             udata = ""
             if self.datatype == "1":
+                if import_way_is_inline:
+                    udata = u'<script>{}</script>'.format(self.data)
+                    if self.import_way == "1":
+                        request.dyn_libraries[self.name] = udata
+                        return VDOM_object.render(self, contents="")
+                    if self.import_way == "2":
+                        return VDOM_object.render(self, contents=udata)
                 if res_id:
                     udata = u'<script type="text/javascript" src="/%s.res"></script>' % res_id
-                    if self.import_way == "1":
-                        udata = u'<script>{}</script>'.format(self.data)
-                    if self.import_way == "2":
-                        udata = u'<script>{}</script>'.format(self.data)
-                        return VDOM_object.render(self, contents=udata)
                     request.dyn_libraries[self.name] = udata
                     return VDOM_object.render(self, contents="")
                 else:
                     udata = '<!-- no res for script -->'
             elif self.datatype == "2" or self.datatype == "3":
-                # first line of the css must be: @charset "UTF-8";
+                if import_way_is_inline:
+                    udata = u'<style>{}</style>'.format(self.data)
+                    if self.import_way == "1":
+                        request.dyn_libraries[self.name] = udata
+                        return VDOM_object.render(self, contents="")
+                    if self.import_way == "2":
+                        return VDOM_object.render(self, contents=udata)
                 if res_id:
                     udata = u'<style rel="stylesheet" type="text/css">@import url("/%s.css");</style>' % res_id
-                    if self.import_way == "1":
-                        udata = u'<style>{}</style>'.format(self.data)
-                    if self.import_way == "2":
-                        udata = u'<style>{}</style>'.format(self.data)
-                        return VDOM_object.render(self, contents=udata)
                     request.dyn_libraries[self.name] = udata
                     return VDOM_object.render(self, contents="")
                 else:
@@ -471,8 +476,6 @@ class VDOM_editableresource(VDOM_object):
                 udata = self.data
 
             id = 'o_' + (self.id).replace('-', '_')
-
-
 
         else:
             return VDOM_object.render(self, contents="")
