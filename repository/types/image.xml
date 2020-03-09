@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_image</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>2.6.8393</Version>
+		<Version>3.6.8393</Version>
 		<Category>Standard</Category>
 		<InterfaceType>4</InterfaceType>
 		<Icon>#Res(e8115c4a-903a-a4c6-c0bc-08a336586d51)</Icon>
@@ -35,6 +35,18 @@
 			<ColorGroup>1</ColorGroup>
 		</Attribute>
 		<Attribute>
+	      <Name>classname</Name>
+	      <DisplayName>#Lang(122)</DisplayName>
+	      <DefaultValue></DefaultValue>
+	      <Visible>1</Visible>
+	      <Help>#Lang(222)</Help>
+	      <InterfaceType>0</InterfaceType>
+	      <CodeInterface>TextField(500)</CodeInterface>
+	      <Colorgroup>4</Colorgroup>
+	      <ErrorValidationMessage>#Lang(322)</ErrorValidationMessage>
+	      <RegularExpressionValidation>^.*$</RegularExpressionValidation>
+	    </Attribute>
+		<Attribute>
 			<Name>hierarchy</Name>
 			<DisplayName>#Lang(101)</DisplayName>
 			<Description>#Lang(201)</Description>
@@ -45,6 +57,114 @@
 			<InterfaceType>0</InterfaceType>
 			<CodeInterface>TextField(2)</CodeInterface>
 			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>value</Name>
+			<DisplayName>#Lang(109)</DisplayName>
+			<Description>#Lang(209)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>File()</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>width</Name>
+			<DisplayName>#Lang(106)</DisplayName>
+			<Description>#Lang(206)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw|)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw|)|auto|)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(32)</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>height</Name>
+			<DisplayName>#Lang(107)</DisplayName>
+			<Description>#Lang(207)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw|)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw|)|auto|)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(32)</CodeInterface>
+			<ColorGroup>4</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>top</Name>
+			<DisplayName>#Lang(104)</DisplayName>
+			<Description>#Lang(204)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>left</Name>
+			<DisplayName>#Lang(105)</DisplayName>
+			<Description>#Lang(205)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>right</Name>
+			<DisplayName>#Lang(929)</DisplayName>
+			<Description>#Lang(929)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>		
+		<Attribute>
+			<Name>bottom</Name>
+			<DisplayName>#Lang(930)</DisplayName>
+			<Description>#Lang(930)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(4)</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>margins</Name>
+			<DisplayName>#Lang(118)</DisplayName>
+			<DefaultValue></DefaultValue>
+			<Visible>1</Visible>
+			<Help>#Lang(118)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(32)</CodeInterface>
+			<Colorgroup>4</Colorgroup>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%)|auto|)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
+		</Attribute>
+		<Attribute>
+			<Name>paddings</Name>
+			<DisplayName>#Lang(119)</DisplayName>
+			<DefaultValue></DefaultValue>
+			<Visible>1</Visible>
+			<Help>#Lang(119)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(32)</CodeInterface>
+			<Colorgroup>4</Colorgroup>
+			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%)|auto|)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
 		</Attribute>
 		<Attribute>
 			<Name>visible</Name>
@@ -85,7 +205,7 @@
 		<Attribute>
 			<Name>alignself</Name>
 			<DisplayName>#Lang(931)</DisplayName>
-			<DefaultValue>auto</DefaultValue>
+			<DefaultValue></DefaultValue>
 			<Visible>1</Visible>
 			<Help>#Lang(931)</Help>
 			<InterfaceType>0</InterfaceType>
@@ -97,7 +217,7 @@
 		<Attribute>
 			<Name>flexgrow</Name>
 			<DisplayName>#Lang(932)</DisplayName>
-			<DefaultValue>0</DefaultValue>
+			<DefaultValue></DefaultValue>
 			<Visible>1</Visible>
 			<Help>#Lang(932)</Help>
 			<InterfaceType>0</InterfaceType>
@@ -109,7 +229,7 @@
 		<Attribute>
 			<Name>flexbasis</Name>
 			<DisplayName>#Lang(933)</DisplayName>
-			<DefaultValue>auto</DefaultValue>
+			<DefaultValue></DefaultValue>
 			<Visible>1</Visible>
 			<Help>#Lang(933)</Help>
 			<InterfaceType>0</InterfaceType>
@@ -121,7 +241,7 @@
 		<Attribute>
 			<Name>orderchild</Name>
 			<DisplayName>#Lang(934)</DisplayName>
-			<DefaultValue>0</DefaultValue>
+			<DefaultValue></DefaultValue>
 			<Visible>1</Visible>
 			<Help>#Lang(934)</Help>
 			<InterfaceType>0</InterfaceType>
@@ -133,7 +253,7 @@
 		<Attribute>
 			<Name>flexshrink</Name>
 			<DisplayName>#Lang(935)</DisplayName>
-			<DefaultValue>1</DefaultValue>
+			<DefaultValue></DefaultValue>
 			<Visible>1</Visible>
 			<Help>#Lang(935)</Help>
 			<InterfaceType>0</InterfaceType>
@@ -145,7 +265,7 @@
 		<Attribute>
 			<Name>float</Name>
 			<DisplayName>#Lang(117)</DisplayName>
-			<DefaultValue>0</DefaultValue>
+			<DefaultValue></DefaultValue>
 			<Visible>1</Visible>
 			<Help>#Lang(217)</Help>
 			<InterfaceType>0</InterfaceType>
@@ -153,30 +273,6 @@
 			<Colorgroup>4</Colorgroup>
 			<ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
 			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
-		</Attribute>
-		<Attribute>
-			<Name>margins</Name>
-			<DisplayName>#Lang(118)</DisplayName>
-			<DefaultValue/>
-			<Visible>1</Visible>
-			<Help>#Lang(118)</Help>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(32)</CodeInterface>
-			<Colorgroup>4</Colorgroup>
-			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
-			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%)|auto|)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
-		</Attribute>
-		<Attribute>
-			<Name>paddings</Name>
-			<DisplayName>#Lang(119)</DisplayName>
-			<DefaultValue/>
-			<Visible>1</Visible>
-			<Help>#Lang(119)</Help>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(32)</CodeInterface>
-			<Colorgroup>4</Colorgroup>
-			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
-			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%)|auto|)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
 		</Attribute>
 		<Attribute>
 			<Name>positioning1</Name>
@@ -191,81 +287,9 @@
 			<RegularExpressionValidation>^[0123]$</RegularExpressionValidation>
 		</Attribute>
 		<Attribute>
-			<Name>top</Name>
-			<DisplayName>#Lang(104)</DisplayName>
-			<Description>#Lang(204)</Description>
-			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(304)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(4)</CodeInterface>
-			<ColorGroup>1</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>left</Name>
-			<DisplayName>#Lang(105)</DisplayName>
-			<Description>#Lang(205)</Description>
-			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(305)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(4)</CodeInterface>
-			<ColorGroup>1</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>right</Name>
-			<DisplayName>#Lang(929)</DisplayName>
-			<Description>#Lang(929)</Description>
-			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(4)</CodeInterface>
-			<ColorGroup>1</ColorGroup>
-		</Attribute>		
-		<Attribute>
-			<Name>bottom</Name>
-			<DisplayName>#Lang(930)</DisplayName>
-			<Description>#Lang(930)</Description>
-			<DefaultValue>0</DefaultValue>
-			<RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(4)</CodeInterface>
-			<ColorGroup>1</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>width</Name>
-			<DisplayName>#Lang(106)</DisplayName>
-			<Description>#Lang(206)</Description>
-			<DefaultValue></DefaultValue>
-			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw|)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw|)|auto)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(306)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(32)</CodeInterface>
-			<ColorGroup>4</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>height</Name>
-			<DisplayName>#Lang(107)</DisplayName>
-			<Description>#Lang(207)</Description>
-			<DefaultValue></DefaultValue>
-			<RegularExpressionValidation>^[ \t]*(((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw|)|auto)[ \t]+){0,3}((-?\d{0,4}\.?\d{1,2})(px|em|ex|pt|cm|mm|in|%|vh|vw|)|auto)[ \t]*$|^$|^[ \t]*inherit[ \t]*$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(307)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>TextField(32)</CodeInterface>
-			<ColorGroup>4</ColorGroup>
-		</Attribute>
-		<Attribute>
-		<Name>backgroundcolor</Name>
+			<Name>backgroundcolor</Name>
 			<DisplayName>#Lang(100)</DisplayName>
-			<DefaultValue/>
+			<DefaultValue></DefaultValue>
 			<Visible>1</Visible>
 			<Help>#Lang(100)</Help>
 			<InterfaceType>0</InterfaceType>
@@ -308,18 +332,6 @@
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
 			<CodeInterface>TextField(4)</CodeInterface>
-			<ColorGroup>2</ColorGroup>
-		</Attribute>
-		<Attribute>
-			<Name>value</Name>
-			<DisplayName>#Lang(109)</DisplayName>
-			<Description>#Lang(209)</Description>
-			<DefaultValue></DefaultValue>
-			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
-			<ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
-			<Visible>1</Visible>
-			<InterfaceType>0</InterfaceType>
-			<CodeInterface>File()</CodeInterface>
 			<ColorGroup>2</ColorGroup>
 		</Attribute>
 		<Attribute>
@@ -370,18 +382,6 @@
 			<CodeInterface>TextField(5000)</CodeInterface>
 			<ColorGroup>0</ColorGroup>
 		</Attribute>
-		<Attribute>
-	      <Name>classname</Name>
-	      <DisplayName>#Lang(122)</DisplayName>
-	      <DefaultValue/>
-	      <Visible>1</Visible>
-	      <Help>#Lang(222)</Help>
-	      <InterfaceType>0</InterfaceType>
-	      <CodeInterface>TextField(500)</CodeInterface>
-	      <Colorgroup>4</Colorgroup>
-	      <ErrorValidationMessage>#Lang(322)</ErrorValidationMessage>
-	      <RegularExpressionValidation>^.*$</RegularExpressionValidation>
-	    </Attribute>
 	</Attributes>
 	<Languages>
 		<Language Code="en_US">
@@ -1006,6 +1006,17 @@
 
 
 class VDOM_image(VDOM_object):
+    def get_css_style(self, style_name, style_value):
+        if style_name == 'clear' and style_value == 'none': return ""
+
+        if style_name == 'background-color' and style_value == '#': return ""
+
+        if style_name == 'z-index' and style_value == '0': return ""
+
+        if (style_name == "right" or style_name == "bottom") and (style_value == 'px'): return ""
+
+        if style_value == "": return ""
+        else: return "{}: {};".format(style_name, style_value)
 
     def render(self, contents=""):
 
@@ -1036,43 +1047,13 @@ class VDOM_image(VDOM_object):
         if self.float == 'both':
             clear = "both"
             self.float = "none"
-        style = u"z-index: {zindex}; \
-				  top: {top}px; \
-				  left: {left}px; \
-				  right: {right}px; \
-				  bottom: {bottom}px; \
-				  background-position: {backgroundposition}; \
-				  background-repeat: {backgroundrepeat}; \
-				  position: {position}; \
-				  float: {float}; \
-				  clear: {clear}; \
-				  margin: {margin}; \
-				  padding: {padding}; \
-				  align-self: {alignself}; \
-				  flex-grow: {flexgrow}; \
-				  flex-basis: {flexbasis}; \
-				  order: {order}; \
-				  flex-shrink: {flexshrink}; \
-				  background-color: #{backgroundcolor}".format(
-            zindex = self.zindex,
-            top = self.top,
-            left = self.left,
-			right = self.right,
-			bottom = self.bottom,
-            backgroundposition = self.backgroundposition,
-            backgroundrepeat = self.backgroundrepeat,
-            position = position,
-			float = self.float,
-			clear = clear,
-			margin = self.margins,
-			padding = self.paddings,
-			alignself = self.alignself,
-			flexgrow = self.flexgrow,
-			flexbasis = self.flexbasis,
-			order = self.orderchild,
-			flexshrink = self.flexshrink,
-			backgroundcolor = self.backgroundcolor)
+
         id = 'o_' + (self.id).replace('-', '_')
+        
+        styles = u"<style>{}</style>"
+        style = u""
+        style_mixin = u""
+
         title = iw = ih = ""
         if self.hint:
             title = u"""title="{hint}" """.format(hint = self.hint)
@@ -1094,16 +1075,12 @@ class VDOM_image(VDOM_object):
 
         result = ""
         if self.render_mode == "0":
-            style_mixin = ";background-image: url({link}); \
-			                height: {height}; \
-							width: {width};".format(link=link,height=self.height,width=self.width)
             result = \
-				u"""<img objname={name} class="{classname}" src="{link}" tabindex="{tabindex}" style=" {visible} {style}" {title} />
+				u"""<img id="{id}" objname={name} class="{classname}" src="{link}" tabindex="{tabindex}" style="{visible}" {title} />
 				""".format(
 						id = id,
 						name= self.name,
 						visible = visible,
-						style = style + style_mixin,
 						link = link,
 						width = iw,
 						height = ih,
@@ -1111,14 +1088,17 @@ class VDOM_image(VDOM_object):
 						classname = self.classname, 
 						title = title)
         if self.render_mode == "1":
-            style_mixin = ";background-image: url({link}); height: {height}; width: {width};".format(link=link,height=self.height,width=self.width)
+            style_mixin = "\
+			 #{id} {{ {backgroundimage} }}".format(
+					id=              id,
+					backgroundimage= self.get_css_style('background-image', "url("+link+")")
+				)
             result = \
-				u"""<div objname={name} class="{classname}" {width} {height} id="{id}" style=" {visible} {style}"></div>
+				u"""<div objname={name} class="{classname}" {width} {height} id="{id}" style="{visible}"></div>
 				""".format(
 						id = id,
 						name= self.name,
 						visible = visible,
-						style = style + style_mixin,
 						link = link,
 						width = iw,
 						height = ih,
@@ -1127,24 +1107,68 @@ class VDOM_image(VDOM_object):
 						title = title)
 
         if self.render_mode == "2":
-            style_mixin = ";height: {height}; \
-							width: {width};".format(height=self.height,width=self.width)	
             result = \
-				u"""<div objname={name} class="{classname}" id="{id}" style="{style_mixin} {visible} {style}">
+				u"""<div objname={name} class="{classname}" id="{id}" style="{visible}">
 						<img src="{link}" tabindex="{tabindex}" {title} />
 					</div>
 				""".format(
 						id = id,
 						name= self.name,
 						visible = visible,
-						style = style,
 						link = link,
 						width = iw,
 						height = ih,
 						tabindex = self.tabindex,
 						classname = self.classname, 
-						title = title,
-						style_mixin=style_mixin)
+						title = title)
+
+        style = u"\
+				#{id} {{ \
+				{height} \
+				{width} \
+				{zindex} \
+				{top} \
+				{left} \
+				{right} \
+				{bottom} \
+				{backgroundposition} \
+				{backgroundrepeat} \
+				{position} \
+				{float} \
+				{clear} \
+				{margin} \
+				{padding} \
+				{alignself} \
+				{flexgrow} \
+				{flexbasis} \
+				{order} \
+				{flexshrink} \
+				{backgroundcolor} }}".format(
+					id=id,
+					height=             self.get_css_style('height', self.height),
+					width=              self.get_css_style('width', self.width),
+					zindex=             self.get_css_style('z-index', self.zindex),
+					top=                self.get_css_style('top', self.top + "px"),
+					left=               self.get_css_style('left', self.left + "px"),
+					right=              self.get_css_style('right', self.right + "px"),
+					bottom=             self.get_css_style('bottom', self.bottom + "px"),
+					backgroundposition= self.get_css_style('background-position', self.backgroundposition),
+					backgroundrepeat=   self.get_css_style('background-repeat', self.backgroundrepeat),
+					position=           self.get_css_style('position', position),
+					float=              self.get_css_style('float', self.float),
+					clear=              self.get_css_style('clear', clear),
+					margin=             self.get_css_style('margin', self.margins),
+					padding=            self.get_css_style('padding', self.paddings),
+					alignself=          self.get_css_style('align-self', self.alignself),
+					flexgrow=           self.get_css_style('flex-grow', self.flexgrow),
+					flexbasis=          self.get_css_style('flex-basis', self.flexbasis),
+					order=              self.get_css_style('order', self.orderchild),
+					flexshrink=         self.get_css_style('flex-shrink', self.flexshrink),
+					backgroundcolor=    self.get_css_style('background-color', "#" + self.backgroundcolor))
+        style += style_mixin
+        styles = styles.format(style)
+        styles = styles.replace(" ", "").replace("\t","")
+        result += styles
 
         return VDOM_object.render(self, contents=result)
 
