@@ -14,10 +14,10 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.1</Version>
+    <Version>0.2</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
-    <Containers>htmlcontainer, dialog, container, tablecell, accordeon, dialog_2, vdomclass, smartfolderdata</Containers>
+    <Containers>htmlcontainer, container, flexcontainer, form</Containers>
     <Languages>en_US ,ru_RU ,fr_FR</Languages>
     <Handlers/>
     <RemoteMethods/>
