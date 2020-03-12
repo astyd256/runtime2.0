@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.1</Version>
+    <Version>0.2</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, tablecell, accordeon, dialog_2, vdomclass, smartfolderdata</Containers>
@@ -387,16 +387,20 @@ class VDOM_formeobuilder(VDOM_object):
 			"name": self.name
 			}
 
-		javascript = u"""<script>
-		const %(id)s = new FormeoEditor({
-			editorContainer: '#%(id)s',
-			svgSprite: 'https://draggable.github.io/formeo/assets/img/formeo-sprite.svg',
-      events: {
-        onSave: evt => {
-          execEventBinded('%(woid)s', "onSave", {"formJSON": %(id)s.formData});
-        }
+		javascript = u"""<script type='module'>
+      async function init() {
+        if (!window.FormeoEditor) await import('/72aef15c-ab6b-bb04-8163-1d8828ab5651.js');
+        const %(id)s = new FormeoEditor({
+          editorContainer: '#%(id)s',
+          svgSprite: 'https://draggable.github.io/formeo/assets/img/formeo-sprite.svg',
+          events: {
+            onSave: evt => {
+              execEventBinded('%(woid)s', "onSave", {"formJSON": %(id)s.formData});
+            }
+          }
+        });
       }
-		});
+      init();
 		</script>
 		""" % {
 			"id": id,
@@ -433,7 +437,7 @@ class VDOM_formeobuilder(VDOM_object):
 
 		]]></SourceCode>
   <Libraries>
-    <Library Target="html"><![CDATA[<script type="text/javascript" src="/72aef15c-ab6b-bb04-8163-1d8828ab5651.res"></script>]]></Library>
+    <!-- <Library Target="html"><![CDATA[<script type="text/javascript" src="/72aef15c-ab6b-bb04-8163-1d8828ab5651.res"></script>]]></Library> -->
     <Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/a0147d68-b7b4-b1f2-d796-223e6390b140.res" />]]></Library>
   </Libraries>
   <E2vdom>
