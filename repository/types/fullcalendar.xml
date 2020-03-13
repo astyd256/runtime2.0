@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>2.33.8389</Version>
+    <Version>2.33.8390</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, tablecell</Containers>
@@ -1526,8 +1526,6 @@ class VDOM_fullcalendar(VDOM_object):
   <Libraries>
     <Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/02dfd9db-16fe-3690-73e1-baf58cd3e6f4.res" />]]></Library>
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/10b18a20-59c9-2b2b-e4b3-7281bcc66d4f.res?v=1.6.4'></script>]]></Library>
-    <Library Target="html"><![CDATA[<script type='text/javascript' src='/d1e1abad-b15d-450e-b769-4fe10ccb02af.res'></script>]]></Library>
-    <Library Target="html"><![CDATA[<script type='text/javascript' src='/c81084e1-0296-56fc-339a-1b9328e787dd.res'></script>]]></Library>
     <Library Target="html"><![CDATA[<script type='text/javascript'>
 
 function parseRruleSources( sources )
