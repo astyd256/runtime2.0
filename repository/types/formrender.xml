@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.16.9203</Version>
+    <Version>1.17.9203</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>form</Containers>
@@ -716,7 +716,7 @@ class VDOM_formrender(VDOM_object):
         classname = u"""class="%s" """ % self.classname if self.classname else u""
 
         if VDOM_CONFIG_1["DEBUG"] == "1":
-            debug_info = u"objtype='formbuilder' objname='%s' ver='%s'" % (self.name, self.type.version)
+            debug_info = u"objtype='formRender' objname='%s' ver='%s'" % (self.name, self.type.version)
         else:
             debug_info = u""
 
@@ -796,22 +796,19 @@ class VDOM_formrender(VDOM_object):
                     const hidden_input = $(`<input class="hidden hidden-field" name="${{fieldData.name}}" readonly aria-hidden="true" type="hidden" />`);
                     btn_group.append(hidden_input);
 
-                    const javascript_for_change_event = document.createElement("script");
-                    javascript_for_change_event.type = "text/javascript";
-                    javascript_for_change_event.innerHTML = `
-                    $("[name='${{fieldData.name}}']").change(function() {{ 
-                      const new_val = $(this).val();
-                      execEventBinded('{woid}', "valuechange", {{"itemValue": new_val}});
-                    }})
-                    `
                     $(document.getElementById(fieldData.name)).append(btn_group);
-                    $(document.getElementById(fieldData.name)).append(javascript_for_change_event);
 
                     $(`[data-id='${{fieldData.name}}']`).hierarchySelect({{
                       hierarchy: true,
                       search: true,
                       width: 250
                     }});
+
+                    $("body").on("change", `#{id} input[name='${{fieldData.name}}']`, function() {{
+                        const new_val = $(this).val();
+                        execEventBinded('{woid}', "valuechange", {{"itemValue": new_val}});
+                    }})
+
                   }}
                 }};
               }},
