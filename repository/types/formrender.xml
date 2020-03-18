@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.17.9203</Version>
+    <Version>1.18.9203</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>form</Containers>
@@ -727,8 +727,10 @@ class VDOM_formrender(VDOM_object):
                     u"""
                     <div {debug_info} id="{id}" style="display:block;margin:0; {display} {style}" name="{name}" style="overflow:visible" {classname}></div>
        <script>
+              const {id} = {{}};
+              {id}.formData = {contents};
               jQuery(function($) {{
-                  $('#{id}').formRender({{fields: formRenderModules.fields, templates: formRenderModules.templates ,dataType: '{datatype}',formData: {contents}, i18n: {{
+                  $('#{id}').formRender({{fields: formRenderModules.fields, templates: formRenderModules.templates ,dataType: '{datatype}',formData: {id}.formData, i18n: {{
                   locale: '{language}',
                   location: '/',
                   extension: '.lang',
