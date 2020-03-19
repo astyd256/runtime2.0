@@ -1107,21 +1107,18 @@ class VDOM_gantt(VDOM_object):
             try:
                 level = int(self.disable_add)
                 params.append(u"""
-                gantt.templates.grid_row_class = function( start, end, task ){
-                        if ( task.$level >= %(level)s ){
-                    return "nested_task"
-                    }
-                    return "";
+                gantt.templates.grid_row_class = function( start, end, task ) {
+                    return ( task.$level >= %(level)s ) ? "nested_task" : ""
                 };
                 """ % {"level": level})
 
                 custom_style.append(u"""
                 .nested_task .gantt_add{
-                    display: none !important;
+                    display: none;
                 }
                 """)
             except:
-                raise Exception (u" Disable add button %s" % self.disable_add)
+                raise Exception (u" Disable add button param error value must be integer")
 
         if self.highlight_weekend:
             params.append(u"""
