@@ -374,17 +374,7 @@
     <Attribute>
       <Name>base_tasks</Name>
       <DisplayName>#Lang(127)</DisplayName>
-      <DefaultValue>gantt.config.lightbox.sections = [
-    {name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
-    {name: "time", map_to: "auto", type: "duration"},
-    {
-        name: "deadline", map_to: {start_date: "deadline"},
-        type: "duration_optional",
-        button: true,
-        single_date: true
-    },
-    {name: "type", height: 50, type: "typeselect", map_to: "type"}
-];
+      <DefaultValue>
 gantt.config.lightbox.project_sections= [
     {name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
     {name: "type", type: "typeselect", map_to: "type"},
@@ -1192,6 +1182,17 @@ class VDOM_gantt(VDOM_object):
 
         if self.deadline == "1":
             params.append(u"""
+                gantt.config.lightbox.sections = [
+                    {name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
+                    {name: "time", map_to: "auto", type: "duration"},
+                    {
+                        name: "deadline", map_to: {start_date: "deadline"},
+                        type: "duration_optional",
+                        button: true,
+                        single_date: true
+                    },
+                    {name: "type", height: 50, type: "typeselect", map_to: "type"}
+                ];
                 gantt.config.xml_date = "%d-%m-%Y %H:%i:%s";
 
                 gantt.locale.labels.deadline_enable_button = 'Set';
