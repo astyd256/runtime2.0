@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.100.9200</Version>
+    <Version>1.101.9200</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer</Containers>
@@ -218,6 +218,30 @@
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
+      <Name>start_date</Name>
+      <DisplayName>#Lang(927)</DisplayName>
+      <DefaultValue>new Date()</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(217)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>MultiLine(10000)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>end_date</Name>
+      <DisplayName>#Lang(928)</DisplayName>
+      <DefaultValue></DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(217)</Help>
+      <InterfaceType></InterfaceType>
+      <CodeInterface>MultiLine(10000)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
       <Name>deadline</Name>
       <DisplayName>#Lang(118)</DisplayName>
       <DefaultValue>1</DefaultValue>
@@ -225,7 +249,7 @@
       <Help>#Lang(218)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>DropDown((#Lang(416)|1)|(#Lang(417)|0))</CodeInterface>
-      <Colorgroup>2</Colorgroup>
+      <Colorgroup>1</Colorgroup>
       <ErrorValidationMessage>#Lang(318)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
@@ -411,7 +435,8 @@ gantt.config.lightbox.milestone_sections= [
     <Attribute>
       <Name>custom</Name>
       <DisplayName>#Lang(128)</DisplayName>
-      <DefaultValue>gantt.config.types.meeting = "meeting";
+      <DefaultValue>
+gantt.config.types.meeting = "meeting";
 gantt.locale.labels.type_meeting = "Meeting";
 gantt.config.lightbox.meeting_sections = [
     {name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
@@ -664,6 +689,8 @@ return "";
       <Sentence ID="924">Task object</Sentence>
       <Sentence ID="925">Task id</Sentence>
       <Sentence ID="926">Current X-value</Sentence>
+      <Sentence ID="927">Start date</Sentence>
+      <Sentence ID="928">End date</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="001">Gantt</Sentence>
@@ -851,6 +878,8 @@ return "";
       <Sentence ID="924">Task object</Sentence>
       <Sentence ID="925">Task id</Sentence>
       <Sentence ID="926">Current X-value</Sentence>
+      <Sentence ID="927">Start date</Sentence>
+      <Sentence ID="928">End date</Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="001">Gantt</Sentence>
@@ -1038,6 +1067,8 @@ return "";
       <Sentence ID="924">Task object</Sentence>
       <Sentence ID="925">Task id</Sentence>
       <Sentence ID="926">Текущее значение X</Sentence>
+      <Sentence ID="927">Start date</Sentence>
+      <Sentence ID="928">End date</Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -1279,6 +1310,8 @@ class VDOM_gantt(VDOM_object):
 
                     %(params)s
                     //cosnt gantt = Gantt.getGanttInstance();
+                    %(gantt_config_start_date)s;
+                    %(gantt_config_end_date)s;
                     gantt.init("%(id_gantt)s");
                     %(data)s
                     
@@ -1315,17 +1348,19 @@ class VDOM_gantt(VDOM_object):
                     
                 </script>
             """ % {
-                        "debug_info":         debug_info,
-                        "id":                 id,
-                        "woid":               woid,
-                        "display":            display,
-                        "style":              style,
-                        "name":               self.name,
-                        "classname":          classname,
-                        "id_gantt":           id_gantt,
-                        "params":             '\n'.join(params),
-                        "custom_style":       '\n'.join(custom_style),
-                        "data":               data,
+                        "debug_info":              debug_info,
+                        "id":                      id,
+                        "woid":                    woid,
+                        "display":                 display,
+                        "style":                   style,
+                        "name":                    self.name,
+                        "classname":               classname,
+                        "id_gantt":                id_gantt,
+                        "params":                  '\n'.join(params),
+                        "custom_style":            '\n'.join(custom_style),
+                        "data":                    data,
+                        "gantt_config_start_date": "" if not self.start_date else "gantt.config.start_date = {}".format(self.start_date),
+                        "gantt_config_end_date":   "" if not self.end_date else "gantt.config.end_date = {}".format(self.end_date)
                     }
 
 
