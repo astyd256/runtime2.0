@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_formbutton</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.16.6200</Version>
+		<Version>1.16.6201</Version>
 		<Category>Form</Category>
 		<InterfaceType>3</InterfaceType>
 		<Icon>#Res(31f8a850-4a26-04f7-4fe4-1705bb8d4471)</Icon>
@@ -716,7 +716,7 @@ Submit - send the from data using the request method selected in the Method attr
 		id = u"o_" + (self.id).replace('-', '_')
 
 		if VDOM_CONFIG_1["DEBUG"] == "1":
-			debug_info = u"objtype='formbutton' objname='%s'" % ( (self.label).replace("'", "") )
+			debug_info = u"objtype='formbutton' objname='%s'" % ( (self.name).replace("'", "") )
 		else:
 			debug_info = u""
 
