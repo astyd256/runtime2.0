@@ -1160,10 +1160,17 @@ class VDOM_gantt(VDOM_object):
                 if(!gantt.isWorkTime({task:task, date:date})){
                     return "week_end" ;
                 }
-            };""")
+            };
+            
+            gantt.templates.scale_cell_class = function(date){
+              if(!gantt.isWorkTime(date))
+                  return "week_end";
+            };
+            """)
 
             custom_style.append(u"""
-            .gantt_task_cell.week_end {
+            .gantt_task_cell.week_end,
+            .gantt_scale_cell.week_end {
                 background-color: #%(color)s;
             }
 
