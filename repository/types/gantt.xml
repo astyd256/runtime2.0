@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.101.9200</Version>
+    <Version>1.101.9201</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer</Containers>
@@ -1187,21 +1187,21 @@ class VDOM_gantt(VDOM_object):
                     maxColumnWidth: 54,
                     levels: [
                         [
-                            { unit: "month", format: "%M %Y", step: 1},
-                            { unit: "day", format: "%d %M", step: 1}
+                            { unit: "day", step: 1},
+                            { unit: "week", step: 1}
                         ],
                         [
-                            { unit: "month", format: "%M %Y", step: 1},
-                            { unit: "day", format: "%d %M", step: 1},
-                            { unit: "hour", format: "%H:%i", step: 6}
+                            { unit: "day", step: 1},
+                            { unit: "month", step: 1},
+                            { unit: "hour", step: 6}
                         ],
                         [
-                            {unit: "day", format: "%d %M",step: 1},
-                            {unit: "hour",format: "%H:%i",step: 3}
+                            {unit: "day",step: 1},
+                            {unit: "hour",step: 3}
                         ],
                         [
-                            { unit: "day", format: "%d %M", step: 1 },
-                            { unit: "hour", format: "%H:%i", step: 1}
+                            { unit: "day", step: 1 },
+                            { unit: "hour", step: 1}
                         ]
                     ],
                     useKey: "ctrlKey",
