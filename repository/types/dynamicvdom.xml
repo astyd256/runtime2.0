@@ -677,9 +677,6 @@ TEMPLATE = u"""{libraries}
 </div>
 <script type='text/javascript'>
 {declarations}
-const el = document.getElementById("{id}")
-const shadow = el.attachShadow({{mode: 'open'}});
-shadow.innerHTML = `{contents}`;
 </script>
 {dynlibraries}"""
 
