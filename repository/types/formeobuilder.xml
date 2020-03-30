@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.2</Version>
+    <Version>0.3</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, tablecell, accordeon, dialog_2, vdomclass, smartfolderdata</Containers>
@@ -398,13 +398,14 @@ class VDOM_formeobuilder(VDOM_object):
               execEventBinded('%(woid)s', "onSave", {"formJSON": %(id)s.formData});
             }
           }
-        });
+        }, %(data)s);
       }
       init();
 		</script>
 		""" % {
 			"id": id,
-      "woid": woid
+      "woid": woid,
+      "data": self.data
 		}
 
 		styles = u"""<style>
