@@ -2,6 +2,11 @@
 import string
 import base64
 
+try:
+    import jsmin
+except ImportError as err:
+    jsmin = None
+
 import file_access
 import settings
 import managers
@@ -342,9 +347,12 @@ def type_builder(parser, installation_callback=None):
                             except KeyError:
                                 raise MissingAttributeError(u"Type")
                             def resource_handler(value):
+                                data = base64.b64decode(value)
+                                if resource_type == 'js' and jsmin is not None:
+                                    data = jsmin.jsmin(data)
                                 managers.resource_manager.add_resource(type.id, None,
                                     {"id": resource_id, "name": resource_name, "res_format": resource_type},
-                                    base64.b64decode(value), optimize=0)
+                                    data, optimize=0)
                             parser.handle_value(name, attributes, resource_handler)
                             # </Resource>
                         else:

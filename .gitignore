@@ -12,3 +12,4 @@ types/*
 fonts/*
 
 .DS_Store
+.idea/
