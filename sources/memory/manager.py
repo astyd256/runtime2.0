@@ -1,26 +1,26 @@
-
 import gc
 import os
 import os.path
-
-from weakref import ref
+import re
+import shutil
+import sqlite3
+import tempfile
 from threading import RLock
+from weakref import ref
 
-import settings
-import managers
 import file_access
-
+import managers
+import settings
 from logs import log
-from utils.structure import Structure
-from utils.properties import roproperty  # rwproperty
-from utils.tracing import format_exception_trace, describe_object, format_referrers
 from utils.parsing import Parser, ParsingException
+from utils.properties import roproperty  # rwproperty
+from utils.structure import Structure
+from utils.tracing import format_exception_trace, describe_object, format_referrers
 
-from .constants import DEFAULT_APPLICATION_NAME, APPLICATION_START_CONTEXT
-from .generic import MemoryBase
-from .type import type_builder, MemoryTypes
 from .application import application_builder, MemoryApplications
+from .constants import DEFAULT_APPLICATION_NAME
 from .daemon import MemoryWriter, MemoryCleaner
+from .type import type_builder, MemoryTypes
 
 
 class AlreadyExistsError(Exception):
@@ -214,6 +214,204 @@ class Memory(object):
         except BaseException:
             cleanup(application.id)
             raise
+
+    # updating
+
+    def update_application(self, filename):
+        tmpldapdir = ""
+        tmpdbdir = ""  # directory for saving databases
+        tmpresdir = ""  # directory for saving resources
+        tmpappdir = ""  # directory for saving application
+        err_mess = ""
+
+        try:
+            f = open(filename, "rb")
+            some = f.read(1024)
+            f.close()
+            rexp = re.compile(r"\<id\>(.+)\<\/id\>", re.IGNORECASE)
+            subject = rexp.search(some)
+            if subject:
+                appid = subject.groups()[0].strip()
+                debug("Update application id=\"%s\"" % appid)
+            else:
+                raise Exception("Application XML-file is corrupted - unable to find application ID")
+
+            debug("Check application...")
+            err_mess = ". Try to INSTALL the new version instead of UPDATE"
+            try:
+                app = managers.memory.applications[appid]
+            except Exception, e:
+                raise Exception(str(e))
+
+            # temporal copy of installed application
+            debug("Save installed version...")
+            err_mess = ". Unable to save previous version of application"
+            tmpappdir = tempfile.mkdtemp("", "appupdate_", VDOM_CONFIG["TEMP-DIRECTORY"])
+            app.export(filename=os.path.join(tmpappdir, app.id + ".xml"))
+        except Exception, e:
+            if tmpappdir:
+                shutil.rmtree(tmpappdir, ignore_errors=True)
+            import traceback
+            traceback.print_exc(file=debugfile)
+            raise Exception(str(e) + err_mess)
+
+        # save databases in temp dir
+        debug("Save current databases...")
+        dbs = {}
+        try:
+            tmpdbdir = tempfile.mkdtemp("", "appupdate_", VDOM_CONFIG["TEMP-DIRECTORY"])
+            r = managers.database_manager.list_databases(appid)
+            for item in r:
+                try:
+                    obj = managers.database_manager.get_database(appid, item)
+                    con = sqlite3.connect(tmpdbdir + "/" + obj.filename)
+                    obj.backup_data(con)
+                    con.close()
+                    dbs[tmpdbdir + "/" + obj.filename] = {
+                        "id": obj.id,
+                        "name": obj.name,
+                        "owner_id": obj.owner_id,
+                        "type": "sqlite"
+                    }
+                    debug("Database %s saved" % obj.name)
+                except:
+                    pass
+        except:
+            pass
+
+        # save resources in temp dir
+        debug("Save current resources...")
+        res_numb = 0
+        try:
+            tmpresdir = tempfile.mkdtemp("", "appupdate_", VDOM_CONFIG["TEMP-DIRECTORY"])
+            rpath1 = os.path.join(VDOM_CONFIG["FILE-ACCESS-DIRECTORY"], file_access.RESOURCE, appid)
+            lst = managers.resource_manager.list_resources(appid)
+            for ll in lst:
+                try:
+                    ro = managers.resource_manager.get_resource(appid, ll)
+                    if not ro.dependences:
+                        shutil.copy2(rpath1 + "/" + ro.filename, tmpresdir)
+                        res_numb += 1
+                except:
+                    pass
+        except:
+            pass
+        debug("%s resources saved" % str(res_numb))
+        # save ldap in temp dir
+        debug("Save current ldap...")
+        from subprocess import Popen, PIPE
+        import shlex
+        try:
+            tmpldapdir = tempfile.mkdtemp("", "appupdate_", VDOM_CONFIG["TEMP-DIRECTORY"])
+            cmd = """sh /opt/boot/ldap_backup.sh -g %s -b -o %s""" % (appid, os.path.abspath(tmpldapdir))
+            out = Popen(shlex.split(cmd), stdin=PIPE, bufsize=-1, stdout=PIPE, stderr=PIPE, close_fds=True)
+            out.wait()
+        except:
+            pass
+        # uninstall application but keep databases
+        debug("Uninstall current version...")
+        try:
+            app.uninstall()
+        except Exception:
+            # nothing deleted (no del rights) - temp folders to be removed
+            if tmpappdir:
+                shutil.rmtree(tmpappdir, ignore_errors=True)
+            if tmpdbdir:
+                shutil.rmtree(tmpdbdir, ignore_errors=True)
+            if tmpresdir:
+                shutil.rmtree(tmpresdir, ignore_errors=True)
+            if tmpldapdir:
+                shutil.rmtree(tmpldapdir, ignore_errors=True)
+            raise
+
+        # install new version
+        debug("Install new version...")
+        try:
+            subject = self.install_application(filename=filename)
+        except Exception, e:
+            import traceback
+            traceback.print_exc(file=debugfile)
+
+        if subject is None:
+            if tmpappdir:
+                shutil.rmtree(tmpappdir, ignore_errors=True)
+            if tmpdbdir:
+                shutil.rmtree(tmpdbdir, ignore_errors=True)
+            if tmpresdir:
+                shutil.rmtree(tmpresdir, ignore_errors=True)
+            if tmpldapdir:
+                shutil.rmtree(tmpldapdir, ignore_errors=True)
+
+        app_exist = True
+        keep_backup = False
+        if subject is None:  # update error, restore previous version
+            debug("Install error, restore previous version...")
+            err_mess = "Unable to install new version - previous version seems to be not removed"
+            app_exist = False
+            try:
+                rest_path = os.path.join(tmpappdir, "%s.xml" % appid)
+                subject = managers.xml_manager.import_application(rest_path, ignore_version=True)
+                if not subject[0]:
+                    subject = (None, err_mess + ". " + subject[1] + ". Please, contact your dealer")
+                    keep_backup = True
+                else:
+                    debug("Restored successfully")
+                    app_exist = True
+                    subject = (None, err_mess + ". Previous version restored successfully")
+            except Exception, e:
+                import traceback
+                traceback.print_exc(file=debugfile)
+                subject = (None, err_mess + str(e))
+
+        else:  # update successful
+            debug("Installed successfully")
+
+        if app_exist:
+            # restore databases
+            debug("Restore databases...")
+            try:
+                # removing databases that we already had before
+                for old_db in dbs.itervalues():
+                    if managers.database_manager.check_database(appid, old_db["id"]):
+                        managers.database_manager.delete_database(appid, old_db["id"])
+            except:
+                pass
+            for path in dbs:
+                try:
+                    f = open(path, "rb")
+                    data = f.read()
+                    f.close()
+                    managers.database_manager.add_database(appid, dbs[path], data)
+                except:
+                    pass
+
+            # restore resources
+            debug("Restore resources...")
+            try:
+                os.mkdir(rpath1)
+            except:
+                pass
+            r2 = os.listdir(tmpresdir)
+            for item in r2:
+                try:
+                    shutil.copy2(os.path.join(tmpresdir, item), os.path.join(rpath1, item))
+                except:
+                    pass
+            # restore ldap
+            try:
+                cmd = """sh /opt/boot/ldap_backup.sh -g %s -r -i %s""" % (appid, tmpldapdir)
+                out = Popen(shlex.split(cmd), stdin=PIPE, bufsize=-1, stdout=PIPE, stderr=PIPE, close_fds=True)
+                out.wait()
+            except:
+                pass
+
+        if tmpappdir and not keep_backup:
+            shutil.rmtree(tmpappdir, ignore_errors=True)
+        if tmpresdir and not keep_backup:
+            shutil.rmtree(tmpresdir, ignore_errors=True)
+        if tmpldapdir and not keep_backup:
+            shutil.rmtree(tmpldapdir, ignore_errors=True)
+        return subject
 
     # installation
 

@@ -1,7 +1,6 @@
-
 import managers
-from .auxiliary import section, show, warn, search
 
+from .auxiliary import section, show, warn, search
 
 DEFAULT = 0
 

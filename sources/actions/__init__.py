@@ -23,4 +23,4 @@ import shell
 import user
 import group
 import soap
-import updatetype
+import update
