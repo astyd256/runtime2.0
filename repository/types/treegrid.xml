@@ -941,13 +941,22 @@ class VDOM_treegrid(VDOM_object):
 
 					execEventBinded('%(idn)s', 'cellclick', {
             keyField: key,
-            cellData:JSON.stringify(row), 
+            cellData:JSON.stringify(row),
             columnData:JSON.stringify(column)});
 				});
 
-				%(id_treegrid)s.events.on("cellDblClick", function (row,column) {
-					execEventBinded('%(idn)s', 'celldblclick', {cellData:JSON.stringify(row), columnData:JSON.stringify(column)});
-				});
+        %(id_treegrid)s.events.on("cellDblClick", function (row, column) {
+          //window.console.log(row);
+          //window.console.log('********');
+          //window.console.log(column);
+
+          const key = row.%(keyField)s
+
+          execEventBinded('%(idn)s', 'celldblclick', {
+            keyField: key,
+            cellData:JSON.stringify(row),
+            columnData:JSON.stringify(column)});
+        });
 	</script>
 </div>
 """ % {
@@ -991,7 +1000,9 @@ class VDOM_treegrid(VDOM_object):
         </Event>
         <Event Name="celldblclick" Help="#Lang(509)">
           <Parameters>
-            <Parameter Name="cellData" Order="0" VbType="" Help="#Lang(904)"/>
+            <Parameter Name="keyField" Order="0" VbType="" Help="#Lang(901)"/>
+            <Parameter Name="cellData" Order="0" VbType="" Help="#Lang(902)"/>
+            <Parameter Name="headerData" Order="0" VbType="" Help="#Lang(903)"/>
           </Parameters>
         </Event>
         <Event Name="custom" Help="#Lang(511)">
