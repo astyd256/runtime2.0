@@ -75,6 +75,8 @@ def run(filename, select=False):
         with section("update types from %s" % filename):
             for filename in managers.file_manager.list(file_access.FILE, None, filename):
                 if filename.endswith(EXTENSION):
-                    update(os.path.join(filename, filename), select=select)
+                    typename, _ = os.path.splitext(filename)
+                    type_path = locate_repository(type=typename)
+                    update(type_path, select=select)
     else:
         update(filename, select=select)
