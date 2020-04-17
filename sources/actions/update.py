@@ -21,8 +21,11 @@ def update(filename, select=False):
         notifications = []
         try:
             if entity is TYPE:
-                uninstall.run(filename, select)
-                install.run(filename, select)
+                typename = os.path.splitext(os.path.basename(filename))[0]
+                uninstall.run(typename, select)
+                subject = managers.memory.install_type(filename=filename)
+                if settings.STORE_BYTECODE:
+                    subject.compile()
             elif entity is APPLICATION:
                 subject = managers.memory.update_application(filename)
                 if settings.STORE_BYTECODE:
