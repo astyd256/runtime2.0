@@ -5,6 +5,7 @@ import re
 import shutil
 import sqlite3
 import tempfile
+from distutils.dir_util import copy_tree
 from threading import RLock
 from weakref import ref
 
@@ -220,6 +221,7 @@ class Memory(object):
     def update_application(self, filename):
         tmpldapdir = ""
         tmpdbdir = ""  # directory for saving databases
+        tmpstordir = ""  # directory for saving storage
         tmpresdir = ""  # directory for saving resources
         tmpappdir = ""  # directory for saving application
         err_mess = ""
@@ -279,12 +281,20 @@ class Memory(object):
         except:
             pass
 
+        debug("Save storage...")
+        try:
+            tmpstordir = tempfile.mkdtemp("", "appupdate_", VDOM_CONFIG["TEMP-DIRECTORY"])
+            storage_dir = os.path.join(settings.STORAGE_LOCATION, appid)
+            copy_tree(storage_dir, tmpstordir)
+        except:
+            pass
+
         # save resources in temp dir
         debug("Save current resources...")
         res_numb = 0
         try:
             tmpresdir = tempfile.mkdtemp("", "appupdate_", VDOM_CONFIG["TEMP-DIRECTORY"])
-            rpath1 = os.path.join(VDOM_CONFIG["FILE-ACCESS-DIRECTORY"], file_access.RESOURCE, appid)
+            rpath1 = os.path.join(settings.RESOURCES_LOCATION, appid)
             lst = managers.resource_manager.list_resources(appid)
             for ll in lst:
                 try:
@@ -297,6 +307,7 @@ class Memory(object):
         except:
             pass
         debug("%s resources saved" % str(res_numb))
+
         # save ldap in temp dir
         debug("Save current ldap...")
         from subprocess import Popen, PIPE
@@ -308,6 +319,7 @@ class Memory(object):
             out.wait()
         except:
             pass
+
         # uninstall application but keep databases
         debug("Uninstall current version...")
         try:
@@ -318,6 +330,8 @@ class Memory(object):
                 shutil.rmtree(tmpappdir, ignore_errors=True)
             if tmpdbdir:
                 shutil.rmtree(tmpdbdir, ignore_errors=True)
+            if tmpstordir:
+                shutil.rmtree(tmpldapdir, ignore_errors=True)
             if tmpresdir:
                 shutil.rmtree(tmpresdir, ignore_errors=True)
             if tmpldapdir:
@@ -331,12 +345,13 @@ class Memory(object):
         except Exception, e:
             import traceback
             traceback.print_exc(file=debugfile)
-
         if subject is None:
             if tmpappdir:
                 shutil.rmtree(tmpappdir, ignore_errors=True)
             if tmpdbdir:
                 shutil.rmtree(tmpdbdir, ignore_errors=True)
+            if tmpstordir:
+                shutil.rmtree(tmpldapdir, ignore_errors=True)
             if tmpresdir:
                 shutil.rmtree(tmpresdir, ignore_errors=True)
             if tmpldapdir:
@@ -385,6 +400,13 @@ class Memory(object):
                 except:
                     pass
 
+            debug("Restore storage...")
+            try:
+                storage_dir = os.path.join(settings.STORAGE_LOCATION, appid)
+                copy_tree(tmpstordir, storage_dir)
+            except:
+                pass
+
             # restore resources
             debug("Restore resources...")
             try:
@@ -407,6 +429,8 @@ class Memory(object):
 
         if tmpappdir and not keep_backup:
             shutil.rmtree(tmpappdir, ignore_errors=True)
+        if tmpstordir and not keep_backup:
+            shutil.rmtree(tmpldapdir, ignore_errors=True)
         if tmpresdir and not keep_backup:
             shutil.rmtree(tmpresdir, ignore_errors=True)
         if tmpldapdir and not keep_backup:
