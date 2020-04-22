@@ -3,12 +3,11 @@ import os
 import file_access
 import managers
 import settings
-from utils.auxiliary import forfeit
 
 from . import uninstall, install
-from .auxiliary import section, show, warn, detect, locate_repository, is_entity_name
+from .auxiliary import section, warn, show, detect, locate_repository, is_entity_name
 from .auxiliary.constants import TYPE, APPLICATION, EXTENSION, TYPES
-from .select import select as select_default
+from utils.auxiliary import forfeit
 
 
 def update(filename, select=False):
@@ -23,26 +22,23 @@ def update(filename, select=False):
             if entity is TYPE:
                 typename = os.path.splitext(os.path.basename(filename))[0]
                 uninstall.run(typename, select)
-                subject = managers.memory.install_type(filename=filename)
-                if settings.STORE_BYTECODE:
-                    subject.compile()
+                install.run(typename)
             elif entity is APPLICATION:
                 subject = managers.memory.update_application(filename)
                 if settings.STORE_BYTECODE:
                     for library in subject.libraries.itervalues():
                         library.compile()
+                show("contains %s" % subject)
+                with section("notifications"):
+                    for lineno, message in notifications:
+                        show("line %d: %s" % (lineno, forfeit(message)))
+                if select:
+                    if entity is not APPLICATION:
+                        raise Exception("can't select non-application")
+                    select(subject)
         except Exception as error:
             warn("unable to update %s: %s" % (entity, error))
             raise
-        else:
-            show("contains %s" % subject)
-            with section("notifications"):
-                for lineno, message in notifications:
-                    show("line %d: %s" % (lineno, forfeit(message)))
-            if select:
-                if entity is not APPLICATION:
-                    raise Exception("can't select non-application")
-                select_default(subject)
 
 
 def run(filename, select=False):
