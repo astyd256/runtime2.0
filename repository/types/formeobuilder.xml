@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.3</Version>
+    <Version>0.4</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, tablecell, accordeon, dialog_2, vdomclass, smartfolderdata</Containers>
@@ -380,17 +380,19 @@ class VDOM_formeobuilder(VDOM_object):
 		result = u"""
 			<div objname="%(name)s" data-id="%(id)s">
 				<div id="%(id)s"></div>
-				<button onclick="console.log(JSON.stringify(%(id)s.formData))">GET JSON IN CONSOLE</button>
+				<button data-ident="%(id)s">GET JSON IN CONSOLE</button>
 			</div>
 			""" % {
 			"id" : id,
 			"name": self.name
 			}
 
-		javascript = u"""<script type='module'>
+		javascript = u"""
+    <script type='module'>
+      var %(id)s = null
       async function init() {
         if (!window.FormeoEditor) await import('/72aef15c-ab6b-bb04-8163-1d8828ab5651.js');
-        const %(id)s = new FormeoEditor({
+        %(id)s = new FormeoEditor({
           editorContainer: '#%(id)s',
           svgSprite: 'https://draggable.github.io/formeo/assets/img/formeo-sprite.svg',
           events: {
@@ -399,8 +401,14 @@ class VDOM_formeobuilder(VDOM_object):
             }
           }
         }, %(data)s);
+        return %(id)s
       }
-      init();
+      init().then(function(data) {
+        %(id)s = data
+        $("[data-ident='%(id)s']").click(function() {
+          console.log(JSON.stringify(%(id)s.formData))
+        })
+      });
 		</script>
 		""" % {
 			"id": id,
