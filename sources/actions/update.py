@@ -3,11 +3,12 @@ import os
 import file_access
 import managers
 import settings
+from utils.auxiliary import forfeit
 
 from . import uninstall, install
 from .auxiliary import section, warn, show, detect, locate_repository, is_entity_name
 from .auxiliary.constants import TYPE, APPLICATION, EXTENSION, TYPES
-from utils.auxiliary import forfeit
+from .select import select as select_default
 
 
 def update(filename, select=False):
@@ -35,7 +36,7 @@ def update(filename, select=False):
                 if select:
                     if entity is not APPLICATION:
                         raise Exception("can't select non-application")
-                    select(subject)
+                    select_default(subject)
         except Exception as error:
             warn("unable to update %s: %s" % (entity, error))
             raise
