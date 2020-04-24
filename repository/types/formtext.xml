@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.88.6200</Version>
+    <Version>1.99.6200</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>form, password, container</Containers>
@@ -243,15 +243,27 @@
     </Attribute>
     <Attribute>
       <Name>customname</Name>
-      <DisplayName>#Lang(120)</DisplayName>
+      <DisplayName>#Lang(121)</DisplayName>
       <DefaultValue/>
       <Visible>1</Visible>
-      <Help>#Lang(320)</Help>
+      <Help>#Lang(221)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>TextField(100)</CodeInterface>
       <Colorgroup>1</Colorgroup>
-      <ErrorValidationMessage>#Lang(220)</ErrorValidationMessage>
+      <ErrorValidationMessage>#Lang(321)</ErrorValidationMessage>
       <RegularExpressionValidation>^.*$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>required</Name>
+      <DisplayName>#Lang(122)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(222)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(417)|0)|(#Lang(418)|1))</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(322)</ErrorValidationMessage>
+      <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
     </Attribute>
   </Attributes>
   <Languages>
@@ -277,7 +289,8 @@
       <Sentence ID="117">TabIndex</Sentence>
       <Sentence ID="118">CSS Class</Sentence>
       <Sentence ID="119">Border</Sentence>
-      <Sentence ID="120">Custom name</Sentence>
+      <Sentence ID="121">Custom name</Sentence>
+      <Sentence ID="122">Required</Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Order of rendering the object on the page</Sentence>
       <Sentence ID="203">Visibility of the object</Sentence>
@@ -296,7 +309,8 @@
       <Sentence ID="217">Index number of switching the elements on pressing the tab key</Sentence>
       <Sentence ID="218">CSS class name</Sentence>
       <Sentence ID="219">Define if the border is visible or not</Sentence>
-      <Sentence ID="220">invalid custom name for input</Sentence>
+      <Sentence ID="221">custom name for input</Sentence>
+      <Sentence ID="222">When present, it specifies that field must be filled out before submitting the form</Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Incorrect value, must be even integer from 0 to 99</Sentence>
       <Sentence ID="303">Incorrect value, must be either 0 or 1</Sentence>
@@ -315,7 +329,8 @@
       <Sentence ID="317">Incorrect value, must be positive integer</Sentence>
       <Sentence ID="318">Names of CSS classes</Sentence>
       <Sentence ID="319">Incorrect value, must be either 0 or 1</Sentence>
-      <Sentence ID="320">custom name for input</Sentence>
+      <Sentence ID="321">invalid custom name for input</Sentence>
+      <Sentence ID="322">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">Invisible</Sentence>
@@ -331,6 +346,8 @@
       <Sentence ID="414">On</Sentence>
       <Sentence ID="415">Invisible</Sentence>
       <Sentence ID="416">Visible</Sentence>
+      <Sentence ID="417">No</Sentence>
+      <Sentence ID="418">Yes</Sentence>
       <Sentence ID="501">Hide the object</Sentence>
       <Sentence ID="502">Show the object</Sentence>
       <Sentence ID="503">Hide the object</Sentence>
@@ -422,7 +439,8 @@
       <Sentence ID="117">TabIndex</Sentence>
       <Sentence ID="118">Class</Sentence>
       <Sentence ID="119">Bordure</Sentence>
-      <Sentence ID="120"></Sentence>
+      <Sentence ID="121"></Sentence>
+      <Sentence ID="122">Obligatoire</Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Hiérarchie de l'objet, ordre de chargement de l'objet par rapport aux autres</Sentence>
       <Sentence ID="203">Afficher ou cacher l'objet</Sentence>
@@ -441,7 +459,8 @@
       <Sentence ID="217">Tab index of the object on the page</Sentence>
       <Sentence ID="218">CSS class name</Sentence>
       <Sentence ID="219">Afficher ou masquer la bordure</Sentence>
-      <Sentence ID="220"></Sentence>
+      <Sentence ID="221"></Sentence>
+      <Sentence ID="222">Lorsqu'il est présent, il précise que le champ doit être rempli avant de soumettre le formulaire</Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Valeur Incorrecte, doit être positive</Sentence>
       <Sentence ID="303">Valeur Incorrecte, doit être 0 ou 1</Sentence>
@@ -460,7 +479,8 @@
       <Sentence ID="317">Valeur Incorrecte, doit être positive</Sentence>
       <Sentence ID="318">Incorrect value</Sentence>
       <Sentence ID="319">Valeur Incorrecte, doit être 0 ou 1</Sentence>
-      <Sentence ID="320"></Sentence>
+      <Sentence ID="321"></Sentence>
+      <Sentence ID="322">Valeur incorrecte, doit être 0 ou 1</Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">Invisible</Sentence>
@@ -476,6 +496,8 @@
       <Sentence ID="414">On</Sentence>
       <Sentence ID="415">Invisible</Sentence>
       <Sentence ID="416">Visible</Sentence>
+      <Sentence ID="417">Non</Sentence>
+      <Sentence ID="418">Oui</Sentence>
       <Sentence ID="501">Hide the object</Sentence>
       <Sentence ID="502">Show the object</Sentence>
       <Sentence ID="503">Hide the object</Sentence>
@@ -567,7 +589,8 @@
       <Sentence ID="117">Tab индекс</Sentence>
       <Sentence ID="118">Класс CSS</Sentence>
       <Sentence ID="119">Граница</Sentence>
-      <Sentence ID="120"></Sentence>
+      <Sentence ID="121"></Sentence>
+      <Sentence ID="122">Обязательное поле</Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
       <Sentence ID="203">Неправильное значение, должен быть указан 0 или 1</Sentence>
@@ -586,7 +609,8 @@
       <Sentence ID="217">Tab индекс объекта на странице</Sentence>
       <Sentence ID="218">Имя класса CSS</Sentence>
       <Sentence ID="219">Отображение границы</Sentence>
-      <Sentence ID="220"></Sentence>
+      <Sentence ID="221"></Sentence>
+      <Sentence ID="222">Когда он присутствует, он указывает, что поле ввода должно быть заполнено перед отправкой формы</Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Неправильное значение, должно быть указано целое число от 0 до 99</Sentence>
       <Sentence ID="303">Неправильное значение</Sentence>
@@ -605,7 +629,8 @@
       <Sentence ID="317">Неправильное значение, должно быть указано целое положительное число</Sentence>
       <Sentence ID="318">Неправильное значение</Sentence>
       <Sentence ID="319">Неправильное значение, должен быть указан 0 или 1</Sentence>
-      <Sentence ID="320"></Sentence>
+      <Sentence ID="321"></Sentence>
+      <Sentence ID="322">Неправильное значение: допустимы цифры 0 и 1</Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">Не отображать</Sentence>
@@ -621,6 +646,8 @@
       <Sentence ID="414">Включен</Sentence>
       <Sentence ID="415">Невидимая</Sentence>
       <Sentence ID="416">Видимая</Sentence>
+      <Sentence ID="417">Нет</Sentence>
+      <Sentence ID="418">Да</Sentence>
       <Sentence ID="501">Скрыть объект</Sentence>
       <Sentence ID="502">Показать объект</Sentence>
       <Sentence ID="503">Скрыть объект</Sentence>
@@ -820,6 +847,8 @@
 
 		border = u"border-width: 0px;" if self.multiline == "0" and self.border == "0" else u""
 		
+		required = 'required' if self.required=='1' else u''
+		
 		style = u"""z-index: {zind}; position: {pos}; top: {top}px; left: {left}px; width: {width}px; height: {height}px;
 					padding: 2px 5px; {display} {border} font: 14px tahoma
 				""".format(zind = self.zindex, pos = self.position, top = self.top, left = self.left, 
@@ -841,16 +870,32 @@
 			debug_info = u""
 
 		if self.multiline == "0":
-			result = u"""<input {debug_info} id="{id}" name="{name}" style="{style}" type="text" tabindex="{tabind}" 
-							value="{value}" class="{classn}" autocomplete="{auto}" {mode} {title} {placeholder} />
-					""".format(id = id, name = self.customname or self.name, style = style, tabind = self.tabindex, debug_info = debug_info,
-							value = unicode(self.value).replace('"', '&quot;'), classn = self.classname, auto = auto,
-							mode = mode, placeholder = placeholder, title = title)
+			result = u"""
+				<input {debug_info} {required} id="{id}" name="{name}" 
+					style="{style}" type="text" tabindex="{tabind}" 
+					value="{value}" class="{classn}" autocomplete="{auto}" 
+					{mode} {title} {placeholder} 
+				/>
+			""".format(
+				id=id, name=self.customname or self.name, style=style, 
+				tabind=self.tabindex, debug_info=debug_info,
+				value=unicode(self.value).replace('"', '&quot;'), 
+				classn=self.classname, auto=auto, mode=mode, 
+				placeholder=placeholder, title=title, 
+				required=required
+			)
 		else:
-			result = u"""<textarea {debug_info} id="{id}" name="{name}" tabindex="{tabind}" 
-							style="{style}" class="{classn}" {mode} {title} {placeholder}>{value}</textarea>
-					""".format(id = id, name = self.customname or self.name, tabind = self.tabindex, debug_info = debug_info,
-							style = style, classn = self.classname, mode = mode, value = self.value, placeholder = placeholder, title = title)
+			result = u"""
+				<textarea {debug_info} {required} id="{id}" name="{name}" 
+					tabindex="{tabind}" style="{style}" class="{classn}" 
+					{mode} {title} {placeholder}
+				>{value}</textarea>
+			""".format(
+				id=id, name=self.customname or self.name, tabind=self.tabindex, 
+				debug_info=debug_info, style=style, classn=self.classname, 
+				mode=mode, value=self.value, placeholder=placeholder, title=title,
+				required=required
+			)
 
 		focused = u"$q('#%s').focus();" % id if self.focused == "1" else ""
 
