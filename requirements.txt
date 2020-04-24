@@ -1,4 +1,4 @@
-jsmin
+jsmin==2.2.2
 defusedxml==0.4.1
 djehouty==0.1.5
 docutils==0.12
