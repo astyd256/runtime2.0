@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.526.83890</Version>
+    <Version>4.537.83890</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, flexcontainer</Containers>
@@ -243,69 +243,81 @@
     </Attribute>
     <Attribute>
       <Name>selectedrows</Name>
-      <DisplayName>#Lang(122)</DisplayName>
+      <DisplayName>#Lang(121)</DisplayName>
       <DefaultValue/>
       <Visible>1</Visible>
-      <Help>#Lang(222)</Help>
+      <Help>#Lang(221)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>TextField(10000)</CodeInterface>
       <Colorgroup>2</Colorgroup>
-      <ErrorValidationMessage>#Lang(322)</ErrorValidationMessage>
+      <ErrorValidationMessage>#Lang(321)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
       <Name>selectionmode</Name>
-      <DisplayName>#Lang(123)</DisplayName>
+      <DisplayName>#Lang(122)</DisplayName>
       <DefaultValue>0</DefaultValue>
       <Visible>1</Visible>
-      <Help>#Lang(223)</Help>
+      <Help>#Lang(222)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>DropDown((#Lang(414)|0)|(#Lang(415)|1))</CodeInterface>
       <Colorgroup>2</Colorgroup>
-      <ErrorValidationMessage>#Lang(323)</ErrorValidationMessage>
+      <ErrorValidationMessage>#Lang(322)</ErrorValidationMessage>
       <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
     </Attribute>
     <Attribute>
       <Name>style</Name>
-      <DisplayName>#Lang(124)</DisplayName>
+      <DisplayName>#Lang(123)</DisplayName>
       <DefaultValue>#%(id)s caption {font: 18px Arial;text-align:left;margin-bottom:15px;}#%(id)s table.table {border-collapse:collapse;border:1px solid #d4d4d4;height:0px;}#%(id)s .th-cell {height:32px !important;background:#f5f5f5;text-align:left;padding-left:10px;border-bottom:2px solid #d4d4d4;}#%(id)s .thead {height:32px !important;background:#f5f5f5;}#%(id)s table.table td.cell {height:32px !important;text-align:left;padding-left:10px;}#%(id)s tr.even {background: #f0f0f0; } #%(id)s .row {cursor:pointer;}#%(id)s .row_selected {background:#effdff !important;}</DefaultValue>
       <Visible>1</Visible>
-      <Help>#Lang(224)</Help>
+      <Help>#Lang(223)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>MultiLine(100000)</CodeInterface>
       <Colorgroup>4</Colorgroup>
-      <ErrorValidationMessage>#Lang(324)</ErrorValidationMessage>
+      <ErrorValidationMessage>#Lang(323)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
       <Name>skin</Name>
-      <DisplayName>#Lang(125)</DisplayName>
+      <DisplayName>#Lang(124)</DisplayName>
       <DefaultValue>1</DefaultValue>
       <Visible>1</Visible>
-      <Help>#Lang(225)</Help>
+      <Help>#Lang(224)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>DropDown((#Lang(416)|0)|(#Lang(417)|1)|(#Lang(418)|2)|(#Lang(419)|3))</CodeInterface>
       <Colorgroup>4</Colorgroup>
-      <ErrorValidationMessage>#Lang(325)</ErrorValidationMessage>
+      <ErrorValidationMessage>#Lang(324)</ErrorValidationMessage>
       <RegularExpressionValidation>^.*$</RegularExpressionValidation>
     </Attribute>
     <Attribute>
       <Name>cssclass</Name>
-      <DisplayName>#Lang(126)</DisplayName>
+      <DisplayName>#Lang(125)</DisplayName>
       <DefaultValue/>
       <Visible>1</Visible>
-      <Help>#Lang(226)</Help>
+      <Help>#Lang(225)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>TextField(100)</CodeInterface>
       <Colorgroup>4</Colorgroup>
-      <ErrorValidationMessage>#Lang(326)</ErrorValidationMessage>
+      <ErrorValidationMessage>#Lang(325)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
       <Name>customparams</Name>
-      <DisplayName>#Lang(127)</DisplayName>
+      <DisplayName>#Lang(126)</DisplayName>
       <DefaultValue>"lengthChange": false,
 "info": false,</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(226)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>MultiLine(10000)</CodeInterface>
+      <Colorgroup>3</Colorgroup>
+      <ErrorValidationMessage>#Lang(326)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>customfunc</Name>
+      <DisplayName>#Lang(127)</DisplayName>
+      <DefaultValue/>
       <Visible>1</Visible>
       <Help>#Lang(227)</Help>
       <InterfaceType>0</InterfaceType>
@@ -315,7 +327,7 @@
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>customfunc</Name>
+      <Name>customcolumns</Name>
       <DisplayName>#Lang(128)</DisplayName>
       <DefaultValue/>
       <Visible>1</Visible>
@@ -327,27 +339,15 @@
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>customcolumns</Name>
+      <Name>tristate</Name>
       <DisplayName>#Lang(129)</DisplayName>
-      <DefaultValue/>
+      <DefaultValue>0</DefaultValue>
       <Visible>1</Visible>
       <Help>#Lang(229)</Help>
       <InterfaceType>0</InterfaceType>
-      <CodeInterface>MultiLine(10000)</CodeInterface>
-      <Colorgroup>3</Colorgroup>
-      <ErrorValidationMessage>#Lang(329)</ErrorValidationMessage>
-      <RegularExpressionValidation>.*</RegularExpressionValidation>
-    </Attribute>
-    <Attribute>
-      <Name>tristate</Name>
-      <DisplayName>#Lang(131)</DisplayName>
-      <DefaultValue>0</DefaultValue>
-      <Visible>1</Visible>
-      <Help>#Lang(231)</Help>
-      <InterfaceType>0</InterfaceType>
       <CodeInterface>DropDown((#Lang(421)|1)|(#Lang(422)|0))</CodeInterface>
       <Colorgroup>3</Colorgroup>
-      <ErrorValidationMessage>#Lang(331)</ErrorValidationMessage>
+      <ErrorValidationMessage>#Lang(329)</ErrorValidationMessage>
       <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
     </Attribute>
   </Attributes>
@@ -374,16 +374,15 @@
       <Sentence ID="117">Page length</Sentence>
       <Sentence ID="118">Split a table into pages</Sentence>
       <Sentence ID="119">Vertical scroll</Sentence>
-      <Sentence ID="121">Hidden fields</Sentence>
-      <Sentence ID="122">Selected rows</Sentence>
-      <Sentence ID="123">Selection mode</Sentence>
-      <Sentence ID="124">Style</Sentence>
-      <Sentence ID="125">Skin</Sentence>
-      <Sentence ID="126">CSS Class</Sentence>
-      <Sentence ID="127">Сustom parameters</Sentence>
-      <Sentence ID="128">Custom functions</Sentence>
-      <Sentence ID="129">Custom columns</Sentence>
-      <Sentence ID="131">Tri state</Sentence>
+      <Sentence ID="121">Selected rows</Sentence>
+      <Sentence ID="122">Selection mode</Sentence>
+      <Sentence ID="123">Style</Sentence>
+      <Sentence ID="124">Skin</Sentence>
+      <Sentence ID="125">CSS Class</Sentence>
+      <Sentence ID="126">Сustom parameters</Sentence>
+      <Sentence ID="127">Custom functions</Sentence>
+      <Sentence ID="128">Custom columns</Sentence>
+      <Sentence ID="129">Tri state</Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Order of rendering the object on the page</Sentence>
       <Sentence ID="203">Visibility of the object</Sentence>
@@ -402,16 +401,15 @@
       <Sentence ID="217">Length of table page</Sentence>
       <Sentence ID="218">Split a table into pages and show page numbers from below</Sentence>
       <Sentence ID="219">Add a vertical scroll</Sentence>
-      <Sentence ID="221">Fields which should be hidden</Sentence>
-      <Sentence ID="222">Rows which should be checked</Sentence>
-      <Sentence ID="223">Mode of row selecting</Sentence>
-      <Sentence ID="224">CSS style of the object</Sentence>
-      <Sentence ID="225">Skin of the object</Sentence>
-      <Sentence ID="226">Names of CSS classes</Sentence>
-      <Sentence ID="227">User custom parameters</Sentence>
-      <Sentence ID="228">Write custom functions</Sentence>
-      <Sentence ID="229">User custom columns</Sentence>
-      <Sentence ID="231">Use 3 states for checkboxes in multiselect mode</Sentence>
+      <Sentence ID="221">Rows which should be checked</Sentence>
+      <Sentence ID="222">Mode of row selecting</Sentence>
+      <Sentence ID="223">CSS style of the object</Sentence>
+      <Sentence ID="224">Skin of the object</Sentence>
+      <Sentence ID="225">Names of CSS classes</Sentence>
+      <Sentence ID="226">User custom parameters</Sentence>
+      <Sentence ID="227">Write custom functions</Sentence>
+      <Sentence ID="228">User custom columns</Sentence>
+      <Sentence ID="229">Use 3 states for checkboxes in multiselect mode</Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="303"></Sentence>
@@ -430,16 +428,15 @@
       <Sentence ID="317">Not valide page length</Sentence>
       <Sentence ID="318">Error in split table</Sentence>
       <Sentence ID="319">Error in scroll - vertical</Sentence>
-      <Sentence ID="321">Error, attributes must be in header</Sentence>
-      <Sentence ID="322">Incorrect value</Sentence>
+      <Sentence ID="321">Incorrect value</Sentence>
+      <Sentence ID="322"></Sentence>
       <Sentence ID="323"></Sentence>
       <Sentence ID="324"></Sentence>
       <Sentence ID="325"></Sentence>
-      <Sentence ID="326"></Sentence>
-      <Sentence ID="327">Error in custom parameters</Sentence>
-      <Sentence ID="328">Error in custom functions</Sentence>
-      <Sentence ID="329">Error in custom columns</Sentence>
-      <Sentence ID="331">Incorrect value</Sentence>
+      <Sentence ID="326">Error in custom parameters</Sentence>
+      <Sentence ID="327">Error in custom functions</Sentence>
+      <Sentence ID="328">Error in custom columns</Sentence>
+      <Sentence ID="329">Incorrect value</Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">No</Sentence>
@@ -541,16 +538,15 @@
       <Sentence ID="117"></Sentence>
       <Sentence ID="118"></Sentence>
       <Sentence ID="119"></Sentence>
-      <Sentence ID="121">Hidden fields</Sentence>
-      <Sentence ID="122">Selected rows</Sentence>
-      <Sentence ID="123">Selection mode</Sentence>
-      <Sentence ID="124">Style</Sentence>
-      <Sentence ID="125">Skin</Sentence>
-      <Sentence ID="126">CSS Class</Sentence>
+      <Sentence ID="121">Selected rows</Sentence>
+      <Sentence ID="122">Selection mode</Sentence>
+      <Sentence ID="123">Style</Sentence>
+      <Sentence ID="124">Skin</Sentence>
+      <Sentence ID="125">CSS Class</Sentence>
+      <Sentence ID="126"></Sentence>
       <Sentence ID="127"></Sentence>
       <Sentence ID="128"></Sentence>
       <Sentence ID="129"></Sentence>
-      <Sentence ID="131"></Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Order of rendering the object on the page</Sentence>
       <Sentence ID="203">Visibility of the object</Sentence>
@@ -569,16 +565,15 @@
       <Sentence ID="217"></Sentence>
       <Sentence ID="218"></Sentence>
       <Sentence ID="219"></Sentence>
-      <Sentence ID="221">Fields which should be hidden</Sentence>
-      <Sentence ID="222">Rows which should be checked</Sentence>
-      <Sentence ID="223">Mode of row selecting</Sentence>
-      <Sentence ID="224">CSS style of the object</Sentence>
-      <Sentence ID="225">Skin of the object</Sentence>
-      <Sentence ID="226">Names of CSS classes</Sentence>
+      <Sentence ID="221">Rows which should be checked</Sentence>
+      <Sentence ID="222">Mode of row selecting</Sentence>
+      <Sentence ID="223">CSS style of the object</Sentence>
+      <Sentence ID="224">Skin of the object</Sentence>
+      <Sentence ID="225">Names of CSS classes</Sentence>
+      <Sentence ID="226"></Sentence>
       <Sentence ID="227"></Sentence>
       <Sentence ID="228"></Sentence>
       <Sentence ID="229"></Sentence>
-      <Sentence ID="231"></Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="303"></Sentence>
@@ -597,8 +592,8 @@
       <Sentence ID="317"></Sentence>
       <Sentence ID="318"></Sentence>
       <Sentence ID="319"></Sentence>
-      <Sentence ID="321">Error, attributes must be in header</Sentence>
-      <Sentence ID="322">Incorrect value</Sentence>
+      <Sentence ID="321">Incorrect value</Sentence>
+      <Sentence ID="322"></Sentence>
       <Sentence ID="323"></Sentence>
       <Sentence ID="324"></Sentence>
       <Sentence ID="325"></Sentence>
@@ -606,7 +601,6 @@
       <Sentence ID="327"></Sentence>
       <Sentence ID="328"></Sentence>
       <Sentence ID="329"></Sentence>
-      <Sentence ID="331"></Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">No</Sentence>
@@ -708,16 +702,15 @@
       <Sentence ID="117"></Sentence>
       <Sentence ID="118"></Sentence>
       <Sentence ID="119"></Sentence>
-      <Sentence ID="121">Скрытые поля</Sentence>
-      <Sentence ID="122">Выбранные ряды</Sentence>
-      <Sentence ID="123">Режим выбора</Sentence>
-      <Sentence ID="124">Стиль</Sentence>
-      <Sentence ID="125">Оформление</Sentence>
-      <Sentence ID="126">Класс CSS</Sentence>
+      <Sentence ID="121">Выбранные ряды</Sentence>
+      <Sentence ID="122">Режим выбора</Sentence>
+      <Sentence ID="123">Стиль</Sentence>
+      <Sentence ID="124">Оформление</Sentence>
+      <Sentence ID="125">Класс CSS</Sentence>
+      <Sentence ID="126"></Sentence>
       <Sentence ID="127"></Sentence>
       <Sentence ID="128"></Sentence>
       <Sentence ID="129"></Sentence>
-      <Sentence ID="131"></Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
       <Sentence ID="203">Режим отображения объекта</Sentence>
@@ -736,16 +729,15 @@
       <Sentence ID="217"></Sentence>
       <Sentence ID="218"></Sentence>
       <Sentence ID="219"></Sentence>
-      <Sentence ID="221">Поля, которые нужно скрыть</Sentence>
-      <Sentence ID="222">Строки, которые необходимо проверить</Sentence>
-      <Sentence ID="223">Режим выбора строк</Sentence>
-      <Sentence ID="224">Стиль CSS</Sentence>
-      <Sentence ID="225">Оформление объекта</Sentence>
-      <Sentence ID="226">Имена классов CSS</Sentence>
+      <Sentence ID="221">Строки, которые необходимо проверить</Sentence>
+      <Sentence ID="222">Режим выбора строк</Sentence>
+      <Sentence ID="223">Стиль CSS</Sentence>
+      <Sentence ID="224">Оформление объекта</Sentence>
+      <Sentence ID="225">Имена классов CSS</Sentence>
+      <Sentence ID="226"></Sentence>
       <Sentence ID="227"></Sentence>
       <Sentence ID="228"></Sentence>
       <Sentence ID="229"></Sentence>
-      <Sentence ID="231"></Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Неправильное значение, должен быть указан 0 или 1</Sentence>
       <Sentence ID="303"></Sentence>
@@ -764,8 +756,8 @@
       <Sentence ID="317"></Sentence>
       <Sentence ID="318"></Sentence>
       <Sentence ID="319"></Sentence>
-      <Sentence ID="321">Ошибка, данные атрибуты должны быть в заголовке</Sentence>
-      <Sentence ID="322">Неправильное значение</Sentence>
+      <Sentence ID="321">Неправильное значение</Sentence>
+      <Sentence ID="322"></Sentence>
       <Sentence ID="323"></Sentence>
       <Sentence ID="324"></Sentence>
       <Sentence ID="325"></Sentence>
@@ -773,7 +765,6 @@
       <Sentence ID="327"></Sentence>
       <Sentence ID="328"></Sentence>
       <Sentence ID="329"></Sentence>
-      <Sentence ID="331"></Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">Нет</Sentence>
@@ -1226,7 +1217,18 @@ class VDOM_datatable_v4(VDOM_object):
           %(selectedrows)s
         },
         %(customparams)s
+        // NOTE: Hides pagination panel if there's only one page
+        "fnDrawCallback": function(oSettings) {
+        	if (oSettings._iDisplayLength == -1 || oSettings._iDisplayLength > oSettings.fnRecordsDisplay()) {
+            	jQuery(oSettings.nTableWrapper).find('.dataTables_paginate').addClass('datatable-pagination-disable');
+        	} else {
+        	    jQuery(oSettings.nTableWrapper).find('.dataTables_paginate').removeClass('datatable-pagination-disable');
+        	}
+    	}
       });
+      
+      $('#%(id)s').find('.dataTable')
+      	.wrap("<div class='table_wrapper'></div>");
 
       %(title)s
 
