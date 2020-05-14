@@ -555,9 +555,13 @@ class VDOM_formeorender(VDOM_object):
             <![CDATA[
             const id = "#"+this.domCont.id;
             const formeoRender = new FormeoRenderer({
-            renderContainer: id
-              });
-            formeoRender.render(data);
+              renderContainer: id
+            });
+            try {
+              formeoRender.render(JSON.parse(data));
+            } catch (e) {
+              formeoRender.render(data);
+            }
             ]]>
           </SourceCode>
         </Action>

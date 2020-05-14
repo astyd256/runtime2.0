@@ -397,7 +397,7 @@ class VDOM_formeobuilder(VDOM_object):
           svgSprite: 'https://draggable.github.io/formeo/assets/img/formeo-sprite.svg',
           events: {
             onSave: evt => {
-              execEventBinded('%(woid)s', "onSave", {"formJSON": %(id)s.formData});
+              execEventBinded('%(woid)s', "onSave", {"formJSON": JSON.stringify(%(id)s.formData)});
             }
           }
         }, %(data)s);
