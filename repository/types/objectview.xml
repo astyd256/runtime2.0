@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.81.8388</Version>
+    <Version>1.82.8388</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, flexcontainer, dialog, dialog_2, container, tablecell, form, accordeon, smartfolderdata</Containers>
@@ -317,7 +317,7 @@
       <Name>dynamicrender</Name>
       <DisplayName>#Lang(127)</DisplayName>
       <DefaultValue>0</DefaultValue>
-      <Visible>0</Visible>
+      <Visible>1</Visible>
       <Help>#Lang(227)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>DropDown((#Lang(424)|0)|(#Lang(425)|1))</CodeInterface>
@@ -441,23 +441,23 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="423">Yes</Sentence>
       <Sentence ID="424">No</Sentence>
       <Sentence ID="425">Yes</Sentence>
-      <Sentence ID="501">Resize the object width and height</Sentence>
-      <Sentence ID="502">Hide the object</Sentence>
+      <Sentence ID="501">Hide the object</Sentence>
+      <Sentence ID="502">Show the items of the object</Sentence>
       <Sentence ID="503">Load the items of the object on scrolling to them.</Sentence>
-      <Sentence ID="504">Show the object</Sentence>
+      <Sentence ID="504">Load the items of the object on scrolling to them.</Sentence>
       <Sentence ID="505">Load the items of the object on scrolling to them.</Sentence>
       <Sentence ID="506">Load the items of the object on scrolling to them.</Sentence>
       <Sentence ID="507">Load the items of the object on scrolling to them.</Sentence>
-      <Sentence ID="508">Select listed items</Sentence>
+      <Sentence ID="508">Resize the object width and height</Sentence>
       <Sentence ID="509">Load the items of the object on scrolling to them.</Sentence>
-      <Sentence ID="511">Load the items of the object on scrolling to them.</Sentence>
-      <Sentence ID="512">Load the items of the object on scrolling to them.</Sentence>
+      <Sentence ID="511">Select listed items</Sentence>
+      <Sentence ID="512">Select listed items and unselect all other</Sentence>
       <Sentence ID="513">Load the items of the object on scrolling to them.</Sentence>
-      <Sentence ID="514">Load the items of the object on scrolling to them.</Sentence>
+      <Sentence ID="514">Show the object</Sentence>
       <Sentence ID="515">Load the items of the object on scrolling to them.</Sentence>
-      <Sentence ID="516">Show the items of the object</Sentence>
+      <Sentence ID="516">Load the items of the object on scrolling to them.</Sentence>
       <Sentence ID="517">Load the items of the object on scrolling to them.</Sentence>
-      <Sentence ID="518"></Sentence>
+      <Sentence ID="518">Load the items of the object on scrolling to them.</Sentence>
       <Sentence ID="519"></Sentence>
       <Sentence ID="521"></Sentence>
       <Sentence ID="522"></Sentence>
@@ -467,58 +467,58 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="526"></Sentence>
       <Sentence ID="527"></Sentence>
       <Sentence ID="528"></Sentence>
-      <Sentence ID="529">Select listed items and unselect all other</Sentence>
-      <Sentence ID="601">resizeTo</Sentence>
-      <Sentence ID="602">Hide</Sentence>
+      <Sentence ID="529"></Sentence>
+      <Sentence ID="601">Hide</Sentence>
+      <Sentence ID="602">Show</Sentence>
       <Sentence ID="603">Show</Sentence>
       <Sentence ID="604">Show</Sentence>
       <Sentence ID="605">Show</Sentence>
       <Sentence ID="606">Show</Sentence>
-      <Sentence ID="607">unselectItems</Sentence>
-      <Sentence ID="608">selectItems</Sentence>
+      <Sentence ID="607">Show</Sentence>
+      <Sentence ID="608">resizeTo</Sentence>
       <Sentence ID="609">selectAll</Sentence>
-      <Sentence ID="611">Show</Sentence>
-      <Sentence ID="612">Show</Sentence>
-      <Sentence ID="613">unselectAll</Sentence>
+      <Sentence ID="611">selectItems</Sentence>
+      <Sentence ID="612">selectOnly</Sentence>
+      <Sentence ID="613">Show</Sentence>
       <Sentence ID="614">Show</Sentence>
       <Sentence ID="615">Show</Sentence>
       <Sentence ID="616">Show</Sentence>
-      <Sentence ID="617">Show</Sentence>
-      <Sentence ID="618">selectOnly</Sentence>
-      <Sentence ID="701">Width</Sentence>
-      <Sentence ID="702">Height</Sentence>
+      <Sentence ID="617">unselectAll</Sentence>
+      <Sentence ID="618">unselectItems</Sentence>
+      <Sentence ID="701">Fade</Sentence>
+      <Sentence ID="702">Fade</Sentence>
       <Sentence ID="703">Fade</Sentence>
       <Sentence ID="704">Fade</Sentence>
       <Sentence ID="705">Fade</Sentence>
       <Sentence ID="706">Fade</Sentence>
       <Sentence ID="707">Fade</Sentence>
       <Sentence ID="708">Fade</Sentence>
-      <Sentence ID="709">idlist</Sentence>
-      <Sentence ID="711">idlist</Sentence>
-      <Sentence ID="712">Fade</Sentence>
-      <Sentence ID="713">Fade</Sentence>
+      <Sentence ID="709">Width</Sentence>
+      <Sentence ID="711">Height</Sentence>
+      <Sentence ID="712">idlist</Sentence>
+      <Sentence ID="713">idlist</Sentence>
       <Sentence ID="714">Fade</Sentence>
       <Sentence ID="715">Fade</Sentence>
       <Sentence ID="716">Fade</Sentence>
       <Sentence ID="717">Fade</Sentence>
-      <Sentence ID="718">list of items</Sentence>
-      <Sentence ID="801">New value of width</Sentence>
-      <Sentence ID="802">New value of height</Sentence>
-      <Sentence ID="803">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="718">idlist</Sentence>
+      <Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="802">Time of appearance</Sentence>
+      <Sentence ID="803">Time of appearance</Sentence>
       <Sentence ID="804">Time of appearance</Sentence>
-      <Sentence ID="805">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="805">Time of appearance</Sentence>
       <Sentence ID="806">Time of appearance</Sentence>
       <Sentence ID="807">Time of appearance</Sentence>
       <Sentence ID="808">Time of appearance</Sentence>
-      <Sentence ID="809">list of items</Sentence>
-      <Sentence ID="811">Time of appearance</Sentence>
+      <Sentence ID="809">New value of width</Sentence>
+      <Sentence ID="811">New value of height</Sentence>
       <Sentence ID="812">Time of appearance</Sentence>
       <Sentence ID="813">list of items</Sentence>
-      <Sentence ID="814">Time of appearance</Sentence>
-      <Sentence ID="815">Time of appearance</Sentence>
+      <Sentence ID="814">list of items</Sentence>
+      <Sentence ID="815">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="816">Time of appearance</Sentence>
       <Sentence ID="817">Time of appearance</Sentence>
-      <Sentence ID="818">idlist</Sentence>
+      <Sentence ID="818">list of items</Sentence>
       <Sentence ID="901"></Sentence>
       <Sentence ID="902"></Sentence>
       <Sentence ID="903"></Sentence>
@@ -633,23 +633,23 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="423"></Sentence>
       <Sentence ID="424"></Sentence>
       <Sentence ID="425"></Sentence>
-      <Sentence ID="501">Resize the object width and height</Sentence>
-      <Sentence ID="502">Hide the object</Sentence>
+      <Sentence ID="501">Hide the object</Sentence>
+      <Sentence ID="502">Show the items of the object</Sentence>
       <Sentence ID="503">Show the items of the object</Sentence>
-      <Sentence ID="504">Show the object</Sentence>
+      <Sentence ID="504">Show the items of the object</Sentence>
       <Sentence ID="505">Show the items of the object</Sentence>
       <Sentence ID="506">Show the items of the object</Sentence>
       <Sentence ID="507">Show the items of the object</Sentence>
-      <Sentence ID="508">Show the items of the object</Sentence>
+      <Sentence ID="508">Resize the object width and height</Sentence>
       <Sentence ID="509">Show the items of the object</Sentence>
       <Sentence ID="511">Show the items of the object</Sentence>
-      <Sentence ID="512">Show the items of the object</Sentence>
+      <Sentence ID="512"></Sentence>
       <Sentence ID="513">Show the items of the object</Sentence>
-      <Sentence ID="514">Show the items of the object</Sentence>
+      <Sentence ID="514">Show the object</Sentence>
       <Sentence ID="515">Show the items of the object</Sentence>
       <Sentence ID="516">Show the items of the object</Sentence>
       <Sentence ID="517">Show the items of the object</Sentence>
-      <Sentence ID="518"></Sentence>
+      <Sentence ID="518">Show the items of the object</Sentence>
       <Sentence ID="519"></Sentence>
       <Sentence ID="521"></Sentence>
       <Sentence ID="522"></Sentence>
@@ -660,57 +660,57 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="527"></Sentence>
       <Sentence ID="528"></Sentence>
       <Sentence ID="529"></Sentence>
-      <Sentence ID="601">resizeTo</Sentence>
-      <Sentence ID="602">Hide</Sentence>
+      <Sentence ID="601">Hide</Sentence>
+      <Sentence ID="602">Show</Sentence>
       <Sentence ID="603">Show</Sentence>
       <Sentence ID="604">Show</Sentence>
       <Sentence ID="605">Show</Sentence>
       <Sentence ID="606">Show</Sentence>
       <Sentence ID="607">Show</Sentence>
-      <Sentence ID="608">Show</Sentence>
+      <Sentence ID="608">resizeTo</Sentence>
       <Sentence ID="609">Show</Sentence>
       <Sentence ID="611">Show</Sentence>
-      <Sentence ID="612">Show</Sentence>
+      <Sentence ID="612"></Sentence>
       <Sentence ID="613">Show</Sentence>
       <Sentence ID="614">Show</Sentence>
       <Sentence ID="615">Show</Sentence>
       <Sentence ID="616">Show</Sentence>
       <Sentence ID="617">Show</Sentence>
-      <Sentence ID="618"></Sentence>
-      <Sentence ID="701">Width</Sentence>
-      <Sentence ID="702">Height</Sentence>
+      <Sentence ID="618">Show</Sentence>
+      <Sentence ID="701">Fade</Sentence>
+      <Sentence ID="702">Fade</Sentence>
       <Sentence ID="703">Fade</Sentence>
       <Sentence ID="704">Fade</Sentence>
       <Sentence ID="705">Fade</Sentence>
       <Sentence ID="706">Fade</Sentence>
       <Sentence ID="707">Fade</Sentence>
       <Sentence ID="708">Fade</Sentence>
-      <Sentence ID="709">Fade</Sentence>
-      <Sentence ID="711">Fade</Sentence>
+      <Sentence ID="709">Width</Sentence>
+      <Sentence ID="711">Height</Sentence>
       <Sentence ID="712">Fade</Sentence>
-      <Sentence ID="713">Fade</Sentence>
+      <Sentence ID="713"></Sentence>
       <Sentence ID="714">Fade</Sentence>
       <Sentence ID="715">Fade</Sentence>
       <Sentence ID="716">Fade</Sentence>
       <Sentence ID="717">Fade</Sentence>
-      <Sentence ID="718"></Sentence>
-      <Sentence ID="801">New value of width</Sentence>
-      <Sentence ID="802">New value of height</Sentence>
-      <Sentence ID="803">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="718">Fade</Sentence>
+      <Sentence ID="801">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="802">Time of appearance</Sentence>
+      <Sentence ID="803">Time of appearance</Sentence>
       <Sentence ID="804">Time of appearance</Sentence>
-      <Sentence ID="805">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="805">Time of appearance</Sentence>
       <Sentence ID="806">Time of appearance</Sentence>
       <Sentence ID="807">Time of appearance</Sentence>
       <Sentence ID="808">Time of appearance</Sentence>
-      <Sentence ID="809">Time of appearance</Sentence>
-      <Sentence ID="811">Time of appearance</Sentence>
+      <Sentence ID="809">New value of width</Sentence>
+      <Sentence ID="811">New value of height</Sentence>
       <Sentence ID="812">Time of appearance</Sentence>
-      <Sentence ID="813">Time of appearance</Sentence>
+      <Sentence ID="813"></Sentence>
       <Sentence ID="814">Time of appearance</Sentence>
-      <Sentence ID="815">Time of appearance</Sentence>
+      <Sentence ID="815">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="816">Time of appearance</Sentence>
       <Sentence ID="817">Time of appearance</Sentence>
-      <Sentence ID="818"></Sentence>
+      <Sentence ID="818">Time of appearance</Sentence>
       <Sentence ID="901"></Sentence>
       <Sentence ID="902"></Sentence>
       <Sentence ID="903"></Sentence>
@@ -825,23 +825,23 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="423"></Sentence>
       <Sentence ID="424"></Sentence>
       <Sentence ID="425"></Sentence>
-      <Sentence ID="501">Изменить ширину и высоту</Sentence>
-      <Sentence ID="502">Скрыть объект</Sentence>
+      <Sentence ID="501">Скрыть объект</Sentence>
+      <Sentence ID="502">Показать элементы объекта</Sentence>
       <Sentence ID="503">Показать элементы объекта</Sentence>
-      <Sentence ID="504">Показать объект</Sentence>
+      <Sentence ID="504">Показать элементы объекта</Sentence>
       <Sentence ID="505">Показать элементы объекта</Sentence>
       <Sentence ID="506">Показать элементы объекта</Sentence>
       <Sentence ID="507">Показать элементы объекта</Sentence>
-      <Sentence ID="508">Показать элементы объекта</Sentence>
+      <Sentence ID="508">Изменить ширину и высоту</Sentence>
       <Sentence ID="509">Показать элементы объекта</Sentence>
       <Sentence ID="511">Показать элементы объекта</Sentence>
-      <Sentence ID="512">Показать элементы объекта</Sentence>
+      <Sentence ID="512"></Sentence>
       <Sentence ID="513">Показать элементы объекта</Sentence>
-      <Sentence ID="514">Показать элементы объекта</Sentence>
+      <Sentence ID="514">Показать объект</Sentence>
       <Sentence ID="515">Показать элементы объекта</Sentence>
       <Sentence ID="516">Показать элементы объекта</Sentence>
       <Sentence ID="517">Показать элементы объекта</Sentence>
-      <Sentence ID="518"></Sentence>
+      <Sentence ID="518">Показать элементы объекта</Sentence>
       <Sentence ID="519"></Sentence>
       <Sentence ID="521"></Sentence>
       <Sentence ID="522"></Sentence>
@@ -852,57 +852,57 @@ Visible - the whole content will always be shown without reference to the object
       <Sentence ID="527"></Sentence>
       <Sentence ID="528"></Sentence>
       <Sentence ID="529"></Sentence>
-      <Sentence ID="601">resizeTo</Sentence>
-      <Sentence ID="602">Скрыть</Sentence>
+      <Sentence ID="601">Скрыть</Sentence>
+      <Sentence ID="602">Показать</Sentence>
       <Sentence ID="603">Показать</Sentence>
       <Sentence ID="604">Показать</Sentence>
       <Sentence ID="605">Показать</Sentence>
       <Sentence ID="606">Показать</Sentence>
       <Sentence ID="607">Показать</Sentence>
-      <Sentence ID="608">Показать</Sentence>
+      <Sentence ID="608">resizeTo</Sentence>
       <Sentence ID="609">Показать</Sentence>
       <Sentence ID="611">Показать</Sentence>
-      <Sentence ID="612">Показать</Sentence>
+      <Sentence ID="612"></Sentence>
       <Sentence ID="613">Показать</Sentence>
       <Sentence ID="614">Показать</Sentence>
       <Sentence ID="615">Показать</Sentence>
       <Sentence ID="616">Показать</Sentence>
       <Sentence ID="617">Показать</Sentence>
-      <Sentence ID="618"></Sentence>
-      <Sentence ID="701">Ширина</Sentence>
-      <Sentence ID="702">Высота</Sentence>
+      <Sentence ID="618">Показать</Sentence>
+      <Sentence ID="701">Исчезновение</Sentence>
+      <Sentence ID="702">Исчезновение</Sentence>
       <Sentence ID="703">Исчезновение</Sentence>
       <Sentence ID="704">Исчезновение</Sentence>
       <Sentence ID="705">Исчезновение</Sentence>
       <Sentence ID="706">Исчезновение</Sentence>
       <Sentence ID="707">Исчезновение</Sentence>
       <Sentence ID="708">Исчезновение</Sentence>
-      <Sentence ID="709">Исчезновение</Sentence>
-      <Sentence ID="711">Исчезновение</Sentence>
+      <Sentence ID="709">Ширина</Sentence>
+      <Sentence ID="711">Высота</Sentence>
       <Sentence ID="712">Исчезновение</Sentence>
-      <Sentence ID="713">Исчезновение</Sentence>
+      <Sentence ID="713"></Sentence>
       <Sentence ID="714">Исчезновение</Sentence>
       <Sentence ID="715">Исчезновение</Sentence>
       <Sentence ID="716">Исчезновение</Sentence>
       <Sentence ID="717">Исчезновение</Sentence>
-      <Sentence ID="718"></Sentence>
-      <Sentence ID="801">Новое значение ширины</Sentence>
-      <Sentence ID="802">Новое значение высоты</Sentence>
-      <Sentence ID="803">Время исчезновения в миллисекундах</Sentence>
+      <Sentence ID="718">Исчезновение</Sentence>
+      <Sentence ID="801">Время исчезновения в миллисекундах</Sentence>
+      <Sentence ID="802">Время появления</Sentence>
+      <Sentence ID="803">Время появления</Sentence>
       <Sentence ID="804">Время появления</Sentence>
-      <Sentence ID="805">Время исчезновения в миллисекундах</Sentence>
+      <Sentence ID="805">Время появления</Sentence>
       <Sentence ID="806">Время появления</Sentence>
       <Sentence ID="807">Время появления</Sentence>
       <Sentence ID="808">Время появления</Sentence>
-      <Sentence ID="809">Время появления</Sentence>
-      <Sentence ID="811">Время появления</Sentence>
+      <Sentence ID="809">Новое значение ширины</Sentence>
+      <Sentence ID="811">Новое значение высоты</Sentence>
       <Sentence ID="812">Время появления</Sentence>
-      <Sentence ID="813">Время появления</Sentence>
+      <Sentence ID="813"></Sentence>
       <Sentence ID="814">Время появления</Sentence>
-      <Sentence ID="815">Время появления</Sentence>
+      <Sentence ID="815">Время исчезновения в миллисекундах</Sentence>
       <Sentence ID="816">Время появления</Sentence>
       <Sentence ID="817">Время появления</Sentence>
-      <Sentence ID="818"></Sentence>
+      <Sentence ID="818">Время появления</Sentence>
       <Sentence ID="901"></Sentence>
       <Sentence ID="902"></Sentence>
       <Sentence ID="903"></Sentence>
@@ -1404,7 +1404,9 @@ if ($j.trim(ovtmp.html()) != '') {
     /*$j('>div[dataid]',ovtmp).each(function(){
         $j(">span.ov-eoi", x).before($j(this));
     });*/
-    vdom_ov_markShow("%(woid)s");
+    // vdom_ov_markShow("%(woid)s");
+    // NOTE: Workaround for not working vdom_ov_markShow after load
+    window.setTimeout('vdom_ov_markShow("%(woid)s")', 1);
 }
 """
 
@@ -1842,51 +1844,51 @@ function vdom_ov_getSelected(o) {
   <E2vdom>
     <Events>
       <Userinterfaceevents>
-        <Event Name="itemsselected" Help="#Lang(518)">
+        <Event Name="itemsselected" Help="#Lang(519)">
           <Parameters>
             <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(901)"/>
           </Parameters>
         </Event>
-        <Event Name="itemmouseover" Help="#Lang(519)">
+        <Event Name="itemmouseover" Help="#Lang(521)">
           <Parameters>
             <Parameter Name="id" Order="0" VbType="" Help="#Lang(902)"/>
           </Parameters>
         </Event>
-        <Event Name="itemmouseout" Help="#Lang(521)">
+        <Event Name="itemmouseout" Help="#Lang(522)">
           <Parameters>
             <Parameter Name="id" Order="0" VbType="" Help="#Lang(903)"/>
           </Parameters>
         </Event>
-        <Event Name="itemdblclick" Help="#Lang(522)">
+        <Event Name="itemdblclick" Help="#Lang(523)">
           <Parameters>
             <Parameter Name="id" Order="0" VbType="" Help="#Lang(904)"/>
           </Parameters>
         </Event>
-        <Event Name="itemclick" Help="#Lang(523)">
+        <Event Name="itemclick" Help="#Lang(524)">
           <Parameters>
             <Parameter Name="id" Order="0" VbType="" Help="#Lang(905)"/>
           </Parameters>
         </Event>
-        <Event Name="itemsrequest" Help="#Lang(524)">
+        <Event Name="itemsrequest" Help="#Lang(525)">
           <Parameters>
             <Parameter Name="idlist" Order="0" VbType="" Help="#Lang(906)"/>
           </Parameters>
         </Event>
-        <Event Name="dragstart" Help="#Lang(525)">
+        <Event Name="dragstart" Help="#Lang(526)">
           <Parameters>
             <Parameter Name="id" Order="0" VbType="" Help="#Lang(907)"/>
           </Parameters>
         </Event>
-        <Event Name="mouseover" Help="#Lang(526)">
+        <Event Name="mouseover" Help="#Lang(527)">
           <Parameters>
             <Parameter Name="X" Order="0" VbType="" Help="#Lang(908)"/>
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(909)"/>
           </Parameters>
         </Event>
-        <Event Name="endscroll" Help="#Lang(527)">
+        <Event Name="endscroll" Help="#Lang(528)">
           <Parameters/>
         </Event>
-        <Event Name="itemsort" Help="#Lang(528)">
+        <Event Name="itemsort" Help="#Lang(529)">
           <Parameters>
             <Parameter Name="id" Order="0" VbType="" Help="#Lang(911)"/>
             <Parameter Name="position" Order="0" VbType="" Help="#Lang(912)"/>
@@ -1896,20 +1898,20 @@ function vdom_ov_getSelected(o) {
     </Events>
     <Actions>
       <Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
-        <Action Help="#Lang(502)" InterfaceName="#Lang(602)" MethodName="hide">
+        <Action Help="#Lang(501)" InterfaceName="#Lang(601)" MethodName="hide">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(703)" ScriptName="fade" Help="#Lang(803)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(701)" ScriptName="fade" Help="#Lang(801)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[vdom_ui_hide(this.domCont, fade);]]></SourceCode>
         </Action>
-        <Action Help="#Lang(516)" InterfaceName="#Lang(616)" MethodName="hideLoading">
+        <Action Help="#Lang(502)" InterfaceName="#Lang(602)" MethodName="hideLoading">
           <Parameters/>
           <SourceCode><![CDATA[$j('>div.ov-content>div>.loading',this.domCont).fadeOut(100);]]></SourceCode>
         </Action>
-        <Action Help="#Lang(514)" InterfaceName="#Lang(614)" MethodName="insertAfter">
+        <Action Help="#Lang(503)" InterfaceName="#Lang(603)" MethodName="insertAfter">
           <Parameters>
-            <Parameter DefaultValue="'item-id'" Interface="" InterfaceName="#Lang(714)" ScriptName="id" Help="#Lang(814)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(715)" ScriptName="items" Help="#Lang(815)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="'item-id'" Interface="" InterfaceName="#Lang(702)" ScriptName="id" Help="#Lang(802)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(703)" ScriptName="items" Help="#Lang(803)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[if (typeof items === 'object') {
     var o = this.domCont, z = $j('>div.ov-content>div['+id+']',o);
@@ -1921,9 +1923,9 @@ function vdom_ov_getSelected(o) {
     }
 }]]></SourceCode>
         </Action>
-        <Action Help="#Lang(515)" InterfaceName="#Lang(615)" MethodName="insertAtBeginning">
+        <Action Help="#Lang(504)" InterfaceName="#Lang(604)" MethodName="insertAtBeginning">
           <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(716)" ScriptName="items" Help="#Lang(816)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(704)" ScriptName="items" Help="#Lang(804)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[if (typeof items === 'object') {
     var o = this.domCont, z = $j('>div.ov-content>div:first',o);
@@ -1934,9 +1936,9 @@ function vdom_ov_getSelected(o) {
     vdom_ov_markShow(o.id.substring(2, o.id.length));
 }]]></SourceCode>
         </Action>
-        <Action Help="#Lang(511)" InterfaceName="#Lang(611)" MethodName="insertAtEnd">
+        <Action Help="#Lang(505)" InterfaceName="#Lang(605)" MethodName="insertAtEnd">
           <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(712)" ScriptName="items" Help="#Lang(812)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(705)" ScriptName="items" Help="#Lang(805)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[if (typeof items === 'object') {
     var o = this.domCont;
@@ -1948,8 +1950,8 @@ function vdom_ov_getSelected(o) {
         </Action>
         <Action Help="#Lang(506)" InterfaceName="#Lang(606)" MethodName="insertBefore">
           <Parameters>
-            <Parameter DefaultValue="'item-id'" Interface="" InterfaceName="#Lang(707)" ScriptName="id" Help="#Lang(807)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(708)" ScriptName="items" Help="#Lang(808)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="'item-id'" Interface="" InterfaceName="#Lang(706)" ScriptName="id" Help="#Lang(806)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(707)" ScriptName="items" Help="#Lang(807)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[if (typeof items === 'object') {
     var o = this.domCont, z = $j('>div.ov-content>div['+id+']',o);
@@ -1961,19 +1963,19 @@ function vdom_ov_getSelected(o) {
     }
 }]]></SourceCode>
         </Action>
-        <Action Help="#Lang(517)" InterfaceName="#Lang(617)" MethodName="refresh">
+        <Action Help="#Lang(507)" InterfaceName="#Lang(607)" MethodName="refresh">
           <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(717)" ScriptName="idlist" Help="#Lang(817)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(708)" ScriptName="idlist" Help="#Lang(808)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[var o=this.domCont;
 $j('>div.ov-content>div[dataid]',o).remove();
 execEventBinded(o.id.substring(2, o.id.length), "itemsrequest", {idlist: ""});
 /*vdom_ov_markShow(o.id.substring(2, o.id.length));*/]]></SourceCode>
         </Action>
-        <Action Help="#Lang(501)" InterfaceName="#Lang(601)" MethodName="resizeTo">
+        <Action Help="#Lang(508)" InterfaceName="#Lang(608)" MethodName="resizeTo">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(701)" ScriptName="width" Help="#Lang(801)" RegularExpressionValidation=".*"/>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(702)" ScriptName="height" Help="#Lang(802)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(709)" ScriptName="width" Help="#Lang(809)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(711)" ScriptName="height" Help="#Lang(811)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[$q(this.domCont).width(parseInt(width,10)).height(parseInt(height,10));]]></SourceCode>
         </Action>
@@ -1983,9 +1985,9 @@ execEventBinded(o.id.substring(2, o.id.length), "itemsrequest", {idlist: ""});
 $j('>div.ov-content>div[dataid]',o).addClass('selected');
 vdom_ov_getSelected(o.id.substring(2, o.id.length));]]></SourceCode>
         </Action>
-        <Action Help="#Lang(508)" InterfaceName="#Lang(608)" MethodName="selectItems">
+        <Action Help="#Lang(511)" InterfaceName="#Lang(611)" MethodName="selectItems">
           <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(711)" ScriptName="idlist" Help="#Lang(811)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(712)" ScriptName="idlist" Help="#Lang(812)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[if (typeof idlist === 'object') {
     var o = this.domCont;
@@ -1995,9 +1997,9 @@ vdom_ov_getSelected(o.id.substring(2, o.id.length));]]></SourceCode>
     vdom_ov_getSelected(o.id.substring(2, o.id.length));
 }]]></SourceCode>
         </Action>
-        <Action Help="#Lang(529)" InterfaceName="#Lang(618)" MethodName="selectOnly">
+        <Action Help="#Lang(512)" InterfaceName="#Lang(612)" MethodName="selectOnly">
           <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(818)" ScriptName="idlist" Help="#Lang(718)" RegularExpressionValidation=""/>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(713)" ScriptName="idlist" Help="#Lang(813)" RegularExpressionValidation=""/>
           </Parameters>
           <SourceCode><![CDATA[var o = this.domCont;
 $j('>div.ov-content>div[dataid]',o).removeClass('selected');
@@ -2011,9 +2013,9 @@ if (typeof idlist === 'object') {
     vdom_ov_getSelected(o.id.substring(2, o.id.length));
 }]]></SourceCode>
         </Action>
-        <Action Help="#Lang(512)" InterfaceName="#Lang(612)" MethodName="selectToggle">
+        <Action Help="#Lang(513)" InterfaceName="#Lang(613)" MethodName="selectToggle">
           <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(713)" ScriptName="idlist" Help="#Lang(813)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(714)" ScriptName="idlist" Help="#Lang(814)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[if (typeof idlist === 'object') {
     var o = this.domCont;
@@ -2023,36 +2025,36 @@ if (typeof idlist === 'object') {
     vdom_ov_getSelected(o.id.substring(2, o.id.length));
 }]]></SourceCode>
         </Action>
-        <Action Help="#Lang(504)" InterfaceName="#Lang(604)" MethodName="show">
+        <Action Help="#Lang(514)" InterfaceName="#Lang(614)" MethodName="show">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(705)" ScriptName="fade" Help="#Lang(805)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(715)" ScriptName="fade" Help="#Lang(815)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[vdom_ui_show(this.domCont, fade);]]></SourceCode>
         </Action>
-        <Action Help="#Lang(505)" InterfaceName="#Lang(605)" MethodName="showItems">
+        <Action Help="#Lang(515)" InterfaceName="#Lang(615)" MethodName="showItems">
           <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(706)" ScriptName="items" Help="#Lang(806)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(716)" ScriptName="items" Help="#Lang(816)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[$j('>div.ov-content>div[dataid]',this.domCont).hide(0);
 for (var i in items) {
     $j('>div.ov-content>div[dataid="'+i+'"]',this.domCont).fadeIn(100);
 }]]></SourceCode>
         </Action>
-        <Action Help="#Lang(503)" InterfaceName="#Lang(603)" MethodName="sortItems">
+        <Action Help="#Lang(516)" InterfaceName="#Lang(616)" MethodName="sortItems">
           <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(704)" ScriptName="idlist" Help="#Lang(804)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(717)" ScriptName="idlist" Help="#Lang(817)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[]]></SourceCode>
         </Action>
-        <Action Help="#Lang(513)" InterfaceName="#Lang(613)" MethodName="unselectAll">
+        <Action Help="#Lang(517)" InterfaceName="#Lang(617)" MethodName="unselectAll">
           <Parameters/>
           <SourceCode><![CDATA[var o = this.domCont;
 $j('>div.ov-content>div[dataid]',o).removeClass('selected');
 vdom_ov_getSelected(o.id.substring(2, o.id.length));]]></SourceCode>
         </Action>
-        <Action Help="#Lang(507)" InterfaceName="#Lang(607)" MethodName="unselectItems">
+        <Action Help="#Lang(518)" InterfaceName="#Lang(618)" MethodName="unselectItems">
           <Parameters>
-            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(709)" ScriptName="idlist" Help="#Lang(809)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="[]" Interface="" InterfaceName="#Lang(718)" ScriptName="idlist" Help="#Lang(818)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[if (typeof idlist === 'object') {
     var o = this.domCont;
