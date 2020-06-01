@@ -58,6 +58,18 @@
 			<ColorGroup>1</ColorGroup>
 		</Attribute>
 		<Attribute>
+			<Name>classname</Name>
+			<DisplayName>#Lang(918)</DisplayName>
+			<DefaultValue></DefaultValue>
+			<Visible>1</Visible>
+			<Help>#Lang(000)</Help>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>TextField(500)</CodeInterface>
+			<Colorgroup>4</Colorgroup>
+			<ErrorValidationMessage>#Lang(000)</ErrorValidationMessage>
+			<RegularExpressionValidation>^.*$</RegularExpressionValidation>
+		</Attribute>
+		<Attribute>
 			<Name>zindex</Name>
 			<DisplayName>#Lang(103)</DisplayName>
 			<Description>#Lang(203)</Description>
@@ -222,6 +234,7 @@
 			<Sentence ID="915">Current Y-value</Sentence>
 			<Sentence ID="916">Current X-value</Sentence>
 			<Sentence ID="917">Current Y-value</Sentence>
+			<Sentence ID="918">CSS Class</Sentence>
 		</Language>
 		<Language Code="fr_FR">
 			<Sentence ID="001">Zone de Texte de Formulaire</Sentence>
@@ -302,6 +315,7 @@
 			<Sentence ID="915">Current Y-value</Sentence>
 			<Sentence ID="916">Current X-value</Sentence>
 			<Sentence ID="917">Current Y-value</Sentence>
+			<Sentence ID="918">CSS Class</Sentence>
 		</Language>
 		<Language Code="ru_RU">
 			<Sentence ID="001">Поле текста</Sentence>
@@ -382,6 +396,7 @@
 			<Sentence ID="915">Текущее значение Y</Sentence>
 			<Sentence ID="916">Текущее значение X</Sentence>
 			<Sentence ID="917">Текущее значение Y</Sentence>
+			<Sentence ID="918">CSS Class</Sentence>
 		</Language>
 	</Languages>
 	<Resources>
@@ -993,7 +1008,7 @@
 		%(id)s_editor.updateFrame();
 	});
 });</script>
-<div id="%(id)s" style="%(style)s">
+<div class="%(classname)s" objname="%(name)s" objtype="formtexteditor" id="%(id)s" style="%(style)s">
 	<textarea name="%(name)s" tabindex="%(tabind)s" style="%(style_area)s">%(value)s</textarea>
 </div>
 			""" % {
@@ -1004,7 +1019,8 @@
 				"style_area": style_area,
 				"value":      self.value,
 				"width":      self.width,
-				"height":     self.height
+				"height":     self.height,
+				"classname":  self.classname
 			}
 
 		return VDOM_object.render(self, contents=result)
