@@ -14,7 +14,7 @@
     <Container>2</Container>
     <Category>Standard</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.1273.8389</Version>
+    <Version>1.1274.8389</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, flexcontainer, tablecell, form, accordeon, tabview, dialog_2, vdomclass, desktopapplication, desktopshared, smartfolderdata</Containers>
@@ -136,7 +136,7 @@
     <Attribute>
       <Name>flexwrap</Name>
       <DisplayName>#Lang(111)</DisplayName>
-      <DefaultValue>5</DefaultValue>
+      <DefaultValue>2</DefaultValue>
       <Visible>1</Visible>
       <Help>#Lang(211)</Help>
       <InterfaceType>0</InterfaceType>
