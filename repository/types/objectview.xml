@@ -1505,16 +1505,20 @@ class VDOM_objectview(VDOM_object):
                 "classname": source_classname
             }
 
-            if bindings is None or not isinstance(data, dict):
+            if not isinstance(data, dict):
                 values["data"] = data
-            else:
+                try:
+                    data = json.loads(data)
+                except:
+                    pass
+            if bindings is not None and isinstance(data, dict):
                 template_name = data.get("vdomclass", "default")
-                binding = bindings.get(template_name, {})
+                binding = bindings.get(template_name)
 
                 cache = {0: (copy, {})}
 
                 for key, value in data.iteritems():
-                    if key not in binding:
+                    if binding is None or key not in binding:
                         continue
 
                     attributes = binding[key]
