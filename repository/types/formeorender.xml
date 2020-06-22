@@ -442,7 +442,7 @@ class VDOM_formeorender(VDOM_object):
 		</script>
 		""" % {
 			"id": id,
-      "data": "%(id)s.render(%(data)s);" % {"id": id, "data": self.data} if self.data else ""
+			"data": "%(id)s.render(%(data)s);" % {"id": id, "data": self.data} if self.data else {"id": id, "data": '{"id": "mock"}'}
 		}
 
 		styles = u"""
