@@ -77,7 +77,7 @@ class MemoryObjects(MemoryBase, MutableMapping):
 
             if item._virtual == self._owner.virtual:
                 self._items[item._id] = item
-                self._items_by_name[item._name] = item
+                self._items_by_name[item._name.lower()] = item
                 if not item._virtual:
                     self._all_items[item._id] = item
             else:

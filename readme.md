@@ -9,11 +9,14 @@ The first is needed to check that system meets all requirements:
 * pycrypto (pip install pycrypto)
 * sqlite (pip install pysqlite; copy dll for windows)
 * sqlitebck (copy dll for windows)
+* soappy (pip install soappy)
+* pyScss[(docs)](https://pyscss.readthedocs.io/en/latest/index.html) (pip install pyScss) 
+* WsgiDAV (pip install WsgiDAV==2.4.0)
+* lxml (pip install lxml)
+Optional, for some apps only:
 * xapian (copy module for windows)
 * xappy (copy module for windows)
 * python-ldap (pip install python-ldap)
-* soappy (pip install soappy)
-* pyScss[(docs)](https://pyscss.readthedocs.io/en/latest/index.html) (pip install pyScss) 
 
 Then download latest runtime. Before first run is needed to build C extensions:
 

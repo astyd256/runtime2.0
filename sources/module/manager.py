@@ -82,7 +82,7 @@ class VDOM_module_manager(object):
                 # _o = app.search_object(app.index) # CHECK: _o = app.search_object(app.index_page)
                 _o = app.objects.catalog.get(app.index)
                 if _o:
-                    request_object.redirect("/%s.vdom" % _o.name)
+                    request_object.redirect("/%s.vdom" % _o.name.lower())
                 else:
                     return (404, None)
             elif app.objects: # CHECK: len(app.get_objects_list()) > 0: # redirect to the first container
