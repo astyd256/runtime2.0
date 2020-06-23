@@ -1432,7 +1432,7 @@ class VDOM_web_services_server(object):
         if "objectlist" in interfaces and 1 == len(interfaces["objectlist"]) and "" == interfaces["objectlist"][0]:
             result += "<Objectlist>\n"
             # for oid in app.get_all_objects():
-            for obj1 in app.objects.catalog.itervalues():
+            for obj1 in app.objects.catalog.values():
                 # obj1 = app.search_object(oid)
                 if "copy" != obj1.type.name:
                     # if None != obj1.parent and ("copy" != obj.type.name or 0 == obj1.toplevel.has_copy):  # (oid not in obj.toplevel.all_child_objects):

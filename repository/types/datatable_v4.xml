@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.537.83890</Version>
+    <Version>4.539.83890</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, flexcontainer</Containers>
@@ -1141,6 +1141,7 @@ class VDOM_datatable_v4(VDOM_object):
       $('#%(id_table)s tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
+                execEventBinded('%(idn)s', 'rowsunselected', {});
             }
             else {
                 table.$('tr.selected').removeClass('selected');
@@ -1714,6 +1715,9 @@ $j(function(){
           <Parameters>
             <Parameter Name="keyList" Order="0" VbType="" Help="#Lang(924)"/>
           </Parameters>
+        </Event>
+        <Event Name="rowsunselected" Help="">
+          <Parameters/>
         </Event>
       </Userinterfaceevents>
     </Events>
