@@ -1,4 +1,5 @@
 import managers
+import sys
 
 from .auxiliary import section, show, warn, search
 
@@ -34,6 +35,7 @@ def select(application, name=None):
             managers.storage.write_object(VDOM_CONFIG["VIRTUAL-HOSTING-STORAGE-RECORD"], data)
         except Exception as error:
             warn("unable to select application: %s" % error)
+            sys.exit(1)
 
 
 def delete_(name=None):
