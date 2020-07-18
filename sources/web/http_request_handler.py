@@ -533,7 +533,10 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def address_string(self):
         """Return the client address formatted for logging"""
         host, port = self.client_address[:2]
-        return host
+        remote_ip = self.headers.get("X-Real-IP") or \
+                    self.headers.get("X-Forwarded-For") or \
+                    host
+        return remote_ip
 
     def sample_page(self, method):
         """generate sample output page"""
