@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+  <Information>
+    <Name>spreadsheet_v2</Name>
+    <DisplayName>#Lang(001)</DisplayName>
+    <Description>#Lang(002)</Description>
+    <ClassName>VDOM_spreadsheet</ClassName>
+    <ID>71a9c2c9-768f-4093-892b-63e1a33c2625</ID>
+    <Icon>#Res(a9cdfb15-cedd-a794-8a09-801025c6b9f4)</Icon>
+    <EditorIcon>#Res(0a1e0e02-c8b7-f149-9387-801055d14d13)</EditorIcon>
+    <StructureIcon>#Res(9d82bbce-515f-6aeb-254f-801040966293)</StructureIcon>
+    <Moveable>1</Moveable>
+    <Resizable>3</Resizable>
+    <Container>1</Container>
+    <Category>Additional</Category>
+    <Dynamic>1</Dynamic>
+    <Version>0.1</Version>
+    <InterfaceType>1</InterfaceType>
+    <OptimizationPriority>1</OptimizationPriority>
+    <Containers>htmlcontainer, dialog, container, tablecell, flexcontainer</Containers>
+    <Languages>en_US, ru_RU, fr_FR</Languages>
+    <Handlers/>
+    <RemoteMethods/>
+    <WCAG/>
+    <XMLScriptName/>
+  </Information>
+  <Attributes>
+    <Attribute>
+      <Name>hierarchy</Name>
+      <DisplayName>#Lang(003)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(2)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d+$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>visible</Name>
+      <DisplayName>#Lang(102)</DisplayName>
+      <DefaultValue>1</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(401)|1)|(#Lang(402)|0))</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>zindex</Name>
+      <DisplayName>#Lang(103)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(2)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>top</Name>
+      <DisplayName>#Lang(104)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(4)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>left</Name>
+      <DisplayName>#Lang(105)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(4)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>width</Name>
+      <DisplayName>#Lang(106)</DisplayName>
+      <DefaultValue>300</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(4)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>height</Name>
+      <DisplayName>#Lang(107)</DisplayName>
+      <DefaultValue>200</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(4)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>content</Name>
+      <DisplayName>#Lang(108)</DisplayName>
+      <DefaultValue/>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>3</InterfaceType>
+      <CodeInterface>MultiLine(100000)</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+  </Attributes>
+  <Languages>
+    <Language Code="en_US">
+      <Sentence ID="000">Default help field</Sentence>
+      <Sentence ID="001">Spreadsheet_v2</Sentence>
+      <Sentence ID="002">The Kendo UI Spreadsheet </Sentence>
+      <Sentence ID="103">Hierarchy</Sentence>
+      <Sentence ID="004">Default validation message</Sentence>
+    </Language>
+    <Language Code="ru_RU">
+      <Sentence ID="000">Default help field</Sentence>
+      <Sentence ID="001">Spreadsheet_v2</Sentence>
+      <Sentence ID="002">The Kendo UI Spreadsheet </Sentence>
+      <Sentence ID="103">Hierarchy</Sentence>
+      <Sentence ID="004">Default validation message</Sentence>
+    </Language>
+    <Language Code="fr_FR">
+      <Sentence ID="000">Default help field</Sentence>
+      <Sentence ID="001">Spreadsheet_v2</Sentence>
+      <Sentence ID="002">The Kendo UI Spreadsheet </Sentence>
+      <Sentence ID="103">Hierarchy</Sentence>
+      <Sentence ID="004">Default validation message</Sentence>
+    </Language>
+  </Languages>
+  <Resources>
+    <Resource ID="a9cdfb15-cedd-a794-8a09-801025c6b9f4" Name="Mimetypes-x-office-spreadsheet-icon64.png" Type="png"><![CDATA[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]]></Resource>
+    <Resource ID="0a1e0e02-c8b7-f149-9387-801055d14d13" Name="Mimetypes-x-office-spreadsheet-icon24.png" Type="png"><![CDATA[iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAD0UlEQVR42rWWS09aQRTHz3C5gl4EGwVM3ChJFyqP2oXfoo0bXdR+kXZR66YuauKuMfELaNVa1KZxZWJMu2jSTTckGG3QmEIqKq8LiEzPOXcgIGAXTScRhrlzz2/O/zxGAf95iNrE7/fbns/OvvD5/d6mh0Lcb0FK66thZWVl5eXR0ZHZBPD5fPra6mpsfHw84HA4pKBhAWQdY33ybynZsiCApDUpaQ1smibDkYj35OTkogXwfm2NACOFQgEQAj9SBpznDdA1Cf2OAjx0/wZN06BSqYButzOpcnMDdl1nT+y45vF4gADHx8etgI2NjVgQPUhc6dKsOsSvjA28bpB2GwjbTRYGe3IEkAgQuq7zqcsIQBi5IzSbDdwejwyFQu0B0Wg0FgoGA9/PnfJnWkNxqjD9uCJxk7i6voa+vj6WqGiawul0slHTNMGJktbm3d3dMhgMdvYA6SNnyQxUpAZQLYP/gRNseLJ0Og2Dg4MsQ6lUgq6uLn6vVCzynOS6RekMlwtQ5s6AcDgcSCaTFEMO88DAgESAKKIhwzAwzkIiQKBR3qNgLFfl9hZcLpccGxtrD9jc3IyFQ6HA5dUVG6WTY/qyRHkMPL4MZNVUEpHRAkmk5iYegiQaHR1tD9je3maJUqkUGaLTsu4EopPiy5YsDRKRZ5RxtP/W8gA6Ara2tmKRSCSAetclwrTjSblcZkMU5JpE9L4C8H4F6OwBSUQeUB3QqelPZQ6fFKVomZuWROxB0ZII7gVQDDLZrFW96IG7t5fnpTseOCjItI5y1eYqizoHmSQiAOZ8HdCrAGUypABFAqAsoLJIb8gio6dHBjsVGgWZAZRFmsaAPhUDzhCSorHQVBY5VMpSplHRPZqYaN+LajHIZjLc2AhAWUGDg6wKik+N/Yd0pxjYqT/h6W+wbZBnk5OTA2dnZ5cdCy2TybRKhACVmhKDyb2IelIul+Piq8339/c/LS0tTSGg0tYD7CMBzCKJTY2fYRbV01Fli8TnAlsGg2gPGpfYMsTe3t6Xt4uLT1D/dMuFU4sBAkao71jtv1ki7jkoC6UxPaMTDw8Ps0y7OzvfXs3NPUXjycb7qAnwgWKAEl03ZJHLMLiky6p6q0jI5/P0nsxls2JoaAh2d3e/vp6fn4rH46m7F15rN1US1bLI43YzoKgKCqtVZtEw3XQEODw83H+zsDCNxi+gzWgGrK9zFpHharXasMvaJnGN2gFdMoV8Hj5Go5+Xl5efoSzX0GHUAf39/drMzMycz+v1NxqtD+vuZTBBEolE/ODg4N3p6WkB7hl/+Zfh38cfX0adN1kulPYAAAAASUVORK5CYII=]]></Resource>
+    <Resource ID="9d82bbce-515f-6aeb-254f-801040966293" Name="Mimetypes-x-office-spreadsheet-icon16.png" Type="png"><![CDATA[iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB/klEQVR42o2TzW7aQBDHJzbGHxhbaQtLglQIRqr6BFz7Nq3UA30Abu4j9FT1WG7NoTn0yrfyEL304iJAQpUD2MY2dGaxCa6QmpGsWXnn/9vZ2ZkLSKxUKmkXaPAE26MtFosNrbnAMAxx0O87lmUxYnAO+ayIf6k1LKuIkBWPMU1T7CPg+uqKibkc/Ph5CYayh1f6byjIALs4BkEUIUaPFMqWAMZ8Pn84AoaDgQOXr9n9LwneNEN4oQNE3h8oFDQIwxByCN5utxygaRrUb26ygF6v5zwvXbOVH4KpiVDQVPA8j/YygH0KqNeN2Wz2CBhgBuVymZEIawKKokAURSDLMhdKkpQB1Gq1LGA8HnOA7/ug6zoXEiCfzz8dUKlUGAVRAAkpdRKmVyD/X0CIAJUAifAIIH+SwUsEZIo4Ho0OGWCwpqoHIV5BSk6m590GAex2O1Bwv9lsZgHUB9VqlVGwmgKSDAIUCoIA3mbDofjfb7Vaz5bLpXcWQC9AQiqiiA1EhaWT6YUeXDe2bfvdt9vbL8dWJsCIrsDYAXCSgYgnr9Zr3t6KLMftdvvD1273U9rSj4Dh0GFURLpCkgGtSei6LvhBEH207fco/nw6WBxQLBbFyWTiWI0G4/1+MkAEmU6n606n8/b73V3338k8Dhw2jolOODO6lAU+QLA+N9p/AYVKRCB1pn5tAAAAAElFTkSuQmCC]]></Resource>
+  </Resources>
+  <SourceCode>
+  <![CDATA[class VDOM_spreadsheet(VDOM_object):
+    def render(self, contents=""):
+        id = 'o_' + (self.id).replace('-', '_')
+
+        return VDOM_object.render(self, contents=result) 
+
+
+    def wysiwyg(self, contents=""):
+        from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
+
+        image_id = "18e2b159-f1f6-529c-e4e8-7af4c3033b41"
+        result = get_empty_wysiwyg_value(self, image_id)
+
+        return VDOM_object.wysiwyg(self, contents=result)
+  ]]>
+  </SourceCode>
+  <Libraries/>
+  <E2vdom>
+    <Events>
+      <Userinterfaceevents>
+      </Userinterfaceevents>
+    </Events>
+    <Actions>
+      <Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
+        <Action Help="#Lang(501)" InterfaceName="#Lang(601)" MethodName="hide">
+          <Parameters>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(701)" ScriptName="fade" Help="#Lang(801)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[$q(this.domCont).hide(fade);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(502)" InterfaceName="#Lang(602)" MethodName="loadData">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(702)" ScriptName="jsondata" Help="#Lang(802)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(503)" InterfaceName="#Lang(603)" MethodName="resizeTo">
+          <Parameters>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(703)" ScriptName="width" Help="#Lang(803)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(704)" ScriptName="height" Help="#Lang(804)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[$q(this.domCont).width(parseInt(width,10)).height(parseInt(height,10));]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(504)" InterfaceName="#Lang(604)" MethodName="show">
+          <Parameters>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(705)" ScriptName="fade" Help="#Lang(805)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[$q(this.domCont).show(fade);]]></SourceCode>
+        </Action>
+      </Container>
+    </Actions>
+  </E2vdom>
+</Type>
