@@ -120,7 +120,7 @@ class VDOM_module_manager(object):
             # get container object and check if it can be a top level container
             _a = managers.memory.applications[request_object.app_id()] 
             #check for both guid, low case and original case
-            obj = _a.objects.get(container_id) or _a.objects.catalog.get(container_id) or _a.objects.catalog.get(parts[-2])
+            obj = _a.objects.get(container_id) or _a.objects.catalog.get(container_id) or _a.objects.catalog.get(url_parts[0])
 
             # CHECK: if not obj:
             # CHECK:    for _i in _a.objects:
