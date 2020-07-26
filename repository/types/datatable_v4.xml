@@ -1573,17 +1573,17 @@ def on_update(object, attributes):
     <Library Target="html"><![CDATA[<script type='text/javascript'>
 
 function vdom_dtv3_triBoxClick(t) {
-  $j(t).siblings('em').hide(0);
+  $(t).siblings('em').hide(0);
 }
 function vdom_dtv3_triClick(t) {
-  $j(t).parent().find('em').hide(0);
+  $(t).parent().find('em').hide(0);
 }
 function vdom_dtv3_triReset() { // todo: fix for specific checkboxes
-  $j('#trailer').show();
-  $j('#chkBox').removeAttr('checked');
+  $('#trailer').show();
+  $('#chkBox').removeAttr('checked');
 }
 
-$j(function(){
+$(function(){
   //$j('.datatablev3.multiselect.tristate .tri em').click(function(){ vdom_dtv3_triClick(this); });
   //$j('.datatablev3.multiselect.tristate input:checkbox.ms').live('change click', vdom_dtv3_triBoxClick);
   //$j('#btnReset').click(vdom_dtv3_triReset);
