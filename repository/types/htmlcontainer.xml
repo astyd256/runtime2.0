@@ -3469,12 +3469,12 @@ TEMPLATE = u"""{doctype}
 {jquery_ui}
 {test_functions}
 <script type="text/javascript" src="/3e932470-0e08-446c-a866-30c00e6d812a.res"></script>
+{static_libraries}
+{dynamic_libraries}
 {test_classes}
 <style type="text/css">
 {css}
 </style>
-{static_libraries}
-{dynamic_libraries}
 <!--[if lt IE 9]><script src="/62bfaaa0-c2fd-02d5-2a32-49056e416a65.res"></script><![endif]-->
 </head>
 <body id="{element_name}" style="{style}"{inline_style}{inline_class}>
