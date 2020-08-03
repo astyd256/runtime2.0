@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.70.9200</Version>
+    <Version>1.71.9200</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -958,7 +958,6 @@ class VDOM_treegrid(VDOM_object):
             columnData:JSON.stringify(column)});
         });
 	</script>
-</div>
 """ % {
 				"debug_info":      debug_info,
 				"id":              id,
