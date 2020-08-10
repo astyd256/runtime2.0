@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.276.9200</Version>
+    <Version>0.277.9200</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -131,6 +131,18 @@
       <CodeInterface>MultiLine(10000)</CodeInterface>
       <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(309)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>pagelength</Name>
+      <DisplayName>#Lang(925)</DisplayName>
+      <DefaultValue>10</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(217)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>Number(1,99999)</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
@@ -409,6 +421,7 @@
       <Sentence ID="922">cellData</Sentence>
       <Sentence ID="923">cellData</Sentence>
       <Sentence ID="924">cellData</Sentence>
+      <Sentence ID="925">Page length</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="001">tabulator</Sentence>
@@ -552,6 +565,7 @@
       <Sentence ID="922">cellData</Sentence>
       <Sentence ID="923">cellData</Sentence>
       <Sentence ID="924">cellData</Sentence>
+      <Sentence ID="925">Page length</Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="001">tabulator</Sentence>
@@ -695,6 +709,7 @@
       <Sentence ID="922">cellData</Sentence>
       <Sentence ID="923">cellData</Sentence>
       <Sentence ID="924">cellData</Sentence>
+      <Sentence ID="925">Page length</Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -790,7 +805,7 @@ class VDOM_tabulator(VDOM_object):
 			responsiveLayout: "hide",
 			placeholder:"No Data Available",
 			pagination:"local", 
-			paginationSize: 50,
+			paginationSize: %(pagelength)s,
 			rowClick: function (e, row) {singleClick(e, row);},
 			rowDblClick: function (e, row) {doubleClick(e, row);},
 			%(params)s
@@ -812,7 +827,8 @@ class VDOM_tabulator(VDOM_object):
             "columns": self.columns,
             "keyField": self.key,
             "hidden_fields_styles": hidden_fields_styles,
-            "hidden_columns": hidden_columns
+            "hidden_columns": hidden_columns,
+            "pagelength": self.pagelength
         }
 
         return VDOM_object.render(self, contents=result)
