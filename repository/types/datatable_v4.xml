@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.539.83890</Version>
+    <Version>4.558.83890</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, flexcontainer</Containers>
@@ -476,6 +476,7 @@
       <Sentence ID="518"></Sentence>
       <Sentence ID="519"></Sentence>
       <Sentence ID="521"></Sentence>
+      <Sentence ID="522"></Sentence>
       <Sentence ID="601">custom</Sentence>
       <Sentence ID="602">hide</Sentence>
       <Sentence ID="603">selectAll</Sentence>
@@ -640,6 +641,7 @@
       <Sentence ID="518"></Sentence>
       <Sentence ID="519"></Sentence>
       <Sentence ID="521"></Sentence>
+      <Sentence ID="522"></Sentence>
       <Sentence ID="601">custom</Sentence>
       <Sentence ID="602">hide</Sentence>
       <Sentence ID="603">selectAll</Sentence>
@@ -804,6 +806,7 @@
       <Sentence ID="518"></Sentence>
       <Sentence ID="519"></Sentence>
       <Sentence ID="521"></Sentence>
+      <Sentence ID="522"></Sentence>
       <Sentence ID="601">custom</Sentence>
       <Sentence ID="602">hide</Sentence>
       <Sentence ID="603">selectAll</Sentence>
@@ -1716,7 +1719,7 @@ $(function(){
             <Parameter Name="keyList" Order="0" VbType="" Help="#Lang(924)"/>
           </Parameters>
         </Event>
-        <Event Name="rowsunselected" Help="">
+        <Event Name="rowsunselected" Help="#Lang(522)">
           <Parameters/>
         </Event>
       </Userinterfaceevents>
@@ -1748,22 +1751,21 @@ for (i = 0; i < number; i++)
           <Parameters>
             <Parameter DefaultValue="[]" Interface="idlist" InterfaceName="#Lang(703)" ScriptName="idlist" Help="#Lang(803)" RegularExpressionValidation="^.*$"/>
           </Parameters>
-          <SourceCode><![CDATA[
-const id_table = '#t_' + this.domCont.id;
+          <SourceCode><![CDATA[const id_table = '#t_' + this.domCont.id;
 const table = $(id_table).DataTable();
-const mas  = idlist;
 
-const tableData = table.rows().data().toArray()
-let keysFromTable = []
+const tableData = table.rows().data().toArray();
+let keysFromTable = [];
 tableData.forEach(el => {
-  keysFromTable.push(el[0])
-})
+    keysFromTable.push(el[0]);
+});
 
-mas.forEach( idFromAttr => {
-  let cellPosition = keysFromTable.indexOf(idFromAttr)
-  if (cellPosition === -1) return;
-  $(table.row( cellPosition ).node()).addClass('selected');
-})
+idlist.forEach(idFromAttr => {
+    let cellPosition = keysFromTable.indexOf(idFromAttr);
+    if (cellPosition === -1) return;
+    $(table.row(cellPosition).node()).addClass('selected');
+    execEventBinded(this.domCont.id.slice(2), "cellclick", {keyField: idFromAttr});
+});
 ]]></SourceCode>
         </Action>
         <Action Help="#Lang(505)" InterfaceName="#Lang(605)" MethodName="selectNone">
