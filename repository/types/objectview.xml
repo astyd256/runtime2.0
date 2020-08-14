@@ -167,7 +167,7 @@
       <CodeInterface>DropDown((#Lang(408)|0)|(#Lang(409)|1))</CodeInterface>
       <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
-      <RegularExpressionValidation>^\{0,1}$</RegularExpressionValidation>
+      <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
     </Attribute>
     <Attribute>
       <Name>sortable</Name>
