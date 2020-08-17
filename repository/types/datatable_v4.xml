@@ -230,13 +230,13 @@
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>scrollY</Name>
+      <Name>fixedheader</Name>
       <DisplayName>#Lang(119)</DisplayName>
       <DefaultValue>0</DefaultValue>
       <Visible>1</Visible>
       <Help>#Lang(219)</Help>
       <InterfaceType>0</InterfaceType>
-      <CodeInterface>Number(0,)</CodeInterface>
+      <CodeInterface>DropDown((#Lang(404)|1)|(#Lang(403)|0))</CodeInterface>
       <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(319)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
@@ -373,7 +373,7 @@
       <Sentence ID="116">Fixed height</Sentence>
       <Sentence ID="117">Page length</Sentence>
       <Sentence ID="118">Split a table into pages</Sentence>
-      <Sentence ID="119">Vertical scroll</Sentence>
+      <Sentence ID="119">Fixed header when scroll</Sentence>
       <Sentence ID="121">Selected rows</Sentence>
       <Sentence ID="122">Selection mode</Sentence>
       <Sentence ID="123">Style</Sentence>
@@ -540,7 +540,7 @@
       <Sentence ID="116"></Sentence>
       <Sentence ID="117"></Sentence>
       <Sentence ID="118"></Sentence>
-      <Sentence ID="119"></Sentence>
+      <Sentence ID="119">Fixed header when scroll</Sentence>
       <Sentence ID="121">Selected rows</Sentence>
       <Sentence ID="122">Selection mode</Sentence>
       <Sentence ID="123">Style</Sentence>
@@ -707,7 +707,7 @@
       <Sentence ID="116"></Sentence>
       <Sentence ID="117"></Sentence>
       <Sentence ID="118"></Sentence>
-      <Sentence ID="119"></Sentence>
+      <Sentence ID="119">Fixed header when scroll</Sentence>
       <Sentence ID="121">Выбранные ряды</Sentence>
       <Sentence ID="122">Режим выбора</Sentence>
       <Sentence ID="123">Стиль</Sentence>
@@ -1123,10 +1123,19 @@ class VDOM_datatable_v4(VDOM_object):
         },
 """ % {"id_table": id_table}
 
-    if self.scrollY != "0":
-      scroll = u'"scrollY": "%(scrollY)spx",\n"scrollCollapse": true,\n' % {"scrollY": self.scrollY}
+    scrollY_styles = ""
+    if self.fixedheader != "0":
+      scrollY = u'"scrollY": "%(scrollY)s",' % {"scrollY": self.height}
+      scrollY_styles = """
+      #%(id)s .dataTables_scrollHead, 
+      #%(id)s .dataTables_scrollHeadInner, 
+      #%(id)s table.display.dataTable.no-footer 
+      {width: 100%% !important;}
+      #%(id)s .dataTables_scroll, #%(id)s .dataTables_wrapper
+      {height: 100%%;}
+      """ % {"id":id}
     else:
-      scroll = ""
+      scrollY = ""
 
     if self.pagelength:
       page_length = u"""
@@ -1171,10 +1180,7 @@ class VDOM_datatable_v4(VDOM_object):
                 $(this).addClass('selected');
             }
         } );
- 
-        $('#button').click( function () {
-            table.row('.selected').remove().draw( false );
-        } );
+
 """ % {"id_table": id_table, "idn": idn}
     else:
       slelection_mode = u"""
@@ -1183,9 +1189,6 @@ class VDOM_datatable_v4(VDOM_object):
         execEventBinded('%(idn)s', 'rowsselected', {keyList: table.row( this ).index()});
       } );
  
-        $('#button').click( function () {
-            alert( table.rows('.selected').data().length +' row(s) selected' );
-        } );
 """ % {"id_table": id_table, "idn": idn}
 
     if self.selectedrows:
@@ -1211,6 +1214,8 @@ class VDOM_datatable_v4(VDOM_object):
     result = u"""
     <div %(debug_info)s id='%(id)s' style='%(style)s' %(cssclass)s>
   <style type="text/css">
+    %(scrollY_styles)s
+
     #%(id)s .dt-buttons {
         display:none;
     }
@@ -1232,7 +1237,7 @@ class VDOM_datatable_v4(VDOM_object):
         "order": [],
         %(paging)s
         %(searching)s
-        %(scroll)s
+        %(scrollY)s
         %(page_length)s
         %(show_header)s
         "columnDefs": [%(customcolumns)s],
@@ -1306,9 +1311,10 @@ class VDOM_datatable_v4(VDOM_object):
         "searching":       searching,
         "selection_mode":  slelection_mode,
         "selectedrows":    selectedrows,
-        "scroll":          scroll,
+        "scrollY":          scrollY,
         "style":           style,
         "selfstyle":       self.style % {"id": id},
+        "scrollY_styles":  scrollY_styles,
         "cssclass":        cssclass,
         "title":           title,
         "fixed_height":    fixed_height,
