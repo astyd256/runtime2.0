@@ -516,6 +516,8 @@
       <Sentence ID="922">cellData</Sentence>
       <Sentence ID="923">cellData</Sentence>
       <Sentence ID="924">cellData</Sentence>
+      <Sentence ID="925">Export as excel</Sentence>
+      <Sentence ID="926">Export as PDF</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="001">Datatable v3</Sentence>
@@ -681,6 +683,8 @@
       <Sentence ID="922">cellData</Sentence>
       <Sentence ID="923">cellData</Sentence>
       <Sentence ID="924">cellData</Sentence>
+      <Sentence ID="925">Export as excel</Sentence>
+      <Sentence ID="926">Export as PDF</Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="001">Таблица данных v3</Sentence>
@@ -846,6 +850,8 @@
       <Sentence ID="922">cellData</Sentence>
       <Sentence ID="923">cellData</Sentence>
       <Sentence ID="924">cellData</Sentence>
+      <Sentence ID="925">Export as excel</Sentence>
+      <Sentence ID="926">Export as PDF</Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -1072,7 +1078,6 @@ class VDOM_datatable_v4(VDOM_object):
         raise Exception (u"Incorrect value in header %s" % self.header)
     else:
       col_title = []
-
     if self.data:
       try:
         src_data = json.loads(self.data)
@@ -1206,6 +1211,9 @@ class VDOM_datatable_v4(VDOM_object):
     result = u"""
     <div %(debug_info)s id='%(id)s' style='%(style)s' %(cssclass)s>
   <style type="text/css">
+    #%(id)s .dt-buttons {
+        display:none;
+    }
     %(selfstyle)s
   </style>
     <table id="%(id_table)s" class="display" width="100%%" %(fixed_height)s>
@@ -1216,6 +1224,10 @@ class VDOM_datatable_v4(VDOM_object):
       var id_%(id)s = '%(id)s';
       const table = $('#%(id_table)s').DataTable({
         data: %(data)s,
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         columns: %(columns)s,
         "order": [],
         %(paging)s
@@ -1809,6 +1821,12 @@ table.draw();
             <Parameter DefaultValue="0" Interface="fade" InterfaceName="#Lang(705)" ScriptName="fade" Help="#Lang(805)" RegularExpressionValidation="^\d+$"/>
           </Parameters>
           <SourceCode><![CDATA[vdom_ui_show(this.domCont, fade);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(508)" InterfaceName="#Lang(925)" MethodName="exportAsExcel">
+          <SourceCode><![CDATA[$(`#t_${this.domCont.id}_wrapper .dt-buttons .buttons-excel`).click()]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(508)" InterfaceName="#Lang(926)" MethodName="exportAsPDF">
+          <SourceCode><![CDATA[$(`#t_${this.domCont.id}_wrapper .dt-buttons .buttons-pdf`).click()]]></SourceCode>
         </Action>
       </Container>
     </Actions>
