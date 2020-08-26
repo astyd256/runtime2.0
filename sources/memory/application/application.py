@@ -11,7 +11,7 @@ from database.dbobject import VDOM_sql_query
 from utils.properties import weak, constant, roproperty, rwproperty
 
 from ..constants import DEFAULT_SCRIPTING_LANGUAGE, DEFAULT_LANGUAGE, \
-    APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
+    APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, REQUEST_STOP_CONTEXT, SESSION_FINISH_CONTEXT
 from ..generic import MemoryBase
 from ..auxiliary import write_as_base64, copy_as_base64
 from .objects import MemoryObjects
@@ -30,7 +30,7 @@ class MemoryApplicationSketch(MemoryBase):
 
     is_application = constant(True)
 
-    generic = APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, SESSION_FINISH_CONTEXT
+    generic = APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, REQUEST_STOP_CONTEXT, SESSION_FINISH_CONTEXT
 
     _restore = False
 

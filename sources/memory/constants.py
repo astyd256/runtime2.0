@@ -26,5 +26,7 @@ SESSION_START_CONTEXT = "sessiononstart"  # "onsessionstart"
 SESSION_FINISH_CONTEXT = "sessiononfinish"  # "sessiononfinish"
 
 REQUEST_START_CONTEXT = "requestonstart"  # "onrequeststart"
+REQUEST_STOP_CONTEXT = "requestonstop"
 REQUEST_TIMEOUT_CONTEXT = "requestontimeout"
 REQUEST_ERROR_CONTEXT = "requestonerror"
+

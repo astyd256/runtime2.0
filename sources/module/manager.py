@@ -165,6 +165,10 @@ class VDOM_module_manager(object):
             # CHECK:    managers.engine.special(_a, _a.global_actions["session"]["sessiononstart"])
             # CHECK:    request_object.session().on_start_executed = True
 
+            on_request_start = _a.actions.get("requestonstart")
+            if on_request_start and on_request_start.source_code:
+                managers.engine.execute(on_request_start)
+
             result = ""
             try:
                 result = managers.engine.render(obj, render_type=obj.type.render_type.lower())
@@ -213,6 +217,11 @@ class VDOM_module_manager(object):
 #           except:
 #               debug(_("Module manager: post processing error: %s") % sys.exc_info()[0])
 #               traceback.print_exc(file=debugfile)
+
+            on_request_stop = _a.actions.get("requestonstop")
+            if on_request_stop and on_request_stop.source_code:
+                managers.engine.execute(on_request_stop)
+
             return (None, result.encode("utf-8"))
 
         elif "py" == request_type:  # dynamic python script, this doesn't require an application to be registered
