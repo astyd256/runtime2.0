@@ -1229,7 +1229,7 @@ class VDOM_datatable_v4(VDOM_object):
       var id_%(id)s = '%(id)s';
       const table = $('#%(id_table)s').DataTable({
         data: %(data)s,
-        dom: 'Bfrtip',
+        dom: 'Bfri<"table_wrapper"t>p',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
@@ -1254,9 +1254,6 @@ class VDOM_datatable_v4(VDOM_object):
         	}
     	}
       });
-      
-      $('#%(id)s').find('.dataTable')
-      	.wrap("<div class='table_wrapper'></div>");
 
       %(title)s
 
