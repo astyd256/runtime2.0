@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.560.83890</Version>
+    <Version>4.570.83890</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, flexcontainer</Containers>
@@ -153,6 +153,18 @@
       <Help>#Lang(212)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>MultiLine(100000)</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(312)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>autowidth</Name>
+      <DisplayName>#Lang(927)</DisplayName>
+      <DefaultValue>true</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(212)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(404)|true)|(#Lang(405)|false))</CodeInterface>
       <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(312)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
@@ -518,6 +530,7 @@
       <Sentence ID="924">cellData</Sentence>
       <Sentence ID="925">Export as excel</Sentence>
       <Sentence ID="926">Export as PDF</Sentence>
+      <Sentence ID="927">Auto width columns</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="001">Datatable v3</Sentence>
@@ -685,6 +698,7 @@
       <Sentence ID="924">cellData</Sentence>
       <Sentence ID="925">Export as excel</Sentence>
       <Sentence ID="926">Export as PDF</Sentence>
+      <Sentence ID="927">Auto width columns</Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="001">Таблица данных v3</Sentence>
@@ -852,6 +866,7 @@
       <Sentence ID="924">cellData</Sentence>
       <Sentence ID="925">Export as excel</Sentence>
       <Sentence ID="926">Export as PDF</Sentence>
+      <Sentence ID="927">Auto width columns</Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -1105,7 +1120,7 @@ class VDOM_datatable_v4(VDOM_object):
         'className': 'hide_column',
         'createdCell':  function (td, cellData, rowData, row, col) {
         $(td).css({'display': 'none'})
-        $(td).attr('data-key',cellData); 
+        $(td).attr('data-key', cellData); 
       }
     }"""
 
@@ -1118,10 +1133,15 @@ class VDOM_datatable_v4(VDOM_object):
       show_header = u""
     else:
       show_header = u"""
-      "drawCallback": function() {
-          $("#%(id_table)s thead").remove(); 
-        },
-""" % {"id_table": id_table}
+        const header = $("#%(id)s thead th");
+        header.css('line-height', 0, "!important");
+        header.css('font-size', 0, "!important");
+        header.css('overflow','hidden', "!important");
+        header.css('padding-top', '0', "!important");
+        header.css('max-height', 0, "!important");
+        header.css('padding-bottom', '0', "!important");
+        header.css('height', 0, "!important");
+      """ % {"id": id}
 
     scrollY_styles = ""
     if self.fixedheader != "0":
@@ -1234,25 +1254,28 @@ class VDOM_datatable_v4(VDOM_object):
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
         columns: %(columns)s,
-        "order": [],
+        order: [],
         %(paging)s
         %(searching)s
         %(scrollY)s
         %(page_length)s
-        %(show_header)s
-        "columnDefs": [%(customcolumns)s],
+        autoWidth: %(autoWidth)s,
+        columnDefs: [%(customcolumns)s],
         initComplete : function() {
           %(selectedrows)s
         },
         %(customparams)s
         // NOTE: Hides pagination panel if there's only one page
-        "fnDrawCallback": function(oSettings) {
-        	if (oSettings._iDisplayLength == -1 || oSettings._iDisplayLength > oSettings.fnRecordsDisplay()) {
-            	jQuery(oSettings.nTableWrapper).find('.dataTables_paginate').addClass('datatable-pagination-disable');
-        	} else {
-        	    jQuery(oSettings.nTableWrapper).find('.dataTables_paginate').removeClass('datatable-pagination-disable');
-        	}
-    	}
+        "drawCallback": function(oSettings) {
+            %(show_header)s
+
+            if (oSettings._iDisplayLength == -1 || oSettings._iDisplayLength > oSettings.fnRecordsDisplay()) {
+                jQuery(oSettings.nTableWrapper).find('.dataTables_paginate').addClass('datatable-pagination-disable');
+            } else {
+                jQuery(oSettings.nTableWrapper).find('.dataTables_paginate').removeClass('datatable-pagination-disable');
+            }
+            
+         }
       });
 
       %(title)s
@@ -1307,6 +1330,7 @@ class VDOM_datatable_v4(VDOM_object):
         "paging":          paging,
         "searching":       searching,
         "selection_mode":  slelection_mode,
+        "autoWidth":       self.autowidth,
         "selectedrows":    selectedrows,
         "scrollY":          scrollY,
         "style":           style,
