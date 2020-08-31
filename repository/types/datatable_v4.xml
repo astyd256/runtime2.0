@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.570.83890</Version>
+    <Version>4.571</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, flexcontainer</Containers>
@@ -1102,27 +1102,18 @@ class VDOM_datatable_v4(VDOM_object):
         raise Exception (u"Incorrect value in data %s" % self.data)
     else:
       src_data = [[]]
-      
-    if self.key and not self.customcolumns:
-      if self.key in [_['title'] for _ in col_title]:
-        self.customcolumns = """{
-        'targets': 0,
-        'className': 'hide_column',
-        'createdCell':  function (td, cellData, rowData, row, col) {
-        $(td).css({'display': 'none'})
-        $(td).attr('data-key',cellData); 
-      }
-    }"""
-    elif self.key and self.customcolumns:
-      if self.key in [_['title'] for _ in col_title]:
-        self.customcolumns += """{
-        'targets': 0,
-        'className': 'hide_column',
-        'createdCell':  function (td, cellData, rowData, row, col) {
-        $(td).css({'display': 'none'})
-        $(td).attr('data-key', cellData); 
-      }
-    }"""
+    
+    key_index = -1
+    if self.key:
+      key_index = [_['title'] for _ in col_title].index(self.key)
+    else:
+      pass
+
+    VALID_KEY = key_index != -1 or key_index == 0
+    if VALID_KEY and not self.customcolumns:
+      self.customcolumns = """{targets: %(index)s, visible: false}""" % { "index": key_index }
+    elif VALID_KEY and self.customcolumns:
+      self.customcolumns += """,{targets: %(index)s, visible: false}""" % { "index": key_index }
 
     if self.fixedheight == "1":
       fixed_height = u"""height = "%(height)spx" """% {"height": self.height}
@@ -1250,9 +1241,7 @@ class VDOM_datatable_v4(VDOM_object):
       const table = $('#%(id_table)s').DataTable({
         data: %(data)s,
         dom: 'Bfri<"table_wrapper"t>p',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
+        buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
         columns: %(columns)s,
         order: [],
         %(paging)s
@@ -1268,7 +1257,6 @@ class VDOM_datatable_v4(VDOM_object):
         // NOTE: Hides pagination panel if there's only one page
         "drawCallback": function(oSettings) {
             %(show_header)s
-
             if (oSettings._iDisplayLength == -1 || oSettings._iDisplayLength > oSettings.fnRecordsDisplay()) {
                 jQuery(oSettings.nTableWrapper).find('.dataTables_paginate').addClass('datatable-pagination-disable');
             } else {
@@ -1285,32 +1273,23 @@ class VDOM_datatable_v4(VDOM_object):
         return $(colheader).text().trim();
       } );
 
+      function get_column_data(clicked_element) {
+        const column = table.cell( clicked_element ).index().column;
+        const row = table.cell( clicked_element ).index().row;
+
+        const first_column_data = table.cell({row: row, column: %(key_index)s}).data();
+        const cellData = table.row(row).data();
+        const title = table.column(column).title();
+
+        return {keyField:first_column_data, cellData:cellData, headerData:title}
+      }
+
       $('#%(id_table)s tbody').on( 'click', 'td', function () {
-        const idx = table.cell( this ).index().column;
-        const idy = table.cell( this ).index().row;
-        const title = table.column( idx ).title();
-        const el = $(this);
-        const parent = el.parent();
-        const first_col = parent.children()[0];
-        let key = $(first_col).attr('data-key');
-        if (key == null) {
-            key = idy;
-        }
-        execEventBinded('%(idn)s', 'cellclick', {keyField: key, cellData:table.row( idy ).data(), headerData:title});
+        execEventBinded('%(idn)s', 'cellclick', get_column_data(this));
       } );
       
       $('#%(id_table)s tbody').on( 'dblclick', 'td', function () {
-        const idx = table.cell( this ).index().column;
-        const idy = table.cell( this ).index().row;
-        const title = table.column( idx ).title();
-        const el = $(this);
-        const parent = el.parent();
-        const first_col = parent.children()[0];
-        let key = $(first_col).attr('data-key');
-        if (key == null) {
-            key = idy;
-        }
-        execEventBinded('%(idn)s', 'celldblclick', {keyField: key, cellData:table.row( idy ).data(), headerData:title});
+        execEventBinded('%(idn)s', 'celldblclick', get_column_data(this));
       } );
 
       %(customfunc)s
@@ -1342,7 +1321,8 @@ class VDOM_datatable_v4(VDOM_object):
         "customparams":    self.customparams,
         "customfunc":      self.customfunc,
         "data":            json.dumps(src_data),
-        "columns":         json.dumps(col_title)
+        "columns":         json.dumps(col_title),
+        "key_index":       key_index
     }
 
     return VDOM_object.render(self, contents=result)
