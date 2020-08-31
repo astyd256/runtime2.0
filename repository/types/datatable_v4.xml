@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.571</Version>
+    <Version>4.572</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, flexcontainer</Containers>
@@ -1173,34 +1173,27 @@ class VDOM_datatable_v4(VDOM_object):
 
     if self.selectionmode == "0":
       slelection_mode = u"""
-      $('#%(id_table)s tbody').on( 'click', 'tr', function () {
-            if ( $(this).hasClass('selected') ) {
-                $(this).removeClass('selected');
+      $('#%(id_table)s tbody').on( 'click', 'td', function () {
+            const tr = $(this).parent()
+            if ( tr.hasClass('selected') ) {
+                tr.removeClass('selected');
                 execEventBinded('%(idn)s', 'rowsunselected', {});
             }
             else {
                 table.$('tr.selected').removeClass('selected');
-                const idy = table.row( this ).index()
-                const element = $(this);
-                const key_column = element.children()[0];
-                let key = $(key_column).attr('data-key');
-                if (key == null) {
-                  key = idy;
-                }
-          execEventBinded('%(idn)s', 'rowsselected', {keyList: key});
-                $(this).addClass('selected');
+                const {keyField} = get_column_data(this);
+                execEventBinded('%(idn)s', 'rowsselected', {keyList: keyField});
+                tr.addClass('selected');
             }
-        } );
-
-""" % {"id_table": id_table, "idn": idn}
+        } );""" % {"id_table": id_table, "idn": idn}
     else:
       slelection_mode = u"""
-      $('#%(id_table)s tbody').on( 'click', 'tr', function () {
-            $(this).toggleClass('selected');
-        execEventBinded('%(idn)s', 'rowsselected', {keyList: table.row( this ).index()});
-      } );
- 
-""" % {"id_table": id_table, "idn": idn}
+      $('#%(id_table)s tbody').on( 'click', 'td', function () {
+            const tr = $(this).perent();
+            tr.toggleClass('selected');
+            const {keyField} = get_column_data(this);
+        execEventBinded('%(idn)s', 'rowsselected', {keyList: keyField});
+      } );""" % {"id_table": id_table, "idn": idn}
 
     if self.selectedrows:
       try:
