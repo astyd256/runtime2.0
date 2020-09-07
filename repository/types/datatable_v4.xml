@@ -1105,7 +1105,11 @@ class VDOM_datatable_v4(VDOM_object):
     
     key_index = -1
     if self.key:
-      key_index = [_['title'] for _ in col_title].index(self.key)
+      try:
+        key_index = [_['title'] for _ in col_title].index(self.key)
+      except ValueError:
+        print "Datatable {table_name} has incorrect key value".format(table_name=self.name)
+        key_index = 0
     else:
       pass
 
