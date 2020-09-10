@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>2.33.8390</Version>
+    <Version>2.33.8391</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, tablecell</Containers>
@@ -1219,11 +1219,11 @@ class VDOM_fullcalendar(VDOM_object):
 	RENDER_SCRIPT = """
 	$.curCSS = function (element, attrib, val) {$(element).css(attrib, val);};
 	/*Fullcalendar. VDOM Type Version %(version)s. Last modified - %(date_mod)s*/
-	$j(function(){
+	$(function(){
 
 		%(window_lazyloading_1)s
 
-		$j("#%(id_out)s").fullCalendar({
+		$("#%(id_out)s").fullCalendar({
 
 			header: {
 				left: '',
@@ -1276,7 +1276,7 @@ class VDOM_fullcalendar(VDOM_object):
 			{
 				end = endDate.getTime() / 1000;
 				start = startDate.getTime() / 1000;
-				$j("#%(id_out)s").fullCalendar('unselect');
+				$("#%(id_out)s").fullCalendar('unselect');
 				execEventBinded("%(id_woo)s", "daysSelected", {
 					start: start,
 					end: end,
@@ -1321,8 +1321,8 @@ class VDOM_fullcalendar(VDOM_object):
 			}
 		});
 
-		$j("#%(id_out)s").fullCalendar( 'render' );
-		$j("#%(id_out)s").fullCalendar( 'gotoDate',  %(year)s, %(month)s, %(day)s);
+		$("#%(id_out)s").fullCalendar( 'render' );
+		$("#%(id_out)s").fullCalendar( 'gotoDate',  %(year)s, %(month)s, %(day)s);
 	});
 """
 
