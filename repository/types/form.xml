@@ -785,6 +785,7 @@ dGE+IDw/eHBhY2tldCBlbmQ9InIiPz5gnN14AAAAhUlEQVR42mLcsn2dPQMDQxcQmzGQBk4BcRkT
 kFgBxH1AzEgiBulZATJAAohXMpAOQHokmBgoBEzYBf8JAvF/NPwOm1oWAha8B2Ihkl1AsReoaYAg
 EP+H4lUjNAwIAqxh8I+B6T00vRPlgqdA7EeG5SA9T0EuSAHi+UC8kUQDXgBxIkCAAQDl7B+DjspN
 DAAAAABJRU5ErkJggg==]]></Resource>
+    <Resource ID="d71c042b-2d14-4e1b-9323-9305f0e2dc36" Name="submitVDOMformJs.js" Type="js"><![CDATA[Y2xhc3MgU3VibWl0VkRPTUZvcm1KcyB7CiAgICBjb25zdHJ1Y3Rvcihmb3JtSWQsIHJlcG9ydEFib3V0VmFsaWRpdHkpIHsKICAgICAgdGhpcy5mb3JtSWQgPSBmb3JtSWQ7CiAgICAgIHRoaXMuJGZvcm0gPSAkKGAjJHtmb3JtSWR9YCk7CiAgICAgIHRoaXMucmVwb3J0QWJvdXRWYWxpZGl0eSA9IHJlcG9ydEFib3V0VmFsaWRpdHk7CiAgICAgIHRoaXMuaW5pdEZvcm1TdWJtaXRFdmVudCgpOwogICAgICB0aGlzLmJvZHkgPSAkKCJib2R5Iik7CiAgICB9CiAgCiAgICBpbml0Rm9ybVN1Ym1pdEV2ZW50KCkgewogICAgICB0aGlzLiRmb3JtLnN1Ym1pdCgoZSkgPT4gewogICAgICAgIHJldHVybiB0aGlzLnN1Ym1pdEZvcm0odGhpcy4kZm9ybSwgZSk7CiAgICAgIH0pOwogICAgfQogIAogICAgc3VibWl0Rm9ybShmb3JtLCBlKSB7CiAgICAgIC8vY29uc3QgZm9ybUlzVmFsaWQgPSB0aGlzLnJlcG9ydFZhbGlkaXR5KGUpOwogICAgICAvL2lmICghZm9ybUlzVmFsaWQpIHJldHVybiBmYWxzZTsKICAKICAgICAgY29uc3QgZm9ybUlzU3VibWl0dGVkID0gdGhpcy5mb3JtSXNTdWJtaXR0ZWQodGhpcy5mb3JtSWQpOwogICAgICBpZiAoZm9ybUlzU3VibWl0dGVkKSByZXR1cm4gZmFsc2U7CiAgCiAgICAgIHRoaXMuYWRkU3VibWl0QnV0dG9uc1RvRm9ybShmb3JtLCBlKTsKICAKICAgICAgY29uc3QgZm9ybURhdGEgPSB7fTsKICAgICAgdGhpcy5zZXJlYWxpemVGb3JtKGZvcm1EYXRhLCBmb3JtKTsKICAKICAgICAgdGhpcy5zZW5kRm9ybVRocm91Z2hFMlZET00oZm9ybURhdGEpOwogIAogICAgICByZXR1cm4gZmFsc2U7CiAgICB9CiAgCiAgICBhZGRTdWJtaXRCdXR0b25zVG9Gb3JtKGZvcm0sIGUpIHsKICAgICAgY29uc3QgZm9ybUhhc1N1Ym1pdFRyaWdnZXIgPSBmb3JtLmNoaWxkcmVuKCJpbnB1dFtuYW1lPV9fc3VibWl0X3RyaWdnZXJfX10iKQogICAgICAgIC5sZW5ndGg7CiAgICAgIGNvbnN0IGZvcm1TdWJtaXR0ZXIgPSAkKGUub3JpZ2luYWxFdmVudC5zdWJtaXR0ZXIpOwogICAgICBjb25zdCBmb3JtU3VibWl0dGVyTmFtZSA9IGZvcm1TdWJtaXR0ZXIuYXR0cigibmFtZSIpOwogICAgICBjb25zdCBoaWRkZW5JbnB1dCA9ICQoCiAgICAgICAgYDxpbnB1dCB0eXBlPSdoaWRkZW4nIG5hbWU9J19fc3VibWl0X3RyaWdnZXJfXyc+PC9pbnB1dD5gCiAgICAgICk7CiAgICAgIGlmICghZm9ybUhhc1N1Ym1pdFRyaWdnZXIpIHsKICAgICAgICBmb3JtLmFwcGVuZChoaWRkZW5JbnB1dC52YWwoZm9ybVN1Ym1pdHRlck5hbWUpKTsKICAgICAgfSBlbHNlIHsKICAgICAgICBmb3JtLmNoaWxkcmVuKCJpbnB1dFtuYW1lPV9fc3VibWl0X3RyaWdnZXJfX10iKS52YWwoZm9ybVN1Ym1pdHRlck5hbWUpOwogICAgICB9CiAgICB9CiAgCiAgICBzZXJlYWxpemVGb3JtKGZvcm1EYXRhLCBmb3JtKSB7CiAgICAgIGNvbnN0IHN1Ym1pdFRyaWdnZXIgPSBmb3JtLmNoaWxkcmVuKCJpbnB1dFtuYW1lPSdfX3N1Ym1pdF90cmlnZ2VyX18nXSIpOwogICAgICBpZiAoc3VibWl0VHJpZ2dlci5sZW5ndGgpIHsKICAgICAgICBmb3JtRGF0YVtzdWJtaXRUcmlnZ2VyLnZhbCgpXSA9IDE7CiAgICAgICAgc3VibWl0VHJpZ2dlci5yZW1vdmUoKTsKICAgICAgfQogIAogICAgICBjb25zdCBvYmpIYXNLZXkgPSAob2JqLCBrZXkpID0+IG9iai5oYXNPd25Qcm9wZXJ0eShrZXkpOwogICAgICBjb25zdCBkYXRhSXNBcnJheSA9ICh2YWx1ZSkgPT4gJC5pc0FycmF5KHZhbHVlKTsKICAKICAgICAgY29uc3Qgc2VyZWFsaXplZEZvcm1EYXRhID0gZm9ybS5zZXJpYWxpemVBcnJheSgpOwogICAgICBmb3IgKGxldCBrIG9mIHNlcmVhbGl6ZWRGb3JtRGF0YSkgewogICAgICAgIGNvbnN0IGtleSA9IGsubmFtZTsKICAgICAgICBjb25zdCB2YWx1ZSA9IGsudmFsdWU7CiAgICAgICAgY29uc3QgZGF0YUlzVmFsaWQgPQogICAgICAgICAgdHlwZW9mIGtleSAhPT0gInVuZGVmaW5lZCIgJiYgdHlwZW9mIHZhbHVlICE9PSAidW5kZWZpbmVkIjsKICAgICAgICBpZiAoZGF0YUlzVmFsaWQpIHsKICAgICAgICAgIGlmIChvYmpIYXNLZXkoZm9ybURhdGEsIGtleSkpIHsKICAgICAgICAgICAgaWYgKGRhdGFJc0FycmF5KGZvcm1EYXRhW2tleV0pKSB7CiAgICAgICAgICAgICAgZm9ybURhdGFba2V5XS5wdXNoKHZhbHVlKTsKICAgICAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAgICBjb25zdCBmb3JtVmFsdWUgPSBmb3JtRGF0YVtrZXldOwogICAgICAgICAgICAgIGZvcm1EYXRhW2tleV0gPSBuZXcgQXJyYXkoZm9ybVZhbHVlLCB2YWx1ZSk7CiAgICAgICAgICAgIH0KICAgICAgICAgIH0gZWxzZSB7CiAgICAgICAgICAgIGZvcm1EYXRhW2tleV0gPSB2YWx1ZTsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KICAgIH0KICAKICAgIHJlcG9ydFZhbGlkaXR5KGUpIHsKICAgICAgaWYgKHRoaXMucmVwb3J0QWJvdXRWYWxpZGl0eSkgewogICAgICAgIGNvbnN0IGZvcm1Jc1ZhbGlkID0gZS5yZXBvcnRWYWxpZGl0eSgpOwogICAgICAgIGlmICghZm9ybUlzVmFsaWQpIHsKICAgICAgICAgIHJldHVybiBmYWxzZTsKICAgICAgICB9CiAgICAgIH0KICAgICAgcmV0dXJuIHRydWU7CiAgICB9CiAgCiAgICBzZW5kRm9ybVRocm91Z2hFMlZET00oZm9ybURhdGEpIHsKICAgICAgY29uc3QgdmRvbUlkID0gdGhpcy5mb3JtSWQuc2xpY2UoMik7CiAgICAgIGNvbnN0IGV2ZW50ID0gInN1Ym1pdCI7CiAgICAgIGV4ZWNFdmVudEJpbmRlZCh2ZG9tSWQsIGV2ZW50LCBmb3JtRGF0YSk7CiAgICB9CiAgCiAgICBmb3JtSXNTdWJtaXR0ZWQoZm9ybUlkKSB7CiAgICAgIGNvbnN0IGRhdGFLZXkgPSBgJHtmb3JtSWR9X3N1Ym1pdHRlZGA7CiAgICAgIGNvbnN0IGZvcm1Jc1N1Ym1pdHRlZCA9IHRoaXMuYm9keS5kYXRhKGRhdGFLZXkpID09ICIxIjsKICAKICAgICAgaWYgKGZvcm1Jc1N1Ym1pdHRlZCA9PT0gIjEiKSByZXR1cm4gdHJ1ZTsKICAKICAgICAgdGhpcy5ib2R5LmRhdGEoZGF0YUtleSwgIjEiKTsKICAgICAgc2V0VGltZW91dCgoKSA9PiB7CiAgICAgICAgdGhpcy5ib2R5LmRhdGEoZGF0YUtleSwgIjAiLCAiIik7CiAgICAgIH0sIDEwMDApOwogIAogICAgICByZXR1cm4gZmFsc2U7CiAgICB9CiAgfQogIA==]]></Resource>
   </Resources>
   <SourceCode><![CDATA[
 from scripting import e2vdom
@@ -825,62 +826,7 @@ class VDOM_form(VDOM_object):
 			csrftoken = ""
 
 		if self.meth == "event":
-			submitjs = u"""<script type="text/javascript">
-$j(function(){
-  $j('#%(id)s').submit(function(e){
-    
-    var $form = $j(this);
-    
-    if (%(reportvalidity)s) {
-    	const valid = this.reportValidity();
-    	if (!valid) { return false; }
-    }
-
-    if ($j('body').data('%(id)s_submitted') == '1')
-      return false;
-    
-    $j('body').data('%(id)s_submitted', '1');
-    setTimeout(function() {
-      $j('body').data('%(id)s_submitted', '');
-    }, 1000);
-
-    var formData = {};
-
-    var submitTrigger = $form.children('input[name=__submit_trigger__]');
-    if (submitTrigger.length){
-      formData[submitTrigger.val()] = 1;
-      submitTrigger.remove();
-    }
-    
-    var a = $j('#%(id)s').serializeArray();
-    for (var k of a){
-      if(typeof k.name !== 'undefined' && typeof k.value !== 'undefined') {
-        if (formData.hasOwnProperty(k.name)){
-          if (jQuery.isArray(formData[k.name])){
-            formData[k.name].push(k.value);
-          } else {
-            v = formData[k.name];
-            formData[k.name] = new Array(v, k.value);
-          }
-        } else {
-          formData[k.name]=k.value;
-        }
-      }
-    }
-    execEventBinded('%(woid)s', "submit", formData);
-    return false;
-  });
-
-  $('#%(id)s').on( "click", "button[type=submit], input[type=submit]", function(){
-    var form = $('#%(id)s');
-    if (!form.children('input[name=__submit_trigger__]').length){
-      form.append('<input type="hidden" name="__submit_trigger__" value="' + $(this).attr('name') + '" />');
-    } else {
-      form.children('input[name=__submit_trigger__]').val($(this).attr('name'));
-    }
-  });
-});
-</script>""" % { "id": id, "woid": woid, "reportvalidity": reportvalidity }
+			submitjs = u"""<script type="text/javascript">$(function () {new SubmitVDOMFormJs("%(id)s", "%(reportvalidity)s");});</script>""" % { "id": id, "woid": woid, "reportvalidity": reportvalidity }
 		else:
 			submitjs = u""
 
@@ -944,7 +890,9 @@ $j(function(){
 
 		
 ]]></SourceCode>
-  <Libraries/>
+  <Libraries>
+    <Library Target="html"><![CDATA[<script src="/d71c042b-2d14-4e1b-9323-9305f0e2dc36.res"></script>]]></Library>
+  </Libraries>
   <E2vdom>
     <Events>
       <Userinterfaceevents>
