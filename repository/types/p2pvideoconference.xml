@@ -347,39 +347,39 @@ class VDOM_p2pvideoconference(VDOM_object):
         STYLES_STRING = STYLES_STRING.replace(" ", "")
 
         SCRIPT = """
-          <script>
-            $(function() {
-              const conferenceOptions = {
-                socketIoHost: '%(host)s',
-                socketIoPort: '%(port)s',
-                peerJsHost: '%(peer_js_host)s',
-                peerJsPort: '%(peer_js_port)s',
-                peerJsPath: "/",
-                videoWrapperClass: '%(video_wrapper_class)s',
-                myStreamClass: "my-video-wrapper",
-                //common controls classes
-                controlsWrapperClass: "controls-wrapper",
-                commonControlClass: "control",
-                videoIsDisabledClass: "disabled-video",
-                audioIsDisabledClass: "disabled-audio",
-                streamIsMutedClass: "muted",
-                //volume control classes
-                volumeControlClass: "volume-control",
-                //mute control classes
-                muteControlClass: "mute-control",
-                muteControlMutedClass: "muted",
-                muteControlUnmutedClass: "unmuted",
-                //video control classes
-                videoControlClass: "video-control",
-                disableVideoClass: "disable-video",
-                enableVideoClass: "enable-video",
-                //micrphone control classes
-                microControlClass: "micro-control",
-                disableMicroClass: "disable-micro",
-                enableMicroClass: "enable-micro",
-              };
-              const connector = new $.P2PVideoConferenceConnector('%(id)s', '%(room_id)s', conferenceOptions);
-            });
+          <script defer>
+              $(window).load(() => {
+                const conferenceOptions = {
+                  socketIoHost: '%(host)s',
+                  socketIoPort: '%(port)s',
+                  peerJsHost: '%(peer_js_host)s',
+                  peerJsPort: '%(peer_js_port)s',
+                  peerJsPath: "/",
+                  videoWrapperClass: '%(video_wrapper_class)s',
+                  myStreamClass: "my-video-wrapper",
+                  //common controls classes
+                  controlsWrapperClass: "controls-wrapper",
+                  commonControlClass: "control",
+                  videoIsDisabledClass: "disabled-video",
+                  audioIsDisabledClass: "disabled-audio",
+                  streamIsMutedClass: "muted",
+                  //volume control classes
+                  volumeControlClass: "volume-control",
+                  //mute control classes
+                  muteControlClass: "mute-control",
+                  muteControlMutedClass: "muted",
+                  muteControlUnmutedClass: "unmuted",
+                  //video control classes
+                  videoControlClass: "video-control",
+                  disableVideoClass: "disable-video",
+                  enableVideoClass: "enable-video",
+                  //micrphone control classes
+                  microControlClass: "micro-control",
+                  disableMicroClass: "disable-micro",
+                  enableMicroClass: "enable-micro",
+                };
+                const connector = new $.P2PVideoConferenceConnector('%(id)s', '%(room_id)s', conferenceOptions);
+              });
           </script>
         """ % {
           "id": ID,
