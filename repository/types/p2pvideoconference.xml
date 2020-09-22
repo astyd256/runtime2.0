@@ -351,7 +351,6 @@ class VDOM_p2pvideoconference(VDOM_object):
 
         SCRIPT = """
           <script defer>
-          let %(id)s = null;
             $(function() {
               const conferenceOptions = {
                 socketIoHost: '%(host)s',
@@ -382,7 +381,7 @@ class VDOM_p2pvideoconference(VDOM_object):
                 disableMicroClass: "disable-micro",
                 enableMicroClass: "enable-micro",
               };
-              %(id)s = new $.P2PVideoConferenceConnector('%(id)s', '%(room_id)s', conferenceOptions);
+              window.connector_%(id)s = new $.P2PVideoConferenceConnector('%(id)s', '%(room_id)s', conferenceOptions);
             });
           </script>
         """ % {
@@ -429,7 +428,7 @@ class VDOM_p2pvideoconference(VDOM_object):
           <SourceCode><![CDATA[$q(this.domCont).hide(fade);]]></SourceCode>
         </Action>
         <Action Help="#Lang(000)" InterfaceName="#Lang(135)" MethodName="connect">
-          <SourceCode><![CDATA[eval(`${$(this.domCont).attr('id')}.created()`)]]></SourceCode>
+          <SourceCode><![CDATA[eval(`window.connector_${$(this.domCont).attr('id')}.created()`)]]></SourceCode>
         </Action>
         <Action Help="#Lang(000)" InterfaceName="#Lang(126)" MethodName="show">
           <Parameters>
