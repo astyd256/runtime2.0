@@ -392,7 +392,18 @@ class VDOM_p2pvideoconference(VDOM_object):
                 endCallControlClass: "end-call",
                 joinCallControlClass: "join-call",
               };
-              window.connector_%(id)s = new $.P2PVideoConferenceConnector('%(id)s', '%(room_id)s', conferenceOptions);
+              let delay = 1000;
+              let tryInit = setTimeout(function costyl() {
+                try {
+                  window.connector_%(id)s = new $.P2PVideoConferenceConnector('%(id)s', '%(room_id)s', conferenceOptions);
+                  clearTimeout(tryInit)
+                } catch(err) {
+                  console.warn("Error init conference, trying...")
+                  dalay += 1000;
+                  dalay > 3000 ? clearTimeout(tryInit) : null;
+                  tryInit = setTimeout(costyl, dalay);
+                }
+              }, delay);
             });
           </script>
         """ % {
