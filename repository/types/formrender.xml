@@ -753,7 +753,7 @@ class VDOM_formrender(VDOM_object):
         return VDOM_object.wysiwyg(self, contents=result)]]></SourceCode>
   <Libraries>
     <Library Target="html"><![CDATA[<script type="text/javascript" src="/b3d87bd3-515a-4d5c-84f0-3fc82bdbb126.res"></script>]]></Library>
-    <Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/62e4acf9-ca64-423f-9fe0-265da0034aa1.res" />]]></Library>>
+    <Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/62e4acf9-ca64-423f-9fe0-265da0034aa1.res" />]]></Library>
   </Libraries>
   <E2vdom>
     <Events>
