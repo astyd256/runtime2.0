@@ -452,7 +452,7 @@ class VDOM_p2pvideoconference(VDOM_object):
           <SourceCode><![CDATA[$q(this.domCont).hide(fade);]]></SourceCode>
         </Action>
         <Action Help="#Lang(000)" InterfaceName="#Lang(135)" MethodName="connect">
-          <SourceCode><![CDATA[eval(`window.connector_${$(this.domCont).attr('id')}.created()`)]]></SourceCode>
+          <SourceCode><![CDATA[eval(`window.connector_${$(this.domCont).attr('id')}.connect()`)]]></SourceCode>
         </Action>
         <Action Help="#Lang(000)" InterfaceName="#Lang(126)" MethodName="show">
           <Parameters>
