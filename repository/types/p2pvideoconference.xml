@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.1</Version>
+    <Version>0.101</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, tablecell, flexcontainer</Containers>
@@ -205,6 +205,18 @@
       <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
+    <Attribute>
+      <Name>username</Name>
+      <DisplayName>#Lang(135)</DisplayName>
+      <DefaultValue>user</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(100)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
   </Attributes>
   <Languages>
     <Language Code="en_US">
@@ -241,6 +253,7 @@
       <Sentence ID="133">Peer js port</Sentence>
       <Sentence ID="134">Video wrapper class</Sentence>
       <Sentence ID="135">Connect</Sentence>
+      <Sentence ID="136">User name</Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="000">Default help field</Sentence>
@@ -276,6 +289,7 @@
       <Sentence ID="133">Peer js port</Sentence>
       <Sentence ID="134">Video wrapper class</Sentence>
       <Sentence ID="135">Connect</Sentence>
+      <Sentence ID="136">User name</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="000">Default help field</Sentence>
@@ -311,6 +325,7 @@
       <Sentence ID="133">Peer js port</Sentence>
       <Sentence ID="134">Video wrapper class</Sentence>
       <Sentence ID="135">Connect</Sentence>
+      <Sentence ID="136">User name</Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -359,6 +374,7 @@ class VDOM_p2pvideoconference(VDOM_object):
                 peerJsHost: '%(peer_js_host)s',
                 peerJsPort: '%(peer_js_port)s',
                 peerJsPath: "/",
+                userName: "%(user_name)s",
                 videoConfIsEnabledClass: "conf-enabled",
                 videoConfIsDisabledClass: "conf-disabled",
                 videosWrapperClass: "videos-wrapper",
@@ -413,7 +429,8 @@ class VDOM_p2pvideoconference(VDOM_object):
           "room_id": self.roomid,
           "peer_js_host": self.peerjshost,
           "peer_js_port": self.peerjsport,
-          "video_wrapper_class": self.videowrapperclass
+          "video_wrapper_class": self.videowrapperclass,
+          "user_name": self.username
         }
 
         HTML = """<div {debug_string} class='{id} {classname}'></div>""".format(debug_string=DEBUG_INFO_STRING, classname=self.cssclass, id=ID)
