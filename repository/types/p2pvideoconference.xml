@@ -415,9 +415,9 @@ class VDOM_p2pvideoconference(VDOM_object):
                   clearTimeout(tryInit)
                 } catch(err) {
                   console.warn("Error init conference, trying...")
-                  dalay += 1000;
-                  dalay > 3000 ? clearTimeout(tryInit) : null;
-                  tryInit = setTimeout(costyl, dalay);
+                  delay += 1000;
+                  delay > 3000 ? clearTimeout(tryInit) : null;
+                  tryInit = setTimeout(costyl, delay);
                 }
               }, delay);
             });
