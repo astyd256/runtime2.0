@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.103</Version>
+    <Version>0.104</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, tablecell, flexcontainer</Containers>
@@ -446,7 +446,7 @@ class VDOM_p2pvideoconference(VDOM_object):
           "peer_js_port": self.peerjsport,
           "video_wrapper_class": self.videowrapperclass,
           "user_name": self.username,
-          "auto_connect": "true" if self.autoconnect else "false",
+          "auto_connect": "true" if self.autoconnect == "1" else "false",
         }
 
         HTML = """<div {debug_string} class='{id} {classname}'></div>""".format(debug_string=DEBUG_INFO_STRING, classname=self.cssclass, id=ID)
