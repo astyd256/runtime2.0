@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.101</Version>
+    <Version>0.104</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, tablecell, flexcontainer</Containers>
@@ -146,6 +146,18 @@
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
+      <Name>autoconnect</Name>
+      <DisplayName>#Lang(137)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(011)|1)|(#Lang(012)|0))</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
       <Name>port</Name>
       <DisplayName>#Lang(130)</DisplayName>
       <DefaultValue/>
@@ -254,6 +266,7 @@
       <Sentence ID="134">Video wrapper class</Sentence>
       <Sentence ID="135">Connect</Sentence>
       <Sentence ID="136">User name</Sentence>
+      <Sentence ID="137">Autoconnect</Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="000">Default help field</Sentence>
@@ -290,6 +303,7 @@
       <Sentence ID="134">Video wrapper class</Sentence>
       <Sentence ID="135">Connect</Sentence>
       <Sentence ID="136">User name</Sentence>
+      <Sentence ID="137">Autoconnect</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="000">Default help field</Sentence>
@@ -326,6 +340,7 @@
       <Sentence ID="134">Video wrapper class</Sentence>
       <Sentence ID="135">Connect</Sentence>
       <Sentence ID="136">User name</Sentence>
+      <Sentence ID="137">Autoconnect</Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -368,7 +383,7 @@ class VDOM_p2pvideoconference(VDOM_object):
           <script defer>
             $(function() {
               const conferenceOptions = {
-                autoConnect: false,
+                autoConnect: %(auto_connect)s,
                 socketIoHost: '%(host)s',
                 socketIoPort: '%(port)s',
                 peerJsHost: '%(peer_js_host)s',
@@ -430,7 +445,8 @@ class VDOM_p2pvideoconference(VDOM_object):
           "peer_js_host": self.peerjshost,
           "peer_js_port": self.peerjsport,
           "video_wrapper_class": self.videowrapperclass,
-          "user_name": self.username
+          "user_name": self.username,
+          "auto_connect": "true" if self.autoconnect == "1" else "false",
         }
 
         HTML = """<div {debug_string} class='{id} {classname}'></div>""".format(debug_string=DEBUG_INFO_STRING, classname=self.cssclass, id=ID)
