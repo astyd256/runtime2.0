@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Type>
+  <Information>
+    <Name>scheduler</Name>
+    <DisplayName>#Lang(001)</DisplayName>
+    <Description>#Lang(002)</Description>
+    <ClassName>VDOM_scheduler</ClassName>
+    <ID>64d09544-7b17-4920-b68a-79a1c9df62d5</ID>
+    <Icon>#Res(a0955637-e4dd-4cd1-933b-540c46acf37f)</Icon>
+    <EditorIcon>#Res(1c731386-bbca-407d-a99b-63414183e22b)</EditorIcon>
+    <StructureIcon>#Res(f46c4232-c554-48b2-a330-9b3cb0cc7ba7)</StructureIcon>
+    <Moveable>1</Moveable>
+    <Resizable>3</Resizable>
+    <Container>1</Container>
+    <Category>Additional</Category>
+    <Dynamic>1</Dynamic>
+    <Version>0.1</Version>
+    <InterfaceType>1</InterfaceType>
+    <OptimizationPriority>1</OptimizationPriority>
+    <Containers>htmlcontainer, dialog, container, flexcontainer</Containers>
+    <Languages>en_US, ru_RU, fr_FR</Languages>
+    <Handlers/>
+    <RemoteMethods/>
+    <WCAG/>
+    <XMLScriptName/>
+  </Information>
+  <Attributes>
+    <Attribute>
+      <Name>hierarchy</Name>
+      <DisplayName>#Lang(014)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(2)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d+$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>visible</Name>
+      <DisplayName>#Lang(020)</DisplayName>
+      <DefaultValue>1</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(011)|1)|(#Lang(012)|0))</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>positioning1</Name>
+      <DisplayName>#Lang(021)</DisplayName>
+      <DefaultValue>absolute</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(122)|absolute)|(#Lang(123)|static)|(#Lang(124)|relative))</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>zindex</Name>
+      <DisplayName>#Lang(015)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(2)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d{1,2}$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>top</Name>
+      <DisplayName>#Lang(016)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(4)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^auto$|\d{0,4}|^$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>left</Name>
+      <DisplayName>#Lang(017)</DisplayName>
+      <DefaultValue>0</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(4)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^auto$|\d{0,4}|^$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>width</Name>
+      <DisplayName>#Lang(018)</DisplayName>
+      <DefaultValue>300</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(4)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>height</Name>
+      <DisplayName>#Lang(019)</DisplayName>
+      <DefaultValue>200</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(4)</CodeInterface>
+      <Colorgroup>1</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>^\d{1,4}$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>cssclass</Name>
+      <DisplayName>#Lang(013)</DisplayName>
+      <DefaultValue/>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(100)</CodeInterface>
+      <Colorgroup>4</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>data</Name>
+      <DisplayName>#Lang(029)</DisplayName>
+      <DefaultValue/>
+      <Visible>1</Visible>
+      <Help>#Lang(000)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>MultiLine()</CodeInterface>
+      <Colorgroup>4</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+  </Attributes>
+  <Languages>
+    <Language Code="en_US">
+      <Sentence ID="000">Default help field</Sentence>
+      <Sentence ID="001">Scheduler</Sentence>
+      <Sentence ID="002">JavaScript Event Calendar (Based on DHTMLX)</Sentence>
+      <Sentence ID="004">Default validation message</Sentence>
+      <Sentence ID="009">Rows count</Sentence>
+      <Sentence ID="010">Show toolbar</Sentence>
+      <Sentence ID="011">Yes</Sentence>
+      <Sentence ID="012">No</Sentence>
+      <Sentence ID="013">Css class</Sentence>
+      <Sentence ID="014">Hierarchy</Sentence>
+      <Sentence ID="015">Z-Index</Sentence>
+      <Sentence ID="016">Top</Sentence>
+      <Sentence ID="017">Left</Sentence>
+      <Sentence ID="018">Width</Sentence>
+      <Sentence ID="019">Height</Sentence>
+      <Sentence ID="020">Visibility</Sentence>
+      <Sentence ID="021">Position</Sentence>
+      <Sentence ID="022">absolute</Sentence>
+      <Sentence ID="023">static</Sentence>
+      <Sentence ID="024">relative</Sentence>
+      <Sentence ID="025">Hide</Sentence>
+      <Sentence ID="026">Show</Sentence>
+      <Sentence ID="028">Fade</Sentence>
+      <Sentence ID="029">Data</Sentence>
+    </Language>
+    <Language Code="ru_RU">
+      <Sentence ID="000">Default help field</Sentence>
+      <Sentence ID="001">Spreadsheet_v2</Sentence>
+      <Sentence ID="002">JavaScript Event Calendar (Based on DHTMLX)</Sentence>
+      <Sentence ID="004">Default validation message</Sentence>
+      <Sentence ID="009">Rows count</Sentence>
+      <Sentence ID="010">Show toolbar</Sentence>
+      <Sentence ID="011">Yes</Sentence>
+      <Sentence ID="012">No</Sentence>
+      <Sentence ID="013">Css class</Sentence>
+      <Sentence ID="014">Hierarchy</Sentence>
+      <Sentence ID="015">Z-Index</Sentence>
+      <Sentence ID="016">Top</Sentence>
+      <Sentence ID="017">Left</Sentence>
+      <Sentence ID="018">Width</Sentence>
+      <Sentence ID="019">Height</Sentence>
+      <Sentence ID="020">Visibility</Sentence>
+      <Sentence ID="021">Position</Sentence>
+      <Sentence ID="022">absolute</Sentence>
+      <Sentence ID="023">static</Sentence>
+      <Sentence ID="024">relative</Sentence>
+      <Sentence ID="025">Hide</Sentence>
+      <Sentence ID="026">Show</Sentence>
+      <Sentence ID="028">Fade</Sentence>
+      <Sentence ID="029">Data</Sentence>
+    </Language>
+    <Language Code="fr_FR">
+      <Sentence ID="000">Default help field</Sentence>
+      <Sentence ID="001">Spreadsheet_v2</Sentence>
+      <Sentence ID="002">JavaScript Event Calendar (Based on DHTMLX)</Sentence>
+      <Sentence ID="004">Default validation message</Sentence>
+      <Sentence ID="009">Rows count</Sentence>
+      <Sentence ID="010">Show toolbar</Sentence>
+      <Sentence ID="011">Yes</Sentence>
+      <Sentence ID="012">No</Sentence>
+      <Sentence ID="013">Css class</Sentence>
+      <Sentence ID="014">Hierarchy</Sentence>
+      <Sentence ID="015">Z-Index</Sentence>
+      <Sentence ID="016">Top</Sentence>
+      <Sentence ID="017">Left</Sentence>
+      <Sentence ID="018">Width</Sentence>
+      <Sentence ID="019">Height</Sentence>
+      <Sentence ID="020">Visibility</Sentence>
+      <Sentence ID="021">Position</Sentence>
+      <Sentence ID="022">absolute</Sentence>
+      <Sentence ID="023">static</Sentence>
+      <Sentence ID="024">relative</Sentence>
+      <Sentence ID="025">Hide</Sentence>
+      <Sentence ID="026">Show</Sentence>
+      <Sentence ID="028">Fade</Sentence>
+      <Sentence ID="029">Data</Sentence>
+    </Language>
+  </Languages>
+  <Resources>
+    <Resource ID="a0955637-e4dd-4cd1-933b-540c46acf37f" Name="scheduler-icon64.png" Type="png"><![CDATA[iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfkCwYRGwpHvXY6AAADo0lEQVRo3u2ZzUtUURjGf3PnQ61kIj/AhIimiDJxISRqQtbKKKJ2fWgZbQtc1H8glJuCWhVRJFRkELUIF9KiaBqhKLKiKY1E+mA000prdO7cFl7PnJl7p9GZe+9sfM7mnfOce97nnvOe95x7BtLDTxff+U4Xflv4jGhnGg2Nadpt4QFQ0jIe6ikCoIh6PJbzGQUoFAi7wKRdrrzQaebaDfikhxR8aLikNloWPKjEU525kn6tpIZa1lKMgkI9Ab1+iKeGRxfPq/ximGe8YsJsLIpppY9xVDQbi8o4fRymONX9eq4zZatruUxxhTWy+430OeZ8rsTpFRNEGXcddj9XblECHhSOsVuK3jEG+IpqQxC6qaCaUhH4+wlxHjbzRmia4TaN+CnAywq6RX03K/Dik0o2fAF+GrnDrKh/yUYPe9gg3r6bU4yLBZp4pzgzzBoW8OL5KE8I85s2fRQ2sVdhJ1692VvOCvcQJyrsqDGBZM2PcYZ3uu1jp0KVoHr5IHUQI8RfAP4SImZwkD0fplfYVR5KdVPlPVpSFz1UcAC4SQ9myJbXCKPiBqAMERBR2gxdeCmnXEwRlvFtROf9pt0mAZglYivP/7Zjh5B3AZ4kW8GTdU8LR0z24hKRHyfIUMr5wB5oBGiYH3tXytJzHHmPgSUBiXjMUxAmBMS4yjWHluFRtuJLFQAx4sw4IAB5b8x7DCwJWBKQbtkto5a1IitofOI50xbyEsyOZEV0MkZUKmN06tcNVvDSkcxcQBOjhg+pUZos4yUB5jFQwXJD3XIqLOMlmAsYYMRQN8KAZbwE8yAMc5oO1klB9JFzhC3jMwqIc59HScM4xYR0dsqVzygANH7wg/TIlRfIeyLKu4D0BxAXHimIYoYZzJXPICDAQQJSB0PcYMhCXoJZJizngSGTPaDcMj5jJqyT0uY8mqizjJeQ9yA0F9DPY0PdY/ot4yWYB2GEEyZBFLGMT0K6KxqXdPPnNflgyYVf0BWNZrj5s5bXoaAKxe6FPGAJ3GJEVIWfuulltWMCKsXN2aTCoKjezipH3JfQLOxBhaDI0ts44sDHqZtWGnRbIwg7+CZWQoQOSmx1v4oOIsLfV5pdFHKB46LBH0I85LMITWvfvZJm8W8iwGVOuoBquqmRGv5n88wJ8gYN8IpDvJ4zWxh2/A+bYXYltCi08MJR9y9pSc2eVVzkC3HbXat84xJbEvOSQCF17KOBAH5bsqLKJIMEuUc/f+Yr/wHHS3J5l+nm0QAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMC0xMS0wNlQxNzoyNzoxMCswMDowMHvu8QAAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjAtMTEtMDZUMTc6Mjc6MTIrMDA6MDCdLFiVAAAAAElFTkSuQmCC]]></Resource>
+    <Resource ID="1c731386-bbca-407d-a99b-63414183e22b" Name="scheduler-icon24.png" Type="png"><![CDATA[iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfkCwYRGyp801byAAABU0lEQVQ4y6XSP0tbYRTH8U/iQ5cmN1Fplya5Qx1KB6EKFaS1gi/Cl+DaqX0Ljq6dOtbmLZjFoUvp5OQiBBOH1oAKygW55DqYP6C3XkvPs3yH33nOOb9zGEfdvn31BxkBPDHrpQW81kMzh4+cuaaEFR8tq3iOP1KEHL70y46fM9Z99UFJqoIrQ5Q9vcOXIm+tOaAj882iVSdOrGpq5vKiXZk9EqfeINLWFvFXXjKQkOmKQVV14lkex7qygKBhqCzD3Eh0n4caAiWZ1KlUcQTPhPIjhHey+G3TsaLUoZbvXgSk+nqP+LwsHZ8G1NRx7uIBHnnQ1VLV1tPTFolyuao1tnVasphNFxdpaEy2m8fxf1S4naGvP+n7Po9m+OfFTWeoicVqI4vzONaVTc+7OJYMJMEPGz7bdlYgn/XJvE7Jmi9eGbgqSKiYd2gL3tmTyApeouM9N6vMkn3Gs8JSAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIwLTExLTA2VDE3OjI3OjQyKzAwOjAwpJHuTQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMC0xMS0wNlQxNzoyNzo0NCswMDowMLYcY8sAAAAASUVORK5CYII=]]></Resource>
+    <Resource ID="f46c4232-c554-48b2-a330-9b3cb0cc7ba7" Name="sCheduler-icon16.png" Type="png"><![CDATA[iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfkCwYRGzsWY3YAAAAA2ElEQVQoz3XQMUoDQRQG4G+WbVcQUqawSyWksrAKgkewEPYAkgOIrYZA8ALJIbyBJFpZiIcQrW22TNgdi13XXYlvig/eG/hnHhCsrCSSnqEeZS5MTEQvOKUxePbkITVz6U0UJAg0RgMLxxTuJObmgtAzMVNQyZHJBKEnuSqovHpvnkrsyJGTlHb41/qSUt42Q09yZYro0Dk2OOv4KJKiMnKLT3p+qH4jhoZSac82ojRyg3tcd1wo6wjN9vaJran/amobbAwsFe3Xfio6cOWLsbWdcs/ZWRt/A73uSSq8+yQLAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIwLTExLTA2VDE3OjI3OjU4KzAwOjAwzEuxnQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMC0xMS0wNlQxNzoyODowMCswMDowMDcSEq8AAAAASUVORK5CYII=]]></Resource>
+  <SourceCode>
+    <![CDATA[import json
+
+class VDOM_scheduler(VDOM_object):
+    def render(self, contents=""):
+        WOID = (self.id).replace('-', '_')
+        ID = 'o_' + WOID
+
+        DEBUG_INFO = {
+          "objname": self.name,
+          "objtype": "p2pvideoconference",
+          "js_lib": "dhtmlx scheduler",
+          "id": ID,
+          "version": self.type.version
+        }
+        DEBUG_INFO_STRING = " ".join([str(key)+"='"+str(value)+"'" for key, value in DEBUG_INFO.items()])
+
+        DISPLAY = lambda v: "none" if v == "0" else None
+        SIZE_CONVERT = lambda v: str(v) + "px"
+        STYLES = {
+            "display": DISPLAY(self.visible),
+            "position": self.positioning1,
+            "z-index": self.zindex,
+            "top": SIZE_CONVERT(self.top),
+            "left": SIZE_CONVERT(self.left),
+            "width": SIZE_CONVERT(self.width),
+            "height": SIZE_CONVERT(self.height),
+        }
+        STYLES_STRING_FORMAT = ";".join([str(key)+":"+str(value) for key, value in STYLES.items() if value])
+        STYLES_STRING = """
+          <style>
+          .%(id)s
+            {
+              %(styles)s
+            }
+          </style>
+        """ % { "id":ID, "styles": STYLES_STRING_FORMAT }
+        STYLES_STRING = STYLES_STRING.replace(" ", "")
+
+        SCRIPT = """
+          <script defer>
+            $(function() {
+              const conferenceOptions = {
+                autoConnect: %(auto_connect)s,
+                socketIoHost: '%(host)s',
+                socketIoPort: '%(port)s',
+                peerJsHost: '%(peer_js_host)s',
+                peerJsPort: '%(peer_js_port)s',
+                peerJsPath: "/",
+                userName: "%(user_name)s"
+              };
+              let delay = 1000;
+              let tryInit = setTimeout(function costyl() {
+                try {
+                  window.connector_%(id)s = new $.P2PVideoConferenceConnector('%(id)s', '%(room_id)s', conferenceOptions);
+
+                  clearTimeout(tryInit)
+                } catch(err) {
+                  console.warn(err);
+                  console.warn("Error init conference, trying again...")
+                  delay += 1000;
+                  if (delay > 4000) {
+                    clearTimeout(tryInit)
+                  } else {
+                    tryInit = setTimeout(costyl, delay);
+                  }
+                }
+              }, delay);
+            });
+          </script>
+        """ % {
+          "id": ID,
+          "woid": WOID,
+          "host": self.host,
+          "port": self.port,
+          "room_id": self.roomid,
+          "peer_js_host": self.peerjshost,
+          "peer_js_port": self.peerjsport,
+          "user_name": self.username,
+          "auto_connect": "true" if self.autoconnect == "1" else "false",
+        }
+
+        HTML = """<div {debug_string} class='{id} {classname}'></div>""".format(debug_string=DEBUG_INFO_STRING, classname=self.cssclass, id=ID)
+
+        RESULT = """{}{}{}""".format(STYLES_STRING, HTML, SCRIPT)
+
+        return VDOM_object.render(self, contents=RESULT) 
+
+    def wysiwyg(self, contents=""):
+        from scripting.legacy.wysiwyg import get_empty_wysiwyg_value
+
+        image_id = "a0955637-e4dd-4cd1-933b-540c46acf37f"
+        result = get_empty_wysiwyg_value(self, image_id)
+
+        return VDOM_object.wysiwyg(self, contents=result)
+  ]]>
+  </SourceCode>
+  <Libraries>
+    <Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/fefcb5bf-ed43-4ec4-ac74-e035a5def431.css" />]]></Library>
+    <Library Target="html"><![CDATA[<script type='text/javascript' src='/dffb2eea-7fc0-4593-80f6-c2ec4ed3ccf0.js'></script>]]></Library>
+    <Library Target="html"><![CDATA[<script type='text/javascript' src='/3870bb94-e2d5-48fd-99b0-358705ed4091.js'></script>]]></Library>
+  </Libraries>
+  <E2vdom>
+    <Events>
+      <Userinterfaceevents>
+      </Userinterfaceevents>
+    </Events>
+    <Actions>
+      <Container ID="2330fe83-8cd6-4ed5-907d-11874e7ebcf4">
+        <Action Help="#Lang(000)" InterfaceName="#Lang(125)" MethodName="hide">
+          <Parameters>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(128)" ScriptName="fade" Help="#Lang(801)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[$q(this.domCont).hide(fade);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(000)" InterfaceName="#Lang(135)" MethodName="connect">
+          <SourceCode><![CDATA[window[`connector_${this.name}`].connect()]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(000)" InterfaceName="#Lang(138)" MethodName="disconnect">
+          <SourceCode><![CDATA[window[`connector_${this.name}`].endCall()]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(000)" InterfaceName="#Lang(126)" MethodName="show">
+          <Parameters>
+            <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(128)" ScriptName="fade" Help="#Lang(805)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[$q(this.domCont).show(fade);]]></SourceCode>
+        </Action>
+      </Container>
+    </Actions>
+  </E2vdom>
+</Type>
