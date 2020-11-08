@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.1</Version>
+    <Version>0.2</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, flexcontainer</Containers>
@@ -136,7 +136,9 @@
     <Attribute>
       <Name>data</Name>
       <DisplayName>#Lang(029)</DisplayName>
-      <DefaultValue/>
+      <DefaultValue>
+        {"data":[{"redactor":"1","start_date":"2017-03-02","end_date":"2017-03-23","text":"A-12","id":"1"},{"redactor":"2","start_date":"2017-03-07","end_date":"2017-03-21","text":"A-45","id":"2"},{"redactor":"3","start_date":"2017-03-06","end_date":"2017-03-14","text":"A-58","id":"3"},{"redactor":"4","start_date":"2017-03-04","end_date":"2017-03-18","text":"A-28","id":"4"}],"collections":{"redactors":[{"key":"1","full_name":"Marie-Sophie","label":"Marie-Sophie DE SAIRGINE","number":"0678 22 14 56","description":"Programmer","employment_type":"Freelance","end_time":"2020-10-01"},{"key":"2","full_name":"Nicolas KORBOULEWSKY","label":"Nicolas KORBOULEWSKY","number":"0678 22 14 56","description":"Programmer","employment_type":"Permament","end_time":"2020-10-02"},{"key":"3","full_name":"Marie","label":"Marie-Sophie","number":"0678 22 14 56","description":"Programmer","employment_type":"Permament","end_time":"2020-10-03"}]}}
+      </DefaultValue>
       <Visible>1</Visible>
       <Help>#Lang(000)</Help>
       <InterfaceType>0</InterfaceType>
@@ -148,9 +150,9 @@
     <Attribute>
       <Name>startdate</Name>
       <DisplayName>#Lang(030)</DisplayName>
-      <DefaultValue/>
+      <DefaultValue>2017-03-01</DefaultValue>
       <Visible>1</Visible>
-      <Help>#Lang(000)</Help>
+      <Help>#Lang(032)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>TextField(100)</CodeInterface>
       <Colorgroup>4</Colorgroup>
@@ -160,11 +162,151 @@
     <Attribute>
       <Name>enddate</Name>
       <DisplayName>#Lang(031)</DisplayName>
-      <DefaultValue/>
+      <DefaultValue>2017-03-30</DefaultValue>
       <Visible>1</Visible>
-      <Help>#Lang(000)</Help>
+      <Help>#Lang(032)</Help>
       <InterfaceType>0</InterfaceType>
       <CodeInterface>TextField(100)</CodeInterface>
+      <Colorgroup>4</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>schedulerconfig</Name>
+      <DisplayName>#Lang(034)</DisplayName>
+      <DefaultValue>
+        //===============
+        //Configuration
+        //===============
+        scheduler.locale.labels.section_custom = "Section";
+        scheduler.config.details_on_create = true;
+        scheduler.config.details_on_dblclick = true;
+        scheduler.config.mark_now = true;
+        scheduler.date.timeline_start = scheduler.date.month_start;
+        scheduler.config.hour_size_px = 20000;
+
+        //Mark weekends.
+        scheduler.addMarkedTimespan({
+          days: [0, 6],
+          zones: "fullday",
+          css: "timeline_weekend",
+        });
+
+        // Hide header where we can change view and nanigate on dates
+        scheduler.xy.nav_height = 0;
+
+        // Modal fields configuration
+        scheduler.config.lightbox.sections = [
+          {
+            name: "description",
+            height: 130,
+            map_to: "text",
+            type: "textarea",
+            focus: true,
+          },
+          {
+            name: "custom",
+            height: 23,
+            type: "select",
+            options: scheduler.serverList("redactors"),
+            map_to: "redactor",
+          },
+          { name: "time", height: 72, type: "time", map_to: "auto" },
+        ];
+        scheduler.getRedactorByKey = (key) => {
+          return scheduler.serverList("redactors").find((el) => el.key === key);
+        };
+
+        //On hover on task
+        scheduler.templates.tooltip_text = function (start, end, event) {
+          var redactor = scheduler.getRedactorByKey(event.redactor) || {
+            label: "",
+          };
+
+          var html = [];
+          html.push(`Booking: &lt;b>${event.text}&lt;/b>`);
+          html.push(`Redactor: &lt;b>${redactor.label}&lt;/b>`);
+          html.push(`Check-in: &lt;b>${start}&lt;/b>`);
+          html.push(`Check-out: &lt;b>${end}&lt;/b>`);
+          return html.join("&lt;br>");
+        };
+
+        const eventDateFormat = scheduler.date.date_to_str("%d %M %Y");
+        scheduler.templates.event_bar_text = function (start, end, event) {
+          const startDate = eventDateFormat(event.start_date);
+          const endDate = eventDateFormat(event.end_date);
+          const redactor = scheduler.getRedactorByKey(event.redactor);
+          return [
+            event.text + "&lt;br />",
+            startDate + " - " + endDate,
+            "&lt;div class='booking_status booking-option'>" + redactor.label + "&lt;/div>",
+          ].join("");
+        };
+      </DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(032)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>MultiLine()</CodeInterface>
+      <Colorgroup>4</Colorgroup>
+      <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>timelineconfig</Name>
+      <DisplayName>#Lang(033)</DisplayName>
+      <DefaultValue>
+          //===============
+          //Timeline configuration
+          //===============
+          scheduler.createTimelineView({
+            name: "timeline",
+            x_unit: "day",
+            x_date: "%j",
+            x_step: 1,
+            x_size: 31,
+            section_autoheight: false,
+            y_unit: scheduler.serverList("redactors"),
+            y_property: "redactor",
+            render: "bar",
+            round_position: true,
+            event_dy: "full",
+            dy: 60,
+            dx: 400,
+            second_scale: {
+              x_unit: "month",
+              x_date: "%F, %Y",
+            },
+          });
+
+          // Header labels config
+          var headerHTML =
+            "&lt;div class='timeline_item_cell'>Redacteur&lt;/div>" +
+            "&lt;div class='timeline_item_cell'>Fin de la redaction&lt;/div>";
+          scheduler.locale.labels.timeline_scale_header = headerHTML;
+
+          scheduler.templates.timeline_scale_label = function (key, label, section) {
+            const imgSrc = "https://www.svgrepo.com/show/57853/avatar.svg";
+            return [
+              "&lt;div class='timeline_item_cell'>" +
+                `&lt;img class='redactor-image' src='${imgSrc}'/>` +
+                `&lt;div class='redactor-info-wrapper'>` +
+                `&lt;span class='redactor-name'>${section.label}&lt;/span>` +
+                `&lt;span>${section.number}&lt;/span>` +
+                `&lt;span>${section.description} / ${section.employment_type}&lt;/span>` +
+                `&lt;/div>` +
+                "&lt;/div>",
+              "&lt;div class='timeline_item_cell room_status'>",
+              "&lt;span class='status-label'>" +
+                scheduler.getRedactorByKey(key).end_time +
+                "&lt;/span>",
+              "&lt;/div>",
+            ].join("");
+          };
+      </DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(032)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>MultiLine()</CodeInterface>
       <Colorgroup>4</Colorgroup>
       <ErrorValidationMessage>#Lang(004)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
@@ -198,6 +340,9 @@
       <Sentence ID="029">Data</Sentence>
       <Sentence ID="030">Start date</Sentence>
       <Sentence ID="031">End date</Sentence>
+      <Sentence ID="032">JS format Date.parse([])</Sentence>
+      <Sentence ID="033">Timeline config</Sentence>
+      <Sentence ID="034">Scheduler config</Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="000">Default help field</Sentence>
@@ -226,6 +371,9 @@
       <Sentence ID="029">Data</Sentence>
       <Sentence ID="030">Start date</Sentence>
       <Sentence ID="031">End date</Sentence>
+      <Sentence ID="032">JS format Date.parse([])</Sentence>
+      <Sentence ID="033">Timeline config</Sentence>
+      <Sentence ID="034">Scheduler config</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="000">Default help field</Sentence>
@@ -254,6 +402,9 @@
       <Sentence ID="029">Data</Sentence>
       <Sentence ID="030">Start date</Sentence>
       <Sentence ID="031">End date</Sentence>
+      <Sentence ID="032">JS format Date.parse([])</Sentence>
+      <Sentence ID="033">Timeline config</Sentence>
+      <Sentence ID="034">Scheduler config</Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -295,75 +446,28 @@ class VDOM_scheduler(VDOM_object):
             "height": SIZE_CONVERT(self.height),
         }
         STYLES_STRING_FORMAT = ";".join([str(key)+":"+str(value) for key, value in STYLES.items() if value])
-        STYLES_STRING = """
-          <style>
-          .%(id)s
-            {
-              %(styles)s
-            }
-          </style>
-        """ % { "id":ID, "styles": STYLES_STRING_FORMAT }
+
+        STYLES_STRING = """<style>.%(id)s { %(styles)s }</style>""" % { "id":ID, "styles": STYLES_STRING_FORMAT }
         STYLES_STRING = STYLES_STRING.replace(" ", "")
 
-        SCRIPT = """
-          <script defer>
+        SCRIPT_CONFIG = """<script data-meta='CONFIG'>$(document).ready(() => {%(js_code)s});</script>""" % { 'js_code': self.schedulerconfig }
+
+        TIMELINE_CONFIG = """<script data-meta='TIMELINE CONFIG'>$(document).ready(() => {%(js_code)s});</script>""" % { 'js_code': self.timelineconfig }
+
+        INIT_SCRIPT = """
+          <script data-meta='scheduler init script'>
             $(document).ready(() => {
-              //===============
-              //Configuration
-              //===============
-              scheduler.locale.labels.section_custom = "Section";
-              scheduler.config.details_on_create = true;
-              scheduler.config.details_on_dblclick = true;
-              scheduler.config.mark_now = true;
-              scheduler.date.timeline_start = scheduler.date.month_start;
-              scheduler.config.hour_size_px = 20000;
+              scheduler.init("scheduler_%(id)s", new Date(), "timeline");
+              scheduler.getView().setRange( new Date('%(start_date)s'), new Date('%(end_date)s') );
 
-              //Mark weekends.
-              scheduler.addMarkedTimespan({
-                days: [0, 6],
-                zones: "fullday",
-                css: "timeline_weekend",
-              });
+              scheduler.parse(`%(data)s`, "json");
+            })
+          </script>
+        """ % { "id": ID, "data": self.data, "start_date": self.startdate, "end_date": self.enddate }
 
-              // Hide header where we can change view and nanigate on dates
-              scheduler.xy.nav_height = 0;
-
-              // Modal fields configuration
-              scheduler.config.lightbox.sections = [
-                {
-                  name: "description",
-                  height: 130,
-                  map_to: "text",
-                  type: "textarea",
-                  focus: true,
-                },
-                {
-                  name: "custom",
-                  height: 23,
-                  type: "select",
-                  options: scheduler.serverList("redactors"),
-                  map_to: "redactor",
-                },
-                { name: "time", height: 72, type: "time", map_to: "auto" },
-              ];
-              scheduler.getRedactorByKey = (key) => {
-                return scheduler.serverList("redactors").find((el) => el.key === key);
-              };
-
-              //On hover on task
-              scheduler.templates.tooltip_text = function (start, end, event) {
-                var redactor = scheduler.getRedactorByKey(event.redactor) || {
-                  label: "",
-                };
-
-                var html = [];
-                html.push(`Booking: <b>${event.text}</b>`);
-                html.push(`Redactor: <b>${redactor.label}</b>`);
-                html.push(`Check-in: <b>${start}</b>`);
-                html.push(`Check-out: <b>${end}</b>`);
-                return html.join("<br>");
-              };
-
+        HARDCODE_CONFIG = """
+           <script data-meta='TYPE CONFIG'>
+            $(document).ready(() => {
               //===============
               //Hard configuration (not editable in attrs)
               //===============
@@ -371,152 +475,35 @@ class VDOM_scheduler(VDOM_object):
                 //execEventBinded(id, event,data);
               });
 
-              //===============
-              //Timeline configuration
-              //===============
-              scheduler.createTimelineView({
-                name: "timeline",
-                x_unit: "day",
-                x_date: "%j",
-                x_step: 1,
-                x_size: 31,
-                section_autoheight: false,
-                y_unit: scheduler.serverList("redactors"),
-                y_property: "redactor",
-                render: "bar",
-                round_position: true,
-                event_dy: "full",
-                dy: 60,
-                dx: 400,
-                second_scale: {
-                  x_unit: "month",
-                  x_date: "%F, %Y",
-                },
-              });
-              // Header labels config
-              var headerHTML =
-                "<div class='timeline_item_cell'>Redacteur</div>" +
-                "<div class='timeline_item_cell'>Fin de la redaction</div>";
-              scheduler.locale.labels.timeline_scale_header = headerHTML;
-              scheduler.templates.timeline_scale_label = function (key, label, section) {
-                const imgSrc = "https://www.svgrepo.com/show/57853/avatar.svg";
-                return [
-                  "<div class='timeline_item_cell'>" +
-                    `<img class='redactor-image' src='${imgSrc}'/>` +
-                    `<div class='redactor-info-wrapper'>` +
-                    `<span class='redactor-name'>${section.label}</span>` +
-                    `<span>${section.number}</span>` +
-                    `<span>${section.description} / ${section.employment_type}</span>` +
-                    `</div>` +
-                    "</div>",
-                  "<div class='timeline_item_cell room_status'>",
-                  "<span class='status-label'>" +
-                    scheduler.getRedactorByKey(key).end_time +
-                    "</span>",
-                  "</div>",
-                ].join("");
-              };
-
               scheduler.attachEvent("onTemplatesReady", function () {
-                console.log("some event");
-                const eventDateFormat = scheduler.date.date_to_str("%d %M %Y");
-                scheduler.templates.event_bar_text = function (start, end, event) {
-                  const startDate = eventDateFormat(event.start_date);
-                  const endDate = eventDateFormat(event.end_date);
-                  const redactor = scheduler.getRedactorByKey(event.redactor);
-                  return [
-                    event.text + "<br />",
-                    startDate + " - " + endDate,
-                    "<div class='booking_status booking-option'>" +
-                      redactor.label +
-                      "</div>",
-                  ].join("");
-                };
+                //bind
               });
-
-              scheduler.init("scheduler_here", new Date(), "timeline");
-
-              scheduler.parse(
-                JSON.stringify({
-                  data: [
-                    {
-                      redactor: "1",
-                      start_date: "2017-03-02",
-                      end_date: "2017-03-23",
-                      text: "A-12",
-                      id: "1",
-                    },
-                    {
-                      redactor: "2",
-                      start_date: "2017-03-07",
-                      end_date: "2017-03-21",
-                      text: "A-45",
-                      id: "2",
-                    },
-                    {
-                      redactor: "3",
-                      start_date: "2017-03-06",
-                      end_date: "2017-03-14",
-                      text: "A-58",
-                      id: "3",
-                    },
-                    {
-                      redactor: "4",
-                      start_date: "2017-03-04",
-                      end_date: "2017-03-18",
-                      text: "A-28",
-                      id: "4",
-                    },
-                  ],
-                  collections: {
-                    redactors: [
-                      {
-                        key: "1",
-                        full_name: "Marie-Sophie",
-                        label: "Marie-Sophie DE SAIRGINE",
-                        number: "0678 22 14 56",
-                        description: "Programmer",
-                        employment_type: "Freelance",
-                        end_time: "2020-10-01",
-                      },
-                      {
-                        key: "2",
-                        full_name: "Nicolas KORBOULEWSKY",
-                        label: "Nicolas KORBOULEWSKY",
-                        number: "0678 22 14 56",
-                        description: "Programmer",
-                        employment_type: "Permament",
-                        end_time: "2020-10-02",
-                      },
-                      {
-                        key: "3",
-                        full_name: "Marie",
-                        label: "Marie-Sophie",
-                        number: "0678 22 14 56",
-                        description: "Programmer",
-                        employment_type: "Permament",
-                        end_time: "2020-10-03",
-                      },
-                    ],
-                  },
-                }),
-                "json"
-              );
-            });
-          </script>
+            })
+           </script>
         """
 
-        HTML = """<div {debug_string} class='{id} {classname}'>
-          <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'></div>
-          <div style="position: absolute; left: -9999px; top: -9999px;">
-            <div class="dhx_cal_container">
-              <div class="dhx_cal_scale_placeholder"></div>
-              <div></div>
-            </div>
-          </div>
-        </div>""".format(debug_string=DEBUG_INFO_STRING, classname=self.cssclass, id=ID)
+        TYPE_WRAPPER = """<div {debug_string} class='{id} {classname}'>{content}</div>"""
 
-        RESULT = """{}{}{}""".format(STYLES_STRING, HTML, SCRIPT)
+        TYPE_HTML = """
+          <div id="scheduler_{id}" class="dhx_cal_container" style='width:100%; height:100%;'></div>
+            <div style="position: absolute; left: -9999px; top: -9999px;">
+              <div class="dhx_cal_container">
+                <div class="dhx_cal_scale_placeholder"></div>
+                <div></div>
+              </div>
+          </div>
+        """.format(id=ID)
+
+        SCRIPTS = """{}{}{}{}""".format(SCRIPT_CONFIG, TIMELINE_CONFIG, HARDCODE_CONFIG, INIT_SCRIPT)
+
+        CONTENT = """{}{}{}""".format(STYLES_STRING, TYPE_HTML, SCRIPTS)
+
+        RESULT = TYPE_WRAPPER.format(
+          debug_string=DEBUG_INFO_STRING,
+          classname=self.cssclass,
+          id=ID,
+          content=CONTENT
+        )
 
         return VDOM_object.render(self, contents=RESULT)
 
