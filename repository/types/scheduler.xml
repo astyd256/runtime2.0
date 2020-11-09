@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>1</Version>
+    <Version>1.1</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, flexcontainer</Containers>
@@ -615,6 +615,12 @@ class VDOM_scheduler(VDOM_object):
             <Parameter DefaultValue="'2020-01-01'" Interface="" InterfaceName="#Lang(041)" ScriptName="date" Help="#Lang(032)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[scheduler.setCurrentView(new Date(date))]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(000)" InterfaceName="#Lang(043)" MethodName="setData">
+          <Parameters>
+            <Parameter DefaultValue="'{}'" Interface="" InterfaceName="#Lang(029)" ScriptName="data" Help="#Lang(000)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[scheduler.parse(data)]]></SourceCode>
         </Action>
       </Container>
     </Actions>
