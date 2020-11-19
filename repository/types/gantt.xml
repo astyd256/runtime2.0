@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_gantt</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.101.9201</Version>
+		<Version>1.02</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(e0ab6594-77ca-47b3-a35c-d3939406ca8e)</Icon>
@@ -291,6 +291,18 @@
 			<ColorGroup>1</ColorGroup>
 		</Attribute>
 		<Attribute>
+			<Name>mincolumnwidth</Name>
+			<DisplayName>#Lang(942)</DisplayName>
+			<Description>#Lang(401)</Description>
+			<DefaultValue>10</DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(401)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>.*</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
 			<Name>classname</Name>
 			<DisplayName>#Lang(122)</DisplayName>
 			<Description>#Lang(222)</Description>
@@ -517,6 +529,7 @@
 			<Sentence ID="939">Round dnd dates</Sentence>
 			<Sentence ID="940">Work time</Sentence>
 			<Sentence ID="941">Correct work time</Sentence>
+			<Sentence ID="942">Min column width</Sentence>
 		</Language>
 		<Language Code="fr_FR">
 			<Sentence ID="001">Gantt</Sentence>
@@ -719,6 +732,7 @@
 			<Sentence ID="939">Round dnd dates</Sentence>
 			<Sentence ID="940">Work time</Sentence>
 			<Sentence ID="941">Correct work time</Sentence>
+			<Sentence ID="942">Min column width</Sentence>
 		</Language>
 		<Language Code="ru_RU">
 			<Sentence ID="001">Gantt</Sentence>
@@ -921,6 +935,7 @@
 			<Sentence ID="939">Round dnd dates</Sentence>
 			<Sentence ID="940">Work time</Sentence>
 			<Sentence ID="941">Correct work time</Sentence>
+			<Sentence ID="942">Min column width</Sentence>
 		</Language>
 	</Languages>
 	<Resources>
@@ -9207,6 +9222,9 @@
               gantt_%(id)s.config.round_dnd_dates = %(round_dnd_dates)s;
 
 
+              gantt_%(id)s.config.min_column_width = %(min_column_width)s;
+
+
               gantt_%(id)s.config.work_time = %(work_time)s;
               gantt_%(id)s.config.correct_work_time = %(correct_work_time)s;
 
@@ -9259,7 +9277,8 @@
           "duration_step": self.durationstep,
           "round_dnd_dates": self.rounddnddates,
           "work_time": self.worktime,
-          "correct_work_time": self.correctworktime
+          "correct_work_time": self.correctworktime,
+          "min_column_width": self.mincolumnwidth,
         }
 
         SET_DATA_SCRIPT = """<script>$(document).ready(()=>{gantt_%(id)s.parse(`%(data)s`);})</script>""" % { "id": ID, "data": self.data }
