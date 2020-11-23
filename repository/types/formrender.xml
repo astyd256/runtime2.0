@@ -728,9 +728,10 @@ class VDOM_formrender(VDOM_object):
                   location: '/',
                   extension: '.lang',
                 }}}});
-                $('#{id} input, select').on(
-                  "change",
-                  e => {{
+
+                $('body').off("change", "#{id} input, select");
+                
+                $('body').on("change", "#{id} input, select", e => {{
                     const $input = $(e.currentTarget);
                     const itemName = $input.attr('name');
                     const itemValue = $input.val();
