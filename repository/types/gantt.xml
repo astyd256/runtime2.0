@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_gantt</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.02</Version>
+		<Version>1.1</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(e0ab6594-77ca-47b3-a35c-d3939406ca8e)</Icon>
@@ -326,6 +326,54 @@
 			<CodeInterface>Color()</CodeInterface>
 			<ColorGroup>2</ColorGroup>
 		</Attribute>
+		<Attribute>
+			<Name>zoom</Name>
+			<DisplayName>#Lang(943)</DisplayName>
+			<Description>#Lang(401)</Description>
+			<DefaultValue>
+				{
+					minColumnWidth: 50,
+					maxColumnWidth: 50,
+					levels: [
+						[
+							{ unit: "month", format: "%M %Y", step: 1, css: () => '' },
+							{
+								unit: "week", step: 1, format: function (date) {
+									const dateToStr = gantt.date.date_to_str("%d %M");
+									const endDate = gantt.date.add(date, -6, "day");
+									return dateToStr(date) + " - " + dateToStr(endDate);
+								}
+							}
+						],
+						[
+							{
+								unit: "week", step: 1, format: function (date) {
+									const dateToStr = gantt.date.date_to_str("%d %M");
+									const endDate = gantt.date.add(date, -6, "day");
+									return dateToStr(date) + " - " + dateToStr(endDate);
+								}
+							},
+							{ unit: "day", format: "%d", step: 1 }
+						],
+						[
+							{ unit: "day", format: "%d %M", step: 1 },
+							{ unit: "hour", format: "%H:%i", step: 1 }
+						]
+					],
+					useKey: "ctrlKey",
+					trigger: "wheel",
+					element: function () {
+						return gantt_o_0b1e8527_f6dd_4096_9fff_19772a921696.$root.querySelector(".gantt_task");
+					}
+				}
+			</DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(401)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(10000)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
 	</Attributes>
 	<Languages>
 		<Language Code="en_US">
@@ -530,6 +578,7 @@
 			<Sentence ID="940">Work time</Sentence>
 			<Sentence ID="941">Correct work time</Sentence>
 			<Sentence ID="942">Min column width</Sentence>
+			<Sentence ID="943">Zoom config</Sentence>
 		</Language>
 		<Language Code="fr_FR">
 			<Sentence ID="001">Gantt</Sentence>
@@ -733,6 +782,7 @@
 			<Sentence ID="940">Work time</Sentence>
 			<Sentence ID="941">Correct work time</Sentence>
 			<Sentence ID="942">Min column width</Sentence>
+			<Sentence ID="943">Zoom config</Sentence>
 		</Language>
 		<Language Code="ru_RU">
 			<Sentence ID="001">Gantt</Sentence>
@@ -936,6 +986,7 @@
 			<Sentence ID="940">Work time</Sentence>
 			<Sentence ID="941">Correct work time</Sentence>
 			<Sentence ID="942">Min column width</Sentence>
+			<Sentence ID="943">Zoom config</Sentence>
 		</Language>
 	</Languages>
 	<Resources>
@@ -9225,6 +9276,9 @@
               gantt_%(id)s.config.min_column_width = %(min_column_width)s;
 
 
+              gantt_%(id)s.ext.zoom.init(%(zoom_config)s);
+
+
               gantt_%(id)s.config.work_time = %(work_time)s;
               gantt_%(id)s.config.correct_work_time = %(correct_work_time)s;
 
@@ -9279,6 +9333,7 @@
           "work_time": self.worktime,
           "correct_work_time": self.correctworktime,
           "min_column_width": self.mincolumnwidth,
+          "zoom_config": self.zoom
         }
 
         SET_DATA_SCRIPT = """<script>$(document).ready(()=>{gantt_%(id)s.parse(`%(data)s`);})</script>""" % { "id": ID, "data": self.data }
