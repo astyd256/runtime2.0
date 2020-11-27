@@ -579,6 +579,9 @@
 			<Sentence ID="941">Correct work time</Sentence>
 			<Sentence ID="942">Min column width</Sentence>
 			<Sentence ID="943">Zoom config</Sentence>
+			<Sentence ID="944">Set config</Sentence>
+			<Sentence ID="945">config</Sentence>
+			<Sentence ID="946">value</Sentence>
 		</Language>
 		<Language Code="fr_FR">
 			<Sentence ID="001">Gantt</Sentence>
@@ -783,6 +786,9 @@
 			<Sentence ID="941">Correct work time</Sentence>
 			<Sentence ID="942">Min column width</Sentence>
 			<Sentence ID="943">Zoom config</Sentence>
+			<Sentence ID="944">Set config</Sentence>
+			<Sentence ID="945">config</Sentence>
+			<Sentence ID="946">value</Sentence>
 		</Language>
 		<Language Code="ru_RU">
 			<Sentence ID="001">Gantt</Sentence>
@@ -987,6 +993,9 @@
 			<Sentence ID="941">Correct work time</Sentence>
 			<Sentence ID="942">Min column width</Sentence>
 			<Sentence ID="943">Zoom config</Sentence>
+			<Sentence ID="944">Set config</Sentence>
+			<Sentence ID="945">config</Sentence>
+			<Sentence ID="946">value</Sentence>
 		</Language>
 	</Languages>
 	<Resources>
@@ -9408,48 +9417,37 @@
 					<Parameters>
 						<Parameter Name="fade" DisplayName="#Lang(704)" Description="#Lang(804)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
-					<SourceCode>
-<![CDATA[vdom_ui_hide(this.domCont, fade);]]>
-					</SourceCode>
+					<SourceCode><![CDATA[vdom_ui_hide(this.domCont, fade);]]></SourceCode>
 				</Action>
 				<Action Name="show" DisplayName="#Lang(612)" Description="#Lang(512)">
 					<Parameters>
 						<Parameter Name="fade" DisplayName="#Lang(713)" Description="#Lang(813)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
-					<SourceCode>
-<![CDATA[vdom_ui_show(this.domCont, fade);window[`gantt_${this.name}`].render()]]>
-					</SourceCode>
+					<SourceCode><![CDATA[vdom_ui_show(this.domCont, fade);window[`gantt_${this.name}`].render()]]></SourceCode>
 				</Action>
 				<Action Name="removeClass" DisplayName="#Lang(606)" Description="#Lang(506)">
 					<Parameters>
 						<Parameter Name="className" DisplayName="#Lang(708)" Description="#Lang(808)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
-					<SourceCode>
-<![CDATA[$q(this.domCont).removeClass(className);]]>
-					</SourceCode>
+					<SourceCode><![CDATA[$q(this.domCont).removeClass(className);]]></SourceCode>
 				</Action>
 				<Action Name="addClass" DisplayName="#Lang(601)" Description="#Lang(501)">
 					<Parameters>
 						<Parameter Name="className" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
-					<SourceCode>
-<![CDATA[$q(this.domCont).addClass(className);]]>
-					</SourceCode>
+					<SourceCode><![CDATA[$q(this.domCont).addClass(className);]]></SourceCode>
 				</Action>
 				<Action Name="setData" DisplayName="#Lang(608)" Description="#Lang(000)">
 					<Parameters>
 						<Parameter Name="data" DisplayName="#Lang(711)" Description="#Lang(401)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
-					<SourceCode>
-<![CDATA[window[`gantt_${this.name}`].parse(data);console.log('he')]]>
-					</SourceCode>
+					<SourceCode><![CDATA[window[`gantt_${this.name}`].parse(data);console.log('he')]]></SourceCode>
 				</Action>
 				<Action Name="setStyle" DisplayName="#Lang(611)" Description="#Lang(511)">
 					<Parameters>
 						<Parameter Name="cssStyleValue" DisplayName="#Lang(712)" Description="#Lang(812)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
-					<SourceCode>
-<![CDATA[var t=$q(this.domCont);t.attr('style', t.attr('style') + ';' + cssStyleValue);]]>
+					<SourceCode><![CDATA[var t=$q(this.domCont);t.attr('style', t.attr('style') + ';' + cssStyleValue);]]>
 					</SourceCode>
 				</Action>
 				<Action Name="setDateRange" DisplayName="#Lang(929)" Description="#Lang(401)">
@@ -9458,18 +9456,25 @@
 						<Parameter Name="endDate" DisplayName="#Lang(928)" Description="#Lang(401)" DefaultValue="&apos;2020-01-05&apos;" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
 					<SourceCode>
-<![CDATA[window[`gantt_${this.name}`].config.start_date = new Date(startDate);
-          window[`gantt_${this.name}`].config.end_date = new Date(endDate);
-          window[`gantt_${this.name}`].render();]]>
+						<![CDATA[
+							window[`gantt_${this.name}`].config.start_date = new Date(startDate);
+							window[`gantt_${this.name}`].config.end_date = new Date(endDate);
+							window[`gantt_${this.name}`].render();
+						]]>
 					</SourceCode>
+				</Action>
+				<Action Name="setConfig" DisplayName="#Lang(944)" Description="#Lang(401)">
+					<Parameters>
+						<Parameter Name="config" DisplayName="#Lang(945)" Description="#Lang(401)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+						<Parameter Name="value" DisplayName="#Lang(946)" Description="#Lang(401)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
+					</Parameters>
+					<SourceCode><![CDATA[window[`gantt_${this.name}`].config[config] = value;]]></SourceCode>
 				</Action>
 				<Action Name="setClass" DisplayName="#Lang(607)" Description="#Lang(507)">
 					<Parameters>
 						<Parameter Name="className" DisplayName="#Lang(709)" Description="#Lang(809)" DefaultValue="" RegularExpressionValidation=".*" Interface="setClass" />
 					</Parameters>
-					<SourceCode>
-<![CDATA[$q(this.domCont).attr('class',className);]]>
-					</SourceCode>
+					<SourceCode><![CDATA[$q(this.domCont).attr('class',className);]]></SourceCode>
 				</Action>
 			</Container>
 		</Actions>
