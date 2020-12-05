@@ -17,3 +17,5 @@ sqlitebck==1.2.1
 vobject==0.9.6.1
 requests==2.23.0
 lxml==4.5.0
+pyjwt==1.7.1
+pytz==2020.4
