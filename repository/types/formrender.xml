@@ -729,9 +729,10 @@ class VDOM_formrender(VDOM_object):
                   extension: '.lang',
                 }}}});
 
-                $('body').off("change", "#{id} input, select");
+                //fix rerender(for example onchange VDOM attrs)
+                $('body').off("change", "#{id} input, #{id} select");
                 
-                $('body').on("change", "#{id} input, #{id} input select", e => {{
+                $('body').on("change", "#{id} input, #{id} select", e => {{
                     const $input = $(e.currentTarget);
                     const itemName = $input.attr('name');
                     const itemValue = $input.val();
