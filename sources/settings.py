@@ -68,10 +68,10 @@ SESSION_LIFETIME = 1200  # life time for web sessions
 
 # timeouts
 
-SCRIPT_TIMEOUT = 30.1  # default termination timeout for arbitrary actions
-COMPUTE_TIMEOUT = 30.1  # cumulutive timeout for all comupter actions
-RENDER_TIMEOUT = 30.1  # cumulative timeout for all onload actions
-WYSIWYG_TIMEOUT = 30.1  # cumulative timeout fro all wysiwyg actinos
+SCRIPT_TIMEOUT = 300  # default termination timeout for arbitrary actions
+COMPUTE_TIMEOUT = 300  # cumulutive timeout for all comupter actions
+RENDER_TIMEOUT = 300  # cumulative timeout for all onload actions
+WYSIWYG_TIMEOUT = 300  # cumulative timeout fro all wysiwyg actinos
 
 CONNECTION_INITIAL_TIMEOUT = 3.0  # initial connection timeout before disconnect
 CONNECTION_SUBSEQUENT_TIMEOUT = 30.0  # connection timeout after receive any data
