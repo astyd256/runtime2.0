@@ -4275,9 +4275,11 @@ $(document).ready(() => {
 
 		return VDOM_object.wysiwyg(self, contents=result)]]></SourceCode>
   <Libraries>
+	<!-- CODE MIRROR LIB -->
+    <Library Target="html"><![CDATA[<script type="text/javascript" src="/064add91-8595-0f40-10ea-09d38022edee.res?"></script>]]></Library>
+	<!-- searchcursor -->
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/5cd10fee-6e10-5253-24ea-3edb0a87f9ec.res?match'></script>]]></Library>
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/95be4415-7ccb-b87b-f50f-77c8485f6bd9.res?syntaxes'></script>]]></Library>
-    <Library Target="html"><![CDATA[<script type="text/javascript" src="/064add91-8595-0f40-10ea-09d38022edee.res?"></script>]]></Library>
     <Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/9cc0dd1e-ae9c-4028-b77a-cd3dddc81b10.css" />]]></Library>
 	<!-- serach addon -->
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/f63a7b6c-28bc-42a7-9142-9446b5dd9ac3.js'></script>]]></Library>
