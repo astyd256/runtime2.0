@@ -255,6 +255,18 @@
 			<ColorGroup>2</ColorGroup>
 		</Attribute>
 		<Attribute>
+			<Name>showlightbox</Name>
+			<DisplayName>#Lang(947)</DisplayName>
+			<Description>#Lang(401)</Description>
+			<DefaultValue>true</DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(401)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(407)|true)|(#Lang(408)|false))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
 			<Name>rounddnddates</Name>
 			<DisplayName>#Lang(939)</DisplayName>
 			<Description>#Lang(401)</Description>
@@ -299,7 +311,7 @@
 			<ErrorValidationMessage>#Lang(401)</ErrorValidationMessage>
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
-			<CodeInterface>.*</CodeInterface>
+			<CodeInterface>TextField(500)</CodeInterface>
 			<ColorGroup>1</ColorGroup>
 		</Attribute>
 		<Attribute>
@@ -582,6 +594,7 @@
 			<Sentence ID="944">Set config</Sentence>
 			<Sentence ID="945">config</Sentence>
 			<Sentence ID="946">value</Sentence>
+			<Sentence ID="947">Show lightbox</Sentence>
 		</Language>
 		<Language Code="fr_FR">
 			<Sentence ID="001">Gantt</Sentence>
@@ -789,6 +802,7 @@
 			<Sentence ID="944">Set config</Sentence>
 			<Sentence ID="945">config</Sentence>
 			<Sentence ID="946">value</Sentence>
+			<Sentence ID="947">Show lightbox</Sentence>
 		</Language>
 		<Language Code="ru_RU">
 			<Sentence ID="001">Gantt</Sentence>
@@ -996,6 +1010,7 @@
 			<Sentence ID="944">Set config</Sentence>
 			<Sentence ID="945">config</Sentence>
 			<Sentence ID="946">value</Sentence>
+			<Sentence ID="947">Show lightbox</Sentence>
 		</Language>
 	</Languages>
 	<Resources>
@@ -9323,7 +9338,7 @@
               gantt_%(id)s.attachEvent("onTaskDblClick", function(id, e) {
                   const task = gantt_%(id)s.getTask(id);
                   execEventBinded(E2VDOMIdFormat('%(id)s'), 'onTaskDblClick', {id: id, value: JSON.stringify(task)});
-                  return true;
+                  return %(show_lightbox)s;
               });
 
               gantt_%(id)s.attachEvent("onAfterTaskDelete", function(id,item){
@@ -9342,7 +9357,8 @@
           "work_time": self.worktime,
           "correct_work_time": self.correctworktime,
           "min_column_width": self.mincolumnwidth,
-          "zoom_config": self.zoom
+          "zoom_config": self.zoom,
+          "show_lightbox": self.showlightbox
         }
 
         SET_DATA_SCRIPT = """<script>$(document).ready(()=>{gantt_%(id)s.parse(`%(data)s`);})</script>""" % { "id": ID, "data": self.data }

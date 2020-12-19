@@ -301,6 +301,18 @@
 			<CodeInterface>MultiLine()</CodeInterface>
 			<ColorGroup>4</ColorGroup>
 		</Attribute>
+		<Attribute>
+			<Name>showlightbox</Name>
+			<DisplayName>#Lang(043)</DisplayName>
+			<Description>#Lang(000)</Description>
+			<DefaultValue>true</DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(000)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(011)|true)|(#Lang(012)|false))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
 	</Attributes>
 	<Languages>
 		<Language Code="en_US">
@@ -341,6 +353,7 @@
 			<Sentence ID="040">Set date range</Sentence>
 			<Sentence ID="041">Date</Sentence>
 			<Sentence ID="042">Set date</Sentence>
+			<Sentence ID="043">Show lightbox</Sentence>
 		</Language>
 		<Language Code="fr_FR">
 			<Sentence ID="000">Default help field</Sentence>
@@ -380,6 +393,7 @@
 			<Sentence ID="040">Set date range</Sentence>
 			<Sentence ID="041">Date</Sentence>
 			<Sentence ID="042">Set date</Sentence>
+			<Sentence ID="043">Show lightbox</Sentence>
 		</Language>
 		<Language Code="ru_RU">
 			<Sentence ID="000">Default help field</Sentence>
@@ -419,6 +433,7 @@
 			<Sentence ID="040">Set date range</Sentence>
 			<Sentence ID="041">Date</Sentence>
 			<Sentence ID="042">Set date</Sentence>
+			<Sentence ID="043">Show lightbox</Sentence>
 		</Language>
 	</Languages>
 	<Resources>
@@ -5609,7 +5624,8 @@ class VDOM_scheduler(VDOM_object):
               scheduler.attachEvent("onTemplatesReady", () => {execEventBinded(E2VDOMIdFormat('%(id)s'),'onTemplatesReady');});
 
               scheduler.attachEvent("onClick", function (id, e) {
-                execEventBinded(E2VDOMIdFormat('%(id)s'), 'onClick', {id: id, value: JSON.stringify(e)});
+                const event = scheduler.getEvent(id);
+                execEventBinded(E2VDOMIdFormat('%(id)s'), 'onClick', {id: id, value: JSON.stringify(event)});
                 return true;
               });
 
@@ -5620,9 +5636,15 @@ class VDOM_scheduler(VDOM_object):
               scheduler.attachEvent("onEventDeleted", function(id, ev) {
                 execEventBinded(E2VDOMIdFormat('%(id)s'), 'onEventDeleted', {id: id, value: JSON.stringify(ev)});
               });
+
+              scheduler.attachEvent("onDblClick", function(id, e) {
+                const event = scheduler.getEvent(id);
+                execEventBinded(E2VDOMIdFormat('%(id)s'), 'onDblClick', {id: id, value: JSON.stringify(event)});
+                return %(show_lightbox)s;
+              });
             })
            </script>
-        """ % {'id': ID}
+        """ % {'id': ID, "show_lightbox": self.showlightbox}
 
         TYPE_WRAPPER = """<div {debug_string} class='{id} {classname}'>{content}</div>"""
 
