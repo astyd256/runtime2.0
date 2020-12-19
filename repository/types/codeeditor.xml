@@ -4172,33 +4172,37 @@
 <div id="%(id)s" style="%(style)s" %(debug_info)s>
 	<textarea name="%(name)s" style='%(style_area)s'>%(value)s</textarea>
 </div>
-<script type="text/javascript">$q(function(){
-	if (typeof window.%(id)s_codeeditor !== 'undefined') {
-		window.%(id)s_codeeditor.toTextArea();
-		delete(window.%(id)s_codeeditor);
-	}
-	window.%(id)s_codeeditor = CodeMirror.fromTextArea($q('#%(id)s>textarea').get(0), {
-		mode: '%(mode)s',
-		lineNumbers: true,
-		styleActiveLine: true,
-		readOnly: %(is_readonly)s,
-		onCursorActivity: function() { window.%(id)s_codeeditor.matchHighlight("CodeMirror-matchhighlight"); }
-	});
-	$q('#%(id)s').parents('form:first').submit(function(){
-		window.%(id)s_codeeditor.save();
-	});
-	window.%(id)s_codeeditor.refresh();
+<script type="text/javascript">
+$(document).ready(() => {
+    if (typeof window.%(id)s_codeeditor !== 'undefined') {
+        window.%(id)s_codeeditor.toTextArea();
+        delete(window.%(id)s_codeeditor);
+    }
+    
+    window.%(id)s_codeeditor = CodeMirror.fromTextArea($('#%(id)s>textarea').get(0), {
+        mode: '%(mode)s',
+        lineNumbers: true,
+        styleActiveLine: true,
+        readOnly: %(is_readonly)s,
+        onCursorActivity: function() { window.%(id)s_codeeditor.matchHighlight("CodeMirror-matchhighlight"); }
+    });
+    
+    $('#%(id)s').parents('form:first').submit(function(){
+        window.%(id)s_codeeditor.save();
+    });
+    
+    window.%(id)s_codeeditor.refresh();
 
-	var el = $('#%(id)s');
+    const el = $('#%(id)s');
 
-	var intervalId = setInterval(function() {
-		if (el.is(':visible')) {
-			window.%(id)s_codeeditor.refresh();
-			clearInterval(intervalId);
-		}
-	}, 200);
-});</script>
-			""" % {
+    var intervalId = setInterval(function() {
+        if (el.is(':visible')) {
+            window.%(id)s_codeeditor.refresh();
+            clearInterval(intervalId);
+        }
+    }, 200);
+});
+</script>""" % {
 				"mode":       self.syntax,
 				"id":         id,
 				"name":       self.customname or self.name,
@@ -4276,15 +4280,15 @@
     <Library Target="html"><![CDATA[<script type="text/javascript" src="/064add91-8595-0f40-10ea-09d38022edee.res?"></script>]]></Library>
     <Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/9cc0dd1e-ae9c-4028-b77a-cd3dddc81b10.css" />]]></Library>
 	<!-- serach addon -->
-    <Library Target="html"><![CDATA[<script defer type='text/javascript' src='/f63a7b6c-28bc-42a7-9142-9446b5dd9ac3.js'></script>]]></Library>
+    <Library Target="html"><![CDATA[<script type='text/javascript' src='/f63a7b6c-28bc-42a7-9142-9446b5dd9ac3.js'></script>]]></Library>
     <!-- search cursor addon -->
-    <Library Target="html"><![CDATA[<script defer type='text/javascript' src='/0116ae12-49d8-4389-bb9d-fd74e73890bb.js'></script>]]></Library>
+    <Library Target="html"><![CDATA[<script type='text/javascript' src='/0116ae12-49d8-4389-bb9d-fd74e73890bb.js'></script>]]></Library>
 	<!-- jump to line addon -->
-    <Library Target="html"><![CDATA[<script defer type='text/javascript' src='/69646baf-4138-4033-8aec-8bf48e467c62.js'></script>]]></Library>
+    <Library Target="html"><![CDATA[<script type='text/javascript' src='/69646baf-4138-4033-8aec-8bf48e467c62.js'></script>]]></Library>
 	<!-- dialog css -->
     <Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/25634bc0-f478-460c-bdcd-29c38d0c3f6c.css" />]]></Library>
 	<!-- dialog js addon -->
-    <Library Target="html"><![CDATA[<script defer type='text/javascript' src='/4aa2cd26-287d-4f83-b2f8-927b5593693e.js'></script>]]></Library>
+    <Library Target="html"><![CDATA[<script type='text/javascript' src='/4aa2cd26-287d-4f83-b2f8-927b5593693e.js'></script>]]></Library>
   </Libraries>
   <E2vdom>
     <Events>
