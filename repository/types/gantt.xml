@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_gantt</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.3</Version>
+		<Version>1.4</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(e0ab6594-77ca-47b3-a35c-d3939406ca8e)</Icon>
@@ -608,6 +608,8 @@
 			<Sentence ID="946">value</Sentence>
 			<Sentence ID="947">Show lightbox</Sentence>
 			<Sentence ID="948">Show today marker</Sentence>
+			<Sentence ID="949">Zoom in</Sentence>
+			<Sentence ID="950">Zoom out</Sentence>
 		</Language>
 		<Language Code="fr_FR">
 			<Sentence ID="001">Gantt</Sentence>
@@ -817,6 +819,8 @@
 			<Sentence ID="946">value</Sentence>
 			<Sentence ID="947">Show lightbox</Sentence>
 			<Sentence ID="948">Show today marker</Sentence>
+			<Sentence ID="949">Zoom in</Sentence>
+			<Sentence ID="950">Zoom out</Sentence>
 		</Language>
 		<Language Code="ru_RU">
 			<Sentence ID="001">Gantt</Sentence>
@@ -1026,6 +1030,8 @@
 			<Sentence ID="946">value</Sentence>
 			<Sentence ID="947">Show lightbox</Sentence>
 			<Sentence ID="948">Show today marker</Sentence>
+			<Sentence ID="949">Zoom in</Sentence>
+			<Sentence ID="950">Zoom out</Sentence>
 		</Language>
 	</Languages>
 	<Resources>
@@ -2118,6 +2124,12 @@
 						<Parameter Name="className" DisplayName="#Lang(709)" Description="#Lang(809)" DefaultValue="" RegularExpressionValidation=".*" Interface="setClass" />
 					</Parameters>
 					<SourceCode><![CDATA[$q(this.domCont).attr('class',className);]]></SourceCode>
+				</Action>
+				<Action Name="zoomIn" DisplayName="#Lang(949)" Description="#Lang(401)">
+					<SourceCode><![CDATA[window[`gantt_${this.name}`].ext.zoom.zoomIn()]]></SourceCode>
+				</Action>
+				<Action Name="zoomOut" DisplayName="#Lang(950)" Description="#Lang(401)">
+					<SourceCode><![CDATA[window[`gantt_${this.name}`].ext.zoom.zoomOut()]]></SourceCode>
 				</Action>
 			</Container>
 		</Actions>
