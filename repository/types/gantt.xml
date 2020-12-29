@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_gantt</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.2</Version>
+		<Version>1.3</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(e0ab6594-77ca-47b3-a35c-d3939406ca8e)</Icon>
@@ -293,6 +293,18 @@
 		<Attribute>
 			<Name>correctworktime</Name>
 			<DisplayName>#Lang(941)</DisplayName>
+			<Description>#Lang(401)</Description>
+			<DefaultValue>false</DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(401)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(407)|true)|(#Lang(408)|false))</CodeInterface>
+			<ColorGroup>1</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>showtodaymarker</Name>
+			<DisplayName>#Lang(948)</DisplayName>
 			<Description>#Lang(401)</Description>
 			<DefaultValue>false</DefaultValue>
 			<RegularExpressionValidation>.*</RegularExpressionValidation>
@@ -595,6 +607,7 @@
 			<Sentence ID="945">config</Sentence>
 			<Sentence ID="946">value</Sentence>
 			<Sentence ID="947">Show lightbox</Sentence>
+			<Sentence ID="948">Show today marker</Sentence>
 		</Language>
 		<Language Code="fr_FR">
 			<Sentence ID="001">Gantt</Sentence>
@@ -803,6 +816,7 @@
 			<Sentence ID="945">config</Sentence>
 			<Sentence ID="946">value</Sentence>
 			<Sentence ID="947">Show lightbox</Sentence>
+			<Sentence ID="948">Show today marker</Sentence>
 		</Language>
 		<Language Code="ru_RU">
 			<Sentence ID="001">Gantt</Sentence>
@@ -1011,6 +1025,7 @@
 			<Sentence ID="945">config</Sentence>
 			<Sentence ID="946">value</Sentence>
 			<Sentence ID="947">Show lightbox</Sentence>
+			<Sentence ID="948">Show today marker</Sentence>
 		</Language>
 	</Languages>
 	<Resources>
@@ -1875,6 +1890,27 @@
             $(document).ready(() => {
               gantt_%(id)s = Gantt.getGanttInstance();
 
+              gantt_%(id)s.plugins({
+                marker: true
+              });
+
+              if (%(show_today_marker)s) {
+                const todayMarkerLabelFormat = gantt_%(id)s.date.date_to_str(gantt_%(id)s.config.task_date);
+                gantt_%(id)s.addMarker({
+                    id: 'today',
+                    start_date: new Date(),
+                    css: "today",
+                    title: todayMarkerLabelFormat(new Date())
+                });
+
+                //Auto update today marker
+                setInterval(function() {
+                    const today = gantt_%(id)s.getMarker('today');
+                    today.start_date = new Date();
+                    today.title = todayMarkerLabelFormat(today.start_date);
+                    gantt_%(id)s.updateMarker('today');
+                }, 1000*60);
+              }
 
               gantt_%(id)s.config.start_date = new Date("%(start_date)s");
               gantt_%(id)s.config.end_date = new Date("%(end_date)s");
@@ -1948,7 +1984,8 @@
           "correct_work_time": self.correctworktime,
           "min_column_width": self.mincolumnwidth,
           "zoom_config": self.zoom,
-          "show_lightbox": self.showlightbox
+          "show_lightbox": self.showlightbox,
+          "show_today_marker": self.showtodaymarker
         }
 
         SET_DATA_SCRIPT = """<script>$(document).ready(()=>{gantt_%(id)s.parse(`%(data)s`);})</script>""" % { "id": ID, "data": self.data }
