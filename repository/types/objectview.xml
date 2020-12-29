@@ -1472,6 +1472,7 @@ class VDOM_objectview(VDOM_object):
             used_types.add(obj.type)        
         
         source_classname = source_object.attributes["classname"]
+        source_visible = source_object.attributes["visible"]
         source_width = source_object.attributes["width"]
         source_height = source_object.attributes["height"]
 
@@ -1498,7 +1499,7 @@ class VDOM_objectview(VDOM_object):
 
             values = {
                 "dataid": key,
-                "visible": "1",
+                "visible": source_visible,
                 "width": source_width,
                 "height": source_height,
                 "classauto": classes,
@@ -1551,11 +1552,12 @@ class VDOM_objectview(VDOM_object):
             copy.attributes.update(values)
 
             if div_only:
+                display = "block" if source_visible else "none"
                 contents.append(u"""<div class="{classes}" dataid="{id}" style="{style}"></div>""".format(
                     id=key,
                     classes=classes,
-                    style=u"position:relative;width:%spx;height:%spx;display:block;" % (
-                        source_width, source_height)))
+                    style=u"position:relative;width:%spx;height:%spx;display:%s;" % (
+                        source_width, source_height, display)))
             else:
                 contents.append(managers.engine.render(copy, parent_object, "vdom"))
         
