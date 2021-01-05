@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.290.0</Version>
+    <Version>0.291.0</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -813,53 +813,59 @@ class VDOM_tabulator(VDOM_object):
 		</style>
 
 		<script type="text/javascript">
-		function singleClick(e, row) {
-			const key = row.getData().%(keyField)s
-			execEventBinded('%(idn)s', 'cellclick', {
-					keyField: key,
-					cellData:JSON.stringify(row.getData()),
-					columnData:JSON.stringify(e)
-				}
-			);
-		}
-		
-				
-		function selectionChange(data, rows) {
-			const keys = data.map(({ %(keyField)s }) => %(keyField)s);
-			execEventBinded('%(idn)s', 'rowsselected', {
-					keyList: keys
-				}
-			);
-		}
+$(document).ready(() => {
+    function singleClick(e, row) {
+    const key = row.getData().%(keyField)s;
 
-		function doubleClick(e, row) {
-			const key = row.getData().%(keyField)s
-			execEventBinded('%(idn)s', 'celldblclick', {
-					keyField: key,
-					cellData:JSON.stringify(row.getData()),
-					columnData:JSON.stringify(e)
-				}
-			);
-		}
+    execEventBinded('%(idn)s', 'cellclick', {
+            keyField: key,
+            cellData:JSON.stringify(row.getData()),
+            columnData:JSON.stringify(e)
+        }
+    );
+    }
 
-		var %(id_tabulator)s = new Tabulator("#%(id_tabulator)s", {
-			height:"100%%",
-			data: %(data)s,
-			dataTree:true,
-			dataTreeStartExpanded:true,
-			columns: %(columns)s,
-			responsiveLayout: "hide",
-			placeholder:"No Data Available",
-			selectableRangeMode:"click",
-			rowClick: function (e, row) {singleClick(e, row);},
-			rowDblClick: function (e, row) {doubleClick(e, row);},
-			rowSelectionChanged: function (e, row) {selectionChange(e, row);},
-			%(params)s
-		});
-		var cols_to_hide = %(hidden_columns)s;
-		cols_to_hide.forEach(function(item,i,cols_to_hide){ %(id_tabulator)s.hideColumn(item);}); 
+        
+    function selectionChange(data, rows) {
+    const keys = data.map(({ %(keyField)s }) => %(keyField)s);
+
+    execEventBinded('%(idn)s', 'rowsselected', {
+            keyList: keys
+        }
+    );
+    }
+
+    function doubleClick(e, row) {
+    const key = row.getData().%(keyField)s;
+
+    execEventBinded('%(idn)s', 'celldblclick', {
+            keyField: key,
+            cellData:JSON.stringify(row.getData()),
+            columnData:JSON.stringify(e)
+        }
+    );
+    }
+
+    var %(id_tabulator)s = new Tabulator("#%(id_tabulator)s", {
+      height:"100%%",
+      data: %(data)s,
+      dataTree:true,
+      dataTreeStartExpanded:true,
+      columns: %(columns)s,
+      responsiveLayout: "hide",
+      placeholder:"No Data Available",
+      selectableRangeMode:"click",
+      rowClick: function (e, row) {singleClick(e, row);},
+      rowDblClick: function (e, row) {doubleClick(e, row);},
+      rowSelectionChanged: function (e, row) {selectionChange(e, row);},
+      %(params)s
+    });
+
+    var cols_to_hide = %(hidden_columns)s;
+
+    cols_to_hide.forEach(function(item,i,cols_to_hide) { %(id_tabulator)s.hideColumn(item) }); 
+});
 		</script>
-		</div>
 """ % {
             "debug_info": debug_info,
             "id": id,
