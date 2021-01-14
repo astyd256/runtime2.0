@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.572</Version>
+    <Version>4.58</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, flexcontainer</Containers>
@@ -1232,7 +1232,6 @@ class VDOM_datatable_v4(VDOM_object):
     <table id="%(id_table)s" class="display" width="100%%" %(fixed_height)s>
     </table>
   <script type="text/javascript">
-
     $(document).ready(function(){
       var id_%(id)s = '%(id)s';
       const table = $('#%(id_table)s').DataTable({
@@ -1281,13 +1280,24 @@ class VDOM_datatable_v4(VDOM_object):
         return {keyField:first_column_data, cellData:cellData, headerData:title}
       }
 
-      $('#%(id_table)s tbody').on( 'click', 'td', function () {
-        execEventBinded('%(idn)s', 'cellclick', get_column_data(this));
-      } );
-      
-      $('#%(id_table)s tbody').on( 'dblclick', 'td', function () {
-        execEventBinded('%(idn)s', 'celldblclick', get_column_data(this));
-      } );
+      table.click_timer = 0;
+      table.click_delay = 200;
+      table.click_prevent = false;
+
+      $("#%(id_table)s tbody")
+        .on("click", 'td', function() {
+          table.click_timer = setTimeout(() => {
+            if (!table.click_prevent) {
+              execEventBinded('%(idn)s', 'cellclick', get_column_data(this));
+            }
+            table.click_prevent = false;
+          }, table.click_delay);
+        })
+        .on("dblclick", 'td', function() {
+          clearTimeout(table.click_timer);
+          table.click_prevent = true;
+          execEventBinded('%(idn)s', 'celldblclick', get_column_data(this));
+        });
 
       %(customfunc)s
       %(selection_mode)s
