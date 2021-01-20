@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_gantt</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.5</Version>
+		<Version>1.5.1</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(e0ab6594-77ca-47b3-a35c-d3939406ca8e)</Icon>
@@ -1156,6 +1156,27 @@
                     gantt_%(id)s.updateMarker('today');
                 }, 1000*60);
               }
+
+
+              gantt_%(id)s.config.constraint_types = {
+                  // As Soon As Possible
+                  ASAP: "asap",
+                  // As Late As Possible
+                  ALAP: "alap",
+                  // Start No Earlier Than
+                  SNET: "snet",
+                  // Start No Later Than
+                  SNLT: "snlt",
+                  // Finish No Earlier Than
+                  FNET: "fnet",
+                  // Finish No Later Than
+                  FNLT: "fnlt",
+                  // Must Start On
+                  MSO: "mso",
+                  // Must Finish On
+                  MFO: "mfo"
+              };
+
 
               gantt_%(id)s.config.start_date = new Date("%(start_date)s");
               gantt_%(id)s.config.end_date = new Date("%(end_date)s");
