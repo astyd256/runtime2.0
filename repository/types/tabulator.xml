@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.291.0</Version>
+    <Version>0.3</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -788,6 +788,7 @@ class VDOM_tabulator(VDOM_object):
 
         if self.selection == "1":
             params.append(u"selectable:true,")
+            params.append("selectable:1,")
 
         if self.columns_auto_width == "1":
             params.append(u'layout: "fitDataStretch",')
@@ -815,17 +816,15 @@ class VDOM_tabulator(VDOM_object):
 		<script type="text/javascript">
 $(document).ready(() => {
     function singleClick(e, row) {
-    const key = row.getData().%(keyField)s;
-
-    execEventBinded('%(idn)s', 'cellclick', {
-            keyField: key,
-            cellData:JSON.stringify(row.getData()),
-            columnData:JSON.stringify(e)
-        }
-    );
+      execEventBinded('%(idn)s', 'cellclick', {
+              keyField: row.getData().%(keyField)s,
+              cellData:JSON.stringify(row.getData()),
+              columnData:JSON.stringify(e)
+          }
+      );
     }
 
-        
+
     function selectionChange(data, rows) {
     const keys = data.map(({ %(keyField)s }) => %(keyField)s);
 
@@ -854,7 +853,6 @@ $(document).ready(() => {
       columns: %(columns)s,
       responsiveLayout: "hide",
       placeholder:"No Data Available",
-      selectableRangeMode:"click",
       rowClick: function (e, row) {singleClick(e, row);},
       rowDblClick: function (e, row) {doubleClick(e, row);},
       rowSelectionChanged: function (e, row) {selectionChange(e, row);},

@@ -14,7 +14,7 @@
     <Container>2</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.86</Version>
+    <Version>1.87</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, tablecell, accordeon, dialog_2, vdomclass, smartfolderdata, flexcontainer</Containers>
@@ -339,6 +339,7 @@
       <Sentence ID="916">Current X-value</Sentence>
       <Sentence ID="917">Current X-value</Sentence>
       <Sentence ID="918">Current X-value</Sentence>
+      <Sentence ID="919">custom</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="001">Formulaire</Sentence>
@@ -473,6 +474,7 @@ Validité du rapport</Sentence>
       <Sentence ID="916">Current X-value</Sentence>
       <Sentence ID="917">Current X-value</Sentence>
       <Sentence ID="918">Current X-value</Sentence>
+      <Sentence ID="919">custom</Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="001">Форма</Sentence>
@@ -606,6 +608,7 @@ Validité du rapport</Sentence>
       <Sentence ID="916">Текущее значение X</Sentence>
       <Sentence ID="917">Текущее значение X</Sentence>
       <Sentence ID="918">Текущее значение X</Sentence>
+      <Sentence ID="918">9екcustom</Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -1013,6 +1016,12 @@ class VDOM_form(VDOM_object):
         <Action Help="#Lang(511)" InterfaceName="#Lang(611)" MethodName="submit">
           <Parameters/>
           <SourceCode><![CDATA[$q(this.domCont).submit();]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(003)" InterfaceName="#Lang(919)" MethodName="custom">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(003)" ScriptName="custom" Help="#Lang(003)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[eval(custom);]]></SourceCode>
         </Action>
       </Container>
     </Actions>
