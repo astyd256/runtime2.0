@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.3</Version>
+    <Version>0.3.1</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -167,6 +167,18 @@
       <CodeInterface>MultiLine(100000)</CodeInterface>
       <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>datatreestartexpanded</Name>
+      <DisplayName>#Lang(925)</DisplayName>
+      <DefaultValue>1</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(508)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(407)|1)|(#Lang(408)|0))</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
@@ -441,6 +453,7 @@
       <Sentence ID="922">cellData</Sentence>
       <Sentence ID="923">cellData</Sentence>
       <Sentence ID="924">cellData</Sentence>
+      <Sentence ID="925">Data tree start expanded</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="001">tabulator</Sentence>
@@ -592,6 +605,7 @@
       <Sentence ID="922">cellData</Sentence>
       <Sentence ID="923">cellData</Sentence>
       <Sentence ID="924">cellData</Sentence>
+      <Sentence ID="925">Data tree start expanded</Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="001">tabulator</Sentence>
@@ -743,6 +757,7 @@
       <Sentence ID="922">cellData</Sentence>
       <Sentence ID="923">cellData</Sentence>
       <Sentence ID="924">cellData</Sentence>
+      <Sentence ID="925">Data tree start expanded</Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -845,11 +860,11 @@ $(document).ready(() => {
     );
     }
 
-    var %(id_tabulator)s = new Tabulator("#%(id_tabulator)s", {
+    window.%(id_tabulator)s = new Tabulator("#%(id_tabulator)s", {
       height:"100%%",
       data: %(data)s,
       dataTree:true,
-      dataTreeStartExpanded:true,
+      dataTreeStartExpanded: %(data_tree_start_expanded)s,
       columns: %(columns)s,
       responsiveLayout: "hide",
       placeholder:"No Data Available",
@@ -877,7 +892,8 @@ $(document).ready(() => {
             "columns": self.columns,
             "keyField": self.key,
             "hidden_fields_styles": hidden_fields_styles,
-            "hidden_columns": hidden_columns
+            "hidden_columns": hidden_columns,
+            "data_tree_start_expanded": 'true' if self.datatreestartexpanded == "1" else 'false'
         }
 
         return VDOM_object.render(self, contents=result)
