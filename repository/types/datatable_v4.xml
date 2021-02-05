@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.58</Version>
+    <Version>4.60</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, flexcontainer</Containers>
@@ -1823,12 +1823,14 @@ for (i = 0; i < number; i++) {
           <Parameters>
             <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(704)" ScriptName="data" Help="#Lang(804)" RegularExpressionValidation=""/>
           </Parameters>
-          <SourceCode><![CDATA[const id_table = '#t_' + this.domCont.id;
-const table = $(id_table).DataTable();
-table.clear();
-table.rows.add(data);
-table.draw();
-]]></SourceCode>
+          <SourceCode><![CDATA[
+            const id_table = '#t_' + this.domCont.id;
+            const table = $(id_table).DataTable();
+            table.clear();
+            table.rows.add(JSON.parse(data));
+            table.draw();
+          ]]>
+          </SourceCode>
         </Action>
         <Action Help="#Lang(507)" InterfaceName="#Lang(607)" MethodName="show">
           <Parameters>
