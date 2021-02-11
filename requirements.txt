@@ -19,3 +19,4 @@ requests==2.23.0
 lxml==4.5.0
 pyjwt==1.7.1
 pytz==2020.4
+chevron==0.14.0
