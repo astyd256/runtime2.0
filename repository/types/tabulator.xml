@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.3.4</Version>
+    <Version>0.3.5</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -1026,7 +1026,7 @@ window[tabulator].addRowCss(rowId,  cssClass);]]></SourceCode>
           </Parameters>
           <SourceCode><![CDATA[const vdom_id = this.domCont.id;
 const tabulator = 't_' + vdom_id.slice(2);
-window[tabulator].setData(data);]]></SourceCode>
+window[tabulator].setData(JSON.parse(data));]]></SourceCode>
         </Action>
         <Action Help="#Lang(506)" InterfaceName="#Lang(606)" MethodName="show">
           <Parameters>
