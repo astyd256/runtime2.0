@@ -2,10 +2,11 @@
 import string
 import base64
 
-try:
-    import jsmin
-except ImportError as err:
-    jsmin = None
+# FIXME TODO jsmin has issue with RegExp conditions.
+# try:
+#     import jsmin
+# except ImportError as err:
+jsmin = None
 
 import file_access
 import settings
