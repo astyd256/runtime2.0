@@ -9,10 +9,28 @@ from utils.tracing import show_exception_trace
 from resource import VDOM_module_resource
 from .python import VDOM_module_python
 from post_processing import VDOM_post_processing
+from contextlib import contextmanager
+
 
 guid_regex=re.compile("[0-9A-Z]{8}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{12}", re.IGNORECASE)
+
+
+@contextmanager
+def start_stop_request(actions):
+    on_request_start = actions.get("requestonstart")
+    if on_request_start and on_request_start.source_code:
+        managers.engine.execute(on_request_start)
+
+    yield
+
+    on_request_stop = actions.get("requestonstop")
+    if on_request_stop and on_request_stop.source_code:
+        managers.engine.execute(on_request_stop)
+
+
 class PathNotFound(Exception):
     pass
+
 
 class VDOM_module_manager(object):
     """Module Manager class"""
@@ -118,7 +136,7 @@ class VDOM_module_manager(object):
             #request_object.container_id = container_id
             #debug("Container id: " + container_id)
             # get container object and check if it can be a top level container
-            _a = managers.memory.applications[request_object.app_id()] 
+            _a = managers.memory.applications[request_object.app_id()]
             #check for both guid, low case and original case
             obj = _a.objects.get(container_id) or _a.objects.catalog.get(container_id) or _a.objects.catalog.get(url_parts[0])
 
@@ -165,78 +183,73 @@ class VDOM_module_manager(object):
             # CHECK:    managers.engine.special(_a, _a.global_actions["session"]["sessiononstart"])
             # CHECK:    request_object.session().on_start_executed = True
 
-            on_request_start = _a.actions.get("requestonstart")
-            if on_request_start and on_request_start.source_code:
-                managers.engine.execute(on_request_start)
+            with start_stop_request(_a.actions):
+                result = ""
+                try:
+                    result = managers.engine.render(obj, render_type=obj.type.render_type.lower())
+                    # result = managers.engine.render(obj, None, obj.type.render_type.lower())
+                    # CHECK: result = managers.engine.render(_a, obj, None, obj.type.render_type.lower())
+                except VDOM_exception, e:
+                    debug("Render exception: " + str(e))
+                    show_exception_trace(caption="Module Manager: Render exception", locals=True)
+                    return (None, str(e))
+                except Exception as ee:
+                    show_exception_trace(caption="Module Manager: Render exception", locals=True)
+                    action = _a.actions.get("requestonerror")
+                    if action and action.source_code:
+                        request = managers.request_manager.get_request()
+                        request.arguments().arguments()["error"] = [ee]
+                        managers.engine.execute(action)
+                        if request_object.wholeAnswer:
+                            return (None, request_object.wholeAnswer.encode("utf-8"))
+                    raise
+                # finally:
+                #     for key in request_object.files:
+                #         if getattr(request_object.files[key][0],"name", None):
+                #             if not request_object.files[key][0].closed:
+                #                 request_object.files[key][0].close()
+                #             os.remove(request_object.files[key][0].name)
 
-            result = ""
-            try:
-                result = managers.engine.render(obj, render_type=obj.type.render_type.lower())
-                # result = managers.engine.render(obj, None, obj.type.render_type.lower())
-                # CHECK: result = managers.engine.render(_a, obj, None, obj.type.render_type.lower())
-            except VDOM_exception, e:
-                debug("Render exception: " + str(e))
-                show_exception_trace(caption="Module Manager: Render exception", locals=True)
-                return (None, str(e))
-            except Exception as ee:
-                show_exception_trace(caption="Module Manager: Render exception", locals=True)
-                action = _a.actions.get("requestonerror")
-                if action and action.source_code:
-                    request = managers.request_manager.get_request()
-                    request.arguments().arguments()["error"] = [ee]
-                    managers.engine.execute(action)
-                    if request_object.wholeAnswer:
-                        return (None, request_object.wholeAnswer.encode("utf-8"))
-                raise
-            # finally:
-            #     for key in request_object.files:
-            #         if getattr(request_object.files[key][0],"name", None):
-            #             if not request_object.files[key][0].closed:
-            #                 request_object.files[key][0].close()
-            #             os.remove(request_object.files[key][0].name)
+                if request_object.fh:
+                    from logs import log
+                    # log.debug("REQUEST FILE HANDLER: %r" % request_object.fh)
+                    shutil.copyfileobj(request_object.fh, request_object.wfile)
+                    return (None, "")
 
-            if request_object.fh:
-                from logs import log
-                # log.debug("REQUEST FILE HANDLER: %r" % request_object.fh)
-                shutil.copyfileobj(request_object.fh, request_object.wfile)
-                return (None, "")
+                outp = request_object.output()
+                if outp:
+                    if request_object.binary():
+                        return (None, outp)
+                    else:
+                        return (None, outp.encode("utf-8"))
 
-            outp = request_object.output()
-            if outp:
-                if request_object.binary():
-                    return (None, outp)
-                else:
-                    return (None, outp.encode("utf-8"))
+                #debug("Result is: " + result.encode("utf-8"))
 
-            #debug("Result is: " + result.encode("utf-8"))
+                # now do module post processing
+    #           module = VDOM_post_processing()
+    #           try:
+    #               result = module.run(result)
+    #           except:
+    #               debug(_("Module manager: post processing error: %s") % sys.exc_info()[0])
+    #               traceback.print_exc(file=debugfile)
 
-            # now do module post processing
-#           module = VDOM_post_processing()
-#           try:
-#               result = module.run(result)
-#           except:
-#               debug(_("Module manager: post processing error: %s") % sys.exc_info()[0])
-#               traceback.print_exc(file=debugfile)
-
-            on_request_stop = _a.actions.get("requestonstop")
-            if on_request_stop and on_request_stop.source_code:
-                managers.engine.execute(on_request_stop)
-
-            return (None, result.encode("utf-8"))
+                return None, result.encode("utf-8")
 
         elif "py" == request_type:  # dynamic python script, this doesn't require an application to be registered
-            try:
-                module = VDOM_module_python()
-                return (None, module.run(request_object))
-            except Exception, e:
-                debug(_("Module manager: python module error: %s") % str(e))
-                #traceback.print_exc(file=debugfile)
-                return (500, None)
-            # finally:
-            #     for key in request_object.files:
-            #         if not request_object.files[key][0].closed:
-            #             request_object.files[key][0].close()
-            #         os.remove(request_object.files[key][0].name)
+            _a = managers.memory.applications[request_object.app_id()]
+            with start_stop_request(_a.actions):
+                try:
+                    module = VDOM_module_python()
+                    return (None, module.run(request_object))
+                except Exception, e:
+                    debug(("Module manager: python module error: %s") % str(e))
+                    #traceback.print_exc(file=debugfile)
+                    return 500, None
+                # finally:
+                #     for key in request_object.files:
+                #         if not request_object.files[key][0].closed:
+                #             request_object.files[key][0].close()
+                #         os.remove(request_object.files[key][0].name)
 
         elif request_type:# pass to resource module
             module = VDOM_module_resource()
