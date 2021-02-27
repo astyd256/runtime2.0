@@ -121,7 +121,7 @@ def run(request):
 			request.write("<ACTIONS>%s</ACTIONS>" % rr.encode("utf-8"))
 		else:
 			request.last_state=state
-			debug("INCOMING STATE: %s"%request.last_state["#"])
+			#debug("INCOMING STATE: %s"%request.last_state["#"])
 			#request.add_header("Content-Type", "text/xml")
 			request.add_header("Content-Type", "text/plain")
 			r = {}
@@ -177,7 +177,7 @@ def run(request):
 				request.write("<ACTIONS>%s</ACTIONS>" % rr.getvalue().encode("utf-8"))
 				request.write("<SV>%s</SV>" % json.dumps(request.shared_variables).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;'))
 
-			debug("OUTCOMING STATE: %s"%(request.next_state or request.last_state)["#"])
+			#debug("OUTCOMING STATE: %s"%(request.next_state or request.last_state)["#"])
 			# request.write("<STATE value=\"%s\"/>"%0)
 			request.write("<STATE value=\"%s\"/>"%(request.next_state or request.last_state)["#"])
 

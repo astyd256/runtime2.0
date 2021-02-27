@@ -60,7 +60,8 @@ class Engine(object):
                 self.select(previous)
 
     def compute(self, object, parent=None):
-        log.write("Compute %s" % object)
+        if settings.DETAILED_LOGGING:
+            log.write("Compute %s" % object)
         previous = self.select(object.application)
         managers.script_manager.constrain(settings.COMPUTE_TIMEOUT)
         try:
@@ -72,7 +73,8 @@ class Engine(object):
             self.select(previous)
 
     def render(self, object, parent=None, render_type=None):
-        log.write("Render %s" % object)
+        if settings.DETAILED_LOGGING:
+            log.write("Render %s" % object)
         previous = self.select(object.application)
         managers.script_manager.constrain(settings.RENDER_TIMEOUT)
         try:
@@ -89,7 +91,8 @@ class Engine(object):
 
     @contextmanager
     def start_render(self, object, parent=None, render_type=None):
-        log.write("Render %s" % object)
+        if settings.DETAILED_LOGGING:
+            log.write("Render %s" % object)
         previous = self.select(object.application)
         managers.script_manager.constrain(settings.RENDER_TIMEOUT)
         try:
@@ -103,7 +106,8 @@ class Engine(object):
             # statistics.show("Render %s" % object)
 
     def wysiwyg(self, object, parent=None):
-        log.write("Wysiwyg %s" % object)
+        if settings.DETAILED_LOGGING:
+            log.write("Wysiwyg %s" % object)
         previous = self.select(object.application)
         managers.script_manager.constrain(settings.WYSIWYG_TIMEOUT)
         try:
@@ -116,7 +120,8 @@ class Engine(object):
 
     @contextmanager
     def start_wysiwyg(self, object, parent=None):
-        log.write("Wysiwyg %s" % object)
+        if settings.DETAILED_LOGGING:
+            log.write("Wysiwyg %s" % object)
         previous = self.select(object.application)
         managers.script_manager.constrain(settings.WYSIWYG_TIMEOUT)
         try:
@@ -153,7 +158,8 @@ class Engine(object):
             # statistics.show("Execute%s %s" % (" and render" if render else "", action))
 
     def terminate(self):
-        log.write("Terminate render")
+        if settings.DETAILED_LOGGING:
+            log.write("Terminate render")
         # from utils.tracing import format_thread_trace
         # log.debug(format_thread_trace(statements=False, skip=("terminate", "redirect"), until="scripting.executable"))
         raise RenderTermination
