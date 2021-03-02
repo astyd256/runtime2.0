@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.3.7</Version>
+    <Version>0.3.8</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -810,7 +810,6 @@ class VDOM_tabulator(VDOM_object):
 
         if self.selection == "1":
             params.append(u"selectable:true,")
-            params.append("selectable:1,")
 
         if self.columns_auto_width == "1":
             params.append(u'layout: "fitDataStretch",')

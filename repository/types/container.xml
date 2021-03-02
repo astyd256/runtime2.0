@@ -14,7 +14,7 @@
     <Container>2</Container>
     <Category>Standard</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.554.8388</Version>
+    <Version>1.554.9</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, container, tablecell, form, accordeon, tabview, dialog_2, vdomclass, desktopapplication, desktopshared, smartfolderdata, flexcontainer</Containers>
@@ -298,7 +298,7 @@
       <Sentence ID="114">Footer mode</Sentence>
       <Sentence ID="115">Security code</Sentence>
       <Sentence ID="116">Overflow</Sentence>
-      <Sentence ID="117"></Sentence>
+      <Sentence ID="117">CSS Class</Sentence>
       <Sentence ID="118">lockposition</Sentence>
       <Sentence ID="119">Background color</Sentence>
       <Sentence ID="121">Background image</Sentence>
@@ -490,7 +490,7 @@
       <Sentence ID="114">Mode Pied-de-page</Sentence>
       <Sentence ID="115">Code de securité</Sentence>
       <Sentence ID="116">Overflow</Sentence>
-      <Sentence ID="117"></Sentence>
+      <Sentence ID="117">CSS Class</Sentence>
       <Sentence ID="118"></Sentence>
       <Sentence ID="119">Background color</Sentence>
       <Sentence ID="121">Background image</Sentence>
@@ -682,7 +682,7 @@
       <Sentence ID="114">Режим подвала</Sentence>
       <Sentence ID="115">Код безопасности</Sentence>
       <Sentence ID="116">Переполнение</Sentence>
-      <Sentence ID="117"></Sentence>
+      <Sentence ID="117">CSS Class</Sentence>
       <Sentence ID="118"></Sentence>
       <Sentence ID="119">Background color</Sentence>
       <Sentence ID="121">Background image</Sentence>
