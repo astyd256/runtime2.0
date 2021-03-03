@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.65</Version>
+    <Version>4.7</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, flexcontainer</Containers>
@@ -1178,22 +1178,9 @@ class VDOM_datatable_v4(VDOM_object):
     else:
       title = u""
 
-    if self.selectionmode == "0":
-      slelection_mode = u"""
-      $('#%(id_table)s tbody').on( 'click', 'td', function () {
-            const tr = $(this).parent()
-            if ( tr.hasClass('selected') ) {
-                tr.removeClass('selected');
-                execEventBinded('%(idn)s', 'rowsunselected', {});
-            }
-            else {
-                table.$('tr.selected').removeClass('selected');
-                const {keyField} = get_column_data(this);
-                execEventBinded('%(idn)s', 'rowsselected', {keyList: keyField});
-                tr.addClass('selected');
-            }
-        } );""" % {"id_table": id_table, "idn": idn}
-    else:
+    # if multiselect
+    slelection_mode = ""
+    if self.selectionmode == "1":
       slelection_mode = u"""
       $('#%(id_table)s tbody').on( 'click', 'td', function () {
             const tr = $(this).perent();
@@ -1249,9 +1236,7 @@ class VDOM_datatable_v4(VDOM_object):
         %(page_length)s
         autoWidth: %(autoWidth)s,
         columnDefs: [%(customcolumns)s],
-        initComplete : function() {
-          %(selectedrows)s
-        },
+        initComplete : function() { %(selectedrows)s },
         %(customparams)s
         // NOTE: Hides pagination panel if there's only one page
         "drawCallback": function(oSettings) {
@@ -1287,10 +1272,22 @@ class VDOM_datatable_v4(VDOM_object):
       table.click_delay = 200;
       table.click_prevent = false;
 
-      $("#%(id_table)s tbody")
-        .on("click", 'td', function() {
+      $("#%(id_table)s tbody").on("click", 'td', function() {
+          const sinleSelectionMode = %(single_selection_mode)s;
+          const tr = $(this).parent()
           table.click_timer = setTimeout(() => {
             if (!table.click_prevent) {
+             if (sinleSelectionMode) {
+               if (tr.hasClass('selected')) {
+                 tr.removeClass('selected');
+                 execEventBinded('%(idn)s', 'rowsunselected', {});
+               } else {
+                 table.$('tr.selected').removeClass('selected');
+                 const {keyField} = get_column_data(this);
+                 execEventBinded('%(idn)s', 'rowsselected', {keyList: keyField});
+                 tr.addClass('selected');
+               }
+             }
               execEventBinded('%(idn)s', 'cellclick', get_column_data(this));
             }
             table.click_prevent = false;
@@ -1309,30 +1306,31 @@ class VDOM_datatable_v4(VDOM_object):
   </script>
 </div>
 """ % {
-        "debug_info":      debug_info,
-        "id":              id,
-        "idn":             idn,
-        "id_table":        id_table,
-        "customcolumns":   self.customcolumns,
-        "show_header":     show_header,
-        "page_length":     page_length,
-        "paging":          paging,
-        "searching":       searching,
-        "selection_mode":  slelection_mode,
-        "autoWidth":       self.autowidth,
-        "selectedrows":    selectedrows,
-        "scrollY":          scrollY,
-        "style":           style,
-        "selfstyle":       self.style % {"id": id},
-        "scrollY_styles":  scrollY_styles,
-        "cssclass":        cssclass,
-        "title":           title,
-        "fixed_height":    fixed_height,
-        "customparams":    self.customparams,
-        "customfunc":      self.customfunc,
-        "data":            json.dumps(src_data),
-        "columns":         json.dumps(col_title),
-        "key_index":       key_index
+        "debug_info":            debug_info,
+        "id":                    id,
+        "idn":                   idn,
+        "id_table":              id_table,
+        "customcolumns":         self.customcolumns,
+        "show_header":           show_header,
+        "page_length":           page_length,
+        "paging":                paging,
+        "searching":             searching,
+        "selection_mode":        slelection_mode,
+        "single_selection_mode": 'true' if self.selectionmode == "0" else 'false',
+        "autoWidth":             self.autowidth,
+        "selectedrows":          selectedrows,
+        "scrollY":               scrollY,
+        "style":                 style,
+        "selfstyle":             self.style % {"id": id},
+        "scrollY_styles":        scrollY_styles,
+        "cssclass":              cssclass,
+        "title":                 title,
+        "fixed_height":          fixed_height,
+        "customparams":          self.customparams,
+        "customfunc":            self.customfunc,
+        "data":                  json.dumps(src_data),
+        "columns":               json.dumps(col_title),
+        "key_index":             key_index
     }
 
     return VDOM_object.render(self, contents=result)
@@ -1609,76 +1607,56 @@ def on_update(object, attributes):
 
   return ""]]></SourceCode>
   <Libraries>
-    <Library Target="html"><![CDATA[<script type='text/javascript'>
+    <Library Target="html"><![CDATA[
+      <style type="text/css">
+        .hide_column {
+            display : none;
+        }
 
-function vdom_dtv3_triBoxClick(t) {
-  $(t).siblings('em').hide(0);
-}
-function vdom_dtv3_triClick(t) {
-  $(t).parent().find('em').hide(0);
-}
-function vdom_dtv3_triReset() { // todo: fix for specific checkboxes
-  $('#trailer').show();
-  $('#chkBox').removeAttr('checked');
-}
+        .datatablev4.multiselect.tristate div.tri {
+          position: relative;
+          height: 20px;
+        }
 
-$(function(){
-  //$j('.datatablev3.multiselect.tristate .tri em').click(function(){ vdom_dtv3_triClick(this); });
-  //$j('.datatablev3.multiselect.tristate input:checkbox.ms').live('change click', vdom_dtv3_triBoxClick);
-  //$j('#btnReset').click(vdom_dtv3_triReset);
-});
+        .datatablev4.multiselect.tristate div.tri input {
+          z-index: 10;  
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          background: transparent;
+          opacity: 0.7;
+          filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+          -moz-opacity: 0.7;
+          -khtml-opacity: 0.7;
+        }
 
-</script>
+        .datatablev4.multiselect.tristate div.tri em {
+          z-index: 1;
+          background: #6c6;
+          width: 7px;
+          height: 8px;
+          display: block;
+          position: absolute;
+          top: 5px;
+          left: 7px;
+          overflow: hidden;
+          padding: 0;
+          margin: 0;
+        }
 
-<style type="text/css">
+        .lt-ie9 .datatablev4.multiselect.tristate div.tri em {
+          left: 6px;
+        }
 
-.hide_column {
-    display : none;
-}
+        .lt-ie8 .datatablev4.multiselect.tristate div.tri em {
+          left: 7px;
+          top: 7px;
+        }
 
-
-.datatablev4.multiselect.tristate div.tri {
-  position: relative;
-  height: 20px;
-}
-
-.datatablev4.multiselect.tristate div.tri input {
-  z-index: 10;  
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: transparent;
-  opacity: 0.7;
-  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
-  -moz-opacity: 0.7;
-  -khtml-opacity: 0.7;
-}
-
-.datatablev4.multiselect.tristate div.tri em {
-  z-index: 1;
-  background: #6c6;
-  width: 7px;
-  height: 8px;
-  display: block;
-  position: absolute;
-  top: 5px;
-  left: 7px;
-  overflow: hidden;
-  padding: 0;
-  margin: 0;
-}
-
-.lt-ie9 .datatablev4.multiselect.tristate div.tri em {
-  left: 6px;
-}
-
-.lt-ie8 .datatablev4.multiselect.tristate div.tri em {
-  left: 7px;
-  top: 7px;
-}
-
-</style>]]></Library>
+      </style>
+      ]]>
+    </Library>
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/1017e4bd-e816-d1cc-a1d0-d6461fe79f24.js'></script>]]></Library>
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/d29cfae0-39cf-48a2-8fc2-88061fa5e7b2.js'></script>]]></Library>
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/32c8de6e-7bd8-4327-84da-b5ecbffe67c5.js'></script>]]></Library>
