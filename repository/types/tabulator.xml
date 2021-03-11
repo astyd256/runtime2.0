@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.3.8</Version>
+    <Version>0.4</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -220,11 +220,11 @@
     <Attribute>
       <Name>selection</Name>
       <DisplayName>#Lang(117)</DisplayName>
-      <DefaultValue>1</DefaultValue>
+      <DefaultValue>multi</DefaultValue>
       <Visible>1</Visible>
       <Help>#Lang(217)</Help>
       <InterfaceType>0</InterfaceType>
-      <CodeInterface>DropDown((#Lang(407)|1)|(#Lang(408)|0))</CodeInterface>
+      <CodeInterface>DropDown((#Lang(931)|multi)|(#Lang(930)|single))</CodeInterface>
       <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
@@ -239,6 +239,18 @@
       <CodeInterface>DropDown((#Lang(409)|1)|(#Lang(411)|0))</CodeInterface>
       <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(318)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>search_field</Name>
+      <DisplayName>#Lang(929)</DisplayName>
+      <DefaultValue>false</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(224)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(409)|true)|(#Lang(411)|false))</CodeInterface>
+      <Colorgroup>2</Colorgroup>
+      <ErrorValidationMessage>#Lang(224)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
@@ -456,6 +468,10 @@
       <Sentence ID="925">Data tree start expanded</Sentence>
       <Sentence ID="926">filename</Sentence>
       <Sentence ID="927">Export to xlsx</Sentence>
+      <Sentence ID="928">Clear filter</Sentence>
+      <Sentence ID="929">Search field</Sentence>
+      <Sentence ID="930">Single</Sentence>
+      <Sentence ID="931">Multi</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="001">tabulator</Sentence>
@@ -610,6 +626,10 @@
       <Sentence ID="925">Data tree start expanded</Sentence>
       <Sentence ID="926">filename</Sentence>
       <Sentence ID="927">Export to xlsx</Sentence>
+      <Sentence ID="928">Clear filter</Sentence>
+      <Sentence ID="929">Search field</Sentence>
+      <Sentence ID="930">Single</Sentence>
+      <Sentence ID="931">Multi</Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="001">tabulator</Sentence>
@@ -764,6 +784,10 @@
       <Sentence ID="925">Data tree start expanded</Sentence>
       <Sentence ID="926">filename</Sentence>
       <Sentence ID="927">Export to xlsx</Sentence>
+      <Sentence ID="928">Clear filter</Sentence>
+      <Sentence ID="929">Search field</Sentence>
+      <Sentence ID="930">Single</Sentence>
+      <Sentence ID="931">Multi</Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -808,8 +832,7 @@ class VDOM_tabulator(VDOM_object):
         if self.rows_height:
             params.append(u"rowHeight: %s," % (self.rows_height))
 
-        if self.selection == "1":
-            params.append(u"selectable:true,")
+        params.append(u"selectable:true," if self.selection == "multi" else u"selectable:1,")
 
         if self.columns_auto_width == "1":
             params.append(u'layout: "fitDataStretch",')
@@ -825,9 +848,18 @@ class VDOM_tabulator(VDOM_object):
             debug_info = u"objtype='%s' objname='%s' ver='%s'" % (self.type.name, self.name, self.type.version)
         else:
             debug_info = u""
+        
+        search_field = ''
+        if self.search_field == 'true':
+          search_field = """
+          <div class="tabulator-search-wrapper">
+            <input class="tabulator-search" type="search" onchange="Obj{id}.filter(this.value)">
+          </div>
+          """.format(id=id[1:])
 
         result = u"""
 		<div %(debug_info)s id='%(id)s' style='%(style)s' %(cssclass)s>
+			%(search_field)s
 			<div id="%(id_tabulator)s" style="width:100%%; height:100%%"></div>
 		</div>
 		<style type="text/css">
@@ -899,7 +931,8 @@ $(document).ready(() => {
             "keyField": self.key,
             "hidden_fields_styles": hidden_fields_styles,
             "hidden_columns": hidden_columns,
-            "data_tree_start_expanded": 'true' if self.datatreestartexpanded == "1" else 'false'
+            "data_tree_start_expanded": 'true' if self.datatreestartexpanded == "1" else 'false',
+            "search_field": search_field
         }
 
         return VDOM_object.render(self, contents=result)
@@ -1047,6 +1080,28 @@ window[tabulator].addRowCss(rowId,  cssClass);]]></SourceCode>
             const vdom_id = this.domCont.id;
             const tabulator = 't_' + vdom_id.slice(2);
             window[tabulator].download("xlsx", filename, {});
+          ]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(927)" InterfaceName="#Lang(927)" MethodName="filter">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(927)" ScriptName="textFilter" Help="#Lang(927)" RegularExpressionValidation=""/>
+          </Parameters>
+          <SourceCode><![CDATA[
+            const vdom_id = this.domCont.id;
+            const tabulator = 't_' + vdom_id.slice(2);
+            const headerColumnNames = window[tabulator].getColumns().map(e => e._column.field);
+            textFilter = textFilter.toLowerCase();
+            const filterFuntion = (data) => headerColumnNames
+              .map(e => data[e].toString().toLowerCase())
+              .some(e => e.includes(textFilter));
+            window[tabulator].setFilter(filterFuntion, '', '');
+          ]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(928)" InterfaceName="#Lang(928)" MethodName="clearFilter">
+          <SourceCode><![CDATA[
+            const vdom_id = this.domCont.id;
+            const tabulator = 't_' + vdom_id.slice(2);
+            window[tabulator].clearFilter();
           ]]></SourceCode>
         </Action>
         <Action Help="#Lang(506)" InterfaceName="#Lang(606)" MethodName="show">
