@@ -809,7 +809,7 @@ class VDOM_tabulator(VDOM_object):
         id = u'o_' + idn
         id_tabulator = u't_' + idn
 
-        display = u" display:none; " if self.visible == "0" else u""
+        display = u" display:none !important; " if self.visible == "0" else u""
 
         style = u"""{display}z-index: {zind}; position: absolute; top: {top}px; left: {left}px; height: {height}px; width: {width}px""" \
             .format(display=display, zind=self.zindex, top=self.top, left=self.left, height=self.height,

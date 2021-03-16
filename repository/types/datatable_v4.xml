@@ -1274,7 +1274,7 @@ class VDOM_datatable_v4(VDOM_object):
 
       $("#%(id_table)s tbody").on("click", 'td', function() {
           const sinleSelectionMode = %(single_selection_mode)s;
-          const tr = $(this).parent()
+          const tr = $(this).parent();
           table.click_timer = setTimeout(() => {
             if (!table.click_prevent) {
              if (sinleSelectionMode) {

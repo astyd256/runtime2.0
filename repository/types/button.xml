@@ -1649,7 +1649,7 @@ $j('#'+this.domCont.id+'_e2vdomhelper.disabled-over').hide(0);]]></SourceCode>
           <Parameters>
             <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(702)" ScriptName="fade" Help="#Lang(802)" RegularExpressionValidation=".*"/>
           </Parameters>
-          <SourceCode><![CDATA[vdom_ui_show(this.domCont, fade);]]></SourceCode>
+          <SourceCode><![CDATA[vdom_ui_show(this.domCont, fade, undefined, undefined, '');]]></SourceCode>
         </Action>
         <Action Help="#Lang(524)" InterfaceName="#Lang(615)" MethodName="toggleClass">
           <Parameters>

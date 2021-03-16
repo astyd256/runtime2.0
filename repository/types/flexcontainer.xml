@@ -1564,17 +1564,23 @@ class VDOM_flexcontainer(VDOM_object):
 
 		# Display
 
-		if self.displaying == "1": 
+		if self.displaying == "1":
+			display_style = u"block"
 			displaying = u" display: block; "
 		elif self.displaying == "2":
+			display_style = u"inline"
 			displaying = u" display: inline; "
 		elif self.displaying == "3":
+			display_style = u"flex"
 			displaying = u" display: flex; "
 		elif self.displaying == "4":
+			display_style = u"grid"
 			displaying = u" display: grid; "
 		elif self.displaying == "5":
+			display_style = u"inline-block"
 			displaying = u" display: inline-block; "
 		else:
+			display_style = u""
 			displaying = u""
 		
 		if self.visible == "0":
@@ -1910,9 +1916,9 @@ class VDOM_flexcontainer(VDOM_object):
 
 		# Compound DIV
 
-		result = u"""<div {debug_info} {footer} id="{id}" style="{style}" {classname}>{title_tag}{cont_tag}</div>"""\
+		result = u"""<div {debug_info} {footer} data-display='{display_style}' id="{id}" style="{style}" {classname}>{title_tag}{cont_tag}</div>"""\
 				.format(debug_info = debug_info, footer =  footer, id = id, style = style, classname = classname,
-							title_tag = title_tag, cont_tag = cont_tag)
+							title_tag = title_tag, cont_tag = cont_tag, display_style = display_style)
 
 		return VDOM_object.render(self, contents=result)
 
@@ -2237,9 +2243,7 @@ $j(this.domCont).css('opacity', nn);
           <Parameters>
             <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(717)" ScriptName="fade" Help="#Lang(817)" RegularExpressionValidation=".*"/>
           </Parameters>
-          <SourceCode><![CDATA[
-vdom_ui_show(this.domCont, fade);
-                    ]]></SourceCode>
+          <SourceCode><![CDATA[vdom_ui_show(this.domCont, fade, undefined, undefined, this.domCont.getAttribute("data-display") || "")]]></SourceCode>
         </Action>
         <Action Help="#Lang(516)" InterfaceName="#Lang(616)" MethodName="startResizeX">
           <Parameters/>
