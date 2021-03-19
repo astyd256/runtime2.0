@@ -3608,6 +3608,16 @@ class VDOM_xmldialog(VDOM_object):
         result = """
 <div style='display:none' %(debug_info)s><div id='%(id)s'>%(data)s</div></div>
 <script type='text/javascript'>$q(function(){
+	$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+		_title: function(title) {
+			if (!this.options.title) {
+				title.html("&#160;");
+			} else {
+				title.html(this.options.title);
+			}
+		}
+	}));
+
     dialog = $q("#%(id)s")
     var dialogScripts = $q("#%(id)s").find("script");
     dialogScripts.remove();
