@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.99.6200</Version>
+    <Version>1.99.6201</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>form, password, container</Containers>
@@ -1083,8 +1083,7 @@ jQuery(function(){ $j('input[placeholder], textarea[placeholder]').placeholder()
           <Parameters>
             <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(705)" ScriptName="value" Help="#Lang(805)" RegularExpressionValidation=".*"/>
           </Parameters>
-          <SourceCode><![CDATA[vdom_evt_setvalue(this, value);
-/*vdom_evt_setvalue(this, $q('<div/>').html(value).html());*/]]></SourceCode>
+          <SourceCode><![CDATA[vdom_evt_setvalue(this, value);]]></SourceCode>
         </Action>
         <Action Help="#Lang(507)" InterfaceName="#Lang(607)" MethodName="moveTo">
           <Parameters>
