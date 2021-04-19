@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.4</Version>
+    <Version>0.4.1</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -802,9 +802,7 @@
 
 
 class VDOM_tabulator(VDOM_object):
-
     def render(self, contents=""):
-
         idn = (self.id).replace('-', '_')
         id = u'o_' + idn
         id_tabulator = u't_' + idn
@@ -824,7 +822,6 @@ class VDOM_tabulator(VDOM_object):
         hidden_columns = [item.encode('UTF8') for item in self.hiddenfields.split()]
 
         hidden_fields_styles = ""
-
 
         if self.fit_to_container == "1":
             params.append(u"fitToContainer:true,")
@@ -853,7 +850,7 @@ class VDOM_tabulator(VDOM_object):
         if self.search_field == 'true':
           search_field = """
           <div class="tabulator-search-wrapper">
-            <input class="tabulator-search" type="search" onchange="Obj{id}.filter(this.value)">
+            <input class="tabulator-search" type="search" oninput="clearTimeout(window.t{id}.filter_timeoutID); window.t{id}.filter_timeoutID = setTimeout(() => {{Obj{id}.filter(this.value)}}, 500)">
           </div>
           """.format(id=id[1:])
 
