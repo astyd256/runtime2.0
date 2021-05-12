@@ -1255,6 +1255,7 @@
 
               gantt_%(id)s.config.start_on_monday = true;
 
+              gantt_%(id)s.config.show_tasks_outside_timescale = true;
 
               gantt_%(id)s.config.duration_unit = "%(duration_unit)s";
               gantt_%(id)s.config.duration_step = %(duration_step)s;
