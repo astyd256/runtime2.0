@@ -44,7 +44,7 @@ class VDOM_acl_manager:
 			return True
 		if hasattr(request, "request_type") and request.request_type in ["vdom", "action"]:
 			app = request.application()
-			if app and (app.id == object_id or app.search_object(object_id)):
+			if app and (app.id == object_id or app.objects.get(obj_id)):
 				return True
 			
 	def __deny_protected(self,appid, access_type):
@@ -147,12 +147,12 @@ class VDOM_acl_manager:
 			return self.check_access("vdombox", username, access_type)
 		app = None
 		try:
-			app = managers.xml_manager.get_application(app_id)
+			app = managers.memory.applications.get(app_id)
 		except:
 			return False
 		id_to_check = [app_id, "vdombox"]
 		if app_id != obj_id:
-			obj = app.search_object(obj_id)
+			obj = app.objects.get(obj_id)
 			if not obj: return False
 			i = 0
 			while obj:
