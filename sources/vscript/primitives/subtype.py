@@ -5,10 +5,8 @@ from .primitive import primitive
 
 
 class subtype(primitive):
-
 	def __call__(self, *arguments, **keywords):
 		raise errors.type_mismatch
-
 
 	def _get_exception(self):
 		raise errors.type_mismatch
@@ -21,7 +19,6 @@ class subtype(primitive):
 	exception=property(_get_exception)
 	value=property(_get_value)
 
-	
 	def _get_code(self):
 		raise errors.python_using_abstract
 
@@ -30,7 +27,6 @@ class subtype(primitive):
 
 	code=property(_get_code)
 	name=property(_get_name)
-
 
 	add_table={}
 	sub_table={}
@@ -51,13 +47,11 @@ class subtype(primitive):
 	or_table={}
 	xor_table={}
 
-
 	def redim(self, preserve, *subscripts):
 		raise errors.type_mismatch
 
 	def erase(self, *arguments):
 		raise errors.type_mismatch
-
 
 	def _get_as_simple(self):
 		raise errors.type_mismatch
@@ -106,6 +100,7 @@ class subtype(primitive):
 	as_boolean=property(_get_as_boolean)
 	as_date=property(_get_as_date)
 	as_dictionary=property(_get_as_dictionary)
+	as_ordereddictionary=property(_get_as_dictionary)
 	as_double=property(_get_as_double)
 	as_generic=property(_get_as_generic)
 	as_integer=property(_get_as_integer)
@@ -115,7 +110,6 @@ class subtype(primitive):
 
 	def as_specific(self, specific):
 		raise errors.type_mismatch
-
 
 	is_empty=property(lambda self: False)
 	is_null=property(lambda self: False)
@@ -142,7 +136,9 @@ class subtype(primitive):
 
 	def is_dictionary(self, function=None):
 		return False
-	
+
+	def is_ordereddictionary(self, function=None):
+		return False
 
 	def __iter__(self):
 		raise errors.type_mismatch
@@ -152,7 +148,6 @@ class subtype(primitive):
 
 	def __contains__(self, value):
 		raise errors.type_mismatch
-
 
 	def __add__(self, another):
 		def unknown(one, another): raise errors.type_mismatch
@@ -201,7 +196,6 @@ class subtype(primitive):
 		except OverflowError: raise errors.overflow, None, sys.exc_info()[2]
 		except ZeroDivisionError: raise errors.invalid_procedure_call, None, sys.exc_info()[2]
 
-
 	def __eq__(self, another):
 		def unknown(one, another): raise errors.type_mismatch
 		simple=another.as_simple
@@ -248,7 +242,6 @@ class subtype(primitive):
 		simple=another.as_simple
 		return self.xor_table.get(type(simple), unknown)(self, simple)
 
-
 	def __invert__(self):
 		raise errors.type_mismatch
 		
@@ -260,7 +253,6 @@ class subtype(primitive):
 
 	def __abs__(self):
 		raise errors.type_mismatch
-
 
 	def __int__(self):
 		raise errors.type_mismatch

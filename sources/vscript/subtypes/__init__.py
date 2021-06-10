@@ -11,5 +11,6 @@ from .binary import binary
 from .date import date
 from .array import array
 from .dictionary import dictionary
+from .ordereddictionary import ordereddictionary
 from .generic import generic
 from .nothing import nothing, v_nothing

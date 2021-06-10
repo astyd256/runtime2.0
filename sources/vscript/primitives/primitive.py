@@ -86,6 +86,7 @@ class primitive(object):
 	as_boolean=property(_get_as_boolean)
 	as_date=property(_get_as_date)
 	as_dictionary=property(_get_as_dictionary)
+	as_ordereddictionary=property(_get_as_dictionary)
 	as_double=property(_get_as_double)
 	as_generic=property(_get_as_generic)
 	as_integer=property(_get_as_integer)

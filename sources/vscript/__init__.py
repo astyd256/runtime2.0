@@ -2,7 +2,7 @@
 from .subtypes import mismatch, empty, null, integer, string, double, \
 	boolean, error, binary, date, array, dictionary, generic, nothing, \
 	nan, infinity, true, false, v_mismatch, v_empty, v_null, v_nothing, \
-	v_true_value, v_false_value
+	v_true_value, v_false_value, ordereddictionary
 from .variables import variant, constant, permanent, shadow
 from .essentials import check, randomize, echo, concat, exitloop, exitdo, exitfor
 from .conversions import as_is, as_value, as_specific, as_array, as_binary, \

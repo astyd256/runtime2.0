@@ -29,6 +29,7 @@ class variable(primitive):
 	as_boolean=property(lambda self: self.subtype.as_boolean)
 	as_date=property(lambda self: self.subtype.as_date)
 	as_dictionary=property(lambda self: self.subtype.as_dictionary)
+	as_ordereddictionary=property(lambda self: self.subtype.as_ordereddictionary)
 	as_double=property(lambda self: self.subtype.as_double)
 	as_generic=property(lambda self: self.subtype.as_generic)
 	as_integer=property(lambda self: self.subtype.as_integer)
