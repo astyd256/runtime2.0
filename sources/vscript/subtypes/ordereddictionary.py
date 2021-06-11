@@ -21,7 +21,7 @@ class ordereddictionary(subtype):
 		else:
 			return self._items.get(arguments[0].subtype, v_empty)
 
-	copy=property(lambda self: OrderedDict({k.copy: v.copy for k, v in self._items.iteritems()}))
+	copy=property(lambda self: OrderedDict([(k.copy, v.copy) for k, v in self._items.iteritems()]))
 
 	code=property(lambda self: 9001)
 
