@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type>
   <Information>
-    <Name>Tabulator</Name>
+    <Name>tabulator</Name>
     <DisplayName>#Lang(001)</DisplayName>
     <Description>#Lang(002)</Description>
     <ClassName>VDOM_tabulator</ClassName>
