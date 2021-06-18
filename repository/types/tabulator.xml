@@ -171,30 +171,18 @@
     </Attribute>
     <Attribute>
       <Name>datatreestartexpanded</Name>
-      <DisplayName>#Lang(925)</DisplayName>
-      <DefaultValue>1</DefaultValue>
-      <Visible>1</Visible>
-      <Help>#Lang(508)</Help>
-      <InterfaceType>0</InterfaceType>
-      <CodeInterface>DropDown((#Lang(407)|1)|(#Lang(408)|0))</CodeInterface>
-      <Colorgroup>2</Colorgroup>
-      <ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
-      <RegularExpressionValidation>.*</RegularExpressionValidation>
-    </Attribute>
-    <Attribute>
-      <Name>key</Name>
       <DisplayName>#Lang(114)</DisplayName>
-      <DefaultValue/>
+      <DefaultValue>1</DefaultValue>
       <Visible>1</Visible>
       <Help>#Lang(214)</Help>
       <InterfaceType>0</InterfaceType>
-      <CodeInterface>TextField(1000)</CodeInterface>
+      <CodeInterface>DropDown((#Lang(407)|1)|(#Lang(408)|0))</CodeInterface>
       <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(314)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>hiddenfields</Name>
+      <Name>key</Name>
       <DisplayName>#Lang(115)</DisplayName>
       <DefaultValue/>
       <Visible>1</Visible>
@@ -206,55 +194,43 @@
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>rows_height</Name>
+      <Name>hiddenfields</Name>
       <DisplayName>#Lang(116)</DisplayName>
       <DefaultValue/>
       <Visible>1</Visible>
       <Help>#Lang(216)</Help>
       <InterfaceType>0</InterfaceType>
-      <CodeInterface>Number(0,1000)</CodeInterface>
+      <CodeInterface>TextField(1000)</CodeInterface>
       <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(316)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>selection</Name>
+      <Name>rows_height</Name>
       <DisplayName>#Lang(117)</DisplayName>
-      <DefaultValue>multi</DefaultValue>
+      <DefaultValue/>
       <Visible>1</Visible>
       <Help>#Lang(217)</Help>
       <InterfaceType>0</InterfaceType>
-      <CodeInterface>DropDown((#Lang(931)|multi)|(#Lang(930)|single))</CodeInterface>
+      <CodeInterface>Number(0,1000)</CodeInterface>
       <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(317)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>fit_to_container</Name>
+      <Name>selection</Name>
       <DisplayName>#Lang(118)</DisplayName>
-      <DefaultValue>1</DefaultValue>
+      <DefaultValue>multi</DefaultValue>
       <Visible>1</Visible>
       <Help>#Lang(218)</Help>
       <InterfaceType>0</InterfaceType>
-      <CodeInterface>DropDown((#Lang(409)|1)|(#Lang(411)|0))</CodeInterface>
+      <CodeInterface>DropDown((#Lang(409)|multi)|(#Lang(411)|single))</CodeInterface>
       <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(318)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>search_field</Name>
-      <DisplayName>#Lang(929)</DisplayName>
-      <DefaultValue>false</DefaultValue>
-      <Visible>1</Visible>
-      <Help>#Lang(224)</Help>
-      <InterfaceType>0</InterfaceType>
-      <CodeInterface>DropDown((#Lang(409)|true)|(#Lang(411)|false))</CodeInterface>
-      <Colorgroup>2</Colorgroup>
-      <ErrorValidationMessage>#Lang(224)</ErrorValidationMessage>
-      <RegularExpressionValidation>.*</RegularExpressionValidation>
-    </Attribute>
-    <Attribute>
-      <Name>columns_auto_width</Name>
+      <Name>fit_to_container</Name>
       <DisplayName>#Lang(119)</DisplayName>
       <DefaultValue>1</DefaultValue>
       <Visible>1</Visible>
@@ -266,51 +242,75 @@
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>style</Name>
+      <Name>search_field</Name>
       <DisplayName>#Lang(121)</DisplayName>
-      <DefaultValue/>
+      <DefaultValue>false</DefaultValue>
       <Visible>1</Visible>
       <Help>#Lang(221)</Help>
       <InterfaceType>0</InterfaceType>
-      <CodeInterface>MultiLine(100000)</CodeInterface>
-      <Colorgroup>4</Colorgroup>
+      <CodeInterface>DropDown((#Lang(414)|true)|(#Lang(415)|false))</CodeInterface>
+      <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(321)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>skin</Name>
+      <Name>columns_auto_width</Name>
       <DisplayName>#Lang(122)</DisplayName>
       <DefaultValue>1</DefaultValue>
       <Visible>1</Visible>
       <Help>#Lang(222)</Help>
       <InterfaceType>0</InterfaceType>
-      <CodeInterface>DropDown((#Lang(414)|0)|(#Lang(415)|1)|(#Lang(416)|2)|(#Lang(417)|3))</CodeInterface>
-      <Colorgroup>4</Colorgroup>
+      <CodeInterface>DropDown((#Lang(416)|1)|(#Lang(417)|0))</CodeInterface>
+      <Colorgroup>2</Colorgroup>
       <ErrorValidationMessage>#Lang(322)</ErrorValidationMessage>
-      <RegularExpressionValidation>^.*$</RegularExpressionValidation>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>cssclass</Name>
+      <Name>style</Name>
       <DisplayName>#Lang(123)</DisplayName>
       <DefaultValue/>
       <Visible>1</Visible>
       <Help>#Lang(223)</Help>
       <InterfaceType>0</InterfaceType>
-      <CodeInterface>TextField(100)</CodeInterface>
+      <CodeInterface>MultiLine(100000)</CodeInterface>
       <Colorgroup>4</Colorgroup>
       <ErrorValidationMessage>#Lang(323)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
     <Attribute>
-      <Name>custom</Name>
+      <Name>skin</Name>
       <DisplayName>#Lang(124)</DisplayName>
-      <DefaultValue/>
+      <DefaultValue>1</DefaultValue>
       <Visible>1</Visible>
       <Help>#Lang(224)</Help>
       <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(418)|0)|(#Lang(419)|1)|(#Lang(421)|2)|(#Lang(422)|3))</CodeInterface>
+      <Colorgroup>4</Colorgroup>
+      <ErrorValidationMessage>#Lang(324)</ErrorValidationMessage>
+      <RegularExpressionValidation>^.*$</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>cssclass</Name>
+      <DisplayName>#Lang(125)</DisplayName>
+      <DefaultValue/>
+      <Visible>1</Visible>
+      <Help>#Lang(225)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>TextField(100)</CodeInterface>
+      <Colorgroup>4</Colorgroup>
+      <ErrorValidationMessage>#Lang(325)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
+      <Name>custom</Name>
+      <DisplayName>#Lang(126)</DisplayName>
+      <DefaultValue/>
+      <Visible>1</Visible>
+      <Help>#Lang(226)</Help>
+      <InterfaceType>0</InterfaceType>
       <CodeInterface>MultiLine(10000)</CodeInterface>
       <Colorgroup>3</Colorgroup>
-      <ErrorValidationMessage>#Lang(324)</ErrorValidationMessage>
+      <ErrorValidationMessage>#Lang(326)</ErrorValidationMessage>
       <RegularExpressionValidation>.*</RegularExpressionValidation>
     </Attribute>
   </Attributes>
@@ -331,16 +331,18 @@
       <Sentence ID="111">Pagging</Sentence>
       <Sentence ID="112">Page length</Sentence>
       <Sentence ID="113">Data</Sentence>
-      <Sentence ID="114">key</Sentence>
-      <Sentence ID="115">Hidden fields</Sentence>
-      <Sentence ID="116">Rows height</Sentence>
-      <Sentence ID="117">Selection</Sentence>
-      <Sentence ID="118">Fit to container</Sentence>
-      <Sentence ID="119">Columns auto width</Sentence>
-      <Sentence ID="121">Style</Sentence>
-      <Sentence ID="122">Skin</Sentence>
-      <Sentence ID="123">CSS Class</Sentence>
-      <Sentence ID="124">Custom</Sentence>
+      <Sentence ID="114">Data tree start expanded</Sentence>
+      <Sentence ID="115">key</Sentence>
+      <Sentence ID="116">Hidden fields</Sentence>
+      <Sentence ID="117">Rows height</Sentence>
+      <Sentence ID="118">Selection</Sentence>
+      <Sentence ID="119">Fit to container</Sentence>
+      <Sentence ID="121">Search field</Sentence>
+      <Sentence ID="122">Columns auto width</Sentence>
+      <Sentence ID="123">Style</Sentence>
+      <Sentence ID="124">Skin</Sentence>
+      <Sentence ID="125">CSS Class</Sentence>
+      <Sentence ID="126">Custom</Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Order of rendering the object on the page</Sentence>
       <Sentence ID="203">Visibility of the object</Sentence>
@@ -353,16 +355,18 @@
       <Sentence ID="211">Set columns to auto width</Sentence>
       <Sentence ID="212">Set columns to auto width</Sentence>
       <Sentence ID="213">Table data described in the array or dictionary</Sentence>
-      <Sentence ID="214">key</Sentence>
-      <Sentence ID="215">Hidden fields</Sentence>
-      <Sentence ID="216">Set rows height</Sentence>
-      <Sentence ID="217">Activate selection in tabulator</Sentence>
-      <Sentence ID="218">Fit tabulator to own container</Sentence>
-      <Sentence ID="219">Set columns to auto width</Sentence>
-      <Sentence ID="221">CSS style of the object</Sentence>
-      <Sentence ID="222">Skin of the object</Sentence>
-      <Sentence ID="223">Names of CSS classes</Sentence>
-      <Sentence ID="224">Write custom parameters for tabulator</Sentence>
+      <Sentence ID="214"></Sentence>
+      <Sentence ID="215">key</Sentence>
+      <Sentence ID="216">Hidden fields</Sentence>
+      <Sentence ID="217">Set rows height</Sentence>
+      <Sentence ID="218">Activate selection in tabulator</Sentence>
+      <Sentence ID="219">Fit tabulator to own container</Sentence>
+      <Sentence ID="221">Write custom parameters for tabulator</Sentence>
+      <Sentence ID="222">Set columns to auto width</Sentence>
+      <Sentence ID="223">CSS style of the object</Sentence>
+      <Sentence ID="224">Skin of the object</Sentence>
+      <Sentence ID="225">Names of CSS classes</Sentence>
+      <Sentence ID="226">Write custom parameters for tabulator</Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="303"></Sentence>
@@ -375,16 +379,18 @@
       <Sentence ID="311">Error in columns_auto_width</Sentence>
       <Sentence ID="312">Error in columns_auto_width</Sentence>
       <Sentence ID="313">Incorrect value, must be array or dictionary</Sentence>
-      <Sentence ID="314">key</Sentence>
-      <Sentence ID="315">Hidden fields</Sentence>
-      <Sentence ID="316">Error in rows_height</Sentence>
-      <Sentence ID="317">Error in selection</Sentence>
-      <Sentence ID="318">Error in fit_to_container</Sentence>
-      <Sentence ID="319">Error in columns_auto_width</Sentence>
-      <Sentence ID="321"></Sentence>
-      <Sentence ID="322"></Sentence>
+      <Sentence ID="314">Error in selection</Sentence>
+      <Sentence ID="315">key</Sentence>
+      <Sentence ID="316">Hidden fields</Sentence>
+      <Sentence ID="317">Error in rows_height</Sentence>
+      <Sentence ID="318">Error in selection</Sentence>
+      <Sentence ID="319">Error in fit_to_container</Sentence>
+      <Sentence ID="321">Write custom parameters for tabulator</Sentence>
+      <Sentence ID="322">Error in columns_auto_width</Sentence>
       <Sentence ID="323"></Sentence>
-      <Sentence ID="324">Error in custom</Sentence>
+      <Sentence ID="324"></Sentence>
+      <Sentence ID="325"></Sentence>
+      <Sentence ID="326">Error in custom</Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">No</Sentence>
@@ -393,24 +399,28 @@
       <Sentence ID="406">No</Sentence>
       <Sentence ID="407">Yes</Sentence>
       <Sentence ID="408">No</Sentence>
-      <Sentence ID="409">Yes</Sentence>
-      <Sentence ID="411">No</Sentence>
+      <Sentence ID="409">Multi</Sentence>
+      <Sentence ID="411">Single</Sentence>
       <Sentence ID="412">Yes</Sentence>
       <Sentence ID="413">No</Sentence>
-      <Sentence ID="414">User defined</Sentence>
-      <Sentence ID="415">Default</Sentence>
-      <Sentence ID="416">EOF</Sentence>
-      <Sentence ID="417">ProSuite</Sentence>
+      <Sentence ID="414">Yes</Sentence>
+      <Sentence ID="415">No</Sentence>
+      <Sentence ID="416">Yes</Sentence>
+      <Sentence ID="417">No</Sentence>
+      <Sentence ID="418">User defined</Sentence>
+      <Sentence ID="419">Default</Sentence>
+      <Sentence ID="421">EOF</Sentence>
+      <Sentence ID="422">ProSuite</Sentence>
       <Sentence ID="501">Add css class to cell</Sentence>
       <Sentence ID="502">Add css class to row</Sentence>
-      <Sentence ID="503">For custom function</Sentence>
-      <Sentence ID="504">Hide the object</Sentence>
-      <Sentence ID="505">Set new data for tabulator</Sentence>
-      <Sentence ID="506">Show the object</Sentence>
-      <Sentence ID="507"></Sentence>
-      <Sentence ID="508"></Sentence>
-      <Sentence ID="509"></Sentence>
-      <Sentence ID="511"></Sentence>
+      <Sentence ID="503">Clear filter</Sentence>
+      <Sentence ID="504">For custom function</Sentence>
+      <Sentence ID="505">Export to xlsx</Sentence>
+      <Sentence ID="506">Export to xlsx</Sentence>
+      <Sentence ID="507">Hide the object</Sentence>
+      <Sentence ID="508">Set new data for tabulator</Sentence>
+      <Sentence ID="509">Show the object</Sentence>
+      <Sentence ID="511">Unselect all rows</Sentence>
       <Sentence ID="512"></Sentence>
       <Sentence ID="513"></Sentence>
       <Sentence ID="514"></Sentence>
@@ -419,30 +429,42 @@
       <Sentence ID="517"></Sentence>
       <Sentence ID="518"></Sentence>
       <Sentence ID="519"></Sentence>
+      <Sentence ID="521"></Sentence>
+      <Sentence ID="522"></Sentence>
+      <Sentence ID="523"></Sentence>
+      <Sentence ID="524"></Sentence>
       <Sentence ID="601">setCellCss</Sentence>
       <Sentence ID="602">addRowClass</Sentence>
-      <Sentence ID="603">custom</Sentence>
-      <Sentence ID="604">hide</Sentence>
-      <Sentence ID="605">setData</Sentence>
-      <Sentence ID="606">show</Sentence>
+      <Sentence ID="603">Clear filter</Sentence>
+      <Sentence ID="604">custom</Sentence>
+      <Sentence ID="605">Export to xlsx</Sentence>
+      <Sentence ID="606">Export to xlsx</Sentence>
+      <Sentence ID="607">hide</Sentence>
+      <Sentence ID="608">setData</Sentence>
+      <Sentence ID="609">show</Sentence>
+      <Sentence ID="611">unselectAll</Sentence>
       <Sentence ID="701">columnId</Sentence>
       <Sentence ID="702">cssClass</Sentence>
       <Sentence ID="703">rowId</Sentence>
       <Sentence ID="704">cssClass</Sentence>
       <Sentence ID="705">rowId</Sentence>
       <Sentence ID="706">Incorrect value, must be string</Sentence>
-      <Sentence ID="707">fade</Sentence>
-      <Sentence ID="708">data</Sentence>
+      <Sentence ID="707">filename</Sentence>
+      <Sentence ID="708">Export to xlsx</Sentence>
       <Sentence ID="709">fade</Sentence>
+      <Sentence ID="711">data</Sentence>
+      <Sentence ID="712">fade</Sentence>
       <Sentence ID="801"></Sentence>
       <Sentence ID="802"></Sentence>
       <Sentence ID="803">scriptName0</Sentence>
       <Sentence ID="804"></Sentence>
       <Sentence ID="805"></Sentence>
       <Sentence ID="806">Incorrect value, must be string</Sentence>
-      <Sentence ID="807">Fade effect, time is indicated in milliseconds</Sentence>
-      <Sentence ID="808">New data for tabulator</Sentence>
+      <Sentence ID="807">filename</Sentence>
+      <Sentence ID="808">Export to xlsx</Sentence>
       <Sentence ID="809">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="811">New data for tabulator</Sentence>
+      <Sentence ID="812">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="901">cellData</Sentence>
       <Sentence ID="902">cellData</Sentence>
       <Sentence ID="903">headerData</Sentence>
@@ -465,13 +487,6 @@
       <Sentence ID="922">cellData</Sentence>
       <Sentence ID="923">cellData</Sentence>
       <Sentence ID="924">cellData</Sentence>
-      <Sentence ID="925">Data tree start expanded</Sentence>
-      <Sentence ID="926">filename</Sentence>
-      <Sentence ID="927">Export to xlsx</Sentence>
-      <Sentence ID="928">Clear filter</Sentence>
-      <Sentence ID="929">Search field</Sentence>
-      <Sentence ID="930">Single</Sentence>
-      <Sentence ID="931">Multi</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="001">tabulator</Sentence>
@@ -489,16 +504,18 @@
       <Sentence ID="111">Pagging</Sentence>
       <Sentence ID="112">Page length</Sentence>
       <Sentence ID="113">Data</Sentence>
-      <Sentence ID="114">key</Sentence>
-      <Sentence ID="115">Hidden fields</Sentence>
-      <Sentence ID="116">Rows height</Sentence>
-      <Sentence ID="117">Selection</Sentence>
-      <Sentence ID="118">Fit to container</Sentence>
-      <Sentence ID="119">Columns auto width</Sentence>
-      <Sentence ID="121">Style</Sentence>
-      <Sentence ID="122">Skin</Sentence>
-      <Sentence ID="123">CSS Class</Sentence>
-      <Sentence ID="124"></Sentence>
+      <Sentence ID="114">Data tree start expanded</Sentence>
+      <Sentence ID="115">key</Sentence>
+      <Sentence ID="116">Hidden fields</Sentence>
+      <Sentence ID="117">Rows height</Sentence>
+      <Sentence ID="118">Selection</Sentence>
+      <Sentence ID="119">Fit to container</Sentence>
+      <Sentence ID="121">Search field</Sentence>
+      <Sentence ID="122">Columns auto width</Sentence>
+      <Sentence ID="123">Style</Sentence>
+      <Sentence ID="124">Skin</Sentence>
+      <Sentence ID="125">CSS Class</Sentence>
+      <Sentence ID="126"></Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Order of rendering the object on the page</Sentence>
       <Sentence ID="203">Visibility of the object</Sentence>
@@ -511,16 +528,18 @@
       <Sentence ID="211">Set columns to auto width</Sentence>
       <Sentence ID="212">Set columns to auto width</Sentence>
       <Sentence ID="213">Table data described in the array or dictionary</Sentence>
-      <Sentence ID="214">key</Sentence>
-      <Sentence ID="215">Hidden fields</Sentence>
-      <Sentence ID="216">Set rows height</Sentence>
-      <Sentence ID="217">Activate selection in tabulator</Sentence>
-      <Sentence ID="218">Fit tabulator to own container</Sentence>
-      <Sentence ID="219">Set columns to auto width</Sentence>
-      <Sentence ID="221">CSS style of the object</Sentence>
-      <Sentence ID="222">Skin of the object</Sentence>
-      <Sentence ID="223">Names of CSS classes</Sentence>
-      <Sentence ID="224"></Sentence>
+      <Sentence ID="214"></Sentence>
+      <Sentence ID="215">key</Sentence>
+      <Sentence ID="216">Hidden fields</Sentence>
+      <Sentence ID="217">Set rows height</Sentence>
+      <Sentence ID="218">Activate selection in tabulator</Sentence>
+      <Sentence ID="219">Fit tabulator to own container</Sentence>
+      <Sentence ID="221"></Sentence>
+      <Sentence ID="222">Set columns to auto width</Sentence>
+      <Sentence ID="223">CSS style of the object</Sentence>
+      <Sentence ID="224">Skin of the object</Sentence>
+      <Sentence ID="225">Names of CSS classes</Sentence>
+      <Sentence ID="226"></Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Incorrect value, must be either 0 or 1</Sentence>
       <Sentence ID="303"></Sentence>
@@ -533,16 +552,18 @@
       <Sentence ID="311">Error in columns_auto_width</Sentence>
       <Sentence ID="312">Error in columns_auto_width</Sentence>
       <Sentence ID="313">Incorrect value, must be array or dictionary</Sentence>
-      <Sentence ID="314">key</Sentence>
-      <Sentence ID="315">Hidden fields</Sentence>
-      <Sentence ID="316">Error in rows_height</Sentence>
-      <Sentence ID="317">Error in selection</Sentence>
-      <Sentence ID="318">Error in fit_to_container</Sentence>
-      <Sentence ID="319">Error in columns_auto_width</Sentence>
+      <Sentence ID="314">Error in selection</Sentence>
+      <Sentence ID="315">key</Sentence>
+      <Sentence ID="316">Hidden fields</Sentence>
+      <Sentence ID="317">Error in rows_height</Sentence>
+      <Sentence ID="318">Error in selection</Sentence>
+      <Sentence ID="319">Error in fit_to_container</Sentence>
       <Sentence ID="321"></Sentence>
-      <Sentence ID="322"></Sentence>
+      <Sentence ID="322">Error in columns_auto_width</Sentence>
       <Sentence ID="323"></Sentence>
       <Sentence ID="324"></Sentence>
+      <Sentence ID="325"></Sentence>
+      <Sentence ID="326"></Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">No</Sentence>
@@ -551,24 +572,28 @@
       <Sentence ID="406">No</Sentence>
       <Sentence ID="407">Yes</Sentence>
       <Sentence ID="408">No</Sentence>
-      <Sentence ID="409">Yes</Sentence>
-      <Sentence ID="411">No</Sentence>
+      <Sentence ID="409">Multi</Sentence>
+      <Sentence ID="411">Single</Sentence>
       <Sentence ID="412">Yes</Sentence>
       <Sentence ID="413">No</Sentence>
-      <Sentence ID="414">User defined</Sentence>
-      <Sentence ID="415">Default</Sentence>
-      <Sentence ID="416">EOF</Sentence>
-      <Sentence ID="417">ProSuite</Sentence>
+      <Sentence ID="414">Yes</Sentence>
+      <Sentence ID="415">No</Sentence>
+      <Sentence ID="416">Yes</Sentence>
+      <Sentence ID="417">No</Sentence>
+      <Sentence ID="418">User defined</Sentence>
+      <Sentence ID="419">Default</Sentence>
+      <Sentence ID="421">EOF</Sentence>
+      <Sentence ID="422">ProSuite</Sentence>
       <Sentence ID="501">Add css class to cell</Sentence>
       <Sentence ID="502">Add css class to row</Sentence>
-      <Sentence ID="503">For custom function</Sentence>
-      <Sentence ID="504">Hide the object</Sentence>
-      <Sentence ID="505">Set new data for tabulator</Sentence>
-      <Sentence ID="506">Show the object</Sentence>
-      <Sentence ID="507"></Sentence>
-      <Sentence ID="508"></Sentence>
-      <Sentence ID="509"></Sentence>
-      <Sentence ID="511"></Sentence>
+      <Sentence ID="503">Clear filter</Sentence>
+      <Sentence ID="504">For custom function</Sentence>
+      <Sentence ID="505">Export to xlsx</Sentence>
+      <Sentence ID="506">Export to xlsx</Sentence>
+      <Sentence ID="507">Hide the object</Sentence>
+      <Sentence ID="508">Set new data for tabulator</Sentence>
+      <Sentence ID="509">Show the object</Sentence>
+      <Sentence ID="511">Désélectionner toutes les lignes</Sentence>
       <Sentence ID="512"></Sentence>
       <Sentence ID="513"></Sentence>
       <Sentence ID="514"></Sentence>
@@ -577,30 +602,42 @@
       <Sentence ID="517"></Sentence>
       <Sentence ID="518"></Sentence>
       <Sentence ID="519"></Sentence>
+      <Sentence ID="521"></Sentence>
+      <Sentence ID="522"></Sentence>
+      <Sentence ID="523"></Sentence>
+      <Sentence ID="524"></Sentence>
       <Sentence ID="601">setCellCss</Sentence>
       <Sentence ID="602">addRowClass</Sentence>
-      <Sentence ID="603">custom</Sentence>
-      <Sentence ID="604">hide</Sentence>
-      <Sentence ID="605">setData</Sentence>
-      <Sentence ID="606">show</Sentence>
+      <Sentence ID="603">Clear filter</Sentence>
+      <Sentence ID="604">custom</Sentence>
+      <Sentence ID="605">Export to xlsx</Sentence>
+      <Sentence ID="606">Export to xlsx</Sentence>
+      <Sentence ID="607">hide</Sentence>
+      <Sentence ID="608">setData</Sentence>
+      <Sentence ID="609">show</Sentence>
+      <Sentence ID="611">unselectAll</Sentence>
       <Sentence ID="701">columnId</Sentence>
       <Sentence ID="702">cssClass</Sentence>
       <Sentence ID="703">rowId</Sentence>
       <Sentence ID="704">cssClass</Sentence>
       <Sentence ID="705">rowId</Sentence>
       <Sentence ID="706"></Sentence>
-      <Sentence ID="707">fade</Sentence>
-      <Sentence ID="708">data</Sentence>
-      <Sentence ID="709"></Sentence>
+      <Sentence ID="707">filename</Sentence>
+      <Sentence ID="708">Export to xlsx</Sentence>
+      <Sentence ID="709">fade</Sentence>
+      <Sentence ID="711">data</Sentence>
+      <Sentence ID="712"></Sentence>
       <Sentence ID="801"></Sentence>
       <Sentence ID="802"></Sentence>
       <Sentence ID="803"></Sentence>
       <Sentence ID="804"></Sentence>
       <Sentence ID="805"></Sentence>
       <Sentence ID="806"></Sentence>
-      <Sentence ID="807">Fade effect, time is indicated in milliseconds</Sentence>
-      <Sentence ID="808">New data for tabulator</Sentence>
+      <Sentence ID="807">filename</Sentence>
+      <Sentence ID="808">Export to xlsx</Sentence>
       <Sentence ID="809">Fade effect, time is indicated in milliseconds</Sentence>
+      <Sentence ID="811">New data for tabulator</Sentence>
+      <Sentence ID="812">Fade effect, time is indicated in milliseconds</Sentence>
       <Sentence ID="901">cellData</Sentence>
       <Sentence ID="902">cellData</Sentence>
       <Sentence ID="903">headerData</Sentence>
@@ -623,13 +660,6 @@
       <Sentence ID="922">cellData</Sentence>
       <Sentence ID="923">cellData</Sentence>
       <Sentence ID="924">cellData</Sentence>
-      <Sentence ID="925">Data tree start expanded</Sentence>
-      <Sentence ID="926">filename</Sentence>
-      <Sentence ID="927">Export to xlsx</Sentence>
-      <Sentence ID="928">Clear filter</Sentence>
-      <Sentence ID="929">Search field</Sentence>
-      <Sentence ID="930">Single</Sentence>
-      <Sentence ID="931">Multi</Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="001">tabulator</Sentence>
@@ -647,16 +677,18 @@
       <Sentence ID="111">Pagging</Sentence>
       <Sentence ID="112">Page length</Sentence>
       <Sentence ID="113">Данные</Sentence>
-      <Sentence ID="114">key</Sentence>
-      <Sentence ID="115">Hidden fields</Sentence>
-      <Sentence ID="116">Rows height</Sentence>
-      <Sentence ID="117">Selection</Sentence>
-      <Sentence ID="118">Fit to container</Sentence>
-      <Sentence ID="119">Columns auto width</Sentence>
-      <Sentence ID="121">Стиль</Sentence>
-      <Sentence ID="122">Оформление</Sentence>
-      <Sentence ID="123">Класс CSS</Sentence>
-      <Sentence ID="124"></Sentence>
+      <Sentence ID="114">Data tree start expanded</Sentence>
+      <Sentence ID="115">key</Sentence>
+      <Sentence ID="116">Hidden fields</Sentence>
+      <Sentence ID="117">Rows height</Sentence>
+      <Sentence ID="118">Selection</Sentence>
+      <Sentence ID="119">Fit to container</Sentence>
+      <Sentence ID="121">Search field</Sentence>
+      <Sentence ID="122">Columns auto width</Sentence>
+      <Sentence ID="123">Стиль</Sentence>
+      <Sentence ID="124">Оформление</Sentence>
+      <Sentence ID="125">Класс CSS</Sentence>
+      <Sentence ID="126"></Sentence>
       <Sentence ID="201"></Sentence>
       <Sentence ID="202">Порядок визуализации объекта в ходе загрузки страницы</Sentence>
       <Sentence ID="203">Режим отображения объекта</Sentence>
@@ -669,16 +701,18 @@
       <Sentence ID="211">Set columns to auto width</Sentence>
       <Sentence ID="212">Set columns to auto width</Sentence>
       <Sentence ID="213">Данные таблицы, описанные в виде словаря или массива</Sentence>
-      <Sentence ID="214">key</Sentence>
-      <Sentence ID="215">Hidden fields</Sentence>
-      <Sentence ID="216">Set rows height</Sentence>
-      <Sentence ID="217">Activate selection in tabulator</Sentence>
-      <Sentence ID="218">Fit tabulator to own container</Sentence>
-      <Sentence ID="219">Set columns to auto width</Sentence>
-      <Sentence ID="221">Стиль CSS</Sentence>
-      <Sentence ID="222">Оформление объекта</Sentence>
-      <Sentence ID="223">Имена классов CSS</Sentence>
-      <Sentence ID="224"></Sentence>
+      <Sentence ID="214"></Sentence>
+      <Sentence ID="215">key</Sentence>
+      <Sentence ID="216">Hidden fields</Sentence>
+      <Sentence ID="217">Set rows height</Sentence>
+      <Sentence ID="218">Activate selection in tabulator</Sentence>
+      <Sentence ID="219">Fit tabulator to own container</Sentence>
+      <Sentence ID="221"></Sentence>
+      <Sentence ID="222">Set columns to auto width</Sentence>
+      <Sentence ID="223">Стиль CSS</Sentence>
+      <Sentence ID="224">Оформление объекта</Sentence>
+      <Sentence ID="225">Имена классов CSS</Sentence>
+      <Sentence ID="226"></Sentence>
       <Sentence ID="301"></Sentence>
       <Sentence ID="302">Неправильное значение, должен быть указан 0 или 1</Sentence>
       <Sentence ID="303"></Sentence>
@@ -691,16 +725,18 @@
       <Sentence ID="311">Error in columns_auto_width</Sentence>
       <Sentence ID="312">Error in columns_auto_width</Sentence>
       <Sentence ID="313">Неправильное значение, должен быть массив или словарь</Sentence>
-      <Sentence ID="314">key</Sentence>
-      <Sentence ID="315">Hidden fields</Sentence>
-      <Sentence ID="316">Error in rows_height</Sentence>
-      <Sentence ID="317">Error in selection</Sentence>
-      <Sentence ID="318">Error in fit_to_container</Sentence>
-      <Sentence ID="319">Error in columns_auto_width</Sentence>
+      <Sentence ID="314">Error in selection</Sentence>
+      <Sentence ID="315">key</Sentence>
+      <Sentence ID="316">Hidden fields</Sentence>
+      <Sentence ID="317">Error in rows_height</Sentence>
+      <Sentence ID="318">Error in selection</Sentence>
+      <Sentence ID="319">Error in fit_to_container</Sentence>
       <Sentence ID="321"></Sentence>
-      <Sentence ID="322"></Sentence>
+      <Sentence ID="322">Error in columns_auto_width</Sentence>
       <Sentence ID="323"></Sentence>
       <Sentence ID="324"></Sentence>
+      <Sentence ID="325"></Sentence>
+      <Sentence ID="326"></Sentence>
       <Sentence ID="401"></Sentence>
       <Sentence ID="402"></Sentence>
       <Sentence ID="403">Нет</Sentence>
@@ -709,24 +745,28 @@
       <Sentence ID="406">No</Sentence>
       <Sentence ID="407">Yes</Sentence>
       <Sentence ID="408">No</Sentence>
-      <Sentence ID="409">Yes</Sentence>
-      <Sentence ID="411">No</Sentence>
+      <Sentence ID="409">Multi</Sentence>
+      <Sentence ID="411">Single</Sentence>
       <Sentence ID="412">Yes</Sentence>
       <Sentence ID="413">No</Sentence>
-      <Sentence ID="414">Определено пользователем</Sentence>
-      <Sentence ID="415">По умолчанию</Sentence>
-      <Sentence ID="416">EOF</Sentence>
-      <Sentence ID="417">ProSuite</Sentence>
+      <Sentence ID="414">Yes</Sentence>
+      <Sentence ID="415">No</Sentence>
+      <Sentence ID="416">Yes</Sentence>
+      <Sentence ID="417">No</Sentence>
+      <Sentence ID="418">Определено пользователем</Sentence>
+      <Sentence ID="419">По умолчанию</Sentence>
+      <Sentence ID="421">EOF</Sentence>
+      <Sentence ID="422">ProSuite</Sentence>
       <Sentence ID="501">Add css class to cell</Sentence>
       <Sentence ID="502">Add css class to row</Sentence>
-      <Sentence ID="503">For custom function</Sentence>
-      <Sentence ID="504">Скрыть объект</Sentence>
-      <Sentence ID="505">Set new data for tabulator</Sentence>
-      <Sentence ID="506">Отобразить объект</Sentence>
-      <Sentence ID="507"></Sentence>
-      <Sentence ID="508"></Sentence>
-      <Sentence ID="509"></Sentence>
-      <Sentence ID="511"></Sentence>
+      <Sentence ID="503">Clear filter</Sentence>
+      <Sentence ID="504">For custom function</Sentence>
+      <Sentence ID="505">Export to xlsx</Sentence>
+      <Sentence ID="506">Export to xlsx</Sentence>
+      <Sentence ID="507">Скрыть объект</Sentence>
+      <Sentence ID="508">Set new data for tabulator</Sentence>
+      <Sentence ID="509">Отобразить объект</Sentence>
+      <Sentence ID="511">Отменить выбор всех строк</Sentence>
       <Sentence ID="512"></Sentence>
       <Sentence ID="513"></Sentence>
       <Sentence ID="514"></Sentence>
@@ -735,30 +775,42 @@
       <Sentence ID="517"></Sentence>
       <Sentence ID="518"></Sentence>
       <Sentence ID="519"></Sentence>
+      <Sentence ID="521"></Sentence>
+      <Sentence ID="522"></Sentence>
+      <Sentence ID="523"></Sentence>
+      <Sentence ID="524"></Sentence>
       <Sentence ID="601">setCellCss</Sentence>
       <Sentence ID="602">addRowClass</Sentence>
-      <Sentence ID="603">custom</Sentence>
-      <Sentence ID="604">hide</Sentence>
-      <Sentence ID="605">setData</Sentence>
-      <Sentence ID="606">show</Sentence>
+      <Sentence ID="603">Clear filter</Sentence>
+      <Sentence ID="604">custom</Sentence>
+      <Sentence ID="605">Export to xlsx</Sentence>
+      <Sentence ID="606">Export to xlsx</Sentence>
+      <Sentence ID="607">hide</Sentence>
+      <Sentence ID="608">setData</Sentence>
+      <Sentence ID="609">show</Sentence>
+      <Sentence ID="611">unselectAll</Sentence>
       <Sentence ID="701">columnId</Sentence>
       <Sentence ID="702">cssClass</Sentence>
       <Sentence ID="703">rowId</Sentence>
       <Sentence ID="704">cssClass</Sentence>
       <Sentence ID="705">rowId</Sentence>
       <Sentence ID="706"></Sentence>
-      <Sentence ID="707">Исчезновение</Sentence>
-      <Sentence ID="708">data</Sentence>
-      <Sentence ID="709"></Sentence>
+      <Sentence ID="707">filename</Sentence>
+      <Sentence ID="708">Export to xlsx</Sentence>
+      <Sentence ID="709">Исчезновение</Sentence>
+      <Sentence ID="711">data</Sentence>
+      <Sentence ID="712"></Sentence>
       <Sentence ID="801"></Sentence>
       <Sentence ID="802">scriptName2</Sentence>
       <Sentence ID="803"></Sentence>
       <Sentence ID="804"></Sentence>
       <Sentence ID="805"></Sentence>
       <Sentence ID="806"></Sentence>
-      <Sentence ID="807">Время исчезновения в миллисекундах</Sentence>
-      <Sentence ID="808">New data for tabulator</Sentence>
+      <Sentence ID="807">filename</Sentence>
+      <Sentence ID="808">Export to xlsx</Sentence>
       <Sentence ID="809">Время исчезновения в миллисекундах</Sentence>
+      <Sentence ID="811">New data for tabulator</Sentence>
+      <Sentence ID="812">Время исчезновения в миллисекундах</Sentence>
       <Sentence ID="901">cellData</Sentence>
       <Sentence ID="902">cellData</Sentence>
       <Sentence ID="903">headerData</Sentence>
@@ -781,13 +833,6 @@
       <Sentence ID="922">cellData</Sentence>
       <Sentence ID="923">cellData</Sentence>
       <Sentence ID="924">cellData</Sentence>
-      <Sentence ID="925">Data tree start expanded</Sentence>
-      <Sentence ID="926">filename</Sentence>
-      <Sentence ID="927">Export to xlsx</Sentence>
-      <Sentence ID="928">Clear filter</Sentence>
-      <Sentence ID="929">Search field</Sentence>
-      <Sentence ID="930">Single</Sentence>
-      <Sentence ID="931">Multi</Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -945,88 +990,83 @@ $(document).ready(() => {
         return VDOM_object.wysiwyg(self, contents=result)
 ]]></SourceCode>
   <Libraries>
-    <!-- moment js from htmlcontainer (for sorting by date column) -->
     <Library Target="html"><![CDATA[<script type="text/javascript" src="/f571e9e8-e892-49a4-bea0-ff8e15c2c697.js"></script>]]></Library>
-    <!-- tabulator lib -->
     <Library Target="html"><![CDATA[<script type="text/javascript" src="/201ab0cc-b23c-1ce0-0254-90a8ce68e937.js"></script>]]></Library>
-    <!-- xml exporter lib -->
     <Library Target="html"><![CDATA[<script type="text/javascript" src="/da929190-ff0f-44c1-98ef-ac25dcc0c7c3.js"></script>]]></Library>
     <Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/8c57b832-48a6-26ae-6f92-90a8f5772f6b.css" />]]></Library>
-    <!-- lodash (for filter) -->
     <Library Target="html"><![CDATA[<script type="text/javascript" src="/c212c2ac-8edd-4003-b9d2-0f0f13547d0a.js"></script>]]></Library>
-    <!-- deepdash (for filter) -->
     <Library Target="html"><![CDATA[<script type="text/javascript" src="/650ce890-2cd7-49b3-9b91-a143cc064e28.js"></script>]]></Library>
     <Library Target="html"><![CDATA[<script>deepdash(_)</script>]]></Library>
   </Libraries>
   <E2vdom>
     <Events>
       <Userinterfaceevents>
-        <Event Name="cellclick" Help="#Lang(507)">
+        <Event Name="cellclick" Help="#Lang(512)">
           <Parameters>
             <Parameter Name="keyField" Order="0" VbType="" Help="#Lang(901)"/>
             <Parameter Name="cellData" Order="0" VbType="" Help="#Lang(902)"/>
             <Parameter Name="headerData" Order="0" VbType="" Help="#Lang(903)"/>
           </Parameters>
         </Event>
-        <Event Name="celldblclick" Help="#Lang(508)">
+        <Event Name="celldblclick" Help="#Lang(513)">
           <Parameters>
             <Parameter Name="keyField" Order="0" VbType="" Help="#Lang(904)"/>
             <Parameter Name="cellData" Order="0" VbType="" Help="#Lang(905)"/>
             <Parameter Name="headerData" Order="0" VbType="" Help="#Lang(906)"/>
           </Parameters>
         </Event>
-        <Event Name="custom" Help="#Lang(509)">
+        <Event Name="custom" Help="#Lang(514)">
           <Parameters>
             <Parameter Name="params" Order="0" VbType="" Help="#Lang(907)"/>
           </Parameters>
         </Event>
-        <Event Name="dragstart" Help="#Lang(511)">
+        <Event Name="dragstart" Help="#Lang(515)">
           <Parameters>
             <Parameter Name="params" Order="0" VbType="" Help="#Lang(908)"/>
           </Parameters>
         </Event>
-        <Event Name="headerselected" Help="#Lang(512)">
+        <Event Name="headerselected" Help="#Lang(516)">
           <Parameters>
             <Parameter Name="headername" Order="0" VbType="" Help="#Lang(909)"/>
           </Parameters>
         </Event>
-        <Event Name="load" Help="#Lang(513)">
+        <Event Name="load" Help="#Lang(517)">
           <Parameters>
             <Parameter Name="width" Order="0" VbType="" Help="#Lang(911)"/>
             <Parameter Name="height" Order="0" VbType="" Help="#Lang(912)"/>
           </Parameters>
         </Event>
-        <Event Name="mousedown" Help="#Lang(514)">
+        <Event Name="mousedown" Help="#Lang(518)">
           <Parameters>
             <Parameter Name="X" Order="0" VbType="" Help="#Lang(913)"/>
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(914)"/>
           </Parameters>
         </Event>
-        <Event Name="mousemove" Help="#Lang(515)">
+        <Event Name="mousemove" Help="#Lang(519)">
           <Parameters>
             <Parameter Name="X" Order="0" VbType="" Help="#Lang(915)"/>
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(916)"/>
           </Parameters>
         </Event>
-        <Event Name="mouseout" Help="#Lang(516)">
+        <Event Name="mouseout" Help="#Lang(521)">
           <Parameters>
             <Parameter Name="X" Order="0" VbType="" Help="#Lang(917)"/>
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(918)"/>
           </Parameters>
         </Event>
-        <Event Name="mouseover" Help="#Lang(517)">
+        <Event Name="mouseover" Help="#Lang(522)">
           <Parameters>
             <Parameter Name="X" Order="0" VbType="" Help="#Lang(919)"/>
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(921)"/>
           </Parameters>
         </Event>
-        <Event Name="mouseup" Help="#Lang(518)">
+        <Event Name="mouseup" Help="#Lang(523)">
           <Parameters>
             <Parameter Name="X" Order="0" VbType="" Help="#Lang(922)"/>
             <Parameter Name="Y" Order="0" VbType="" Help="#Lang(923)"/>
           </Parameters>
         </Event>
-        <Event Name="rowsselected" Help="#Lang(519)">
+        <Event Name="rowsselected" Help="#Lang(524)">
           <Parameters>
             <Parameter Name="keyList" Order="0" VbType="" Help="#Lang(924)"/>
           </Parameters>
@@ -1054,31 +1094,23 @@ window[tabulator].addCellCss(rowId, columnId, cssClass);]]></SourceCode>
 const tabulator = 't_' + vdom_id.slice(2);
 window[tabulator].addRowCss(rowId,  cssClass);]]></SourceCode>
         </Action>
-        <Action Help="#Lang(503)" InterfaceName="#Lang(603)" MethodName="custom">
+        <Action Help="#Lang(503)" InterfaceName="#Lang(603)" MethodName="clearFilter">
+          <Parameters/>
+          <SourceCode><![CDATA[
+            const vdom_id = this.domCont.id;
+            const tabulator = 't_' + vdom_id.slice(2);
+            window[tabulator].clearFilter();
+          ]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(504)" InterfaceName="#Lang(604)" MethodName="custom">
           <Parameters>
             <Parameter DefaultValue="" Interface="custom" InterfaceName="#Lang(706)" ScriptName="custom" Help="#Lang(806)" RegularExpressionValidation=".*"/>
           </Parameters>
           <SourceCode><![CDATA[eval(custom);]]></SourceCode>
         </Action>
-        <Action Help="#Lang(504)" InterfaceName="#Lang(604)" MethodName="hide">
+        <Action Help="#Lang(505)" InterfaceName="#Lang(605)" MethodName="exportToXlsx">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="fade" InterfaceName="#Lang(707)" ScriptName="fade" Help="#Lang(807)" RegularExpressionValidation="^\d+$"/>
-          </Parameters>
-          <SourceCode><![CDATA[vdom_ui_hide(this.domCont, fade);]]></SourceCode>
-        </Action>
-        <Action Help="#Lang(505)" InterfaceName="#Lang(605)" MethodName="setData">
-          <Parameters>
-            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(708)" ScriptName="data" Help="#Lang(808)" RegularExpressionValidation=""/>
-          </Parameters>
-          <SourceCode><![CDATA[
-            const vdom_id = this.domCont.id;
-            const tabulator = 't_' + vdom_id.slice(2);
-            window[tabulator].setData(JSON.parse(data));
-          ]]></SourceCode>
-        </Action>
-        <Action Help="#Lang(927)" InterfaceName="#Lang(927)" MethodName="exportToXlsx">
-          <Parameters>
-            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(926)" ScriptName="filename" Help="#Lang(926)" RegularExpressionValidation=""/>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(707)" ScriptName="filename" Help="#Lang(807)" RegularExpressionValidation=""/>
           </Parameters>
           <SourceCode><![CDATA[
             const vdom_id = this.domCont.id;
@@ -1086,9 +1118,9 @@ window[tabulator].addRowCss(rowId,  cssClass);]]></SourceCode>
             window[tabulator].download("xlsx", filename, {});
           ]]></SourceCode>
         </Action>
-        <Action Help="#Lang(927)" InterfaceName="#Lang(927)" MethodName="filter">
+        <Action Help="#Lang(506)" InterfaceName="#Lang(606)" MethodName="filter">
           <Parameters>
-            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(927)" ScriptName="textFilter" Help="#Lang(927)" RegularExpressionValidation=""/>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(708)" ScriptName="textFilter" Help="#Lang(808)" RegularExpressionValidation=""/>
           </Parameters>
           <SourceCode><![CDATA[
             const vdom_id = this.domCont.id;
@@ -1115,21 +1147,35 @@ window[tabulator].addRowCss(rowId,  cssClass);]]></SourceCode>
             window[tabulator].setFilter(filterFuntion, ids);
           ]]></SourceCode>
         </Action>
-        <Action Help="#Lang(928)" InterfaceName="#Lang(928)" MethodName="clearFilter">
+        <Action Help="#Lang(507)" InterfaceName="#Lang(607)" MethodName="hide">
+          <Parameters>
+            <Parameter DefaultValue="0" Interface="fade" InterfaceName="#Lang(709)" ScriptName="fade" Help="#Lang(809)" RegularExpressionValidation="^\d+$"/>
+          </Parameters>
+          <SourceCode><![CDATA[vdom_ui_hide(this.domCont, fade);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(508)" InterfaceName="#Lang(608)" MethodName="setData">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(711)" ScriptName="data" Help="#Lang(811)" RegularExpressionValidation=""/>
+          </Parameters>
           <SourceCode><![CDATA[
             const vdom_id = this.domCont.id;
             const tabulator = 't_' + vdom_id.slice(2);
-            window[tabulator].clearFilter();
+            window[tabulator].setData(JSON.parse(data));
           ]]></SourceCode>
         </Action>
-        <Action Help="#Lang(506)" InterfaceName="#Lang(606)" MethodName="show">
+        <Action Help="#Lang(509)" InterfaceName="#Lang(609)" MethodName="show">
           <Parameters>
-            <Parameter DefaultValue="0" Interface="fade" InterfaceName="#Lang(709)" ScriptName="fade" Help="#Lang(809)" RegularExpressionValidation="^\d+$"/>
+            <Parameter DefaultValue="0" Interface="fade" InterfaceName="#Lang(712)" ScriptName="fade" Help="#Lang(812)" RegularExpressionValidation="^\d+$"/>
           </Parameters>
           <SourceCode><![CDATA[
             vdom_ui_show(this.domCont, fade);
             window[`t_${this.domCont.id.slice(2)}`].redraw();
           ]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(511)" InterfaceName="#Lang(611)" MethodName="unselectAll">
+          <Parameters/>
+          <SourceCode><![CDATA[const vdom_id = this.domCont.id;
+const tabulator = 't_' + vdom_id.slice(2); window[tabulator].deselectRow();]]></SourceCode>
         </Action>
       </Container>
     </Actions>
