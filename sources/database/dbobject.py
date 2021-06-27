@@ -114,7 +114,7 @@ class VDOM_database_table:
             #fields_list += ")"
         database = managers.database_manager.get_database(self.owner_id, self.database_id)
         cur = database.get_connection().cursor()
-        cur.execute("create table \'%s\'%s" % (self.name, fields_list))
+        cur.execute("CREATE TABLE IF NOT EXISTS \'%s\'%s" % (self.name, fields_list))
         self.restore_structure(True)
 
     def remove(self):
@@ -168,10 +168,10 @@ class VDOM_database_table:
         columns = {}
         database = managers.database_manager.get_database(self.owner_id, self.database_id)
         cur = database.get_connection().cursor()
-        cur.execute("SELECT sql FROM sqlite_master WHERE type=\'table\' and name=?", (self.name,))
+        cur.execute("SELECT sql FROM sqlite_master WHERE type=\'table\' and upper(name)=?", (self.name.upper(),))
         for row in cur:
-            table_def = re.search(r"""create table (?P<tbl_name>['\"]?\w*['\"]?)\s*\((?P<declaration>.+)\)""", row[0], re.DOTALL | re.IGNORECASE)
-            if (not table_def) or ((table_def.group("tbl_name") != self.name) and (table_def.group("tbl_name")[1:-1] != self.name)):
+            table_def = re.search(r"""create table [\`'\"]?(?P<tbl_name>\w*)[\`'\"]?\s*\((?P<declaration>.+)\)""", row[0], re.DOTALL | re.IGNORECASE)
+            if (not table_def) or (table_def.group("tbl_name").lower() != self.name.lower()):
                 #raise VDOM_exception("Invalid database info")
                 continue
             declaration = table_def.group("declaration")
