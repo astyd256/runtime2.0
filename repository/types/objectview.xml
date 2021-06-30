@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.82.8388</Version>
+    <Version>1.82.8389</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, flexcontainer, dialog, dialog_2, container, tablecell, form, accordeon, smartfolderdata</Containers>
@@ -1123,6 +1123,7 @@ Visible - the whole content will always be shown without reference to the object
 			e2EuZWFjaChmdW5jdGlvbigpe3ZhciBuPSQodGhpcyksbT1uLndpZHRoKCksbD1uLmhlaWdodCgp
 			LG89JC5kYXRhKHRoaXMsZCk7aWYobSE9PW8ud3x8bCE9PW8uaCl7bi50cmlnZ2VyKGosW28udz1t
 			LG8uaD1sXSl9fSk7ZygpfSxlW2JdKX19KShqUXVlcnksdGhpcyk7DQo=]]></Resource>
+    <Resource ID="6fc7a62f-9482-4cfe-a625-75810735a9de" Name="objectview.js" Type="js"><![CDATA[KGZ1bmN0aW9uKCQpIHsNCiAgICAkLmZuLmxpdmVEcmFnZ2FibGUgPSBmdW5jdGlvbiAobykgew0KICAgICAgICB0aGlzLmxpdmUoIm1vdXNlb3ZlciIsIGZ1bmN0aW9uKCkgew0KICAgICAgICAgICAgaWYgKCEkKHRoaXMpLmRhdGEoImluaXRkcmFnIikpIHsNCiAgICAgICAgICAgICAgICAkKHRoaXMpLmRhdGEoImluaXRkcmFnIiwgdHJ1ZSkuZHJhZ2dhYmxlKG8pOw0KICAgICAgICAgICAgfQ0KICAgICAgICB9KTsNCiAgICAgICAgcmV0dXJuICQoKTsNCiAgICB9Ow0KfShqUXVlcnkpKTsNCg0KKGZ1bmN0aW9uKCQpIHsNCiAgICAkLmZuLmxpdmVTb3J0YWJsZSA9IGZ1bmN0aW9uIChvKSB7DQogICAgICAgIHRoaXMubGl2ZSgibW91c2VvdmVyIiwgZnVuY3Rpb24oKSB7DQogICAgICAgICAgICBpZiAoISQodGhpcykuZGF0YSgiaW5pdHNvcnQiKSkgew0KICAgICAgICAgICAgICAgICQodGhpcykuZGF0YSgiaW5pdHNvcnQiLCB0cnVlKS5zb3J0YWJsZShvKTsNCiAgICAgICAgICAgIH0NCiAgICAgICAgfSk7DQogICAgICAgIHJldHVybiAkKCk7DQogICAgfTsNCn0oalF1ZXJ5KSk7DQoNCmZ1bmN0aW9uIHZkb21fb3ZfaW5EaXYodzAsIHMpew0KICAgIHZhciB3ID0gJGoodzApLCByZXN1bHQgPSBbXSwgZWxzID0gJGoocywgdyksIHBhLCBvcGE7DQogICAgdmFyIG8gPSB3LnBvc2l0aW9uKCksIHdUb3AgPSB3LnNjcm9sbFRvcCgpOw0KICAgIHZhciBvdG9wID0gKG8gPT0gbnVsbCkgPyAwIDogby50b3A7DQogICAgaWYgKHcucGFyZW50KCkpIHsNCiAgICAgICAgcCA9IHcucGFyZW50KCk7DQogICAgICAgIG9wYSA9IHAucG9zaXRpb24oKTsNCiAgICAgICAgb3RvcCArPSAob3BhID09IG51bGwpID8gMCA6IG9wYS50b3A7DQogICAgfQ0KICAgIHZhciB3SGVpZ2h0ID0gdy5vdXRlckhlaWdodCh0cnVlKSArIG90b3A7DQogICAgdmFyIHdCb3R0b20gPSB3SGVpZ2h0ICsgd1RvcCArIG90b3A7DQogICAgZWxzLmVhY2goZnVuY3Rpb24oKXsNCiAgICAgICAgdmFyIGVsID0gJGoodGhpcyk7DQogICAgICAgIGlmIChlbC5oYXNDbGFzcygnbm90LWxvYWRlZCcpKSB7DQogICAgICAgICAgICB2YXIgb2Zmc2V0ID0gZWwub2Zmc2V0KCk7DQogICAgICAgICAgICB2YXIgZWxUb3AgPSBvZmZzZXQudG9wOw0KICAgICAgICAgICAgdmFyIGVsQm90dG9tID0gb2Zmc2V0LnRvcCArIGVsLm91dGVySGVpZ2h0KHRydWUpOw0KICAgICAgICAgICAgLy9pZiggKGVsVG9wID49IHdUb3AgJiYgZWxUb3AgPD0gd0JvdHRvbSkgfHwgKGVsQm90dG9tIDw9IHdCb3R0b20gJiYgZWxCb3R0b20gPj0gd1RvcCkgKSB7DQogICAgICAgICAgICBpZiggKGVsVG9wID49IDAgJiYgZWxUb3AgPD0gd0hlaWdodCkgfHwgKGVsQm90dG9tIDw9IHdIZWlnaHQgJiYgZWxCb3R0b20gPj0gMCkgKSB7DQogICAgICAgICAgICAgICAgLy9lbC5yZW1vdmVDbGFzcygnbm90LWxvYWRlZCcpOw0KICAgICAgICAgICAgICAgIHJlc3VsdC5wdXNoKHRoaXMpOw0KICAgICAgICAgICAgfQ0KICAgICAgICAgICAgLy9pZiggd1RvcCA8PSBlbFRvcCAmJiAoZWwuaGVpZ2h0KCkgKyBlbFRvcCkgPCAod1RvcCArIHdIZWlnaHQpICkgcmVzdWx0LnB1c2godGhpcyk7DQogICAgICAgIH0NCiAgICB9KTsNCiAgICByZXR1cm4gJGoocmVzdWx0KTsNCn0NCg0KZnVuY3Rpb24gdmRvbV9vdl9tYXJrU2hvdyhpKSB7DQogICAgdmFyIHEgPSAnPmRpdi5vdi1jb250ZW50PmRpdltkYXRhaWRdJzsNCiAgICB2YXIgYSA9IFtdLCB6ID0gdmRvbV9vdl9pbkRpdignI29fJytpLCBxKTsNCiAgICBpZiAoei5zaXplKCkgPiAwKSB7DQogICAgICAgIHouZWFjaChmdW5jdGlvbigpew0KICAgICAgICAgICAgYS5wdXNoKCRqKHRoaXMpLmF0dHIoJ2RhdGFpZCcpKTsNCiAgICAgICAgfSk7DQogICAgICAgIC8vZXhlY0V2ZW50QmluZGVkKGksICJpdGVtc3JlcXVlc3QiLCB7aWRsaXN0OiBhfSk7DQogICAgICAgIHZhcg0KICAgICAgICAgICAgZCA9ICRqKCcjb18nK2kpLA0KICAgICAgICAgICAgZHggPSBwYXJzZUludChkLmRhdGEoJ21hcmtzaG93JyksIDEwKTsNCiAgICAgICAgaWYgKGR4ID4gMikgew0KICAgICAgICAgICAgZC5kYXRhKCdtYXJrc2hvdycsIDApOw0KICAgICAgICB9IGVsc2Ugew0KICAgICAgICAgICAgZXhlY0V2ZW50QmluZGVkKGksICJpdGVtc3JlcXVlc3QiLCB7aWRsaXN0OiBhfSk7DQogICAgICAgICAgICBkLmRhdGEoJ21hcmtzaG93JywgZHggKyAxKTsNCiAgICAgICAgfQ0KICAgIH0NCn0NCg0KZnVuY3Rpb24gdmRvbV9vdl9tYWtlRGl2KGksIG8pIHsNCiAgICB2YXIgcyA9ICRqKCc+ZGl2Lm92LWNvbnRlbnQ+ZGl2W2RhdGFpZF06Zmlyc3QnLCBvKS5hdHRyKCdzdHlsZScpOw0KICAgIGlmIChzID09ICcnKSBzID0gJ2hlaWdodDoxMHB4O3dpZHRoOjEwcHg7JzsNCiAgICByZXR1cm4gJzxkaXYgZGF0YWlkPSInK2krJyIgY2xhc3M9IicrJGoobykuZGF0YSgib3ZpdGVtY2xhc3MiKSsnIG5vdC1sb2FkZWQiIHN0eWxlPSInK3MrJyI+PC9kaXY+JzsNCn0NCg0KZnVuY3Rpb24gdmRvbV9vdl9nZXRTZWxlY3RlZChvKSB7DQogICAgdmFyIGEgPSBbXTsNCiAgICAkaignI29fJytvKycgLm92LWNvbnRlbnQ+ZGl2W2RhdGFpZF0uc2VsZWN0ZWQnKS5lYWNoKGZ1bmN0aW9uKCl7IGEucHVzaCgkaih0aGlzKS5hdHRyKCdkYXRhaWQnKSk7IH0pOw0KICAgIGV4ZWNFdmVudEJpbmRlZChvLCAiaXRlbXNzZWxlY3RlZCIsIHtpZGxpc3Q6IGF9KTsNCn0NCg0KLyoqDQogKiBBbmRlcnNvbiBGZXJtaW5pYW5vDQogKiBjb250YXRvQGFuZGVyc29uZmVybWluaWFuby5jb20gLS0gZmVlbCBmcmVlIHRvIGNvbnRhY3QgbWUgZm9yIGJ1Z3Mgb3IgbmV3IGltcGxlbWVudGF0aW9ucy4NCiAqIGpRdWVyeSBTY3JvbGxQYWdpbmF0aW9uDQogKiAyOHRoL01hcmNoLzIwMTENCiAqIGh0dHA6Ly9hbmRlcnNvbmZlcm1pbmlhbm8uY29tL2pxdWVyeXNjcm9sbHBhZ2luYXRpb24vDQogKiBZb3UgbWF5IHVzZSB0aGlzIHNjcmlwdCBmb3IgZnJlZSwgYnV0IGtlZXAgbXkgY3JlZGl0cy4NCiAqIFRoYW5rIHlvdS4NCiAqICMgbW9kaWZpZWQgZm9yIFZET00gQm94IFJlc2VhcmNoIGJ5IExlbyBAIDIwMTItMDgtMTQNCiAqLw0KDQooZnVuY3Rpb24oJCl7DQogICAgJC5mbi5pbmZpbml0ZVNjcm9sbCA9IGZ1bmN0aW9uKG9wdGlvbnMpIHsNCiAgICAgICAgdmFyIG9wdHMgPSAkLmV4dGVuZCgkLmZuLmluZmluaXRlU2Nyb2xsLmRlZmF1bHRzLCBvcHRpb25zKTsNCiAgICAgICAgcmV0dXJuIHRoaXMuZWFjaChmdW5jdGlvbigpIHsNCiAgICAgICAgICAkLmZuLmluZmluaXRlU2Nyb2xsLmluaXQoJCh0aGlzKSwgb3B0cyk7DQogICAgICAgIH0pOw0KICAgIH07DQoNCiAgICAkLmZuLnN0b3BpbmZpbml0ZVNjcm9sbCA9IGZ1bmN0aW9uKCl7DQogICAgICAgIHJldHVybiB0aGlzLmVhY2goZnVuY3Rpb24oKSB7DQogICAgICAgICAgICAkKHRoaXMpLmF0dHIoJ2luZmluaXRlU2Nyb2xsJywgJ2Rpc2FibGVkJyk7DQogICAgICAgIH0pOw0KICAgIH07DQoNCiAgICAkLmZuLmluZmluaXRlU2Nyb2xsLmxvYWRDb250ZW50ID0gZnVuY3Rpb24ob2JqLCBvcHRzKXsNCiAgICAgICAgdmFyICRjb250ZW50ID0gJCgnPmRpdi5vdi1jb250ZW50Jywgb2JqKTsNCiAgICAgICAgdmFyIGNhbkxvYWRDb250ZW50ID0gJGNvbnRlbnQub3V0ZXJIZWlnaHQoKSAtIG9iai5pbm5lckhlaWdodCgpIC0gb2JqLnNjcm9sbFRvcCgpIDw9IG9wdHMuaGVpZ2h0T2Zmc2V0Ow0KICAgICAgICBpZiAoY2FuTG9hZENvbnRlbnQpIHsNCiAgICAgICAgICAgIGV4ZWNFdmVudEJpbmRlZChvcHRzLm92aWQsICdpdGVtc2JhdGNocmVxdWVzdCcsIHsgbG9hZGVkOiAkKCc+ZGl2Lm92LWNvbnRlbnQ+ZGl2W2RhdGFpZF0nLCQob2JqKSkuc2l6ZSgpIH0pOw0KICAgICAgICB9DQogICAgfTsNCg0KICAgICQuZm4uaW5maW5pdGVTY3JvbGwuaW5pdCA9IGZ1bmN0aW9uKG9iaiwgb3B0cyl7DQogICAgICAgIG9iai5hdHRyKCdpbmZpbml0ZVNjcm9sbCcsICdlbmFibGVkJyk7DQogICAgICAgIG9iai5zY3JvbGwoZnVuY3Rpb24oZXZlbnQpew0KICAgICAgICAgICAgaWYgKG9iai5hdHRyKCdpbmZpbml0ZVNjcm9sbCcpID09ICdlbmFibGVkJyl7DQogICAgICAgICAgICAgICAgJC5mbi5pbmZpbml0ZVNjcm9sbC5sb2FkQ29udGVudChvYmosIG9wdHMpOw0KICAgICAgICAgICAgfSBlbHNlIHsNCiAgICAgICAgICAgICAgICBldmVudC5zdG9wUHJvcGFnYXRpb24oKTsNCiAgICAgICAgICAgIH0NCiAgICAgICAgfSk7DQogICAgICAgICQuZm4uaW5maW5pdGVTY3JvbGwubG9hZENvbnRlbnQob2JqLCBvcHRzKTsNCiAgICAgfTsNCg0KICAgICQuZm4uaW5maW5pdGVTY3JvbGwuZGVmYXVsdHMgPSB7DQogICAgICAgICdvdmlkJzogJycsDQogICAgICAgICdjc3NjJzogJycsDQogICAgICAgICdoZWlnaHRPZmZzZXQnOiAzMA0KICAgIH07DQp9KShqUXVlcnkpOw==]]></Resource>
     <Resource ID="feb69c13-3f9b-f49f-6527-72f5a7193a34" Name="16.gif" Type="gif"><![CDATA[R0lGODlhUAAKAIQAANxiZPy+vPzi5PSWlPzy9PzS1OympPzq7Pz6/Pza3PympORqbPSmpNxmZPzC
 			xPzm5PSanPz29PzW1Pzu7Pz+/Pze3PSqrBwZHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05F
 			VFNDQVBFMi4wAwEAAAAh+QQJAwAXACwAAAAAUAAKAAAF0mBRCWRpnuaIrqfKvu57JgJl33iu73zv
@@ -1706,144 +1707,8 @@ class VDOM_objectview(VDOM_object):
         result = get_empty_wysiwyg_value(self, "cc72f740-5527-4dab-3c59-16b7fccb0032")
         return VDOM_object.wysiwyg(self, contents=result)]]></SourceCode>
   <Libraries>
-    <Library Target="html"><![CDATA[<script type="text/javascript" src="/e0cc0355-d598-33f6-92e9-731bed2c78eb.res"></script>
-<script type='text/javascript'>
-
-(function($) {
-    $.fn.liveDraggable = function (o) {
-        this.live("mouseover", function() {
-            if (!$(this).data("initdrag")) {
-                $(this).data("initdrag", true).draggable(o);
-            }
-        });
-        return $();
-    };
-}(jQuery));
-
-(function($) {
-    $.fn.liveSortable = function (o) {
-        this.live("mouseover", function() {
-            if (!$(this).data("initsort")) {
-                $(this).data("initsort", true).sortable(o);
-            }
-        });
-        return $();
-    };
-}(jQuery));
-
-function vdom_ov_inDiv(w0, s){
-    var w = $j(w0), result = [], els = $j(s, w), pa, opa;
-    var o = w.position(), wTop = w.scrollTop();
-    var otop = (o == null) ? 0 : o.top;
-    if (w.parent()) {
-        p = w.parent();
-        opa = p.position();
-        otop += (opa == null) ? 0 : opa.top;
-    }
-    var wHeight = w.outerHeight(true) + otop;
-    var wBottom = wHeight + wTop + otop;
-    els.each(function(){
-        var el = $j(this);
-        if (el.hasClass('not-loaded')) {
-            var offset = el.offset();
-            var elTop = offset.top;
-            var elBottom = offset.top + el.outerHeight(true);
-            //if( (elTop >= wTop && elTop <= wBottom) || (elBottom <= wBottom && elBottom >= wTop) ) {
-            if( (elTop >= 0 && elTop <= wHeight) || (elBottom <= wHeight && elBottom >= 0) ) {
-                //el.removeClass('not-loaded');
-                result.push(this);
-            }
-            //if( wTop <= elTop && (el.height() + elTop) < (wTop + wHeight) ) result.push(this);
-        }
-    });
-    return $j(result);
-}
-
-function vdom_ov_markShow(i) {
-    var q = '>div.ov-content>div[dataid]';
-    var a = [], z = vdom_ov_inDiv('#o_'+i, q);
-    if (z.size() > 0) {
-        z.each(function(){
-            a.push($j(this).attr('dataid'));
-        });
-        //execEventBinded(i, "itemsrequest", {idlist: a});
-        var
-            d = $j('#o_'+i),
-            dx = parseInt(d.data('markshow'), 10);
-        if (dx > 2) {
-            d.data('markshow', 0);
-        } else {
-            execEventBinded(i, "itemsrequest", {idlist: a});
-            d.data('markshow', dx + 1);
-        }
-    }
-}
-
-function vdom_ov_makeDiv(i, o) {
-    var s = $j('>div.ov-content>div[dataid]:first', o).attr('style');
-    if (s == '') s = 'height:10px;width:10px;';
-    return '<div dataid="'+i+'" class="'+$j(o).data("ovitemclass")+' not-loaded" style="'+s+'"></div>';
-}
-
-function vdom_ov_getSelected(o) {
-    var a = [];
-    $j('#o_'+o+' .ov-content>div[dataid].selected').each(function(){ a.push($j(this).attr('dataid')); });
-    execEventBinded(o, "itemsselected", {idlist: a});
-}
-
-/**
- * Anderson Ferminiano
- * contato@andersonferminiano.com -- feel free to contact me for bugs or new implementations.
- * jQuery ScrollPagination
- * 28th/March/2011
- * http://andersonferminiano.com/jqueryscrollpagination/
- * You may use this script for free, but keep my credits.
- * Thank you.
- * # modified for VDOM Box Research by Leo @ 2012-08-14
- */
-
-(function($){
-    $.fn.infiniteScroll = function(options) {
-        var opts = $.extend($.fn.infiniteScroll.defaults, options);
-        return this.each(function() {
-          $.fn.infiniteScroll.init($(this), opts);
-        });
-    };
-
-    $.fn.stopinfiniteScroll = function(){
-        return this.each(function() {
-            $(this).attr('infiniteScroll', 'disabled');
-        });
-    };
-
-    $.fn.infiniteScroll.loadContent = function(obj, opts){
-        var $content = $('>div.ov-content', obj);
-        var canLoadContent = $content.outerHeight() - obj.innerHeight() - obj.scrollTop() <= opts.heightOffset;
-        if (canLoadContent) {
-            execEventBinded(opts.ovid, 'itemsbatchrequest', { loaded: $('>div.ov-content>div[dataid]',$(obj)).size() });
-        }
-    };
-
-    $.fn.infiniteScroll.init = function(obj, opts){
-        obj.attr('infiniteScroll', 'enabled');
-        obj.scroll(function(event){
-            if (obj.attr('infiniteScroll') == 'enabled'){
-                $.fn.infiniteScroll.loadContent(obj, opts);
-            } else {
-                event.stopPropagation();
-            }
-        });
-        $.fn.infiniteScroll.loadContent(obj, opts);
-     };
-
-    $.fn.infiniteScroll.defaults = {
-        'ovid': '',
-        'cssc': '',
-        'heightOffset': 30
-    };
-})(jQuery);
-
-</script>]]></Library>
+    <Library Target="html"><![CDATA[<script type="text/javascript" src="/e0cc0355-d598-33f6-92e9-731bed2c78eb.res"></script>]]></Library>
+    <Library Target="html"><![CDATA[<script type='text/javascript' src="/6fc7a62f-9482-4cfe-a625-75810735a9de.js"></script>]]></Library>
   </Libraries>
   <E2vdom>
     <Events>
