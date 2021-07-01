@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_tree</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>2.21.8388</Version>
+		<Version>2.21.8389</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(cbd47a55-cfad-bba6-e2a5-16f2a90371de)</Icon>
@@ -1675,11 +1675,9 @@ jQuery(document).ready(function($){
 ]]>
 	</SourceCode>
 	<Libraries>
-		<Library Target="html"><![CDATA[<link rel="stylesheet" media="screen" type="text/css" href='/874e5ad0-7a30-2eab-e2e4-6296c661f3a6.css'/>
-<style>
-.dynatreetype span.dynatree-node { display: block; }
-</style>
-<script src="/68671807-a23c-6556-c975-954574516160.js" type="text/javascript" charset="UTF-8"></script>]]></Library>
+		<Library Target="html"><![CDATA[<link rel="stylesheet" media="screen" type="text/css" href='/874e5ad0-7a30-2eab-e2e4-6296c661f3a6.css'/>]]></Library>
+		<Library Target="html"><![CDATA[<style>.dynatreetype span.dynatree-node { display: block; }</style>]]></Library>
+		<Library Target="html"><![CDATA[<script src="/68671807-a23c-6556-c975-954574516160.js" type="text/javascript" charset="UTF-8"></script>]]></Library>
 	</Libraries>
 	<E2VDOM>
 		<Events>
