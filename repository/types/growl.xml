@@ -433,6 +433,7 @@
 			xEtQDDKgD5TGgTgQiI8ScgYoLyDzxYAYFCbhQHyOGH+AciMy/yUQewDxXWIDAiDAACvDbxud7dPP
 			AAAAAElFTkSuQmCC
 		</Resource>
+		<Resource ID="c5eb2a78-a577-4f63-a7f1-70ca44b27239" Type="js" Name="growl-js-custom">CQkJJChmdW5jdGlvbigkKXsNCglpZiAodHlwZW9mICQuZ3Jvd2wgPT09ICd1bmRlZmluZWQnKSB7DQoJCSQuZ3Jvd2w9ZnVuY3Rpb24odCxtKXsNCgkJCSQuZ3JpdHRlci5hZGQoeyd0aXRsZSc6dCwndGV4dCc6bSwnc3RpY2t5JzpmYWxzZSwndGltZSc6Jyd9KTsNCgkJfQ0KCX0NCgkkKCdzcGFuLmdyb3dscycpLmVhY2goZnVuY3Rpb24oKXsNCgkJdmFyIHQ9JC50cmltKCQoJz5zcGFuJyx0aGlzKS5odG1sKCkpLCBtPSQudHJpbSgkKCc+ZGl2Jyx0aGlzKS5odG1sKCkpOw0KCQlpZiAodCE9JycgJiYgbSE9JycgJiYgJC5ncm93bCkgJC5ncm93bCh0LG0pOw0KCX0pOw0KfSk7</Resource>
 		<Resource ID="58db188c-f7c3-e026-6eaf-d38812ea1af7" Type="js" Name="growl-js">
 			KGZ1bmN0aW9uKCQpeyQuZ3JpdHRlcj17fTskLmdyaXR0ZXIub3B0aW9ucz17cG9zaXRpb246Jycs
 			ZmFkZV9pbl9zcGVlZDonbWVkaXVtJyxmYWRlX291dF9zcGVlZDo1MDAsdGltZTo2MDAwfQokLmdy
@@ -729,21 +730,9 @@ class VDOM_growl(VDOM_object):
 ]]>
 	</SourceCode>
 	<Libraries>
-		<Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/f3c84c23-dc6a-e27f-750b-29368302c6ac.res" />
-<script type="text/javascript" src="/58db188c-f7c3-e026-6eaf-d38812ea1af7.res"></script>
-<script type="text/javascript">
-jQuery(function($){
-	if (typeof $.growl === 'undefined') {
-		$.growl=function(t,m){
-			$.gritter.add({'title':t,'text':m,'sticky':false,'time':''});
-		}
-	}
-	$('span.growls').each(function(){
-		var t=$.trim($('>span',this).html()), m=$.trim($('>div',this).html());
-		if (t!='' && m!='' && $.growl) $.growl(t,m);
-	});
-});
-</script>]]></Library>
+		<Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/f3c84c23-dc6a-e27f-750b-29368302c6ac.res" />]]></Library>
+		<Library Target="html"><![CDATA[<script type="text/javascript" src="/58db188c-f7c3-e026-6eaf-d38812ea1af7.res"></script>]]></Library>
+		<Library Target="html"><![CDATA[<script type="text/javascript" src="/c5eb2a78-a577-4f63-a7f1-70ca44b27239.res"></script>]]></Library>
 	</Libraries>
 	<E2VDOM>
 		<Events>

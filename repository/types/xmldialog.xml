@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_xmldialog</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.189.9200</Version>
+		<Version>1.189.9201</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(723723b4-c8f4-5e4a-b02c-16fa8e0d53f7)</Icon>
@@ -762,6 +762,7 @@
 			5AGXtiExpm+DywsA9aRafT8cj7/D+w/u3lNQuUHJitSkKIiRwYDbe/HvOIuLB8pPzBvweb+GIsMb
 			fwCDLsCecWjaaQAAAABJRU5ErkJggg==
 		</Resource>
+		<Resource ID="97bb6c7e-baa0-43e7-b4c9-1d78cf916efe" Type="css" Name="code-mirror.css">CQkJLkNvZGVNaXJyb3Igew0KCWxpbmUtaGVpZ2h0OiAxZW07DQoJZm9udC1mYW1pbHk6IG1vbm9zcGFjZTsNCglib3JkZXI6IDFweCBzb2xpZCBzaWx2ZXI7DQoJb3ZlcmZsb3c6IHZpc2libGU7DQp9DQoNCi5Db2RlTWlycm9yLXNjcm9sbCB7IA0KCW92ZXJmbG93OiBhdXRvOw0KCXBvc2l0aW9uOiByZWxhdGl2ZTsNCn0NCg0KLkNvZGVNaXJyb3ItZ3V0dGVyIHsgcG9zaXRpb246IGFic29sdXRlOyBsZWZ0OiAwOyB0b3A6IDA7IHotaW5kZXg6IDEwOyBiYWNrZ3JvdW5kLWNvbG9yOiAjZjdmN2Y3OyBib3JkZXItcmlnaHQ6IDFweCBzb2xpZCAjZWVlOyBtaW4td2lkdGg6IDJlbTsgaGVpZ2h0OiAxMDAlOyB9DQouQ29kZU1pcnJvci1ndXR0ZXItdGV4dCB7IGNvbG9yOiAjYWFhOyB0ZXh0LWFsaWduOiByaWdodDsgcGFkZGluZzogLjRlbSAuMmVtIC40ZW0gLjRlbTsgd2hpdGUtc3BhY2U6IHByZSAhaW1wb3J0YW50OyB9DQouQ29kZU1pcnJvci1saW5lcyB7IHBhZGRpbmc6IC40ZW07IH0NCg0KLkNvZGVNaXJyb3IgcHJlIHsNCi1tb3otYm9yZGVyLXJhZGl1czogMDsNCi13ZWJraXQtYm9yZGVyLXJhZGl1czogMDsNCi1vLWJvcmRlci1yYWRpdXM6IDA7IGJvcmRlci1yYWRpdXM6IDA7IGJvcmRlci13aWR0aDogMDsgbWFyZ2luOiAwOyBwYWRkaW5nOiAwOyBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDsNCmZvbnQtZmFtaWx5OiBpbmhlcml0OyBmb250LXNpemU6IGluaGVyaXQ7IHBhZGRpbmc6IDA7IG1hcmdpbjogMDsgd2hpdGUtc3BhY2U6IHByZTsgd29yZC13cmFwOiBub3JtYWw7IH0NCg0KLkNvZGVNaXJyb3Itd3JhcCBwcmUgeyB3b3JkLXdyYXA6IGJyZWFrLXdvcmQ7IHdoaXRlLXNwYWNlOiBwcmUtd3JhcDsgfQ0KLkNvZGVNaXJyb3Itd3JhcCAuQ29kZU1pcnJvci1zY3JvbGwgeyANCgkvKm92ZXJmbG93LXg6IGF1dG87Ki8NCn0NCg0KLkNvZGVNaXJyb3IgdGV4dGFyZWEgeyBvdXRsaW5lOiBub25lICFpbXBvcnRhbnQ7IH0NCg0KLkNvZGVNaXJyb3IgcHJlLkNvZGVNaXJyb3ItY3Vyc29yIHsgei1pbmRleDogMTA7IHBvc2l0aW9uOiBhYnNvbHV0ZTsgdmlzaWJpbGl0eTogaGlkZGVuOyBib3JkZXItbGVmdDogMXB4IHNvbGlkIGJsYWNrOyBib3JkZXItcmlnaHQ6bm9uZTsgd2lkdGg6MDsgfQ0KLkNvZGVNaXJyb3IgcHJlLkNvZGVNaXJyb3ItY3Vyc29yLkNvZGVNaXJyb3Itb3ZlcndyaXRlIHt9DQouQ29kZU1pcnJvci1mb2N1c2VkIHByZS5Db2RlTWlycm9yLWN1cnNvciB7IHZpc2liaWxpdHk6IHZpc2libGU7IH0NCg0KZGl2LkNvZGVNaXJyb3Itc2VsZWN0ZWQgeyBiYWNrZ3JvdW5kOiAjZDlkOWQ5OyB9DQouQ29kZU1pcnJvci1mb2N1c2VkIGRpdi5Db2RlTWlycm9yLXNlbGVjdGVkIHsgYmFja2dyb3VuZDogI2Q3ZDRmMDsgfQ0KDQouQ29kZU1pcnJvci1zZWFyY2hpbmcgew0KYmFja2dyb3VuZDogI2ZmYTsNCmJhY2tncm91bmQ6IHJnYmEoMjU1LCAyNTUsIDAsIC40KTsNCn0NCg0Kc3Bhbi5Db2RlTWlycm9yLW1hdGNoaGlnaGxpZ2h0IHsgYmFja2dyb3VuZDogI2ZmMSB9DQouQ29kZU1pcnJvci1mb2N1c2VkIHNwYW4uQ29kZU1pcnJvci1tYXRjaGhpZ2hsaWdodCB7IGJhY2tncm91bmQ6ICNmZjE7ICFpbXBvcnRhbnQgfQ0KDQovKiBEZWZhdWx0IHRoZW1lICovDQoNCi5jbS1zLWRlZmF1bHQgc3Bhbi5jbS1rZXl3b3JkIHtjb2xvcjogIzcwODt9DQouY20tcy1kZWZhdWx0IHNwYW4uY20tYXRvbSB7Y29sb3I6ICMyMTk7fQ0KLmNtLXMtZGVmYXVsdCBzcGFuLmNtLW51bWJlciB7Y29sb3I6ICMxNjQ7fQ0KLmNtLXMtZGVmYXVsdCBzcGFuLmNtLWRlZiB7Y29sb3I6ICMwMGY7fQ0KLmNtLXMtZGVmYXVsdCBzcGFuLmNtLXZhcmlhYmxlIHtjb2xvcjogYmxhY2s7fQ0KLmNtLXMtZGVmYXVsdCBzcGFuLmNtLXZhcmlhYmxlLTIge2NvbG9yOiAjMDVhO30NCi5jbS1zLWRlZmF1bHQgc3Bhbi5jbS12YXJpYWJsZS0zIHtjb2xvcjogIzA4NTt9DQouY20tcy1kZWZhdWx0IHNwYW4uY20tcHJvcGVydHkge2NvbG9yOiBibGFjazt9DQouY20tcy1kZWZhdWx0IHNwYW4uY20tb3BlcmF0b3Ige2NvbG9yOiBibGFjazt9DQouY20tcy1kZWZhdWx0IHNwYW4uY20tY29tbWVudCB7Y29sb3I6ICM5OTk7fQ0KLmNtLXMtZGVmYXVsdCBzcGFuLmNtLXN0cmluZyB7Y29sb3I6ICNhMTE7fQ0KLmNtLXMtZGVmYXVsdCBzcGFuLmNtLXN0cmluZy0yIHtjb2xvcjogI2Y1MDt9DQouY20tcy1kZWZhdWx0IHNwYW4uY20tbWV0YSB7Y29sb3I6ICM1NTU7fQ0KLmNtLXMtZGVmYXVsdCBzcGFuLmNtLWVycm9yIHtjb2xvcjogI2YwMDt9DQouY20tcy1kZWZhdWx0IHNwYW4uY20tcXVhbGlmaWVyIHtjb2xvcjogIzU1NTt9DQouY20tcy1kZWZhdWx0IHNwYW4uY20tYnVpbHRpbiB7Y29sb3I6ICMzMGE7fQ0KLmNtLXMtZGVmYXVsdCBzcGFuLmNtLWJyYWNrZXQge2NvbG9yOiAjY2M3O30NCi5jbS1zLWRlZmF1bHQgc3Bhbi5jbS10YWcge2NvbG9yOiAjMTcwO30NCi5jbS1zLWRlZmF1bHQgc3Bhbi5jbS1hdHRyaWJ1dGUge2NvbG9yOiAjMDBjO30NCi5jbS1zLWRlZmF1bHQgc3Bhbi5jbS1oZWFkZXIge2NvbG9yOiAjYTBhO30NCi5jbS1zLWRlZmF1bHQgc3Bhbi5jbS1xdW90ZSB7Y29sb3I6ICMwOTA7fQ0KLmNtLXMtZGVmYXVsdCBzcGFuLmNtLWhyIHtjb2xvcjogIzk5OTt9DQouY20tcy1kZWZhdWx0IHNwYW4uY20tbGluayB7Y29sb3I6ICMwMGM7fQ0KDQpzcGFuLmNtLWhlYWRlciwgc3Bhbi5jbS1zdHJvbmcge2ZvbnQtd2VpZ2h0OiBib2xkO30NCnNwYW4uY20tZW0ge2ZvbnQtc3R5bGU6IGl0YWxpYzt9DQpzcGFuLmNtLWVtc3Ryb25nIHtmb250LXN0eWxlOiBpdGFsaWM7IGZvbnQtd2VpZ2h0OiBib2xkO30NCnNwYW4uY20tbGluayB7dGV4dC1kZWNvcmF0aW9uOiB1bmRlcmxpbmU7fQ0KDQpkaXYuQ29kZU1pcnJvciBzcGFuLkNvZGVNaXJyb3ItbWF0Y2hpbmdicmFja2V0IHtjb2xvcjogIzBmMDt9DQpkaXYuQ29kZU1pcnJvciBzcGFuLkNvZGVNaXJyb3Itbm9ubWF0Y2hpbmdicmFja2V0IHtjb2xvcjogI2YyMjt9</Resource>
 		<Resource ID="9f1c05cd-fee2-6055-2ef4-16fae66214c8" Type="css" Name="style">
 			LnhtbC1kaWFsb2ctZm9ybSBkaXYucm93IHsNCiAgICB0ZXh0LWFsaWduOiBsZWZ0Ow0KICAgIGNs
 			ZWFyOiBib3RoOw0KICAgIGZsb2F0OiBub25lOw0KfQ0KLnhtbC1kaWFsb2ctZm9ybSBkaXYucm93
@@ -3781,94 +3782,14 @@ class VDOM_xmldialog(VDOM_object):
 #     print xml_dialog.render('', '')]]>
 	</SourceCode>
 	<Libraries>
-		<Library Target="html"><![CDATA[<link rel="stylesheet" media="screen" type="text/css" href="/9f1c05cd-fee2-6055-2ef4-16fae66214c8.res" />
-<script type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae32145d0.res?v1.02"></script>
-<script type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae32bafe5.res"></script>
-<!--<script type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae6cbdfa6.res"></script>-->
-<script type="text/javascript" src="/966f39fb-3da2-95f2-c33a-398880aff765.res?v2.22"></script>
-<script type="text/javascript" src="/5cd10fee-6e10-5253-24ea-3edb0a87f9ec.res?match"></script>
-<script type="text/javascript" src="/95be4415-7ccb-b87b-f50f-77c8485f6bd9.res?syntaxes"></script>
-<script type='text/javascript' src='/b4993ec8-6d66-8240-22a7-48fbbedfe371.res'></script>
-
-<style type="text/css">
-.CodeMirror {
-	line-height: 1em;
-	font-family: monospace;
-	border: 1px solid silver;
-	overflow: visible;
-}
-
-.CodeMirror-scroll { 
-	overflow: auto;
-	position: relative;
-}
-
-.CodeMirror-gutter { position: absolute; left: 0; top: 0; z-index: 10; background-color: #f7f7f7; border-right: 1px solid #eee; min-width: 2em; height: 100%; }
-.CodeMirror-gutter-text { color: #aaa; text-align: right; padding: .4em .2em .4em .4em; white-space: pre !important; }
-.CodeMirror-lines { padding: .4em; }
-
-.CodeMirror pre {
--moz-border-radius: 0;
--webkit-border-radius: 0;
--o-border-radius: 0; border-radius: 0; border-width: 0; margin: 0; padding: 0; background: transparent;
-font-family: inherit; font-size: inherit; padding: 0; margin: 0; white-space: pre; word-wrap: normal; }
-
-.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; }
-.CodeMirror-wrap .CodeMirror-scroll { 
-	/*overflow-x: auto;*/
-}
-
-.CodeMirror textarea { outline: none !important; }
-
-.CodeMirror pre.CodeMirror-cursor { z-index: 10; position: absolute; visibility: hidden; border-left: 1px solid black; border-right:none; width:0; }
-.CodeMirror pre.CodeMirror-cursor.CodeMirror-overwrite {}
-.CodeMirror-focused pre.CodeMirror-cursor { visibility: visible; }
-
-div.CodeMirror-selected { background: #d9d9d9; }
-.CodeMirror-focused div.CodeMirror-selected { background: #d7d4f0; }
-
-.CodeMirror-searching {
-background: #ffa;
-background: rgba(255, 255, 0, .4);
-}
-
-span.CodeMirror-matchhighlight { background: #ff1 }
-.CodeMirror-focused span.CodeMirror-matchhighlight { background: #ff1; !important }
-
-/* Default theme */
-
-.cm-s-default span.cm-keyword {color: #708;}
-.cm-s-default span.cm-atom {color: #219;}
-.cm-s-default span.cm-number {color: #164;}
-.cm-s-default span.cm-def {color: #00f;}
-.cm-s-default span.cm-variable {color: black;}
-.cm-s-default span.cm-variable-2 {color: #05a;}
-.cm-s-default span.cm-variable-3 {color: #085;}
-.cm-s-default span.cm-property {color: black;}
-.cm-s-default span.cm-operator {color: black;}
-.cm-s-default span.cm-comment {color: #999;}
-.cm-s-default span.cm-string {color: #a11;}
-.cm-s-default span.cm-string-2 {color: #f50;}
-.cm-s-default span.cm-meta {color: #555;}
-.cm-s-default span.cm-error {color: #f00;}
-.cm-s-default span.cm-qualifier {color: #555;}
-.cm-s-default span.cm-builtin {color: #30a;}
-.cm-s-default span.cm-bracket {color: #cc7;}
-.cm-s-default span.cm-tag {color: #170;}
-.cm-s-default span.cm-attribute {color: #00c;}
-.cm-s-default span.cm-header {color: #a0a;}
-.cm-s-default span.cm-quote {color: #090;}
-.cm-s-default span.cm-hr {color: #999;}
-.cm-s-default span.cm-link {color: #00c;}
-
-span.cm-header, span.cm-strong {font-weight: bold;}
-span.cm-em {font-style: italic;}
-span.cm-emstrong {font-style: italic; font-weight: bold;}
-span.cm-link {text-decoration: underline;}
-
-div.CodeMirror span.CodeMirror-matchingbracket {color: #0f0;}
-div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
-</style>]]></Library>
+		<Library Target="html"><![CDATA[<link rel="stylesheet" media="screen" type="text/css" href="/9f1c05cd-fee2-6055-2ef4-16fae66214c8.res" />]]></Library>
+		<Library Target="html"><![CDATA[<link type="text/css" href="/97bb6c7e-baa0-43e7-b4c9-1d78cf916efe.res">]]></Library>
+		<Library Target="html"><![CDATA[<script type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae32145d0.res?v1.02"></script>]]></Library>
+		<Library Target="html"><![CDATA[<script type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae32bafe5.res"></script>]]></Library>
+		<Library Target="html"><![CDATA[<script type="text/javascript" src="/966f39fb-3da2-95f2-c33a-398880aff765.res?v2.22"></script>]]></Library>
+		<Library Target="html"><![CDATA[<script type="text/javascript" src="/5cd10fee-6e10-5253-24ea-3edb0a87f9ec.res?match"></script>]]></Library>
+		<Library Target="html"><![CDATA[<script type="text/javascript" src="/95be4415-7ccb-b87b-f50f-77c8485f6bd9.res?syntaxes"></script>]]></Library>
+		<Library Target="html"><![CDATA[<script type='text/javascript' src='/b4993ec8-6d66-8240-22a7-48fbbedfe371.res'></script>]]></Library>
 	</Libraries>
 	<E2VDOM>
 		<Events>
