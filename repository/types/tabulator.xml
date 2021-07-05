@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.4.5</Version>
+    <Version>0.4.6</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass</Containers>
@@ -996,7 +996,7 @@ $(document).ready(() => {
     <Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/8c57b832-48a6-26ae-6f92-90a8f5772f6b.css" />]]></Library>
     <Library Target="html"><![CDATA[<script type="text/javascript" src="/c212c2ac-8edd-4003-b9d2-0f0f13547d0a.js"></script>]]></Library>
     <Library Target="html"><![CDATA[<script type="text/javascript" src="/650ce890-2cd7-49b3-9b91-a143cc064e28.js"></script>]]></Library>
-    <Library Target="html"><![CDATA[<script>deepdash(_)</script>]]></Library>
+    <Library Target="html"><![CDATA[<script>$(()=>{deepdash(_)})</script>]]></Library>
   </Libraries>
   <E2vdom>
     <Events>

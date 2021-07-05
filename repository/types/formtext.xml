@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.99.6201</Version>
+    <Version>1.100</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>form, password, container</Containers>
@@ -759,39 +759,6 @@
 			pXoEyHEcSQhBjLG34HVdCQxYBFAQBMQ51wGvQgDDy7LoM8cnDEOKoojiONauqupQz8YsGEiYAKzg
 			eZ5u1nVNZVnqagZtzfO8z+oAwL7v700j9J4J6xrpAIDGts5nW4c7+EZ/GlAUBbVtq+tHAYDt+vMV
 			pjRNncEkSVDu+A9Unud4zq4peE23hwADAM4lOmQB6glmAAAAAElFTkSuQmCC]]></Resource>
-    <Resource ID="cb185b0a-942e-5ea6-6410-51a426b39fcc" Name="jquery.placeholder.min.js" Type="js"><![CDATA[LyoKKiBQbGFjZWhvbGRlciBwbHVnaW4gZm9yIGpRdWVyeQoqIC0tLQoqIENvcHlyaWdodCAyMDEw
-			LCBEYW5pZWwgU3RvY2tzIChodHRwOi8vd2ViY2xvdWQuc2UpCiogUmVsZWFzZWQgdW5kZXIgdGhl
-			IE1JVCwgQlNELCBhbmQgR1BMIExpY2Vuc2VzLgoqLwoKKGZ1bmN0aW9uKGIpe2Z1bmN0aW9uIGQo
-			YSl7dGhpcy5pbnB1dD1hO2EuYXR0cigidHlwZSIpPT0icGFzc3dvcmQiJiZ0aGlzLmhhbmRsZVBh
-			c3N3b3JkKCk7YihhWzBdLmZvcm0pLnN1Ym1pdChmdW5jdGlvbigpe2lmKGEuaGFzQ2xhc3MoInBs
-			YWNlaG9sZGVyIikmJmFbMF0udmFsdWU9PWEuYXR0cigicGxhY2Vob2xkZXIiKSlhWzBdLnZhbHVl
-			PSIifSl9ZC5wcm90b3R5cGU9e3Nob3c6ZnVuY3Rpb24oYSl7aWYodGhpcy5pbnB1dFswXS52YWx1
-			ZT09PSIifHxhJiZ0aGlzLnZhbHVlSXNQbGFjZWhvbGRlcigpKXtpZih0aGlzLmlzUGFzc3dvcmQp
-			dHJ5e3RoaXMuaW5wdXRbMF0uc2V0QXR0cmlidXRlKCJ0eXBlIiwidGV4dCIpfWNhdGNoKGIpe3Ro
-			aXMuaW5wdXQuYmVmb3JlKHRoaXMuZmFrZVBhc3N3b3JkLnNob3coKSkuaGlkZSgpfXRoaXMuaW5w
-			dXQuYWRkQ2xhc3MoInBsYWNlaG9sZGVyIik7dGhpcy5pbnB1dFswXS52YWx1ZT10aGlzLmlucHV0
-			LmF0dHIoInBsYWNlaG9sZGVyIil9fSwKaGlkZTpmdW5jdGlvbigpe2lmKHRoaXMudmFsdWVJc1Bs
-			YWNlaG9sZGVyKCkmJnRoaXMuaW5wdXQuaGFzQ2xhc3MoInBsYWNlaG9sZGVyIikmJih0aGlzLmlu
-			cHV0LnJlbW92ZUNsYXNzKCJwbGFjZWhvbGRlciIpLHRoaXMuaW5wdXRbMF0udmFsdWU9IiIsdGhp
-			cy5pc1Bhc3N3b3JkKSl7dHJ5e3RoaXMuaW5wdXRbMF0uc2V0QXR0cmlidXRlKCJ0eXBlIiwicGFz
-			c3dvcmQiKX1jYXRjaChhKXt9dGhpcy5pbnB1dC5zaG93KCk7dGhpcy5pbnB1dFswXS5mb2N1cygp
-			fX0sdmFsdWVJc1BsYWNlaG9sZGVyOmZ1bmN0aW9uKCl7cmV0dXJuIHRoaXMuaW5wdXRbMF0udmFs
-			dWU9PXRoaXMuaW5wdXQuYXR0cigicGxhY2Vob2xkZXIiKX0saGFuZGxlUGFzc3dvcmQ6ZnVuY3Rp
-			b24oKXt2YXIgYT10aGlzLmlucHV0O2EuYXR0cigicmVhbFR5cGUiLCJwYXNzd29yZCIpO3RoaXMu
-			aXNQYXNzd29yZD0hMDtpZigoYi5icm93c2VyLm1zaWV8fGIuYnJvd3Nlci5vcGVyYSkmJmFbMF0u
-			b3V0ZXJIVE1MKXt2YXIgYz1iKGFbMF0ub3V0ZXJIVE1MLnJlcGxhY2UoL3R5cGU9KFsnIl0pP3Bh
-			c3N3b3JkXDEvZ2ksCiJ0eXBlPSQxdGV4dCQxIikpO3RoaXMuZmFrZVBhc3N3b3JkPWMudmFsKGEu
-			YXR0cigicGxhY2Vob2xkZXIiKSkuYWRkQ2xhc3MoInBsYWNlaG9sZGVyIikuZm9jdXMoZnVuY3Rp
-			b24oKXthLnRyaWdnZXIoImZvY3VzIik7Yih0aGlzKS5oaWRlKCl9KTtiKGFbMF0uZm9ybSkuc3Vi
-			bWl0KGZ1bmN0aW9uKCl7Yy5yZW1vdmUoKTthLnNob3coKX0pfX19O3ZhciBlPSEhKCJwbGFjZWhv
-			bGRlciJpbiBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJpbnB1dCIpKTtiLmZuLnBsYWNlaG9sZGVy
-			PWZ1bmN0aW9uKCl7cmV0dXJuIGU/dGhpczp0aGlzLmVhY2goZnVuY3Rpb24oKXt2YXIgYT1iKHRo
-			aXMpLGM9bmV3IGQoYSk7Yy5zaG93KCEwKTthLmZvY3VzKGZ1bmN0aW9uKCl7Yy5oaWRlKCl9KTth
-			LmJsdXIoZnVuY3Rpb24oKXtjLnNob3coITEpfSk7KGIuYnJvd3Nlci5tc2llfHxiLmJyb3dzZXIu
-			b3BlcmEpJiYoYih3aW5kb3cpLmxvYWQoZnVuY3Rpb24oKXthLnZhbCgpJiZhLnJlbW92ZUNsYXNz
-			KCJwbGFjZWhvbGRlciIpO2Muc2hvdyghMCl9KSwKYS5mb2N1cyhmdW5jdGlvbigpe2lmKHRoaXMu
-			dmFsdWU9PSIiKXt2YXIgYT10aGlzLmNyZWF0ZVRleHRSYW5nZSgpO2EuY29sbGFwc2UoITApO2Eu
-			bW92ZVN0YXJ0KCJjaGFyYWN0ZXIiLDApO2Euc2VsZWN0KCl9fSkpfSl9fSkoalF1ZXJ5KTsK]]></Resource>
     <Resource ID="dc3697f6-3d20-e2d1-1630-f615db1dbd65" Name="FormText-.png" Type="png"><![CDATA[iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
 			bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
 			bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
@@ -976,12 +943,7 @@ def on_update(object, attributes):
 		if int(height) < 4:
 			# o.set_attributes({"height": "4"})
 			attributes["height"] = "4"]]></SourceCode>
-  <Libraries>
-    <Library Target="html"><![CDATA[<script type="text/javascript" src="/cb185b0a-942e-5ea6-6410-51a426b39fcc.res"></script>
-<script type="text/javascript">
-jQuery(function(){ $j('input[placeholder], textarea[placeholder]').placeholder(); });
-</script>]]></Library>
-  </Libraries>
+  <Libraries></Libraries>
   <E2vdom>
     <Events>
       <Userinterfaceevents>
