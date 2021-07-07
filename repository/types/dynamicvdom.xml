@@ -676,13 +676,13 @@ TEMPLATE = u"""{libraries}
 <div objname="{name}" id="{id}" style="{style}" class="{classes}">{contents}
 </div>
 <script type='text/javascript'>
+$('body').on('DOMSubtreeModified', '#{id}', () => {{window.dynamicObjectLoading=true}});
 {declarations}
 </script>
 {dynlibraries}"""
 
 
 class VDOM_DynamicObject(VDOM_object):
-
     def inner_render(self):
         e2vdom.process(self)
         try:
