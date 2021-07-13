@@ -6,7 +6,7 @@ from json.scanner import py_make_scanner
 from .. import errors
 from ..subtypes import array, binary, boolean, date, dictionary, double, \
 	empty, error, generic, integer, mismatch, nothing, null, string, \
-	v_empty, v_null
+	v_empty, v_null, ordereddictionary
 
 
 def wrap(value):
@@ -65,6 +65,8 @@ class VScriptJSONEncoder(JSONEncoder):
 			mismatch: lambda value: unicode(value),
 			nothing: lambda value: value.name,
 			null: lambda value: None,
+			ordereddictionary: lambda value: {key.as_string: value \
+				for key, value in value.items.iteritems()},
 			string: lambda value: value.value} \
 				.get(type(value), unknown)(value)
 
