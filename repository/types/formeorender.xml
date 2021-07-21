@@ -435,10 +435,12 @@ class VDOM_formeorender(VDOM_object):
 
 		javascript = u"""
     <script>
-      const %(id)s = new FormeoRenderer({
-          renderContainer: '#%(id)s'
-        });
-      %(data)s
+      $(document).ready(() => {
+        window.%(id)s = new FormeoRenderer({
+            renderContainer: '#%(id)s'
+          });
+        %(data)s
+      })
 		</script>
 		""" % {
 			"id": id,
