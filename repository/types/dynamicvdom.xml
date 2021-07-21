@@ -676,7 +676,7 @@ TEMPLATE = u"""{libraries}
 <div objname="{name}" id="{id}" style="{style}" class="{classes}">{contents}
 </div>
 <script type='text/javascript'>
-$('body').on('DOMNodeInserted', '#{id}', () => {{
+$('body').on('DOMNodeInserted', '#{id}', (el) => {{
 	const $this = $(el.target);
 	if ($this.attr('objname') == 'dynamicvdom') {{
 		window.dynamicObjectLoading = true;
