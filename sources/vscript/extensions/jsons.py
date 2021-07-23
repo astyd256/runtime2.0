@@ -3,6 +3,7 @@ import types
 from json import JSONDecoder, JSONEncoder
 from json.decoder import JSONObject, JSONArray
 from json.scanner import py_make_scanner
+from collections import OrderedDict
 from .. import errors
 from ..subtypes import array, binary, boolean, date, dictionary, double, \
 	empty, error, generic, integer, mismatch, nothing, null, string, \
@@ -65,10 +66,11 @@ class VScriptJSONEncoder(JSONEncoder):
 			mismatch: lambda value: unicode(value),
 			nothing: lambda value: value.name,
 			null: lambda value: None,
-			ordereddictionary: lambda value: {key.as_string: value \
-				for key, value in value.items.iteritems()},
-			string: lambda value: value.value} \
-				.get(type(value), unknown)(value)
+			ordereddictionary: lambda value: OrderedDict(
+				[(k.as_string, v) for k, v in value.items.iteritems()]
+			),
+			string: lambda value: value.value
+		}.get(type(value), unknown)(value)
 
 
 def v_asjson(value):
