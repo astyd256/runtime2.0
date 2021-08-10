@@ -123,7 +123,7 @@ class VDOM_database_manager(object):
         self.__index[database.id] = database
         self.__database_by_name[(database.owner_id, database.name)] = database
         # managers.file_manager.create_database_directory(owner_id)
-        managers.file_manager.prepare_directory(file_access.DATABASE, owner_id)
+        managers.file_manager.prepare_directory(file_access.DATABASE, owner_id, cleanup=False)
         managers.storage.write_object_async(VDOM_CONFIG["DATABASE-MANAGER-INDEX-STORAGE-RECORD"], self.__index)
         return database
 
