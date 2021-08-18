@@ -1171,17 +1171,7 @@ $j("#%(id)s>.controls div.control").click(function(){
 $j("#%(id)s .controls .control, #%(id)s .item-panel .control, #%(id)s .item-panel a.edit").click(function(){
 	var t = $j(this), sf = $j("#%(id)s");
 	if (t.hasClass('add')) {
-
-			var n = prompt("%(msg_1)s","%(msg_2)s");
-			if (n) {
-				n = $j.trim(n);
-				if (n == '') {
-					alert("%(msg_3)s");
-				} else {
-					execEventBinded('%(woid)s', "newsmartfolder", {"name": n}, true);
-				}
-			}
-
+			execEventBinded('%(woid)s', "newsmartfolder", {"name": "%(msg_2)s"}, true);
 	} else
 	if (t.hasClass('edit')) {
 
@@ -1189,20 +1179,11 @@ $j("#%(id)s .controls .control, #%(id)s .item-panel .control, #%(id)s .item-pane
 			if (!o) {
 				alert("%(msg_5)s");
 			} else {
-				var n = prompt("%(msg_6)s",o.data('sf').name);
-				if (n) {
-					n = $j.trim(n);
-					if (n == '') {
-						alert("%(msg_3)s");
-					} else {
-						execEventBinded('%(woid)s', "rename", {"guid": o.data('sf').guid, "name": n}, true);
-					}
-				}
+				execEventBinded('%(woid)s', "rename", {"guid": o.data('sf').guid, "name": o.data('sf').name}, true);
 			}
 
 	} else
 	if (t.hasClass('delete')) {
-		//if (confirm("%(msg_12)s")) {
 			var x = sf.data('sf_items_selected') || [];
 			if (x.length) {
 				execEventBinded('%(woid)s', "delete", {"guidlist": x}, true);
@@ -1212,7 +1193,6 @@ $j("#%(id)s .controls .control, #%(id)s .item-panel .control, #%(id)s .item-pane
 					execEventBinded('%(woid)s', "delete", {"guidlist": [o.data('sf').guid]}, true);
 				}
 			}
-		//}
 	} else
 	if (t.hasClass('group')) {
 		var gs = sf.data('sf_items_selected') || [];
@@ -1264,7 +1244,7 @@ $j("#%(id)s .controls .control, #%(id)s .item-panel .control, #%(id)s .item-pane
 		var z = null;
 		$j.each(ss, function(i,x){
 			vdom_sf_selected_add(sf, $(x).attr('index'));
-			//console.info(i, x, $(x))
+			//console.info(i, x, $(x));
 			if (i == 0) z == $(x);
 		});
 		if (z == null) z = ss.first();
