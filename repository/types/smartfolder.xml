@@ -1112,6 +1112,7 @@ var sfo = $j('#%(id)s'), x = sfo.data("sf"), i = $j(this).attr('index');
 $j('>.%(class)s', sfo).removeClass('selected');
 $j(this).addClass('selected');
 
+
 				execEventBinded('%(woid)s', "itemclick", {"id":t.attr("index")});
 			}
 		}, 250);
@@ -1195,23 +1196,25 @@ $j("#%(id)s .controls .control, #%(id)s .item-panel .control, #%(id)s .item-pane
 			}
 	} else
 	if (t.hasClass('group')) {
-		var gs = sf.data('sf_items_selected') || [];
-		if (gs.length) {
-			var n = prompt("%(msg_7)s","%(msg_8)s");
-			if (n) {
-				n = $j.trim(n);
-				if (n == '') {
-					alert("%(msg_9)s");
-				} else {
-					var x = sf.data('sf_items_selected') || [];
-					if (x.length) {
-						execEventBinded('%(woid)s', "group", {"name": n, "guidlist": x}, true);
-					}
-				}
-			}
-		} else {
-			alert("%(msg_10)s");
-		}
+		var x = sf.data('sf_items_selected') || [];
+		execEventBinded('%(woid)s', "group", {"name": "%(msg_8)s", "guidlist": x}, true);
+		// var gs = sf.data('sf_items_selected') || [];
+		// if (gs.length) {
+			 // var n = prompt("%(msg_7)s","%(msg_8)s");
+			// if (n) {
+				// n = $j.trim(n);
+				// if (n == '') {
+					// alert("%(msg_9)s");
+				// } else {
+					// var x = sf.data('sf_items_selected') || [];
+					// if (x.length) {
+						// execEventBinded('%(woid)s', "group", {"name": n, "guidlist": x}, true);
+					// }
+			//	}
+			//}
+	//	} else {
+	//		alert("%(msg_10)s");
+	//	}
 	} else
 	if (t.hasClass('ungroup')) {
 
@@ -1238,26 +1241,24 @@ $j("#%(id)s .controls .control, #%(id)s .item-panel .control, #%(id)s .item-pane
 		$j('.sub', this).show(0);
 	} else
 	if (t.hasClass('selectall')) {
+		var s = 'selected', sc = 'current';
 		var ss = $j("#%(id)s .items .%(class)s:not(.noselect)");
-		//ss.addClass('selected');
-		$j('.sub', $(this).parents('.controls:first')).hide(0);
-		var z = null;
-		$j.each(ss, function(i,x){
-			vdom_sf_selected_add(sf, $(x).attr('index'));
-			//console.info(i, x, $(x));
-			if (i == 0) z == $(x);
-		});
-		if (z == null) z = ss.first();
-		//sf.data('sf_current_item', z);
-		z.data('forselect', ss);
-		z.click();
 
-		//vdom_sf_check_panel(sf, z);
-		//vdom_sf_check_selected(sf);
+		$j.each(ss, function(i, x){
+			vdom_sf_selected_add(sf, $(x).attr('index'));
+		});
+
+		//sf.data('sf_current_item', z);
+		sf.find('.sf-item').addClass(s);
+		sf.find('.sf-item').addClass(sc);
+		sf.addClass('has-current');
+
+		vdom_sf_check_selected(sf);
+		vdom_sf_check_panel(sf);
+
+
 	} else
 	if (t.hasClass('selectnone')) {
-		$j("#%(id)s .items .%(class)s").removeClass('selected');
-		$j('.sub', $(this).parents('.controls:first')).hide(0);
 		vdom_sf_selected_remove_all(sf);
 	}
 	return false;
@@ -1329,18 +1330,31 @@ function vdom_sf_set_drag(sf) {
 	vdom_sf_set_dnd(sf.attr('id'), '%(woid)s', '%(class)s');
 }
 
-function vdom_sf_check_panel(sf, t) {
-	if (vdom_sf_selected_count(sf) > 0 || sf.find('.has-current').size() > 0) {
-		$j('.item-panel .buttons .group', sf).show(0);
-		$j('.item-panel .buttons .ungroup', sf).hide(0);
-	} else {
-		$j('.item-panel .buttons .group', sf).hide(0);
+function vdom_sf_check_panel(sf, t=null) {
+	var pan = $j('.item-panel', sf);
+	// if (vdom_sf_selected_count(sf) == 1 || sf.find('.has-current').size() == 1)
+	if (vdom_sf_selected_count(sf) == 1) {
+		$j('.title-wrap', pan).show(0);
+		$j('.info', pan).show(0);
+		$j('.metas', pan).show(0);
+		$j('.buttons .group', pan).hide(0);
 		if (t.hasClass('group')) {
-			$j('.item-panel .buttons .ungroup', sf).show(0);
+			$j('.buttons .ungroup', pan).show(0);
 		} else {
-			$j('.item-panel .buttons .ungroup', sf).hide(0);
+			$j('.buttons .ungroup', pan).hide(0);
 		}
-	}
+		pan.show(0);
+	// } else if (vdom_sf_selected_count(sf) == 0 || sf.find('.has-current').size() == 0)
+	} else if (vdom_sf_selected_count(sf) > 1) {
+		$j('.title-wrap', pan).hide(0);
+		$j('.info', pan).hide(0);
+		$j('.metas', pan).hide(0);
+		$j('.buttons .ungroup', pan).hide(0);
+		$j('.buttons .group', pan).show(0);
+		pan.show(0);
+	} else {
+		$j('.item-panel', sf).hide(0);
+		}
 }
 
 function vdom_sf_set_handlers(sfid){
@@ -1366,7 +1380,6 @@ function vdom_sf_set_handlers(sfid){
 					var x_prev = prev.data("sf");
 
 					if (e.ctrlKey) {
-
 						if (x.noselect !== '1') {
 							if (t.hasClass(s)) {
 								t.removeClass(s);
@@ -1378,7 +1391,7 @@ function vdom_sf_set_handlers(sfid){
 								//vdom_sf_selected_add(sfid, $j(sfid.data('sf_current_item')).data('sf').guid);
 							}
 						} else {
-t.stop().css("opacity", 0).animate({ opacity: 1 }, 1000);
+							t.stop().css("opacity", 0).animate({ opacity: 1 }, 1000);
 						}
 
 						if (!prev.data('first_selected')) {
@@ -1391,22 +1404,16 @@ t.stop().css("opacity", 0).animate({ opacity: 1 }, 1000);
 						}
 						//x_prev.first_selected = true;
 						prev.data('first_selected', true)
-
-						//sfid.data('sf_current_item', t);
-						//t.parents('.items').find('.sf-item').removeClass(sc);
-						//t.addClass(sc);
 					}
 					else {
 						prev.data('first_selected', false);
-
 						vdom_sf_selected_remove_all(sfid);
-						t.parents('.items').find('.sf-item').removeClass(s);
+						vdom_sf_selected_add(sfid, x.guid);
 					}
 
 					sfid.data('sf_current_item', t);
-
 					t.parents('.items').find('.sf-item').removeClass(sc);
-					t.addClass(sc);
+					t.addClass(sc); t.addClass(s);
 
 					if ($j('.%(class)s.'+sc, sfid).size() > 0) {
 						sfid.addClass('has-current');
@@ -1425,12 +1432,11 @@ t.stop().css("opacity", 0).animate({ opacity: 1 }, 1000);
 							s = s + '<span><b>'+z+'</b> '+x+'</span>';
 						});
 						$j('>.metas', pan).html(s);
-
 					} else {
 						sfid.removeClass('has-current');
 					}
 
-/*
+					/*
 					if (sfid.data('sf_selectmode') == 0) {
 						sfid.data('sf_current_item', t);
 
@@ -1470,13 +1476,13 @@ t.stop().css("opacity", 0).animate({ opacity: 1 }, 1000);
 							}
 						}
 					}
-*/
+					*/
+
 
 					if (t.data('forselect') !== false) {
 						t.data('forselect').addClass('selected');
 						t.data('forselect', false);
 					}
-
 					vdom_sf_check_selected(sfid);
 					vdom_sf_check_panel(sfid, t);
 				}
@@ -1521,9 +1527,11 @@ function vdom_sf_selected_remove(sf, guid){
 }
 
 function vdom_sf_selected_remove_all(sf){
-	$j("#%(id)s .items .%(class)s").removeClass('selected');
+	$j(".items .%(class)s", sf).removeClass('selected');
+	$j(".items .%(class)s", sf).removeClass('current');
 	sf.data('sf_items_selected', []);
 	vdom_sf_check_selected(sf);
+	$j('.item-panel', sf).hide(0);
 }
 
 function vdom_sf_selected_count(sf){
