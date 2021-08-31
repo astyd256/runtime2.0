@@ -1176,7 +1176,7 @@ $j("#%(id)s .controls .control, #%(id)s .item-panel .control, #%(id)s .item-pane
 	} else
 	if (t.hasClass('edit')) {
 
-			var o = sf.data('sf_current_item') || false;
+			var o = sf.data('sf_items_selected') || false;
 			if (!o) {
 				alert("%(msg_5)s");
 			} else {
@@ -1338,11 +1338,15 @@ function vdom_sf_check_panel(sf, t=null) {
 		$j('.info', pan).show(0);
 		$j('.metas', pan).show(0);
 		$j('.buttons .group', pan).hide(0);
+		t = t || sf.find('.sf-item');
 		if (t.hasClass('group')) {
 			$j('.buttons .ungroup', pan).show(0);
 		} else {
 			$j('.buttons .ungroup', pan).hide(0);
 		}
+		set_panel_data(sf, t);
+
+
 		pan.show(0);
 	// } else if (vdom_sf_selected_count(sf) == 0 || sf.find('.has-current').size() == 0)
 	} else if (vdom_sf_selected_count(sf) > 1) {
@@ -1357,6 +1361,30 @@ function vdom_sf_check_panel(sf, t=null) {
 		}
 }
 
+
+function set_panel_data(sf, t){
+	if ($j('.%(class)s.'+'current', sf).size() > 0) {
+		sf.addClass('has-current');
+
+		// set info for current item
+		var d = t.data('sf');
+		var pan = $j('.item-panel', sf);
+
+		pan.removeClass('group folder');
+		if (t.hasClass('group')) pan.addClass('group'); else pan.addClass('folder');
+
+		$j('.title-wrap>.title', pan).text(d['name']);
+		$j('>.info', pan).text(d['info']);
+		var s = '';
+		$j.each(d['metas'], function(z,x){
+			s = s + '<span><b>'+z+'</b> '+x+'</span>';
+		});
+		$j('>.metas', pan).html(s);
+
+	} else {
+		sf.removeClass('has-current');
+	}
+}
 function vdom_sf_set_handlers(sfid){
 	vdom_sf_set_drag(sfid);
 
@@ -1443,27 +1471,7 @@ function vdom_sf_set_handlers(sfid){
 						t.parents('.items').find('.sf-item').removeClass(sc);
 						t.addClass(sc);
 
-						if ($j('.%(class)s.'+sc, sfid).size() > 0) {
-							sfid.addClass('has-current');
-
-							// set info for current item
-							var d = t.data('sf');
-							var pan = $j('.item-panel', sfid);
-
-							pan.removeClass('group folder');
-							if (t.hasClass('group')) pan.addClass('group'); else pan.addClass('folder');
-
-							$j('.title-wrap>.title', pan).text(d['name']);
-							$j('>.info', pan).text(d['info']);
-							var s = '';
-							$j.each(d['metas'], function(z,x){
-								s = s + '<span><b>'+z+'</b> '+x+'</span>';
-							});
-							$j('>.metas', pan).html(s);
-
-						} else {
-							sfid.removeClass('has-current');
-						}
+						set_panel_data(sfid, t);
 
 					} else {
 						if (x.noselect !== '1') {
