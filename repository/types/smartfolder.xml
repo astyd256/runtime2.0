@@ -1175,55 +1175,33 @@ $j("#%(id)s .controls .control, #%(id)s .item-panel .control, #%(id)s .item-pane
 			execEventBinded('%(woid)s', "newsmartfolder", {"name": "%(msg_2)s"}, true);
 	} else
 	if (t.hasClass('edit')) {
-
-			var o = sf.data('sf_items_selected') || false;
-			if (!o) {
-				alert("%(msg_5)s");
-			} else {
-				execEventBinded('%(woid)s', "rename", {"guid": o.data('sf').guid, "name": o.data('sf').name}, true);
-			}
+			var o = sf.data('sf_current_item') || false;
+			var arguments = o? {"guid": o.data('sf').guid, "name": o.data('sf').name}: {};
+			execEventBinded('%(woid)s', "rename", arguments, true);
 
 	} else
 	if (t.hasClass('delete')) {
 			var x = sf.data('sf_items_selected') || [];
+			var arguments = {};
 			if (x.length) {
-				execEventBinded('%(woid)s', "delete", {"guidlist": x}, true);
+				arguments = {"guidlist": x};
 			} else {
 				var o = sf.data('sf_current_item') || false;
 				if (o) {
-					execEventBinded('%(woid)s', "delete", {"guidlist": [o.data('sf').guid]}, true);
+					arguments = {"guidlist": [o.data('sf').guid]};
 				}
 			}
+			execEventBinded('%(woid)s', "delete", arguments, true);
 	} else
 	if (t.hasClass('group')) {
 		var x = sf.data('sf_items_selected') || [];
 		execEventBinded('%(woid)s', "group", {"name": "%(msg_8)s", "guidlist": x}, true);
-		// var gs = sf.data('sf_items_selected') || [];
-		// if (gs.length) {
-			 // var n = prompt("%(msg_7)s","%(msg_8)s");
-			// if (n) {
-				// n = $j.trim(n);
-				// if (n == '') {
-					// alert("%(msg_9)s");
-				// } else {
-					// var x = sf.data('sf_items_selected') || [];
-					// if (x.length) {
-						// execEventBinded('%(woid)s', "group", {"name": n, "guidlist": x}, true);
-					// }
-			//	}
-			//}
-	//	} else {
-	//		alert("%(msg_10)s");
-	//	}
 	} else
 	if (t.hasClass('ungroup')) {
 
 			var x = sf.data('sf_current_item') || [];
-			if (x.length) {
-				execEventBinded('%(woid)s', "ungroup", {"guid": x.data('sf').guid}, true);
-			} else {
-				alert("%(msg_11)s");
-			}
+			var arguments = x.length? {"guid": x.data('sf').guid}: {};
+			execEventBinded('%(woid)s', "ungroup", arguments, true);
 
 	} else
 	if (t.hasClass('rules')) {
@@ -1248,9 +1226,10 @@ $j("#%(id)s .controls .control, #%(id)s .item-panel .control, #%(id)s .item-pane
 			vdom_sf_selected_add(sf, $(x).attr('index'));
 		});
 
-		//sf.data('sf_current_item', z);
-		sf.find('.sf-item').addClass(s);
-		sf.find('.sf-item').addClass(sc);
+		var t = sf.find('.sf-item');
+		if (t.length == 1) sf.data('sf_current_item', t);
+		t.addClass(s);
+		t.addClass(sc);
 		sf.addClass('has-current');
 
 		vdom_sf_check_selected(sf);
