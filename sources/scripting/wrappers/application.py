@@ -282,7 +282,7 @@ class VDOM_databases(object):
     def create(self, db_name, title="DBSchema", description=""):
         from scripting.wrappers import application
         application_memmory = managers.memory.applications[application.id]
-        obj = pplication_memmory.objects.get(
+        obj = application_memmory.objects.get(
             db_name,
             application_memmory.objects.new(managers.memory.types[DBSCHEMA_ID], name=db_name)
         )
