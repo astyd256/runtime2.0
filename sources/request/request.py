@@ -277,9 +277,15 @@ class VDOM_request(object):
 		else:
 			self.add_header("Content-Disposition", "attachment; filename=\"%s\""%filename)
 			
-		if cache_control:
+		if cache_control is None:
+			pass
+		elif cache_control is True:
 			self.add_header("Cache-Control", "max-age=86400")
-			
+		elif cache_control is False:
+			self.add_header("Cache-Control", "no-cache, no-store, must-revalidate")
+		elif isinstance(cache_control, int):
+			self.add_header("Cache-Control", "max-age=%s"%cache_control)
+		
 		self.add_header("Content-Length",str(length))
 		self.set_nocache()
 		self.write_handler(handler)
