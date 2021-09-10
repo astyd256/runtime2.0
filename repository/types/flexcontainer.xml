@@ -1894,8 +1894,6 @@ class VDOM_flexcontainer(VDOM_object):
 					aligncon = aligncontent)
 				
 		style = defaultstyle + flexstyle
-			
-					
 
 		id = u"o_" + (self.id).replace('-', '_')
 		footer = u"""rel="footer" """ if self.footer == "1" else u""
@@ -1923,8 +1921,6 @@ class VDOM_flexcontainer(VDOM_object):
 		return VDOM_object.render(self, contents=result)
 
 
-
-
 	def wysiwyg(self, contents=""):
 		from scripting.legacy.wysiwyg import get_centered_image_metrics
 
@@ -1939,7 +1935,7 @@ class VDOM_flexcontainer(VDOM_object):
 
 		# show icon if container is empty
 		empty_container_image = ""
-		if len(contents)==0 and self.backgroundimage == "":
+		if len(contents) == 0 and self.backgroundimage == "":
 			image_id = "88746dc1-2404-e1bd-7ced-c746075863cf"
 			image_width = image_height = 50
 
@@ -2050,15 +2046,8 @@ def on_update(object, attributes):
 		superheight = attributes["superheight"]
 		if 'px' in superheight.lower():
 			modifications.update(width = int(superheight[0:superheight.find("px")]))
-
-
-
-
-
 	attributes.update(modifications)
 	return ""
-	
-
 ]]></SourceCode>
   <Libraries/>
   <E2vdom>
