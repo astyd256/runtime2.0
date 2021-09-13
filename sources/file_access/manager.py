@@ -6,7 +6,7 @@ import shutil
 
 from collections import deque
 from threading import RLock
-from tempfile import mkdtemp, NamedTemporaryFile # _TemporaryFileWrapper
+from tempfile import mkdtemp, NamedTemporaryFile, _TemporaryFileWrapper
 from glob import glob
 
 import settings
@@ -208,6 +208,28 @@ class FileManager(object):
             mode = "w" if encoding else "wb"
             # self.ensure(category, owner, mode)
             with VDOM_named_mutex(location):
+                if isinstance(data, Attachment):
+                    if data._get_realpath():
+                        if not data.handler.closed:
+                            data.handler.close()
+                        try:
+                            os.rename(data._get_realpath(), location)
+                        except OSError:
+                            os.remove(location)
+                            os.rename(data._get_realpath(), location)
+                        data._del_fileobj()
+                        return
+                    else:
+                        data = data.handler
+                elif isinstance(data, _TemporaryFileWrapper):
+                    if not data.closed:
+                        data.close()
+                    try:
+                        os.rename(data.name, location)
+                    except OSError:
+                        os.remove(location)
+                        os.rename(data.name, location)
+                    return
                 if safely:
                     proper_location, location = location, location + ".temporary"
                 with io.open(location, mode, encoding=encoding, newline=None if "b" in mode else "") as file:
