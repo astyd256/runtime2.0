@@ -9,13 +9,31 @@ from utils.parsing import Parser, ParsingException, \
 	UnexpectedElementValueError, UnexpectedAttributeValueError, \
 	MissingElementError, MissingAttributeError
 
+class EventInfo(object):
+	def __init__(self, event_source_id, event_name, event_parameters):
+		self._event_source_id = event_source_id
+		self._event_name = event_name
+		self._event_parameters = event_parameters
+
+	@property
+	def event_source_id(self):
+		return self._event_source_id
+
+	@property
+	def event_name(self):
+		return self._event_name
+
+	@property
+	def event_parameters(self):
+		return self._event_parameters
+
 
 def calls_builder(parser):
 	"legacy"  # select legacy builder mode
 	def document_handler(name, attributes):
-		if name=="Events" or name=="EVENTS":
+		if name == "Events" or name == "EVENTS":
 			# <Events>
-			structure=VDOM_structure(sid=None, appid=None, events={}, state=0)
+			structure = VDOM_structure(sid=None, appid=None, events=[], state=0)
 			def events_handler(name, attributes):
 				if name=="Application" or name=="APPLICATION":
 					# <Application>
@@ -54,7 +72,9 @@ def calls_builder(parser):
 						else:
 							parser.reject_elements(name, attributes)
 					def close_event_handler(name):
-						structure.events[event_source_object_id, event_name]=event_parameters
+						structure.events.append(
+							EventInfo(event_source_object_id, event_name, event_parameters)
+						)
 					parser.handle_elements(name, attributes, event_handler, close_event_handler)
 					# </Event>
 				elif name=="SharedVariables" or name=="SV":
@@ -101,7 +121,7 @@ def run(request):
 		# 	datafield)
 		request.request_type = "action"
 		try:
-			ev=Parser(builder=calls_builder).parse(datafield)
+			ev = Parser(builder=calls_builder).parse(datafield)
 		except ParsingException as error:
 			debug("Unable to parse data: %s" % error)
 		app = request.application()
@@ -128,26 +148,28 @@ def run(request):
 			err = None
 			try:
 				# print "E2VDOM >>>", ev.events
-				for ob, nm in ev.events:
-					obj=app.objects.catalog.get(ob)
+				for event_info in ev.events:
+					obj = app.objects.catalog.get(event_info.event_source_id)
 					if obj is None:
 						debug("Event: Incorrect source object")
 						continue
-					h=app.events.catalog.get((ob, nm)) # all
+					h = app.events.catalog.get((event_info.event_source_id, event_info.event_name)) # all
 					if h is None:
 						debug("Event: No such event")
 						continue
 					# for callee in h.callees:
-					# 	print "CALLEE >>>", callee
+					# print "CALLEE >>>", callee
 					for callee in h.callees:
 						if not callee.is_action:
 							continue
-						params = ev.events[ob, nm]
-						params["sender"] = [ob]
-						params["sender_event"] = [nm]
+						params = event_info.event_parameters
+						params.update({
+							"sender": [event_info.event_source_id],
+							"sender_event": [event_info.event_name]
+						})
 						request.arguments().arguments(params)
 						request.container_id = callee.owner
-						result=managers.engine.execute(callee, render=1)
+						result = managers.engine.execute(callee, render=1)
 						for key in result:
 							k_ob=app.objects.catalog.get(key)
 							k_ob_parent_id = k_ob.parent.id if k_ob.parent else ""
