@@ -168,35 +168,6 @@ class FileManager(object):
             else:
                 raise
 
-    # There are some code pieces from write
-
-    # TODO: This dirty hack must be checked for new UWSGI layer
-    # if isinstance(content, Attachment):
-    #     if content._get_realpath():
-    #         if not content.handler.closed:
-    #             content.handler.close()
-    #         try:
-    #             os.rename(content._get_realpath(), location)
-    #         except OSError:
-    #             os.remove(location)
-    #             os.rename(content._get_realpath(), location)
-    #         content._del_fileobj()
-    #         return
-    #     else:
-    #         content = content.handler
-    #         async = False
-
-    # TODO: This dirty hack possible not work on 2.7.11 or later
-    # elif isinstance(content, _TemporaryFileWrapper):
-    #     if not content.closed: # .closed -> .close_called ???
-    #         content.close() # on os.name == "nt" no .close in object
-    #     try:
-    #         os.rename(content.name, location)
-    #     except OSError:
-    #         os.remove(location)
-    #         os.rename(content.name, location)
-    #     return
-
     def write(self, category, owner, name, data=None, encoding=None, async=False, safely=False):
         if async:
             with self._lock:
@@ -213,22 +184,30 @@ class FileManager(object):
                         if not data.handler.closed:
                             data.handler.close()
                         try:
-                            os.rename(data._get_realpath(), location)
-                        except OSError:
-                            os.remove(location)
-                            os.rename(data._get_realpath(), location)
+                            shutil.move(data._get_realpath(), location)
+                        except OSError as e:
+                            print (u"Attachment save error: %s"%e)
+                            try: 
+                                os.remove(location)
+                            except OSError as e:
+                                print (u"Target removal error: %s"%e)
+                            shutil.move(data._get_realpath(), location)
                         data._del_fileobj()
                         return
                     else:
                         data = data.handler
-                elif isinstance(data, _TemporaryFileWrapper):
+                elif isinstance(data, _TemporaryFileWrapper): #TODO: This dirty hack possible not work on 2.7.11 or later
                     if not data.closed:
                         data.close()
                     try:
-                        os.rename(data.name, location)
-                    except OSError:
-                        os.remove(location)
-                        os.rename(data.name, location)
+                        shutil.move(data.name, location)
+                    except OSError as e:
+                        print (u"Attachment save error: %s"%e)
+                        try: 
+                            os.remove(location)
+                        except OSError as e:
+                            print (u"Target removal error: %s"%e)
+                        shutil.move(data.name, location)
                     return
                 if safely:
                     proper_location, location = location, location + ".temporary"
