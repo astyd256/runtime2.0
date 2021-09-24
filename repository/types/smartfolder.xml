@@ -1348,15 +1348,14 @@ function set_panel_data(sf, t){
 		// set info for current item
 		var d = t.data('sf');
 		var pan = $j('.item-panel', sf);
-
 		pan.removeClass('group folder');
 		if (t.hasClass('group')) pan.addClass('group'); else pan.addClass('folder');
 
 		$j('.title-wrap>.title', pan).text(d['name']);
 		$j('>.info', pan).text(d['info']);
 		var s = '';
-		$j.each(d['metas'], function(z,x){
-			s = s + '<span><b>'+z+'</b> '+x+'</span>';
+		$j.each(d['metas'], function(index, meta){
+			s += '<span class="metas type-'+ meta['type']+'"><b>'+meta['title']+'</b> '+ meta['value'] +'</span>'
 		});
 		$j('>.metas', pan).html(s);
 
@@ -1435,8 +1434,8 @@ function vdom_sf_set_handlers(sfid){
 						$j('.title-wrap>.title', pan).text(d['name']);
 						$j('>.info', pan).text(d['info']);
 						var s = '';
-						$j.each(d['metas'], function(z,x){
-							s = s + '<span><b>'+z+'</b> '+x+'</span>';
+						$j.each(d['metas'], function(index, meta){
+							s += '<span class="metas type-'+ meta['type']+'"><b>'+meta['title']+'</b> '+ meta['value'] +'</span>'
 						});
 						$j('>.metas', pan).html(s);
 					} else {
@@ -1549,7 +1548,7 @@ function vdom_sf_enable(id){
 	$j('#'+id+' .sf-disabled').fadeOut('fast');
 }
 
-function vdom_sf_load(id,path,total,data){
+function vdom_sf_load(id, path, total, data){
 	var sf = $j('#'+id);
 	sf.data('sf_path', path);
 	sf.data('sf_items_count', total);
@@ -1574,9 +1573,9 @@ function vdom_sf_load(id,path,total,data){
 				nomove:    e['nomove'] || '',
 				noselect:  e['noselect'] || '',
 				info:      e['info'] || '',
-				metas:     e['metas'] || {}
+				metas:     e['metas'] || []
 			};
-			if (typeof a['metas'] === 'string') a['metas'] = JSON.parse(a['metas']);
+			if (typeof a['metas'] === 'string') a['metas'] = [JSON.parse(a['metas'])];
 
 			var s = $j( '<div class="sf-item" index="'+a['guid']+'"><div class="img"><div></div></div><div class="name">'+a['name']+'</div><div class="type-'+a['type']+'"></div></div>' );
 			if (a['nomove'] == '1') s.append('<div class="sf-item"><div class="name">'+a['name']+'</div><div class="type-'+a['type']+'"></div></div>' );
@@ -2104,7 +2103,7 @@ function vdom_sf_set_dnd(sfid, sfwoid, sfclass) {
 /*
 function vdom_sf_activate(id){
 }
-function vdom_sf_load(id,path,total,data){
+function vdom_sf_load(id,path, total, data){
 	var sf = $j('#'+id);
 	var d = [], s, s0 = $j("<div class='sf-item'></div>");
 	if (typeof data === 'array' || typeof data === 'object') {

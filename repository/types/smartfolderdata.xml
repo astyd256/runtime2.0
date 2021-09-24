@@ -1255,8 +1255,8 @@ function vdom_sfd_refresh(sf){
 			var a = {
 				type:     e['type'] || 'string',
 				name:     e['name'] || '',
-				title:    e['title'] || 'no title',
-				value:    e['value'] || 'no value',
+				title:    e['title'] || '',
+				value:    e['value'] || '',
 				editable: !!e['editable']
 			};
 			var at = a['type'], inp = '', aq = a['value'].replace("'",'&prime;');
@@ -1289,7 +1289,7 @@ function vdom_sfd_enable(id){
 	$j('#'+id+' .sf-disabled').fadeOut('fast');
 }
 
-function vdom_sfd_load(id,data){
+function vdom_sfd_load(id, data){
 	var sf = $j('#'+id);
 	var dd = data || '';
 	if (dd == '') {
@@ -1339,8 +1339,8 @@ function vdom_sfd_set_handlers(sf){
 				var a = {
 					type:      e['type'] || 'string',
 					name:      e['name'] || '',
-					title:     e['title'] || 'no title',
-					value:     e['value'] || 'no value',
+					title:     e['title'] || '',
+					value:     e['value'] || '',
 					editable:  !!e['editable'],
 					deletable: !!e['deletable']
 				};
