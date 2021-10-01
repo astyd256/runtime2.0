@@ -331,9 +331,10 @@ class VDOM_tinymce(VDOM_object):
             }
 
             /* fix icons */
-            .mce-container-body *::before {
+            .mce-ico {
                 font-family: 'tinymce' !important;
             }
+
         </style>
         """ % { "id": ID, "styles": STYLES_STRING_FORMAT }
 
