@@ -376,6 +376,17 @@ class VDOM_tinymce(VDOM_object):
                     table: { title: 'Table', items: 'inserttable | cell row column | tableprops deletetable' },
                     help: { title: 'Help', items: 'help' }
                   },
+                  paste_data_images: true,
+                  images_upload_handler: (blobInfo, success, failure, progress) => {
+                    //console.log(1);
+                    //const base64 = blobInfo.base64();
+                    //const bytes = (base64.length * (3/4)) - (base64.endsWith("==") ? 2 : 1);
+                    //const maxSize = 500000;
+                    //if (bytes > maxSize) {
+                    //  failure("File should be less than 500kB");
+                    //}
+                    success(`data:image/png;base64, ${blobInfo.base64()}`);
+                  },
                   setup: (editor) => {
                     editor.on('change', function () {
                       editor.save();
