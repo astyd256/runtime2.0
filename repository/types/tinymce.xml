@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Additional</Category>
     <Dynamic>1</Dynamic>
-    <Version>0.1</Version>
+    <Version>0.3</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, flexcontainer, form</Containers>
@@ -320,13 +320,13 @@ class VDOM_tinymce(VDOM_object):
                 height: 100%%;
             }
 
-            .%(id)s #mceu_15-body {
+            .%(id)s > div > div {
                 height: 100%% !important;
                 display: flex;
                 flex-direction: column;
             }
 
-            .%(id)s #mceu_33 {
+            .%(id)s .mce-edit-area {
                 flex: 1;
             }
 
@@ -376,7 +376,13 @@ class VDOM_tinymce(VDOM_object):
                     table: { title: 'Table', items: 'inserttable | cell row column | tableprops deletetable' },
                     help: { title: 'Help', items: 'help' }
                   },
+                  toolbar: 'undo redo | formatselect fontselect  fontsizeselect | ' +
+                    'bold italic backcolor | alignleft aligncenter ' +
+                    'alignright alignjustify | bullist numlist outdent indent | ' +
+                    'removeformat | ' +
+                    'link image',
                   paste_data_images: true,
+                  fontsize_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt',
                   setup: (editor) => {
                     editor.on('change', function () {
                       editor.save();
