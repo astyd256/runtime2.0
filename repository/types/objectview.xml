@@ -17,7 +17,7 @@
     <Version>1.82.8389</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
-    <Containers>htmlcontainer, flexcontainer, dialog, dialog_2, container, tablecell, form, accordeon, smartfolderdata</Containers>
+    <Containers>htmlcontainer, flexcontainer, dialog, dialog_2, container, tablecell, form, accordeon, smartfolderdata, sensetive</Containers>
     <Languages>en_US ,fr_FR ,ru_RU</Languages>
     <Handlers/>
     <RemoteMethods/>

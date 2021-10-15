@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_tree</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>2.21.8389</Version>
+		<Version>2.22</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(cbd47a55-cfad-bba6-e2a5-16f2a90371de)</Icon>
@@ -1451,24 +1451,28 @@ jQuery(document).ready(function($){
         isFolder: node.data.isFolder
       });
     },
-    onDeactivate: function(node) {
+    onDeactivate: (node) => {
     },
-    onSelect: function(flag, node) {
-      var a = [];
-      $q('#%(id)s').dynatree("getRoot").visit(function(node){
-        if (node.isSelected()) a.push(node.data.key);
+    onSelect: (flag, node) => {
+      const keyList = [];
+      $('#%(id)s').dynatree("getRoot").visit(function(node){
+        if (node.isSelected()) keyList.push(node.data.key);
       });
-      execEventBinded("%(woid)s", "select", {keyList: a});
+      if (keyList.length === 0) {
+        execEventBinded("%(woid)s", "unselectedall");
+      } else {
+        execEventBinded("%(woid)s", "select", {keyList});
+      }
     },
-    onExpand: function(flag, node) {
+    onExpand: (flag, node) => {
       if (typeof fixfooter !== 'undefined') fixfooter();
       execEventBinded("%(woid)s", "expand", {});
     },
-    onLazyRead: function(node){
+    onLazyRead: (node) => {
       execEventBinded("%(woid)s", "lazyLoad", {nodeKey: node.data.key});
     }
     /*,dnd: {
-      onDragStart: function(node) {
+      onDragStart: (node) => {
         // This function MUST be defined to enable dragging for the tree.
         // Return false to cancel dragging of node.
         //logMsg("tree.onDragStart(%(o)s)", node);
@@ -1669,9 +1673,6 @@ jQuery(document).ready(function($){
           html_data = html_data)
     
     return VDOM_object.wysiwyg(self, contents=result)
-  
-  ##################################################
-  
 ]]>
 	</SourceCode>
 	<Libraries>
@@ -1775,6 +1776,9 @@ jQuery(document).ready(function($){
 						<Parameter Name="keyList" Description="#Lang(929)" Order="0"/>
 					</Parameters>
 				</Event>
+				<Event Name="unselectedall" Description="#Lang(003)">
+					<Parameters />
+				</Event>
 			</UserInterfaceEvents>
 		</Events>
 		<Actions>
@@ -1784,32 +1788,25 @@ jQuery(document).ready(function($){
 						<Parameter Name="width" DisplayName="#Lang(703)" Description="#Lang(803)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
 						<Parameter Name="height" DisplayName="#Lang(704)" Description="#Lang(804)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
-					<SourceCode>
-<![CDATA[$q(this.domCont).width(parseInt(width,10)).height(parseInt(height,10));]]>
-					</SourceCode>
+					<SourceCode><![CDATA[$(this.domCont).width(parseInt(width,10)).height(parseInt(height,10));]]></SourceCode>
 				</Action>
 				<Action Name="hide" DisplayName="#Lang(601)" Description="#Lang(501)">
 					<Parameters>
 						<Parameter Name="fade" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
-					<SourceCode>
-<![CDATA[$j(this.domCont).fadeOut(fade);]]>
-					</SourceCode>
+					<SourceCode><![CDATA[$(this.domCont).fadeOut(fade);]]></SourceCode>
 				</Action>
 				<Action Name="show" DisplayName="#Lang(604)" Description="#Lang(504)">
 					<Parameters>
 						<Parameter Name="fade" DisplayName="#Lang(705)" Description="#Lang(805)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
-					<SourceCode>
-<![CDATA[$q(this.domCont).fadeIn(fade);]]>
-					</SourceCode>
+					<SourceCode><![CDATA[$(this.domCont).fadeIn(fade);]]></SourceCode>
 				</Action>
 				<Action Name="loadHTMLData" DisplayName="#Lang(602)" Description="#Lang(502)">
 					<Parameters>
 						<Parameter Name="HTMLdata" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
-					<SourceCode>
-<![CDATA[$j(this.domCont).html(HTMLdata);]]>
+					<SourceCode><![CDATA[$(this.domCont).html(HTMLdata)]]>
 					</SourceCode>
 				</Action>
 				<Action Name="addNode" DisplayName="#Lang(604)" Description="#Lang(504)">
@@ -1818,11 +1815,13 @@ jQuery(document).ready(function($){
 						<Parameter Name="childs" DisplayName="#Lang(705)" Description="#Lang(805)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
 					<SourceCode>
-<![CDATA[var node = $q(this.domCont).dynatree("getTree").getNodeByKey(targetNodeKey);
-if (node){
-  node.setLazyNodeStatus(DTNodeStatus_Ok);
-  node.addChild(eval(childs));
-}]]>
+						<![CDATA[
+							const node = $(this.domCont).dynatree("getTree").getNodeByKey(targetNodeKey);
+							if (node) {
+								node.setLazyNodeStatus(DTNodeStatus_Ok);
+								node.addChild(eval(childs));
+							}
+						]]>
 					</SourceCode>
 				</Action>
 			</Container>
