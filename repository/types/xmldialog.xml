@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_xmldialog</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.189.9202</Version>
+		<Version>1.189.93</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(723723b4-c8f4-5e4a-b02c-16fa8e0d53f7)</Icon>
@@ -3786,7 +3786,10 @@ class VDOM_xmldialog(VDOM_object):
 		<Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/97bb6c7e-baa0-43e7-b4c9-1d78cf916efe.res">]]></Library>
 		<Library Target="html"><![CDATA[<script type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae32145d0.res?v1.02"></script>]]></Library>
 		<Library Target="html"><![CDATA[<script type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae32bafe5.res"></script>]]></Library>
-		<Library Target="html"><![CDATA[<script type="text/javascript" src="/966f39fb-3da2-95f2-c33a-398880aff765.res?v2.22"></script>]]></Library>
+		
+		<!-- CODE MIRROR LIB -->
+		<Library Target="html"><![CDATA[<script type="text/javascript" src="/064add91-8595-0f40-10ea-09d38022edee.js"></script>]]></Library>
+		
 		<Library Target="html"><![CDATA[<script type="text/javascript" src="/5cd10fee-6e10-5253-24ea-3edb0a87f9ec.res?match"></script>]]></Library>
 		<Library Target="html"><![CDATA[<script type="text/javascript" src="/95be4415-7ccb-b87b-f50f-77c8485f6bd9.res?syntaxes"></script>]]></Library>
 		<Library Target="html"><![CDATA[<script type='text/javascript' src='/b4993ec8-6d66-8240-22a7-48fbbedfe371.res'></script>]]></Library>
