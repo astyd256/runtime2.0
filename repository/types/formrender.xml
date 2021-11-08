@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Form</Category>
     <Dynamic>1</Dynamic>
-    <Version>1.19</Version>
+    <Version>1.20</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>form</Containers>
@@ -885,14 +885,28 @@ $q(this.domCont).formRender({dataType: datatype,formData: JSON.parse(data), i18n
           <Parameters>
             <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(712)" ScriptName="cssStyleValue" Help="#Lang(812)" RegularExpressionValidation=".*"/>
           </Parameters>
-          <SourceCode><![CDATA[var t=$q(this.domCont);
+          <SourceCode><![CDATA[var t=$(this.domCont);
 t.attr('style', t.attr('style') + ';' + cssStyleValue);]]></SourceCode>
         </Action>
         <Action Help="#Lang(509)" InterfaceName="#Lang(609)" MethodName="setClass">
           <Parameters>
             <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(713)" ScriptName="className" Help="#Lang(813)" RegularExpressionValidation=".*"/>
           </Parameters>
-          <SourceCode><![CDATA[$q(this.domCont).attr('class',className);]]></SourceCode>
+          <SourceCode><![CDATA[$(this.domCont).attr('class',className);]]></SourceCode>
+        </Action>
+        <Action Help="#Lang(509)" InterfaceName="#Lang(509)" MethodName="setInputValue">
+          <Parameters>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(509)" ScriptName="name" Help="#Lang(509)" RegularExpressionValidation=".*"/>
+            <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(509)" ScriptName="value" Help="#Lang(509)" RegularExpressionValidation=".*"/>
+          </Parameters>
+          <SourceCode><![CDATA[
+          {
+            const tryJsonParse = value => {
+                try { return JSON.parse(str) } catch (err) { return value }
+            };
+            $(this.domCont).find(`[name='${name}']`).val(tryJsonParse(value));
+          }
+          ]]></SourceCode>
         </Action>
       </Container>
     </Actions>
