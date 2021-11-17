@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_uploader</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.16.6200</Version>
+		<Version>1.16.63</Version>
 		<Category>Form</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(2cb1a464-fb61-a73b-68f6-17248921c0ac)</Icon>
@@ -49,7 +49,7 @@
 		<Attribute>
 			<Name>visible</Name>
 			<DisplayName>#Lang(102)</DisplayName>
-			<Description>#Lang(202)</Description>
+			<Description>#Lang(211)</Description>
 			<DefaultValue>1</DefaultValue>
 			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
 			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
@@ -140,6 +140,30 @@
 			<Visible>1</Visible>
 			<InterfaceType>0</InterfaceType>
 			<CodeInterface>TextField(200)</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>required</Name>
+			<DisplayName>#Lang(809)</DisplayName>
+			<Description>#Lang(211)</Description>
+			<DefaultValue>0</DefaultValue>
+			<RegularExpressionValidation>^[01]$</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>DropDown((#Lang(808)|0)|(#Lang(807)|1))</CodeInterface>
+			<ColorGroup>2</ColorGroup>
+		</Attribute>
+		<Attribute>
+			<Name>accept</Name>
+			<DisplayName>#Lang(810)</DisplayName>
+			<Description>#Lang(211)</Description>
+			<DefaultValue></DefaultValue>
+			<RegularExpressionValidation>.*</RegularExpressionValidation>
+			<ErrorValidationMessage>#Lang(302)</ErrorValidationMessage>
+			<Visible>1</Visible>
+			<InterfaceType>0</InterfaceType>
+			<CodeInterface>MultiLine(10000)</CodeInterface>
 			<ColorGroup>2</ColorGroup>
 		</Attribute>
 		<Attribute>
@@ -244,6 +268,10 @@
 			<Sentence ID="804">Visual effect of moving, time is indicated in milliseconds</Sentence>
 			<Sentence ID="805">CSS style value</Sentence>
 			<Sentence ID="806">Fade effect, time is indicated in milliseconds</Sentence>
+			<Sentence ID="807">true</Sentence>
+			<Sentence ID="808">false</Sentence>
+			<Sentence ID="809">required</Sentence>
+			<Sentence ID="810">accept</Sentence>
 		</Language>
 		<Language Code="fr_FR">
 			<Sentence ID="001">Envoi de fichier</Sentence>
@@ -309,6 +337,10 @@
 			<Sentence ID="804">Visual effect by moving</Sentence>
 			<Sentence ID="805">New CSS style value</Sentence>
 			<Sentence ID="806">Time of appearance</Sentence>
+			<Sentence ID="807">true</Sentence>
+			<Sentence ID="808">false</Sentence>
+			<Sentence ID="809">required</Sentence>
+			<Sentence ID="810">accept</Sentence>
 		</Language>
 		<Language Code="ru_RU">
 			<Sentence ID="001">Загрузчик</Sentence>
@@ -374,6 +406,10 @@
 			<Sentence ID="804">Визуальный эффект при перетаскивании</Sentence>
 			<Sentence ID="805">Новое значение стиля CSS</Sentence>
 			<Sentence ID="806">Время появления в миллисекундах</Sentence>
+			<Sentence ID="807">true</Sentence>
+			<Sentence ID="808">false</Sentence>
+			<Sentence ID="809">required</Sentence>
+			<Sentence ID="810">accept</Sentence>
 		</Language>
 	</Languages>
 	<Resources>
@@ -508,15 +544,17 @@ class VDOM_uploader(VDOM_object):
 			<style>{skin}</style>
 			<div style="{style}" id="{id}" {classname}>
 				<div class="label" style="display:none">{text}</div>
-				<input type="file" name="{name}" {control_width} tabindex="{tabind}" />
+				<input type="file" accept="{accept}" {required} name="{name}" {control_width} tabindex="{tabind}" />
 			</div>
 			{js}
 			""".format(
 					id = id, name = self.name, style = style, tabind = self.tabindex, classname = classname,
 					text = self.text, js = js, 
 					skin = self.style % { "id": id },
+					required = "required" if self.required == "1" else "",
+					accept = self.accept,
 					control_width = u'size="2"' if int(self.skin) == 1 else u'size="%s"' % ((int(self.width) - 96) / 7 + 1)
-					)
+				)
 
 		return VDOM_object.render(self, contents=result)
 
