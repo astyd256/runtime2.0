@@ -446,7 +446,7 @@ class VDOM_editableresource(VDOM_object):
             udata = ""
             if self.datatype == "1":
                 if import_way_is_inline:
-                    udata = u'<script id='{}'>{}</script>'.format(id, self.data)
+                    udata = u'<script id="{}">{}</script>'.format(id, self.data)
                     if self.import_way == "1":
                         request.dyn_libraries[self.name] = udata
                         return VDOM_object.render(self, contents="")
@@ -460,7 +460,7 @@ class VDOM_editableresource(VDOM_object):
                     udata = '<!-- no res for script -->'
             elif self.datatype == "2" or self.datatype == "3":
                 if import_way_is_inline:
-                    udata = u'<style id='{}'>{}</style>'.format(id, self.data)
+                    udata = u'<style id="{}">{}</style>'.format(id, self.data)
                     if self.import_way == "1":
                         request.dyn_libraries[self.name] = udata
                         return VDOM_object.render(self, contents="")
