@@ -6,7 +6,7 @@
 		<DisplayName>#Lang(001)</DisplayName>
 		<ClassName>VDOM_editableresource</ClassName>
 		<Description>#Lang(002)</Description>
-		<Version>1.98.6720</Version>
+		<Version>1.98.7</Version>
 		<Category>Additional</Category>
 		<InterfaceType>1</InterfaceType>
 		<Icon>#Res(a61a9853-638a-8f83-0a70-16a8c65eb8a1)</Icon>
@@ -428,8 +428,8 @@
 from scss.compiler import compile_string
 
 class VDOM_editableresource(VDOM_object):
-
     def render(self, contents=""):
+        id = u"o_" + (self.id).replace('-', '_')
         if self.datatype == "4":
             return VDOM_object.render(self, contents="")
         import_way_is_inline = self.import_way=="1" or self.import_way=="2"
@@ -446,7 +446,7 @@ class VDOM_editableresource(VDOM_object):
             udata = ""
             if self.datatype == "1":
                 if import_way_is_inline:
-                    udata = u'<script>{}</script>'.format(self.data)
+                    udata = u'<script id='{}'>{}</script>'.format(id, self.data)
                     if self.import_way == "1":
                         request.dyn_libraries[self.name] = udata
                         return VDOM_object.render(self, contents="")
@@ -460,7 +460,7 @@ class VDOM_editableresource(VDOM_object):
                     udata = '<!-- no res for script -->'
             elif self.datatype == "2" or self.datatype == "3":
                 if import_way_is_inline:
-                    udata = u'<style>{}</style>'.format(self.data)
+                    udata = u'<style id='{}'>{}</style>'.format(id, self.data)
                     if self.import_way == "1":
                         request.dyn_libraries[self.name] = udata
                         return VDOM_object.render(self, contents="")
@@ -474,8 +474,6 @@ class VDOM_editableresource(VDOM_object):
                     udata = '<!-- no res for style -->'
             else:
                 udata = self.data
-
-            id = 'o_' + (self.id).replace('-', '_')
 
         else:
             return VDOM_object.render(self, contents="")
