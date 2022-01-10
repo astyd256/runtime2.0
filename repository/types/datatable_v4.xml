@@ -14,7 +14,7 @@
     <Container>1</Container>
     <Category>Table</Category>
     <Dynamic>1</Dynamic>
-    <Version>4.7</Version>
+    <Version>4.7.1</Version>
     <InterfaceType>1</InterfaceType>
     <OptimizationPriority>1</OptimizationPriority>
     <Containers>htmlcontainer, dialog, dialog_2, container, tablecell, form, vdomclass, flexcontainer</Containers>
@@ -1236,7 +1236,10 @@ class VDOM_datatable_v4(VDOM_object):
         %(page_length)s
         autoWidth: %(autoWidth)s,
         columnDefs: [%(customcolumns)s],
-        initComplete : function() { %(selectedrows)s },
+        initComplete : function() { 
+          execEventBinded('%(idn)s', 'load', {width:$q('#%(id)s').outerWidth(),height:$q('#%(id)s').outerHeight()});
+          %(selectedrows)s 
+        },
         %(customparams)s
         // NOTE: Hides pagination panel if there's only one page
         "drawCallback": function(oSettings) {
@@ -1301,7 +1304,6 @@ class VDOM_datatable_v4(VDOM_object):
 
       %(customfunc)s
       %(selection_mode)s
-      execEventBinded('%(idn)s', 'load', {width:$q('#%(id)s').outerWidth(),height:$q('#%(id)s').outerHeight()});
     });
   </script>
 </div>
@@ -1653,32 +1655,60 @@ def on_update(object, attributes):
           left: 7px;
           top: 7px;
         }
-
       </style>
       ]]>
     </Library>
-    <!-- jquery.dataTables.min.js -->
-    <Library Target="html"><![CDATA[<script type='text/javascript' src='/1017e4bd-e816-d1cc-a1d0-d6461fe79f24.js'></script>]]></Library>
-    <!-- dataTables.buttons.min.js -->
-    <Library Target="html"><![CDATA[<script type='text/javascript' src='/d29cfae0-39cf-48a2-8fc2-88061fa5e7b2.js'></script>]]></Library>
-    <!-- jszip.min.js -->
-    <Library Target="html"><![CDATA[<script type='text/javascript' src='/32c8de6e-7bd8-4327-84da-b5ecbffe67c5.js'></script>]]></Library>
-    <!-- pdfmake.min.js -->
-    <Library Target="html"><![CDATA[<script type='text/javascript' src='/9e044b02-c2c9-41bf-bd4b-97a7e8104229.js'></script>]]></Library>
-    <!-- vfs_fonts.js -->
-    <Library Target="html"><![CDATA[<script type='text/javascript' src='/99b0e311-cf88-42e9-9c11-f051b6566105.js'></script>]]></Library>
-    <!-- buttons.html5.min.js -->
-    <Library Target="html"><![CDATA[<script type='text/javascript' src='/09e4831d-54eb-4c7d-85a5-642f9d54d34a.js'></script>]]></Library>
-    <!-- buttons.print.min.js -->
-    <Library Target="html"><![CDATA[<script type='text/javascript' src='/075d48bd-23cc-4e39-9e7e-f9142de723e9.js'></script>]]></Library>
+    <!-- Custom js import for dynamicvdom type. -->
+    <Library Target="html">
+      <![CDATA[
+        <script>
+        {
+          const loadScript = (url, callback) => {
+              jQuery.ajax({
+                  url: url,
+                  dataType: 'script',
+                  success: callback,
+                  async: false
+              });
+          }
+          if (typeof $.fn.DataTable == 'undefined') {
+            //<!-- jquery.dataTables.min.js -->
+            loadScript('/1017e4bd-e816-d1cc-a1d0-d6461fe79f24.js', () => {
+                const doNothing = () => {};
+                //<!-- dataTables.buttons.min.js -->
+                loadScript('/d29cfae0-39cf-48a2-8fc2-88061fa5e7b2.js', doNothing);
+
+                //<!-- jszip.min.js -->
+                loadScript('/32c8de6e-7bd8-4327-84da-b5ecbffe67c5.js', doNothing);
+
+                //<!-- pdfmake.min.js -->
+                loadScript('/9e044b02-c2c9-41bf-bd4b-97a7e8104229.js', doNothing);
+
+                //<!-- vfs_fonts.js -->
+                loadScript('/99b0e311-cf88-42e9-9c11-f051b6566105.js', doNothing);
+
+                //<!-- buttons.html5.min.js -->
+                loadScript('/09e4831d-54eb-4c7d-85a5-642f9d54d34a.js', doNothing);
+
+                //<!-- buttons.print.min.js -->
+                loadScript('/075d48bd-23cc-4e39-9e7e-f9142de723e9.js', doNothing);
+
+                //<!-- time.js for sorting by time -->
+                loadScript('/66ee65b8-53d0-47a7-bdbb-5c2aff14c221.js', doNothing);
+
+                //<!-- date-uk.js for sorting by time -->
+                loadScript('/651c5b80-e639-4cf6-a740-6be6d2482e9c.js', doNothing);
+
+                //<!-- date-euro.js for sorting by time -->
+                loadScript('/b59b082a-db89-437b-82fc-6434123d87f8.js', doNothing);
+            });
+          }
+        }
+        </script>
+      ]]>
+    </Library>
     <!-- jquery.dataTables.min.css -->
     <Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/50b58754-91cd-81c4-f84a-d64be29fd79f.css" />]]></Library>
-    <!-- time.js for sorting by time -->
-    <Library Target="html"><![CDATA[<script type='text/javascript' src='/66ee65b8-53d0-47a7-bdbb-5c2aff14c221.js'></script>]]></Library>
-    <!-- date-uk.js for sorting by time -->
-    <Library Target="html"><![CDATA[<script type='text/javascript' src='/651c5b80-e639-4cf6-a740-6be6d2482e9c.js'></script>]]></Library>
-    <!-- date-euro.js for sorting by time -->
-    <Library Target="html"><![CDATA[<script type='text/javascript' src='/b59b082a-db89-437b-82fc-6434123d87f8.js'></script>]]></Library>
   </Libraries>
   <E2vdom>
     <Events>
