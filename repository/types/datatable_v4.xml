@@ -1657,13 +1657,21 @@ def on_update(object, attributes):
       </style>
       ]]>
     </Library>
+    <!-- jquery.dataTables.min.js -->
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/1017e4bd-e816-d1cc-a1d0-d6461fe79f24.js'></script>]]></Library>
+    <!-- dataTables.buttons.min.js -->
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/d29cfae0-39cf-48a2-8fc2-88061fa5e7b2.js'></script>]]></Library>
+    <!-- jszip.min.js -->
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/32c8de6e-7bd8-4327-84da-b5ecbffe67c5.js'></script>]]></Library>
+    <!-- pdfmake.min.js -->
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/9e044b02-c2c9-41bf-bd4b-97a7e8104229.js'></script>]]></Library>
+    <!-- vfs_fonts.js -->
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/99b0e311-cf88-42e9-9c11-f051b6566105.js'></script>]]></Library>
+    <!-- buttons.html5.min.js -->
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/09e4831d-54eb-4c7d-85a5-642f9d54d34a.js'></script>]]></Library>
+    <!-- buttons.print.min.js -->
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/075d48bd-23cc-4e39-9e7e-f9142de723e9.js'></script>]]></Library>
+    <!-- jquery.dataTables.min.css -->
     <Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/50b58754-91cd-81c4-f84a-d64be29fd79f.css" />]]></Library>
     <!-- time.js for sorting by time -->
     <Library Target="html"><![CDATA[<script type='text/javascript' src='/66ee65b8-53d0-47a7-bdbb-5c2aff14c221.js'></script>]]></Library>
