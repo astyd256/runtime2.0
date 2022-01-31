@@ -1,12 +1,16 @@
 import managers
 import json
 import base64
-import hashlib  
+import hashlib
 import time
 from traceback import print_exc
 from utils.semaphore import VDOM_semaphore
+
+
 class InvalidParamsException(Exception):
 	pass
+
+
 def run(request):
 	args = request.arguments().arguments()
 	request.render_type = "e2vdom"
@@ -45,21 +49,21 @@ def run(request):
 			if container.lower() == 'api':
 				obj = app.objects.select(container)
 			else:
-				obj = app.objects.catalog.get(container)			
+				obj = app.objects.catalog.get(container)
 			if not obj or obj.name.lower() != "api":
 				raise InvalidParamsException("Invalid params")
 			else:
 				if action not in obj.actions:
-					raise InvalidParamsException("Invalid params")	
+					raise InvalidParamsException("Invalid params")
 				request.arguments().arguments({"xml_param": [xml_param], "xml_data": [xml_data]})
 				request.container_id = obj.id
-				result=managers.engine.execute(obj.actions[action])				
+				result=managers.engine.execute(obj.actions[action])
 				ret = request.session().value("response")
 				request.session().remove("response")
 				if isinstance(ret, unicode):
 					ret = ret.encode("utf8","ignore")
-		except InvalidParamsException:
-			request.write("<ERROR>Invalid params</ERROR>")
+		except InvalidParamsException as ex:
+			request.write("<ERROR>%s</ERROR>" % ex.message)
 		except Exception as e:
 			print_exc()
 			request.write("<ERROR>%s</ERROR>"%e)
