@@ -55,6 +55,8 @@ def run(request):
 			else:
 				if action not in obj.actions:
 					raise InvalidParamsException("Invalid params")
+				if not xml_data and arguments["method"] == "post":
+					xml_data = {k:v for k,v in args.items() if k not in ("appid", "objid", "action_name" , "xml_param", "callback", "sid")}
 				request.arguments().arguments({"xml_param": [xml_param], "xml_data": [xml_data]})
 				request.container_id = obj.id
 				result=managers.engine.execute(obj.actions[action])

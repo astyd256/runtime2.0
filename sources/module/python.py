@@ -18,7 +18,8 @@ class VDOM_module_python(VDOM_module):
 		script_name = "_".join(script_name.split("-"))
 		request.add_header("Content-Type", "text/html")
 		try:
-			exec "admin." + script_name + ".run(request)"
+			if script_name.isalpha():
+				exec "admin." + script_name + ".run(request)"
 		except VDOM_exception, e:
 			if str(e) != "Authentication failed":#TODO: replace it with VDOM_exception_auth_failed
 				# traceback.print_exc(file=debugfile)

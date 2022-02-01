@@ -114,6 +114,7 @@ class Dispatcher(object):
                 message = unicode(error).encode("utf8")
             else:
                 message = str(error)
+            import SOAPpy
             raise SOAPpy.faultType(remote_method_call_error, _("Remote method call error"), message)
 
         response = request.session().value("response")
