@@ -34,10 +34,11 @@ def run(request):
 				#sem.unlock()			
 	appid = args.get("appid")[0] if args.get("appid") else request.app_id()
 	container = args.get("objid")[0] if args.get("objid") else "API"
-	action =args.get("action_name")[0] if args.get("action_name") else ""
+	action = args.get("action_name")[0] if args.get("action_name") else ""
 	xml_param = args.get("xml_param")[0] if args.get("xml_param") else ""
 	xml_data = args.get("xml_data")[0] if args.get("xml_data") else ""
 	callback = args.get("callback")[0] if args.get("callback") else ""
+
 	if not (appid !='' and container !='' and action !=''):
 		request.write("<ERROR>Invalid params</ERROR>")
 	else:
@@ -55,7 +56,8 @@ def run(request):
 			else:
 				if action not in obj.actions:
 					raise InvalidParamsException("Invalid params")
-				if not xml_data and arguments["method"] == "post":
+
+				if not xml_data and request.method == "post":
 					xml_data = {k:v for k,v in args.items() if k not in ("appid", "objid", "action_name" , "xml_param", "callback", "sid")}
 				request.arguments().arguments({"xml_param": [xml_param], "xml_data": [xml_data]})
 				request.container_id = obj.id
