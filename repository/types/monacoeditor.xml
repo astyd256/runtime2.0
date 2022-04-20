@@ -316,6 +316,7 @@ class VDOM_monacoeditor(VDOM_object):
                     values: JSON.parse(`%(values)s` || '{}'),
                     theme: "vb", // ["vs", "vs-dark", "hc-black"]
                     textAreaName: "%(name)s",
+                    hover: {delay: 3000, enabled: false}
                   }
                   window.monacoEditor = new MonacoEditor(document.getElementById("%(id)s"), config);
                 });
