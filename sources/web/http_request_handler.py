@@ -14,33 +14,27 @@ import socket
 # import time
 import traceback
 import select
-import SOAPpy
-
-if sys.platform.startswith("freebsd"):
-    import vdomlib
-
-import webdav_server
-from wsgidav.wsgidav_app import WsgiDAVApp
-from wsgiref.util import guess_scheme
-
 # import SocketServer
 import BaseHTTPServer
 import SimpleHTTPServer
+#import webdav_server
+#from wsgidav.wsgidav_app import WsgiDAVApp
+from wsgiref.util import guess_scheme
+
 from time import time
 from threading import current_thread
 from cStringIO import StringIO
 # import xml.sax.saxutils
 
+import SOAPpy
 import settings
 import managers
 
 from request.request import VDOM_request
-from storage.storage import VDOM_config
+#from storage.storage import VDOM_config
 from version import SERVER_NAME, SERVER_VERSION
-# import soap.SOAPBuilder
 from soap.wsdl import methods as soap_methods
 # from utils.exception import VDOM_exception
-from utils.tracing import format_exception_trace
 from utils.pages import compose_page, compose_trace
 # A class to describe how header messages are handled
 
@@ -48,7 +42,7 @@ from utils.pages import compose_page, compose_trace
 THREAD_ATTRIBUTE_NAME = "vdom_web_server_request"
 
 
-class HeaderHandler:
+class HeaderHandler(object):
     # Initially fail out if there are any problems.
     def __init__(self, header, attrs):
         for i in header.__dict__.keys():
@@ -58,14 +52,15 @@ class HeaderHandler:
             d = getattr(header, i)
 
             try:
-                fault = int(attrs[id(d)][(NS.ENV, 'mustUnderstand')])
+                fault = int(attrs[id(d)][(SOAPpy.NS.ENV, 'mustUnderstand')])
             except:
                 fault = 0
 
             if fault:
-                raise faultType, ("%s:MustUnderstand" % NS.ENV_T,
-                                  "Required Header Misunderstood",
-                                  "%s" % i)
+                raise SOAPpy.faultType, ("%s:MustUnderstand" % SOAPpy.NS.ENV_T,
+                                         "Required Header Misunderstood",
+                                         "%s" % i)
+
 
 # for the soap handler
 _contexts = dict()
@@ -74,8 +69,7 @@ _contexts = dict()
 class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     """VDOM http request handler"""
 
-    """server version string"""
-    server_version = SERVER_NAME
+    server_version = SERVER_NAME  # server version string
 
     def __init__(self, request, client_address, server, args=None):
         """constructor"""
@@ -91,7 +85,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             SimpleHTTPServer.SimpleHTTPRequestHandler.__init__(self, request, client_address, server)
         except:
             raise
-        
+
     def start_response(self, status, response_headers, exc_info=None):
         if exc_info:
             try:
@@ -101,27 +95,28 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 exc_info = None    # Avoid circular ref.
         status_code = int(status.split(' ')[0])
         status_message = status[status.find(' ')+1:]
-        #print (">>>%s %s"%(status_code,status_message))
+#       print (">>>%s %s"%(status_code,status_message))
         try:
             self.send_response(status_code, status_message)
-        except socket.error as e:#TODO: find why socket already closed when error in Webdav
+        except socket.error as e:  # TODO: find why socket already closed when error in Webdav
+            print ("socket.error on start_response: %s"%e)
             return
         for header in response_headers:
             if header[0] != 'Date':
                 self.send_header(header[0], header[1])
-    
+
         cookies = self.__request.response_cookies()
         if "sid" in cookies:
             cookies["sid"]["path"] = "/"
             self.wfile.write("%s\r\n" % cookies.output())
-    
+
         self.end_headers()
         #print response_headers
         #_str = '\n'.join( traceback.format_stack() )
         #print _str
-        #cgi.escape( str )		
+        #cgi.escape( str )
         return self.wfile.write
-    
+
     def get_environ(self):
         env = self.__request.environment().environment().copy()
         #env = {}
@@ -135,33 +130,33 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         env['SERVER_PROTOCOL'] = self.request_version
         env['REQUEST_METHOD'] = self.command
         if '?' in self.path:
-            path,query = self.path.split('?',1)
+            path, query = self.path.split('?', 1)
         else:
-            path,query = self.path,''
-    
+            path, query = self.path, ''
+
         env['PATH_INFO'] = urllib.unquote(path)
         env['QUERY_STRING'] = query
-    
         host = self.address_string()
         if host != self.client_address[0]:
             env['REMOTE_HOST'] = host
         env['REMOTE_ADDR'] = self.client_address[0]
-    
+
         if self.headers.typeheader is None:
             env['CONTENT_TYPE'] = self.headers.type
         else:
             env['CONTENT_TYPE'] = self.headers.typeheader
-    
+
         length = self.headers.getheader('content-length')
         if length:
             env['CONTENT_LENGTH'] = length
         script_name = env.get('SCRIPT_NAME')
         if script_name:
             env['SCRIPT_NAME'] = script_name.rstrip("/")
-    
+
         for h in self.headers.headers:
-            k,v = h.split(':',1)
-            k=k.replace('-','_').upper(); v=v.strip()
+            k, v = h.split(':', 1)
+            k = k.replace('-', '_').upper()
+            v = v.strip()
             if k in env:
                 continue                    # skip content length, type,etc.
             if 'HTTP_'+k in env:
@@ -170,14 +165,12 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             else:
                 env['HTTP_'+k] = v
         return env
-    
+
     def handle_one_request(self):
         """Handle a single HTTP request.
-    
         You normally don't need to override this method; see the class
         __doc__ string for information on how to handle specific HTTP
         commands such as GET and POST.
-    
         """
         try:
             self.raw_requestline = self.rfile.readline()
@@ -186,18 +179,17 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 self.request_version = ''
                 self.command = ''
                 self.send_error(414)
-                return            
+                return
             if not self.raw_requestline:
                 self.close_connection = 1
                 return
             if not self.parse_request():
                 # An error code has been sent, just exit
                 return
+
             mname = 'do_' + self.command
             host = self.headers.get("host")
-    
             vh = self.server.virtual_hosting()
-    
             app_id = (vh.get_site(host.lower()) if host else None) or vh.get_def_site()
             if not app_id:
                 app_id = managers.memory.applications.default.id if managers.memory.applications.default else None
@@ -205,11 +197,11 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             if app_id:
                 try:
                     #if app_id not in managers.memory.applications:
-                    #    managers.memory.load_application(app_id)					
+                    #    managers.memory.load_application(app_id)
                     appl = managers.memory.applications[app_id]
                     self.wsgidav_app = getattr(appl, 'wsgidav_app', None)
                 except KeyError as e:
-                    debug(e)			
+                    debug(e)
                 else:
                     #dav_map = getattr(appl,"dav_map",None)
                     #if not dav_map:
@@ -218,33 +210,32 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     #	for obj in appl.get_objects_list():
                     #		if obj.type.id == '1a43b186-5c83-92fa-7a7f-5b6c252df941':
                     #			dav_map.add("/" + obj.name)
-                    #for realm in dav_map:    
+                    #for realm in dav_map:
                     #	if self.path.startswith(realm):
                     #		mname = 'do_WebDAV'
                     realm = self.path.strip("/").split("/").pop(0)
                     if managers.webdav_manager.check_webdav_share_path(appl.id, realm):
                         mname = 'do_WebDAV'
-                                 
-    
+
             if self.command not in ("GET", "POST"):
                 mname = 'do_WebDAV'
-            
+
             if mname == 'do_WebDAV' and self.wsgidav_app is None:
                 managers.webdav_manager.load_webdav(app_id)
-                self.wsgidav_app = appl.wsgidav_app                  
-    
+                self.wsgidav_app = appl.wsgidav_app
+
             if not hasattr(self, mname):
                 self.send_error(501, "Unsupported method (%r)" % self.command)
                 return
             method = getattr(self, mname)
             method()
-            self.wfile.flush() #actually send the response if not already done.
+            self.wfile.flush()  # actually send the response if not already done.
         except socket.timeout, e:
             #a read or a write timed out.  Discard this connection
             self.log_error("Request timed out: %r", e)
             self.close_connection = 1
-            return	
-        
+            return
+
     def handle(self):
         """Handle multiple requests if necessary."""
         # self.close_connection = 1
@@ -265,11 +256,11 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 deadline = time() + settings.CONNECTION_SUBSEQUENT_TIMEOUT
             elif time() > deadline:
                 break
-    
+
     def do_WebDAV(self):
         if self.__reject:
             self.send_error(503, self.responses[503][0])
-            return None		
+            return None
         self.create_request(self.command.lower())
         environ = self.get_environ()
         application = self.wsgidav_app
@@ -279,24 +270,24 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         elif environ["REQUEST_METHOD"] == "OPTIONS" and environ["PATH_INFO"] in ("/", "*"):
             import wsgidav.util as util
             self.start_response("200 OK", [("Content-Type", "text/html"),
-                                                           ("Content-Length", "0"),
-                                                                ("DAV", "1,2"),
-                                                                ("Server", "DAV/2"),
-                                                                ("Date", util.getRfc1123Time()),
-                                                                ])		
+                                           ("Content-Length", "0"),
+                                           ("DAV", "1,2"),
+                                           ("Server", "DAV/2"),
+                                           ("Date", util.getRfc1123Time()),
+                                           ])
             return
-    
+
         if environ["REQUEST_METHOD"] == "PROPFIND" and environ["PATH_INFO"] in ("/", "*"):
             providers = self.wsgidav_app.providerMap.keys()
             if providers:
-                environ["PATH_INFO"] = providers[0]#Need some testing if this approach will work
+                environ["PATH_INFO"] = providers[0]  # Need some testing if this approach will work
             else:
                 self.send_error(404, self.responses[404][0])
                 return
         #print "<<<%s %s"%(environ["REQUEST_METHOD"], environ["PATH_INFO"])
         for v in application(environ, self.start_response):
             self.wfile.write(v)
-            
+
     def do_GET(self):
         """serve a GET request"""
         # create request object
@@ -342,12 +333,10 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             sys.setcheckinterval(100)
             #self.copyfile(f, self.wfile)
             f.close()
-            
-    
-            
+
     def create_request(self, method):
         """initialize request, <method> is either 'post' or 'get'"""
-        
+
         #debug("CREATE REQUEST %s"%self)
         #import gc
         #debug("\nGarbage: "+str(len(gc.garbage))+"\n")
@@ -425,6 +414,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                           traceback.format_exc(), '-' * 40])
             self.__request.collect_files()
             self.send_error(500, excinfo=fe)
+            debug(e)
             return None
 
         # check redirect
@@ -457,7 +447,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             # if isinstance(ret, file):
             if isinstance(ret, (file, io.IOBase)):
                 if sys.platform.startswith("freebsd"):
-                    vdomlib.sendres(self.wfile.fileno(), ret.fileno(), int(ret_len))
+                    #vdomlib.sendres(self.wfile.fileno(), ret.fileno(), int(ret_len))
                     ret.close()
                     return None
                 else:
@@ -533,9 +523,9 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def address_string(self):
         """Return the client address formatted for logging"""
         host, port = self.client_address[:2]
-        remote_ip = self.headers.get("X-Real-IP") or \
-                    self.headers.get("X-Forwarded-For") or \
-                    host
+        remote_ip = self.headers.get("X-Real-IP")\
+            or self.headers.get("X-Forwarded-For")\
+            or host
         return remote_ip
 
     def sample_page(self, method):
@@ -544,7 +534,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         f = StringIO()
         f.write("<b>Application id:</b> %s<br>" % str(self.__request.app_id()))
         f.write("<b>Registered types:</b><br>")
-        mngr = managers.xml_manager
+        mngr = managers.memory
         typelst = mngr.get_types()
         for typeid in typelst:
             tp = None
@@ -603,7 +593,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         dumpHeadersIn = 0
         dumpHeadersOut = 0
 
-        cf = VDOM_config()
+        #cf = VDOM_config()
         # No more alot of debug while soap
         # if "1" == cf.get_opt("DEBUG"):
         #   VDOM_debug = 1
@@ -637,8 +627,8 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             # and leave only the first element
 
             if SOAPpy.Config.simplify_objects:
-                args = simplify(args)
-                kw = simplify(kw)
+                args = SOAPpy.simplify(args)
+                kw = SOAPpy.simplify(kw)
 
             # Handle mixed named and unnamed arguments by assuming
             # that all arguments with names of the form "v[0-9]+"
@@ -724,7 +714,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     f = self.server.funcmap[ns][method]
 
                     # look for the authorization method
-                    if self.server.config.authMethod != None:
+                    if self.server.config.authMethod is not None:
                         authmethod = self.server.config.authMethod
                         if ns in self.server.funcmap and authmethod in self.server.funcmap[ns]:
                             a = self.server.funcmap[ns][authmethod]
@@ -736,14 +726,13 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     f = self.server.objmap[ns]
 
                     # Look for the authorization method
-                    if self.server.config.authMethod != None:
+                    if self.server.config.authMethod is not None:
                         authmethod = self.server.config.authMethod
                         if hasattr(f, authmethod):
                             a = getattr(f, authmethod)
 
                     # then continue looking for the method
-                    l = method.split(".")
-                    for i in l:
+                    for i in method.split("."):
                         f = getattr(f, i)
             except:
                 info = sys.exc_info()
@@ -782,7 +771,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                                                               self.headers["SOAPAction"])
 
                     # Do an authorization check
-                    if a != None:
+                    if a is not None:
                         if not a(None, **{"_SOAPContext":
                                           _contexts[thread_id]}):
                             raise SOAPpy.faultType("%s:Server" % SOAPpy.NS.ENV_T,
@@ -829,7 +818,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                             fr = f(*args, **{})
 
                     if type(fr) == type(self) and \
-                       isinstance(fr, voidType):
+                       isinstance(fr, SOAPpy.voidType):
                         resp = SOAPpy.buildSOAP(kw={'%sResponse xmlns="http://services.vdom.net/VDOMServices"' % method: fr},
                                                 encoding=self.server.encoding,
                                                 config=self.server.config)
@@ -844,8 +833,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     if thread_id in _contexts:
                         del _contexts[thread_id]
 
-                except Exception, e:
-                    import traceback
+                except Exception as e:
                     info = sys.exc_info()
 
                     try:
@@ -877,8 +865,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     status = self.__request.fault_type_http_code
                 else:
                     status = 200
-        except SOAPpy.faultType, e:
-            import traceback
+        except SOAPpy.faultType as e:
             info = sys.exc_info()
             try:
                 if self.server.config.dumpFaultInfo:
@@ -900,12 +887,11 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             resp = SOAPpy.buildSOAP(e, encoding=self.server.encoding,
                                     config=self.server.config, namespace="http://services.vdom.net/VDOMServices")
             status = self.__request.fault_type_http_code
-        except Exception, e:
+        except Exception as e:
             # internal error, report as HTTP server error
 
             if self.server.config.dumpFaultInfo:
                 s = 'Internal exception %s' % e
-                import traceback
                 SOAPpy.debugHeader(s)
                 info = sys.exc_info()
                 try:
@@ -934,7 +920,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             # got a valid SOAP response
             self.send_response(status)
             t = 'text/xml'
-            if self.server.encoding != None:
+            if self.server.encoding is not None:
                 t += '; charset="%s"' % self.server.encoding
             self.send_header("Content-type", t)
             self.send_header("Content-length", str(len(resp)))
@@ -974,10 +960,10 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             # SSL connections drops the output, so this work-around.
             # This should be investigated more someday.
 
-            if self.server.config.SSLserver and \
-               isinstance(self.connection, SSL.Connection):
-                self.connection.set_shutdown(SSL.SSL_SENT_SHUTDOWN |
-                                             SSL.SSL_RECEIVED_SHUTDOWN)
+            if self.server.config.SSLserver:
+                from OpenSSL import SSL
+                if isinstance(self.connection, SSL.Connection):
+                    self.connection.set_shutdown(SSL.SENT_SHUTDOWN | SSL.RECEIVED_SHUTDOWN)
             else:
                 # self.connection.shutdown(1)
                 pass
