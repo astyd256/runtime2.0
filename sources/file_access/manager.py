@@ -176,6 +176,9 @@ class FileManager(object):
                     self.start_daemon()
         else:
             location = self.locate(category, owner, name)
+            location_dir = os.path.dirname(location)
+            if not os.path.exists(location_dir):
+                os.makedirs(location_dir)
             mode = "w" if encoding else "wb"
             # self.ensure(category, owner, mode)
             with VDOM_named_mutex(location):
@@ -203,7 +206,7 @@ class FileManager(object):
                         shutil.move(data.name, location)
                     except OSError as e:
                         print (u"Attachment save error: %s"%e)
-                        try: 
+                        try:
                             os.remove(location)
                         except OSError as e:
                             print (u"Target removal error: %s"%e)
