@@ -170,6 +170,18 @@
       <RegularExpressionValidation>^(#?[0-9A-Fa-f]{6})?$</RegularExpressionValidation>
     </Attribute>
     <Attribute>
+      <Name>htmltag</Name>
+      <DisplayName>#Lang(940)</DisplayName>
+      <DefaultValue>div</DefaultValue>
+      <Visible>1</Visible>
+      <Help>#Lang(219)</Help>
+      <InterfaceType>0</InterfaceType>
+      <CodeInterface>DropDown((#Lang(941)|div)|(#Lang(942)|span)|(#Lang(943)|h1)|(#Lang(944)|h2)|(#Lang(945)|h3)|(#Lang(946)|h4)|(#Lang(947)|h5)|(#Lang(948)|h6)|(#Lang(949)|p))</CodeInterface>
+      <Colorgroup>4</Colorgroup>
+      <ErrorValidationMessage>#Lang(313)</ErrorValidationMessage>
+      <RegularExpressionValidation>.*</RegularExpressionValidation>
+    </Attribute>
+    <Attribute>
       <Name>fontfamily</Name>
       <DisplayName>#Lang(114)</DisplayName>
       <DefaultValue>Tahoma, "Geneva CY", geneva, sans-serif</DefaultValue>
@@ -427,6 +439,16 @@ All changes of attributes are applied to the whole text. You cannot change the s
       <Sentence ID="937"></Sentence>
       <Sentence ID="938"></Sentence>
       <Sentence ID="939"></Sentence>
+      <Sentence ID="940">HTML tag</Sentence>
+      <Sentence ID="941">div</Sentence>
+      <Sentence ID="942">span</Sentence>
+      <Sentence ID="943">h1</Sentence>
+      <Sentence ID="944">h2</Sentence>
+      <Sentence ID="945">h3</Sentence>
+      <Sentence ID="946">h4</Sentence>
+      <Sentence ID="947">h5</Sentence>
+      <Sentence ID="948">h6</Sentence>
+      <Sentence ID="949">p</Sentence>
     </Language>
     <Language Code="fr_FR">
       <Sentence ID="001">Texte simple</Sentence>
@@ -587,6 +609,16 @@ All changes of attributes are applied to the whole text. You cannot change the s
       <Sentence ID="937"></Sentence>
       <Sentence ID="938"></Sentence>
       <Sentence ID="939"></Sentence>
+      <Sentence ID="940">HTML tag</Sentence>
+      <Sentence ID="941">div</Sentence>
+      <Sentence ID="942">span</Sentence>
+      <Sentence ID="943">h1</Sentence>
+      <Sentence ID="944">h2</Sentence>
+      <Sentence ID="945">h3</Sentence>
+      <Sentence ID="946">h4</Sentence>
+      <Sentence ID="947">h5</Sentence>
+      <Sentence ID="948">h6</Sentence>
+      <Sentence ID="949">p</Sentence>
     </Language>
     <Language Code="ru_RU">
       <Sentence ID="001">Текст</Sentence>
@@ -747,6 +779,16 @@ All changes of attributes are applied to the whole text. You cannot change the s
       <Sentence ID="937"></Sentence>
       <Sentence ID="938"></Sentence>
       <Sentence ID="939"></Sentence>
+      <Sentence ID="940">HTML tag</Sentence>
+      <Sentence ID="941">div</Sentence>
+      <Sentence ID="942">span</Sentence>
+      <Sentence ID="943">h1</Sentence>
+      <Sentence ID="944">h2</Sentence>
+      <Sentence ID="945">h3</Sentence>
+      <Sentence ID="946">h4</Sentence>
+      <Sentence ID="947">h5</Sentence>
+      <Sentence ID="948">h6</Sentence>
+      <Sentence ID="949">p</Sentence>
     </Language>
   </Languages>
   <Resources>
@@ -936,7 +978,7 @@ class VDOM_text(VDOM_object):
         else:
             debug_info = u""
 
-        result = u"<div %(debug_info)s id=\"%(id)s\" style=\"%(zind)s%(style)s%(css)s\" class=\"%(classname)s\" %(hint)s>%(value)s</div>" % {
+        result = u"<%(html_tag)s %(debug_info)s id=\"%(id)s\" style=\"%(zind)s%(style)s%(css)s\" class=\"%(classname)s\" %(hint)s>%(value)s</%(html_tag)s>" % {
             "hint": hint,
             "zind": style_zindex,
             "debug_info": debug_info,
@@ -944,7 +986,9 @@ class VDOM_text(VDOM_object):
             "style": "; ".join(["%s: %s" % (key, value) for key, value in style.iteritems() if value]),
             "css": "; %s" % self.css if self.css else "",
             "classname": self.classname,
-            "value": self.value}
+            "value": self.value,
+            "html_tag": self.htmltag
+        }
 
         return VDOM_object.render(self, contents=result)
 
