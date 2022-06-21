@@ -911,15 +911,31 @@ class VDOM_tabulator(VDOM_object):
 
 		<script type="text/javascript">
 $(document).ready(() => {
-    function singleClick(e, row) {
-      execEventBinded('%(idn)s', 'cellclick', {
-              keyField: row.getData().%(keyField)s,
-              cellData:JSON.stringify(row.getData()),
-              columnData:JSON.stringify(e)
-          }
-      );
-    }
+    const clickInfo = {
+        click_timer: 0,
+        click_delay: 200,
+        click_prevent: false
+    };
 
+    function singleClick(e, row) {
+        const isSelected = row.isSelected();
+        row.deselect();
+        clickInfo.click_timer = setTimeout(() => {
+            if (!clickInfo.click_prevent) {
+                execEventBinded('%(idn)s', 'cellclick', {
+                    keyField: row.getData().%(keyField)s,
+                    cellData:JSON.stringify(row.getData()),
+                    columnData:JSON.stringify(e)
+                });
+                if (!isSelected) {
+                  row.deselect();
+                } else {
+                  row.select();
+                }
+            }
+            clickInfo.click_prevent = false;
+            }, clickInfo.click_delay);
+    }
 
     function selectionChange(data, rows) {
     const keys = data.map(({ %(keyField)s }) => %(keyField)s);
@@ -931,14 +947,14 @@ $(document).ready(() => {
     }
 
     function doubleClick(e, row) {
-    const key = row.getData().%(keyField)s;
-
-    execEventBinded('%(idn)s', 'celldblclick', {
-            keyField: key,
-            cellData:JSON.stringify(row.getData()),
-            columnData:JSON.stringify(e)
-        }
-    );
+        clearTimeout(clickInfo.click_timer);
+        clickInfo.click_prevent = true;
+        execEventBinded('%(idn)s', 'celldblclick', {
+                keyField: row.getData().%(keyField)s,
+                cellData:JSON.stringify(row.getData()),
+                columnData:JSON.stringify(e)
+            }
+        );
     }
 
     window.%(id_tabulator)s = new Tabulator("#%(id_tabulator)s", {
@@ -949,9 +965,9 @@ $(document).ready(() => {
       columns: %(columns)s,
       responsiveLayout: "hide",
       placeholder:"No Data Available",
-      rowClick: function (e, row) {singleClick(e, row);},
-      rowDblClick: function (e, row) {doubleClick(e, row);},
-      rowSelectionChanged: function (e, row) {selectionChange(e, row);},
+      rowClick: singleClick,
+      rowDblClick: doubleClick,
+      rowSelectionChanged: selectionChange,
       %(params)s
     });
 
