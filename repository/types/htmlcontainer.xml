@@ -3173,10 +3173,14 @@ JAVASCRIPT = \
     u"{declarations}\n" \
     u"</script>\n"
 
-JQUERY_UI = \
-    u"<link rel='stylesheet' media='screen' type='text/css' href='/feb5cd9d-2a21-5c85-cd11-f6aed7921731.css'/>" \
-    u"<script type='text/javascript' src='/b67cfe82-a508-63ba-37ca-6c27d82c5112.res?v=1.11.4.1m'></script>"\
-    u"<script type='text/javascript' src='/423ef208-bbe1-8e35-1cf7-ad62bfc65d62.res?v=1.11.4.1'></script>"
+
+JQUERY_UI = u"""
+	<link rel="preload" href="/feb5cd9d-2a21-5c85-cd11-f6aed7921731.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<noscript><link rel="stylesheet" href="/feb5cd9d-2a21-5c85-cd11-f6aed7921731.css"></noscript>
+
+	<script type='text/javascript' src='/b67cfe82-a508-63ba-37ca-6c27d82c5112.res?v=1.11.4.1m'></script>
+	<script type='text/javascript' src='/423ef208-bbe1-8e35-1cf7-ad62bfc65d62.res?v=1.11.4.1'></script>
+"""
 
 DEFAULT_TEST_FUNCTIONS = "<script type='text/javascript' src='/a81eaffd-b22a-2503-e74e-34b3040c0cd7.res?v20120717'></script>"
 DEFAULT_TEST_CLASSES = "<script type='text/javascript' src='/ae074ca4-ab1b-7aec-c8f6-c276b2443a5b.res?v20130417-3'></script>"
@@ -3208,7 +3212,7 @@ TEMPLATE = u"""{doctype}
 <script type="text/javascript" src="/f52cba1b-398b-7d84-e6d2-ac04be70b751.res?v20170730"></script>
 <script type="text/javascript" src="/3549c3cd-209e-1d4d-a3c3-ac04dc109d52.res?v20170730"></script>
 <script type="text/javascript" src="/113513d0-ebae-42c4-9bdf-44ebf7828910.res?v20170730"></script>
-<script type="text/javascript" src="/ccfb4678-798f-230e-0cc8-22bad806c706.res?v20180123"></script>
+<script defer type="text/javascript" src="/ccfb4678-798f-230e-0cc8-22bad806c706.res?v20180123"></script>
 {jquery_ui}
 {test_functions}
 <script type="text/javascript" src="/3e932470-0e08-446c-a866-30c00e6d812a.res"></script>
@@ -3230,7 +3234,7 @@ TEMPLATE = u"""{doctype}
 <div id='e2vdomindicator' style='z-index:99999;width:1px;height:1px;position:absolute;position:fixed;left:0;top:0;display:none'></div>
 <!--[if lt IE 7]>
 <script type="text/javascript" src="/0b3e0dc0-6429-eb14-26d6-2d30c535b707.res"></script>
-<script type="text/javascript">$j(function(){{ $j('img,input').ifixpng();}});</script>
+<script type="text/javascript">$(function(){{ $('img,input').ifixpng();}});</script>
 <![endif]-->
 <script type="text/javascript" src="/6cdc7eef-c7d2-bc99-b202-98b2d9052836.res"></script>
 <script type="text/javascript">
@@ -3333,7 +3337,7 @@ class VDOM_htmlcontainer(VDOM_object):
             if cookie_name not in request.cookies:
                 cookiewarning=u"""<div id="cookieWarningDiv" style="display: block; text-align: center; background: #333; color: #fff; font-size: 15px !important; width: 90%%; box-sizing: content-box; font-family: sans-serif !important; padding-top: 5px; padding-right: 5%%; padding-bottom: 5px; padding-left: 5%%; vertical-align: initial;">
                                   <span id="cookieWarningAlert" style="font: 15px verdana;"> %(text)s </span>
-                                  <span id="cookieWarningOK" style="cursor: pointer; display: inline-block; font-size: 16px; background: #4596ec !important; border-radius: 10px; font-family: sans-serif !important; box-sizing: initial; vertical-align: initial; padding-top: 5px; padding-right: 10px; padding-bottom: 5px; padding-left: 10px; margin-left: 7px;" onclick="$j(function(){ document.cookie = '%(cookie)s=1; expires=%(cookie_exp)s'; $('#cookieWarningDiv').hide(); });">&#x2713; OK</span>
+                                  <span id="cookieWarningOK" style="cursor: pointer; display: inline-block; font-size: 16px; background: #4596ec !important; border-radius: 10px; font-family: sans-serif !important; box-sizing: initial; vertical-align: initial; padding-top: 5px; padding-right: 10px; padding-bottom: 5px; padding-left: 10px; margin-left: 7px;" onclick="$(function(){ document.cookie = '%(cookie)s=1; expires=%(cookie_exp)s'; $('#cookieWarningDiv').hide(); });">&#x2713; OK</span>
                                   </div>""" % {
                                                    "text": self.cookiewarningtext,
                                                    "cookie": cookie_name,
@@ -3475,7 +3479,7 @@ class VDOM_htmlcontainer(VDOM_object):
           <Parameters>
             <Parameter DefaultValue="" Interface="" InterfaceName="#Lang(701)" ScriptName="value" Help="#Lang(801)" RegularExpressionValidation=".*"/>
           </Parameters>
-          <SourceCode><![CDATA[$j(this.domCont).append(value);]]></SourceCode>
+          <SourceCode><![CDATA[$(this.domCont).append(value);]]></SourceCode>
         </Action>
         <Action Help="#Lang(502)" InterfaceName="#Lang(602)" MethodName="changeCursor">
           <Parameters>
@@ -3496,7 +3500,7 @@ class VDOM_htmlcontainer(VDOM_object):
         if (typeof e2vdomSV[key] !== 'undefined') delete(e2vdomSV[key]);
     } else if (action == 'push') {
         var a = (typeof e2vdomSV[key] !== 'undefined') ? e2vdomSV[key] : [];
-        if ($j.inArray(value,a)) a.push(value);
+        if ($.inArray(value,a)) a.push(value);
         e2vdomSV[key] = a;
     } else if (action == 'pop') {
         if (typeof e2vdomSV[key][value] !== 'undefined') delete(e2vdomSV[key][value]);
@@ -3559,7 +3563,7 @@ execEventBinded(id.substring(2, id.length), "labelchanged", {label:label});
           <Parameters>
             <Parameter DefaultValue="0" Interface="" InterfaceName="#Lang(712)" ScriptName="value" Help="#Lang(812)" RegularExpressionValidation=".*"/>
           </Parameters>
-          <SourceCode><![CDATA[$j(this.domCont).html(value);]]></SourceCode>
+          <SourceCode><![CDATA[$(this.domCont).html(value);]]></SourceCode>
         </Action>
         <Action Help="#Lang(512)" InterfaceName="#Lang(612)" MethodName="moveZindexTo">
           <Parameters>

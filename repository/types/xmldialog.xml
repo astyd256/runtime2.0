@@ -3428,18 +3428,18 @@ def render_codeeditor(elem):
 <div id="{id}" style="{style}">
 	<textarea name="{name}" style="{style_area}">{value}</textarea>
 </div>
-<script type="text/javascript">$q(document).bind('dialog.loaded', function(){{
+<script type="text/javascript">$(document).bind('dialog.loaded', function(){{
 	if (typeof window.{id}_codeeditor !== 'undefined') {{
 		window.{id}_codeeditor.toTextArea();
 		delete(window.{id}_codeeditor);
 	}}
-	window.{id}_codeeditor = CodeMirror.fromTextArea($q('#{id}>textarea').get(0), {{
+	window.{id}_codeeditor = CodeMirror.fromTextArea($('#{id}>textarea').get(0), {{
 		mode: '{mode}',
 		lineNumbers: true,
 		styleActiveLine: true,
 		onCursorActivity: function() {{ window.{id}_codeeditor.matchHighlight("CodeMirror-matchhighlight"); }}
 	}})
-	$q('#{id}').parents('form:first').submit(function(){{
+	$('#{id}').parents('form:first').submit(function(){{
 		window.{id}_codeeditor.save()
 	}})
 	window.{id}_codeeditor.refresh()
@@ -3608,7 +3608,7 @@ class VDOM_xmldialog(VDOM_object):
 
         result = """
 <div style='display:none' %(debug_info)s><div id='%(id)s'>%(data)s</div></div>
-<script type='text/javascript'>$q(function(){
+<script type='text/javascript'>$(function(){
 	$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
 		_title: function(title) {
 			if (!this.options.title) {
@@ -3619,12 +3619,12 @@ class VDOM_xmldialog(VDOM_object):
 		}
 	}));
 
-    dialog = $q("#%(id)s")
-    var dialogScripts = $q("#%(id)s").find("script");
+    dialog = $("#%(id)s")
+    var dialogScripts = $("#%(id)s").find("script");
     dialogScripts.remove();
-    $q("#%(id)s").data('ev','1');
-    $q("#%(id)s:ui-dialog").dialog("destroy");
-    $q("#%(id)s").dialog({
+    $("#%(id)s").data('ev','1');
+    $("#%(id)s:ui-dialog").dialog("destroy");
+    $("#%(id)s").dialog({
         title: "%(title)s",
         width: %(width)s,
         height: %(height)s,
@@ -3633,24 +3633,24 @@ class VDOM_xmldialog(VDOM_object):
         resizable: false,
         autoOpen: %(show)s,
         open: function(e,u) {
-            var dialog = $q("#%(id)s");
+            var dialog = $("#%(id)s");
             if (dialog.data('ev')=='1') execEventBinded('%(idn)s', "show", {});
 
             vdom_xd_create_richtextarea(dialog);
             vdom_xd_create_livesearch(dialog);
 
-            $j.datepicker.setDefaults($j.datepicker.regional['fr']);
-            $j('#%(id)s input.date, #%(id)s .date input').datepicker('destroy').datepicker({
+            $.datepicker.setDefaults($.datepicker.regional['fr']);
+            $('#%(id)s input.date, #%(id)s .date input').datepicker('destroy').datepicker({
                 dateFormat: 'dd/mm/yy', showButtonPanel: true
             }).blur();
         },
         close: function(e,u) {
-            $j('#ui-datepicker-div,#ColorDropdown_selector').fadeOut();
-            if ($q("#%(id)s").data('ev')=='1') execEventBinded('%(idn)s', "hide", {});
+            $('#ui-datepicker-div,#ColorDropdown_selector').fadeOut();
+            if ($("#%(id)s").data('ev')=='1') execEventBinded('%(idn)s', "hide", {});
         }
     });
     
-    $q("#%(id)s form.xml-dialog-form").live('submit',function(e){
+    $("#%(id)s form.xml-dialog-form").live('submit',function(e){
         function escapeXml(s) {
             return s.replace(/[<>&'"]/g, function (c) {
                 switch (c) {
@@ -3666,7 +3666,7 @@ class VDOM_xmldialog(VDOM_object):
         for (var i in window["xmlDialogTinyEditors"])
             window["xmlDialogTinyEditors"][i].post();
 
-        var x=[], a=$q(this).serializeArray();
+        var x=[], a=$(this).serializeArray();
         for (var k of a) if(typeof k.name !== 'undefined' && typeof k.value !== 'undefined') x[escapeXml(k.name)]=k.value;
         execEventBinded('%(idn)s', "submit", x);
         return false;
@@ -3782,17 +3782,25 @@ class VDOM_xmldialog(VDOM_object):
 #     print xml_dialog.render('', '')]]>
 	</SourceCode>
 	<Libraries>
-		<Library Target="html"><![CDATA[<link rel="stylesheet" media="screen" type="text/css" href="/9f1c05cd-fee2-6055-2ef4-16fae66214c8.res" />]]></Library>
-		<Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/97bb6c7e-baa0-43e7-b4c9-1d78cf916efe.res">]]></Library>
-		<Library Target="html"><![CDATA[<script type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae32145d0.res?v1.02"></script>]]></Library>
-		<Library Target="html"><![CDATA[<script type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae32bafe5.res"></script>]]></Library>
+		<Library Target="html"><![CDATA[
+			<link rel="preload" href="/9f1c05cd-fee2-6055-2ef4-16fae66214c8.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+			<noscript><link rel="stylesheet" href="/9f1c05cd-fee2-6055-2ef4-16fae66214c8.css"></noscript>
+			]]>
+		</Library>
+		<Library Target="html"><![CDATA[
+			<link rel="preload" href="/97bb6c7e-baa0-43e7-b4c9-1d78cf916efe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+			<noscript><link rel="stylesheet" href="/97bb6c7e-baa0-43e7-b4c9-1d78cf916efe.css"></noscript>
+			]]>
+		</Library>
+		<Library Target="html"><![CDATA[<script defer type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae32145d0.res?v1.02"></script>]]></Library>
+		<Library Target="html"><![CDATA[<script defer type="text/javascript" src="/9f1c05cd-fee2-6055-2ef4-16fae32bafe5.res"></script>]]></Library>
 		
 		<!-- CODE MIRROR LIB -->
-		<Library Target="html"><![CDATA[<script type="text/javascript" src="/064add91-8595-0f40-10ea-09d38022edee.js"></script>]]></Library>
+		<Library Target="html"><![CDATA[<script defer type="text/javascript" src="/064add91-8595-0f40-10ea-09d38022edee.js"></script>]]></Library>
 		
-		<Library Target="html"><![CDATA[<script type="text/javascript" src="/5cd10fee-6e10-5253-24ea-3edb0a87f9ec.res?match"></script>]]></Library>
-		<Library Target="html"><![CDATA[<script type="text/javascript" src="/95be4415-7ccb-b87b-f50f-77c8485f6bd9.res?syntaxes"></script>]]></Library>
-		<Library Target="html"><![CDATA[<script type='text/javascript' src='/b4993ec8-6d66-8240-22a7-48fbbedfe371.res'></script>]]></Library>
+		<Library Target="html"><![CDATA[<script defer type="text/javascript" src="/5cd10fee-6e10-5253-24ea-3edb0a87f9ec.res?match"></script>]]></Library>
+		<Library Target="html"><![CDATA[<script defer type="text/javascript" src="/95be4415-7ccb-b87b-f50f-77c8485f6bd9.res?syntaxes"></script>]]></Library>
+		<Library Target="html"><![CDATA[<script defer type='text/javascript' src='/b4993ec8-6d66-8240-22a7-48fbbedfe371.res'></script>]]></Library>
 	</Libraries>
 	<E2VDOM>
 		<Events>
@@ -3819,7 +3827,7 @@ class VDOM_xmldialog(VDOM_object):
 						<Parameter Name="height" DisplayName="#Lang(704)" Description="#Lang(804)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
 					<SourceCode>
-<![CDATA[$q("#"+this.domCont.id).dialog("option",{width:parseInt(width,10),height:parseInt(height,10)});]]>
+<![CDATA[$("#"+this.domCont.id).dialog("option",{width:parseInt(width,10),height:parseInt(height,10)});]]>
 					</SourceCode>
 				</Action>
 				<Action Name="hide" DisplayName="#Lang(601)" Description="#Lang(501)">
@@ -3827,7 +3835,7 @@ class VDOM_xmldialog(VDOM_object):
 						<Parameter Name="fade" DisplayName="#Lang(701)" Description="#Lang(801)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
 					<SourceCode>
-<![CDATA[$q("#"+this.domCont.id).dialog('close');]]>
+<![CDATA[$("#"+this.domCont.id).dialog('close');]]>
 					</SourceCode>
 				</Action>
 				<Action Name="show" DisplayName="#Lang(602)" Description="#Lang(502)">
@@ -3835,7 +3843,7 @@ class VDOM_xmldialog(VDOM_object):
 						<Parameter Name="fade" DisplayName="#Lang(702)" Description="#Lang(802)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
 					<SourceCode>
-<![CDATA[$q("#"+this.domCont.id).dialog('open');]]>
+<![CDATA[$("#"+this.domCont.id).dialog('open');]]>
 					</SourceCode>
 				</Action>
 				<Action Name="executeCallback" DisplayName="#Lang(605)" Description="#Lang(505)">
@@ -3844,7 +3852,7 @@ class VDOM_xmldialog(VDOM_object):
 						<Parameter Name="params" DisplayName="#Lang(707)" Description="#Lang(807)" DefaultValue="0" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
 					<SourceCode>
-<![CDATA[$q("#"+this.domCont.id).dialog('executeCallback', callbackName, params);]]>
+<![CDATA[$("#"+this.domCont.id).dialog('executeCallback', callbackName, params);]]>
 					</SourceCode>
 				</Action>
 				<Action Name="loadData" DisplayName="#Lang(604)" Description="#Lang(504)">

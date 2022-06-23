@@ -1005,11 +1005,16 @@ $(document).ready(() => {
         return VDOM_object.wysiwyg(self, contents=result)
 ]]></SourceCode>
   <Libraries>
-    <Library Target="html"><![CDATA[<script type="text/javascript" src="/f571e9e8-e892-49a4-bea0-ff8e15c2c697.js"></script>]]></Library>
-    <Library Target="html"><![CDATA[<script type="text/javascript" src="/201ab0cc-b23c-1ce0-0254-90a8ce68e937.js"></script>]]></Library>
-    <Library Target="html"><![CDATA[<script type="text/javascript" src="/da929190-ff0f-44c1-98ef-ac25dcc0c7c3.js"></script>]]></Library>
-    <Library Target="html"><![CDATA[<link rel="stylesheet" type="text/css" href="/8c57b832-48a6-26ae-6f92-90a8f5772f6b.css" />]]></Library>
-    <Library Target="html"><![CDATA[<script type="text/javascript" src="/c212c2ac-8edd-4003-b9d2-0f0f13547d0a.js"></script>]]></Library>
+    <Library Target="html"><![CDATA[<script defer type="text/javascript" src="/f571e9e8-e892-49a4-bea0-ff8e15c2c697.js"></script>]]></Library>
+    <Library Target="html"><![CDATA[<script defer type="text/javascript" src="/201ab0cc-b23c-1ce0-0254-90a8ce68e937.js"></script>]]></Library>
+    <Library Target="html"><![CDATA[<script defer type="text/javascript" src="/da929190-ff0f-44c1-98ef-ac25dcc0c7c3.js"></script>]]></Library>
+    <Library Target="html">
+      <![CDATA[
+    	  <link rel="preload" href="/8c57b832-48a6-26ae-6f92-90a8f5772f6b.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	      <noscript><link rel="stylesheet" href="/8c57b832-48a6-26ae-6f92-90a8f5772f6b.css"></noscript>
+      ]]>
+    </Library>
+    <Library Target="html"><![CDATA[<script defer type="text/javascript" src="/c212c2ac-8edd-4003-b9d2-0f0f13547d0a.js"></script>]]></Library>
   </Libraries>
   <E2vdom>
     <Events>

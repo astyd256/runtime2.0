@@ -867,12 +867,12 @@
 		focused = u"$q('#%s').focus();" % id if self.focused == "1" else ""
 
 		result += u"""<script type='text/javascript'>
-$j(document).ready(function(){
-	$j('#%(id)s').blur(function(){
-		var x = $j.trim($j(this).val());
+$(document).ready(function(){
+	$('#%(id)s').blur(function(){
+		var x = $.trim($(this).val());
 		execEventBinded("%(clean_id)s", "blur", { itemValue: x, charCount: x.length });
 	});
-	$j('#%(id)s').focusin(function(){
+	$('#%(id)s').focusin(function(){
 		execEventBinded("%(clean_id)s", "focus", {});
 	});
 	%(focused)s

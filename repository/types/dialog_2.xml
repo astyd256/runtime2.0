@@ -1411,12 +1411,12 @@ filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=1, StartColorStr=
 		#	}
 
 		result += """<script type='text/javascript'>
-$j(document).ready(function(){
+$(document).ready(function(){
 	if (typeof dialog_win_%(id)s !== 'undefined') {
 		dialog_win_%(id)s.hide();
 		delete(dialog_win_%(id)s);
 	}
-	dialog_win_%(id)s=new Boxy($j('#%(id)s'),{
+	dialog_win_%(id)s=new Boxy($('#%(id)s'),{
 		width: %(width)s
 		,height: %(height)s
 		,title: "%(title)s"
@@ -1427,16 +1427,16 @@ $j(document).ready(function(){
 		,userclass: "%(classname)s"
 		,afterHide: function(){ 
 			execEventBinded("%(idn)s", "hide", {});
-			$j('#ui-datepicker-div,#ColorDropdown_selector').fadeOut(); 
+			$('#ui-datepicker-div,#ColorDropdown_selector').fadeOut(); 
 		}
 		,afterShow: function(){ 
 			execEventBinded("%(idn)s", "show", {}); 
 		}
 	});
-	$j('.boxy-modal-blackout').scroll(function(){
-		$j('#ui-datepicker-div').fadeOut(); 
-		$j('input.formcolorpicker').click(); 
-		$j('input[name^=formdate_]').focusout(); 
+	$('.boxy-modal-blackout').scroll(function(){
+		$('#ui-datepicker-div').fadeOut(); 
+		$('input.formcolorpicker').click(); 
+		$('input[name^=formdate_]').focusout(); 
 	});
 });
 </script>""" % {

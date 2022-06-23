@@ -874,8 +874,8 @@
 
 		result = \
 			u"""<div id="%(id)s" style="%(div_style)s"><input id="inp_%(id)s" class='formcolorpicker' name="%(name)s" style="%(inp_style)s" type="text" tabindex="%(tabind)s" value="%(value)s" /></div>
-<script type="text/javascript">$j(document).ready(function(){
-	$j("#inp_%(id)s").colorInput({
+<script type="text/javascript">$(document).ready(function(){
+	$("#inp_%(id)s").colorInput({
 		hideInput:%(hide)s,textAccept:"%(title_OK)s",textCancel:"%(title_Canc)s",
 		change:function(){
 			execEventBinded("%(clean_id)s","changecolor",{color:this.value});
@@ -1085,7 +1085,7 @@ execEventBinded(id.substring(2, id.length), "changecolor", {itemValue:value});]]
 						<Parameter Name="cssStyleValue" DisplayName="#Lang(705)" Description="#Lang(805)" DefaultValue="" RegularExpressionValidation=".*" Interface="" />
 					</Parameters>
 					<SourceCode>
-<![CDATA[$j(this).attr('style', cssStyleValue);]]>
+<![CDATA[$(this).attr('style', cssStyleValue);]]>
 					</SourceCode>
 				</Action>
 				<Action Name="show" DisplayName="#Lang(605)" Description="#Lang(505)">

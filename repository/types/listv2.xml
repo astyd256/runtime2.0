@@ -850,7 +850,7 @@ class VDOM_listv2(VDOM_object):
             }}
             {css}
         </style>
-        <script type="text/javascript">jQuery(document).ready(function(){{jQuery("#o_{id}").vdomList_v2({options});}});</script>""" 
+        <script type="text/javascript">$(document).ready(function(){{$("#o_{id}").vdomList_v2({options});}});</script>""" 
 
         contents += output.format(
             version=self.type.version,
@@ -881,7 +881,7 @@ class VDOM_listv2(VDOM_object):
 ]]>
 	</SourceCode>
 	<Libraries>
-		<Library Target="html"><![CDATA[<script type="text/javascript" src="/92de1d12-fb07-41e5-a288-50f6fc80112a.res"></script>]]></Library>
+		<Library Target="html"><![CDATA[<script defer type="text/javascript" src="/92de1d12-fb07-41e5-a288-50f6fc80112a.res"></script>]]></Library>
 	</Libraries>
 	<E2VDOM>
 		<Events>

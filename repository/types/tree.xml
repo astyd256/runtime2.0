@@ -1676,9 +1676,12 @@ jQuery(document).ready(function($){
 ]]>
 	</SourceCode>
 	<Libraries>
-		<Library Target="html"><![CDATA[<link rel="stylesheet" media="screen" type="text/css" href='/874e5ad0-7a30-2eab-e2e4-6296c661f3a6.css'/>]]></Library>
+		<Library Target="html"><![CDATA[
+			<link rel="preload" href="/874e5ad0-7a30-2eab-e2e4-6296c661f3a6.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+			<noscript><link rel="stylesheet" href="/874e5ad0-7a30-2eab-e2e4-6296c661f3a6.css"></noscript>
+		]]></Library>
 		<Library Target="html"><![CDATA[<style>.dynatreetype span.dynatree-node { display: block; }</style>]]></Library>
-		<Library Target="html"><![CDATA[<script src="/68671807-a23c-6556-c975-954574516160.js" type="text/javascript" charset="UTF-8"></script>]]></Library>
+		<Library Target="html"><![CDATA[<script defer src="/68671807-a23c-6556-c975-954574516160.js" type="text/javascript" charset="UTF-8"></script>]]></Library>
 	</Libraries>
 	<E2VDOM>
 		<Events>

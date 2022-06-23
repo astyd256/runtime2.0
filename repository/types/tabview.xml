@@ -643,12 +643,12 @@ class VDOM_tabview(VDOM_object):
 			if self.currenttab == child.hierarchy:
 				show_guid = u"o_" + (child.id).replace('-', '_')
 				js = u"""<script type="text/javascript">
-$j('#%(id)s div.content_%(id)s').children('div').hide();
-$j('#%(id)s #%(show_guid)s').show();
-$j('#%(id)s ul.tabNavigation a').removeClass('active');
-$j('#%(id)s ul.tabNavigation a[href="#%(show_guid)s"]').addClass('active');
+$('#%(id)s div.content_%(id)s').children('div').hide();
+$('#%(id)s #%(show_guid)s').show();
+$('#%(id)s ul.tabNavigation a').removeClass('active');
+$('#%(id)s ul.tabNavigation a[href="#%(show_guid)s"]').addClass('active');
 </script>""" % { "id": id, "show_guid": show_guid }
-		
+
 		sortTagArray = OrderedDict(sorted(tag_array.items(), key=lambda t: t[0]))
 		for key in sortTagArray:
 			tab_tag += tag_array[key]
@@ -670,7 +670,7 @@ $j('#%(id)s ul.tabNavigation a[href="#%(show_guid)s"]').addClass('active');
 			tabs = u'<ul id="ul_%(id)s" class="tabNavigation" style="list-style: none"> %(tab)s </ul>' % {"id": id, "tab": tab_tag}
 			js += u"""<script type="text/javascript">
 var tabview_children_%(id)s = %(arr)s;
-$j(document).ready(function($){
+$(document).ready(function($){
 	$("#ul_%(id)s a").click(function(){
 		$("#%(id)s>div.content_%(id)s>div").fadeOut(100);
 		$("#%(id)s>div.content_%(id)s>div").filter(this.hash).fadeIn(100);

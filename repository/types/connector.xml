@@ -3086,9 +3086,9 @@ class VDOM_connector(VDOM_object):
             connectorclass_js = ""
         else:
             connectorclass_js = u"""
-$j("#%(id)s .%(connectorclass)s").each(function(i,e) {
-	var p = $j(e).parent();
-	x.makeSource($j(e), {
+("#%(id)s .%(connectorclass)s").each(function(i,e) {
+	var p = $(e).parent();
+	x.makeSource($(e), {
 		parent: p,
 		anchor: "Continuous",
 		connector: [ "StateMachine", { curviness: 1 } ],//"Straight"
@@ -3145,7 +3145,7 @@ $j("#%(id)s .%(connectorclass)s").each(function(i,e) {
 
         js = u"""
 <script type="text/javascript">
-$j(document).ready(function(){
+$(document).ready(function(){
 
 	var ourConnector = {
 		margin:          0,
@@ -3157,7 +3157,7 @@ $j(document).ready(function(){
 		overlays:        [ ["Arrow", { location: 1, width: 10, length: 15 } ] ]
 	};
 
-	$j('#%(id)s div[dataid]').each(function(){
+	$('#%(id)s div[dataid]').each(function(){
 		$(this).attr('id', 'conn-' + $(this).attr('dataid'));
 	});
 
@@ -3238,9 +3238,9 @@ console.info('connectionDragStop');
 			anchor: "Continuous"
 		});
 
-		$j("#%(id)s div[dataid]").bind('click dblclick', function(e){
+		$("#%(id)s div[dataid]").bind('click dblclick', function(e){
 			if (e.preventDefault) e.preventDefault(); else e.returnValue = false;
-			var t = $j(this);
+			var t = $(this);
 			if (e.type == 'dblclick') {
 				t.data('doo', false);
 				execEventBinded('%(woid)s', "itemdblclick", {"id":t.attr("dataid")});
