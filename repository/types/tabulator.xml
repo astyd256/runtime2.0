@@ -924,8 +924,8 @@ $(document).ready(() => {
             if (!clickInfo.click_prevent) {
                 execEventBinded('%(idn)s', 'cellclick', {
                     keyField: row.getData().%(keyField)s,
-                    cellData:JSON.stringify(row.getData()),
-                    columnData:JSON.stringify(e)
+                    cellData: JSON.stringify(row.getData()),
+                    headerData: e.path[0].getAttribute('tabulator-field')
                 });
                 if (!isSelected) {
                   row.deselect();
@@ -951,8 +951,8 @@ $(document).ready(() => {
         clickInfo.click_prevent = true;
         execEventBinded('%(idn)s', 'celldblclick', {
                 keyField: row.getData().%(keyField)s,
-                cellData:JSON.stringify(row.getData()),
-                columnData:JSON.stringify(e)
+                cellData: JSON.stringify(row.getData()),
+                headerData: e.path[0].getAttribute('tabulator-field')
             }
         );
     }
