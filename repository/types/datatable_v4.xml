@@ -1183,7 +1183,7 @@ class VDOM_datatable_v4(VDOM_object):
     if self.selectionmode == "1":
       slelection_mode = u"""
       $('#%(id_table)s tbody').on( 'click', 'td', function () {
-            const tr = $(this).perent();
+            const tr = $(this).parent();
             tr.toggleClass('selected');
             const {keyField} = get_column_data(this);
         execEventBinded('%(idn)s', 'rowsselected', {keyList: keyField});
