@@ -733,6 +733,7 @@ class VDOM_growl(VDOM_object):
 		<Library Target="html"><![CDATA[
 			<link rel="preload" href="/f3c84c23-dc6a-e27f-750b-29368302c6ac.res" as="style" onload="this.onload=null;this.rel='stylesheet'">
 			<noscript><link rel="stylesheet" href="/f3c84c23-dc6a-e27f-750b-29368302c6ac.res"></noscript>
+		]]>
 		</Library>
 		<Library Target="html"><![CDATA[<script type="text/javascript" src="/58db188c-f7c3-e026-6eaf-d38812ea1af7.res"></script>]]>
 		</Library>
