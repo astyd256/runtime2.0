@@ -8,7 +8,7 @@ from utils.properties import roproperty
 from utils.tracing import format_exception_trace, show_exception_trace
 
 import managers
-from soap.errors import remote_method_call_error
+
 # import utils
 # from utils.exception import *
 # from utils.exception import VDOM_exception_handler
@@ -115,6 +115,7 @@ class Dispatcher(object):
             else:
                 message = str(error)
             import SOAPpy
+            from soap.errors import remote_method_call_error
             raise SOAPpy.faultType(remote_method_call_error, _("Remote method call error"), message)
 
         response = request.session().value("response")
