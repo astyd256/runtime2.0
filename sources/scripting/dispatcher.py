@@ -8,7 +8,7 @@ from utils.properties import roproperty
 from utils.tracing import format_exception_trace, show_exception_trace
 
 import managers
-# from soap.errors import *
+from soap.errors import remote_method_call_error
 # import utils
 # from utils.exception import *
 # from utils.exception import VDOM_exception_handler
