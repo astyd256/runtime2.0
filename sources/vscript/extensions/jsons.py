@@ -54,7 +54,7 @@ class VScriptJSONEncoder(JSONEncoder):
 			raise errors.system_error, u"Unexpected %s object"%value.__class__.__name__
 		return {
 			array: lambda value: value.items,
-			boolean: lambda value: value.value,
+			boolean: lambda value: bool(value.value),
 			date: lambda value: unicode(value),
 			dictionary: lambda value: {key.as_string: value \
 				for key, value in value.items.iteritems()},
