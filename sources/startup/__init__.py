@@ -11,6 +11,16 @@ import datetime
 datetime.datetime.strptime("2012-01-01", "%Y-%m-%d")
 
 
+#Hotfix to allow urllib certificate validation
+try:
+    import os, ssl, certifi
+    def new_ssl_context_decorator(*args, **kwargs):
+        kwargs['cafile'] = certifi.where()
+        return ssl.create_default_context(*args, **kwargs)
+    ssl._create_default_https_context = new_ssl_context_decorator
+except ImportError:
+    print("Unable to set default ssl validation context for urllib. Check certifi library presence")
+
 # settings
 
 from .importers.settings import SettingsImporter  # noqa

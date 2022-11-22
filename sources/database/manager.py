@@ -204,8 +204,8 @@ class VDOM_database_manager(object):
 
     def remove_databases(self):
         """Clearing all databases"""
-        # managers.file_manager.clear(file_access.database, None, None)
-        managers.file_manager.cleanup_directory(file_access.database, None)
+        #Keep old databases for potential recovery
+        #managers.file_manager.cleanup_directory(file_access.database, None)
         if self.__index or self.__database_by_name:
             self.__index = {}
             self.__database_by_name = {}

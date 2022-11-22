@@ -8,10 +8,6 @@ import managers
 import file_access
 from utils.exception import VDOM_exception, VDOMDatabaseAccessError
 from utils.semaphore import VDOM_semaphore
-# import uuid
-
-import sqlitebck
-
 
 class VDOM_database_object:
     """database object class"""
@@ -82,6 +78,7 @@ class VDOM_database_object:
         return tables
 
     def backup_data(self, tgt_connection):
+        import sqlitebck
         sqlitebck.copy(self.get_connection(), tgt_connection)
 
 
