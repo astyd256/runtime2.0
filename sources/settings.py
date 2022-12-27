@@ -1,4 +1,3 @@
-
 SERVER_ID = "5ed67d80-9017-4753-9633-685a1926a6b9"
 
 # defaults
@@ -146,7 +145,7 @@ VSCRIPT_AUTO_PRECOMPILE = True  # precompile dependencies when needed
 
 # soap
 
-AUTOSELECT_NEW_APPLICATION = False  # auto-select new application on create
+AUTOSELECT_NEW_APPLICATION = True  # auto-select new application on create
 
 # manage
 
