@@ -1,7 +1,8 @@
+from __future__ import absolute_import
 
 import ply.lex as lex
 from . import errors, lexemes
-from source import *
+from .source import *
 
 
 

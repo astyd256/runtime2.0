@@ -1,3 +1,4 @@
+from future.utils import raise_
 from poplib import POP3, POP3_SSL, POP3_SSL_PORT
 from ssl import wrap_socket, PROTOCOL_SSLv23, PROTOCOL_TLSv1
 import time
@@ -21,14 +22,14 @@ class VDOM_POP3_SSL(POP3_SSL):
 				self.sock = socket.socket(af, socktype, proto)
 				self.sock.settimeout(timeout)
 				self.sock.connect(sa)
-			except socket.error, msg:
+			except socket.error as msg:
 				if self.sock:
 					self.sock.close()
 				self.sock = None
 				continue
 			break
 		if not self.sock:
-			raise socket.error, msg
+			raise_(socket.error, msg)
 		self.file = self.sock.makefile('rb')
 		self.sslobj = wrap_socket(self.sock, self.keyfile, self.certfile, ssl_version=ssl_version)
 		self._debugging = 0

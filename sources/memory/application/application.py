@@ -416,13 +416,13 @@ class MemoryApplication(MemoryApplicationSketch):
             self._save_queue = True
             managers.memory.schedule(self)
 
-    def save(self, async=False):
+    def save(self, write_async=False):
         if settings.ALLOW_TO_CHANGE is not None:
             if self._id not in settings.ALLOW_TO_CHANGE:
                 log.write("Unable to save %s due to settings disallow" % self)
                 return
 
-        if async:
+        if write_async:
             if not self._save_queue:
                 self._save_queue = True
                 managers.memory.schedule(self)

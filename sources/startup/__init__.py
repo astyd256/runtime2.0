@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 
 import __builtin__
 import sys
@@ -74,7 +75,7 @@ if settings.START_LOG_SERVER and settings.LOGGER == "native":
 
 # prepare manager
 
-from importers.manager import ImportManager  # noqa
+from .importers.manager import ImportManager  # noqa
 
 
 # obsolete

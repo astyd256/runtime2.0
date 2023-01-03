@@ -1,4 +1,5 @@
-import thread, time, email, email.generator, copy
+from __future__ import absolute_import
+import time, email, email.generator, copy
 from smtplib import SMTP,SMTP_SSL,SMTPConnectError,SMTPHeloError,SMTPAuthenticationError,SMTPException,\
 	SMTPRecipientsRefused,SMTPSenderRefused,SMTPDataError,SSLFakeFile
 from socket import create_connection, error as socket_error
@@ -8,11 +9,11 @@ from email.mime.nonmultipart import MIMENonMultipart
 from email.mime.text import MIMEText
 from email.mime.multipart  import MIMEMultipart
 from collections import namedtuple
-from message import Message
+from .message import Message
 from utils.semaphore import VDOM_semaphore
 from storage.storage import VDOM_config
 import managers
-from daemon import VDOM_mailer
+from .daemon import VDOM_mailer
 
 MailAttachment = namedtuple("MailAttachment","data, filename, content_type, content_subtype")
 
@@ -155,9 +156,9 @@ class VDOM_email_manager(object):
 			#debug("Authentication error: %s" % str(e))
 			self.__error = "SMTP Authentication error: %s" % str(e)
 			managers.log_manager.error_server("SMTP authentication error: %s" % str(e), "email")
-		except SMTPException, e:
+		except SMTPException as e:
 			self.__error = "General SMTP error: %s" % str(e)
-		except Exception, e:
+		except Exception as e:
 			self.__error = "Unknown error: %s" % str(e)
 		finally:
 			self.__sem.unlock()
@@ -319,10 +320,10 @@ class VDOM_email_manager(object):
 					
 					ts = 360
 				
-				except SMTPException, e:
+				except SMTPException as e:
 					self.__error = "General SMTP error: %s" % str(e)
 					ts = 30
-				except Exception, e:
+				except Exception as e:
 					self.__error = "Unknown error: %s" % str(e)
 					ts = 5
 				finally:

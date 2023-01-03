@@ -24,7 +24,7 @@ class LegacyInterface(object):
             setter(value)
 
         iterator = wrapper()
-        iterator.next()
+        next(iterator)
 
         return VALUE(self, None, iterator)
 
@@ -46,7 +46,7 @@ class LegacyInterface(object):
             setter(value)
 
         iterator = wrapper()
-        iterator.next()
+        next(iterator)
 
         return CONTENTS(self, None, iterator)
 

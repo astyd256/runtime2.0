@@ -14,7 +14,7 @@ class MaximalCheckInterval(object):
         self._lock.acquire()
         if self._count == 0:
             self._value = sys.getcheckinterval()
-            sys.setcheckinterval(sys.maxint)
+            sys.setcheckinterval(sys.maxsize)
         self._count += 1
 
     def __exit__(self, extype, exvalue, extraceback):

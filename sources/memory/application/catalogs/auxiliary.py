@@ -4,7 +4,7 @@ def subtree(root):
     stack, iterator = [], root.objects.itervalues()
     while iterator:
         try:
-            child = iterator.next()
+            child = next(iterator)
         except StopIteration:
             if stack:
                 iterator = stack.pop()

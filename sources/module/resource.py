@@ -1,7 +1,8 @@
 """resource module"""
+from __future__ import absolute_import
 import sys
 import managers
-from module import VDOM_module
+from .module import VDOM_module
 from utils.exception import *
 
 

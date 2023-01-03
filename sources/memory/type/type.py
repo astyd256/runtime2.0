@@ -309,8 +309,8 @@ class MemoryType(MemoryTypeSketch):
 
         file.write(u"</Type>\n")
 
-    def save(self, async=False):
-        if async:
+    def save(self, write_async=False):
+        if write_async:
             managers.memory.schedule(self)
         else:
             with managers.file_manager.open(file_access.TYPE, self._id, settings.TYPE_FILENAME,

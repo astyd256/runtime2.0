@@ -1,4 +1,5 @@
 """request module represents the request got by the VDOM server"""
+from __future__ import absolute_import
 
 import sys
 from cStringIO import StringIO
@@ -6,9 +7,9 @@ from StringIO import StringIO as uStringIO
 import cgi
 from cgi import FieldStorage
 
-from environment import VDOM_environment
-from headers import VDOM_headers
-from arguments import VDOM_request_arguments
+from .environment import VDOM_environment
+from .headers import VDOM_headers
+from .arguments import VDOM_request_arguments
 from Cookie import BaseCookie
 #from memory.interface import MemoryInterface
 import managers

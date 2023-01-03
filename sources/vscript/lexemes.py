@@ -284,7 +284,7 @@ def t_string(t):
 
 def t_character(t):
 	r'\&[Hh][0-9A-Fa-f]+'
-	print "STRING!!!"
+	#print("STRING!!!")
 	t.type=u"STRING"
 	t.value=(t.lexer.lineno, unichr(int(t.value[2:], 16)))
 	return t

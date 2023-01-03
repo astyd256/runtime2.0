@@ -40,7 +40,7 @@ class MemoryObjectsDynamicCatalog(MemoryBase, Mapping):
 
     def __iter__(self):
         iterator = subtree(self._collection.owner)
-        iterator.next()
+        next(iterator)
         for subobject in iterator:
             yield subobject.id
 

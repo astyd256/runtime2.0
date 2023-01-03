@@ -298,7 +298,7 @@ class v_evalstring(generic):
 
         def generate():
             iterator = iter(self._strings)
-            yield iterator.next()
+            yield next(iterator)
             for evaluate, expression in self._expressions:
                 if evaluate:
                     ret = eval(expression, namespace)
@@ -308,7 +308,7 @@ class v_evalstring(generic):
                         yield unicode(ret)
                 else:
                     exec(expression, namespace)
-                yield iterator.next()
+                yield next(iterator)
 
         previous = getattr(contexts, "current", v_nothing)
         contexts.current = v_evalcontext() if self._context is None else self._context

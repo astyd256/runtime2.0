@@ -32,7 +32,7 @@ DEFAULT_FILLER = "."
 
 DESIRED_WIDTH = 139
 CAPTION_WIDTH = 36
-LOCATION_WIDTH = 99 if width == sys.maxint else min(width * 2 // 3, 99)
+LOCATION_WIDTH = 99 if width == sys.maxsize else min(width * 2 // 3, 99)
 STATEMENT_WIDTH = DESIRED_WIDTH - LOCATION_WIDTH
 NAME_WIDTH = 32
 VALUE_WIDTH = DESIRED_WIDTH - NAME_WIDTH
@@ -352,7 +352,7 @@ def collect_referrers(referent, limit=16, depth=32, rank=9, exclude=None):
                 chain = chain.reduce(part, rank=2.00 * rank, action=ACCEPT)
             elif hasattr(chain.referrer, "__describe__"):
                 chain = chain.reduce(part, rank=2.00 * rank, action=ACCEPT)
-            elif isinstance(chain.referrer, types.TypeType):
+            elif isinstance(chain.referrer, type):
                 chain = chain.reduce(part, rank=0.10 * rank, action=ACCEPT)
             else:
                 chain = chain.reduce(part, rank=0.80 * rank)
@@ -575,7 +575,7 @@ def format_source_point(path, line, function, indent="", width=LOCATION_WIDTH):
     return fullname + ending
 
 
-def extract_trace(stack, limit=sys.maxint):
+def extract_trace(stack, limit=sys.maxsize):
     entries = islice(reversed(stack), limit) if DEEPER_LATER else stack[len(stack) - limit:]
     result = []
     for path, line, function, statement in entries:
@@ -583,7 +583,7 @@ def extract_trace(stack, limit=sys.maxint):
     return result
 
 
-def format_trace(stack, limit=sys.maxint,
+def format_trace(stack, limit=sys.maxsize,
         statements=True, caption=None, compact=COMPACT_DEFAULT_MODE,
         indent="", filler=DEFAULT_FILLER, into=None):
     lines = [] if into is None else into
@@ -602,7 +602,7 @@ def format_trace(stack, limit=sys.maxint,
 
     indents, fillers = iterlast(indent), iterlast(filler)
     for path, line, function, statement in entries:
-        indent, filler = indents.next(), fillers.next()
+        indent, filler = next(indents), next(fillers)
         ending = fit(":%s:%s" % (line, function), NAME_WIDTH)
         fullname = fit(clarify_source_path(path), width - len(indent) - len(ending))
         location = fullname + ending
@@ -618,7 +618,7 @@ def format_trace(stack, limit=sys.maxint,
         return "\n".join(lines)
 
 
-def extract_thread_trace(thread=None, limit=sys.maxint, skip=None, until=None):
+def extract_thread_trace(thread=None, limit=sys.maxsize, skip=None, until=None):
     if thread is None:
         stack = extract_stack(skip=skip, until=until)
     else:
@@ -632,7 +632,7 @@ def extract_thread_trace(thread=None, limit=sys.maxint, skip=None, until=None):
     return extract_trace(stack, limit=limit)
 
 
-def format_thread_trace(thread=None, limit=sys.maxint,
+def format_thread_trace(thread=None, limit=sys.maxsize,
         statements=True, caption=None, header=False, compact=COMPACT_DEFAULT_MODE,
         indent="", filler=DEFAULT_FILLER, skip=None, until=None, into=None):
     lines = [] if into is None else into
@@ -671,7 +671,7 @@ def format_thread_trace(thread=None, limit=sys.maxint,
         return "\n".join(lines)
 
 
-def extract_threads_trace(limit=sys.maxint, current=True):
+def extract_threads_trace(limit=sys.maxsize, current=True):
     current_thread = None if current else threading.current_thread()
 
     result = OrderedDict()
@@ -683,7 +683,7 @@ def extract_threads_trace(limit=sys.maxint, current=True):
     return result
 
 
-def format_threads_trace(limit=sys.maxint,
+def format_threads_trace(limit=sys.maxsize,
         statements=True, compact=COMPACT_DEFAULT_MODE, current=True,
         indent="", filler=DEFAULT_FILLER, into=None):
     lines = [] if into is None else into
@@ -761,7 +761,7 @@ def format_exception_locals(information=None, ignore_builtins=True, caption=None
         return "\n".join(lines)
 
 
-def extract_exception_trace(information=None, limit=sys.maxint,
+def extract_exception_trace(information=None, limit=sys.maxsize,
         locals=False, threads=False, separate_exception=False):
     extype, exvalue, extraceback = information = information or sys.exc_info()
     if exvalue is None:
@@ -781,7 +781,7 @@ def extract_exception_trace(information=None, limit=sys.maxint,
     return result
 
 
-def format_exception_trace(information=None, limit=sys.maxint,
+def format_exception_trace(information=None, limit=sys.maxsize,
         statements=True, caption=None, label=None, compact=COMPACT_DEFAULT_MODE,
         locals=False, threads=False, separate=False,
         indent="", filler=DEFAULT_FILLER, into=None):
@@ -894,21 +894,21 @@ def get_threads_trace():
 
 # wrappers
 
-def show_trace(stack, limit=sys.maxint,
+def show_trace(stack, limit=sys.maxsize,
         statements=True, caption=None, compact=COMPACT_DEFAULT_MODE,
         indent="", filler=DEFAULT_FILLER, output=None):
     (output or sys.stdout).write(format_trace(
         stack, limit, statements, caption, compact, indent, filler))
 
 
-def show_thread_trace(thread=None, limit=sys.maxint,
+def show_thread_trace(thread=None, limit=sys.maxsize,
         statements=True, caption=None, header=False, compact=COMPACT_DEFAULT_MODE,
         indent="", filler=DEFAULT_FILLER, skip=None, until=None, output=None):
     (output or sys.stdout).write(format_thread_trace(
         thread, limit, statements, caption, header, compact, indent, filler, skip, until))
 
 
-def show_threads_trace(limit=sys.maxint,
+def show_threads_trace(limit=sys.maxsize,
         statements=True, compact=COMPACT_DEFAULT_MODE, current=True,
         indent="", filler=DEFAULT_FILLER, output=None):
     (output or sys.stdout).write(format_threads_trace(
@@ -921,7 +921,7 @@ def show_exception_locals(information=None, ignore_builtins=True, caption=None,
         information, ignore_builtins, caption, indent, filler))
 
 
-def show_exception_trace(information=None, limit=sys.maxint,
+def show_exception_trace(information=None, limit=sys.maxsize,
         statements=True, caption=None, label=None, compact=COMPACT_DEFAULT_MODE,
         locals=False, threads=False, separate=False,
         indent="", filler=DEFAULT_FILLER, output=None):

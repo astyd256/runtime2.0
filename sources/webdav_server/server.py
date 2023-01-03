@@ -1,15 +1,16 @@
-import request_server
+from __future__ import absolute_import
+from . import request_server
 from wsgidav.wsgidav_app import DEFAULT_CONFIG
 try:
 	from wsgidav.wsgidav_app import WsgiDAVApp
-except ImportError, e:
+except ImportError as e:
 	raise RuntimeError("Could not import wsgidav package:\n%s\nSee http://wsgidav.googlecode.com/." % e)
 from wsgidav.lock_storage import LockStorageDict
 from wsgidav.property_manager import PropertyManager
 from wsgidav.lock_manager import LockManager
-from vdom_dav_provider import VDOM_Provider
-from domain_controller import VDOM_domain_controller, VDOM_HTTPAuthenticator
-from vdom_dav_provider import get_properties
+from .vdom_dav_provider import VDOM_Provider
+from .domain_controller import VDOM_domain_controller, VDOM_HTTPAuthenticator
+from .vdom_dav_provider import get_properties
 from wsgidav.debug_filter import WsgiDavDebugFilter
 from wsgidav.error_printer import ErrorPrinter
 from wsgidav.dir_browser import WsgiDavDirBrowser
@@ -121,7 +122,7 @@ class VDOM_webdav_manager(object):
 			try:
 				utf8path = path.encode('utf8')
 				path = utf8path
-			except Exception, e:
+			except Exception as e:
 				debug("Error: " + unicode(e))
 		get_properties(appid, objid, path)
 		

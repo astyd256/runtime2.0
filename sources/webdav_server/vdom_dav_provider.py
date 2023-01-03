@@ -15,6 +15,7 @@ See `Developers info`_ for more information about the WsgiDAV architecture.
 
 .. _`Developers info`: http://docs.wsgidav.googlecode.com/hg/html/develop.html  
 """
+from __future__ import absolute_import
 from collections import OrderedDict
 from wsgidav.dav_error import DAVError, HTTP_FORBIDDEN,HTTP_REQUEST_TIMEOUT,HTTP_NOT_FOUND
 from wsgidav.dav_provider import DAVProvider, DAVCollection, DAVNonCollection, _DAVResource
@@ -27,8 +28,8 @@ import mimetypes
 import shutil
 import stat
 import managers
-from webdav_request import VDOM_webdav_request
-from webdav_cache import lru_cache
+from .webdav_request import VDOM_webdav_request
+from .webdav_cache import lru_cache
 import posixpath
 import tempfile
 __docformat__ = "reStructuredText"

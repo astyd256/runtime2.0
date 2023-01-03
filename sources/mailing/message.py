@@ -17,21 +17,21 @@ def mail_to_dict(mail, codecs = ['utf8', 'cp1252', 'latin1' ]):
 	try:
 		subject = email.Header.decode_header(mail.get('Subject'))
 		result["subject"] = subject[0][0].decode(subject[0][1]) if subject[0][1] else decode_strings(subject[0][0], codecs)
-	except Exception, ex:
+	except Exception as ex:
 		result["subject"] = ""
 		
 
 	try:
 		from_email = email.Header.decode_header(mail.get('From'))
 		result["from_email"] = from_email[0][0].decode(from_email[0][1]) if from_email[0][1] else decode_strings(from_email[0][0], codecs)
-	except Exception, ex:
+	except Exception as ex:
 		result["from_email"] = ""
 		
 
 	try:
 		to_email = email.Header.decode_header(mail.get('To'))
 		result["to_email"] = to_email[0][0].decode(to_email[0][1]) if to_email[0][1] else decode_strings(to_email[0][0], codecs)
-	except Exception, ex:
+	except Exception as ex:
 		result["to_email"] = ""
 		
 	if mail.get('Date'):
@@ -317,12 +317,12 @@ class Message(object):
 								if "Content-Transfer-Encoding" in subpart and subpart["Content-Transfer-Encoding"].lower() == "quoted-printable":
 									try:
 										attachment_object.data = quopri.decodestring(oAttach)
-									except Exception, ex:
+									except Exception as ex:
 										pass								
 								else:
 									try:
 										attachment_object.data= base64.b64decode(oAttach)
-									except Exception, ex:
+									except Exception as ex:
 										pass
 															
 								#attachment_object.data = base64.b64decode(oAttach)
@@ -348,12 +348,12 @@ class Message(object):
 								if "Content-Transfer-Encoding" in subpart and subpart["Content-Transfer-Encoding"].lower() == "base64":
 									try:
 										body += base64.b64decode(subpart.get_payload())
-									except Exception, ex:
+									except Exception as ex:
 										pass
 								elif "Content-Transfer-Encoding" in subpart and subpart["Content-Transfer-Encoding"].lower() == "quoted-printable":
 									try:
 										body += quopri.decodestring(subpart.get_payload())
-									except Exception, ex:
+									except Exception as ex:
 										pass
 								else:
 									if not isinstance(subpart.get_payload(), list):
@@ -368,12 +368,12 @@ class Message(object):
 			if "Content-Transfer-Encoding" in mail and mail["Content-Transfer-Encoding"].lower() == "base64":
 				try:
 					body += base64.b64decode(mail.get_payload())
-				except Exception, ex:
+				except Exception as ex:
 					pass
 			elif "Content-Transfer-Encoding" in mail and mail["Content-Transfer-Encoding"].lower() == "quoted-printable":
 				try:
 					body += quopri.decodestring(mail.get_payload())
-				except Exception, ex:
+				except Exception as ex:
 					pass
 			else:
 				if not isinstance(mail.get_payload(), list):

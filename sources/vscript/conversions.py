@@ -55,7 +55,7 @@ def pack(value, default=None):
 		unicode: lambda value: string(value),
 		bool: lambda value: boolean(value),
 		float: lambda value: double(value),
-		types.NoneType: lambda value: v_null} \
+		type(None): lambda value: v_null} \
 			.get(type(value), default or unknown)(value)
 
 def unpack(value, default=None):

@@ -60,7 +60,7 @@ def elements(self, selector, iterator):
 
         if inspect.isgeneratorfunction(handler):
             inner_iterator = handler(*parameters, **attributes)
-            inner_handlers = inner_iterator.next()
+            inner_handlers = next(inner_iterator)
         else:
             inner_iterator = None
             inner_handlers = handler(*parameters, **attributes)
@@ -73,7 +73,7 @@ def elements(self, selector, iterator):
 
         if iterator:
             try:
-                iterator.next()
+                next(iterator)
             except StopIteration:
                 pass
 

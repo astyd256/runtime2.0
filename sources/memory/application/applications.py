@@ -25,7 +25,7 @@ class MemoryApplications(MemoryBase, Mapping):
     @lazy
     def default(self):
         try:
-            return self[settings.DEFAULT_APPLICATION or iter(self).next()]
+            return self[settings.DEFAULT_APPLICATION or next(iter(self))]
         except (KeyError, StopIteration):
             return None
 

@@ -138,7 +138,7 @@ class VDOM_webdav_request_server(RequestServer):
 			if type(handled) is list:
 				errorList = handled
 				handled = True
-		except Exception, e:
+		except Exception as e:
 			errorList = [ (srcRes.getHref(), asDAVError(e)) ]
 			handled = True
 		if handled:
@@ -200,7 +200,7 @@ class VDOM_webdav_request_server(RequestServer):
 				try:
 					_logger.debug("Recursive move: %s -> '%s'" % (srcRes, destPath))
 					errorList = srcRes.moveRecursive(destPath)
-				except Exception, e:
+				except Exception as e:
 					errorList = [ (srcRes.getHref(), asDAVError(e)) ]
 				return self._sendResponse(environ, start_response, 
 					                  srcRes, successCode, errorList)
@@ -248,7 +248,7 @@ class VDOM_webdav_request_server(RequestServer):
 				if isMove and not sRes.isCollection:
 					sRes.delete()
 	
-			except Exception, e:
+			except Exception as e:
 				ignoreDict[sRes.path] = True
 				# TODO: the error-href should be 'most appropriate of the source 
 				# and destination URLs'. So maybe this should be the destination
@@ -279,7 +279,7 @@ class VDOM_webdav_request_server(RequestServer):
 	#                    _logger.debug("Remove source after move: %s" % sRes)
 					util.status("Remove collection after move: %s" % sRes)
 					sRes.delete()
-				except Exception, e:
+				except Exception as e:
 					errorList.append( (srcRes.getHref(), asDAVError(e)) )
 			util.status("ErrorList", var=errorList)
 	

@@ -1,11 +1,12 @@
 """database manager"""
+from __future__ import absolute_import
 # import string
 # import sys
 # import uuid
 import managers
 import file_access
 # from utils.exception import VDOM_exception
-from dbobject import VDOM_database_object, VDOM_database_table
+from .dbobject import VDOM_database_object, VDOM_database_table
 from xml.dom.minidom import parseString
 from xml.dom import Node
 # import time

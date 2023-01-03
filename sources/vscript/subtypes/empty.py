@@ -25,7 +25,7 @@ class empty(subtype):
 
 	def __div__(self, another):
 		try: return subtype.__div__(self, another)
-		except errors.division_by_zero: raise errors.overflow, None, sys.exc_info()[2]
+		except errors.division_by_zero: raise errors.overflow.with_traceback(sys.exc_info()[2])
 
 
 	def __invert__(self):

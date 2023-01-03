@@ -1,4 +1,5 @@
 
+from future.utils import raise_
 import types
 from json import JSONDecoder, JSONEncoder
 from json.decoder import JSONObject, JSONArray
@@ -12,11 +13,11 @@ from ..subtypes import array, binary, boolean, date, dictionary, double, \
 
 def wrap(value):
 	def unknown(value):
-		raise errors.system_error, u"Unexpected %s object"%value.__class__.__name__
+		raise_(errors.system_error, u"Unexpected %s object"%value.__class__.__name__)
 	return {
 		array: lambda value: value,
 		dictionary: lambda value: value,
-		types.NoneType: lambda value: v_null,
+		type(None): lambda value: v_null,
 		bool: lambda value: boolean(value),
 		float: lambda value: double(value),
 		int: lambda value: integer(value),
@@ -51,7 +52,7 @@ class VScriptJSONEncoder(JSONEncoder):
 
 	def default(self, value):
 		def unknown(value):
-			raise errors.system_error, u"Unexpected %s object"%value.__class__.__name__
+			raise_(errors.system_error, u"Unexpected %s object"%value.__class__.__name__)
 		return {
 			array: lambda value: value.items,
 			boolean: lambda value: bool(value.value),

@@ -1,14 +1,16 @@
 """Module Manager module"""
+from __future__ import absolute_import
 
+from future.utils import raise_
 import sys, traceback, shutil, os, types, re
 
 import managers
 from utils.exception import VDOM_exception
 from utils.tracing import show_exception_trace
 
-from resource import VDOM_module_resource
+from .resource import VDOM_module_resource
 from .python import VDOM_module_python
-from post_processing import VDOM_post_processing
+from .post_processing import VDOM_post_processing
 from contextlib import contextmanager
 
 
@@ -51,7 +53,7 @@ class VDOM_module_manager(object):
                 request_object.add_header("Content-Type", e[ext])
                 request_object.add_header("Cache-Control", "max-age=86400")
             else:
-                raise AttributeError, ext
+                raise_(AttributeError, ext)
             request_object.add_header("Content-Length", str(len(data)))
             return (None, data)
         if "/favicon.ico" == script_name:
@@ -62,7 +64,7 @@ class VDOM_module_manager(object):
                 request_object.environment().environment()["REQUEST_URI"] = "/%s.res" % app.icon
                 module = VDOM_module_resource()
                 return (None, module.run(request_object, "res"))
-            except Exception, e:
+            except Exception as e:
                 debug(_("Module manager: resource module error: %s") % str(e))
                 return (404, None)
 
@@ -189,7 +191,7 @@ class VDOM_module_manager(object):
                     result = managers.engine.render(obj, render_type=obj.type.render_type.lower())
                     # result = managers.engine.render(obj, None, obj.type.render_type.lower())
                     # CHECK: result = managers.engine.render(_a, obj, None, obj.type.render_type.lower())
-                except VDOM_exception, e:
+                except VDOM_exception as e:
                     debug("Render exception: " + str(e))
                     show_exception_trace(caption="Module Manager: Render exception", locals=True)
                     return (None, str(e))
@@ -241,7 +243,7 @@ class VDOM_module_manager(object):
                 try:
                     module = VDOM_module_python()
                     return (None, module.run(request_object))
-                except Exception, e:
+                except Exception as e:
                     debug(("Module manager: python module error: %s") % str(e))
                     #traceback.print_exc(file=debugfile)
                     return 500, None

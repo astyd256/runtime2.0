@@ -32,14 +32,14 @@ class ConsoleWrapper(object):
         if logs:
             logs.console.write(message)
         else:
-            print message or ""
+            print(message or "")
 
     def error(self, message=None):
         logs = sys.modules.get("logs")
         if logs:
             logs.console.error(message)
         else:
-            print ERROR_PREFIX + (message or "").replace("\n", "\n" + ERROR_PREFIX)
+            print(ERROR_PREFIX + (message or "").replace("\n", "\n" + ERROR_PREFIX))
 
 
 console = ConsoleWrapper()

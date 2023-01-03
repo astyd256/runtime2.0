@@ -332,7 +332,7 @@ class xml_object(object):
 
 def f1():
 	x = xml_object("z.xml")
-	print x
+	print(x)
 	return 0
 
 # test
@@ -340,13 +340,13 @@ if __name__ == "__main__":
 	f1()
 	import gc
 	gc.collect()
-	print len(gc.garbage)
+	print(len(gc.garbage))
 	x=raw_input()
 	#import gc
-	print "x"
+	print("x")
 	x = xml_object("z.xml")
 	x.children.pop(0)
-	print x.toxml()
+	print(x.toxml())
 	x=raw_input()
 
 	a = xml_object()

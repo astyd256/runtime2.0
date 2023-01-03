@@ -200,7 +200,7 @@ def exception(value):
 
 @verificator
 def thread(value):
-    print "???", value
+    print("???", value)
     match = THREAD_REGEX.match(value)
     if match:
         return int(value) if match.lastindex else str(value)

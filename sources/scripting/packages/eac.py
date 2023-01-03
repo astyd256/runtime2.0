@@ -1,15 +1,15 @@
 """
 """
+from __future__ import absolute_import
 
 import json
-import md5
+from hashlib import md5
 import urlparse
 import urllib
-import urllib2
 import email
 import email.utils
 import base64
-import jlayout
+from . import jlayout
 
 from xml.dom.minidom import parseString
 from xml.dom import getDOMImplementation

@@ -11,7 +11,7 @@ class variable(primitive):
 		try:
 			return getattr(self.as_complex, name)
 		except AttributeError:
-			raise errors.object_has_no_property(name), None, sys.exc_info()[2]
+			raise errors.object_has_no_property(name).with_traceback(sys.exc_info()[2])
 
 
 	def redim(self, preserve, *subscripts):

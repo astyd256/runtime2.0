@@ -38,13 +38,13 @@ def calls_builder(parser):
 				if name=="Application" or name=="APPLICATION":
 					# <Application>
 					try: structure.appid=attributes.pop(u"ID")
-					except KeyError: raise MissingAttributeError, u"ID"
+					except KeyError: raise MissingAttributeError(u"ID")
 					parser.handle_elements(name, attributes)
 					# </Application>
 				elif name=="Session" or name=="SESSION":
 					# <Session>
 					try: structure.sid=attributes.pop(u"ID")
-					except KeyError: raise MissingAttributeError, u"ID"
+					except KeyError: raise MissingAttributeError(u"ID")
 					parser.handle_elements(name, attributes)
 					# </Session>
 				elif name=="Event" or name=="EVENT":
@@ -52,12 +52,12 @@ def calls_builder(parser):
 					try: event_source_object_id=attributes.pop(u"ObjSrcID")
 					except KeyError:
 						try: event_source_object_id=attributes.pop(u"objSrcID")
-						except KeyError: raise MissingAttributeError, u"ObjSrcID"
+						except KeyError: raise MissingAttributeError(u"ObjSrcID")
 					event_source_object_id="-".join(event_source_object_id[2:].split("_"))
 					try: event_name=attributes.pop(u"Name")
 					except KeyError:
 						try: event_name=attributes.pop(u"name")
-						except KeyError: raise MissingAttributeError, u"Name"
+						except KeyError: raise MissingAttributeError(u"Name")
 					event_parameters={}
 					def event_handler(name, attributes):
 						if name=="Parameter" or name=="PARAMETER":
@@ -65,7 +65,7 @@ def calls_builder(parser):
 							try: parameter_name=attributes.pop(u"Name")
 							except KeyError:
 								try: parameter_name=attributes.pop(u"name")
-								except KeyError: raise MissingAttributeError, u"Name"
+								except KeyError: raise MissingAttributeError(u"Name")
 							def parameter_handler(value): event_parameters[parameter_name]=[value.replace('&quot;', '"').replace('&gt;', '>').replace('&lt;', '<').replace('&amp;', '&').encode("utf8")]
 							parser.handle_value(name, attributes, parameter_handler)
 							# </Parameter>
@@ -88,11 +88,11 @@ def calls_builder(parser):
 				elif name=="State" or name=="STATE":
 					# <Session>
 					try: structure.state=int(attributes.pop(u"Value"))
-					except ValueError: raise UnexpectedAttributeValueError, u"Value"
+					except ValueError: raise UnexpectedAttributeValueError(u"Value")
 					except KeyError:
 						try: structure.state=int(attributes.pop(u"value"))
-						except ValueError: raise UnexpectedAttributeValueError, u"Value"
-						except KeyError: raise MissingAttributeError, u"Value"
+						except ValueError: raise UnexpectedAttributeValueError(u"Value")
+						except KeyError: raise MissingAttributeError(u"Value")
 					parser.handle_elements(name, attributes)
 					# </Session>
 				else:

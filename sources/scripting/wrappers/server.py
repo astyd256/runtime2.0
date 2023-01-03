@@ -312,7 +312,6 @@ class VDOM_server(object):
         return version.SERVER_VERSION
 
     def _get_guid(self):
-        # return utils.uuid.uuid4()
         return uuid4()
 
     def _load_javascript(self):

@@ -41,7 +41,7 @@ def attributes(**keywords):
 
 
 def weaker(bound):
-    instance, function = ref(bound.im_self), bound.im_func
+    instance, function = ref(bound.__self__), bound.__func__
 
     @wraps(function)
     def wrapper(*attributes, **keywords):

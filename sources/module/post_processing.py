@@ -45,7 +45,7 @@ class VDOM_post_processing(VDOM_module):
 		result = data
 		for cls_name in VDOM_post_processing.post_modules:
 			try:
-				exec "module = " + cls_name + "()"
+				exec("module = " + cls_name + "()")
 				if module:
 					result = module.run(result)
 			except:

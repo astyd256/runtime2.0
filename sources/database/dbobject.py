@@ -37,7 +37,7 @@ class VDOM_database_object:
             conn = sqlite3.connect(managers.file_manager.locate(file_access.database, self.owner_id, self.filename), timeout=timeout)
             if not simple_rows:
                 conn.row_factory = sqlite3.Row
-        except Exception, e:
+        except Exception as e:
             self.is_ready = False
             debug("Database open failed:" + str(e))
             return None
@@ -465,7 +465,7 @@ END TRANSACTION;""" % {"newtable": newtable, "newtablename": self.name + "_new",
                         if child.nodeName == "DataInsert":
                             self.addrow(child.attributes["values"].value)
                     self.restore_structure()
-            except Exception, e:
+            except Exception as e:
                 debug("Database update failed:" + str(e))
         return self.get_data_xml()
 
@@ -538,7 +538,7 @@ END TRANSACTION;""" % {"newtable": newtable, "newtablename": self.name + "_new",
             if not self.structure:
                 self.restore_structure()
 
-        except Exception, e:
+        except Exception as e:
             debug("Database reset failed")
             self.__reset_sem.unlock()
             self.__is_prepared = False
@@ -667,7 +667,7 @@ class VDOM_db_column:
     def __init__(self, name, constraints={}):
         """Constructor"""
         self.name = name
-        self.id = name  # str(utils.uuid.uuid4())
+        self.id = name  # str(uuid.uuid4())
 
         if "type" in constraints:
             self.type = constraints["type"]

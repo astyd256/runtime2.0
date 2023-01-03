@@ -71,7 +71,7 @@ class VDOMServiceSingleThread(object):
 		try:
 			ret = self._server.remote_call(self._sid, self.__request_skey(), self._application_id, container_id, action_name, xml_param, xml_data)
 
-		except Exception, ex:
+		except Exception as ex:
 			if ret:
 				raise VDOMServiceCallError( str(ret) )
 			else:
@@ -97,7 +97,7 @@ class VDOMServiceSingleThread(object):
 			soap_method = getattr(self._server, method_name)
 			ret = soap_method(self._sid, self.__request_skey(), *params)
 
-		except Exception, ex:
+		except Exception as ex:
 			if ret:
 				raise VDOMServiceCallError( str(ret) )
 			else:

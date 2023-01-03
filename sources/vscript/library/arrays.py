@@ -10,7 +10,7 @@ def v_dictionary(*arguments):
 	def iterator2(items, error=errors.wrong_number_of_arguments):
 		iterator=iter(items)
 		for key in iterator:
-			try: yield key, iterator.next()
+			try: yield key, next(iterator)
 			except StopIteration: raise error
 	count=len(arguments)
 	if count==1:
@@ -38,7 +38,7 @@ def v_ordereddictionary(*arguments):
 		iterator=iter(items)
 		for key in iterator:
 			try:
-				yield key, iterator.next()
+				yield key, next(iterator)
 			except StopIteration:
 				raise error
 	count=len(arguments)

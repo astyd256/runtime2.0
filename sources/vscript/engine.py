@@ -191,11 +191,11 @@ def vexecute(code, source, object=None, namespace=None, environment=None, use=No
                 use_code, use_source = weakuses[code]
                 vexecute(use_code, use_source, namespace=namespace, environment=environment)
             namespace["__vscript__"] = source
-            exec code in namespace
+            exec(code, namespace)
         except exitloop:
             error_class, error, traceback = sys.exc_info()
             try:
-                raise errors.invalid_exit_statement, None, traceback
+                raise errors.invalid_exit_statement.with_traceback(traceback)
             finally:
                 del traceback
         except AttributeError:
@@ -204,7 +204,7 @@ def vexecute(code, source, object=None, namespace=None, environment=None, use=No
                 if is_vscript(traceback):
                     result = re.search(".+ has no attribute \'(.+)\'", unicode(error))
                     if result:
-                        raise errors.object_has_no_property(name=result.group(1)), None, traceback
+                        raise errors.object_has_no_property(name=result.group(1)).with_traceback(traceback)
                 raise
             finally:
                 del traceback
@@ -212,7 +212,7 @@ def vexecute(code, source, object=None, namespace=None, environment=None, use=No
             error_class, error, traceback = sys.exc_info()
             try:
                 if is_vscript(traceback):
-                    raise errors.type_mismatch, None, traceback
+                    raise errors.type_mismatch.with_traceback(traceback)
                 raise
             finally:
                 del traceback
@@ -222,7 +222,7 @@ def vexecute(code, source, object=None, namespace=None, environment=None, use=No
                 if is_vscript(traceback):
                     result = re.search("(.+)\(\) (?:takes no arguments)|(?:takes exactly \d+ arguments) \(\d+ given\)", unicode(error))
                     if result:
-                        raise errors.wrong_number_of_arguments(name=result.group(1)), None, traceback
+                        raise errors.wrong_number_of_arguments(name=result.group(1)).with_traceback(traceback)
                     elif re.match("__init__\(\) got an unexpected keyword argument 'set'", unicode(error)):
                         raise errors.illegal_assigment
                 raise
@@ -241,7 +241,7 @@ def vexecute(code, source, object=None, namespace=None, environment=None, use=No
             report = format_exception_trace(information=information, locals=True)
             new_error = errors.internal_error(replace=search_exception_place(error, traceback), cause=information, report=report)
             check_exception(new_error, traceback, errors.generic.runtime)
-            raise new_error, None, traceback
+            raise new_error.with_traceback(traceback)
         finally:
             del traceback
 

@@ -62,7 +62,7 @@ class VDOM_resource_editor:
 #                   obj.set_attributes({"width": old_w, "height": old_h})
             if data: return (True, data)
             else: return (True, msg)
-        except Exception, e:
+        except Exception as e:
             return (False, str(e))
 
     def rollback(self, sess, app, obj, resid, attrname, data, ro, param):

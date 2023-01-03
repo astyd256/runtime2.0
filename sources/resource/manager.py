@@ -93,7 +93,7 @@ class VDOM_resource_manager(object):
             # managers.file_manager.write(file_access.resource,
             #     res_descriptor.application_id, object_id, res_descriptor.filename, bin_data, None, write_async)
             managers.file_manager.write(file_access.resource,
-                                        res_descriptor.application_id, res_descriptor.filename, bin_data, async=write_async)
+                                        res_descriptor.application_id, res_descriptor.filename, bin_data, write_async=write_async)
 
             if "label" not in attributes:
                 res_descriptor.save_record()

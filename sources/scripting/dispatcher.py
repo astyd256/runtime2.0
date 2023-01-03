@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 
 from threading import RLock
 from logs import log
@@ -115,7 +116,7 @@ class Dispatcher(object):
             else:
                 message = str(error)
             import SOAPpy
-            from soap.errors import remote_method_call_error
+            from .soap.errors import remote_method_call_error
             raise SOAPpy.faultType(remote_method_call_error, _("Remote method call error"), message)
 
         response = request.session().value("response")

@@ -1,8 +1,9 @@
 """web services utils"""
+from __future__ import absolute_import
 
 import random
 
-from utils.exception import *
+from .utils.exception import *
 
 # session protector class
 class VDOM_session_protector:

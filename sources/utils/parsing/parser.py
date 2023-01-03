@@ -149,7 +149,7 @@ class Parser(LegacyInterface):
         """
         Choose subparser and execute
         """
-        if isinstance(handlers, types.TupleType):
+        if isinstance(handlers, tuple):
             elements(self, {uncover(getattr(handler, "name", handler.__name__)): handler for handler in handlers}.get, iterator)
         elif handlers is None:
             nothing(self, handlers, iterator)

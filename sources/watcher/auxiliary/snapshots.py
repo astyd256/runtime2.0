@@ -33,7 +33,7 @@ class WatcherSnapshooter(SmartDaemon):
     def _collect(self):
         gc.collect()
         check_interval = sys.getcheckinterval()
-        sys.setcheckinterval(sys.maxint)
+        sys.setcheckinterval(sys.maxsize)
         try:
             return {id(object) for object in gc.get_objects() if not isinstance(object, EXCLUDE_TYPES)}
         finally:

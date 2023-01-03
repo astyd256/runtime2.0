@@ -49,7 +49,7 @@ class VDOM_imaging:
 		try:
 			self.__font = ImageFont.truetype(VDOM_CONFIG["FONT-DIRECTORY"] + "/" + name + ".ttf", size,0, encoding="unic")
 			#self.__font = self.__font_factory.get_font(name, size, fontstyle = fontstyle, fontweight = fontweight)
-		except Exception, e:
+		except Exception as e:
 			self.__font = ImageFont.truetype(VDOM_CONFIG["FONT-DIRECTORY"] + "/arial.ttf", size,0, encoding="unic")			
 			debug("creating font error")
 			debug(str(e))			
@@ -88,7 +88,7 @@ class VDOM_imaging:
 				right = left + txtw
 				y = top + txth * 8 / 9
 				draw.line([(left, y) , (right, y)], fill = color)			
-		except Exception, e: 
+		except Exception as e: 
 			debug("!!!!!!!!!!!!VDOM_imagin error:")
 			debug(str(e))
 		

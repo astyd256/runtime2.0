@@ -19,13 +19,13 @@ class VDOM_module_python(VDOM_module):
 		request.add_header("Content-Type", "text/html")
 		try:
 			if script_name.isalnum():
-				exec "admin." + script_name + ".run(request)"
-		except VDOM_exception, e:
+				exec("admin." + script_name + ".run(request)")
+		except VDOM_exception as e:
 			if str(e) != "Authentication failed":#TODO: replace it with VDOM_exception_auth_failed
 				# traceback.print_exc(file=debugfile)
 				sys.excepthook(*sys.exc_info())
 			debug("Error: %s" % str(e))
-		except Exception, e:
+		except Exception as e:
 			debug("Error: %s" % str(e))
 			# traceback.print_exc(file=debugfile)
 			sys.excepthook(*sys.exc_info())

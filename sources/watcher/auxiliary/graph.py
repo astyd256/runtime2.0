@@ -17,9 +17,9 @@ DEFAULT_SKIP_FUNCTIONS = True
 
 def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH,
         optimize=DEFAULT_OPTIMIZE, minify=DEFAULT_MINIFY, skip_functions=DEFAULT_SKIP_FUNCTIONS):
-    print "Generate graph for %s" % \
+    print("Generate graph for %s" % \
         (", ".join("%08X" % id(object) for object in objects)
-            if len(objects) < 10 else "%d objects" % len(objects))
+            if len(objects) < 10 else "%d objects" % len(objects)))
     # TODO: __del__
     # TODO: Dereference members
 
@@ -203,7 +203,7 @@ def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH,
             module = target.__module__
             storage = elementary_nodes
         elif type(target).__module__ == "__builtin__":
-            name = quote(repr(target))[:40] if isinstance(target, (basestring, numbers.Number, bool, types.NoneType)) else " "
+            name = quote(repr(target))[:40] if isinstance(target, (basestring, numbers.Number, bool, type(None))) else " "
             if isinstance(target, (dict, tuple, list, set)):
                 count = len(target)
                 details = "1 item" if count == 1 else "%d items" % count

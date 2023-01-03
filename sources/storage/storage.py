@@ -1,4 +1,5 @@
 """VDOM storage module"""
+from __future__ import absolute_import
 
 import sqlite3
 import cPickle
@@ -8,7 +9,7 @@ from utils.semaphore import VDOM_semaphore
 from utils.exception import VDOM_exception
 from utils.mutex import VDOM_named_mutex_auto
 import settings
-from daemon import VDOM_storage_writer
+from .daemon import VDOM_storage_writer
 
 _save_sql = "INSERT OR REPLACE INTO Resource_index (res_id, app_id, filename, name, res_type,res_format) VALUES (?, ?,?,?,?,?)"
 #__update_sql = "UPDATE Resource_index filename=?, name =? , res_type = ?, res_format = ? WHERE res_id=? "
@@ -125,7 +126,7 @@ class VDOM_storage(object):
         try:
             ret = self.__internal_read(key)
             return ret
-        except Exception, e:
+        except Exception as e:
             debug("Read error, key '%s'" % str(key))
             debug(str(e))
             traceback.print_exc(file=debugfile)
@@ -139,7 +140,7 @@ class VDOM_storage(object):
         try:
             self.__internal_write(key, value)
             return True
-        except Exception, e:
+        except Exception as e:
             debug("Write error, key '%s'" % str(key))
             debug(str(e))
             return False
@@ -173,7 +174,7 @@ class VDOM_storage(object):
 
             return cur.lastrowid or True
 
-        except Exception, e:
+        except Exception as e:
             debug("SQL execute error")
             debug(str(e))
             return False
@@ -186,7 +187,7 @@ class VDOM_storage(object):
         # self.__sem.lock()
         try:
             return sqlite3.connect(self.__fname).execute(sql, params).fetchall()
-        except Exception, e:
+        except Exception as e:
             debug("SQL execute read error")
             debug(str(e))
             return None
@@ -275,7 +276,7 @@ class VDOM_storage(object):
         try:
             data = cPickle.loads(str(data))
             return data
-        except Exception, e:
+        except Exception as e:
             debug("Error reading object '%s' from the storage" % str(key))
             debug(str(e))
             return None
@@ -285,7 +286,7 @@ class VDOM_storage(object):
         data = None
         try:
             data = cPickle.dumps(object)
-        except Exception, e:
+        except Exception as e:
             debug("Error writing object '%s' to the storage" % str(key))
             debug(str(e))
             return False
@@ -296,7 +297,7 @@ class VDOM_storage(object):
         data = None
         try:
             data = cPickle.dumps(object)
-        except Exception, e:
+        except Exception as e:
             debug("Error writing object '%s' to the storage" % str(key))
             debug(str(e))
             return False

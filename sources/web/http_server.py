@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 
 import sys
 # import os
@@ -15,7 +16,7 @@ from utils.pid import VDOM_server_pid
 from utils.exception import VDOM_exception
 from utils.semaphore import VDOM_semaphore
 from utils.tracing import format_exception_trace
-from vhosting import VDOM_vhosting
+from .vhosting import VDOM_vhosting
 from soap.functions import *
 from soap.wsdl import gen_wsdl
 from soap.wsdl import methods as wsdl_methods
@@ -65,7 +66,7 @@ class VDOM_http_server(SocketServer.ThreadingTCPServer):
 
         ssl_context = None
         if ssl_context != None and not config.SSLserver:
-            raise AttributeError, "SSL server not supported by this Python installation"
+            raise AttributeError("SSL server not supported by this Python installation")
         namespace = "http://services.vdom.net/VDOMServices"
         log = 0
         self.namespace = namespace
@@ -112,7 +113,7 @@ class VDOM_http_server(SocketServer.ThreadingTCPServer):
                         sock = SSL.Connection(self.ssl_context, sock)
                         sock._setup_ssl(addr)
                         if sock.accept_ssl() != 1:
-                            raise socket.error, "Couldn't accept SSL connection"
+                            raise socket.error("Couldn't accept SSL connection")
                     return sock, addr
 
     def current_connections(self):
@@ -185,7 +186,7 @@ class VDOM_http_server(SocketServer.ThreadingTCPServer):
             self.__sem.unlock()
         try:
             self.RequestHandlerClass(request, client_address, self, {"reject": self.__reject, "deny": self.__deny, "card": card, "limit": limit, "connections": self.__current_connections})
-        except Exception, e:
+        except Exception as e:
             do_handle = True
             if isinstance(e, socket.error):
                 do_handle = False

@@ -1,7 +1,8 @@
+from __future__ import absolute_import
 
 import sys
 
-from headers import VDOM_dictionary
+from .headers import VDOM_dictionary
 
 class VDOM_cookies(VDOM_dictionary):
 	"""Server cookies"""

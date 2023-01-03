@@ -151,7 +151,7 @@ def get_collection_wrapper(arguments, result, master, getter, letter, setter):
 
 
 def vclass(cls):
-	if not isinstance(cls, types.TypeType):
+	if not isinstance(cls, type):
 		raise errors.python("Require class as argument")
 	vclass=type(cls.__name__,
 		(generic, )+tuple(ancestor for ancestor in cls.__bases__ if ancestor is not object),
@@ -183,7 +183,7 @@ def vsub(*arguments, **keywords):
 def vproperty(*arguments, **keywords):
 	result=keywords.get("result")
 	def decorator(cls):
-		if isinstance(cls, types.ClassType):
+		if isinstance(cls, type):
 			getter=cls.__dict__.get("get")
 			letter=cls.__dict__.get("let")
 			setter=cls.__dict__.get("set")
@@ -192,7 +192,7 @@ def vproperty(*arguments, **keywords):
 		if not (getter or letter or setter):
 			raise errors.python("Require getter, letter or setter")
 		return get_property_wrapper(arguments, result, getter, letter, setter)
-	if arguments and isinstance(arguments[0], types.ClassType):
+	if arguments and isinstance(arguments[0], type):
 		if not result: raise errors.python("Incorrect number of arguments")
 		return decorator(arguments[0])
 	else:
@@ -210,7 +210,7 @@ def vproperty(*arguments, **keywords):
 def vcollection(*arguments, **keywords):
 	result=keywords.get("result")
 	def decorator(cls):
-		if isinstance(cls, types.ClassType):
+		if isinstance(cls, type):
 			master=cls.__dict__.get("all")
 			getter=cls.__dict__.get("get")
 			letter=cls.__dict__.get("let")
@@ -220,7 +220,7 @@ def vcollection(*arguments, **keywords):
 		if not master or not (getter or letter or setter):
 			raise errors.python("Require getter, letter or setter")
 		return get_collection_wrapper(arguments, result, master, getter, letter, setter)
-	if arguments and isinstance(arguments[0], types.ClassType):
+	if arguments and isinstance(arguments[0], type):
 		if not result: raise errors.python("Incorrect number of arguments")
 		return decorator(arguments[0])
 	else:

@@ -60,7 +60,7 @@ class OutputCapture(object):
         if self._file:
             os.write(self._stdout_duplicate, message + "\n")
         else:
-            print message
+            print(message)
 
     def flush(self):
         if self._file:

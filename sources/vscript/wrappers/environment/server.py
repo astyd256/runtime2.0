@@ -522,7 +522,7 @@ class v_server(generic):
 
 	def v_createresource(self, type, name, data):
 		application=managers.request_manager.current.application()
-		data, id=data.as_simple, unicode(utils.uuid.uuid4())
+		data, id=data.as_simple, unicode(uuid.uuid4())
 		if isinstance(data, binary):
 			data=data.as_binary
 		elif isinstance(data, string):

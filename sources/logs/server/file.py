@@ -43,7 +43,7 @@ class LogFile(object):
         self._data = ""
         self._tell = self._size
 
-    def read(self, start=0, count=sys.maxint, into=None):
+    def read(self, start=0, count=sys.maxsize, into=None):
         if self._file is None:
             if self._exists is None:
                 self._exists = os.path.exists(self.filename)
@@ -74,7 +74,7 @@ class LogFile(object):
 
             if self._tell:
                 try:
-                    tell = iterator.next()
+                    tell = next(iterator)
                 except StopIteration:
                     self._data = data
                     continue
@@ -87,7 +87,7 @@ class LogFile(object):
             index, entries = deque(), deque()
             while 1:
                 try:
-                    position = iterator.next()
+                    position = next(iterator)
                 except StopIteration:
                     break
                 else:

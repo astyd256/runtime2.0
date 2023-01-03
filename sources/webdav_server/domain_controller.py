@@ -1,9 +1,11 @@
+from __future__ import print_function
+from __future__ import absolute_import
 import json
 import managers
 import wsgidav.util as util
-from webdav_request import VDOM_webdav_request
+from .webdav_request import VDOM_webdav_request
 from wsgidav.dav_error import DAVError, HTTP_FORBIDDEN
-from webdav_cache import lru_cache
+from .webdav_cache import lru_cache
 from wsgidav.http_authenticator import HTTPAuthenticator
 from wsgidav.middleware import BaseMiddleware
 class VDOM_DigestHandler(BaseMiddleware):
@@ -59,7 +61,7 @@ class VDOM_domain_controller(object):
 		davProvider = environ["wsgidav.provider"]
 		if not davProvider:
 			if environ["wsgidav.verbose"] >= 2:
-				print >>sys.stdout, "getDomainRealm(%s): '%s'" %(inputURL, None)
+				print("getDomainRealm(%s): '%s'" %(inputURL, None), file=sys.stdout)
 			return None
 		obj_name = davProvider.sharePath.strip("/")
 		if obj_name == "":

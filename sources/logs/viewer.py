@@ -66,7 +66,7 @@ class LogViewer(object):
         self._update_request.pack_into(self._stream, actions.UPDATE, 0)
         return self._update_response.unpack_from(self._stream)[0]
 
-    def read(self, start=0, count=sys.maxint, format=False, into=None):
+    def read(self, start=0, count=sys.maxsize, format=False, into=None):
         if self._stream is None:
             self.connect()
         self._read_request.pack_into(self._stream, actions.READ, 0, start, count)

@@ -1,4 +1,5 @@
 """web services server"""
+from __future__ import absolute_import
 
 import string
 import sys
@@ -24,20 +25,20 @@ import security
 import file_access
 
 from logs import log
-from errors import *
+from .errors import *
 from memory import COMPUTE_CONTEXT, \
     APPLICATION_START_CONTEXT, APPLICATION_FINISH_CONTEXT, APPLICATION_UNINSTALL_CONTEXT, \
     SESSION_START_CONTEXT, SESSION_FINISH_CONTEXT, \
     REQUEST_START_CONTEXT, REQUEST_STOP_CONTEXT, REQUEST_TIMEOUT_CONTEXT, REQUEST_ERROR_CONTEXT
-import utils
+from . import utils
 from .utils.encode import *
-from utils.semaphore import VDOM_semaphore
-from utils.mutex import VDOM_named_mutex_auto
-from utils.exception import *
-import soaputils
-from .utils.uuid import uuid4
+from .utils.semaphore import VDOM_semaphore
+from .utils.mutex import VDOM_named_mutex_auto
+from .utils.exception import *
+from . import soaputils
+from uuid import uuid4
 # from memory.xml_object import xml_object # memory.
-from xml_object import xml_object
+from .xml_object import xml_object
 from database.dbobject import VDOM_sql_query
 # from utils.app_management import import_application, update_application, uninstall_application
 from version import SERVER_VERSION as VDOM_server_version
@@ -794,7 +795,7 @@ class VDOM_web_services_server(object):
             # tgt_app.sync()
             tgt_app.save()
             return self.__get_object(copy_obj) + ("\n<ApplicationID>%s</ApplicationID>" % appid)
-        except Exception, e:
+        except Exception as e:
             show_exception_trace(label="SOAP Copy Object", locals=True)
             return self.__format_error(str(e))
 
@@ -847,7 +848,7 @@ class VDOM_web_services_server(object):
 
             # return self.__get_object(obj) + ("\n<ApplicationID>%s</ApplicationID>" % appid)
             return self.__get_object(copy_obj) + ("\n<ApplicationID>%s</ApplicationID>" % appid)
-        except Exception, e:
+        except Exception as e:
             show_exception_trace(label="SOAP Move Object", locals=True)
             return self.__format_error(str(e))
 
@@ -1308,7 +1309,7 @@ class VDOM_web_services_server(object):
         root = None
         try:
             root = xml_object(srcdata=pres.encode("utf-8"))
-        except Exception, e:
+        except Exception as e:
             raise SOAPpy.faultType(xml_script_error, str(e), "<Error><ObjectID>%s</ObjectID></Error>" % objid)
             # return self.__format_error(_("Invalid argument: pres - " + str(e)))
 
@@ -1316,7 +1317,7 @@ class VDOM_web_services_server(object):
         new_id = None
         try:
             new_id = self.__do_submit_object_script_presentation(app, obj, obj.parent, root)
-        except VDOM_exception, e:
+        except VDOM_exception as e:
             # app.sync()
             app.save()
             raise SOAPpy.faultType(xml_script_error, str(e), "<Error><ObjectID>%s</ObjectID></Error>" % objid)
@@ -1512,7 +1513,7 @@ class VDOM_web_services_server(object):
                         if not _id or not _name:
                             raise VDOM_exception_element("server action")
 
-            except Exception, e:
+            except Exception as e:
                 if server_actions_element:
                     server_actions_element.delete()
                 raise SOAPpy.faultType(event_format_error, _("XML error"), str(e))
@@ -1547,7 +1548,7 @@ class VDOM_web_services_server(object):
                             par_value = par.get_value_as_xml()
                             if not par_name:
                                 raise VDOM_exception_element("Parameter")
-        except Exception, e:
+        except Exception as e:
             if client_actions_element:
                 client_actions_element.delete()
             raise SOAPpy.faultType(event_format_error, _("XML error"), str(e))
@@ -1595,7 +1596,7 @@ class VDOM_web_services_server(object):
                             _id = act.attributes["id"]
                             if not _id:
                                 raise VDOM_exception_element("event.action")
-        except Exception, e:
+        except Exception as e:
             if events_element:
                 events_element.delete()
             raise SOAPpy.faultType(event_format_error, _("XML error"), str(e))
@@ -1711,7 +1712,7 @@ class VDOM_web_services_server(object):
         try:
             # obj.set_name(name)
             obj.name = name
-        except VDOM_exception, e:
+        except VDOM_exception as e:
             # raise SOAPpy.faultType(name_error, _("Rename error: ") + str(e), "<Error><ObjectID>%s</ObjectID><Name>%s</Name></Error>" % (obj.id, obj.original_name))
             raise SOAPpy.faultType(name_error, _("Rename error: ") + str(e), "<Error><ObjectID>%s</ObjectID><Name>%s</Name></Error>" % (obj.id, obj.name))
             # "<Object Name=\"%s\" ID=\"%s\" Type=\"%s\"/>" % (obj.original_name, obj.id, obj.type.id))
@@ -1733,7 +1734,7 @@ class VDOM_web_services_server(object):
 
         try:
             self.__set_attributes(obj, attr)
-        except Exception, e:
+        except Exception as e:
             raise SOAPpy.faultType(attr_value_error, str(e), "<Error><ObjectID>%s</ObjectID></Error>" % objid)
 
         # app.sync()
@@ -1992,7 +1993,7 @@ class VDOM_web_services_server(object):
                             if not uuid:
                                 raise VDOM_exception_element("event.action")
                             callees.append(uuid)
-        except Exception, e:
+        except Exception as e:
             # raise SOAPpy.faultType(event_format_error, _("XML error"), str(e))
             raise
         finally:
@@ -2132,7 +2133,7 @@ class VDOM_web_services_server(object):
                             _id = act.attributes["id"]
                             if not _id:
                                 raise VDOM_exception_element("event.action")
-        except Exception, e:
+        except Exception as e:
             if root:
                 root.delete()
             raise SOAPpy.faultType(event_format_error, _("XML error"), str(e))
@@ -2169,7 +2170,7 @@ class VDOM_web_services_server(object):
                     _name = child.attributes["name"]
                     if not _id or not _name:
                         raise VDOM_exception_element("server action")
-        except Exception, e:
+        except Exception as e:
             if root:
                 root.delete()
             raise SOAPpy.faultType(event_format_error, _("XML error"), str(e))
@@ -2609,7 +2610,7 @@ class VDOM_web_services_server(object):
         outp, msg = import_application(tmpfilename, "xml")
         try:
             os.remove(tmpfilename)
-        except Exception, e:
+        except Exception as e:
             pass
         if "" != outp and None != outp:
             if "" != vhname:
@@ -2767,7 +2768,7 @@ class VDOM_web_services_server(object):
         if not managers.acl_manager.session_user_can_manage():
             raise SOAPpy.faultType(server_manage_error, _("Server management is not allowed"), _(""))
 
-        from utils.system import set_virtual_card_key
+        from .utils.system import set_virtual_card_key
         ret = set_virtual_card_key(serial)
 
         if reboot and str(reboot).lower() == "true":
@@ -2877,7 +2878,7 @@ class VDOM_web_services_server(object):
                 if _name:
                     try:
                         _new_obj.set_name(_name)
-                    except VDOM_exception, e:
+                    except VDOM_exception as e:
                         debug(unicode(e))
                 # set attributes
                 for aname in _attr_map:
@@ -2907,12 +2908,12 @@ class VDOM_web_services_server(object):
         root = None
         try:
             root = xml_object(srcdata=objects.encode("utf-8"))
-        except Exception, e:
+        except Exception as e:
             raise SOAPpy.faultType(param_syntax_error, str(e), "objects")
         # start
         try:
             self.__do_create_objects(app, parent, root)
-        except Exception, e:
+        except Exception as e:
             root.delete()
             app.sync()
             raise SOAPpy.faultType(obj_create_error, str(e), "")
@@ -2929,7 +2930,7 @@ class VDOM_web_services_server(object):
         if _name:
             try:
                 parent.set_name(_name)
-            except VDOM_exception, e:
+            except VDOM_exception as e:
                 raise SOAPpy.faultType(name_error, _("Name error"), "<Error><ObjectID>%s</ObjectID><Name>%s</Name></Error>" % (parent.id, _name))
         _attr_elem = xml_obj.get_child_by_name["attributes"]
         if _attr_elem:
@@ -2982,7 +2983,7 @@ class VDOM_web_services_server(object):
         root = None
         try:
             root = xml_object(srcdata=data.encode("utf-8"))
-        except Exception, e:
+        except Exception as e:
             raise SOAPpy.faultType(param_syntax_error, str(e), "data")
         if obj.id != root.attributes["id"]:
             root.delete()
@@ -2991,7 +2992,7 @@ class VDOM_web_services_server(object):
         if _obj_elem:
             try:
                 self.__do_update_object(app, obj, root, _obj_elem)
-            except Exception, e:
+            except Exception as e:
                 root.delete()
                 app.sync()
                 raise SOAPpy.faultType(obj_update_error, str(e), "")

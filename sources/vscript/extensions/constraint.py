@@ -117,7 +117,7 @@ class v_problem(generic):
 		if self._iterator is None:
 			self.v_again()
 		try:
-			solution=self._iterator.next()
+			solution=next(self._iterator)
 		except StopIteration:
 			self._solution=v_empty
 		except Exception as error:

@@ -242,7 +242,7 @@ class Memory(object):
             err_mess = ". Try to INSTALL the new version instead of UPDATE"
             try:
                 app = managers.memory.applications[appid]
-            except Exception, e:
+            except Exception as e:
                 raise Exception(str(e))
 
             # temporal copy of installed application
@@ -250,7 +250,7 @@ class Memory(object):
             err_mess = ". Unable to save previous version of application"
             tmpappdir = tempfile.mkdtemp("", "appupdate_", VDOM_CONFIG["TEMP-DIRECTORY"])
             app.export(filename=os.path.join(tmpappdir, app.id + ".xml"))
-        except Exception, e:
+        except Exception as e:
             if tmpappdir:
                 shutil.rmtree(tmpappdir, ignore_errors=True)
             import traceback
@@ -342,7 +342,7 @@ class Memory(object):
         debug("Install new version...")
         try:
             subject = self.install_application(filename=filename)
-        except Exception, e:
+        except Exception as e:
             import traceback
             traceback.print_exc(file=debugfile)
         if subject is None:
@@ -373,7 +373,7 @@ class Memory(object):
                     debug("Restored successfully")
                     app_exist = True
                     subject = (None, err_mess + ". Previous version restored successfully")
-            except Exception, e:
+            except Exception as e:
                 import traceback
                 traceback.print_exc(file=debugfile)
                 subject = (None, err_mess + str(e))

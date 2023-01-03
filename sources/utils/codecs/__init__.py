@@ -1,11 +1,12 @@
+from __future__ import absolute_import
 
 from codecs import register
 
-import html
-import url
-import xml
-import cdata
-import js
+from . import html
+from . import url
+from . import xml
+from . import cdata
+from . import js
 
 
 register(html.search)

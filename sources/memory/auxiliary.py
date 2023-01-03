@@ -28,8 +28,8 @@ def source_is_empty(source):
     tree = ast.parse(source, mode="exec")
     iterator = ast.walk(tree)
     try:
-        iterator.next()
-        iterator.next()
+        next(iterator)
+        next(iterator)
         return False
     except StopIteration:
         return True

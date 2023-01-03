@@ -1,5 +1,6 @@
 """server request handler module"""
 
+from future.utils import raise_
 import sys
 import io
 # import os
@@ -7,7 +8,6 @@ import io
 import urllib
 import shutil
 # import mimetypes
-import thread
 # import re
 import socket
 # import threading
@@ -22,7 +22,7 @@ import SimpleHTTPServer
 from wsgiref.util import guess_scheme
 
 from time import time
-from threading import current_thread
+from threading import current_thread, get_ident
 from cStringIO import StringIO
 # import xml.sax.saxutils
 
@@ -57,7 +57,7 @@ class HeaderHandler(object):
                 fault = 0
 
             if fault:
-                raise SOAPpy.faultType, ("%s:MustUnderstand" % SOAPpy.NS.ENV_T,
+                raise SOAPpy.faultType("%s:MustUnderstand" % SOAPpy.NS.ENV_T,
                                          "Required Header Misunderstood",
                                          "%s" % i)
 
@@ -89,7 +89,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def start_response(self, status, response_headers, exc_info=None):
         if exc_info:
             try:
-                raise exc_info[0], exc_info[1], exc_info[2]
+                raise_(exc_info[0], exc_info[1], exc_info[2])
                 # do stuff w/exc_info here
             finally:
                 exc_info = None    # Avoid circular ref.
@@ -230,7 +230,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             method = getattr(self, mname)
             method()
             self.wfile.flush()  # actually send the response if not already done.
-        except socket.timeout, e:
+        except socket.timeout as e:
             #a read or a write timed out.  Discard this connection
             self.log_error("Request timed out: %r", e)
             self.close_connection = 1
@@ -763,7 +763,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     if "SOAPAction".lower() not in self.headers.keys() or self.headers["SOAPAction"] == "\"\"":
                         self.headers["SOAPAction"] = method
 
-                    thread_id = thread.get_ident()
+                    thread_id = get_ident()
                     _contexts[thread_id] = SOAPpy.SOAPContext(header, body,
                                                               attrs, data,
                                                               self.connection,

@@ -1,5 +1,6 @@
+from __future__ import absolute_import
 
-import settings
+from . import settings
 from logs import log
 from utils import verificators
 from ..exceptions import OptionError
