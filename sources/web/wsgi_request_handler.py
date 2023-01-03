@@ -1,7 +1,7 @@
 """server request handler module"""
 
 from future.utils import raise_
-import sys, os, posixpath, urllib, shutil, mimetypes, re, socket, threading, time, SOAPpy, traceback, select, cgi
+import sys, os, posixpath, urllib, shutil, mimetypes, thread, re, socket, threading, time, SOAPpy, traceback, select, cgi
 
 if sys.platform.startswith("freebsd"):
     import vdomlib
@@ -664,7 +664,7 @@ class VDOM_wsgi_request_handler(object):
                     if "SOAPAction".lower() not in self.headers.keys() or self.headers["SOAPAction"] == "\"\"":
                         self.headers["SOAPAction"] = method
 
-                    thread_id = threading.get_ident()
+                    thread_id = thread.get_ident()
                     _contexts[thread_id] = SOAPpy.SOAPContext(header, body,
                                                               attrs, data,
                                                               self.connection,

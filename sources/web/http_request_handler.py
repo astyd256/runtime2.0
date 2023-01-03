@@ -3,28 +3,29 @@
 from future.utils import raise_
 import sys
 import io
-# import os
-# import posixpath
 import urllib
 import shutil
-# import mimetypes
-# import re
 import socket
-# import threading
-# import time
 import traceback
 import select
-# import SocketServer
 import BaseHTTPServer
 import SimpleHTTPServer
+# import mimetypes
+# import re
+# import time
+# import SocketServer
+# import os
+# import posixpath
+
 #import webdav_server
 #from wsgidav.wsgidav_app import WsgiDAVApp
+# import xml.sax.saxutils
 from wsgiref.util import guess_scheme
 
 from time import time
-from threading import current_thread, get_ident
+import threading
 from cStringIO import StringIO
-# import xml.sax.saxutils
+
 
 import SOAPpy
 import settings
@@ -73,7 +74,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
     def __init__(self, request, client_address, server, args=None):
         """constructor"""
-        setattr(current_thread(), THREAD_ATTRIBUTE_NAME, self)
+        setattr(threading.current_thread(), THREAD_ATTRIBUTE_NAME, self)
         #debug("Creating RequestHandler object")
         self.__reject = args["reject"]
         self.__deny = args["deny"]
@@ -512,7 +513,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         """log an arbitrary message to stderr"""
         if "127.0.0.1" != self.client_address[0]:
             debug("%s %s {%d}" % (self.address_string(), format % args, self.server.get_cur_con()))
-        #sys.stderr.write("%s - Thread %d - [%s] %s {%d}\n" % (self.address_string(), thread.get_ident(), self.log_date_time_string(), format%args, self.server.get_cur_con()))
+        #sys.stderr.write("%s - Thread %d - [%s] %s {%d}\n" % (self.address_string(), threading.ident, self.log_date_time_string(), format%args, self.server.get_cur_con()))
 
     def print_list(self, list, f):
         """print contents of the dictionary in the form of list"""
@@ -763,7 +764,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     if "SOAPAction".lower() not in self.headers.keys() or self.headers["SOAPAction"] == "\"\"":
                         self.headers["SOAPAction"] = method
 
-                    thread_id = get_ident()
+                    thread_id = threading.ident
                     _contexts[thread_id] = SOAPpy.SOAPContext(header, body,
                                                               attrs, data,
                                                               self.connection,
