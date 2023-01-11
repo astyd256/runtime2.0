@@ -164,7 +164,7 @@ class MemoryTypeSketch(MemoryBase, Executable):
         return self
 
     def __str__(self):
-        return " ".join(filter(None, ("type", ":".join(filter(None, (self._id, self._name))), "sketch")))
+        return " ".join([_f for _f in ("type", ":".join([_f for _f in (self._id, self._name) if _f]), "sketch") if _f])
 
 
 class MemoryType(MemoryTypeSketch):
@@ -290,10 +290,10 @@ class MemoryType(MemoryTypeSketch):
 
         if self._libraries or self._external_libraries:
             file.write(u"\t<Libraries>\n")
-            for library_target, libraries in self._libraries.iteritems():
+            for library_target, libraries in self._libraries.items():
                 for library in libraries:
                     file.write(u"\t\t<Library Target=\"%s\">%s</Library>\n" % (library_target, library.encode("cdata")))
-            for library_target, libraries in self._external_libraries.iteritems():
+            for library_target, libraries in self._external_libraries.items():
                 for library in libraries:
                     file.write(u"\t\t<ExternalLibrary Target=\"%s\">%s</ExternalLibrary>\n" % (library_target, library.encode("cdata")))
             file.write(u"\t</Libraries>\n")
@@ -337,4 +337,4 @@ class MemoryType(MemoryTypeSketch):
         raise NotImplementedError
 
     def __str__(self):
-        return " ".join(filter(None, ("type", ":".join(filter(None, (self._id, self._name))))))
+        return " ".join([_f for _f in ("type", ":".join([_f for _f in (self._id, self._name) if _f])) if _f])

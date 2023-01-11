@@ -31,7 +31,7 @@ def describe(options):
 
     yield "<reply>"
     yield "<descriptions>"
-    for name, items in reference.iteritems():
+    for name, items in reference.items():
         yield "<subgroup name=\"%s\">" % name.encode("xml")
         for description, reference in items:
             yield "<description object=\"%s\">%s</description>" % (

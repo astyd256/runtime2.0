@@ -1,5 +1,9 @@
 
-import __builtin__
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import object
+import builtins
 import os
 
 
@@ -24,7 +28,7 @@ class File_argument(object):
 
     def __try_decode(self, item):
         if isinstance(item, str):
-            return unicode(item.decode("utf-8", "ignore"))
+            return str(item.decode("utf-8", "ignore"))
         else:
             return item
 
@@ -67,4 +71,4 @@ class Attachment(object):
 
 
 # TODO: Try to avoid this
-__builtin__.Attachment = Attachment
+builtins.Attachment = Attachment

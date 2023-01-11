@@ -29,7 +29,7 @@ class MemoryStructureSketch(MemoryBase, Mapping):
 
     def __invert__(self):
         if "_items" in self.__dict__:
-            for item in self._items.itervalues():
+            for item in self._items.values():
                 ~item
         self.__class__ = MemoryStructure
         return self
@@ -91,7 +91,7 @@ class MemoryStructure(MemoryStructureSketch):
                 self._top, self._left, self._state)
         if self.__dict__.get("_items"):
             file.write(u"%s<Object %s>\n" % (ident, information))
-            for item in self._items.itervalues():
+            for item in self._items.values():
                 item.compose(ident=ident + u"\t", file=file)
             file.write(u"%s</Object>\n" % ident)
         else:

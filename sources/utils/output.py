@@ -1,4 +1,8 @@
 
+from builtins import input
+from builtins import str
+from past.builtins import basestring
+from builtins import object
 import sys
 
 from contextlib import contextmanager
@@ -146,7 +150,7 @@ def confirm(message=None, question=None):
     if message:
         console.write(message)
     console.stdout.write("are you sure%s? ___\b\b\b" % (" to %s" % question if question else ""))
-    answer = raw_input()
+    answer = input()
     result = answer.lower() == "yes"
     if not result:
         console.write("unconfirmed")

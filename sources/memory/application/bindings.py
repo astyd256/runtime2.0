@@ -1,4 +1,5 @@
 
+from builtins import str
 from collections import MutableMapping
 from uuid import uuid4
 from utils.properties import lazy, weak, roproperty

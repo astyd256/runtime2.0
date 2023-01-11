@@ -1,4 +1,6 @@
 
+from builtins import str
+from past.builtins import basestring
 import sys
 import types
 import numbers
@@ -78,7 +80,7 @@ def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH,
     def show_edge(source, target):
         if minify and id(source) in owners:
             if isinstance(source, dict):
-                for key, value in source.iteritems():
+                for key, value in source.items():
                     if value is target:
                         membership_edges.append((id(owners[id(source)]), mapping.get(id(target), id(target)), quote(key)))
                         return
@@ -120,7 +122,7 @@ def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH,
             return
         elif isinstance(source, dict):
             try:
-                label = quote(repr(source.keys()[source.values().index(target)]))
+                label = quote(repr(list(source.keys())[list(source.values()).index(target)]))
             except BaseException:
                 label = "?"
             elementary_edges.append((id(source), mapping.get(id(target), id(target)), label))
@@ -215,7 +217,7 @@ def generate_graph(objects, depth=DEFAULT_GRAPH_DEPTH,
             kind = "object"
             name = type(target).__name__
             if isinstance(target, MemoryBase):
-                details = ":".join(filter(None, (getattr(target, "id", None), getattr(target, "name", None)))).lower()
+                details = ":".join([_f for _f in (getattr(target, "id", None), getattr(target, "name", None)) if _f]).lower()
                 if getattr(target, "virtual", None):
                     name += " (Virtual)"
             else:

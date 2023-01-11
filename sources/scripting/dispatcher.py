@@ -1,5 +1,7 @@
 from __future__ import absolute_import
 
+from builtins import str
+from builtins import object
 from threading import RLock
 from logs import log
 
@@ -111,8 +113,8 @@ class Dispatcher(object):
         try:
             managers.engine.execute(action)
         except Exception as error:
-            if hasattr(error, "message") and isinstance(error.message, unicode):
-                message = unicode(error).encode("utf8")
+            if hasattr(error, "message") and isinstance(error.message, str):
+                message = str(error).encode("utf8")
             else:
                 message = str(error)
             import SOAPpy

@@ -56,8 +56,8 @@ class MemoryTypeAttributeSketch(MemoryBase):
         return self
 
     def __str__(self):
-        return " ".join(filter(None, ("attribute", "\"%s\"" % self._name,
-            "sketch of %s" % self._collection.owner if self._collection else None)))
+        return " ".join([_f for _f in ("attribute", "\"%s\"" % self._name,
+            "sketch of %s" % self._collection.owner if self._collection else None) if _f])
 
 
 class MemoryTypeAttribute(MemoryTypeAttributeSketch):
@@ -103,5 +103,5 @@ class MemoryTypeAttribute(MemoryTypeAttributeSketch):
         raise NotImplementedError
 
     def __str__(self):
-        return " ".join(filter(None, ("attribute", "\"%s\"" % self._name,
-            "of %s" % self._collection.owner if self._collection else None)))
+        return " ".join([_f for _f in ("attribute", "\"%s\"" % self._name,
+            "of %s" % self._collection.owner if self._collection else None) if _f])

@@ -1,3 +1,6 @@
+from builtins import str
+from builtins import range
+from builtins import object
 from future.utils import raise_
 from poplib import POP3, POP3_SSL, POP3_SSL_PORT
 from ssl import wrap_socket, PROTOCOL_SSLv23, PROTOCOL_TLSv1
@@ -93,7 +96,7 @@ class VDOM_Pop3_client(object):
 			return []
 		emails = []
 		mail_number = -1
-		for i in xrange(offset, min(limit or self.message_count,self.message_count)):
+		for i in range(offset, min(limit or self.message_count,self.message_count)):
 			mail_number = i+1
 			emails.append(self.fetch_message(i,delete))
 		self.read_mails_count = mail_number

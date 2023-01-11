@@ -1,4 +1,5 @@
 
+from builtins import str
 from hashlib import md5
 from time import time
 
@@ -43,7 +44,7 @@ def soap_query(caption, address, user, password, method, *arguments, **keywords)
 
     try:
         Parser(builder=builder, notify=True, supress=True).parse(
-            response.encode("utf8") if isinstance(response, unicode) else response)
+            response.encode("utf8") if isinstance(response, str) else response)
     except ParsingException as error:
         raise SOAPError("Unable to parse response: %s" % error)
 

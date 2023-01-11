@@ -1,4 +1,6 @@
 from __future__ import absolute_import
+from builtins import str
+from builtins import object
 from . import request_server
 from wsgidav.wsgidav_app import DEFAULT_CONFIG
 try:
@@ -37,7 +39,7 @@ class VDOM_webdav_manager(object):
 		                      })			
 		self.__index = {}
 		self.__path_index = {}
-		app_list = managers.memory.applications.itervalues()
+		app_list = iter(managers.memory.applications.values())
 		for app in app_list:
 			self.load_webdav(app.id)
 			
@@ -46,7 +48,7 @@ class VDOM_webdav_manager(object):
 		__conf = self.__config.copy()
 		__conf["domaincontroller"] = VDOM_domain_controller(appid)		
 		app = managers.memory.applications[appid]
-		for objid, obj in app.objects.iteritems():
+		for objid, obj in app.objects.items():
 			if obj.type.id == '1a43b186-5c83-92fa-7a7f-5b6c252df941':
 				__conf["provider_mapping"]["/"+obj.name.encode('utf8')] = VDOM_Provider(appid, obj.id)
 				if not self.__index.get(appid):
@@ -118,12 +120,12 @@ class VDOM_webdav_manager(object):
 	#	return None		
 	
 	def add_to_cache(self, appid, objid, path):
-		if isinstance(path, unicode):
+		if isinstance(path, str):
 			try:
 				utf8path = path.encode('utf8')
 				path = utf8path
 			except Exception as e:
-				debug("Error: " + unicode(e))
+				debug("Error: " + str(e))
 		get_properties(appid, objid, path)
 		
 	def invalidate(self, appid, objid, path):

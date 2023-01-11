@@ -1,5 +1,7 @@
 from __future__ import print_function
 
+from future import standard_library
+standard_library.install_aliases()
 from threading import current_thread, enumerate as enumerate_threads
 from time import sleep
 

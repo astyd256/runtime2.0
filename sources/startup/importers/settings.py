@@ -1,4 +1,5 @@
 
+from builtins import object
 import sys
 import imp
 import os
@@ -11,12 +12,12 @@ from utils.console import CONSOLE_WIDTH
 class SettingsImporter(object):
 
     def find_module(self, fullname, path=None):
-        return self if fullname == "settings" and path is None else None
+        return self if fullname == "appsettings" and path is None else None
 
     def load_module(self, fullname):
-        if fullname != "settings":
+        if fullname != "appsettings":
             raise ImportError("Settings loader cannot handle module \"%s\"" % fullname)
-
+        fullname = "settings"
         module = sys.modules.get(fullname)
         if not module:
             module = imp.new_module(fullname)
@@ -63,3 +64,6 @@ class SettingsImporter(object):
             module.__dict__["MANAGE_LONG_NAME_WIDTH"] = CONSOLE_WIDTH * 70 // 100
 
         return module
+    
+    def find_spec(self, fullname, path, target=None):
+        return self.find_module(fullname, path)

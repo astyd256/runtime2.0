@@ -1,4 +1,7 @@
 
+from builtins import str
+from past.builtins import basestring
+from builtins import object
 import sys
 import settings
 
@@ -30,7 +33,7 @@ class Console(object):
                 (levels.MESSAGE, "")
 
         if level >= settings.CONSOLE_LOG_LEVEL:
-            if isinstance(message, unicode):
+            if isinstance(message, str):
                 message = message.encode((self.stderr.encoding if level is levels.ERROR
                     else self.stdout.encoding) or "ascii", "backslashreplace")
             elif not isinstance(message, basestring):

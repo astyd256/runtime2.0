@@ -1,5 +1,6 @@
 """session module"""
 
+from past.builtins import basestring
 import sys, string, time, os, shutil
 from copy import copy
 
@@ -52,7 +53,7 @@ class VDOM_session(dict):
 
 	def get_key_list(self):
 		"""get list of keys"""
-		return self.keys()
+		return list(self.keys())
 
 	def __setitem__(self, key, value):
 		self.update()
@@ -102,5 +103,5 @@ class VDOM_session(dict):
 	user = property(__get_user)
 
 	def clean_files(self):
-		for uploaded_file in self.files.itervalues():
+		for uploaded_file in self.files.values():
 			uploaded_file.remove()

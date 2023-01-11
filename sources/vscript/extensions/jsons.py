@@ -1,4 +1,5 @@
 
+from builtins import str
 from future.utils import raise_
 import types
 from json import JSONDecoder, JSONEncoder
@@ -21,9 +22,9 @@ def wrap(value):
 		bool: lambda value: boolean(value),
 		float: lambda value: double(value),
 		int: lambda value: integer(value),
-		long: lambda value: integer(value),
-		str: lambda value: string(unicode(value)),
-		unicode: lambda value: string(value)} \
+		int: lambda value: integer(value),
+		str: lambda value: string(str(value)),
+		str: lambda value: string(value)} \
 			.get(type(value), unknown)(value)
 
 
@@ -32,7 +33,7 @@ def vscript_parse_object(*arguments):
 	# TODO: Remove this after upgrade to Python 2.7.11
 	if isinstance(subject, list):
 		subject = {}
-	return dictionary({string(key): wrap(value) for key, value in subject.iteritems()}), position
+	return dictionary({string(key): wrap(value) for key, value in subject.items()}), position
 
 
 def vscript_parse_array(*arguments):
@@ -56,19 +57,19 @@ class VScriptJSONEncoder(JSONEncoder):
 		return {
 			array: lambda value: value.items,
 			boolean: lambda value: bool(value.value),
-			date: lambda value: unicode(value),
+			date: lambda value: str(value),
 			dictionary: lambda value: {key.as_string: value \
-				for key, value in value.items.iteritems()},
+				for key, value in value.items.items()},
 			double: lambda value: value.value,
 			empty: lambda value: value.name,
 			error: lambda value: value.name,
 			generic: lambda value: value.name,
 			integer: lambda value: value.value,
-			mismatch: lambda value: unicode(value),
+			mismatch: lambda value: str(value),
 			nothing: lambda value: value.name,
 			null: lambda value: None,
 			ordereddictionary: lambda value: OrderedDict(
-				[(k.as_string, v) for k, v in value.items.iteritems()]
+				[(k.as_string, v) for k, v in value.items.items()]
 			),
 			string: lambda value: value.value
 		}.get(type(value), unknown)(value)

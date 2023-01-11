@@ -29,8 +29,8 @@ class MemoryTypeEventSketch(MemoryBase):
         return self
 
     def __str__(self):
-        return " ".join(filter(None, ("event", self._name,
-            "sketch of %s" % self._collection.owner if self._collection else None)))
+        return " ".join([_f for _f in ("event", self._name,
+            "sketch of %s" % self._collection.owner if self._collection else None) if _f])
 
 
 class MemoryTypeEvent(MemoryTypeEventSketch):
@@ -56,5 +56,5 @@ class MemoryTypeEvent(MemoryTypeEventSketch):
         raise NotImplementedError
 
     def __str__(self):
-        return " ".join(filter(None, ("event", self._name,
-            "of %s" % self._collection.owner if self._collection else None)))
+        return " ".join([_f for _f in ("event", self._name,
+            "of %s" % self._collection.owner if self._collection else None) if _f])

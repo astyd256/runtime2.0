@@ -1,4 +1,5 @@
 
+from builtins import object
 from collections import OrderedDict, Mapping
 from utils.properties import weak, lazy, roproperty
 from ..generic import MemoryBase
@@ -20,7 +21,7 @@ class MemoryTypeAttributes(MemoryBase, Mapping):
     @lazy
     def klass(self):
         names = tuple(self._items)
-        namespace = {name: attribute.default_value for name, attribute in self._items.iteritems()}
+        namespace = {name: attribute.default_value for name, attribute in self._items.items()}
         namespace.update({
             "__module__": "memory.type.attributes",
             "_description": "attributes values of %s" % self._owner,
@@ -44,7 +45,7 @@ class MemoryTypeAttributes(MemoryBase, Mapping):
     def compose(self, ident=u"", file=None):
         if self.__dict__.get("_items"):
             file.write(u"%s<Attributes>\n" % ident)
-            for attribute in self._items.itervalues():
+            for attribute in self._items.values():
                 attribute.compose(ident=ident + u"\t", file=file)
             file.write(u"%s</Attributes>\n" % ident)
 

@@ -17,7 +17,7 @@ class MemoryBindingsCatalog(MemoryBase, Mapping):
     def compose(self, ident=u"", file=None):
         if self._items:
             file.write(u"%s<Actions>\n" % ident)
-            for binding in self._items.itervalues():
+            for binding in self._items.values():
                 binding.compose(ident=u"\t" + ident, file=file)
             file.write(u"%s</Actions>\n" % ident)
 

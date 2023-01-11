@@ -1,5 +1,6 @@
 """resource module"""
 from __future__ import absolute_import
+from builtins import str
 import sys
 import managers
 from .module import VDOM_module

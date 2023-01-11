@@ -1,7 +1,9 @@
+from future import standard_library
+standard_library.install_aliases()
 import wsgidav.request_server
 from wsgidav.request_server import *
-import urllib
-from urlparse import urlparse
+import urllib.request, urllib.parse, urllib.error
+from urllib.parse import urlparse
 _logger = wsgidav.request_server._logger
 
 class VDOM_webdav_request_server(RequestServer):
@@ -57,7 +59,7 @@ class VDOM_webdav_request_server(RequestServer):
 	
 		# Destination header may be quoted (e.g. DAV Explorer sends unquoted, 
 		# Windows quoted)
-		destinationHeader = urllib.unquote(environ["HTTP_DESTINATION"])
+		destinationHeader = urllib.parse.unquote(environ["HTTP_DESTINATION"])
 	
 		# Return fragments as part of <path>
 		# Fixes litmus -> running `basic': 9. delete_fragment....... WARNING: DELETE removed collection resource withRequest-URI including fragment; unsafe
@@ -221,7 +223,7 @@ class VDOM_webdav_request_server(RequestServer):
 		for sRes in srcList:
 			# Skip this resource, if there was a failure copying a parent 
 			parentError = False
-			for ignorePath in ignoreDict.keys():
+			for ignorePath in list(ignoreDict.keys()):
 				if util.isEqualOrChildUri(ignorePath, sRes.path):
 					parentError = True
 					break
@@ -267,7 +269,7 @@ class VDOM_webdav_request_server(RequestServer):
 					continue
 				# Skip collections that contain errors (unmoved resources)   
 				childError = False
-				for ignorePath in ignoreDict.keys():
+				for ignorePath in list(ignoreDict.keys()):
 					if util.isEqualOrChildUri(sRes.path, ignorePath):
 						childError = True
 						break

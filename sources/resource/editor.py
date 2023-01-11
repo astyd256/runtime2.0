@@ -1,11 +1,15 @@
 
-from cStringIO import StringIO
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import object
+from io import StringIO
 from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 
 import managers, security
 from uuid import uuid4
 
-class VDOM_resource_editor:
+class VDOM_resource_editor(object):
     """resource editor class"""
 
     def __init__(self):

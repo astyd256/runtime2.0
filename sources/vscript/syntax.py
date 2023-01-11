@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 
+from past.builtins import basestring
 import ply.lex as lex
 from . import errors, lexemes
 from .source import *

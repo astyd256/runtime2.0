@@ -1,4 +1,8 @@
 
+from future import standard_library
+standard_library.install_aliases()
+from past.builtins import basestring
+from builtins import object
 from contextlib import contextmanager
 from threading import local, current_thread, enumerate as enumerate_threads
 

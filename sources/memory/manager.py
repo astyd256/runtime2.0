@@ -1,3 +1,5 @@
+from builtins import str
+from builtins import object
 import gc
 import os
 import os.path
@@ -136,7 +138,7 @@ class Memory(object):
                     if primaries:
                         lines = []
                         lines.append("Tracked primary objects:")
-                        for primary, reference in primaries.iteritems():
+                        for primary, reference in primaries.items():
                             lines.append("    %s" % primary)
                             if reference:
                                 referent = reference()
@@ -386,9 +388,10 @@ class Memory(object):
             debug("Restore databases...")
             try:
                 # removing databases that we already had before
-                for old_db in dbs.itervalues():
+                for old_db in dbs.values():
                     if managers.database_manager.check_database(appid, old_db["id"]):
-                        managers.database_manager.delete_database(appid, old_db["id"])
+                        pass #keep old db for safety reasons
+                        #managers.database_manager.delete_database(appid, old_db["id"])
             except:
                 pass
             for path in dbs:
@@ -468,7 +471,7 @@ class Memory(object):
         context = Structure(uuid=None)
         try:
             if value:
-                type = parser.parse(value.encode("utf8") if isinstance(value, unicode) else value)
+                type = parser.parse(value.encode("utf8") if isinstance(value, str) else value)
             elif filename:
                 type = parser.parse(filename=filename)
             else:
@@ -531,7 +534,7 @@ class Memory(object):
         context = Structure(uuid=None)
         try:
             if value:
-                application = parser.parse(value.encode("utf8") if isinstance(value, unicode) else value)
+                application = parser.parse(value.encode("utf8") if isinstance(value, str) else value)
             elif filename:
                 application = parser.parse(filename=filename)
             else:

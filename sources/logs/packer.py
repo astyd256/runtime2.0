@@ -1,9 +1,11 @@
 
+from future import standard_library
+standard_library.install_aliases()
 import codecs
 import time
 import datetime
 from struct import Struct
-from cStringIO import StringIO
+from io import StringIO
 
 
 ENCODING = "utf8"

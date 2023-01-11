@@ -25,7 +25,7 @@ class VDOM_session_manager(dict):
 
 	def check_sessions(self):
 		"""clean timed-out sessions"""
-		keys_copy = copy.deepcopy(self.keys())
+		keys_copy = copy.deepcopy(list(self.keys()))
 		for sid in keys_copy: self[sid]
 
 	def work(self):

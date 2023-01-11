@@ -1,4 +1,6 @@
 
+from past.builtins import basestring
+from builtins import object
 import managers
 
 
@@ -14,7 +16,7 @@ class VDOM_headers(object):
         return managers.request_manager.current.headers_out().headers().get(name.lower(), default)
 
     def keys(self):
-        return managers.request_manager.current.headers_out().headers().keys()
+        return list(managers.request_manager.current.headers_out().headers().keys())
 
     def __contains__(self, name):
         return name.lower() in managers.request_manager.current.headers_out().headers()
@@ -37,7 +39,7 @@ class VDOM_shared_variables(object):
         managers.request_manager.current.shared_variables.clear()
 
     def keys(self):
-        return managers.request_manager.current.shared_variables.keys()
+        return list(managers.request_manager.current.shared_variables.keys())
 
     def copy(self):
         return managers.request_manager.current.shared_variables.copy()

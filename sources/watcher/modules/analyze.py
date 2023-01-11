@@ -21,12 +21,12 @@ def analyze(options):
 
     if group_by_name:
         name_reference = defaultdict(list)
-        for item, counter in reference.iteritems():
+        for item, counter in reference.items():
             name_reference[get_type_name(target_type=item)].append(counter)
         iterator = ((name, "%d (%d)" % (sum(counters), len(counters)) if len(counters) > 1 else counters[0])
-            for name, counters in name_reference.iteritems())
+            for name, counters in name_reference.items())
     else:
-        iterator = ((get_type_name(target_type=item), counter) for item, counter in reference.iteritems())
+        iterator = ((get_type_name(target_type=item), counter) for item, counter in reference.items())
 
     yield "<reply>"
     yield "<counters>"

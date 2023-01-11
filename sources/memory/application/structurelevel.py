@@ -41,10 +41,10 @@ class MemoryStructureLevelSketch(MemoryBase, MutableSequence):
         return self
 
     def __str__(self):
-        return " ".join(filter(None, (
+        return " ".join([_f for _f in (
             "structure level",
             "\"%s\"" % self._name if self._name else None,
-            "sketch of %s" % self._owner)))
+            "sketch of %s" % self._owner) if _f])
 
 
 class MemoryStructureLevel(MemoryStructureLevelSketch):
@@ -85,7 +85,7 @@ class MemoryStructureLevel(MemoryStructureLevelSketch):
         raise NotImplementedError
 
     def __str__(self):
-        return " ".join(filter(None, (
+        return " ".join([_f for _f in (
             "structure level",
             "\"%s\"" % self._name if self._name else None,
-            "of %s" % self._owner)))
+            "of %s" % self._owner) if _f])

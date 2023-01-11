@@ -1,4 +1,5 @@
 
+from builtins import str
 import weakref
 import socket
 from collections import deque
@@ -135,7 +136,7 @@ class Logger(BaseLogger):
                 # create stream
                 self._stream = LogSocketStream(self, stream_socket)
                 with self._lock:
-                    for luid, name in self._actual.iteritems():
+                    for luid, name in self._actual.items():
                         self._queue.appendleft((actions.ASSUME, luid, name))
 
             # send entry(ies) to the server

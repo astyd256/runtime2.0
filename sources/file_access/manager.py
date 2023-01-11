@@ -1,4 +1,5 @@
 
+from builtins import object
 import io
 import os
 import errno
@@ -15,7 +16,7 @@ import file_access
 from utils.system import *
 from utils.mutex import VDOM_named_mutex
 from utils.tracing import format_exception_trace
-# from utils.file_argument import Attachment
+from utils.file_argument import Attachment
 
 from .auxiliary import cleanup_directory
 from .daemon import FileWriter
@@ -100,7 +101,7 @@ class FileManager(object):
             segments = settings.TEMPORARY_LOCATION, owner, name
         else:
             raise Exception("Unknown category: %r" % category)
-        return os.path.normpath(os.path.join(*filter(None, segments))).decode('utf-8')
+        return os.path.normpath(os.path.join(*[_f for _f in segments if _f])).decode('utf-8')
 
     def ensure(self, category, owner, mode, name=None):
         if "w" not in mode:

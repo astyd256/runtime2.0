@@ -17,7 +17,7 @@ class MemoryEventsCatalog(MemoryBase, Mapping):
     def compose(self, ident=u"", file=None):
         if self._items:
             file.write(u"%s<Events>\n" % ident)
-            for event in self._items.itervalues():
+            for event in self._items.values():
                 event.compose(ident=ident + u"\t", file=file)
             file.write(u"%s</Events>\n" % ident)
 

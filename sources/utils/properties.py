@@ -1,4 +1,5 @@
 
+from builtins import object
 from weakref import ref
 from threading import RLock
 
@@ -170,7 +171,7 @@ def weak(*names, **names_with_values):
     def wrapper(cls):
         for name in names:
             setattr(cls, name, weakproperty(WEAK_NAME_TEMPLATE % name))
-        for name, value in names_with_values.iteritems():
+        for name, value in names_with_values.items():
             weak_name = WEAK_NAME_TEMPLATE % name
             setattr(cls, weak_name, ref(value))
             setattr(cls, name, weakproperty(weak_name))

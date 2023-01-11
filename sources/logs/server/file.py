@@ -1,9 +1,12 @@
 
+from builtins import zip
+from builtins import next
+from builtins import object
 import sys
 import os
 import os.path
 from collections import deque
-from itertools import tee, chain, izip, islice
+from itertools import tee, chain, islice
 import settings
 
 
@@ -57,7 +60,7 @@ class LogFile(object):
         if start < len(self._index):
             lefts, rights = tee(chain((self._size,), self._index))
             next(rights, None)
-            for left, right in islice(izip(lefts, rights), start, start + count):
+            for left, right in islice(zip(lefts, rights), start, start + count):
                 self._file.seek(right)
                 entry = self._formatter.parse(self._file.read(left - right).decode("utf8"))
                 result.append(entry)

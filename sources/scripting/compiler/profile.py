@@ -1,4 +1,5 @@
 
+from builtins import object
 from collections import deque, Sequence
 
 import settings
@@ -119,7 +120,7 @@ class CompilationProfile(CompilationProfileEntity):
     def _entries(self):
         if self._origin.objects:
             entries = CompilationProfileEntries(self)
-            for child in self._origin.objects.itervalues():
+            for child in self._origin.objects.values():
                 if child.type.invisible:
                     continue
                 entries.new(child)

@@ -1,4 +1,7 @@
+from __future__ import division
 
+from builtins import str
+from past.utils import old_div
 import sys
 from .. import errors
 from .primitive import primitive
@@ -61,7 +64,7 @@ class variable(primitive):
 		return self.subtype*another
 
 	def __div__(self, another):
-		return self.subtype/another
+		return old_div(self.subtype,another)
 
 	def __floordiv__(self, another):
 		return self.subtype//another
@@ -125,9 +128,9 @@ class variable(primitive):
 		return str(self.subtype)
 
 	def __unicode__(self):
-		return unicode(self.subtype)
+		return str(self.subtype)
 
-	def __nonzero__(self):
+	def __bool__(self):
 		return bool(self.subtype)
 
 

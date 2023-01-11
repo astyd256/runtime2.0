@@ -1,9 +1,11 @@
 
+from builtins import zip
+from builtins import str
 import inspect
 import re
 
 from types import FunctionType, ModuleType
-from itertools import izip, chain
+from itertools import chain
 from argparse import OPTIONAL, SUPPRESS, ArgumentParser, ArgumentTypeError, HelpFormatter, Action
 
 import utils.verificators
@@ -104,9 +106,9 @@ class StoreMandatoryAction(Action):
 
 verificators = {native.__name__: make_verificator(native, name=name)
     for native, name in (
-        (int, "integer"), (long, "integer"),
+        (int, "integer"), (int, "integer"),
         (float, "float"), (complex, "complex"),
-        (str, "string"), (unicode, "stirng"),
+        (str, "string"), (str, "stirng"),
         (bool, "boolean"),
         (tuple, "list"), (list, "list"), (dict, "mapping"), (set, "list"),
         (switch, "boolean"))}
@@ -161,7 +163,7 @@ def autoparse(alias, routine, subparsers, autoletters=True):
 
     if defaults:
         letters = set("ch")
-        for name, default in izip(optional, defaults):
+        for name, default in zip(optional, defaults):
             entity, media, verificator, description = metadata.get(name, DEFAULT_METADATA)
             keywords = {}
 

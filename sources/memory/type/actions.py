@@ -30,9 +30,9 @@ class MemoryTypeActions(MemoryBase, Mapping):
     def compose(self, ident=u"", file=None):
         if self._items:
             file.write(u"%s<Actions>\n" % ident)
-            for scope, scope_actions in self._items_by_scope.iteritems():
+            for scope, scope_actions in self._items_by_scope.items():
                 file.write(u"%s\t<Container ID=\"%s\">\n" % (ident, scope))
-                for action in scope_actions.itervalues():
+                for action in scope_actions.values():
                     action.compose(ident=ident + u"\t\t", file=file)
                 file.write(u"%s\t</Container>\n" % ident)
             file.write(u"%s</Actions>\n" % ident)
@@ -41,7 +41,7 @@ class MemoryTypeActions(MemoryBase, Mapping):
         try:
             return self._items[key]
         except KeyError:
-            return self._items_by_scope[key].itervalues()
+            return iter(self._items_by_scope[key].values())
 
     def __iter__(self):
         return iter(self._items)

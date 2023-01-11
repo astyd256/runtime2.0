@@ -1,5 +1,7 @@
 
-from __builtin__ import compile as python_compile
+from future import standard_library
+standard_library.install_aliases()
+from builtins import compile as python_compile
 from importlib import import_module
 
 import settings

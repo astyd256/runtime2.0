@@ -1,4 +1,5 @@
-
+#from builtins import str
+#from builtins import object
 import sys
 
 import settings
@@ -152,7 +153,7 @@ class Executable(object):
         package = self.package
         if package:
             __import__(package)
-            namespace["__package__"] = package
+            namespace["__package__"] = str(package)
 
         normally = False
         managers.script_manager.watch()

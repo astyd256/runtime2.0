@@ -48,7 +48,7 @@ class MemoryLibraries(MemoryBase, MutableMapping):
 
     # unsafe
     def compose(self, ident=u"", file=None, shorter=False):
-        libraries = tuple(library for library in self._items.itervalues())
+        libraries = tuple(library for library in self._items.values())
         if libraries:
             file.write(u"%s<Libraries>\n" % ident)
             for library in libraries:

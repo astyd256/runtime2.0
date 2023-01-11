@@ -1,7 +1,11 @@
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import next
+from builtins import range
 import ast
 import re
-from cStringIO import StringIO
+from io import StringIO
 import binascii
 import settings
 

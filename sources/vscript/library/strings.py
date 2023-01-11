@@ -1,4 +1,7 @@
 
+from past.builtins import cmp
+from builtins import str
+from builtins import chr
 import re
 from .. import errors
 from ..subtypes import v_null, array, integer, string, empty
@@ -155,10 +158,10 @@ def v_string(number, character):
 	if character is v_null:
 		return v_null
 	if isinstance(character, (integer, empty)):
-		try: return string(unichr(character)*number)
+		try: return string(chr(character)*number)
 		except ValueError: raise errors.invalid_procedure_call(name=u"string")
 	elif isinstance(character, string):
-		return string(unicode(character)[0]*number)
+		return string(str(character)[0]*number)
 	else:
 		raise errors.type_mismatch
 

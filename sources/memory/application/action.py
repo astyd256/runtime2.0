@@ -1,4 +1,5 @@
 
+from builtins import str
 import settings
 import managers
 import file_access
@@ -57,10 +58,10 @@ class MemoryActionSketch(MemoryBase, Executable):
         return self
 
     def __str__(self):
-        return " ".join(filter(None, (
+        return " ".join([_f for _f in (
             "action",
             "\"%s\"" % self._name if self._name else None,
-            "sketch of %s" % self._collection.owner)))
+            "sketch of %s" % self._collection.owner) if _f])
 
 
 class MemoryActionRestorationSketch(MemoryActionSketch):
@@ -163,7 +164,7 @@ class MemoryAction(MemoryActionSketch):
         raise NotImplementedError
 
     def __str__(self):
-        return " ".join(filter(None, (
+        return " ".join([_f for _f in (
             "action",
             "%s:%s" % (self._id, self._name) if self._name else None,
-            "of %s" % self._collection.owner)))
+            "of %s" % self._collection.owner) if _f])

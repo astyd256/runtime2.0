@@ -1,4 +1,5 @@
 
+from builtins import next
 from collections import Mapping
 from ...generic import MemoryBase
 from .auxiliary import subtree, check_subtree

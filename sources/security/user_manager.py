@@ -2,6 +2,7 @@
 User Manager module
 """
 
+from builtins import object
 from hashlib import md5
 
 import managers
@@ -12,7 +13,7 @@ from security.group import VDOM_usergroup
 from utils.exception import VDOM_exception
 
 
-class VDOM_user_manager:
+class VDOM_user_manager(object):
 	"""Defines user-system operations"""
 
 	def __init__(self):
@@ -38,7 +39,7 @@ class VDOM_user_manager:
 			self.guest_user = self.create_user("guest", "", system=True)
 			managers.storage.write_async(VDOM_CONFIG["USER-MANAGER-GUEST-ID-STORAGE-RECORD"], self.guest_user.id)
 		# create hash
-		for uid in self.users.keys():
+		for uid in list(self.users.keys()):
 			self.users_by_name[self.users[uid].login] = self.users[uid]
 		self.__check_system()
 		self.__check_membership()

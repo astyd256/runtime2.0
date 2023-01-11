@@ -1,3 +1,7 @@
+from builtins import input
+from builtins import range
+from past.builtins import basestring
+from builtins import object
 import os
 from xml.dom.minidom import parse
 from xml.dom.minidom import parseString
@@ -250,7 +254,7 @@ class xml_object(object):
 	def __parse(self):
 		self.name = self.node.nodeName
 		self.lname = self.name.lower()
-		for i in xrange(self.node.attributes.length):
+		for i in range(self.node.attributes.length):
 			attr = self.node.attributes.item(i)
 			self.attributes[attr.name] = self.node.getAttribute(attr.name)
 		v = ""
@@ -341,13 +345,13 @@ if __name__ == "__main__":
 	import gc
 	gc.collect()
 	print(len(gc.garbage))
-	x=raw_input()
+	x=input()
 	#import gc
 	print("x")
 	x = xml_object("z.xml")
 	x.children.pop(0)
 	print(x.toxml())
-	x=raw_input()
+	x=input()
 
 	a = xml_object()
 	a.name = "test"
@@ -384,7 +388,7 @@ if __name__ == "__main__":
 	del x
 	#c.sync("aaa.xml")
 	#del c, d
-	x=raw_input()
+	x=input()
 
 #	z = xml_object()
 #	z.name = "sample"

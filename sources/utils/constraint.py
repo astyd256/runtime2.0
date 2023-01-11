@@ -43,6 +43,10 @@
                     SomeInSetConstraint,
                     SomeNotInSetConstraint
 """
+from builtins import next
+from builtins import zip
+from builtins import range
+from builtins import object
 from future.utils import raise_
 import random
 import copy
@@ -268,7 +272,7 @@ class Problem(object):
 
     def _getArgs(self):
         domains = self._variables.copy()
-        allvariables = domains.keys()
+        allvariables = list(domains.keys())
         constraints = []
         for constraint, variables in self._constraints:
             if not variables:
@@ -283,7 +287,7 @@ class Problem(object):
         for constraint, variables in constraints[:]:
             constraint.preProcess(variables, domains,
                                   constraints, vconstraints)
-        for domain in domains.values():
+        for domain in list(domains.values()):
             domain.resetState()
             if not domain:
                 return None, None, None
@@ -671,9 +675,9 @@ class MinConflictsSolver(Solver):
         # Initial assignment
         for variable in domains:
             assignments[variable] = random.choice(domains[variable])
-        for _ in xrange(self._steps):
+        for _ in range(self._steps):
             conflicted = False
-            lst = domains.keys()
+            lst = list(domains.keys())
             random.shuffle(lst)
             for variable in lst:
                 # Check if variable is not in conflict

@@ -1,4 +1,6 @@
 
+from builtins import str
+from builtins import next
 from weakref import ref
 from collections import Mapping
 from itertools import chain
@@ -77,7 +79,7 @@ class MemoryApplications(MemoryBase, Mapping):
         except KeyError:
             if autocomplete:
                 with self._lock:
-                    for item in self.itervalues():
+                    for item in self.values():
                         if item.name.lower().startswith(uuid_or_name):
                             return item
             return None
@@ -151,7 +153,7 @@ class MemoryApplications(MemoryBase, Mapping):
             if self._queue is False:
                 self._explore()
 
-            items = self._items.keys()
+            items = list(self._items.keys())
             if self._queue:
                 items += self._queue
 

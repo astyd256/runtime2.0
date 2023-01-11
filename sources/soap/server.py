@@ -1,6 +1,12 @@
 """web services server"""
 from __future__ import absolute_import
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import map
+from builtins import str
+from builtins import range
+from builtins import object
 import string
 import sys
 import gc
@@ -15,7 +21,7 @@ import tempfile
 import shutil
 import SOAPpy
 
-from StringIO import StringIO
+from io import StringIO
 from xml.etree import ElementTree
 from collections import OrderedDict
 
@@ -102,21 +108,21 @@ APP_INFO_LIST = (
     ("current_language", "CurrentLanguage"))
 
 APP_INFO_MAPPING = {
-    "Id": ("id", unicode),
-    "Name": ("name", unicode),
-    "Description": ("description", unicode),
-    "Version": ("version", unicode),
-    "Owner": ("owner", unicode),
-    "Password": ("password", unicode),
+    "Id": ("id", str),
+    "Name": ("name", str),
+    "Description": ("description", str),
+    "Version": ("version", str),
+    "Owner": ("owner", str),
+    "Password": ("password", str),
     "Active": ("active", int),
-    "Index": ("index", unicode),
-    "Icon": ("icon", unicode),
-    "ServerVersion": ("server_version", unicode),
-    "ScriptingLanguage": ("scripting_language", unicode),
+    "Index": ("index", str),
+    "Icon": ("icon", str),
+    "ServerVersion": ("server_version", str),
+    "ScriptingLanguage": ("scripting_language", str),
     # TODO: check protected attribute
     # "Protected": ("protected", int),
-    "DefaultLanguage": ("default_language", unicode),
-    "CurrentLanguage": ("current_language", unicode)}
+    "DefaultLanguage": ("default_language", str),
+    "CurrentLanguage": ("current_language", str)}
 
 
 class VDOM_web_services_server(object):
@@ -169,7 +175,7 @@ class VDOM_web_services_server(object):
         if _index not in keymap:  # don't have a key generated for this number
             # generate keys
             keymap[str(keyindex)] = pr.next_session_key(keylast)
-            for ii in xrange(keyindex + 1, int(_index) + 10):  # generate 10 more keys than needed
+            for ii in range(keyindex + 1, int(_index) + 10):  # generate 10 more keys than needed
                 keymap[str(ii)] = pr.next_session_key(keymap[str(ii - 1)])
             sess["keyindex"] = int(_index) + 10
             sess["keylast"] = keymap[str(int(_index) + 9)]
@@ -338,7 +344,7 @@ class VDOM_web_services_server(object):
             param = self.__parse_attr(attr)
             # for key in param.keys():
             #     app.set_info(key, param[key])
-            for key, value in param.iteritems():
+            for key, value in param.items():
                 name, cast = APP_INFO_MAPPING[key]
                 setattr(app, name, cast(value))
         except:
@@ -369,7 +375,7 @@ class VDOM_web_services_server(object):
         param = self.__parse_attr(attr)
         # for key in param.keys():
         #     ret[0].set_info(key, param[key])
-        for key, value in param.iteritems():
+        for key, value in param.items():
             name, cast = APP_INFO_MAPPING[key]
             setattr(app, name, cast(value))
 
@@ -406,7 +412,7 @@ class VDOM_web_services_server(object):
         #         result += "<Application ID=\"%s\">\n" % appid
         #         result += self.__app_info(app)
         #         result += "</Application>"
-        for app in managers.memory.applications.itervalues():
+        for app in managers.memory.applications.values():
             if managers.acl_manager.session_user_has_access2(app.id, app.id, right):
                 appname = app.name
                 if "" == appname:
@@ -487,11 +493,11 @@ class VDOM_web_services_server(object):
         # return ret[0].structure_element.toxml()
         file = StringIO()
         file.write(u"<Structure>\n")
-        for container in app.objects.itervalues():
+        for container in app.objects.values():
             file.write(u"<Object ID=\"%s\" top=\"%s\" left=\"%s\" ResourceID=\"%s\" state=\"%s\">\n" %
                 (container.id, container.structure.top, container.structure.left,
                     container.structure.resource or u"", container.structure.state))
-            for name, level in container.structure.iteritems():
+            for name, level in container.structure.items():
                 file.write(u"<Level Index=\"%s\">\n" % name.encode("xml"))
                 for index, reference in enumerate(level):
                     file.write(u"<Object ID=\"%s\" Index=\"%s\"/>\n" % (reference.id, index))
@@ -596,15 +602,15 @@ class VDOM_web_services_server(object):
             if x:
                 x.delete()
 
-        for container, (top, left, state, resource, levels) in update.iteritems():
+        for container, (top, left, state, resource, levels) in update.items():
             container.structure.top = top
             container.structure.left = left
             container.structure.state = state
             container.structure.resource = resource
 
-            for name, containers in levels.iteritems():
+            for name, containers in levels.items():
                 level = container.structure[name]
-                level[:] = (c for i, c in sorted((i, c) for i, c in containers.iteritems()))
+                level[:] = (c for i, c in sorted((i, c) for i, c in containers.items()))
 
             for name in {name for name in container.structure if name not in levels}:
                 del container.structure[name][:]
@@ -904,7 +910,7 @@ class VDOM_web_services_server(object):
         # result += "</Types>"
         # return result
         result = ["<Types>"]
-        for type in managers.memory.types.itervalues():
+        for type in managers.memory.types.values():
             result.append("<Type id=\"%s\" name=\"%s\" version=\"%s\" />" % (type.id, type.name or _("Not specified"), type.version or _("Not specified")))
         result.append("</Types>")
         return "".join(result)
@@ -1039,7 +1045,7 @@ class VDOM_web_services_server(object):
         # result = '<?xml version="1.0" encoding="utf-8"?>\n%s' % result
         # return result
         result = ["<Types>"]
-        for type in managers.memory.types.itervalues():
+        for type in managers.memory.types.values():
             file = StringIO()
             type.compose(file=file)
             data = file.getvalue()
@@ -1164,7 +1170,7 @@ class VDOM_web_services_server(object):
         ext = []
         # for aname in obj.get_attributes():
         #     val = obj.get_attributes()[aname].value
-        for aname, val in obj.attributes.iteritems():
+        for aname, val in obj.attributes.items():
             # if val != obj.type.get_attributes()[aname].default_value:
             if val != obj.type.attributes[aname].default_value:
                 if not need_xml_escape(val):
@@ -1186,7 +1192,7 @@ class VDOM_web_services_server(object):
 
         # child objects
         # for o in obj.get_objects_list():
-        for o in obj.objects.itervalues():
+        for o in obj.objects.values():
             result += self.__do_get_object_script_presentation(o, depth + 1)
 
         # if len(ext) > 0 or len(obj.get_objects_list()) > 0:
@@ -1221,7 +1227,7 @@ class VDOM_web_services_server(object):
 
         # for aname in type_obj.get_attributes():
         #     attr_map[aname.lower()] = type_obj.get_attributes()[aname].default_value
-        for aname, attribute in type_obj.attributes.iteritems():
+        for aname, attribute in type_obj.attributes.items():
             attr_map[aname] = attribute.default_value
 
         # parse attributes
@@ -1252,7 +1258,7 @@ class VDOM_web_services_server(object):
 
         # write attributes to the object
         # for aname in attr_map:
-        for aname, value in attr_map.iteritems():
+        for aname, value in attr_map.items():
             if "name" == aname:
                 try:
                     # obj.set_name(attr_map[aname])
@@ -1331,7 +1337,7 @@ class VDOM_web_services_server(object):
         """build objects xml"""
         result = ""
         # for o in parent.get_objects_list():
-        for o in parent.objects.itervalues():
+        for o in parent.objects.values():
             result += self.__get_object(o)
         return "<Objects>\n%s</Objects>" % result if result else ""
 
@@ -1359,7 +1365,7 @@ class VDOM_web_services_server(object):
         result += "<Attributes>\n"
         # for a in obj.get_attributes().values():
         #     result += u"<Attribute Name=\"%s\">%s</Attribute>\n" % (a.name, self.__attrvalue(a.original_value))
-        for name, value in obj.attributes.iteritems():
+        for name, value in obj.attributes.items():
             result += u"<Attribute Name=\"%s\">%s</Attribute>\n" % (name, self.__attrvalue(value))
         result += "</Attributes>\n"
 #       result += "<Script>%s</Script>\n" % obj.script
@@ -1367,7 +1373,7 @@ class VDOM_web_services_server(object):
         result += "<Objects>\n"
         # for o in obj.get_objects_list():
         #     result += self.__get_all_objects(o)
-        for o in obj.objects.itervalues():
+        for o in obj.objects.values():
             result += self.__get_all_objects(o)
         result += "</Objects>\n"
         result += self.__get_code_interface(obj)
@@ -1375,7 +1381,7 @@ class VDOM_web_services_server(object):
         return result
 
     def __attrvalue(self, data):
-        data = unicode(data)
+        data = str(data)
         if need_xml_escape(data):
             result = data.replace("]]>", "]]]]><![CDATA[>")
             return "<![CDATA[" + result + "]]>"
@@ -1389,7 +1395,7 @@ class VDOM_web_services_server(object):
         result += "<Attributes>\n"
         # for a in obj.get_attributes().values():
         #     result += u"<Attribute Name=\"%s\">%s</Attribute>\n" % (a.name, self.__attrvalue(a.original_value))
-        for name, value in obj.attributes.iteritems():
+        for name, value in obj.attributes.items():
             result += u"<Attribute Name=\"%s\">%s</Attribute>\n" % (name, self.__attrvalue(value))
         result += "</Attributes>\n"
 #       result += "<Objects/>\n"
@@ -1400,18 +1406,20 @@ class VDOM_web_services_server(object):
     def __get_interfaces(self, type):
         # htmlcontainer {'dropdown': ['(#lang(401)|0)|(#lang(402)|1)'], 'color': [''], 'pagelink': [''], 'multiline': ['150'], 'file': [''], 'textfield': ['2']}
         interfaces = {}
-        for attribute in type.attributes.itervalues():
+        for attribute in type.attributes.values():
             code_interface = attribute.code_interface.lower().strip()
             ret = if_re.search(code_interface)
             if ret:
                 code_name = ret.groups()[0].strip()
                 code_param = ret.groups()[1].strip()
                 if code_name not in interfaces:
-                    interfaces[code_name] = map(string.strip, code_param.split(","))
+                    if attribute.name == "deniedlink":
+                        continue
+                    interfaces[code_name] = list(map(string.strip, code_param.split(",")))
         return interfaces
 
     def __has_copy(self, obj):
-        for o in obj.objects.catalog.itervalues():
+        for o in obj.objects.catalog.values():
             if o.type.name == "copy":
                 return 1
         else:
@@ -1426,7 +1434,7 @@ class VDOM_web_services_server(object):
             result += "<Pagelink>\n"
 #           result += """<Object ID="" Name=""/>\n"""
             # for o in app.get_objects_list():
-            for o in app.objects.itervalues():
+            for o in app.objects.values():
                 result += """<Object ID="%s" Name="%s"/>\n""" % (o.id, o.name)
             result += "</Pagelink>\n"
 
@@ -1434,11 +1442,11 @@ class VDOM_web_services_server(object):
         if "objectlist" in interfaces and 1 == len(interfaces["objectlist"]) and "" == interfaces["objectlist"][0]:
             result += "<Objectlist>\n"
             # for oid in app.get_all_objects():
-            for obj1 in app.objects.catalog.values():
+            for obj1 in list(app.objects.catalog.values()):
                 # obj1 = app.search_object(oid)
                 if "copy" != obj1.type.name:
                     # if None != obj1.parent and ("copy" != obj.type.name or 0 == obj1.toplevel.has_copy):  # (oid not in obj.toplevel.all_child_objects):
-                    if None != obj1.parent and ("copy" != obj.type.name or 0 == self.__has_copy(obj1.container)):  # (oid not in obj.toplevel.all_child_objects):
+                    if None != obj1.parent and ("copy" != obj.type.name):  # or 0 == self.__has_copy(obj1.container) # (oid not in obj.toplevel.all_child_objects):
                         if "copy" == obj.type.name and obj.parent.type.name not in obj1.type.containers:
                             continue
                         result += """<Object ID="%s" Name="%s"/>\n""" % (obj1.id, obj1.name)
@@ -1448,7 +1456,7 @@ class VDOM_web_services_server(object):
             needed = interfaces["objectlist"][0]
             result += "<Objectlist>\n"
             # for oid in app.get_all_objects():
-            for obj1 in app.objects.catalog.itervalues():
+            for obj1 in app.objects.catalog.values():
                 # obj1 = app.search_object(oid)
                 if obj1.type.id == needed:
                     result += """<Object ID="%s" Name="%s"/>\n""" % (obj1.id, obj1.name)
@@ -1465,7 +1473,7 @@ class VDOM_web_services_server(object):
             do_compute = True
         obj = app.search_object(objid)
         typeid = obj.type.id
-        attr = {name: value.value for name, value in obj.get_attributes().items()}
+        attr = {name: value.value for name, value in list(obj.get_attributes().items())}
         name = obj.name
         if parentid:
             try:
@@ -1757,7 +1765,7 @@ class VDOM_web_services_server(object):
         #             for a in app.events[obj.id][src_id][ev_name].actions:
         #                 result += """<Action ID="%s"/>\n""" % a
         #             result += "</Event>\n"
-        for event in obj.events.catalog.itervalues():
+        for event in obj.events.catalog.values():
             result += "<Event ObjSrcID=\"%s\" ObjSrcName=\"%s\" TypeID=\"%s\" ContainerID=\"%s\" Name=\"%s\" Top=\"%s\" Left=\"%s\" State=\"%s\">\n" \
                 % (event.source_object.id, event.source_object.name, event.source_object.type.id,
                     event.source_object.container.id, event.name, event.top, event.left, str(event.state).lower())
@@ -1781,11 +1789,11 @@ class VDOM_web_services_server(object):
         #             for p in a.parameters:
         #                 result += """<Parameter ScriptName="%s"><![CDATA[%s]]></Parameter>\n""" % (p.name, p.value)
         #             result += "</Action>\n"
-        for binding in obj.bindings.catalog.itervalues():
+        for binding in obj.bindings.catalog.values():
             result += """<Action ID="%s" ObjTgtID="%s" ObjTgtName="%s" MethodName="%s" Top="%s" Left="%s" State="%s">\n""" \
                 % (binding.id, binding.target_object.id, binding.target_object.name,
                     binding.name, binding.top, binding.left, str(binding.state).lower())
-            for name, value in binding.parameters.iteritems():
+            for name, value in binding.parameters.items():
                 result += """<Parameter ScriptName="%s"><![CDATA[%s]]></Parameter>\n""" % (name, value)
             result += "</Action>\n"
         result += "</ClientActions>\n"
@@ -2006,7 +2014,7 @@ class VDOM_web_services_server(object):
 
             obj.bindings.clear()
             for event in tuple(event
-                    for event in obj.application.events.catalog.itervalues()
+                    for event in obj.application.events.catalog.values()
                     if event.container is obj):
                 del event.source_object.events[event.key]
 
@@ -2057,7 +2065,7 @@ class VDOM_web_services_server(object):
 
         # for _name in obj.actions["name"]:
         #     x = obj.actions["name"][_name]
-        for _name, x in obj.actions.iteritems():
+        for _name, x in obj.actions.items():
             result += """<Action ID="%s" Name="%s" Top="%s" Left="%s" State="%s">\n""" % (x.id, x.name, x.top, x.left, x.state)
             # result += """<![CDATA[%s]]>\n""" % x.code.replace("]]>", "]]]]><![CDATA[>")
             result += """<![CDATA[%s]]>\n""" % x.source_code.replace("]]>", "]]]]><![CDATA[>")
@@ -2065,7 +2073,7 @@ class VDOM_web_services_server(object):
         result += '</Container>\n'
 
         # for x in obj.objects_list:
-        for x in obj.objects.itervalues():
+        for x in obj.objects.values():
             result += self.__do_get_server_actions(x)
 
         return result
@@ -2209,7 +2217,7 @@ class VDOM_web_services_server(object):
         #     result += "</Container>\n"
         elif objid in GLOBAL_CONTEXTS:
             result += "<Container ID=\"%s\">\n" % objid
-            for _id, _name in GLOBAL_CONTEXTS[objid].iteritems():
+            for _id, _name in GLOBAL_CONTEXTS[objid].items():
                 x = app.actions.get(_id)
                 top, left, state, source_code = (x.top, x.left, x.state, x.source_code) if x else ("", "", "", "")
                 result += """<Action ID="%s" Name="%s" Top="%s" Left="%s" State="%s">\n<![CDATA[%s]]>\n</Action>\n""" % (
@@ -2229,7 +2237,7 @@ class VDOM_web_services_server(object):
         result = ""  # '<Container ID="%s">\n' % obj.id
         # for _name in obj.actions["name"]:
         #     x = obj.actions["name"][_name]
-        for x in obj.actions.itervalues():
+        for x in obj.actions.values():
             additional = ""
             if full:
                 additional = """  Top="%s" Left="%s" State="%s"  """ % (x.top, x.left, x.state)
@@ -2237,7 +2245,7 @@ class VDOM_web_services_server(object):
 
         if full:
             # for x in obj.objects_list:
-            for x in obj.objects.itervalues():
+            for x in obj.objects.values():
                 result += self.__do_get_server_actions_list(x, full)
 
         return result
@@ -2267,7 +2275,7 @@ class VDOM_web_services_server(object):
         #             additional = """  Top="%s" Left="%s" State="%s"  """ % (x.top, x.left, x.state)
         #         result += """<Action ID="%s" Name="%s" ObjectID="%s" ObjectName="%s" %s />\n""" % (x.id, x.name, obj.id, obj.name, additional)
         elif objid in GLOBAL_CONTEXTS:
-            for _id, _name in GLOBAL_CONTEXTS[objid].iteritems():
+            for _id, _name in GLOBAL_CONTEXTS[objid].items():
                 x = app.actions.get(_id)
                 top, left, state, source_code = (x.top, x.left, x.state, x.source_code) if x else ("", "", "", "")
                 additional = ""
@@ -2531,8 +2539,8 @@ class VDOM_web_services_server(object):
         try:
             return managers.dispatcher.dispatch_remote_method(obj, func_name, xml_param, session_id=session_id)
         except Exception as error:
-            if hasattr(error, "message") and isinstance(error.message, unicode):
-                message = unicode(error).encode("utf8")
+            if hasattr(error, "message") and isinstance(error.message, str):
+                message = str(error).encode("utf8")
             else:
                 message = str(error)
             raise SOAPpy.faultType(remote_method_call_error, _("Remote method call error"), message)
@@ -2549,8 +2557,8 @@ class VDOM_web_services_server(object):
         try:
             managers.engine.execute(action)
         except Exception as error:
-            if hasattr(error, "message") and isinstance(error.message, unicode):
-                message = unicode(error).encode("utf8")
+            if hasattr(error, "message") and isinstance(error.message, str):
+                message = str(error).encode("utf8")
             else:
                 message = str(error)
             raise SOAPpy.faultType(remote_method_call_error, _("Remote method call error"), message)
@@ -2879,7 +2887,7 @@ class VDOM_web_services_server(object):
                     try:
                         _new_obj.set_name(_name)
                     except VDOM_exception as e:
-                        debug(unicode(e))
+                        debug(str(e))
                 # set attributes
                 for aname in _attr_map:
                     _new_obj.set_attribute(aname, _attr_map[aname], False)
@@ -2940,7 +2948,7 @@ class VDOM_web_services_server(object):
                     _a_name = _a.attributes["name"]
                     if _a_name:
                         parent.set_attribute(_a_name, _a.get_value_as_xml(), False)
-        _current = copy.deepcopy(parent.objects.keys())     # child objects' IDs
+        _current = copy.deepcopy(list(parent.objects.keys()))     # child objects' IDs
         if objects_xml_obj:
             for child in objects_xml_obj.children:
                 if "object" == child.lname:

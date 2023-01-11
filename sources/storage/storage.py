@@ -1,8 +1,12 @@
 """VDOM storage module"""
 from __future__ import absolute_import
 
+from future import standard_library
+standard_library.install_aliases()
+#from builtins import str
+from builtins import object
 import sqlite3
-import cPickle
+import cPickle as pickle
 import traceback
 
 from utils.semaphore import VDOM_semaphore
@@ -34,7 +38,7 @@ class VDOM_storage(object):
         # start write thread
         self.__daemon = None
         # check if need to write config_1
-        if not VDOM_CONFIG["VDOM-CONFIG-1-RECORD"] in self.keys():
+        if not VDOM_CONFIG["VDOM-CONFIG-1-RECORD"] in list(self.keys()):
             self.write_object(VDOM_CONFIG["VDOM-CONFIG-1-RECORD"], VDOM_CONFIG_1)
         else:
             conf = self.read_object(VDOM_CONFIG["VDOM-CONFIG-1-RECORD"])
@@ -274,21 +278,21 @@ class VDOM_storage(object):
         if not data:
             return None
         try:
-            data = cPickle.loads(str(data))
+            data = pickle.loads(str(data))
             return data
         except Exception as e:
-            debug("Error reading object '%s' from the storage" % str(key))
-            debug(str(e))
+            debug("Error reading object '%s' from the storage" % key)
+            debug(e.message)
             return None
 
     def write_object(self, key, object):
         """save object to the storage"""
         data = None
         try:
-            data = cPickle.dumps(object)
+            data = pickle.dumps(object)
         except Exception as e:
-            debug("Error writing object '%s' to the storage" % str(key))
-            debug(str(e))
+            debug("Error writing object '%s' to the storage" % key)
+            debug(e.message)
             return False
         return self.write(key, data)
 
@@ -296,10 +300,10 @@ class VDOM_storage(object):
         """save object to the storage"""
         data = None
         try:
-            data = cPickle.dumps(object)
+            data = pickle.dumps(object)
         except Exception as e:
-            debug("Error writing object '%s' to the storage" % str(key))
-            debug(str(e))
+            debug("Error writing object '%s' to the storage" % key)
+            debug(e.message)
             return False
         return self.write_async(key, data)
 
@@ -307,7 +311,7 @@ class VDOM_storage(object):
 import managers
 
 
-class VDOM_config:
+class VDOM_config(object):
     """class to read/save changeable config"""
 
     def get_opt(self, name):
@@ -319,7 +323,7 @@ class VDOM_config:
 
     def get_keys(self):
         conf = managers.storage.read_object(VDOM_CONFIG["VDOM-CONFIG-1-RECORD"])
-        return conf.keys()
+        return list(conf.keys())
 
     def set_opt(self, name, val):
         VDOM_named_mutex_auto(name)

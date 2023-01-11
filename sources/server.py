@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # encoding: utf8
 
-import startup.server  # noqa
+from startup import server  # noqa
 import settings
 import managers
 

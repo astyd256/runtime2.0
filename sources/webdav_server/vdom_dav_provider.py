@@ -16,11 +16,13 @@ See `Developers info`_ for more information about the WsgiDAV architecture.
 .. _`Developers info`: http://docs.wsgidav.googlecode.com/hg/html/develop.html  
 """
 from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
 from collections import OrderedDict
 from wsgidav.dav_error import DAVError, HTTP_FORBIDDEN,HTTP_REQUEST_TIMEOUT,HTTP_NOT_FOUND
 from wsgidav.dav_provider import DAVProvider, DAVCollection, DAVNonCollection, _DAVResource
 from wsgidav.property_manager import PropertyManager
-from StringIO import StringIO
+from io import StringIO
 
 import wsgidav.util as util
 import os
@@ -170,7 +172,7 @@ class VDOM_resource(_DAVResource):
 		if not self.isCollection:
 			raise NotImplementedError()
 		memberList = [] 
-		for name, child in self.getMemberChildren().iteritems():
+		for name, child in self.getMemberChildren().items():
 			member = self.getMember(name,child) 
 			assert member is not None
 			memberList.append(member)

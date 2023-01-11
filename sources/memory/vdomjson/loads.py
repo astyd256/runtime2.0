@@ -1,4 +1,6 @@
 
+from builtins import str
+from past.builtins import basestring
 import re
 import json
 
@@ -33,7 +35,7 @@ def loads(vdomjson, object, catch, handler=None):
         return ()
 
     bindings = []
-    for event_declaration, event_actions in actions.iteritems():
+    for event_declaration, event_actions in actions.items():
         try:
             source_name, event_name = event_declaration.split(":")
         except Exception:

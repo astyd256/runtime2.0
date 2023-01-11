@@ -1,4 +1,6 @@
 
+from future import standard_library
+standard_library.install_aliases()
 import ctypes
 import re
 from utils.threads import SmartThread

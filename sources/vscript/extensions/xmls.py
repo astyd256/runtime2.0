@@ -1,4 +1,5 @@
 
+from past.builtins import basestring
 import xml.dom.minidom
 from .. import errors
 from ..subtypes import boolean, integer, generic, string, true, false, \
@@ -286,7 +287,7 @@ class v_xmlattributemap(generic):
 
 
 	def __iter__(self):
-		for attribute in self._attributes.values():
+		for attribute in list(self._attributes.values()):
 			yield variant(v_xmlattribute(attribute))
 
 	def __len__(self):
@@ -411,7 +412,7 @@ class v_xmldocument(v_xmlelement):
 	def v_parse(self, value):
 		value=value.as_string
 		self._document=xml.dom.minidom.parseString(value.encode("utf-8") \
-			if isinstance(value, unicode) else value)
+			if isinstance(value, str) else value)
 		self._node=self._document.documentElement
 		return v_mismatch
 

@@ -1,5 +1,7 @@
 from __future__ import absolute_import
 
+from future import standard_library
+standard_library.install_aliases()
 import sys
 # import os
 # import time
@@ -7,7 +9,7 @@ import random
 import socket
 import select
 # import traceback
-import SocketServer
+import socketserver
 # import BaseHTTPServer
 # import SimpleHTTPServer
 import SOAPpy
@@ -23,7 +25,7 @@ from soap.wsdl import methods as wsdl_methods
 from .http_request_handler import THREAD_ATTRIBUTE_NAME
 
 
-class VDOM_http_server(SocketServer.ThreadingTCPServer):
+class VDOM_http_server(socketserver.ThreadingTCPServer):
     """VDOM threading http server class"""
 
     def __init__(self, server_address, request_handler_class):
@@ -78,13 +80,13 @@ class VDOM_http_server(SocketServer.ThreadingTCPServer):
         self.allow_reuse_address = 1
 
         # call base class constructor
-        SocketServer.ThreadingTCPServer.__init__(self, server_address, request_handler_class)
+        socketserver.ThreadingTCPServer.__init__(self, server_address, request_handler_class)
 
         # create semaphore
         self.__sem = VDOM_semaphore()
 
         # register soap methods
-        for method in wsdl_methods.keys():
+        for method in list(wsdl_methods.keys()):
             exec("""self.registerFunction(SOAPpy.MethodSig(%s, keywords = 0, context = 1), namespace = "http://services.vdom.net/VDOMServices")""" % method)
 
 #		self.registerFunction(SOAPpy.MethodSig(login, keywords = 0, context = 1), namespace = "http://services.vdom.net/VDOMServices")
@@ -145,7 +147,7 @@ class VDOM_http_server(SocketServer.ThreadingTCPServer):
         # while not self.__stop:
         #   self.handle_request()
 
-        SocketServer.ThreadingTCPServer.serve_forever(self)
+        socketserver.ThreadingTCPServer.serve_forever(self)
 
         # while self.__current_connections:
         # while self.active:
@@ -153,7 +155,7 @@ class VDOM_http_server(SocketServer.ThreadingTCPServer):
 
     def shutdown(self):
         self.active = False
-        SocketServer.ThreadingTCPServer.shutdown(self)
+        socketserver.ThreadingTCPServer.shutdown(self)
 
     def verify_request(self, request, client_address):
         """verify the request by matching client address with the stored regexp"""

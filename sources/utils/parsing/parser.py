@@ -1,4 +1,5 @@
 
+from builtins import str
 import types
 from weakref import proxy
 from xml.parsers.expat import ParserCreate, ExpatError

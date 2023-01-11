@@ -1,5 +1,6 @@
 """url post processing module"""
 
+from builtins import str
 import sys, re, traceback
 
 from .module import VDOM_module_post, VDOM_module

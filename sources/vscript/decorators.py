@@ -1,4 +1,8 @@
 
+from builtins import str
+from builtins import zip
+from past.builtins import basestring
+from builtins import object
 import types
 from . import errors
 from .subtypes import array, binary, boolean, date, double, empty, \
@@ -21,7 +25,7 @@ wrappers={
 	native: lambda value: value,
 	generic: lambda value: value,
 	integer: lambda value: integer(int(value)),
-	string: lambda value: string(unicode(value)),
+	string: lambda value: string(str(value)),
 	binary: lambda value: binary(value if isinstance(value, basestring) else str(value)),
 	boolean: lambda value: boolean(bool(value)),
 	double: lambda value: double(float(value))}
@@ -192,7 +196,7 @@ def vproperty(*arguments, **keywords):
 		if not (getter or letter or setter):
 			raise errors.python("Require getter, letter or setter")
 		return get_property_wrapper(arguments, result, getter, letter, setter)
-	if arguments and isinstance(arguments[0], type):
+	if arguments and isinstance(arguments[0], type) and result:
 		if not result: raise errors.python("Incorrect number of arguments")
 		return decorator(arguments[0])
 	else:

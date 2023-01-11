@@ -1,6 +1,8 @@
 """Module Manager module"""
 from __future__ import absolute_import
 
+from builtins import str
+from builtins import object
 from future.utils import raise_
 import sys, traceback, shutil, os, types, re
 
@@ -69,7 +71,7 @@ class VDOM_module_manager(object):
                 return (404, None)
 
         #parts1 = script_name.split("/")
-        url_parts= filter(lambda x: "" != x, script_name.split("/"))
+        url_parts= [x for x in script_name.split("/") if "" != x]
 
         #parts = parts1[-1]
         #parts = parts.split(".")
@@ -110,7 +112,7 @@ class VDOM_module_manager(object):
                 else:
                     return (404, None)
             elif app.objects: # CHECK: len(app.get_objects_list()) > 0: # redirect to the first container
-                request_object.redirect("/%s.vdom" % iter(app.objects.itervalues()).next().name) # CHECK: request_object.redirect("/%s.vdom" % app.get_objects_list()[0].name)
+                request_object.redirect("/%s.vdom" % iter(app.objects.values()).next().name) # CHECK: request_object.redirect("/%s.vdom" % app.get_objects_list()[0].name)
             return (404, None)  # empty request
 
         request_type = url_parts[0].rpartition(".")[2] if '.' in url_parts[0] else 'vdom'

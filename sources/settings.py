@@ -107,8 +107,8 @@ LOGGING_INDENT = "    "
 
 if MANAGE:  # override logging settings for manage utility
     LOGGER = None
-    LOG_LEVEL = 2
-    CONSOLE_LOG_LEVEL = 1
+    LOG_LEVEL = 0
+    CONSOLE_LOG_LEVEL = 0
 
 # profiling
 

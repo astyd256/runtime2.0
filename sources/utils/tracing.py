@@ -1,4 +1,12 @@
 
+from past.builtins import cmp
+from future import standard_library
+standard_library.install_aliases()
+from builtins import map
+from builtins import next
+from builtins import zip
+from builtins import str
+from past.builtins import basestring
 import sys
 import gc
 import types
@@ -267,7 +275,7 @@ def collect_referrers(referent, limit=16, depth=32, rank=9, exclude=None):
 
         def __repr__(self):
             return "<chain%s: %s>" % ({None: "", ACCEPT: "+A", REJECT: "+R"}[self.action],
-                ", ".join(map(lambda item: describe_object(item), self)))
+                ", ".join([describe_object(item) for item in self]))
 
         __str__ = __repr__
 
@@ -294,7 +302,7 @@ def collect_referrers(referent, limit=16, depth=32, rank=9, exclude=None):
         elif isinstance(chain.referrer, (tuple, list, set, frozenset)):
             return chain.reduce(describe_object(chain.referrer), rank=0.80)
         elif isinstance(chain.referrer, dict):
-            for key, value in chain.referrer.copy().iteritems():
+            for key, value in chain.referrer.copy().items():
                 if value is chain.referent:
                     part = "key %s in %s" % (represent(key), describe_object(chain.referrer))
                     if isinstance(key, basestring):
@@ -409,7 +417,7 @@ def collect_referrers(referent, limit=16, depth=32, rank=9, exclude=None):
 
     exclude.add(id(sys.modules))
     modules = set()
-    for module in sys.modules.values():
+    for module in list(sys.modules.values()):
         if module is not None:
             modules.add(id(module.__dict__))
 
@@ -458,7 +466,7 @@ def describe_exception(exception):
             try:
                 description = str(exception)
             except Exception:
-                description = unicode(exception).encode("ascii", "backslashreplace")
+                description = str(exception).encode("ascii", "backslashreplace")
     except Exception:
         description = None
 
@@ -471,9 +479,9 @@ def describe_exception(exception):
 def describe_thread(thread=None):
     if thread is None:
         thread = threading.current_thread()
-    extra = tuple(filter(None, (
+    extra = tuple([_f for _f in (
         "Daemon" if thread.daemon else None,
-        "Stopping" if getattr(thread, "_stopping", None) else None)))
+        "Stopping" if getattr(thread, "_stopping", None) else None) if _f])
     if extra:
         return "%s (%d: %s)" % (thread.name, thread.ident, ", ".join(extra))
     else:
@@ -543,7 +551,7 @@ def describe_object(value):
     if module:
         module = "from " + module
 
-    return " ".join(filter(None, (kind, name, details, module)))
+    return " ".join([_f for _f in (kind, name, details, module) if _f])
 
 
 def describe_reference(value, limit=16, depth=32, rank=9, exclude=None, default=None):
@@ -713,7 +721,7 @@ def extract_exception_locals(information=None, ignore_builtins=True):
     frame = inspect.getinnerframes(extraceback)[-1][0]
 
     result = {}
-    for name, value in frame.f_locals.iteritems():
+    for name, value in frame.f_locals.items():
         if ignore_builtins and name == "__builtins__":
             description = "{...}"
         else:
@@ -740,7 +748,7 @@ def format_exception_locals(information=None, ignore_builtins=True, caption=None
         lines.append(indent + caption)
         indent += settings.LOGGING_INDENT
 
-    for name, value in frame.f_locals.iteritems():
+    for name, value in frame.f_locals.items():
         caption = align(name, NAME_WIDTH - len(indent), " ", filler=filler)
         if ignore_builtins and name == "__builtins__":
             description = "{...}"

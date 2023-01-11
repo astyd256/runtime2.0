@@ -1,4 +1,5 @@
 
+from builtins import next
 import inspect
 from ..exceptions import UnexpectedAttributeError
 from ..auxiliary import subparser, lower

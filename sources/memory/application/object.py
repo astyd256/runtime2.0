@@ -1,4 +1,5 @@
 
+from past.builtins import basestring
 from threading import RLock
 
 import settings
@@ -137,11 +138,11 @@ class MemoryObjectSketch(MemoryBase):
         return self
 
     def __str__(self):
-        return " ".join(filter(None, (
+        return " ".join([_f for _f in (
             "virtual" if getattr(self, "_virtual", None) else None,
             "object",
-            ":".join(filter(None, (getattr(self, "_id", None), getattr(self, "_name", None)))),
-            "sketch")))
+            ":".join([_f for _f in (getattr(self, "_id", None), getattr(self, "_name", None)) if _f]),
+            "sketch") if _f])
 
 
 class MemoryObjectRestorationSketch(MemoryObjectSketch):
@@ -161,11 +162,11 @@ class MemoryObjectDuplicationSketch(MemoryObjectSketch):
 class MemoryObjectGhost(MemoryBase):
 
     def __str__(self):
-        return " ".join(filter(None, (
+        return " ".join([_f for _f in (
             "obsolete",
             "virtual" if self._virtual else None,
             "object",
-            ":".join(filter(None, (self._id, self._name))))))
+            ":".join([_f for _f in (self._id, self._name) if _f])) if _f])
 
 
 class MemoryObject(MemoryObjectSketch):
@@ -240,7 +241,7 @@ class MemoryObject(MemoryObjectSketch):
 
             # perform downward invalidation
             if downward:
-                for child in self._objects.itervalues():
+                for child in self._objects.values():
                     child.invalidate(contexts=contexts, downward=True)
 
             # perform upward invalidation
@@ -331,10 +332,10 @@ class MemoryObject(MemoryObjectSketch):
         raise NotImplementedError
 
     def __str__(self):
-        return " ".join(filter(None, (
+        return " ".join([_f for _f in (
             "virtual" if self._virtual else None,
             "object",
-            ":".join(filter(None, (self._id, self._name))))))
+            ":".join([_f for _f in (self._id, self._name) if _f])) if _f])
 
 
 from .objects import MemoryObjects

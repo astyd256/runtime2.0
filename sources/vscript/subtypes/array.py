@@ -1,4 +1,7 @@
 
+from builtins import next
+from builtins import zip
+from builtins import range
 from copy import deepcopy
 from .. import errors
 from ..primitives import subtype
@@ -229,7 +232,7 @@ class array(subtype):
 		if self._static:
 			raise errors.static_array
 		simple=value.as_simple
-		self._items=filter(lambda item: item!=simple, self._items)
+		self._items=[item for item in self._items if item!=simple]
 		self._subscripts=[len(self._items)-1]
 
 	def __iter__(self):

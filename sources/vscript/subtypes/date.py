@@ -1,4 +1,7 @@
 
+from builtins import zip
+from builtins import str
+from past.builtins import basestring
 import sys, re, datetime
 from math import modf, fabs
 from .. import errors
@@ -38,7 +41,7 @@ class date(subtype):
 			if match:
 				day=match.group("day")
 				month=match.group("month")
-				year=match.group("year") or unicode(datetime.datetime.today().year)
+				year=match.group("year") or str(datetime.datetime.today().year)
 				hour=match.group("hour")
 				minute=match.group("minute")
 				second=match.group("second") or 0
@@ -74,7 +77,7 @@ class date(subtype):
 	as_date=property(lambda self: float(self))
 	as_double=property(lambda self: float(self))
 	as_integer=property(lambda self: int(self))
-	as_string=property(lambda self: unicode(self))
+	as_string=property(lambda self: str(self))
 	as_number=property(lambda self: float(self))
 
 
@@ -118,7 +121,7 @@ class date(subtype):
 		else:
 			return u"%02d.%02d.%d"%(day, month, year)
 	
-	def __nonzero__(self):
+	def __bool__(self):
 		return bool(self._value)
 
 
@@ -126,7 +129,7 @@ class date(subtype):
 		return hash(self._value)
 	
 	def __repr__(self):
-		return "DATE@%08X:%r:%s"%(id(self), self._value, unicode(self))
+		return "DATE@%08X:%r:%s"%(id(self), self._value, str(self))
 
 
 from .boolean import boolean, true, false

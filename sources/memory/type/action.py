@@ -40,8 +40,8 @@ class MemoryTypeActionSketch(MemoryBase):
         return self
 
     def __str__(self):
-        return " ".join(filter(None, ("action", "\"%s\"" % self._name,
-            "sketch of %s" % self._collection.owner if self._collection else None)))
+        return " ".join([_f for _f in ("action", "\"%s\"" % self._name,
+            "sketch of %s" % self._collection.owner if self._collection else None) if _f])
 
 
 class MemoryTypeAction(MemoryTypeActionSketch):
@@ -70,5 +70,5 @@ class MemoryTypeAction(MemoryTypeActionSketch):
         raise NotImplementedError
 
     def __str__(self):
-        return " ".join(filter(None, ("action", "\"%s\"" % self._name,
-            "of %s" % self._collection.owner if self._collection else None)))
+        return " ".join([_f for _f in ("action", "\"%s\"" % self._name,
+            "of %s" % self._collection.owner if self._collection else None) if _f])

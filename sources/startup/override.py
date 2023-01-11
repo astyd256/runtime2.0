@@ -1,9 +1,11 @@
 
+from future import standard_library
+standard_library.install_aliases()
 import os.path
 
 from ast import literal_eval
-from StringIO import StringIO
-from ConfigParser import SafeConfigParser
+from io import StringIO
+from configparser import SafeConfigParser
 
 import settings
 

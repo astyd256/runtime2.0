@@ -1,4 +1,5 @@
 
+from builtins import str
 import sys
 
 import settings
@@ -52,11 +53,11 @@ class MemoryLibrarySketch(MemoryBase, Executable):
         return self
 
     def __str__(self):
-        return " ".join(filter(None, (
+        return " ".join([_f for _f in (
             "library",
             "\"%s\"" % self._name if self._name else None,
             "sketch",
-            " of %s" % self._collection.owner if self._collection else None)))
+            " of %s" % self._collection.owner if self._collection else None) if _f])
 
 
 class MemoryLibraryRestorationSketch(MemoryLibrarySketch):
@@ -108,7 +109,7 @@ class MemoryLibrary(MemoryLibrarySketch):
         raise NotImplementedError
 
     def __str__(self):
-        return " ".join(filter(None, (
+        return " ".join([_f for _f in (
             "library",
             "\"%s\"" % self._name if self._name else None,
-            "of %s" % self._collection.owner if self._collection else None)))
+            "of %s" % self._collection.owner if self._collection else None) if _f])

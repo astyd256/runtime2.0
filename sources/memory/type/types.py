@@ -44,7 +44,7 @@ class MemoryTypes(MemoryBase, Mapping):
         with self._lock:
             if self._lazy:
                 self._discover(full=True)
-            data = "\n".join("%s:%s" % (uuid, name) for name, uuid in self._index.iteritems())
+            data = "\n".join("%s:%s" % (uuid, name) for name, uuid in self._index.items())
         managers.file_manager.write(file_access.FILE, None, settings.INDEX_LOCATION, data)
 
     # unsafe
@@ -90,7 +90,7 @@ class MemoryTypes(MemoryBase, Mapping):
 
         # load all types that's not loaded yet
         if load:
-            for uuid, item in self._items.iteritems():
+            for uuid, item in self._items.items():
                 if item is NOT_LOADED:
                     self._load(uuid)
 
@@ -112,7 +112,7 @@ class MemoryTypes(MemoryBase, Mapping):
                             uuid = self._index[uuid_or_name]
                         except KeyError:
                             if autocomplete:
-                                for name, uuid in self._index.iteritems():
+                                for name, uuid in self._index.items():
                                     if name.lower().startswith(uuid_or_name):
                                         return self.get(uuid)
                             return None
@@ -120,7 +120,7 @@ class MemoryTypes(MemoryBase, Mapping):
                             return self.get(uuid)
                 if autocomplete:
                     with self._lock:
-                        for name, uuid in self._index.iteritems():
+                        for name, uuid in self._index.items():
                             if name.lower().startswith(uuid_or_name):
                                 return self.get(uuid)
                 return None

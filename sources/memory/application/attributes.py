@@ -1,4 +1,7 @@
 
+from builtins import str
+from past.builtins import basestring
+from builtins import object
 import re
 from collections import Mapping, MutableMapping
 import settings
@@ -42,10 +45,10 @@ class MemoryAttributesSketch(MemoryBase, MutableMapping):
         return iter(self._items.__dict__)
 
     def iternondefaultitems(self):
-        return self._items.__dict__.iteritems()
+        return iter(self._items.__dict__.items())
 
     def update(self, values):
-        for name, value in values.iteritems():
+        for name, value in values.items():
             value = DEREFERENCE_REGEX.sub(lambda match: match.group(1), value)
             try:
                 self._owner.type.attributes[name].verify(value)
@@ -136,7 +139,7 @@ class MemoryAttributes(MemoryAttributesSketch):
             if isinstance(collection, Mapping):
                 values = collection
             elif hasattr(collection, "keys"):
-                values = {key: collection[key] for key in collection.keys()}
+                values = {key: collection[key] for key in list(collection.keys())}
             else:
                 values = {key: collection[key] for key, value in collection}
         else:
@@ -144,7 +147,7 @@ class MemoryAttributes(MemoryAttributesSketch):
 
         updates = {}
         with self._owner.lock:
-            for name, value in values.iteritems():
+            for name, value in values.items():
                 if not isinstance(value, basestring):
                     value = str(value)
 
@@ -161,7 +164,7 @@ class MemoryAttributes(MemoryAttributesSketch):
 
                 if updates:
                     layout = False
-                    for name, value in updates.iteritems():
+                    for name, value in updates.items():
                         if not isinstance(value, basestring):
                             value = str(value)
 

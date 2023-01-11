@@ -1,4 +1,7 @@
 
+from future import standard_library
+standard_library.install_aliases()
+from past.builtins import basestring
 import numbers
 import os
 import gc

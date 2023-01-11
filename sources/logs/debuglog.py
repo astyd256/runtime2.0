@@ -1,4 +1,6 @@
 
+from builtins import str
+from past.builtins import basestring
 import settings
 import logs
 from . import levels

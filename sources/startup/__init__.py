@@ -1,15 +1,20 @@
-from __future__ import absolute_import
+#from __future__ import absolute_import
+import sys, datetime
 
-import __builtin__
-import sys
+if sys.version_info[0] < 3:
+    import __builtin__ as builtins
+else:
+    import builtins
+#from future import standard_library
+#standard_library.install_aliases()
 
 from argparse import ArgumentParser
 
 
 # python: http://bugs.python.org/issue7980
-
-import datetime
 datetime.datetime.strptime("2012-01-01", "%Y-%m-%d")
+
+
 
 
 #Hotfix to allow urllib certificate validation
@@ -28,12 +33,11 @@ from .importers.settings import SettingsImporter  # noqa
 
 importer = SettingsImporter()
 sys.meta_path.append(importer)
-settings = __import__("settings")
+settings = __import__("appsettings")
 sys.meta_path.remove(importer)
 
 
 # override
-
 from .override import override  # noqa
 
 parser = ArgumentParser(add_help=False)
@@ -52,9 +56,7 @@ if settings.MANAGE:
 
 # initialize
 
-import utils.codecs  # noqa
-import utils.system  # noqa
-import utils.threads  # noqa
+from utils import codecs, system, threads  # noqa
 import logs  # noqa
 
 
@@ -83,9 +85,9 @@ from .importers.manager import ImportManager  # noqa
 from . import legacy  # noqa
 from .debug import debug, DebugFile  # noqa
 
-__builtin__.VDOM_CONFIG = legacy.VDOM_CONFIG
-__builtin__.VDOM_CONFIG_1 = legacy.VDOM_CONFIG_1
-__builtin__.system_options = {"server_license_type": "0", "firmware": "N/A", "card_state": "1", "object_amount": "15000"}
-__builtin__.debug = debug
-__builtin__.debugfile = DebugFile()
-__builtin__._ = lambda value: value
+builtins.VDOM_CONFIG = legacy.VDOM_CONFIG
+builtins.VDOM_CONFIG_1 = legacy.VDOM_CONFIG_1
+builtins.system_options = {"server_license_type": "0", "firmware": "N/A", "card_state": "1", "object_amount": "15000"}
+builtins.debug = debug
+builtins.debugfile = DebugFile()
+builtins._ = lambda value: value

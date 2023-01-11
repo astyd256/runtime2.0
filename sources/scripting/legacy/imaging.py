@@ -1,12 +1,18 @@
 """image processing module"""
+from __future__ import division
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import object
+from past.utils import old_div
 import sys
-from cStringIO import StringIO
+from io import StringIO
 from PIL import Image, ImageDraw, ImageFont, ImagePalette
 from utils.exception import VDOM_exception
 import managers
 
-class VDOM_imaging:
+class VDOM_imaging(object):
 	"""imaging class"""
 
 	def __init__(self):
@@ -78,15 +84,15 @@ class VDOM_imaging:
 			else:
 				left = imgw - txtw
 		else:
-			left = (imgw - txtw) / 2
-		top = (imgh - txth) / 2
+			left = old_div((imgw - txtw), 2)
+		top = old_div((imgh - txth), 2)
 		
 		draw = ImageDraw.Draw(self.__im)
 		try:
 			draw.text((left , top), text, font = self.__font, fill = color)
 			if textdecoration == 'underline':
 				right = left + txtw
-				y = top + txth * 8 / 9
+				y = top + old_div(txth * 8, 9)
 				draw.line([(left, y) , (right, y)], fill = color)			
 		except Exception as e: 
 			debug("!!!!!!!!!!!!VDOM_imagin error:")

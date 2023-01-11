@@ -266,5 +266,5 @@ class subtype(primitive):
 	def __unicode__(self):
 		raise errors.type_mismatch
 	
-	def __nonzero__(self):
+	def __bool__(self):
 		raise errors.type_mismatch

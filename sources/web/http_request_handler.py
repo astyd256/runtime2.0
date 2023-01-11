@@ -1,15 +1,17 @@
 """server request handler module"""
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import object
 from future.utils import raise_
-import sys
-import io
-import urllib
-import shutil
-import socket
-import traceback
+import sys, io, shutil, socket, traceback, time, SOAPpy,  threading
+import urllib.request, urllib.parse, urllib.error
+from time import time
 import select
-import BaseHTTPServer
-import SimpleHTTPServer
+import http.server
+from wsgiref.util import guess_scheme
+from io import BytesIO
 # import mimetypes
 # import re
 # import time
@@ -19,24 +21,15 @@ import SimpleHTTPServer
 
 #import webdav_server
 #from wsgidav.wsgidav_app import WsgiDAVApp
-# import xml.sax.saxutils
-from wsgiref.util import guess_scheme
 
-from time import time
-import threading
-from cStringIO import StringIO
-
-
-import SOAPpy
 import settings
 import managers
 
 from request.request import VDOM_request
-#from storage.storage import VDOM_config
 from version import SERVER_NAME, SERVER_VERSION
 from soap.wsdl import methods as soap_methods
-# from utils.exception import VDOM_exception
 from utils.pages import compose_page, compose_trace
+
 # A class to describe how header messages are handled
 
 
@@ -46,7 +39,7 @@ THREAD_ATTRIBUTE_NAME = "vdom_web_server_request"
 class HeaderHandler(object):
     # Initially fail out if there are any problems.
     def __init__(self, header, attrs):
-        for i in header.__dict__.keys():
+        for i in list(header.__dict__.keys()):
             if i[0] == "_":
                 continue
 
@@ -67,7 +60,7 @@ class HeaderHandler(object):
 _contexts = dict()
 
 
-class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+class VDOM_http_request_handler(http.server.SimpleHTTPRequestHandler):
     """VDOM http request handler"""
 
     server_version = SERVER_NAME  # server version string
@@ -83,7 +76,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         self.__connections = args["connections"]
         """call base class constructor"""
         try:
-            SimpleHTTPServer.SimpleHTTPRequestHandler.__init__(self, request, client_address, server)
+            http.server.SimpleHTTPRequestHandler.__init__(self, request, client_address, server)
         except:
             raise
 
@@ -135,7 +128,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         else:
             path, query = self.path, ''
 
-        env['PATH_INFO'] = urllib.unquote(path)
+        env['PATH_INFO'] = urllib.parse.unquote(path)
         env['QUERY_STRING'] = query
         host = self.address_string()
         if host != self.client_address[0]:
@@ -279,7 +272,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             return
 
         if environ["REQUEST_METHOD"] == "PROPFIND" and environ["PATH_INFO"] in ("/", "*"):
-            providers = self.wsgidav_app.providerMap.keys()
+            providers = list(self.wsgidav_app.providerMap.keys())
             if providers:
                 environ["PATH_INFO"] = providers[0]  # Need some testing if this approach will work
             else:
@@ -371,14 +364,14 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.send_header("Content-type", "text/html")
             self.send_header("Content-Length", str(len(data)))
             self.end_headers()
-            return StringIO(data)
+            return BytesIO(data)
         if not self.__limit:
             data = _("License exceeded")
             self.send_response(200)
             self.send_header("Content-type", "text/html")
             self.send_header("Content-Length", str(len(data)))
             self.end_headers()
-            return StringIO(data)
+            return BytesIO(data)
         # check if requested for wsdl file - then return it
         if self.__request.environment().environment()["REQUEST_URI"] == VDOM_CONFIG["WSDL-FILE-URL"]:
             wsdl = self.server.get_wsdl()
@@ -386,7 +379,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.send_header("Content-type", "text/xml")
             self.send_header("Content-Length", str(len(wsdl)))
             self.end_headers()
-            return StringIO(wsdl)
+            return BytesIO(wsdl)
         if self.__request.environment().environment()["REQUEST_URI"] == "/crossdomain.xml":
             data = """<?xml version="1.0"?>
 <cross-domain-policy>
@@ -396,7 +389,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.send_header("Content-type", "text/xml")
             self.send_header("Content-Length", str(len(data)))
             self.end_headers()
-            return StringIO(data)
+            return BytesIO(data)
         # management
         if self.__request.environment().environment()["REQUEST_URI"] == VDOM_CONFIG["MANAGEMENT-URL"]:
             return self.redirect("/index.py")
@@ -454,7 +447,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 else:
                     return ret
             else:
-                return StringIO(ret)
+                return BytesIO(ret)
         elif "" == ret:
             self.send_response(204)
             self.send_headers()
@@ -484,7 +477,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def finish(self):
         """finish processing request"""
         #debug("FINISH REQUEST %s"%self)
-        SimpleHTTPServer.SimpleHTTPRequestHandler.finish(self)
+        http.server.SimpleHTTPRequestHandler.finish(self)
         """tell the server that processing is finished"""
         self.server.notify_finish(self.client_address)
 
@@ -507,7 +500,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         self.__request.add_header("Location", to)
         self.send_headers()
         self.end_headers()
-        return StringIO()
+        return BytesIO()
 
     def log_message(self, format, *args):
         """log an arbitrary message to stderr"""
@@ -517,7 +510,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
     def print_list(self, list, f):
         """print contents of the dictionary in the form of list"""
-        for k in list.keys():
+        for k in list(list.keys()):
             f.write("%s: \"%s\"<br>\n" % (k.upper(), list[k]))
         f.write("<hr>")
 
@@ -532,7 +525,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def sample_page(self, method):
         """generate sample output page"""
         debug("Returning sample page")
-        f = StringIO()
+        f = BytesIO()
         f.write("<b>Application id:</b> %s<br>" % str(self.__request.app_id()))
         f.write("<b>Registered types:</b><br>")
         mngr = managers.memory
@@ -593,7 +586,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         dumpSOAPOut = 0
         dumpHeadersIn = 0
         dumpHeadersOut = 0
-
+        start_time = time()
         #cf = VDOM_config()
         # No more alot of debug while soap
         # if "1" == cf.get_opt("DEBUG"):
@@ -608,7 +601,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 s = 'Incoming HTTP headers'
                 SOAPpy.debugHeader(s)
                 debug(self.raw_requestline.strip())
-                debug("\n".join(map(lambda x: x.strip(), self.headers.headers)))
+                debug("\n".join([x.strip() for x in self.headers.headers]))
                 SOAPpy.debugFooter(s)
             data = self.__request.postdata
             if dumpSOAPIn:
@@ -648,7 +641,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 ordered_args = {}
                 named_args = {}
 
-                for (k, v) in kw.items():
+                for (k, v) in list(kw.items()):
 
                     if k[0] == "v":
                         try:
@@ -676,11 +669,11 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             # authorization method
             a = None
 
-            keylist = ordered_args.keys()
+            keylist = list(ordered_args.keys())
             keylist.sort()
 
             # create list in proper order w/o names
-            tmp = map(lambda x: ordered_args[x], keylist)
+            tmp = [ordered_args[x] for x in keylist]
             ordered_args = tmp
 
 #           print '<-> Argument Matching Yielded:'
@@ -761,10 +754,10 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     # and it won't be necessary here
                     # for now we're doing both
 
-                    if "SOAPAction".lower() not in self.headers.keys() or self.headers["SOAPAction"] == "\"\"":
+                    if "SOAPAction".lower() not in list(self.headers.keys()) or self.headers["SOAPAction"] == "\"\"":
                         self.headers["SOAPAction"] = method
 
-                    thread_id = threading.ident
+                    thread_id = threading.current_thread().ident
                     _contexts[thread_id] = SOAPpy.SOAPContext(header, body,
                                                               attrs, data,
                                                               self.connection,
@@ -802,7 +795,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
                             strkw = {}
 
-                            for (k, v) in kw.items():
+                            for (k, v) in list(kw.items()):
                                 strkw[str(k)] = v
                             if c:
                                 strkw["_SOAPContext"] = c
@@ -953,6 +946,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     pass
 
             #resp = xml.sax.saxutils.unescape(resp)
+            print ("Soap method call: %s, respsize: %s,resptime:%s" % (nsmethod.split(":")[-1], len(resp), start_time-time() ))
             self.wfile.write(resp)
             self.wfile.flush()
 
@@ -970,7 +964,7 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 pass
 
     def date_time_string(self):
-        self.__last_date_time_string = BaseHTTPServer.BaseHTTPRequestHandler.date_time_string(self)
+        self.__last_date_time_string = http.server.BaseHTTPRequestHandler.date_time_string(self)
         return self.__last_date_time_string
 
     def send_error(self, code, message=None, excinfo=None):

@@ -1,4 +1,5 @@
 
+from builtins import map
 from collections import defaultdict
 from io import StringIO
 
@@ -99,17 +100,17 @@ class MemoryApplicationSketch(MemoryBase):
         restore = self._restore
         self.__class__ = MemoryApplication
         self._collection.on_complete(self, restore)
-        for item in self._objects.catalog.itervalues():
+        for item in self._objects.catalog.values():
             managers.dispatcher.dispatch_handler(item, "on_startup")
         if not restore:
             self.autosave()
         return self
 
     def __str__(self):
-        return " ".join(filter(None, (
+        return " ".join([_f for _f in (
             "application",
-            ":".join(filter(None, (getattr(self, "_id", None), getattr(self, "_name", "").lower()))),
-            "sketch")))
+            ":".join([_f for _f in (getattr(self, "_id", None), getattr(self, "_name", "").lower()) if _f]),
+            "sketch") if _f])
 
 
 class MemoryApplicationRestorationSketch(MemoryApplicationSketch):
@@ -120,9 +121,9 @@ class MemoryApplicationRestorationSketch(MemoryApplicationSketch):
 class MemoryApplicationGhost(MemoryBase):
 
     def __str__(self):
-        return " ".join(filter(None, (
+        return " ".join([_f for _f in (
             "obsolete application",
-            ":".join(filter(None, (self._id, self._name.lower()))))))
+            ":".join([_f for _f in (self._id, self._name.lower()) if _f])) if _f])
 
 
 class MemoryApplication(MemoryApplicationSketch):
@@ -238,17 +239,17 @@ class MemoryApplication(MemoryApplicationSketch):
                 managers.engine.execute(action)
 
     def cleanup(self):
-        for library in self._libraries.itervalues():
+        for library in self._libraries.values():
             library.cleanup()
         if settings.STORE_ACTIONS_BYTECODE:
-            for action in self._actions.catalog.itervalues():
+            for action in self._actions.catalog.values():
                 action.cleanup()
 
     def compile(self):
-        for library in self._libraries.itervalues():
+        for library in self._libraries.values():
             library.compile()
         if settings.STORE_ACTIONS_BYTECODE:
-            for action in self._actions.catalog.itervalues():
+            for action in self._actions.catalog.values():
                 action.compile()
 
     # unsafe
@@ -290,7 +291,7 @@ class MemoryApplication(MemoryApplicationSketch):
         self._actions.compose(ident=u"\t", file=file)
 
         file.write(u"\t<Structure>\n")
-        for container in self._objects.itervalues():
+        for container in self._objects.values():
             container.structure.compose(ident=u"\t\t", file=file)
         file.write(u"\t</Structure>\n")
 
@@ -355,7 +356,7 @@ class MemoryApplication(MemoryApplicationSketch):
 
         def iterate():
             yield self._id
-            for object in self._objects.itervalues():
+            for object in self._objects.values():
                 yield object.id
 
         for object_id in iterate():
@@ -363,8 +364,8 @@ class MemoryApplication(MemoryApplicationSketch):
                 acl = managers.acl_manager.acl[object_id]
             except KeyError:
                 continue
-            for name, value in acl.iteritems():
-                item = (object_id, u",".join(map(str, value.keys())))
+            for name, value in acl.items():
+                item = (object_id, u",".join(map(str, list(value.keys()))))
                 group = managers.user_manager.get_group_by_name(name)
                 if group and not group.system:
                     groups[group].append(item)
@@ -376,7 +377,7 @@ class MemoryApplication(MemoryApplicationSketch):
             file.write(u"\t<Security>\n")
             if groups:
                 file.write(u"\t\t<Groups>\n")
-                for group, items in groups.iteritems():
+                for group, items in groups.items():
                     file.write(u"\t\t\t<Group>\n")
                     file.write(u"\t\t\t\t<Name>%s</Name>\n" % group.login.encode("xml"))
                     file.write(u"\t\t\t\t<Description>%s</Description>\n" % group.description.encode("xml"))
@@ -388,7 +389,7 @@ class MemoryApplication(MemoryApplicationSketch):
                 file.write(u"\t\t</Groups>\n")
             if users:
                 file.write(u"\t\t<Users>\n")
-                for user, items in users.iteritems():
+                for user, items in users.items():
                     file.write(u"\t\t\t<User>\n")
                     file.write(u"\t\t\t\t<Login>%s</Login>\n" % user.login.encode("xml"))
                     file.write(u"\t\t\t\t<Password>%s</Password>\n" % user.password.encode("xml"))
@@ -485,7 +486,7 @@ class MemoryApplication(MemoryApplicationSketch):
         #     managers.engine.execute(handler, namespace={})
 
         # delete objects's resources
-        for object in self._objects.catalog.itervalues():
+        for object in self._objects.catalog.values():
             managers.resource_manager.invalidate_resources(object.id)
 
         # delete resources
@@ -515,18 +516,18 @@ class MemoryApplication(MemoryApplicationSketch):
         with self.lock:
             # perform downward invalidation
             if downward:
-                for child in self._objects.itervalues():
+                for child in self._objects.values():
                     child.invalidate(contexts=contexts, downward=True)
 
     def unimport_libraries(self):
         with self.lock:
-            for library in self._libraries.itervalues():
+            for library in self._libraries.values():
                 library.unimport()
 
     def __invert__(self):
         raise NotImplementedError
 
     def __str__(self):
-        return " ".join(filter(None, (
+        return " ".join([_f for _f in (
             "application",
-            ":".join(filter(None, (self._id, self._name.lower()))))))
+            ":".join([_f for _f in (self._id, self._name.lower()) if _f])) if _f])

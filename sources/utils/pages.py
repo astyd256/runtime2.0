@@ -1,4 +1,5 @@
 
+from past.builtins import basestring
 import types
 
 from utils.auxiliary import align
@@ -158,7 +159,7 @@ def compose_trace(information=None):
     lines.append("<div class=\"expand\">Locals...</div>")
     lines.append("<div style=\"display: none\">Locals:")
     lines.append("<div class=\"items\">")
-    for name, value in locals.iteritems():
+    for name, value in locals.items():
         lines.append("<div><div>%s</div><div>%s</div></div>" % (name.encode("html"), value.encode("html")))
     lines.append("</div>")
     lines.append("</div>")
@@ -175,7 +176,7 @@ def compose_trace(information=None):
     lines.append("<div class=\"other\" onclick=\"expand(this)\">")
     lines.append("<div class=\"thread section\"><div class=\"expand\">Threads...</div></div>")
     lines.append("<div style=\"display: none\">")
-    for thread, thread_trace in threads.iteritems():
+    for thread, thread_trace in threads.items():
         lines.append("<div class=\"thread section\">")
         lines.append("<div>Traceback for %s:</div>" % describe_thread(thread).encode("html"))
         lines.append("<div class=\"items\">")

@@ -1,4 +1,5 @@
 
+from builtins import str
 from collections import MutableSequence
 from uuid import uuid4
 from utils.properties import lazy, weak, constant, roproperty
