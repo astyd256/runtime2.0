@@ -38,13 +38,14 @@ class VDOM_database_manager(object):
                     remove_list.append(id)
 
             for id in remove_list:
-                self.__index.pop(id)
+                self.__index.pop(id, None)
                 is_dirty_index = True
 
             if is_dirty_index:
                 managers.storage.write_object_async(VDOM_CONFIG["DATABASE-MANAGER-INDEX-STORAGE-RECORD"], self.__index)
         else:
-            self.remove_databases()
+            #self.remove_databases()
+            pass
 
     def add_database(self, owner_id, attributes, data):
         """Adding a new database"""

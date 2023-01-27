@@ -441,7 +441,7 @@ class VDOM_editableresource(VDOM_object):
                 res_type = "js" if self.datatype == '1' else "css" if (self.datatype == '2' or self.datatype == '3') else "txt"
                 self.data = compile_string(self.data) if self.datatype == '3' else self.data
                 if not import_way_is_inline:
-                    res_id = application.resources.create_temporary(self.id, "data", self.data, res_type, "data")
+                    res_id = application.resources.create_temporary(self.id, "userdata", self.data, res_type, "data")
 
             udata = ""
             if self.datatype == "1":

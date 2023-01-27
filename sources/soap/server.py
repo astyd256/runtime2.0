@@ -1437,7 +1437,7 @@ class VDOM_web_services_server(object):
                 # obj1 = app.search_object(oid)
                 if "copy" != obj1.type.name:
                     # if None != obj1.parent and ("copy" != obj.type.name or 0 == obj1.toplevel.has_copy):  # (oid not in obj.toplevel.all_child_objects):
-                    if None != obj1.parent and ("copy" != obj.type.name or 0 == self.__has_copy(obj1.container)):  # (oid not in obj.toplevel.all_child_objects):
+                    if None != obj1.parent and ("copy" != obj.type.name):# or 0 == self.__has_copy(obj1.container)):  # (oid not in obj.toplevel.all_child_objects):
                         if "copy" == obj.type.name and obj.parent.type.name not in obj1.type.containers:
                             continue
                         result += """<Object ID="%s" Name="%s"/>\n""" % (obj1.id, obj1.name)
