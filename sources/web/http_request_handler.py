@@ -454,13 +454,13 @@ class VDOM_http_request_handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     return ret
             else:
                 return StringIO(ret)
-        elif "" == ret:
+        elif code:
+            self.send_error(code, self.responses[code][0])
+            return None
+        elif "" == ret and not self.__request.binary():
             self.send_response(204)
             self.send_headers()
             self.end_headers()
-            return None
-        elif code:
-            self.send_error(code, self.responses[code][0])
             return None
         else:
             self.send_error(404, self.responses[404][0])

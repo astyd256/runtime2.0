@@ -299,4 +299,5 @@ class VDOM_request(object):
 
         self.add_header("Content-Length", str(length))
         self.set_nocache()
+        self.binary(True)
         self.write_handler(handler)
