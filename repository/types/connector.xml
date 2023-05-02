@@ -3086,7 +3086,7 @@ class VDOM_connector(VDOM_object):
             connectorclass_js = ""
         else:
             connectorclass_js = u"""
-("#%(id)s .%(connectorclass)s").each(function(i,e) {
+$("#%(id)s .%(connectorclass)s").each(function(i,e) {
 	var p = $(e).parent();
 	x.makeSource($(e), {
 		parent: p,
