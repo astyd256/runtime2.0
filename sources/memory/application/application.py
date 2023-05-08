@@ -236,7 +236,13 @@ class MemoryApplication(MemoryApplicationSketch):
         if settings.SERVER:
             action = self.actions.get(APPLICATION_START_CONTEXT)
             if action and action.source_code:
-                managers.engine.execute(action)
+                try:
+                    #managers.engine.execute(action)
+                    pass
+                except Exception as e:
+                    print("Exception while application:onstart execution: %s" % e.message)
+                    from traceback import print_exc
+                    print_exc()
 
     def cleanup(self):
         for library in self._libraries.values():

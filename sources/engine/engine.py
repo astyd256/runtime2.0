@@ -49,7 +49,7 @@ class Engine(object):
             if settings.DETAILED_LOGGING:
                 log.write("Select %s" % (application or "no application"))
             self._storage.application = application
-            # TODO: check this thread using
+            # TODO: check this thread using
             current_thread().application = application.id if application else None
         return previous
 

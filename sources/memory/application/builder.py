@@ -1,5 +1,4 @@
 
-from builtins import str
 from builtins import map
 import string
 import base64

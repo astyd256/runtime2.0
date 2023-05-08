@@ -166,7 +166,8 @@ class VDOM_request(object):
                 file_attach.remove()
 
     def add_client_action(self, obj_id, data):
-        self.action_result.write(data)
+        
+        self.action_result.write(str(data))
 
     def binary(self, b=None):
         if b is not None:

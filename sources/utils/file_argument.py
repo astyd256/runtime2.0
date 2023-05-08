@@ -1,10 +1,15 @@
 
 from future import standard_library
 standard_library.install_aliases()
-from builtins import str
+from past.builtins import basestring
 from builtins import object
-import builtins
 import os
+import sys
+
+if sys.version_info[0] < 3:
+    import __builtin__ as builtins
+else:
+    import builtins
 
 
 class File_argument(object):
@@ -13,6 +18,7 @@ class File_argument(object):
         self.fileobj = fileobj
         self.name = self.__try_decode(name)
         self.autoremove = True
+
     def __getitem__(self, key):
         if not isinstance(key, int):
             raise TypeError
@@ -27,8 +33,8 @@ class File_argument(object):
             raise AttributeError
 
     def __try_decode(self, item):
-        if isinstance(item, str):
-            return str(item.decode("utf-8", "ignore"))
+        if isinstance(item, basestring):
+            return bytes(item).decode("utf-8", "ignore")
         else:
             return item
 
@@ -42,7 +48,7 @@ class File_argument(object):
                 try:
                     os.remove(filepath)
                 except Exception as e:
-                    print (str(e))
+                    debug(e.message)
             self.fileobj = None  # TODO: maybe not none bug StringIO()?
 
     def close(self):
@@ -57,12 +63,16 @@ class Attachment(object):
 
     def __get_filename(self):
         return self.__filearg.name
+
     def __get_handler(self):
         return self.__filearg.fileobj
+
     def _get_realpath(self):
         return getattr(self.__filearg.fileobj, "name", None)
+
     def _del_fileobj(self):
         self.__filearg.fileobj = None
+
     def remove(self):
         self.__filearg.remove()
 

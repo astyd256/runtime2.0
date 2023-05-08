@@ -2,14 +2,14 @@
 
 import zlib
 import base64
-
+from past.builtins import basestring
 
 def encode_resource(data):
 	"""encode resource to be sent through web services"""
 	return base64.b64encode(zlib.compress(data))
 
 def need_xml_escape(data):
-	if data and ('<' in data or '>' in data or '&' in data or '\'' in data or '\"' in data or '\n' in data):
+	if isinstance(data, basestring) and ('<' in data or '>' in data or '&' in data or '\'' in data or '\"' in data or '\n' in data):
 		return True
 	return False
 

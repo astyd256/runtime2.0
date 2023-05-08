@@ -1,5 +1,5 @@
 
-from builtins import str
+#from builtins import str
 import types
 from weakref import proxy
 from xml.parsers.expat import ParserCreate, ExpatError
@@ -203,7 +203,7 @@ class Parser(LegacyInterface):
         except ExpatError as error:
             try:
                 error = ERRATIC[error.code]()
-                message = str(error)
+                message = error.message
             except KeyError:
                 message = error.message.split(":")[0].capitalize()
                 error = ParsingException(message)
@@ -222,11 +222,11 @@ class Parser(LegacyInterface):
             error.column = self._parser.CurrentColumnNumber
 
             if self._supress:
-                self.notify(str(error))
+                self.notify(error.message)
             else:
                 raise
         except AbortingError as error:
-            message = str(error)
+            message = error.message
             if message:
                 self.notify(message)
 
