@@ -1,6 +1,8 @@
 from __future__ import absolute_import
 
-from . import settings
+# from sources import settings
+
+import settings
 from logs import log
 from utils import verificators
 from ..exceptions import OptionError

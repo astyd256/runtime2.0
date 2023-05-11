@@ -5,65 +5,133 @@ import imp
 import os
 import os.path
 import io
-
 from utils.console import CONSOLE_WIDTH
+if sys.version_info[0] < 3:
 
 
-class SettingsImporter(object):
 
-    def find_module(self, fullname, path=None):
-        return self if fullname == "appsettings" and path is None else None
+    class SettingsImporter(object):
 
-    def load_module(self, fullname):
-        if fullname != "appsettings":
-            raise ImportError("Settings loader cannot handle module \"%s\"" % fullname)
-        fullname = "settings"
-        module = sys.modules.get(fullname)
-        if not module:
-            module = imp.new_module(fullname)
+        def find_module(self, fullname, path=None):
+            return self if fullname == "appsettings" and path is None else None
 
-        filename = fullname + ".pyc"
-        if os.path.isfile(filename):
-            with io.open(filename, "rb") as file:
-                code = file.read()
-        else:
-            filename = fullname + ".py"
+        def load_module(self, fullname):
+            if fullname != "appsettings":
+                raise ImportError("Settings loader cannot handle module \"%s\"" % fullname)
+            fullname = "settings"
+            module = sys.modules.get(fullname)
+            if not module:
+                module = imp.new_module(fullname)
+
+            filename = fullname + ".pyc"
             if os.path.isfile(filename):
-                with io.open(filename, "rU", encoding="utf8") as file:
-                    source = file.read()
-                code = compile(source, filename, "exec")
+                with io.open(filename, "rb") as file:
+                    code = file.read()
             else:
-                raise ImportError("Unable to load \"%s\"" % fullname)
+                filename = fullname + ".py"
+                if os.path.isfile(filename):
+                    with io.open(filename, "rU", encoding="utf8") as file:
+                        source = file.read()
+                    code = compile(source, filename, "exec")
+                else:
+                    raise ImportError("Unable to load \"%s\"" % fullname)
 
-        module.__file__ = filename
-        module.__loader__ = self
-        module.__package__ = None
+            module.__file__ = filename
+            module.__loader__ = self
+            module.__package__ = None
 
-        platform = sys.platform
-        filename = os.path.splitext(os.path.basename(sys.argv[0]))[0].lower()
-        environment = os.environ.get("ENVIRONMENT", "development").lower()
-        instance = os.environ.get("VDOM_INSTANCE_ID", "unknown")
+            platform = sys.platform
+            filename = os.path.splitext(os.path.basename(sys.argv[0]))[0].lower()
+            environment = os.environ.get("ENVIRONMENT", "development").lower()
+            instance = os.environ.get("VDOM_INSTANCE_ID", "unknown")
 
-        module.__dict__.update(
-            WINDOWS=platform.startswith("win"),
-            LINUX=platform.startswith("linux"),
-            FREEBSD=platform.startswith("frebsd"),
-            SERVER=filename == "server",
-            MANAGE=filename == "manage",
-            PRODUCTION=environment == "production",
-            DEVELOPMENT=environment != "production",
-            ENVIRONMENT=environment,
-            INSTANCE=instance)
+            module.__dict__.update(
+                WINDOWS=platform.startswith("win"),
+                LINUX=platform.startswith("linux"),
+                FREEBSD=platform.startswith("frebsd"),
+                SERVER=filename == "server",
+                MANAGE=filename == "manage",
+                PRODUCTION=environment == "production",
+                DEVELOPMENT=environment != "production",
+                ENVIRONMENT=environment,
+                INSTANCE=instance)
 
-        sys.modules[fullname] = module
-        exec(code, module.__dict__)
+            sys.modules[fullname] = module
+            exec(code, module.__dict__)
 
-        if CONSOLE_WIDTH < module.__dict__.get("MANAGE_LINE_WIDTH"):
-            module.__dict__["MANAGE_LINE_WIDTH"] = CONSOLE_WIDTH
-            module.__dict__["MANAGE_NAME_WIDTH"] = CONSOLE_WIDTH * 30 // 100
-            module.__dict__["MANAGE_LONG_NAME_WIDTH"] = CONSOLE_WIDTH * 70 // 100
+            if CONSOLE_WIDTH < module.__dict__.get("MANAGE_LINE_WIDTH"):
+                module.__dict__["MANAGE_LINE_WIDTH"] = CONSOLE_WIDTH
+                module.__dict__["MANAGE_NAME_WIDTH"] = CONSOLE_WIDTH * 30 // 100
+                module.__dict__["MANAGE_LONG_NAME_WIDTH"] = CONSOLE_WIDTH * 70 // 100
 
-        return module
-    
-    def find_spec(self, fullname, path, target=None):
-        return self.find_module(fullname, path)
+            return module
+        
+        def find_spec(self, fullname, path, target=None):
+            return self.find_module(fullname, path)
+
+else:
+    from importlib.abc import MetaPathFinder
+    from importlib.machinery import ModuleSpec
+    class SettingsImporter(MetaPathFinder):
+
+        # loader = self.instance
+
+        # def find_module(self, fullname, path=None):
+        #     return self if fullname == "appsettings" and path is None else None
+
+        def load_module(self, fullname):
+            if fullname != "appsettings":
+                raise ImportError("Settings loader cannot handle module \"%s\"" % fullname)
+            module = ModuleSpec(fullname, self)          
+
+            filename =  "settings.pyc"
+            if os.path.isfile(filename):
+                with io.open(filename, "rb") as file:
+                    code = file.read()
+            else:
+                filename = "settings.py"
+                if os.path.isfile(filename):
+                    with io.open(filename, "rU", encoding="utf8") as file:
+                        source = file.read()
+                    code = compile(source, filename, "exec")
+                else:
+                    raise ImportError("Unable to load \"%s\"" % filename)
+
+
+            module.__package__ = None
+
+            platform = sys.platform
+            filename = os.path.splitext(os.path.basename(sys.argv[0]))[0].lower()
+            environment = os.environ.get("ENVIRONMENT", "development").lower()
+            instance = os.environ.get("VDOM_INSTANCE_ID", "unknown")
+
+            module.__dict__.update(
+                WINDOWS=platform.startswith("win"),
+                LINUX=platform.startswith("linux"),
+                FREEBSD=platform.startswith("frebsd"),
+                SERVER=filename == "server",
+                MANAGE=filename == "manage",
+                PRODUCTION=environment == "production",
+                DEVELOPMENT=environment != "production",
+                ENVIRONMENT=environment,
+                INSTANCE=instance)
+
+            sys.modules[fullname] = module
+            exec(code, module.__dict__)
+
+            if CONSOLE_WIDTH < module.__dict__.get("MANAGE_LINE_WIDTH"):
+                module.__dict__["MANAGE_LINE_WIDTH"] = CONSOLE_WIDTH
+                module.__dict__["MANAGE_NAME_WIDTH"] = CONSOLE_WIDTH * 30 // 100
+                module.__dict__["MANAGE_LONG_NAME_WIDTH"] = CONSOLE_WIDTH * 70 // 100
+
+            return module           
+        
+        def find_spec(self, fullname, path, target=None):
+            
+            # return self.find_module(fullname, path)
+            return self.load_module(fullname) if fullname == "appsettings" and path is None else None
+            #     else:
+            #         self.load_module(fullname, path)
+            #         return self.find_module("settings", path) 
+            # return None
+ 

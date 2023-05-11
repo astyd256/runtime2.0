@@ -5,6 +5,7 @@ if sys.version_info[0] < 3:
     import __builtin__ as builtins
 else:
     import builtins
+    
 #from future import standard_library
 #standard_library.install_aliases()
 
@@ -28,13 +29,13 @@ except ImportError:
     print("Unable to set default ssl validation context for urllib. Check certifi library presence")
 
 # settings
-
-from .importers.settings import SettingsImporter  # noqa
+from .importers.settings import SettingsImporter
 
 importer = SettingsImporter()
 sys.meta_path.append(importer)
 settings = __import__("appsettings")
 sys.meta_path.remove(importer)
+
 
 
 # override

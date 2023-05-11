@@ -1,0 +1,36 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: manage.py",
+            "type": "python",
+            "request": "launch",
+            "program": "manage.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "/home/astyd256/runtime2.0/sources"
+        },
+        {
+            "name": "Python: manage.py install bmarket-ipaas_compiled",
+            "type": "python",
+            "request": "launch",
+            "program": "manage.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "/home/astyd256/runtime2.0/sources",
+            "args": ["install", "bmarket-ipaas_compiled.xml"]
+        },
+        {
+            "name": "Python: Runtime server",
+            "type": "python",
+            "request": "launch",
+            "program": "server.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "/home/astyd256/runtime2.0/sources"
+        }        
+    ]
+}

@@ -1,9 +1,19 @@
-from __future__ import absolute_import
+# from __future__ import absolute_import
 
-from .dispatcher import Dispatcher, VDOM_dispatcher
+from .dispatcher import VDOM_dispatcher
 from .type import VDOMType
-from .object import VDOMObject, VDOM_object
+# from sources.scripting.object import VDOMObject, VDOM_object
 from .manager import ScriptManager
 from .compiler import Compiler, VDOM_compiler
-from .wrappers import environment, server, application, session, log, request, response  # obsolete_request
-from . import actions
+# from sources.scripting.wrappers import environment, server, application, session, log, request, response  # obsolete_request
+
+# from sources import actions
+
+# from .dispatcher import Dispatcher, VDOM_dispatcher
+# from .type import VDOMType
+# from .object import VDOMObject, VDOM_object
+# from .manager import ScriptManager
+# from .compiler import Compiler, VDOM_compiler
+# from .wrappers import environment, server, application, session, log, request, response  # obsolete_request
+
+# from .import actions
