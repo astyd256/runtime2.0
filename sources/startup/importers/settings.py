@@ -70,34 +70,39 @@ if sys.version_info[0] < 3:
             return self.find_module(fullname, path)
 
 else:
-    from importlib.abc import MetaPathFinder
+    from importlib.abc import MetaPathFinder, Loader
     from importlib.machinery import ModuleSpec
-    class SettingsImporter(MetaPathFinder):
+    from importlib.util import find_spec, module_from_spec
 
-        # loader = self.instance
+    class SettingsImporter(MetaPathFinder, Loader):
 
-        # def find_module(self, fullname, path=None):
-        #     return self if fullname == "appsettings" and path is None else None
+        def exec_module(self, module):
+            try:
+                _ = sys.modules.pop(module.__name__)
+            except KeyError:
+                raise ImportError("module %s is not in sys.modules", module.__name__)
+            sys.modules[module.__name__] = module
+            globals()[module.__name__] = module
 
-        def load_module(self, fullname):
-            if fullname != "appsettings":
-                raise ImportError("Settings loader cannot handle module \"%s\"" % fullname)
-            module = ModuleSpec(fullname, self)          
+        def create_module(self, spec):
 
-            filename =  "settings.pyc"
+            module = module_from_spec(find_spec(spec.name))
+            fullname = module.__name__ 
+            filename = fullname + ".pyc"
             if os.path.isfile(filename):
                 with io.open(filename, "rb") as file:
                     code = file.read()
             else:
-                filename = "settings.py"
+                filename = fullname + ".py"
                 if os.path.isfile(filename):
                     with io.open(filename, "rU", encoding="utf8") as file:
                         source = file.read()
                     code = compile(source, filename, "exec")
                 else:
-                    raise ImportError("Unable to load \"%s\"" % filename)
+                    raise ImportError("Unable to load \"%s\"" % fullname)
 
-
+            module.__file__ = filename
+            module.__loader__ = self
             module.__package__ = None
 
             platform = sys.platform
@@ -118,20 +123,24 @@ else:
 
             sys.modules[fullname] = module
             exec(code, module.__dict__)
+            
 
             if CONSOLE_WIDTH < module.__dict__.get("MANAGE_LINE_WIDTH"):
                 module.__dict__["MANAGE_LINE_WIDTH"] = CONSOLE_WIDTH
                 module.__dict__["MANAGE_NAME_WIDTH"] = CONSOLE_WIDTH * 30 // 100
                 module.__dict__["MANAGE_LONG_NAME_WIDTH"] = CONSOLE_WIDTH * 70 // 100
 
-            return module           
+            return module                   
         
         def find_spec(self, fullname, path, target=None):
             
-            # return self.find_module(fullname, path)
-            return self.load_module(fullname) if fullname == "appsettings" and path is None else None
-            #     else:
-            #         self.load_module(fullname, path)
-            #         return self.find_module("settings", path) 
-            # return None
+            if fullname != "appsettings":
+                return None
+            
+            fullname = "settings"
+            
+            spec = ModuleSpec(fullname, self)          
+
+            return spec  
+
  

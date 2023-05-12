@@ -36,8 +36,6 @@ sys.meta_path.append(importer)
 settings = __import__("appsettings")
 sys.meta_path.remove(importer)
 
-
-
 # override
 from .override import override  # noqa
 
