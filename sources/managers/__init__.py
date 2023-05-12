@@ -51,19 +51,19 @@ class Managers(object):
                 return False
         return True
 
-    def __getattr__(self, name):
-        with self._lock:
-            instance = self.__dict__.get(name)
-            if instance:
-                return instance
-            else:
-                manager_class = self._lazy.get(name)
-                if manager_class:
-                    instance = manager_class()
-                    setattr(self, name, instance)
-                    return instance
-                else:
-                    raise AttributeError(name)
+    # def __getattr__(self, name):
+    #     with self._lock:
+    #         instance = self.__dict__.get(name)
+    #         if instance:
+    #             return instance
+    #         else:
+    #             manager_class = self._lazy.get(name)
+    #             if manager_class:
+    #                 instance = manager_class()
+    #                 setattr(self, name, instance)
+    #                 return instance
+    #             else:
+    #                 raise AttributeError(name)
 
 
 sys.modules[__name__] = Managers()
