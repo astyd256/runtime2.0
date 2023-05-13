@@ -14,6 +14,26 @@
             "cwd": "/home/astyd256/runtime2.0/sources"
         },
         {
+            "name": "Python: manage.py deploy",
+            "type": "python",
+            "request": "launch",
+            "program": "manage.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "/home/astyd256/runtime2.0/sources",
+            "args": ["deploy"]
+        },
+        {
+            "name": "Python: manage.py build",
+            "type": "python",
+            "request": "launch",
+            "program": "manage.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "/home/astyd256/runtime2.0/sources",
+            "args": ["build"]
+        },
+        {
             "name": "Python: manage.py install bmarket-ipaas_compiled",
             "type": "python",
             "request": "launch",

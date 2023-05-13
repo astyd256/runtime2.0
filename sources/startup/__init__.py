@@ -46,7 +46,7 @@ arguments, other = parser.parse_known_args()
 if arguments.filename:
     override(arguments.filename)
 
-
+import logs  # noqa
 # hack to run builder cleanly
 
 if settings.MANAGE:
@@ -56,7 +56,7 @@ if settings.MANAGE:
 # initialize
 
 from utils import codecs, system, threads  # noqa
-import logs  # noqa
+
 
 
 # register libraries finder
