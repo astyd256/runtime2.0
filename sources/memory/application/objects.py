@@ -2,7 +2,12 @@
 from builtins import str
 from builtins import object
 from weakref import ref
-from collections import OrderedDict, MutableMapping
+from collections import OrderedDict
+import sys
+if sys.version_info[0] < 3:
+    from collections import MutableMapping
+else:
+    from collections.abc import MutableMapping
 from itertools import islice
 from uuid import uuid4
 

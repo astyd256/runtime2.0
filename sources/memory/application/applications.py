@@ -2,7 +2,11 @@
 from builtins import str
 from builtins import next
 from weakref import ref
-from collections import Mapping
+import sys
+if sys.version_info[0] < 3:
+    from collections import Mapping
+else:
+    from collections.abc import Mapping
 from itertools import chain
 from threading import RLock, Event
 from uuid import uuid4

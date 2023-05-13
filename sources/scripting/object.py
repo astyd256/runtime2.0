@@ -5,7 +5,11 @@ from builtins import object
 import json
 
 from copy import copy
-from collections import Mapping, MutableMapping
+import sys
+if sys.version_info[0] < 3:
+    from collections import Mapping, MutableMapping
+else:
+    from collections.abc import Mapping, MutableMapping
 
 import settings
 import managers

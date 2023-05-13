@@ -1,6 +1,12 @@
 
 from builtins import object
-from collections import deque, Sequence
+import sys
+if sys.version_info[0] < 3:
+    from collections import Sequence
+else:
+    from collections.abc import Sequence
+
+from collections import deque
 
 import settings
 

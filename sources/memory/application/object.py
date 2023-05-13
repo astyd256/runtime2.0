@@ -1,3 +1,4 @@
+# from __future__ import absolute_import
 
 from past.builtins import basestring
 from threading import RLock
@@ -13,8 +14,9 @@ from ..constants import NON_CONTAINER, CONTAINER, TOP_CONTAINER, RENDER_CONTEXT
 from ..generic import MemoryBase
 from ..empties import ChangeEmptyError, EmptySet
 
-from .attributes import MemoryAttributesSketch
 from .actions import MemoryActions
+from .attributes import MemoryAttributesSketch
+
 from .events import MemoryEvents
 from .bindings import MemoryBindings
 from .structure import MemoryStructureSketch, MemoryStructure

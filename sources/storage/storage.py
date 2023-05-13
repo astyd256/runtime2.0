@@ -6,7 +6,11 @@ standard_library.install_aliases()
 #from builtins import str
 from builtins import object
 import sqlite3
-import cPickle as pickle
+import sys
+if sys.version_info[0] < 3:
+    import cPickle as pickle
+else:
+    import pickle
 import traceback
 
 from utils.semaphore import VDOM_semaphore

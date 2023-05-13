@@ -3,7 +3,7 @@ from builtins import str
 from builtins import object
 import time, email, email.generator, copy
 from smtplib import SMTP,SMTP_SSL,SMTPConnectError,SMTPHeloError,SMTPAuthenticationError,SMTPException,\
-	SMTPRecipientsRefused,SMTPSenderRefused,SMTPDataError,SSLFakeFile
+	SMTPRecipientsRefused,SMTPSenderRefused,SMTPDataError
 from socket import create_connection, error as socket_error
 from ssl import PROTOCOL_SSLv23, PROTOCOL_TLSv1, wrap_socket
 from email import encoders
@@ -38,7 +38,7 @@ class VDOM_SMTP(SMTP):
 		if self.use_ssl != 0:
 			ssl_version = PROTOCOL_SSLv23 if self.use_ssl == 1 else PROTOCOL_TLSv1
 			new_socket = wrap_socket(new_socket, ssl_version=ssl_version)
-			self.file = SSLFakeFile(new_socket)
+			self.file = new_socket.makefile('rwb')
 		return new_socket
 
 
