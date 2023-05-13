@@ -8,8 +8,7 @@ from ..primitives import primitive
 from ..subtypes.date import decode_date, encode_date
 from .. import errors, error
 from datetime import datetime
-from types import NoneType, FunctionType, MethodType, UnboundMethodType, \
-	BuiltinMethodType, BuiltinFunctionType
+from types import NoneType, FunctionType, MethodType, BuiltinFunctionType
 
 
 class Nothing( object ):
@@ -64,9 +63,7 @@ wrappers = {
 	bool					: lambda value: boolean( value ),
 	FunctionType				: lambda value: method_type( value ),
 	MethodType				: lambda value: method_type( value ),
-	UnboundMethodType			: lambda value: method_type( value ),
 	BuiltinFunctionType			: lambda value: method_type( value ),
-	BuiltinMethodType			: lambda value: method_type( value ),
 	datetime				: lambda value: date( encode_date( *list( value.timetuple() )[:6] ) ),
 }
 

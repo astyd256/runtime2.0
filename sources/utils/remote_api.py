@@ -3,7 +3,8 @@ from builtins import object
 import re, hashlib
 import threading
 
-import SOAPpy
+from suds.client import Client
+# import SOAPpy
 
 from utils.exception import VDOMServiceCallError
 
@@ -43,7 +44,8 @@ class VDOMServiceSingleThread(object):
 			ssl._create_default_https_context = ssl._create_unverified_context
 
 		self._url = url
-		return SOAPpy.SOAPProxy(url.rstrip('/') + '/SOAP', namespace='http://services.vdom.net/VDOMServices')
+		return Client(url.rstrip('/') + '/SOAP', namespace='http://services.vdom.net/VDOMServices')
+		# return SOAPpy.SOAPProxy(url.rstrip('/') + '/SOAP', namespace='http://services.vdom.net/VDOMServices')
 
 
 
