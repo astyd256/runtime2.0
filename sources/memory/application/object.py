@@ -14,8 +14,9 @@ from ..constants import NON_CONTAINER, CONTAINER, TOP_CONTAINER, RENDER_CONTEXT
 from ..generic import MemoryBase
 from ..empties import ChangeEmptyError, EmptySet
 
-from .actions import MemoryActions
+# from attributes import MemoryAttributesSketch
 from .attributes import MemoryAttributesSketch
+from .actions import MemoryActions
 
 from .events import MemoryEvents
 from .bindings import MemoryBindings

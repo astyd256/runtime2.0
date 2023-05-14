@@ -3,7 +3,12 @@ from builtins import str
 from past.builtins import basestring
 from builtins import object
 import re
-from collections import Mapping, MutableMapping
+import sys
+
+if sys.version_info[0] < 3:
+    from collections import Mapping, MutableMapping
+else:
+    from collections.abc import Mapping, MutableMapping
 import settings
 import managers
 from utils.properties import weak
@@ -13,7 +18,7 @@ from ..generic import MemoryBase
 
 FORCE_CDATA_LENGTH = 1024
 FORCE_CDATA_REGEX = re.compile(u"[\t\n\r\"<=>]", re.MULTILINE)
-PROHIBITED_CHARACTERS = re.compile(ur"[\x00-\x08\x0B\x0C\x0E-\x19]")
+PROHIBITED_CHARACTERS = re.compile("[\x00-\x08\x0B\x0C\x0E-\x19]")
 DEREFERENCE_REGEX = re.compile(r"\#RES\(([A-F\d]{8}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{4}-[A-F\d]{12})\)", re.IGNORECASE)
 LAYOUT_ATTRIBUTES = {"top", "left", "width", "height", "hierarchy"}
 
