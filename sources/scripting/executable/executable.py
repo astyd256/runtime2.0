@@ -49,7 +49,8 @@ class Executable(object):
                     return value
 
         def __set__(self, instance, value):
-            value = unicode(value)
+            if isinstance(value, bytes):
+                value = value.decode("utf-8")
             with instance.lock:
                 instance._source_code = value
                 location = instance.locate(SOURCE_CODE)

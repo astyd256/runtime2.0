@@ -101,7 +101,7 @@ class FileManager(object):
             segments = settings.TEMPORARY_LOCATION, owner, name
         else:
             raise Exception("Unknown category: %r" % category)
-        return os.path.normpath(os.path.join(*[_f for _f in segments if _f])).decode('utf-8')
+        return os.path.normpath(os.path.join(*[_f for _f in segments if _f]))
 
     def ensure(self, category, owner, mode, name=None):
         if "w" not in mode:

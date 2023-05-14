@@ -737,7 +737,7 @@ def application_builder(parser, installation_callback=None):
                                                     except KeyError:
                                                         raise MissingAttributeError(u"Target")
                                                     try:
-                                                        access = list(map(int, list(map(string.strip, attributes.pop(u"Access").split(u",")))))
+                                                        access = list(map(int, list(map(str.strip, attributes.pop(u"Access").split(u",")))))
                                                     except KeyError:
                                                         raise MissingAttributeError(u"Access")
                                                     except ValueError:
@@ -828,7 +828,7 @@ def application_builder(parser, installation_callback=None):
                                                     except KeyError:
                                                         raise MissingAttributeError(u"Target")
                                                     try:
-                                                        access = list(map(int, list(map(string.strip, attributes.pop(u"Access").split(u",")))))
+                                                        access = list(map(int, list(map(str.strip, attributes.pop(u"Access").split(u",")))))
                                                     except KeyError:
                                                         raise MissingAttributeError(u"Access")
                                                     except ValueError:

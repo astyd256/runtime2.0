@@ -1415,7 +1415,7 @@ class VDOM_web_services_server(object):
                 if code_name not in interfaces:
                     if attribute.name == "deniedlink":
                         continue
-                    interfaces[code_name] = list(map(string.strip, code_param.split(",")))
+                    interfaces[code_name] = list(map(str.strip, code_param.split(",")))
         return interfaces
 
     def __has_copy(self, obj):

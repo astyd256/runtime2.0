@@ -466,7 +466,7 @@ class Memory(object):
             except AttributeError:
                 description = "file"
 
-        log.write("Install type from %s" % description)
+        log.write("\nInstall type from %s\n" % description)
         parser = Parser(builder=type_builder, notify=True, options=on_information)
         context = Structure(uuid=None)
         try:

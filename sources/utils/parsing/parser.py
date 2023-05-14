@@ -226,7 +226,9 @@ class Parser(LegacyInterface):
             else:
                 raise
         except AbortingError as error:
-            message = error.message
+            # message = error.message
+            # if message:
+            message = error.args[0]
             if message:
                 self.notify(message)
 

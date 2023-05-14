@@ -282,7 +282,7 @@ class VDOM_storage(object):
         if not data:
             return None
         try:
-            data = pickle.loads(str(data))
+            data = pickle.loads(data)
             return data
         except Exception as e:
             debug("Error reading object '%s' from the storage" % key)
