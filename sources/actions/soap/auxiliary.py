@@ -3,7 +3,8 @@ from builtins import str
 from hashlib import md5
 from time import time
 
-from SOAPpy import faultType
+# from SOAPpy import faultType
+from suds import WebFault
 
 from utils.parsing import VALUE, Parser, ParsingException
 from utils.remote_api import VDOMServiceSingleThread, VDOMServiceCallError

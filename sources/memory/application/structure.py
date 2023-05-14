@@ -1,5 +1,8 @@
-
-from collections import Mapping
+import sys
+if sys.version_info[0] < 3:
+    from collections import Mapping
+else:
+    from collections.abc import Mapping
 from utils.exception import VDOMSecurityError
 from utils.properties import lazy, weak, roproperty, rwproperty
 from ..generic import MemoryBase

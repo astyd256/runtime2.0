@@ -6,7 +6,7 @@ Js2Py
 Pillow
 ply
 pycryptodome
-SOAPpy
+suds
 WsgiDAV
 wstools
 pyScss

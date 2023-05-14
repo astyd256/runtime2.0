@@ -1,6 +1,10 @@
 
 from builtins import str
-from collections import MutableMapping
+import sys
+if sys.version_info[0] < 3:
+    from collections import MutableMapping
+else:
+    from collections.abc import MutableMapping
 from uuid import uuid4
 from utils.properties import lazy, weak, roproperty
 

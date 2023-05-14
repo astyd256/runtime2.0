@@ -1,5 +1,8 @@
-
-from collections import Mapping
+import sys
+if sys.version_info[0] < 3:
+    from collections import Mapping
+else:
+    from collections.abc import Mapping
 from utils.properties import weak, roproperty
 from ..generic import MemoryBase
 from .event import MemoryTypeEventSketch

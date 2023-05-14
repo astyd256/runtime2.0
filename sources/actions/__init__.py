@@ -23,6 +23,6 @@ from . import delete
 from . import shell
 from . import user
 from . import group
-from . import soap
+# from . import soap
 from . import update
 from . import updatetype

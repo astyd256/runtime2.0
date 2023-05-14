@@ -1,5 +1,8 @@
-
-from collections import MutableSequence
+import sys
+if sys.version_info[0] < 3:
+    from collections import MutableSequence
+else:
+    from collections.abc import MutableSequence
 from utils.properties import lazy, weak, roproperty, rwproperty
 from ..generic import MemoryBase
 

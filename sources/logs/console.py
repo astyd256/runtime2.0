@@ -33,16 +33,16 @@ class Console(object):
                 (levels.MESSAGE, "")
 
         if level >= settings.CONSOLE_LOG_LEVEL:
-            if isinstance(message, str):
-                message = message.encode((self.stderr.encoding if level is levels.ERROR
-                    else self.stdout.encoding) or "ascii", "backslashreplace")
-            elif not isinstance(message, basestring):
+            # if isinstance(message, str):
+            #     message = message.encode((self.stderr.encoding if level is levels.ERROR
+            #         else self.stdout.encoding) or "ascii", "backslashreplace")
+            if not isinstance(message, basestring):
                 message = str(message)
 
-            if format:
+            # if format:
                 # message = self._formatter.format(module, level, message)
-                message = message.decode((self.stderr.encoding if level is levels.ERROR
-                    else self.stdout.encoding) or "ascii")
+                # message = message.decode((self.stderr.encoding if level is levels.ERROR
+                #     else self.stdout.encoding) or "ascii")
 
             with self._lock:
                 (self.stderr if level is levels.ERROR else self.stdout).write(message)
