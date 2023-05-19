@@ -218,6 +218,10 @@ class FileManager(object):
                 with io.open(location, mode, encoding=encoding, newline=None if "b" in mode else "") as file:
                     if hasattr(data, "read"):
                         shutil.copyfileobj(data, file)
+                    elif "b" in mode:
+                        if isinstance(data, str):
+                            data = data.encode()
+                        file.write(data)
                     else:
                         file.write(data)
                 if safely:

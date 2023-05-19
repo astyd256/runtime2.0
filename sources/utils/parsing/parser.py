@@ -203,9 +203,9 @@ class Parser(LegacyInterface):
         except ExpatError as error:
             try:
                 error = ERRATIC[error.code]()
-                message = error.message
+                message = error.args[0]
             except KeyError:
-                message = error.message.split(":")[0].capitalize()
+                message = error.args[0].split(":")[0].capitalize()
                 error = ParsingException(message)
 
             error.offset = self._parser.ErrorByteIndex

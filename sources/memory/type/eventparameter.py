@@ -1,4 +1,4 @@
-
+import codecs
 from utils.properties import weak, roproperty, rwproperty
 from ..generic import MemoryBase
 
@@ -43,7 +43,7 @@ class MemoryTypeEventParameter(MemoryTypeEventParameterSketch):
 
     def compose(self, ident=u"", file=None):
         file.write(u"%s<Parameter Name=\"%s\" Description=\"%s\" Order=\"%s\"/>\n" %
-            (ident, self._name, self._description.encode("xml"), self._order))
+            (ident, self._name, codecs.encode(self._description, "xml"), self._order))
 
     def __invert__(self):
         raise NotImplementedError

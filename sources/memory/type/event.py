@@ -1,4 +1,5 @@
-
+from __future__ import unicode_literals
+import codecs
 from utils.properties import weak, roproperty, rwproperty
 from ..generic import MemoryBase
 from .eventparameters import MemoryTypeEventParameters
@@ -44,7 +45,7 @@ class MemoryTypeEvent(MemoryTypeEventSketch):
 
     def compose(self, ident=u"", file=None):
         information = u"Name=\"%s\" Description=\"%s\"" % \
-            (self._name, self._description.encode("xml"))
+            (self._name, codecs.encode(self._description, "xml"))
         if self._parameters:
             file.write(u"%s<Event %s>\n" % (ident, information))
             self._parameters.compose(ident=ident + u"\t", file=file)

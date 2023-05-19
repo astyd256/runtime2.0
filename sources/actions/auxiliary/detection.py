@@ -89,6 +89,8 @@ def detect(filename):
     try:
         file = managers.file_manager.open(file_access.FILE, None, filename, mode="rb")
     except Exception as error:
+        from traceback import print_exc
+        print_exc()
         warn("unable to open file: %s" % error)
         return None
     else:
@@ -103,6 +105,9 @@ def detect(filename):
                     warn("file does not contain application or type")
                     return None
             except Exception as error:
+                from traceback import print_exc
+                print_exc()
+                warn("unable to open file: %s" % error)
                 warn("unable to detect %s contents: %s" % (filename, error))
                 return None
 
