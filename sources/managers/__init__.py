@@ -62,6 +62,8 @@ class Managers(object):
                     instance = manager_class()
                     setattr(self, name, instance)
                     return instance
+                elif name == '__spec__':
+                    return None
                 else:
                     raise AttributeError(name)
 

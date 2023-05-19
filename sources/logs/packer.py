@@ -27,10 +27,10 @@ def create_packer(format):
         "name": name,
         "arguments": ", ".join(name for name, symbol in pairs),
         "strings": ", ".join(name for name, symbol in pairs if symbol == "S"),
-        "encode": ", ".join("encode(unicode(%s))[0]" % name
+        "encoding": ", ".join("str(%s).encode()[0]" % name
             for name, symbol in pairs if symbol == "S"),
         "pack": ", ".join(("mktime(%s.timetuple())" % name if symbol == "T"
-            else "len(%s)" % name if symbol == "S"
+            else "len(%s.encode())" % name if symbol == "S"
             else name)
             for name, symbol in pairs),
         "write": "\n".join("        stream.write(%s)" % name
@@ -48,10 +48,10 @@ def create_packer(format):
     source = """
 class %(name)s(object):
     def pack(self, %(arguments)s):
-        %(strings)s=%(encode)s
+        %(strings)s=%(encoding)s
         return \"\".join((struct.pack(%(pack)s), %(strings)s))
     def pack_into(self, stream, %(arguments)s):
-        %(strings)s=%(encode)s
+        %(strings)s=%(encoding)s
         stream.write(struct.pack(%(pack)s))
 %(write)s
     def unpack(self, data):

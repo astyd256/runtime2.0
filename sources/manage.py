@@ -33,8 +33,7 @@ managers.register("memory", VDOM_memory, lazy=True)
 managers.register("engine", VDOM_engine, lazy=True)
 
 
-# try:
-arguments.action.run(*arguments.action.arguments)
-# except Exception as error:
-
-    # console.error(error)
+try:
+    arguments.action.run(*arguments.action.arguments)
+except Exception as error:
+    console.error(error)

@@ -469,37 +469,37 @@ class Memory(object):
         log.write("\nInstall type from %s\n" % description)
         parser = Parser(builder=type_builder, notify=True, options=on_information)
         context = Structure(uuid=None)
-        # try:
-        if value:
-            type = parser.parse(value.encode("utf8") if isinstance(value, str) else value)
-        elif filename:
-            type = parser.parse(filename=filename)
-        else:
-            type = parser.parse(file=file)
-
-        if parser.report:
-            if into is None:
-                log.warning("Install type notifications")
-                for lineno, message in parser.report:
-                    log.warning("    %s, line %s" % (message, lineno))
+        try:
+            if value:
+                type = parser.parse(value.encode("utf8") if isinstance(value, str) else value)
+            elif filename:
+                type = parser.parse(filename=filename)
             else:
-                for lineno, message in parser.report:
-                    into.append((lineno, message))
+                type = parser.parse(file=file)
 
-        type.save()
-        self._types.save()
-        return type
-        # except AlreadyExistsError as error:
-        #     raise
-        # except ParsingException as error:
-        #     cleanup(context.uuid)
-        #     raise Exception("Unable to parse %s, line %s: %s" % (description, error.lineno, error))
-        # except IOError as error:
-        #     cleanup(context.uuid)
-        #     raise Exception("Unable to read from %s: %s" % (description, error.strerror))
-        # except:  # noqa
-        #     cleanup(context.uuid)
-        #     raise
+            if parser.report:
+                if into is None:
+                    log.warning("Install type notifications")
+                    for lineno, message in parser.report:
+                        log.warning("    %s, line %s" % (message, lineno))
+                else:
+                    for lineno, message in parser.report:
+                        into.append((lineno, message))
+
+            type.save()
+            self._types.save()
+            return type
+        except AlreadyExistsError as error:
+            raise
+        except ParsingException as error:
+            cleanup(context.uuid)
+            raise Exception("Unable to parse %s, line %s: %s" % (description, error.lineno, error))
+        except IOError as error:
+            cleanup(context.uuid)
+            raise Exception("Unable to read from %s: %s" % (description, error.strerror))
+        except:  # noqa
+            cleanup(context.uuid)
+            raise
 
     def install_application(self, value=None, file=None, filename=None, into=None):
 
