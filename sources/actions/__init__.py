@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
-from . import build
+# HACK: to shut broken builder
+# from . import build
 from . import deploy
 from . import analyze
 from . import list

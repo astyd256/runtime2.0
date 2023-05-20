@@ -4,6 +4,7 @@ from past.builtins import basestring
 from builtins import object
 import re
 import sys
+import codecs
 
 if sys.version_info[0] < 3:
     from collections import Mapping, MutableMapping
@@ -134,8 +135,8 @@ class MemoryAttributes(MemoryAttributesSketch):
             file.write(u"%s<Attributes>\n" % ident)
             for name in self._items.__dict__ if skip_defaults else self._items._enumeration:
                 file.write(u"%s\t<Attribute Name=\"%s\">%s</Attribute>\n" %
-                    (ident, name, PROHIBITED_CHARACTERS.sub("?",
-                        getattr(self._items, name)).encode("cdata" if name in self._cdata else "xml")))
+                    (ident, name, codecs.encode(PROHIBITED_CHARACTERS.sub("?",
+                        getattr(self._items, name)), "cdata" if name in self._cdata else "xml")))
             file.write(u"%s</Attributes>\n" % ident)
 
     def update(self, *arguments, **keywords):

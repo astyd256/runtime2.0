@@ -5,13 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: manage.py",
+            "name": "Python: manage.py list",
             "type": "python",
             "request": "launch",
             "program": "manage.py",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "cwd": "/home/astyd256/runtime2.0/sources"
+            "cwd": "/home/astyd256/runtime2.0/sources",
+            "args": ["list"]
         },
         {
             "name": "Python: manage.py deploy",

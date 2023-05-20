@@ -47,9 +47,9 @@ if arguments.filename:
     override(arguments.filename)
 
 import logs  # noqa
-# hack to run builder cleanly
 
-if settings.MANAGE:
+# HACK: to shut builder because it doesn't compile properly
+if settings.MANAGE and "build" in other:
     from . import builder  # noqa
 
 

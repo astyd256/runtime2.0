@@ -532,43 +532,43 @@ class Memory(object):
         log.write("Install application from %s" % description)
         parser = Parser(builder=application_builder, notify=True, options=on_information)
         context = Structure(uuid=None)
-        try:
-            if value:
-                application = parser.parse(value.encode("utf8") if isinstance(value, str) else value)
-            elif filename:
-                application = parser.parse(filename=filename)
+        # try:
+        if value:
+            application = parser.parse(value.encode("utf8") if isinstance(value, str) else value)
+        elif filename:
+            application = parser.parse(filename=filename)
+        else:
+            application = parser.parse(file=file)
+
+        if parser.report:
+            if into is None:
+                log.warning("Install application notifications")
+                for lineno, message in parser.report:
+                    log.warning("    %s, line %s" % (message, lineno))
             else:
-                application = parser.parse(file=file)
+                for lineno, message in parser.report:
+                    into.append((lineno, message))
 
-            if parser.report:
-                if into is None:
-                    log.warning("Install application notifications")
-                    for lineno, message in parser.report:
-                        log.warning("    %s, line %s" % (message, lineno))
-                else:
-                    for lineno, message in parser.report:
-                        into.append((lineno, message))
-
-            # TODO: check this later - why?
-            application.unimport_libraries()
-            application.save()
-            return application
-        except AlreadyExistsError as error:
-            raise
-        except ParsingException as error:
-            cleanup(context.uuid)
-            raise Exception("Unable to parse %s, line %s: %s" % (description, error.lineno, error))
-        except IOError as error:
-            cleanup(context.uuid)
-            raise Exception("Unable to read %s: %s" % (description, error.strerror))
-        except:  # noqa
-            cleanup(context.uuid)
-            raise
+        # TODO: check this later - why?
+        application.unimport_libraries()
+        application.save()
+        return application
+        # except AlreadyExistsError as error:
+        #     raise
+        # except ParsingException as error:
+        #     cleanup(context.uuid)
+        #     raise Exception("Unable to parse %s, line %s: %s" % (description, error.lineno, error))
+        # except IOError as error:
+        #     cleanup(context.uuid)
+        #     raise Exception("Unable to read %s: %s" % (description, error.strerror))
+        # except:  # noqa
+        #     cleanup(context.uuid)
+        #     raise
 
     # loading
 
     def load_type(self, uuid, silently=False):
-        log.write("Load type %s" % uuid)
+        log.write("Load type %s \n" % uuid)
         location = managers.file_manager.locate(file_access.TYPE, uuid, settings.TYPE_FILENAME)
         parser = Parser(builder=type_builder, notify=True)
         try:
@@ -586,7 +586,7 @@ class Memory(object):
             raise Exception("Unable to parse \"%s\", line %s: %s" % (os.path.basename(location), error.lineno, error))
 
     def load_application(self, uuid, silently=False):
-        log.write("Load application %s" % uuid)
+        log.write("Load application %s\n" % uuid)
         location = managers.file_manager.locate(file_access.APPLICATION, uuid, settings.APPLICATION_FILENAME)
         parser = Parser(builder=application_builder, notify=True)
         try:

@@ -71,7 +71,7 @@ def clean_source_code(source_code):
 
 
 def parse_index_line(value):
-    match = INDEX_LINE_REGEX.match(value)
+    match = INDEX_LINE_REGEX.match(value.decode('utf-8'))
     if match:
         return match.group("uuid"), match.group("name")
     else:

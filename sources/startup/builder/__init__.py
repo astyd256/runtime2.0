@@ -31,7 +31,8 @@ parser = ExceptionalArgumentParser(add_help=False)
 parser.add_argument("-c", "--configure", dest="filename", default=None)
 subparsers = parser.add_subparsers(dest="action")
 subparser = subparsers.add_parser("build")
-# subparsers.add_parser("deploy") #Fixed parser yielding everytime manage.py is called but without build parameters
+subparsers.add_parser("deploy") #Fixed parser yielding everytime manage.py is called but without build parameters
+subparsers.add_parser("install").add_argument("applicaion.xml")
 subparser.add_argument("-l", "--list", action="store_true", dest="list", default=False,
     help="show availavle exensions")
 subparser.add_argument("--cleanup", action="store_true", dest="cleanup", default=False,

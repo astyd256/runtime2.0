@@ -2905,7 +2905,7 @@ class VDOM_web_services_server(object):
         (app, errmsg) = self.__find_application(appid)
         if not app:
             return errmsg
-        if objects.strip() is "":
+        if objects.strip() == "":
             raise SOAPpy.faultType(param_syntax_error, _("Empty data"), "objects")
         parent = None
         if parentid != "":
