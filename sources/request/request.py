@@ -5,7 +5,9 @@ from future import standard_library
 standard_library.install_aliases()
 from builtins import str
 from builtins import object
-import sys, tempfile, urlparse
+
+import sys, tempfile
+from urllib.parse import urlparse
 from io import BytesIO,  StringIO
 #from io import StringIO as uStringIO
 from cgi import FieldStorage

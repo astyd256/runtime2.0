@@ -8,11 +8,11 @@ import sys
 import random
 import socket
 import select
-# import traceback
 import socketserver
 # import BaseHTTPServer
 # import SimpleHTTPServer
 import SOAPpy
+
 # import managers
 from utils.pid import VDOM_server_pid
 from utils.exception import VDOM_exception

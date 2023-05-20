@@ -1,4 +1,3 @@
-
 from future import standard_library
 standard_library.install_aliases()
 import codecs
@@ -30,7 +29,7 @@ def create_packer(format):
         "encoding": ", ".join("str(%s).encode()[0]" % name
             for name, symbol in pairs if symbol == "S"),
         "pack": ", ".join(("mktime(%s.timetuple())" % name if symbol == "T"
-            else "len(%s.encode())" % name if symbol == "S"
+            else "len(str(%s).encode())" % name if symbol == "S"
             else name)
             for name, symbol in pairs),
         "write": "\n".join("        stream.write(%s)" % name

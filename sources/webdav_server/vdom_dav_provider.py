@@ -21,10 +21,10 @@ standard_library.install_aliases()
 from collections import OrderedDict
 from wsgidav.dav_error import DAVError, HTTP_FORBIDDEN,HTTP_REQUEST_TIMEOUT,HTTP_NOT_FOUND
 from wsgidav.dav_provider import DAVProvider, DAVCollection, DAVNonCollection, _DAVResource
-from wsgidav.property_manager import PropertyManager
+from wsgidav.prop_man.property_manager import PropertyManager
 from io import StringIO
 
-import wsgidav.util as util
+
 import os
 import mimetypes
 import shutil
@@ -34,9 +34,10 @@ from .webdav_request import VDOM_webdav_request
 from .webdav_cache import lru_cache
 import posixpath
 import tempfile
+import logging
 __docformat__ = "reStructuredText"
 
-_logger = util.getModuleLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 BUFFER_SIZE = 8192
 

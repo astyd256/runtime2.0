@@ -23,17 +23,17 @@ class OutputCapture(object):
         self._stdout = sys.stdout
         self._stderr = sys.stderr
 
-        # self._stdout_descriptor = self._stdout.fileno()
-        # self._stderr_descriptor = self._stderr.fileno()
+        self._stdout_descriptor = self._stdout.fileno()
+        self._stderr_descriptor = self._stderr.fileno()
 
-        # self._stdout_duplicate = os.dup(self._stdout_descriptor)
-        # self._stderr_duplicate = os.dup(self._stderr_descriptor)
+        self._stdout_duplicate = os.dup(self._stdout_descriptor)
+        self._stderr_duplicate = os.dup(self._stderr_descriptor)
 
         sys.stdout = self._file
         sys.stderr = self._file
 
-        # os.dup2(self._file.fileno(), self._stdout_descriptor)
-        # os.dup2(self._file.fileno(), self._stderr_descriptor)
+        os.dup2(self._file.fileno(), self._stdout_descriptor)
+        os.dup2(self._file.fileno(), self._stderr_descriptor)
 
         return self
 

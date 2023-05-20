@@ -5,13 +5,13 @@ try:
     from wsgidav.wsgidav_app import WsgiDAVApp
 except ImportError as e:
     raise RuntimeError("Could not import wsgidav package:\n%s\nSee http://wsgidav.googlecode.com/." % e)
-from wsgidav.lock_storage import LockStorageDict
-from wsgidav.property_manager import PropertyManager
-from wsgidav.lock_manager import LockManager
+from wsgidav.lock_man.lock_storage import LockStorageDict
+from wsgidav.prop_man.property_manager import PropertyManager
+from wsgidav.lock_man.lock_manager import LockManager
+from wsgidav.mw.debug_filter import WsgiDavDebugFilter
 from .vdom_dav_provider import VDOM_Provider
 from .domain_controller import VDOM_domain_controller, VDOM_HTTPAuthenticator
 from .vdom_dav_provider import get_properties
-from wsgidav.debug_filter import WsgiDavDebugFilter
 from wsgidav.error_printer import ErrorPrinter
 from wsgidav.dir_browser import WsgiDavDirBrowser
 import managers

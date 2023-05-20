@@ -8,7 +8,8 @@ from .webdav_request import VDOM_webdav_request
 from wsgidav.dav_error import DAVError, HTTP_FORBIDDEN
 from .webdav_cache import lru_cache
 from wsgidav.http_authenticator import HTTPAuthenticator
-from wsgidav.middleware import BaseMiddleware
+from wsgidav.mw.base_mw import BaseMiddleware
+
 class VDOM_DigestHandler(BaseMiddleware):
 	def __init__(self, application, domaincontroller):
 		self._domaincontroller = domaincontroller
