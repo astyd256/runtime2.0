@@ -6,6 +6,7 @@ from io import StringIO
 import settings
 import managers
 import file_access
+import codecs
 
 from logs import log
 from database.dbobject import VDOM_sql_query
@@ -270,14 +271,14 @@ class MemoryApplication(MemoryApplicationSketch):
 
         file.write(u"\t<Information>\n")
         file.write(u"\t\t<ID>%s</ID>\n" % self._id)
-        file.write(u"\t\t<Name>%s</Name>\n" % self._name.encode("xml"))
+        file.write(u"\t\t<Name>%s</Name>\n" % codecs.ecnode(self._name, "xml"))
         if self._description:
-            file.write(u"\t\t<Description>%s</Description>\n" % self._description.encode("xml"))
-        file.write(u"\t\t<Version>%s</Version>\n" % self._version.encode("xml"))
+            file.write(u"\t\t<Description>%s</Description>\n" % codecs.ecnode(self._description, "xml"))
+        file.write(u"\t\t<Version>%s</Version>\n" % codecs.ecnode(self._version, "xml"))
         if self._owner:
-            file.write(u"\t\t<Owner>%s</Owner>\n" % self._owner.encode("xml"))
+            file.write(u"\t\t<Owner>%s</Owner>\n" % codecs.ecnode(self._owner, "xml"))
         if self._password:
-            file.write(u"\t\t<Password>%s</Password>\n" % self._password.encode("xml"))
+            file.write(u"\t\t<Password>%s</Password>\n" % codecs.ecnode(self._password, "xml"))
         file.write(u"\t\t<Active>%d</Active>\n" % self._active)
         if self._index:
             file.write(u"\t\t<Index>%s</Index>\n" % self._index)
@@ -311,7 +312,7 @@ class MemoryApplication(MemoryApplicationSketch):
                     file.write(u"\t\t<Language Code=\"%s\">\n" % language_code)
                     for sentence_code in sorted(language_sentences):
                         file.write(u"\t\t\t<Sentence ID=\"%03d\">%s</Sentence>\n" % (
-                            sentence_code, language_sentences[sentence_code].encode("xml")))
+                            sentence_code, codecs.ecnode(language_sentences[sentence_code], "xml")))
                     file.write(u"\t\t</Language>\n")
             file.write(u"\t</Languages>\n")
 
@@ -385,8 +386,8 @@ class MemoryApplication(MemoryApplicationSketch):
                 file.write(u"\t\t<Groups>\n")
                 for group, items in groups.items():
                     file.write(u"\t\t\t<Group>\n")
-                    file.write(u"\t\t\t\t<Name>%s</Name>\n" % group.login.encode("xml"))
-                    file.write(u"\t\t\t\t<Description>%s</Description>\n" % group.description.encode("xml"))
+                    file.write(u"\t\t\t\t<Name>%s</Name>\n" % codecs.ecnode(group.login, "xml"))
+                    file.write(u"\t\t\t\t<Description>%s</Description>\n" % codecs.ecnode(group.description, "xml"))
                     file.write(u"\t\t\t\t<Rights>\n")
                     for item in items:
                         file.write(u"\t\t\t\t\t<Right Target=\"%s\" Access=\"%s\"/>\n" % item)
@@ -397,13 +398,13 @@ class MemoryApplication(MemoryApplicationSketch):
                 file.write(u"\t\t<Users>\n")
                 for user, items in users.items():
                     file.write(u"\t\t\t<User>\n")
-                    file.write(u"\t\t\t\t<Login>%s</Login>\n" % user.login.encode("xml"))
-                    file.write(u"\t\t\t\t<Password>%s</Password>\n" % user.password.encode("xml"))
-                    file.write(u"\t\t\t\t<FirstName>%s</FirstName>\n" % user.first_name.encode("xml"))
-                    file.write(u"\t\t\t\t<LastName>%s</LastName>\n" % user.last_name.encode("xml"))
-                    file.write(u"\t\t\t\t<Email>%s</Email>\n" % user.email.encode("xml"))
-                    file.write(u"\t\t\t\t<SecurityLevel>%s</SecurityLevel>\n" % user.security_level.encode("xml"))
-                    file.write(u"\t\t\t\t<MemberOf>%s</MemberOf>\n" % u",".join(user.member_of).encode("xml"))
+                    file.write(u"\t\t\t\t<Login>%s</Login>\n" % codecs.ecnode(user.login, "xml"))
+                    file.write(u"\t\t\t\t<Password>%s</Password>\n" % codecs.ecnode(user.password, "xml"))
+                    file.write(u"\t\t\t\t<FirstName>%s</FirstName>\n" % codecs.ecnode(user.first_name, "xml"))
+                    file.write(u"\t\t\t\t<LastName>%s</LastName>\n" % codecs.ecnode(user.last_name, "xml"))
+                    file.write(u"\t\t\t\t<Email>%s</Email>\n" % codecs.ecnode(user.email, "xml"))
+                    file.write(u"\t\t\t\t<SecurityLevel>%s</SecurityLevel>\n" % codecs.ecnode(user.security_level, "xml"))
+                    file.write(u"\t\t\t\t<MemberOf>%s</MemberOf>\n" % u",".join(codecs.ecnode(user.member_of, "xml")))
                     file.write(u"\t\t\t\t<Rights>\n")
                     for item in items:
                         file.write(u"\t\t\t\t\t<Right Target=\"%s\" Access=\"%s\"/>\n" % item)

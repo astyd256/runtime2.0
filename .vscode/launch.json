@@ -44,6 +44,26 @@
             "args": ["install", "bmarket-ipaas_compiled.xml"]
         },
         {
+            "name": "Python: manage.py install application",
+            "type": "python",
+            "request": "launch",
+            "program": "manage.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "/home/astyd256/runtime2.0/sources",
+            "args": ["install", "application.xml"]
+        },
+        {
+            "name": "Python: manage.py select application",
+            "type": "python",
+            "request": "launch",
+            "program": "manage.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "/home/astyd256/runtime2.0/sources",
+            "args": ["select", "application.xml"]
+        },
+        {
             "name": "Python: Runtime server",
             "type": "python",
             "request": "launch",
