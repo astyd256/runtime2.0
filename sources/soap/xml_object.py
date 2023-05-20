@@ -9,7 +9,7 @@ from xml.dom import Node
 from xml.dom.minidom import DOMImplementation
 
 def need_cdata(data):
-	if data is not "" and ('<' in data or '>' in data or '"' in data or '&' in data or "'" in data or "\n" in data):
+	if data != "" and ('<' in data or '>' in data or '"' in data or '&' in data or "'" in data or "\n" in data):
 		return True
 	return False
 
@@ -306,7 +306,7 @@ class xml_object(object):
 		result = p + o.name + " ["
 		r = ""
 		for a in o.attributes:
-			if r is not "":
+			if r != "":
 				r += ", "
 			r += a + "=" + o.attributes[a]
 		result += r + "]"

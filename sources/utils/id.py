@@ -87,7 +87,7 @@ def id2link1(res_id):
     #return "temp_" + owner_id + "_" + tempres_id + "." + res_type
 
 def is_valid_identifier(value):
-    if value is "": return False
+    if value == "": return False
     first = value[0]
     if not ('_' == first or first.isalpha()):
         return False

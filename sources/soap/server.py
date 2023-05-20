@@ -2908,7 +2908,7 @@ class VDOM_web_services_server(object):
         if objects.strip() is "":
             raise SOAPpy.faultType(param_syntax_error, _("Empty data"), "objects")
         parent = None
-        if parentid is not "":
+        if parentid != "":
             parent = app.search_object(parentid)
             if parent is None:
                 raise SOAPpy.faultType(parent_object_error, "", "")
@@ -2985,7 +2985,7 @@ class VDOM_web_services_server(object):
         (app, obj, errmsg) = self.__find_object(appid, objid)
         if not obj:
             return errmsg
-        if data.strip() is "":
+        if data.strip() == "":
             raise SOAPpy.faultType(param_syntax_error, _("Empty data"), "data")
         # parse xml
         root = None
