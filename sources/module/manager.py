@@ -170,7 +170,7 @@ class VDOM_module_manager(object):
                 return (503, None)
 
             # set content type of container
-            if obj.type.http_content_type is "":
+            if obj.type.http_content_type == "":
                 return (None, _("Unknown content type"))
             request_object.add_header("Content-type", obj.type.http_content_type.lower())
 

@@ -20,9 +20,9 @@ class MemoryTypeActions(MemoryBase, Mapping):
 
     def on_complete(self, item):
         self._items[item.scope, item.name] = item
-        try:
+        if item.scope in self._items_by_scope:
             items = self._items_by_scope[item.scope]
-        except KeyError:
+        else:
             self._items_by_scope[item.scope] = items = {}
         items[item.scope, item.name] = item
 

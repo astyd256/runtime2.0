@@ -36,7 +36,9 @@ class VDOM_id(object):
 
 def vdomid():
     """generate new id"""
-    return md5("%s%s" %( uuid1().bytes,math.sin(random.random()))).hexdigest()
+    return md5((str(time.time()) + str(math.sin(random.random()))).encode() + _urandom() ).hexdigest()
+    # return md5(b''.join([str(time.time()),_urandom(),str(math.sin(random.random()))])).hexdigest()
+    # return md5("%s%s" %(uuid1().bytes, math.sin(random.random()))).hexdigest()
 
 def hexstr(s):
     """convert byte array to hex string"""

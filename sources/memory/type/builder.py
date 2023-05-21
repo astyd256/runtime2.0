@@ -449,9 +449,9 @@ def type_builder(parser, installation_callback=None):
                                                                 pass
                                                             except ValueError:
                                                                 raise UnexpectedAttributeValueError(u"Order")
-                                                            try:
-                                                                attributes.pop(u"VbType")
-                                                            except KeyError:
+                                                            if "VbType" in attributes:
+                                                                attributes.pop("VbType")
+                                                            else:
                                                                 pass  # Just skip attribute
                                                             ~parameter
                                                             parser.handle_elements(name, attributes)

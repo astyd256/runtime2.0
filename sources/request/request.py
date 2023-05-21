@@ -7,7 +7,7 @@ from builtins import str
 from builtins import object
 
 import sys, tempfile
-from urllib.parse import urlparse
+import urllib.parse 
 from io import BytesIO,  StringIO
 #from io import StringIO as uStringIO
 from cgi import FieldStorage
@@ -86,7 +86,7 @@ class VDOM_request(object):
                 debug("Error while reading socket: %s"%e)
 
         try:
-            args.update(urlparse.parse_qs(env["QUERY_STRING"], True))
+            args.update(urllib.parse.parse_qs(env["QUERY_STRING"], True))
             #for key in args1.keys():
             #    args[key] = args1[key]
         except Exception as e:

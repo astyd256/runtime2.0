@@ -122,18 +122,18 @@ class MemoryApplications(MemoryBase, Mapping):
                         self._queue.add(uuid)
 
     def __getitem__(self, uuid):
-        try:
+        if uuid in self._items:
             return self._items[uuid]
-        except KeyError:
+        else:
             if self._queue is None:
                 raise
             else:
                 on_start = None
                 try:
                     with self._lock:
-                        try:
+                        if uuid in self._items:
                             return self._items[uuid]
-                        except KeyError:
+                        else:
                             if self._queue is None:
                                 raise
                             elif self._queue is False:

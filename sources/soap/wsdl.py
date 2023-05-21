@@ -173,5 +173,5 @@ def gen_wsdl():
 	result += """</definitions>\n"""
 
 	ff = open(VDOM_CONFIG["WSDL-FILE-LOCATION"], "wb")
-	ff.write(result)
+	ff.write(result.encode("utf-8"))
 	ff.close()

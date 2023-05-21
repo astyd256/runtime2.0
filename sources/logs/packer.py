@@ -26,10 +26,10 @@ def create_packer(format):
         "name": name,
         "arguments": ", ".join(name for name, symbol in pairs),
         "strings": ", ".join(name for name, symbol in pairs if symbol == "S"),
-        "encoding": ", ".join("str(%s).encode()[0]" % name
+        "encoding": ", ".join("str(%s).encode()" % name
             for name, symbol in pairs if symbol == "S"),
         "pack": ", ".join(("mktime(%s.timetuple())" % name if symbol == "T"
-            else "len(str(%s).encode())" % name if symbol == "S"
+            else "len(%s)" % name if symbol == "S"
             else name)
             for name, symbol in pairs),
         "write": "\n".join("        stream.write(%s)" % name

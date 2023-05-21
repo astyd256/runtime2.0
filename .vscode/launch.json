@@ -25,6 +25,16 @@
             "args": ["deploy"]
         },
         {
+            "name": "Python: manage.py select miniotestapp",
+            "type": "python",
+            "request": "launch",
+            "program": "manage.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "/home/astyd256/runtime2.0/sources",
+            "args": ["select", "miniotestapp"]
+        },
+        {
             "name": "Python: manage.py build",
             "type": "python",
             "request": "launch",

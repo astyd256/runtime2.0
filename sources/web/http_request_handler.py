@@ -289,9 +289,7 @@ class VDOM_http_request_handler(http.server.SimpleHTTPRequestHandler):
         self.create_request("get")
         f = self.on_request("get")
         if f:
-            sys.setcheckinterval(0)
             shutil.copyfileobj(f, self.wfile)
-            sys.setcheckinterval(100)
             #self.copyfile(f, self.wfile)
             f.close()
         try:
@@ -418,7 +416,7 @@ class VDOM_http_request_handler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             ret_len = None
             # if isinstance(ret, file):
-            if isinstance(ret, (file, io.IOBase)):
+            if isinstance(ret, io.IOBase):
                 ret.seek(0, 2)
                 ret_len = str(ret.tell())
                 ret.seek(0)
@@ -439,7 +437,7 @@ class VDOM_http_request_handler(http.server.SimpleHTTPRequestHandler):
             self.send_headers()
             self.end_headers()
             # if isinstance(ret, file):
-            if isinstance(ret, (file, io.IOBase)):
+            if isinstance(ret, io.IOBase):
                 if sys.platform.startswith("freebsd"):
                     #vdomlib.sendres(self.wfile.fileno(), ret.fileno(), int(ret_len))
                     ret.close()
@@ -472,7 +470,7 @@ class VDOM_http_request_handler(http.server.SimpleHTTPRequestHandler):
             #debug(hh + " : " + headers[hh])
             self.send_header(hh, headers[hh])
         if len(cookies) > 0:
-            self.wfile.write("%s\r\n" % cookies)
+            self.wfile.write(("%s\r\n" % cookies).encode())
 
     def finish(self):
         """finish processing request"""
@@ -991,7 +989,7 @@ class VDOM_http_request_handler(http.server.SimpleHTTPRequestHandler):
 
         self.end_headers()
         if self.command != "HEAD" and content:
-            self.wfile.write(content)
+            self.wfile.write(content.encode())
 
         ###
 

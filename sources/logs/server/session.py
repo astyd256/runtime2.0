@@ -38,9 +38,9 @@ class LogServerSession(SmartDaemon):
             raise Exception
 
         with self._lock:
-            try:
+            if name in self._writers:
                 writer = self._writers[name]
-            except KeyError:
+            else:
                 writer = self._writers[name] = LogWriter(name, log.formatter())
 
         self._mapping[id] = (log, writer, None)
