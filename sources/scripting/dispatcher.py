@@ -57,9 +57,9 @@ class DispatcherEntries(object):
         self._entries = {}
 
     def __getitem__(self, type):
-        try:
+        if type in self._entries:
             return self._entries[type]
-        except KeyError:
+        else:
             with self._lock:
                 entry = self._entries.get(type)
                 if not entry:
