@@ -8,7 +8,7 @@ from ..primitives import primitive
 from ..subtypes.date import decode_date, encode_date
 from .. import errors, error
 from datetime import datetime
-from types import NoneType, FunctionType, MethodType, BuiltinFunctionType
+from types import FunctionType, MethodType, BuiltinFunctionType
 
 
 class Nothing( object ):
@@ -55,7 +55,7 @@ wrappers = {
 	float					: lambda value: double( value  ),
 	str					: lambda value: string( value  ),
 	str					: lambda value: string( value  ),
-	NoneType				: lambda value: v_empty,
+	type(None)				: lambda value: v_empty,
 	Nothing 				: lambda value: v_nothing,
 	list					: lambda value: wrapp_array( value ),
 	tuple					: lambda value: wrapp_array( value ),

@@ -95,7 +95,7 @@ else:
             else:
                 filename = fullname + ".py"
                 if os.path.isfile(filename):
-                    with io.open(filename, "rU", encoding="utf8") as file:
+                    with io.open(filename, "r", encoding="utf8") as file:
                         source = file.read()
                     code = compile(source, filename, "exec")
                 else:
