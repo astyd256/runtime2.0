@@ -1,4 +1,3 @@
-
 from builtins import map
 from collections import defaultdict
 from io import StringIO
@@ -6,14 +5,14 @@ from io import StringIO
 import settings
 import managers
 import file_access
-import codecs
 
 from logs import log
 from database.dbobject import VDOM_sql_query
 from utils.properties import weak, constant, roproperty, rwproperty
 
 from ..constants import DEFAULT_SCRIPTING_LANGUAGE, DEFAULT_LANGUAGE, \
-    APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, REQUEST_STOP_CONTEXT, SESSION_FINISH_CONTEXT
+    APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, REQUEST_STOP_CONTEXT, \
+    SESSION_FINISH_CONTEXT
 from ..generic import MemoryBase
 from ..auxiliary import write_as_base64, copy_as_base64
 from .objects import MemoryObjects
@@ -22,14 +21,12 @@ from .actions import MemoryActions
 from .bindings import MemoryBindings
 from .libraries import MemoryLibraries
 
-
 NOT_LOADED = "NOT LOADED"
 TEMPORARY_EXTENSION = ".new"
 
 
 @weak("_collection")
 class MemoryApplicationSketch(MemoryBase):
-
     is_application = constant(True)
 
     generic = APPLICATION_START_CONTEXT, SESSION_START_CONTEXT, REQUEST_START_CONTEXT, REQUEST_STOP_CONTEXT, SESSION_FINISH_CONTEXT
@@ -115,7 +112,6 @@ class MemoryApplicationSketch(MemoryBase):
 
 
 class MemoryApplicationRestorationSketch(MemoryApplicationSketch):
-
     _restore = True
 
 
@@ -238,7 +234,7 @@ class MemoryApplication(MemoryApplicationSketch):
             action = self.actions.get(APPLICATION_START_CONTEXT)
             if action and action.source_code:
                 try:
-                    #managers.engine.execute(action)
+                    # managers.engine.execute(action)
                     pass
                 except Exception as e:
                     print("Exception while application:onstart execution: %s" % e.message)
@@ -271,14 +267,14 @@ class MemoryApplication(MemoryApplicationSketch):
 
         file.write(u"\t<Information>\n")
         file.write(u"\t\t<ID>%s</ID>\n" % self._id)
-        file.write(u"\t\t<Name>%s</Name>\n" % codecs.encode(self._name, "xml"))
+        file.write(u"\t\t<Name>%s</Name>\n" % self._name)
         if self._description:
-            file.write(u"\t\t<Description>%s</Description>\n" % codecs.encode(self._description, "xml"))
-        file.write(u"\t\t<Version>%s</Version>\n" % codecs.encode(self._version, "xml"))
+            file.write(u"\t\t<Description>%s</Description>\n" % self._description)
+        file.write(u"\t\t<Version>%s</Version>\n" % self._version)
         if self._owner:
-            file.write(u"\t\t<Owner>%s</Owner>\n" % codecs.encode(self._owner, "xml"))
+            file.write(u"\t\t<Owner>%s</Owner>\n" % self._owner)
         if self._password:
-            file.write(u"\t\t<Password>%s</Password>\n" % codecs.encode(self._password, "xml"))
+            file.write(u"\t\t<Password>%s</Password>\n" % self._password)
         file.write(u"\t\t<Active>%d</Active>\n" % self._active)
         if self._index:
             file.write(u"\t\t<Index>%s</Index>\n" % self._index)
@@ -312,7 +308,7 @@ class MemoryApplication(MemoryApplicationSketch):
                     file.write(u"\t\t<Language Code=\"%s\">\n" % language_code)
                     for sentence_code in sorted(language_sentences):
                         file.write(u"\t\t\t<Sentence ID=\"%03d\">%s</Sentence>\n" % (
-                            sentence_code, codecs.encode(language_sentences[sentence_code], "xml")))
+                            sentence_code, language_sentences[sentence_code]))
                     file.write(u"\t\t</Language>\n")
             file.write(u"\t</Languages>\n")
 
@@ -327,7 +323,8 @@ class MemoryApplication(MemoryApplicationSketch):
                             resource_file = resource.get_fd()
                         except:
                             continue
-                        file.write(u"\t\t<Resource ID=\"%s\" Type=\"%s\" Name=\"%s\">\n" % (id, resource.res_format, resource.name))
+                        file.write(u"\t\t<Resource ID=\"%s\" Type=\"%s\" Name=\"%s\">\n" % (
+                        id, resource.res_format, resource.name))
                         copy_as_base64(file, resource_file, indent=u"\t\t\t")
                         file.write(u"\t\t</Resource>\n")
                 file.write(u"\t</Resources>\n")
@@ -348,7 +345,8 @@ class MemoryApplication(MemoryApplicationSketch):
                     if database.name != "":
                         data = managers.database_manager.backup_database(self._id, id)
                         if data:
-                            file.write(u"\t\t<Database ID=\"%s\" Name=\"%s\" Type=\"sqlite\">\n" % (database.id, database.name))
+                            file.write(u"\t\t<Database ID=\"%s\" Name=\"%s\" Type=\"sqlite\">\n" % (
+                            database.id, database.name))
                             write_as_base64(file, data, indent=u"\t\t\t")
                             file.write(u"\t\t</Database>\n")
                 file.write(u"\t</Databases>\n")
@@ -386,8 +384,8 @@ class MemoryApplication(MemoryApplicationSketch):
                 file.write(u"\t\t<Groups>\n")
                 for group, items in groups.items():
                     file.write(u"\t\t\t<Group>\n")
-                    file.write(u"\t\t\t\t<Name>%s</Name>\n" % codecs.encode(group.login, "xml"))
-                    file.write(u"\t\t\t\t<Description>%s</Description>\n" % codecs.encode(group.description, "xml"))
+                    file.write(u"\t\t\t\t<Name>%s</Name>\n" % group.login)
+                    file.write(u"\t\t\t\t<Description>%s</Description>\n" % group.description)
                     file.write(u"\t\t\t\t<Rights>\n")
                     for item in items:
                         file.write(u"\t\t\t\t\t<Right Target=\"%s\" Access=\"%s\"/>\n" % item)
@@ -398,13 +396,13 @@ class MemoryApplication(MemoryApplicationSketch):
                 file.write(u"\t\t<Users>\n")
                 for user, items in users.items():
                     file.write(u"\t\t\t<User>\n")
-                    file.write(u"\t\t\t\t<Login>%s</Login>\n" % codecs.encode(user.login, "xml"))
-                    file.write(u"\t\t\t\t<Password>%s</Password>\n" % codecs.encode(user.password, "xml"))
-                    file.write(u"\t\t\t\t<FirstName>%s</FirstName>\n" % codecs.encode(user.first_name, "xml"))
-                    file.write(u"\t\t\t\t<LastName>%s</LastName>\n" % codecs.encode(user.last_name, "xml"))
-                    file.write(u"\t\t\t\t<Email>%s</Email>\n" % codecs.encode(user.email, "xml"))
-                    file.write(u"\t\t\t\t<SecurityLevel>%s</SecurityLevel>\n" % codecs.encode(user.security_level, "xml"))
-                    file.write(u"\t\t\t\t<MemberOf>%s</MemberOf>\n" % u",".join(codecs.encode(user.member_of, "xml")))
+                    file.write(u"\t\t\t\t<Login>%s</Login>\n" % user.login)
+                    file.write(u"\t\t\t\t<Password>%s</Password>\n" % user.password)
+                    file.write(u"\t\t\t\t<FirstName>%s</FirstName>\n" % user.first_name)
+                    file.write(u"\t\t\t\t<LastName>%s</LastName>\n" % user.last_name)
+                    file.write(u"\t\t\t\t<Email>%s</Email>\n" % user.email)
+                    file.write(u"\t\t\t\t<SecurityLevel>%s</SecurityLevel>\n" % user.security_level)
+                    file.write(u"\t\t\t\t<MemberOf>%s</MemberOf>\n" % u",".join(user.member_of))
                     file.write(u"\t\t\t\t<Rights>\n")
                     for item in items:
                         file.write(u"\t\t\t\t\t<Right Target=\"%s\" Access=\"%s\"/>\n" % item)
@@ -444,9 +442,10 @@ class MemoryApplication(MemoryApplicationSketch):
 
                 try:
                     with managers.file_manager.open(file_access.APPLICATION, self._id, new_filename,
-                            mode="w", encoding="utf8") as file:
+                                                    mode="w", encoding="utf8") as file:
                         self.compose(file=file, shorter=True)
-                except:  # noqa
+                except Exception as e:  # noqa
+                    print(f"{e}")
                     managers.file_manager.delete(file_access.APPLICATION, self._id, new_filename)
                     raise
                 else:
@@ -461,7 +460,7 @@ class MemoryApplication(MemoryApplicationSketch):
                 self.compose(file=file, excess=excess)
             elif filename is not None:
                 with managers.file_manager.open(file_access.FILE, None, filename,
-                        mode="w", encoding="utf8") as file:
+                                                mode="w", encoding="utf8") as file:
                     self.compose(file=file, excess=excess)
             else:
                 return self.compose(excess=excess)
@@ -517,7 +516,8 @@ class MemoryApplication(MemoryApplicationSketch):
 
         # remove files
         managers.memory.cleanup_application_infrastructure(self._id,
-            remove_databases=remove_databases, remove_storage=remove_storage)
+                                                           remove_databases=remove_databases,
+                                                           remove_storage=remove_storage)
 
     def invalidate(self, contexts=None, downward=False, upward=False):
         with self.lock:

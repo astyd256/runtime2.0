@@ -39,10 +39,8 @@ class Console(object):
             if not isinstance(message, basestring):
                 message = str(message)
 
-            # if format:
-                # message = self._formatter.format(module, level, message)
-                # message = message.decode((self.stderr.encoding if level is levels.ERROR
-                #     else self.stdout.encoding) or "ascii")
+            if format:
+                message = self._formatter.format(module, level, message)
 
             with self._lock:
                 (self.stderr if level is levels.ERROR else self.stdout).write(message)

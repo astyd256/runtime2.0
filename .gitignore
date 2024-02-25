@@ -13,3 +13,4 @@ fonts/*
 sources/*.xml
 .DS_Store
 .idea/
+.vscode

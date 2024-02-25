@@ -719,12 +719,12 @@ def application_builder(parser, installation_callback=None):
                                     def group_handler(name, attributes):
                                         if name == u"Name":
                                             # <Name>
-                                            def name_handler(value): group.name = value.encode(u"utf8")
+                                            def name_handler(value): group.name = value
                                             parser.handle_value(name, attributes, name_handler)
                                             # </Name>
                                         elif name == u"Description":
                                             # <Description>
-                                            def description_handler(value): group.description = value.encode(u"utf8")
+                                            def description_handler(value): group.description = value
                                             parser.handle_value(name, attributes, description_handler)
                                             # </Description>
                                         elif name == u"Rights":
@@ -784,38 +784,38 @@ def application_builder(parser, installation_callback=None):
                                     def user_handler(name, attributes):
                                         if name == u"Login":
                                             # <Login>
-                                            def login_handler(value): user.login = value.encode(u"utf8")
+                                            def login_handler(value): user.login = value
                                             parser.handle_value(name, attributes, login_handler)
                                             # </Login>
                                         elif name == u"Password":
                                             # <Password>
-                                            def password_handler(value): user.password = value.encode(u"utf8")
+                                            def password_handler(value): user.password = value
                                             parser.handle_value(name, attributes, password_handler)
                                             # </Password>
                                         elif name == u"FirstName":
                                             # <FirstName>
-                                            def firstname_handler(value): user.firstname = value.encode(u"utf8")
+                                            def firstname_handler(value): user.firstname = value
                                             parser.handle_value(name, attributes, firstname_handler)
                                             # </FirstName>
                                         elif name == u"LastName":
                                             # <LastName>
-                                            def lastname_handler(value): user.lastname = value.encode(u"utf8")
+                                            def lastname_handler(value): user.lastname = value
                                             parser.handle_value(name, attributes, lastname_handler)
                                             # </LastName>
                                         elif name == u"Email":
                                             # <Email>
-                                            def email_handler(value): user.email = value.encode(u"utf8")
+                                            def email_handler(value): user.email = value
                                             parser.handle_value(name, attributes, email_handler)
                                             # </Email>
                                         elif name == u"SecurityLevel":
                                             # <SecurityLevel>
-                                            def securitylevel_handler(value): user.security_level = value.encode(u"utf8")
+                                            def securitylevel_handler(value): user.security_level = value
                                             parser.handle_value(name, attributes, securitylevel_handler)
                                             # </SecurityLevel>
                                         elif name == u"MemberOf":
                                             # <MemberOf>
                                             def memberof_handler(value): user.member_of = \
-                                                [member.strip().encode(u"utf8") for member in value.split(u",")] if value else []
+                                                [member.strip() for member in value.split(u",")] if value else []
                                             parser.handle_value(name, attributes, memberof_handler)
                                             # </MemberOf>
                                         elif name == u"Rights":

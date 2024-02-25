@@ -22,7 +22,7 @@ class MultilineLogFormatter(LogFormatter):
 
     def format(self, *values):
         return self.FORMAT_REGEX.sub(lambda match:
-            ("%s%s %s" if match.group(2) is None else "%s%s%s") % (
+            "" if match.group(1) == '' else "%s%s%s" % (
                 self._make_caption(*values), match.group(1), os.linesep), values[-1])
 
     FIND_REGEX = re.compile("(?: \n| \r\n| \r|.)*(?:\n|\r\n|\r)")

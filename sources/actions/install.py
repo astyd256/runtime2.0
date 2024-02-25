@@ -19,7 +19,7 @@ def install(filename, select=False):
         warn("not an application or type: %s" % filename)
         return
 
-    with section("\ninstall %s from %s" % (entity, filename), lazy=False):
+    with section("install %s from %s" % (entity, filename), lazy=False):
         notifications = []
         try:
             if entity is TYPE:
