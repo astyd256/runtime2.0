@@ -234,8 +234,7 @@ class MemoryApplication(MemoryApplicationSketch):
             action = self.actions.get(APPLICATION_START_CONTEXT)
             if action and action.source_code:
                 try:
-                    # managers.engine.execute(action)
-                    pass
+                    managers.engine.execute(action)
                 except Exception as e:
                     print("Exception while application:onstart execution: %s" % e.message)
                     from traceback import print_exc
@@ -267,14 +266,14 @@ class MemoryApplication(MemoryApplicationSketch):
 
         file.write(u"\t<Information>\n")
         file.write(u"\t\t<ID>%s</ID>\n" % self._id)
-        file.write(u"\t\t<Name>%s</Name>\n" % self._name)
+        file.write(u"\t\t<Name>%s</Name>\n" % self._name.encode("xml").decode())
         if self._description:
-            file.write(u"\t\t<Description>%s</Description>\n" % self._description)
-        file.write(u"\t\t<Version>%s</Version>\n" % self._version)
+            file.write(u"\t\t<Description>%s</Description>\n" % self._description.encode("xml").decode())
+        file.write(u"\t\t<Version>%s</Version>\n" % self._version.encode("xml").decode())
         if self._owner:
-            file.write(u"\t\t<Owner>%s</Owner>\n" % self._owner)
+            file.write(u"\t\t<Owner>%s</Owner>\n" % self._owner.encode("xml").decode())
         if self._password:
-            file.write(u"\t\t<Password>%s</Password>\n" % self._password)
+            file.write(u"\t\t<Password>%s</Password>\n" % self._password.encode("xml").decode())
         file.write(u"\t\t<Active>%d</Active>\n" % self._active)
         if self._index:
             file.write(u"\t\t<Index>%s</Index>\n" % self._index)
@@ -308,7 +307,7 @@ class MemoryApplication(MemoryApplicationSketch):
                     file.write(u"\t\t<Language Code=\"%s\">\n" % language_code)
                     for sentence_code in sorted(language_sentences):
                         file.write(u"\t\t\t<Sentence ID=\"%03d\">%s</Sentence>\n" % (
-                            sentence_code, language_sentences[sentence_code]))
+                            sentence_code, language_sentences[sentence_code].encode("xml").decode()))
                     file.write(u"\t\t</Language>\n")
             file.write(u"\t</Languages>\n")
 
@@ -396,13 +395,13 @@ class MemoryApplication(MemoryApplicationSketch):
                 file.write(u"\t\t<Users>\n")
                 for user, items in users.items():
                     file.write(u"\t\t\t<User>\n")
-                    file.write(u"\t\t\t\t<Login>%s</Login>\n" % user.login)
-                    file.write(u"\t\t\t\t<Password>%s</Password>\n" % user.password)
-                    file.write(u"\t\t\t\t<FirstName>%s</FirstName>\n" % user.first_name)
-                    file.write(u"\t\t\t\t<LastName>%s</LastName>\n" % user.last_name)
-                    file.write(u"\t\t\t\t<Email>%s</Email>\n" % user.email)
-                    file.write(u"\t\t\t\t<SecurityLevel>%s</SecurityLevel>\n" % user.security_level)
-                    file.write(u"\t\t\t\t<MemberOf>%s</MemberOf>\n" % u",".join(user.member_of))
+                    file.write(u"\t\t\t\t<Login>%s</Login>\n" % user.login.encode("xml").decode())
+                    file.write(u"\t\t\t\t<Password>%s</Password>\n" % user.password.encode("xml").decode())
+                    file.write(u"\t\t\t\t<FirstName>%s</FirstName>\n" % user.first_name.encode("xml").decode())
+                    file.write(u"\t\t\t\t<LastName>%s</LastName>\n" % user.last_name.encode("xml").decode())
+                    file.write(u"\t\t\t\t<Email>%s</Email>\n" % user.email.encode("xml").decode())
+                    file.write(u"\t\t\t\t<SecurityLevel>%s</SecurityLevel>\n" % user.security_level.encode("xml").decode())
+                    file.write(u"\t\t\t\t<MemberOf>%s</MemberOf>\n" % u",".join(user.member_of).encode("xml").decode())
                     file.write(u"\t\t\t\t<Rights>\n")
                     for item in items:
                         file.write(u"\t\t\t\t\t<Right Target=\"%s\" Access=\"%s\"/>\n" % item)
@@ -444,8 +443,7 @@ class MemoryApplication(MemoryApplicationSketch):
                     with managers.file_manager.open(file_access.APPLICATION, self._id, new_filename,
                                                     mode="w", encoding="utf8") as file:
                         self.compose(file=file, shorter=True)
-                except Exception as e:  # noqa
-                    print(f"{e}")
+                except:  # noqa
                     managers.file_manager.delete(file_access.APPLICATION, self._id, new_filename)
                     raise
                 else:

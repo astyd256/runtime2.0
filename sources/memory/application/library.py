@@ -97,10 +97,10 @@ class MemoryLibrary(MemoryLibrarySketch):
 
     # unsafe
     def compose(self, ident=u"", file=None, shorter=False):
-        information = u"Name=\"%s\"" % self._name.encode("xml")
+        information = u"Name=\"%s\"" % self._name.encode("xml").decode()
         if not shorter and self.source_code:
             file.write(u"%s<Library %s>\n" % (ident, information))
-            file.write(u"%s\n" % self.source_code.encode("cdata"))
+            file.write(u"%s\n" % self.source_code.encode("cdata").decode())
             file.write(u"%s</Library>\n" % ident)
         else:
             file.write(u"%s<Library %s/>\n" % (ident, information))

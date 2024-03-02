@@ -12,7 +12,7 @@ class JavaScriptCodec(codecs.Codec):
 
     def encode(self, input, errors="strict"):
         output = encode_regex.sub(lambda match: "\{0:03o}".format(ord(match.group(0))), input)
-        return output, len(output)
+        return output.encode(), len(output)
 
     def decode(self, input, errors="strict"):
         raise NotImplementedError

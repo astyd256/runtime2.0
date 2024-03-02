@@ -135,8 +135,8 @@ class MemoryAttributes(MemoryAttributesSketch):
             file.write(u"%s<Attributes>\n" % ident)
             for name in self._items.__dict__ if skip_defaults else self._items._enumeration:
                 file.write(u"%s\t<Attribute Name=\"%s\">%s</Attribute>\n" %
-                    (ident, name, codecs.encode(PROHIBITED_CHARACTERS.sub("?",
-                        getattr(self._items, name)), "cdata" if name in self._cdata else "xml")))
+                    (ident, name, PROHIBITED_CHARACTERS.sub("?",
+                        getattr(self._items, name)).encode("cdata" if name in self._cdata else "xml").decode()))
             file.write(u"%s</Attributes>\n" % ident)
 
     def update(self, *arguments, **keywords):
