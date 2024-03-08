@@ -470,7 +470,8 @@ class VDOM_http_request_handler(http.server.SimpleHTTPRequestHandler):
             #debug(hh + " : " + headers[hh])
             self.send_header(hh, headers[hh])
         if len(cookies) > 0:
-            self.wfile.write(("%s\r\n" % cookies).encode())
+            cookies_header, cookies_value = cookies.split(': ', 1)
+            self.send_header(cookies_header, cookies_value.strip())
 
     def finish(self):
         """finish processing request"""

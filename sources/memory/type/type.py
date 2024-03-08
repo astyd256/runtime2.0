@@ -1,5 +1,4 @@
-from __future__ import unicode_literals
-import codecs
+
 from threading import RLock
 from collections import defaultdict
 from io import StringIO
@@ -18,7 +17,6 @@ from ..auxiliary import copy_as_base64
 from .attributes import MemoryTypeAttributes
 from .events import MemoryTypeUserInterfaceEvents, MemoryTypeObjectEvents
 from .actions import MemoryTypeActions
-
 
 
 NOT_LOADED = "NOT LOADED"
@@ -220,14 +218,14 @@ class MemoryType(MemoryTypeSketch):
 
         file.write("\t<Information>\n")
         file.write("\t\t<ID>%s</ID>\n" % self._id)
-        file.write("\t\t<Name>%s</Name>\n" % codecs.encode(self._name, "xml"))
+        file.write("\t\t<Name>%s</Name>\n" % self._name.encode("xml").decode())
         if self._display_name:
-            file.write("\t\t<DisplayName>%s</DisplayName>\n" % codecs.encode(self._display_name, "xml"))
-        file.write("\t\t<ClassName>%s</ClassName>\n" % codecs.encode(self._name, "xml"))
+            file.write("\t\t<DisplayName>%s</DisplayName>\n" % self._display_name.encode("xml").decode())
+        file.write("\t\t<ClassName>%s</ClassName>\n" % self._class_name.encode("xml").decode())
         if self._description:
-            file.write("\t\t<Description>%s</Description>\n" % codecs.encode(self._description, "xml"))
+            file.write("\t\t<Description>%s</Description>\n" % self._description.encode("xml").decode())
         file.write("\t\t<Version>%s</Version>\n" % self._version)
-        file.write("\t\t<Category>%s</Category>\n" % codecs.encode(self._category, "xml"))
+        file.write("\t\t<Category>%s</Category>\n" % self._category.encode("xml").decode())
         file.write("\t\t<InterfaceType>%s</InterfaceType>\n" % self._interface_type)
         if self._icon:
             file.write("\t\t<Icon>%s</Icon>\n" % self._icon)
@@ -245,7 +243,7 @@ class MemoryType(MemoryTypeSketch):
         if self._render_type:
             file.write("\t\t<RenderType>%s</RenderType>\n" % self._render_type)
         if self._http_content_type:
-            file.write("\t\t<HTTPContentType>%s</HTTPContentType>\n" % codecs.encode(self._http_content_type,"xml"))
+            file.write("\t\t<HTTPContentType>%s</HTTPContentType>\n" % self._http_content_type.encode("xml").decode())
         if self._handlers:
             file.write("\t\t<Handlers>%s</Handlers>\n" % ", ".join(self._handlers))
         if self._remote_methods:
@@ -264,7 +262,7 @@ class MemoryType(MemoryTypeSketch):
                     file.write("\t\t<Language Code=\"%s\">\n" % language_code)
                     for sentence_code in sorted(language_sentences):
                         file.write("\t\t\t<Sentence ID=\"%03d\">%s</Sentence>\n" % (
-                            sentence_code, codecs.encode(language_sentences[sentence_code], "xml")))
+                            sentence_code, language_sentences[sentence_code].encode("xml").decode()))
                     file.write("\t\t</Language>\n")
             file.write("\t</Languages>\n")
 
@@ -287,17 +285,17 @@ class MemoryType(MemoryTypeSketch):
         if not shorter:
             if self.source_code:
                 file.write("\t<SourceCode>\n")
-                file.write("%s\n" % self.source_code.encode("cdata"))
+                file.write("%s\n" % self.source_code.encode("cdata").decode())
                 file.write("\t</SourceCode>\n")
 
         if self._libraries or self._external_libraries:
             file.write("\t<Libraries>\n")
             for library_target, libraries in self._libraries.items():
                 for library in libraries:
-                    file.write("\t\t<Library Target=\"%s\">%s</Library>\n" % (library_target, codecs.encode(library, "cdata")))
+                    file.write("\t\t<Library Target=\"%s\">%s</Library>\n" % (library_target, library.encode("cdata").decode()))
             for library_target, libraries in self._external_libraries.items():
                 for library in libraries:
-                    file.write("\t\t<ExternalLibrary Target=\"%s\">%s</ExternalLibrary>\n" % (library_target, library.encode("cdata")))
+                    file.write("\t\t<ExternalLibrary Target=\"%s\">%s</ExternalLibrary>\n" % (library_target, library.encode("cdata").decode()))
             file.write("\t</Libraries>\n")
 
         if self._user_interface_events or self._object_events or self._actions:
