@@ -1,4 +1,4 @@
-
+import codecs
 from builtins import str
 import settings
 import managers
@@ -152,10 +152,10 @@ class MemoryAction(MemoryActionSketch):
     # unsafe
     def compose(self, ident=u"", file=None):
         information = u"ID=\"%s\" Name=\"%s\" Top=\"%s\" Left=\"%s\" State=\"%s\"" % \
-            (self._id, self._name.encode("xml").decode(), self._top, self._left, self._state)
+            (self._id, codecs.encode(self._name, "xml"), self._top, self._left, self._state)
         if self.source_code:
             file.write(u"%s<Action %s>\n" % (ident, information))
-            file.write(u"%s\n" % self.source_code.encode("cdata").decode())
+            file.write(u"%s\n" % codecs.encode(self.source_code, "cdata"))
             file.write(u"%s</Action>\n" % ident)
         else:
             file.write(u"%s<Action %s/>\n" % (ident, information))

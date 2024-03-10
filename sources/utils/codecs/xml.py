@@ -12,7 +12,7 @@ class XmlCodec(codecs.Codec):
 
     def encode(self, input, errors='strict'):
         output = input.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&apos;")
-        return output.encode(), len(output)
+        return output, len(output)
 
     def decode(self, input, errors='strict'):
         def substitute(match):

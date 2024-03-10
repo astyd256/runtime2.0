@@ -14246,6 +14246,7 @@ import time
 import email
 import email.utils
 import managers
+import codecs
 from scripting import e2vdom
 
 
@@ -14434,7 +14435,7 @@ class VDOM_htmlcontainer(VDOM_object):
             doctype=DOCTYPE,
             type_version=self.type.version,
             server_version=server.version,
-            title=self.title.encode("html"),
+            title=codecs.encode(self.title, "html"),
             metas=metas,
             application=application.id,
             session=session.id,

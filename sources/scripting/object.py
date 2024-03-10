@@ -1,4 +1,4 @@
-
+import codecs
 from builtins import str
 from past.builtins import basestring
 from builtins import object
@@ -299,12 +299,12 @@ class VDOMObject(object):
             arguments = (arguments,)
 
         data = (("str", argument) if isinstance(argument, basestring) else
-                ("obj", json.dumps(argument).encode("xml")) for argument in arguments)
+                ("obj", codecs.encode(json.dumps(argument), "xml")) for argument in arguments)
 
         if arguments:
             self.write("<EXECUTE %s>\n%s\n</EXECUTE>" %
                        (information,
-                        "\n".join("  <PARAM type=\"%s\">%s</PARAM>" % (kind, value.encode("xml")) for kind, value in data)),
+                        "\n".join("  <PARAM type=\"%s\">%s</PARAM>" % (kind, codecs.encode(value, "xml")) for kind, value in data)),
                        action_name)
         else:
             self.write("<EXECUTE %s/>" % information, action_name)

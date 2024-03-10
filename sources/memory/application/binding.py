@@ -1,3 +1,4 @@
+import codecs
 
 from utils.properties import weak, constant, roproperty, rwproperty
 from ..generic import MemoryBase
@@ -89,7 +90,7 @@ class MemoryBinding(MemoryBindingSketch):
         if self._parameters:
             file.write(u"%s<Action %s>\n" % (ident, information))
             for name, value in self._parameters.items():
-                file.write(u"%s\t<Parameter Name=\"%s\">%s</Parameter>\n" % (ident, name, value.encode("xml").decode()))
+                file.write(u"%s\t<Parameter Name=\"%s\">%s</Parameter>\n" % (ident, name, codecs.encode(value, "xml")))
             file.write(u"%s</Action>\n" % ident)
         else:
             file.write(u"%s<Action %s/>\n" % (ident, information))

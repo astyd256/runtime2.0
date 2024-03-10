@@ -80,7 +80,7 @@ class VDOM_resource_manager(object):
             #    res_descriptor = copy.copy(res_descriptor)
             for key in attributes:
                 if key == "name":
-                    setattr(res_descriptor, "name", str(attributes["name"]).encode('ascii', 'ignore'))
+                    setattr(res_descriptor, "name", ''.join(char for char in str(attributes["name"]) if ord(char) < 128))
                     self.__name_index[res_descriptor.name.lower()] = res_descriptor.id
                 elif key == "save_async":
                     write_async = True

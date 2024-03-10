@@ -1,3 +1,4 @@
+import codecs
 
 from future import standard_library
 standard_library.install_aliases()
@@ -646,7 +647,7 @@ class VDOM_sql_query(object):
                 data = row[column]
                 if data == None or data == "None":
                     data = "NULL"
-                result.write("\t\t\t\t<cell>%s</cell>\n" % str(data).encode("xml"))
+                result.write("\t\t\t\t<cell>%s</cell>\n" % codecs.encode(str(data), "xml"))
             result.write("\t\t\t</row>\n")
         result.write("\t\t</data>\n")
         result.write("\t</table>\n")

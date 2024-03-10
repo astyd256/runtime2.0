@@ -1,3 +1,4 @@
+import codecs
 import sys
 if sys.version_info[0] < 3:
     from collections import MutableSequence
@@ -60,7 +61,7 @@ class MemoryStructureLevel(MemoryStructureLevelSketch):
 
     def compose(self, ident=u"", file=None):
         items = self.__dict__.get("_items")
-        attributes = u" Name=\"%s\"" % self._name.encode("xml")
+        attributes = u" Name=\"%s\"" % codecs.encode(self._name, "xml")
         if items:
             file.write(u"%s<Level%s>\n" % (ident, attributes))
             for item in items:

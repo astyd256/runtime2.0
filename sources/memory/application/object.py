@@ -1,4 +1,5 @@
 # from __future__ import absolute_import
+import codecs
 
 from past.builtins import basestring
 from threading import RLock
@@ -200,7 +201,7 @@ class MemoryObject(MemoryObjectSketch):
 
     # unsafe
     def compose(self, ident=u"", file=None, shorter=False, excess=False):
-        information = u"ID=\"%s\" Name=\"%s\" Type=\"%s\"" % (self._id, self._name.encode("xml").decode(), self._type.id)
+        information = u"ID=\"%s\" Name=\"%s\" Type=\"%s\"" % (self._id, codecs.encode(self._name, "xml"), self._type.id)
         if self._attributes or self._objects or self._actions:
             file.write(u"%s<Object %s>\n" % (ident, information))
             self._attributes.compose(ident=ident + u"\t", file=file, shorter=shorter, excess=excess)
@@ -291,7 +292,7 @@ class MemoryObject(MemoryObjectSketch):
                 if probe:
                     return None
             else:
-                if dynamic <= klass._dynamic:
+                if dynamic is None or dynamic <= klass._dynamic:
                     return klass
 
         # remember invalidate count

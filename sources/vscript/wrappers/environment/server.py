@@ -1,4 +1,4 @@
-
+import codecs
 from builtins import str
 from builtins import object
 import re
@@ -556,10 +556,10 @@ class v_server(generic):
 		return v_mismatch
 
 	def v_htmlencode(self, string2encode):
-		return string(str(string2encode.as_string.encode("html")))
+		return string(str(codecs.encode(string2encode.as_string, "html")))
 
 	def v_urlencode(self, string2encode):
-		return string(str(string2encode.as_string.encode("url")))
+		return string(str(codecs.encode(string2encode.as_string, "url")))
 
 	def v_sendmail(self, sender, recipient, subject, message):
 		return integer(managers.email_manager.send(sender.as_string,

@@ -1,3 +1,4 @@
+import codecs
 
 from past.builtins import basestring
 import types
@@ -142,8 +143,8 @@ def compose_trace(information=None):
     lines.append("<div class=\"debug stripes\">")
 
     lines.append("<div class=\"error stripes\">")
-    lines.append("<span class=\"copy\" onclick='copy(\"%s\")'>copy</span>" % report.encode("js"))
-    lines.append(description.encode("html"))
+    lines.append("<span class=\"copy\" onclick='copy(\"%s\")'>copy</span>" % codecs.encode(report, "js"))
+    lines.append(codecs.encode(description, "html"))
     lines.append("</div>")
 
     if causes:
@@ -151,7 +152,7 @@ def compose_trace(information=None):
         lines.append("<div>Caused by:</div>")
         lines.append("<div class=\"items\">")
         for _, exception, _ in causes:
-            lines.append("<div><div>%s</div></div>" % describe_exception(exception).encode("html"))
+            lines.append("<div><div>%s</div></div>" % codecs.encode(describe_exception(exception), "html"))
         lines.append("</div>")
         lines.append("</div>")
 
@@ -160,16 +161,16 @@ def compose_trace(information=None):
     lines.append("<div style=\"display: none\">Locals:")
     lines.append("<div class=\"items\">")
     for name, value in locals.items():
-        lines.append("<div><div>%s</div><div>%s</div></div>" % (name.encode("html"), value.encode("html")))
+        lines.append("<div><div>%s</div><div>%s</div></div>" % (codecs.encode(name, "html"), codecs.encode(value, "html")))
     lines.append("</div>")
     lines.append("</div>")
     lines.append("</div>")
 
     lines.append("<div class=\"thread section\">")
-    lines.append("<div>Traceback for %s:</div>" % describe_thread().encode("html"))
+    lines.append("<div>Traceback for %s:</div>" % codecs.encode(describe_thread(), "html"))
     lines.append("<div class=\"items\">")
     for path, line, function, statement in trace:
-        lines.append("<div><div>%s:%d:%s</div><div>%s</div></div>" % (path.encode("html"), line, function.encode("html"), statement))
+        lines.append("<div><div>%s:%d:%s</div><div>%s</div></div>" % (codecs.encode(path, "html"), line, codecs.encode(function, "html"), statement))
     lines.append("</div>")
     lines.append("</div>")
 
@@ -178,10 +179,10 @@ def compose_trace(information=None):
     lines.append("<div style=\"display: none\">")
     for thread, thread_trace in threads.items():
         lines.append("<div class=\"thread section\">")
-        lines.append("<div>Traceback for %s:</div>" % describe_thread(thread).encode("html"))
+        lines.append("<div>Traceback for %s:</div>" % codecs.encode(describe_thread(thread), "html"))
         lines.append("<div class=\"items\">")
         for path, line, function, statement in thread_trace:
-            lines.append("<div><div>%s:%d:%s</div><div>%s</div></div>" % (path.encode("html"), line, function.encode("html"), statement))
+            lines.append("<div><div>%s:%d:%s</div><div>%s</div></div>" % (codecs.encode(path, "html"), line, codecs.encode(function, "html"), statement))
         lines.append("</div>")
         lines.append("</div>")
     lines.append("</div>")

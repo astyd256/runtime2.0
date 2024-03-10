@@ -1,4 +1,4 @@
-
+import codecs
 import gc
 from collections import defaultdict
 
@@ -31,6 +31,6 @@ def analyze(options):
     yield "<reply>"
     yield "<counters>"
     for name, counter in iterator:
-        yield "<counter object=\"%s\">%s</counter>" % (name.encode("xml"), counter)
+        yield "<counter object=\"%s\">%s</counter>" % (codecs.encode(name, "xml"), counter)
     yield "</counters>"
     yield "</reply>"

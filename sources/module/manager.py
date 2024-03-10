@@ -94,7 +94,7 @@ class VDOM_module_manager(object):
                     request_object.request_type = "vdom"
                     # result = managers.engine.render(a1, o1, None, o1.type.render_type.lower())
                     result = managers.engine.render(o1, render_type=o1.type.render_type.lower())
-                    return (None, result.encode("utf-8").decode())
+                    return (None, result.encode("utf-8"))
             except: raise
         # check if container is present
         app = request_object.application()
@@ -159,7 +159,7 @@ class VDOM_module_manager(object):
                     request.arguments().arguments()["error"] = [ee]
                     managers.engine.execute(action)
                     if request_object.wholeAnswer:
-                        return (None, request_object.wholeAnswer.encode("utf-8").decode())
+                        return (None, request_object.wholeAnswer.encode("utf-8"))
                 return (404, None) #_("Container not found")
 
 
@@ -205,7 +205,7 @@ class VDOM_module_manager(object):
                         request.arguments().arguments()["error"] = [ee]
                         managers.engine.execute(action)
                         if request_object.wholeAnswer:
-                            return (None, request_object.wholeAnswer.encode("utf-8").decode())
+                            return (None, request_object.wholeAnswer.encode("utf-8"))
                     raise
                 # finally:
                 #     for key in request_object.files:
@@ -225,9 +225,9 @@ class VDOM_module_manager(object):
                     if request_object.binary():
                         return (None, outp)
                     else:
-                        return (None, outp.encode("utf-8").decode())
+                        return (None, outp.encode("utf-8"))
 
-                #debug("Result is: " + result.encode("utf-8").decode())
+                #debug("Result is: " + result.encode("utf-8"))
 
                 # now do module post processing
     #           module = VDOM_post_processing()

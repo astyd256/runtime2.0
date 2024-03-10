@@ -1,4 +1,6 @@
 from __future__ import unicode_literals
+
+import codecs
 import re
 from utils.properties import lazy, weak, roproperty, rwproperty
 from ..generic import MemoryBase
@@ -82,16 +84,16 @@ class MemoryTypeAttribute(MemoryTypeAttributeSketch):
         file.write("%s<Attribute>\n" % ident)
         file.write("%s\t<Name>%s</Name>\n" % (ident, self._name))
         if self._display_name:
-            file.write("%s\t<DisplayName>%s</DisplayName>\n" % (ident, self._display_name.encode("xml").decode()))
+            file.write("%s\t<DisplayName>%s</DisplayName>\n" % (ident, codecs.encode(self._display_name, "xml")))
         if self._description:
-            file.write("%s\t<Description>%s</Description>\n" % (ident, self._description.encode("xml").decode()))
-        file.write("%s\t<DefaultValue>%s</DefaultValue>\n" % (ident, self._default_value.encode("xml").decode()))
-        file.write("%s\t<RegularExpressionValidation>%s</RegularExpressionValidation>\n" % (ident, self._validation_pattern.encode("xml").decode()))
+            file.write("%s\t<Description>%s</Description>\n" % (ident, codecs.encode(self._description, "xml")))
+        file.write("%s\t<DefaultValue>%s</DefaultValue>\n" % (ident, codecs.encode(self._default_value, "xml")))
+        file.write("%s\t<RegularExpressionValidation>%s</RegularExpressionValidation>\n" % (ident, codecs.encode(self._validation_pattern, "xml")))
         if self._validation_error_message:
-            file.write("%s\t<ErrorValidationMessage>%s</ErrorValidationMessage>\n" % (ident, self._validation_error_message.encode("xml").decode()))
+            file.write("%s\t<ErrorValidationMessage>%s</ErrorValidationMessage>\n" % (ident, codecs.encode(self._validation_error_message, "xml")))
         file.write("%s\t<Visible>%s</Visible>\n" % (ident, self._visible))
         file.write("%s\t<InterfaceType>%s</InterfaceType>\n" % (ident, self._interface_type))
-        file.write("%s\t<CodeInterface>%s</CodeInterface>\n" % (ident, self._code_interface.encode("xml").decode()))
+        file.write("%s\t<CodeInterface>%s</CodeInterface>\n" % (ident, codecs.encode(self._code_interface, "xml")))
         file.write("%s\t<ColorGroup>%s</ColorGroup>\n" % (ident, self._color_group))
         file.write("%s</Attribute>\n" % ident)
 

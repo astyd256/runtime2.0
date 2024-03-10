@@ -1,3 +1,4 @@
+import codecs
 
 from future import standard_library
 standard_library.install_aliases()
@@ -10,7 +11,7 @@ def dumps(object, file=None, profile=None):
     def compose(object, indent=u"", file=None):
         object_type = object.type.name
         object_name = object.name
-        attribute_values = " ".join("%s=\"%s\"" % (name, value.encode("xml")) for name, value
+        attribute_values = " ".join("%s=\"%s\"" % (name, codecs.encode(value, "xml")) for name, value
             in object.attributes.items() if value != object.type.attributes[name].default_value)
         subobjects = object.objects
         if subobjects:

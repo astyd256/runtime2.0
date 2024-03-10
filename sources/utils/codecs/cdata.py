@@ -6,9 +6,7 @@ class XmlCodec(codecs.Codec):
 
     def encode(self, input, errors='strict'):
         output = u"<![CDATA[%s]]>" % input.replace("]]>", "]]]]><![CDATA[>")
-        # TODO: As of my understanding now encoding only needed to work with bytes,
-        #  so the whole logic should be rewritten
-        return output.encode(), len(output)
+        return output, len(output)
 
     def decode(self, input, errors='strict'):
         raise NotImplementedError

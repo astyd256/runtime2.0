@@ -1,3 +1,4 @@
+import codecs
 from builtins import map
 from collections import defaultdict
 from io import StringIO
@@ -266,14 +267,14 @@ class MemoryApplication(MemoryApplicationSketch):
 
         file.write(u"\t<Information>\n")
         file.write(u"\t\t<ID>%s</ID>\n" % self._id)
-        file.write(u"\t\t<Name>%s</Name>\n" % self._name.encode("xml").decode())
+        file.write(u"\t\t<Name>%s</Name>\n" % codecs.encode(self._name, "xml"))
         if self._description:
-            file.write(u"\t\t<Description>%s</Description>\n" % self._description.encode("xml").decode())
-        file.write(u"\t\t<Version>%s</Version>\n" % self._version.encode("xml").decode())
+            file.write(u"\t\t<Description>%s</Description>\n" % codecs.encode(self._description, "xml"))
+        file.write(u"\t\t<Version>%s</Version>\n" % codecs.encode(self._version, "xml"))
         if self._owner:
-            file.write(u"\t\t<Owner>%s</Owner>\n" % self._owner.encode("xml").decode())
+            file.write(u"\t\t<Owner>%s</Owner>\n" % codecs.encode(self._owner, "xml"))
         if self._password:
-            file.write(u"\t\t<Password>%s</Password>\n" % self._password.encode("xml").decode())
+            file.write(u"\t\t<Password>%s</Password>\n" % codecs.encode(self._password, "xml"))
         file.write(u"\t\t<Active>%d</Active>\n" % self._active)
         if self._index:
             file.write(u"\t\t<Index>%s</Index>\n" % self._index)
@@ -307,7 +308,7 @@ class MemoryApplication(MemoryApplicationSketch):
                     file.write(u"\t\t<Language Code=\"%s\">\n" % language_code)
                     for sentence_code in sorted(language_sentences):
                         file.write(u"\t\t\t<Sentence ID=\"%03d\">%s</Sentence>\n" % (
-                            sentence_code, language_sentences[sentence_code].encode("xml").decode()))
+                            sentence_code, codecs.encode(language_sentences[sentence_code], "xml")))
                     file.write(u"\t\t</Language>\n")
             file.write(u"\t</Languages>\n")
 
@@ -395,13 +396,13 @@ class MemoryApplication(MemoryApplicationSketch):
                 file.write(u"\t\t<Users>\n")
                 for user, items in users.items():
                     file.write(u"\t\t\t<User>\n")
-                    file.write(u"\t\t\t\t<Login>%s</Login>\n" % user.login.encode("xml").decode())
-                    file.write(u"\t\t\t\t<Password>%s</Password>\n" % user.password.encode("xml").decode())
-                    file.write(u"\t\t\t\t<FirstName>%s</FirstName>\n" % user.first_name.encode("xml").decode())
-                    file.write(u"\t\t\t\t<LastName>%s</LastName>\n" % user.last_name.encode("xml").decode())
-                    file.write(u"\t\t\t\t<Email>%s</Email>\n" % user.email.encode("xml").decode())
-                    file.write(u"\t\t\t\t<SecurityLevel>%s</SecurityLevel>\n" % user.security_level.encode("xml").decode())
-                    file.write(u"\t\t\t\t<MemberOf>%s</MemberOf>\n" % u",".join(user.member_of).encode("xml").decode())
+                    file.write(u"\t\t\t\t<Login>%s</Login>\n" % codecs.encode(user.login, "xml"))
+                    file.write(u"\t\t\t\t<Password>%s</Password>\n" % codecs.encode(user.password, "xml"))
+                    file.write(u"\t\t\t\t<FirstName>%s</FirstName>\n" % codecs.encode(user.first_name, "xml"))
+                    file.write(u"\t\t\t\t<LastName>%s</LastName>\n" % codecs.encode(user.last_name, "xml"))
+                    file.write(u"\t\t\t\t<Email>%s</Email>\n" % codecs.encode(user.email, "xml"))
+                    file.write(u"\t\t\t\t<SecurityLevel>%s</SecurityLevel>\n" % codecs.encode(user.security_level, "xml"))
+                    file.write(u"\t\t\t\t<MemberOf>%s</MemberOf>\n" % codecs.encode(u",".join(user.member_of), "xml"))
                     file.write(u"\t\t\t\t<Rights>\n")
                     for item in items:
                         file.write(u"\t\t\t\t\t<Right Target=\"%s\" Access=\"%s\"/>\n" % item)
@@ -443,7 +444,8 @@ class MemoryApplication(MemoryApplicationSketch):
                     with managers.file_manager.open(file_access.APPLICATION, self._id, new_filename,
                                                     mode="w", encoding="utf8") as file:
                         self.compose(file=file, shorter=True)
-                except:  # noqa
+                except Exception as e:  # noqa
+                    print(f"{e}") # noqa
                     managers.file_manager.delete(file_access.APPLICATION, self._id, new_filename)
                     raise
                 else:

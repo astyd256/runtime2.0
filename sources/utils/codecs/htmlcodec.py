@@ -19,7 +19,7 @@ class HtmlCodec(codecs.Codec):
 
     def encode(self, input, errors='strict'):
         output = encode_regex.sub(lambda match: encode_table[match.group(0)], input)
-        return output.encode(), len(output)
+        return output, len(output)
 
     def decode(self, input, errors='strict'):
         def substitute(match):

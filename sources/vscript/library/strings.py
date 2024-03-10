@@ -1,3 +1,4 @@
+import codecs
 
 from past.builtins import cmp
 from builtins import str
@@ -170,7 +171,7 @@ def v_strreverse(string1):
 
 
 def v_escape(string1):
-	return string(string1.as_string.encode("url"))
+	return string(codecs.encode(string1.as_string, "url"))
 
 def v_unescape(string1):
 	return string(string1.as_string.decode("url"))
