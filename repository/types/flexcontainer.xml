@@ -2936,8 +2936,7 @@ class VDOM_flexcontainer(VDOM_object):
         
         if VDOM_CONFIG_1["DEBUG"] == "1":
             debug_info = u"objtype='flexcontainer' objname='%s'" % ( self.name )
-        else:
-            debug_info = u"objtype='flexcontainer' objname='%s'" % ( self.name )
+
         # Compound DIV
 
         result = u"""<div {debug_info} {footer} data-display='{display_style}' id="o_{id}" style="{style}{flexstyle}" {classname}>{title_tag}{cont_tag}</div>"""\

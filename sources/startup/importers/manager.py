@@ -9,6 +9,7 @@ from collections import defaultdict
 import managers
 
 from logs import log
+from importlib.abc import Loader
 
 
 class ImportManagerLocal(object):  # local
@@ -77,14 +78,17 @@ class ImportManager(object):
             return package.get(name)
 
 
-class ImportManagerPackageLoader(object):
+class ImportManagerPackageLoader(Loader):
 
     def __init__(self, fullname):
         self._fullname = fullname
 
-    def load_module(self, fullname):
-        if fullname != self._fullname:
-            log.write("Loader for module \"%s\" cannot handle module \"%s\"" % (self._fullname, fullname))
+    def exec_module(self, module):
+        pass
+
+    def create_module(self, spec):
+        if spec.name != self._fullname:
+            log.write("Loader for module \"%s\" cannot handle module \"%s\"" % (self._fullname, spec.name))
             raise ImportError
 
         module = imp.new_module(self._fullname)
@@ -93,20 +97,21 @@ class ImportManagerPackageLoader(object):
         module.__package__ = self._fullname
         module.__path__ = []
 
-        sys.modules[self._fullname] = module
-
         return module
 
 
-class ImportManagerModuleLoader(object):
+class ImportManagerModuleLoader(Loader):
 
     def __init__(self, fullname, initializer):
         self._fullname = fullname
         self._initializer = initializer
 
-    def load_module(self, fullname):
-        if fullname != self._fullname:
-            log.write("Loader for module \"%s\" cannot handle module \"%s\"" % (self._fullname, fullname))
+    def exec_module(self, module):
+        pass
+
+    def create_module(self, spec):
+        if spec.name != self._fullname:
+            log.write("Loader for module \"%s\" cannot handle module \"%s\"" % (self._fullname, spec.name))
             raise ImportError
 
         package = self._fullname.partition(".")[0]
@@ -117,7 +122,6 @@ class ImportManagerModuleLoader(object):
         module.__loader__ = self
         module.__package__ = package
 
-        sys.modules[self._fullname] = module
         self._initializer(context, name, module.__dict__)
 
         return module

@@ -1,7 +1,8 @@
 
 from future import standard_library
 standard_library.install_aliases()
-import urllib.request, urllib.error, urllib.parse, http.client, mimetools, codecs
+import urllib.request, urllib.error, urllib.parse, http.client, codecs
+from email.parser import Parser
 from io import StringIO
 from .. import errors
 from ..subtypes import generic, boolean, binary, string, true, false, v_empty, v_mismatch, v_nothing
@@ -130,8 +131,8 @@ class v_connection(generic):
 		except http.client.HTTPException as error:
 			raise urllib.error.URLError(error)
 		if self._value.url.startswith("http://"):
-			mime=mimetools.Message(StringIO(self._value.info()))
-			encoding=mime.getparam("charset")
+			mime=Parser().parsestr(self._value.info())
+			encoding=mime.get_content_charset()
 			try: self._encoding, self._codec=encoding, codecs.lookup(encoding)
 			except LookupError: pass
 		return v_mismatch

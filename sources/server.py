@@ -5,7 +5,7 @@ from startup import server  # noqa
 import settings
 import managers
 
-# from logs import VDOM_log_manager
+from logs import VDOM_log_manager
 from startup import ImportManager
 from storage import VDOM_storage
 from file_access import VDOM_file_manager  # VDOM_share
@@ -24,7 +24,7 @@ from module import VDOM_module_manager
 from soap import VDOM_soap_server
 from webdav_server import VDOM_webdav_manager
 
-# managers.register("log_manager", VDOM_log_manager)
+managers.register("log_manager", VDOM_log_manager)
 managers.register("import_manager", ImportManager)
 managers.register("file_manager", VDOM_file_manager, lazy=True)
 managers.register("storage", VDOM_storage, lazy=True)
