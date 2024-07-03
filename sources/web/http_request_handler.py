@@ -210,7 +210,6 @@ class VDOM_http_request_handler(http.server.SimpleHTTPRequestHandler):
                     realm = self.path.strip("/").split("/").pop(0)
                     if managers.webdav_manager.check_webdav_share_path(appl.id, realm):
                         mname = 'do_WebDAV'
-
             if self.command not in ("GET", "POST"):
                 mname = 'do_WebDAV'
 
@@ -320,10 +319,10 @@ class VDOM_http_request_handler(http.server.SimpleHTTPRequestHandler):
             return
         f = self.on_request("post")
         if f:
-            sys.setcheckinterval(0)
+            original_switchinterval = sys.getswitchinterval()  # Save the original switch interval
+            sys.setswitchinterval(1e-6)  # Use a very small interval instead of 0
             shutil.copyfileobj(f, self.wfile)
-            sys.setcheckinterval(100)
-            #self.copyfile(f, self.wfile)
+            sys.setswitchinterval(original_switchinterval) 
             f.close()
 
     def create_request(self, method):
